@@ -24,6 +24,7 @@ enter_group_users
     click element   ${enter_users}
     sleep  2s
     # Wait until the first row shows up
+    sleep   10
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_workspace_users
