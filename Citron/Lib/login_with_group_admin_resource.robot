@@ -22,8 +22,8 @@ enter_group_users
     sleep  0.5s
     # click Users page menu
     click element   ${enter_users}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_workspace_users
@@ -32,8 +32,8 @@ enter_workspace_users
     sleep  0.5s
     # click Users page menu
     click element   ${enter_users}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_group_groups
@@ -42,8 +42,8 @@ enter_group_groups
     sleep  0.5s
     # click Users page menu
     click element   ${enter_groups}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${create_group_button}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_invitations_page
@@ -57,7 +57,6 @@ enter_group_analytics
     sleep  0.5s
     # click Users page menu
     click element   ${enter_analytics}
-    sleep  2s
     # Wait until Dashboard appear
     wait until element is visible    xpath=//b[contains(.,'Dashboard')]    10
 
@@ -81,9 +80,9 @@ enter_workspace_workspace_settings
     sleep  1s
     # click Users page menu
     click element   ${enter_Workspace_settings}
-    sleep  2s
     # Wait until enter page
     wait until element is visible   ${enter_ws_settings_success}
+    sleep  2s
 
 fill_basic_message
     # Enter email

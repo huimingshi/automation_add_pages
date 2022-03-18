@@ -48,8 +48,6 @@ Calls_Click_call_tag_link_to_filter_call
     click_call_tag_link_to_filter_call   ${driver}
     # check result after filter by tag
     ${result}  check_filter_by_tag   ${driver}
-    # check reselt
-    should be equal as strings   ${result}   Pass
     [Teardown]   exit_this_driver   ${driver}
 
 Calls_filter_by_dialer

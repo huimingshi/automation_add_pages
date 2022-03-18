@@ -30,8 +30,8 @@ enter_group_users
     sleep  0.5s
     # click Users page menu
     click element   ${enter_users}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}
     wait until element is visible    ${first_row_shows_up}    10
 
 new_enterprice
@@ -117,8 +117,8 @@ enter_site_workspaces
     sleep  0.5s
     # click Users page menu
     click element   ${enter_workspaces}
-    sleep  1s
     # Wait until the first row shows up
+    wait until element is visible    ${create_workspace_button}
     wait until element is visible    ${first_data_show}    10
 
 enter_site_users
@@ -127,8 +127,8 @@ enter_site_users
     sleep  0.5s
     # click Users page menu
     click element   ${enter_users}
-    sleep  1s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}
     wait until element is visible    ${first_data_show}    10
 
 enter_site_analytics
@@ -147,9 +147,9 @@ enter_workspace_workspace_settings
     sleep  1s
     # click Users page menu
     click element   ${enter_Workspace_settings}
-    sleep  2s
     # Wait until enter page
     wait until element is visible   ${enter_ws_settings_success}
+    sleep  2s
 
 enter_site_calls
     # enter SITE ADMINISTRATION Users page
