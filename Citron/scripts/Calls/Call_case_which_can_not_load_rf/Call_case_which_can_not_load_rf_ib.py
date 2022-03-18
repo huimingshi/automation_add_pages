@@ -145,6 +145,7 @@ def filter_by_different_fields(driver,index,search_text,text_id):
             driver.find_element_by_xpath(f'//div[@class="ag-header-row"]/div[{index}]//button[@ref="eButtonShowMainFilter"]').click()
         else:
             driver.find_element_by_xpath(filterType).click()
+        time.sleep(2)
         driver.find_element_by_xpath('//option[contains(.,"Not contains")]').click()
         driver.find_element_by_xpath(filterText).click()
         driver.find_element_by_xpath(filterText).send_keys(search_text)
@@ -367,12 +368,20 @@ def check_filter_by_tag(driver):
     :return: if pass,return Pass;
              if fail,return Fail
     """
+    result_flag = 1
     for i in range(10):
-        get_text = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="tags"]').get_attribute("textContent")
+        try:
+            get_text = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="tags"]').get_attribute("textContent")
+        except Exception as e:
+            print('预期tag与实际不符',e)
+            screen_shot_func(driver,'预期tag与实际不符')
+            raise Exception
         print(get_text)
         if '11 tag' not in get_text:
-            return  "Fail"
-    return   "Pass"
+            result_flag = 0
+    if result_flag == 0:
+        screen_shot_func(driver,'预期的10条tag与实际不符')
+        raise Exception
 
 def screen_shot_func(driver,screen_name):
     current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))

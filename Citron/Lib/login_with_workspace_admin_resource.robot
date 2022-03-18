@@ -22,8 +22,8 @@ enter_workspace_users
     sleep  1s
     # click Users page menu
     click element   ${enter_users}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_site_users
@@ -32,8 +32,8 @@ enter_site_users
     sleep  1s
     # click Users page menu
     click element   ${enter_users}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_workspace_groups
@@ -42,8 +42,8 @@ enter_workspace_groups
     sleep  1s
     # click Users page menu
     click element   ${enter_groups}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${create_group_button}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_workspace_analytics
@@ -1545,13 +1545,6 @@ delete_group
     click element    xpath=//button[@class="k-button k-primary ml-4" and text()="Ok"]
     sleep  2s
 
-#delete_new_group
-#    [Arguments]
-#    # delete group
-#    delete_group
-#    # close browser
-#    Close
-
 delete_five_new_group
     [Arguments]   ${group_name_1}   ${group_name_2}  ${group_name_3}   ${group_name_4}  ${group_name_5}
     # Search standard member group 1
@@ -1644,15 +1637,15 @@ click_members_of_this_group
 enter_users_page
     # enter Users page
     click element   ${enter_users}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_groups_page
     # enter Groups page
     click element   ${enter_groups}
-    sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${create_group_button}
     wait until element is visible    ${first_row_shows_up}    10
 
 search_special_group
