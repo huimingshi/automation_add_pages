@@ -133,7 +133,7 @@ Small_range_161
 
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly
-    [Tags]     small range 612-617 lines
+    [Tags]     small range 162-167 lines
     [Setup]     run keywords      Login_premium_user                # log in with Site Admin
     ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
@@ -227,7 +227,61 @@ Join_call_168_178
     [Teardown]      run keywords    Close
     ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 
+Join_call_179_187
+    [Documentation]     Join call	MPC via MHS link.
+    [Tags]     small range 179-187 lines
+#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+#    ...         AND               Close
+    # EU1 登录
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}        ${call_oncall_user_password}
+    # TU2 登录
+    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}           ${personal_user_password}
+    # TU2 clicks on EU1’s MHS link. EU1 answers call.
+    ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
+    user_make_call_via_meeting_link    ${driver2}    ${invite_mhs_url}
+    user_anwser_call    ${driver1}
+    # TU3 登录
+    ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}        ${call_oncall_user_password}
+    # EU4 登录
+    ${driver4}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
+    # PU5 登录
+    ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
+    # EU1 sends 3pi link.
+    ${invite_url}     send_invite_in_calling_page    ${driver1}
+    # Following participants try to join call in rapid sequence: TU3 via MHS link. EU4 via MHS link.personal user 5 via MHS link.
+    user_make_call_via_meeting_link    ${driver3}    ${invite_mhs_url}
+    user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
+    user_make_call_via_meeting_link    ${driver5}    ${invite_mhs_url}
+    # VP: EU1 gets accept/decline request from TU3.   EU1 declines call.   TU3 doesn’t  join call.
+    user_decline_call    ${driver1}    in_calling
+    which_page_is_currently_on    ${driver3}    ${your_call_was_declined}
+    # EU1 gets accept/decline request from EU4    EU1 declines call.   VP: EU4 doesn’t  join call.
+    user_decline_call    ${driver1}    in_calling
+    which_page_is_currently_on    ${driver4}    ${your_call_was_declined}
+    # EU1 gets accept/decline request from PU5.   EU1 accepts call.	   VP: PU5 joins call.
+    user_anwser_call    ${driver1}   no_direct
+    which_page_is_currently_on    ${driver5}    ${end_call_button}
 
+    # DU6 登录
+    ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
+    # Following participants try to join call in rapid sequence: different enterprise user 6 via 3pi link. anonymous user 7 via 3pi link.anonymous user 8 via MHS link.
+    user_make_call_via_meeting_link    ${driver6}    ${invite_url}
+    ${driver7}    anonymous_open_meeting_link    ${invite_url}
+    ${driver8}    anonymous_open_meeting_link    ${invite_url}
+    # VP: EU1 gets accept/decline request from DU6."   EU1 accepts call.   VP: DU6 joins call.
+    user_anwser_call    ${driver1}   no_direct
+    which_page_is_currently_on    ${driver6}    ${end_call_button}
+    # EU1 gets accept/decline request from AU7."    EU1 declines call.    VP: AU7 doesn’t join call.
+    user_decline_call    ${driver1}    in_calling
+    which_page_is_currently_on    ${driver7}    ${your_call_was_declined}
+    # EU1 gets accept/decline request from AU8."    EU1 accepts call.	VP: AU8 joins call.
+    user_anwser_call    ${driver1}   no_direct
+    which_page_is_currently_on    ${driver8}    ${end_call_button}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}    ${driver4}    ${driver5}    ${driver6}    ${driver7}    ${driver8}
 
 #Call_Tag_Comment_592_595
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
