@@ -210,6 +210,7 @@ ${EG_user_A_user}                       Huiming.shi.helplightning+EG_user_A@outl
 
 ${EG_user_B_user}                       Huiming.shi.helplightning+EG_user_B@outlook.com                                         # WS_branding_setting_WS1下Expert_Group_1的user
 
+
 ${ws3_branding_A_user}                  Huiming.shi.helplightning+test_WS3_branding_A@outlook.com                               # WS_branding_setting_WS3下的user
 ${ws3_branding_A_username}              Huiming.shi.helplightning+test_WS3_branding_A
 
@@ -218,6 +219,17 @@ ${ws3_branding_B_user}                  Huiming.shi.helplightning+test_WS3_brand
 ${ws3_branding_C_user}                  Huiming.shi.helplightning+test_WS3_branding_C@outlook.com                               # WS_branding_setting_WS3下的user(有personal user)
 ${ws3_branding_C_username}              Huiming.shi.helplightning+test_WS3_branding_C
 
+${test_WS3_TU1_user}                    Huiming.shi.helplightning+test_WS3_TU1@outlook.com                                      # WS_branding_setting_WS3下的user
+
+${test_WS3_TU2_user}                    Huiming.shi.helplightning+test_WS3_TU2@outlook.com                                      # WS_branding_setting_WS3下的user
+${test_WS3_TU2_user_name}               Huiming.shi.helplightning+test_WS3_TU2
+
+${test_WS3_EU1_user}                    Huiming.shi.helplightning+test_WS3_EU1@outlook.com                                      # WS_branding_setting_WS3下的user
+
+${test_WS3_EU2_user}                    Huiming.shi.helplightning+test_WS3_EU2@outlook.com                                      # WS_branding_setting_WS3下的user
+
+${test_WS3_EU3_user}                    Huiming.shi.helplightning+test_WS3_EU3@outlook.com                                      # WS_branding_setting_WS3下的user
+
 ${WS_branding_setting_WS1}              WS_branding_setting_WS1                                                                 # WS_branding_setting_WS1
 
 ${WS_branding_setting_WS2}              WS_branding_setting_WS2                                                                 # WS_branding_setting_WS2
@@ -225,6 +237,10 @@ ${WS_branding_setting_WS2}              WS_branding_setting_WS2                 
 ${WS_branding_setting_WS3}              WS_branding_setting_WS3                                                                 # WS_branding_setting_WS3
 
 ${Expert_Group_1}                       Expert_Group_1                                                                          # Expert_Group_1的name(两个WS下同样的group)
+
+${On_call_group_001}                    On_call_group_001                                                                       # WS_branding_setting_WS3下的on-call group
+
+${On_call_group_002}                    On_call_group_002                                                                       # WS_branding_setting_WS3下的on-call group
 
 ${WS_1_Big_Logo}                        https://s3.cn-north-1.amazonaws.com.cn/helplightning-avatars-stage-asia/files/5d2f55df-c84a-46a3-8eca-70aee8e21b41/original_big_logo_url
 
@@ -239,6 +255,8 @@ ${WS3_User_B_customer_avatar}           https://s3.cn-north-1.amazonaws.com.cn/h
 ${Malphite}                             Thank you for using 熔岩巨兽
 
 ${default_product_name}                 Thank you for using Help Lightning
+
+
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
 # password:  Welcome1

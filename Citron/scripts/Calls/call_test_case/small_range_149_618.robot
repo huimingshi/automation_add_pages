@@ -175,43 +175,59 @@ Join_call_162_167
 Join_call_168_178
     [Documentation]     Join call	MPC via on-call group.
     [Tags]     small range 168-178 lines
-    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+    [Setup]     run keywords      Login_site_admin                  # log in with Site Admin
+    ...         AND               switch_to_created_workspace       ${created_workspace_branding_3}      # 进入WS_branding_setting_WS3这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
     ...         AND               Close
-    # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}        ${call_oncall_user_password}
     # TU2 登录
-    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}           ${personal_user_password}
-    # EU1 calls TU2. TU2 answers call
-    make_calls_with_who   ${driver1}   ${driver2}   ${Team_User1_username}
-    # EU3 登录
-    ${driver3}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
-    # PU4 登录
-    ${driver4}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
-    # DU5 登录
-    ${driver5}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
-    # EU1 sends 3pi link.
-    ${invite_url}     send_invite_in_calling_page    ${driver1}
-    # EU3, PU (personal user 4, DU (different enterprise user) 5, AU (anonymous user) 6 clicks on 3pi link in rapid sequence.
-    user_make_call_via_meeting_link    ${driver3}    ${invite_url}
-    user_make_call_via_meeting_link    ${driver4}    ${invite_url}
-    user_make_call_via_meeting_link    ${driver5}    ${invite_url}
-    ${driver6}    anonymous_open_meeting_link    ${invite_url}
-    # EU3 joins call automatically.
+    ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}        ${call_oncall_user_password}
+    # EU1 登录
+    ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}        ${call_oncall_user_password}
+    # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
+    make_call_to_onCall     ${driver1}    ${driver2}    ${On_call_group_001}
+    ${invite_url}    send_invite_in_calling_page    ${driver2}
+    close_invite_3th_page    ${driver2}
+    # Anonymous user 3 clicks on 3pi link. EU1 answers call.
+    ${driver3}    anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call    ${driver2}   no_direct
+    # VP: AU3 joins call.
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    # EU1 gets accept/decline request from PU4.   EU1 accepts call.    PU4 joins call
-    user_anwser_call    ${driver1}   no_direct
+    # TU2 invites TU4.   TU4 declines call.
+    ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}       ${call_oncall_user_password}
+    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    user_decline_call    ${driver4}
+    # VP: Team user 4 doesn’t join call
+    which_page_is_currently_on    ${driver4}    ${py_contacts_switch_success}
+    # TU2 invites TU4.   TU4 accepts call.
+    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    user_anwser_call    ${driver4}
+    # VP: Team user 4 joins call.
     which_page_is_currently_on    ${driver4}    ${end_call_button}
-    # EU1 gets accept/decline request from DU5.   EU1 declines call.   DU5 doesn't join call
-    user_decline_call    ${driver1}   in_calling
-    which_page_is_currently_on    ${driver5}    ${your_call_was_declined}
-    # EU1 gets accept/decline request from AU6.   EU1 accepts call	VP: AU6 joins call.
-    user_anwser_call    ${driver1}   no_direct
+    # TU2 invites on-call group 1   VP: experts in on-call group 1 receives rollover call.    EU5 answers call.
+    ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}        ${call_oncall_user_password}
+    enter_contacts_search_user     ${driver1}    ${On_call_group_001}
+    click_user_in_contacts_call     ${driver1}    ${On_call_group_001}
+    user_anwser_call    ${driver5}
+    # TU2 invites on-call group 2   VP: other experts in on-call group 2 receives rollover call. Display message “No experts are available to take your call” if no experts login.
+    ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}        ${call_oncall_user_password}
+    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
+    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
+    # All experts in on-call group 2 declines call.   Display message “No experts are available to take your call”.
+    user_decline_call    ${driver6}
+    which_page_is_currently_on    ${driver1}    ${no_experts_are_available}
+    # TU2 invites on-call group 2
+    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
+    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
+    # EU6 in on-call group2 answers call.	VP: expert user 6 joins call
+    user_anwser_call    ${driver6}
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
+
+
 
 #Call_Tag_Comment_592_595
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
