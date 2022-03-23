@@ -176,7 +176,7 @@ ${Expert_User3_username}                Huiming.shi.helplightning+EU3@outlook.co
 ${Expert_User3_name}                    Huiming.shi.helplightning+EU3
 ${Expert_User4_username}                Huiming.shi.helplightning+EU4@outlook.com                                               # Expert User4 username(User_Aa_Bb_group)
 ${Expert_User4_name}                    Huiming.shi.helplightning+EU4
-${Expert_User5_username}                Huiming.shi.helplightning+EU5@outlook.com                                               # Expert User5 username(User_Aa_Bb_group)
+${Expert_User5_username}                Huiming.shi.helplightning+EU5@outlook.com                                               # Expert User5 username(User_Aa_Bb_group)(有personal user)
 ${Expert_User5_name}                    Huiming.shi.helplightning+EU5
 ${Team_User1_username}                  Huiming.shi.helplightning+TU1@outlook.com                                               # Team User1 username(User_Aa_Bb_group)
 ${Team_User1_name}                      Huiming.shi.helplightning+TU1
@@ -215,7 +215,7 @@ ${ws3_branding_A_username}              Huiming.shi.helplightning+test_WS3_brand
 
 ${ws3_branding_B_user}                  Huiming.shi.helplightning+test_WS3_branding_B@outlook.com                               # WS_branding_setting_WS3下的user
 
-${ws3_branding_C_user}                  Huiming.shi.helplightning+test_WS3_branding_C@outlook.com                               # WS_branding_setting_WS3下的user
+${ws3_branding_C_user}                  Huiming.shi.helplightning+test_WS3_branding_C@outlook.com                               # WS_branding_setting_WS3下的user(有personal user)
 ${ws3_branding_C_username}              Huiming.shi.helplightning+test_WS3_branding_C
 
 ${WS_branding_setting_WS1}              WS_branding_setting_WS1                                                                 # WS_branding_setting_WS1

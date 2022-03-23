@@ -131,6 +131,88 @@ Small_range_161
     [Teardown]      run keywords    exit_call   ${driver1}
     ...             AND             exit_driver    ${driver1}   ${driver2}
 
+Join_call_162_167
+    [Documentation]     Join call	MPC via dialer directly
+    [Tags]     small range 612-617 lines
+    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+    ...         AND               enter_workspace_settings_page     # 进入settings页面
+    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+    ...         AND               Close
+    # EU1 登录
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}        ${call_oncall_user_password}
+    # TU2 登录
+    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}           ${personal_user_password}
+    # EU1 calls TU2. TU2 answers call
+    make_calls_with_who   ${driver1}   ${driver2}   ${Team_User1_username}
+    # EU3 登录
+    ${driver3}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
+    # PU4 登录
+    ${driver4}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
+    # DU5 登录
+    ${driver5}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
+    # EU1 sends 3pi link.
+    ${invite_url}     send_invite_in_calling_page    ${driver1}
+    # EU3, PU (personal user 4, DU (different enterprise user) 5, AU (anonymous user) 6 clicks on 3pi link in rapid sequence.
+    user_make_call_via_meeting_link    ${driver3}    ${invite_url}
+    user_make_call_via_meeting_link    ${driver4}    ${invite_url}
+    user_make_call_via_meeting_link    ${driver5}    ${invite_url}
+    ${driver6}    anonymous_open_meeting_link    ${invite_url}
+    # EU3 joins call automatically.
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    # EU1 gets accept/decline request from PU4.   EU1 accepts call.    PU4 joins call
+    user_anwser_call    ${driver1}   no_direct
+    which_page_is_currently_on    ${driver4}    ${end_call_button}
+    # EU1 gets accept/decline request from DU5.   EU1 declines call.   DU5 doesn't join call
+    user_decline_call    ${driver1}   in_calling
+    which_page_is_currently_on    ${driver5}    ${your_call_was_declined}
+    # EU1 gets accept/decline request from AU6.   EU1 accepts call	VP: AU6 joins call.
+    user_anwser_call    ${driver1}   no_direct
+    which_page_is_currently_on    ${driver6}    ${end_call_button}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
+
+Join_call_168_178
+    [Documentation]     Join call	MPC via on-call group.
+    [Tags]     small range 168-178 lines
+    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+    ...         AND               enter_workspace_settings_page     # 进入settings页面
+    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+    ...         AND               Close
+    # EU1 登录
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}        ${call_oncall_user_password}
+    # TU2 登录
+    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}           ${personal_user_password}
+    # EU1 calls TU2. TU2 answers call
+    make_calls_with_who   ${driver1}   ${driver2}   ${Team_User1_username}
+    # EU3 登录
+    ${driver3}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
+    # PU4 登录
+    ${driver4}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
+    # DU5 登录
+    ${driver5}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
+    # EU1 sends 3pi link.
+    ${invite_url}     send_invite_in_calling_page    ${driver1}
+    # EU3, PU (personal user 4, DU (different enterprise user) 5, AU (anonymous user) 6 clicks on 3pi link in rapid sequence.
+    user_make_call_via_meeting_link    ${driver3}    ${invite_url}
+    user_make_call_via_meeting_link    ${driver4}    ${invite_url}
+    user_make_call_via_meeting_link    ${driver5}    ${invite_url}
+    ${driver6}    anonymous_open_meeting_link    ${invite_url}
+    # EU3 joins call automatically.
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    # EU1 gets accept/decline request from PU4.   EU1 accepts call.    PU4 joins call
+    user_anwser_call    ${driver1}   no_direct
+    which_page_is_currently_on    ${driver4}    ${end_call_button}
+    # EU1 gets accept/decline request from DU5.   EU1 declines call.   DU5 doesn't join call
+    user_decline_call    ${driver1}   in_calling
+    which_page_is_currently_on    ${driver5}    ${your_call_was_declined}
+    # EU1 gets accept/decline request from AU6.   EU1 accepts call	VP: AU6 joins call.
+    user_anwser_call    ${driver1}   no_direct
+    which_page_is_currently_on    ${driver6}    ${end_call_button}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
+
 #Call_Tag_Comment_592_595
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
 #    [Tags]     small range 592-595  lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮

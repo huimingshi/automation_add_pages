@@ -24,7 +24,7 @@ def start_an_empty_window():
     :return:
     """
     driver = webdriver.Chrome(chrome_options=option)
-    driver.implicitly_wait(int(6))
+    driver.implicitly_wait(int(15))
     driver.maximize_window()
     return driver
 
@@ -121,7 +121,7 @@ def driver_set_up_and_logIn(username,password,check_toturial = 'no_check_toturia
     :return:
     """
     driver = webdriver.Chrome(chrome_options=option)
-    driver.implicitly_wait(int(10))
+    driver.implicitly_wait(int(15))
     driver.get(test_web)
     driver.maximize_window()
     logIn_citron(driver, username, password, check_toturial, close_bounced, accept, disturb)
