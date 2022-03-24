@@ -318,7 +318,6 @@ Join_call_188_195
     # EU1 gets accept/decline request from PU5.   EU1 accepts call.	   VP: PU5 joins call.
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver5}    ${end_call_button}
-
     # DU6 登录
     ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
     # Following participants try to join call in rapid sequence: different enterprise user 6 via 3pi link. anonymous user 7 via 3pi link.anonymous user 8 via MHS link.
@@ -336,11 +335,11 @@ Join_call_188_195
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
     [Tags]    small range 560-580 lines
-#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
+    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+    ...         AND               enter_workspace_settings_page     # 进入settings页面
+    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+    ...         AND               Close
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # EU2 登录
@@ -388,6 +387,7 @@ Small_range_560_580
     # EU3 send 3PI link to eMail
     ${invite_url}     send_invite_in_calling_page    ${driver3}
     close_invite_3th_page    ${driver3}
+    log to console   ${invite_url}
     # EU5 click 3PI link to join    VP: directly joint automatically, do not need anyone's accept
     ${driver6}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver6}    ${invite_url}
@@ -409,6 +409,7 @@ Small_range_560_580
     # EU3 leave call
     leave_call    ${driver3}
     exit_driver    ${driver3}
+    sleep   80s
     # Expert user from different enterprise click 3PI link
     ${driver9}    driver_set_up_and_logIn    ${ws3_branding_C_user}     ${universal_password}
     user_make_call_via_meeting_link    ${driver9}    ${invite_url}
@@ -416,6 +417,7 @@ Small_range_560_580
     user_anwser_call    ${driver5}   no_direct
     # End 3PC call
     end_call_for_all    ${driver5}
+    sleep   30s
     # Login user click previous 3PI link       VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."
     user_make_call_via_meeting_link    ${driver9}    ${invite_url}
     which_page_is_currently_on    ${driver9}    ${this_call_is_over}
