@@ -152,11 +152,12 @@ def click_show_directory_when_invite_3rd(driver):
 
 def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_personal'):
     """
-    # Make calls with someone
+    Make calls with someone
     :param driver1:
     :param driver2:
     :param who:
-    :param call_time:
+    :param answer: 是否应答，默认anwser应答，no_anwser为不应答
+    :param is_personal: 是否呼叫的是personal标签页中的user，默认不是
     :return:
     """
     # make calls with who
@@ -868,12 +869,12 @@ if __name__ == '__main__':
     # driver6 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com', '*IK<8ik,8ik,')
     # driver7 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766553@outlook.com', '*IK<8ik,8ik,')
     # driver8 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com', '*IK<8ik,8ik,')
-    # driver9 = driver_set_up_and_logIn('Huiming.shi.helplightning+Expert_C@outlook.com', '*IK<8ik,8ik,')
-    # driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+User_B@outlook.com', '*IK<8ik,8ik,')
-    # driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+Expert_A@outlook.com', '*IK<8ik,8ik,')
+    driver9 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU5@outlook.com', '*IK<8ik,8ik,')
+    # driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU2@outlook.com', '*IK<8ik,8ik,')
+    # driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU3@outlook.com', '*IK<8ik,8ik,')
     # driver12 = driver_set_up_and_logIn('Huiming.shi.helplightning+Expert_B@outlook.com', '*IK<8ik,8ik,')
     # driver13 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')
-    driver14 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_A@outlook.com', '*IK<8ik,8ik,')
+    # driver14 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_A@outlook.com', '*IK<8ik,8ik,')
     # driver15 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_B@outlook.com', '*IK<8ik,8ik,')
     # driver16 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_C@outlook.com', '*IK<8ik,8ik,')
     # driver17 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU5@outlook.com', '*IK<8ik,8ik,')

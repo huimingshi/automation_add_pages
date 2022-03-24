@@ -198,7 +198,7 @@ ${another_WS_username}                  Huiming.shi.helplightning+another_WS_use
 ${another_WS_name}                      Huiming.shi.helplightning+another_WS_user
 
 # 下列账号都属于Huiming.shi下的我自己创建的WS中的User或者group
-${ws_branding_A_user}                   Huiming.shi.helplightning+test_WS_branding_A@outlook.com                                # WS_branding_setting_WS1下的user
+${ws_branding_A_user}                   Huiming.shi.helplightning+test_WS_branding_A@outlook.com                                # WS_branding_setting_WS1下的user(有personal user)
 
 ${ws_branding_B_user}                   Huiming.shi.helplightning+test_WS_branding_B@outlook.com                                # WS_branding_setting_WS1下的user
 
