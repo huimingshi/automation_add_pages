@@ -9,7 +9,6 @@ Resource          All_Pages_Xpath/SITE_Admin/Calls.robot
 Resource          All_Pages_Xpath/SITE_Admin/Site_Settings.robot
 Resource          All_Pages_Xpath/SITE_Admin/Users.robot
 Resource          All_Pages_Xpath/SITE_Admin/Workspaces.robot
-Resource          All_Pages_Xpath/SITE_Admin/Workspaces.robot
 Resource          All_Pages_Xpath/WS_Admin/Workspace_Settings.robot
 Resource          All_Pages_Xpath/public_xpath.robot
 Resource          All_Pages_Xpath/crunch_page.robot
@@ -181,6 +180,7 @@ enter_site_workspace_settings
     # enter site  Site Setting page
     click element   ${enter_Workspace_settings}
     wait until element is visible   ${workspace_settings_tag}
+    sleep   3s
 
 has_default_workspace
     # Has Default workspace
@@ -1303,8 +1303,8 @@ sort_calls_by_different_condition
     click element   ${sort_xpath}
     sleep  1s
     @{OwnerList}=    Create List
-    ${count}   get element count   ${get_number_of_rows}
-    FOR   ${i}   IN RANGE  ${count}
+#    ${count}   get element count   ${get_number_of_rows}
+    FOR   ${i}   IN RANGE    10
         ${get_owner_text}   get text    xpath=//div[@row-index="${i}"]/div[@col-id="${col_id}"]
         Append To List    ${OwnerList}    ${get_owner_text}
     END
@@ -1316,7 +1316,7 @@ sort_calls_by_different_condition
     click element  ${sort_xpath}
     sleep  1s
     @{OwnerList}=    Create List
-    FOR   ${i}   IN RANGE  ${count}
+    FOR   ${i}   IN RANGE    10
         ${get_owner_text}   get text    xpath=//div[@row-index="${i}"]/div[@col-id="${col_id}"]
         Append To List    ${OwnerList}    ${get_owner_text}
     END
@@ -1404,6 +1404,8 @@ tag_column_should_not_be_shown_up
     # enter calls page
     click element   ${enter_calls}
     sleep  2s
+    refresh_web_page
+    sleep  2s
     element should not be visible   ${tags_column}
     # back to workspace settings page
     click element   ${enter_Workspace_settings}
@@ -1418,6 +1420,8 @@ tag_column_should_be_shown_up
     sleep  2s
     # enter calls page
     click element   ${enter_calls}
+    sleep  2s
+    refresh_web_page
     sleep  2s
     element should be visible   ${tags_column}
 

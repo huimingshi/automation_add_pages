@@ -237,7 +237,7 @@ In_Citron_update_the_members_of_groups_and_update_the_display_name_Avatar_of_one
     # In Citron update the members of groups
     team_page_search   ${random}   1
     # get user info before modified
-    get_user_info     ${random}     https://s3.cn-north-1
+    get_user_info     ${random}     data:image/png;base64
     # get random number
     ${random_new}   get_random_number
     # enter User page
