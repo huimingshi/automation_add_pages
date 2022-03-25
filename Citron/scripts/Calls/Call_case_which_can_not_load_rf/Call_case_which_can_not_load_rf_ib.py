@@ -246,6 +246,7 @@ def switch_last_365_days(driver):
     """
     try:
         driver.find_element_by_xpath('//select[@id="occured-within"]').click()
+        time.sleep(1)
         driver.find_element_by_xpath('//select[@id="occured-within"]/option[@value="last_365_days"]').click()
     except Exception as e:
         print('切换到Last 365 Days失败',e)

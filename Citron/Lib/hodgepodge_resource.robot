@@ -102,7 +102,6 @@ enter_workspace_workspace_settings
     sleep  1s
     # click Users page menu
     click element   ${enter_Workspace_settings}
-    sleep  2s
     # Wait until enter page
     wait until element is visible   ${enter_ws_settings_success}
 
