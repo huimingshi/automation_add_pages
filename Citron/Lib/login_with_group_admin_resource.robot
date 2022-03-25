@@ -43,7 +43,7 @@ enter_group_groups
     # click Users page menu
     click element   ${enter_groups}
     # Wait until the first row shows up
-    wait until element is visible    ${create_group_button}
+    wait until element is visible    ${switch_to_groups_success}
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_invitations_page

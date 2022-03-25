@@ -1,5 +1,6 @@
 *** Variables ***
 # Groups
+${switch_to_groups_success}                 xpath=//h1[text()="Groups"]                                                                 # 切换到Groups页面成功
 ${create_group_button}                      xpath=//button[contains(.,'Create Group')]                                                  # Create Group button
 ${group_name_input}                         xpath=//input[@placeholder="Enter a name"]                                                  # Group Name input
 ${description_input}                        xpath=//textarea[@placeholder="Enter a brief description"]                                  # Description input

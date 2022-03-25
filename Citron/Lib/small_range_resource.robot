@@ -308,8 +308,8 @@ enter_workspace_groups_page
     sleep  1s
     # click Groups page menu
     click element  ${enter_groups}
-    sleep  2s
     # Wait until enter page
+    wait until element is visible   ${switch_to_groups_success}
     wait until element is visible   ${second_data_show}
 
 enter_workspace_users_page

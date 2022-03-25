@@ -32,7 +32,7 @@ ${py_input_search}                              //input[@id="filter-text-box"]  
 ${py_get_number_of_rows}                        //div[@class="ag-center-cols-container"]/div                                                        # Get number of rows
 ${py_directory_switch_success}                  //h1[contains(.,"Directory")]                                                                       # switch to Directory page successfully
 ${py_users_switch_success}                      //span[contains(.,"Active Users")]                                                                  # switch to Users page successfully
-${py_groups_switch_success}                     //button[text()="Create Group"]                                                                     # switch to Groups page successfully
+${py_groups_switch_success}                     //h1[text()="Groups"]                                                                               # switch to Groups page successfully
 ${py_contacts_switch_success}                   //h1[contains(.,"Contacts")]                                                                        # switch to Contacts page successfully
 ${py_personal_switch_success}                   //li[@class="active"]/a[@id="user-tabs-tab-2"]                                                      # switch to Personal page successfully
 ${py_recents_switch_success}                    //h1[contains(.,"Recent Calls")]                                                                    # switch to Recents page successfully
