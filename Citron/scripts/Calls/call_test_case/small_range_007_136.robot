@@ -212,7 +212,7 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     check_call_can_reach_to_or_not  ${driver1}   ${driver3}   ${invite_url}   1
     [Teardown]      run keywords    exit_call   ${driver2}   2
     ...             AND             Close
-    ...             AND             exit_driver   ${driver1}   ${driver2}
+    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 All_active_users_in_the_entire_enterprise_should_show
     [Documentation]    Open Directory view, All active users in the entire enterprise should show.

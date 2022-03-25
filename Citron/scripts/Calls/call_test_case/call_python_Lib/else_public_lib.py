@@ -61,6 +61,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
     else:
         print('登陆时输入password成功')
     if accept == 'accept':
+        driver.implicitly_wait(8)
         count = driver.find_elements_by_xpath(accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             try:
@@ -82,6 +83,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                 raise Exception
             else:
                 print('登陆成功后接受免责声明成功')
+    driver.implicitly_wait(15)
     if close_bounced == 'close_bounced':
         try:  # close Tutorial
             if check_toturial == 'check_toturial':

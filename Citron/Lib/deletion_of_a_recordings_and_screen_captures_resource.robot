@@ -4,6 +4,7 @@ Library           Selenium2Library
 Library           DateTime
 Library           String
 Resource          public.robot
+Resource          All_Pages_Xpath/WS_Admin/Calls.robot
 Resource          All_Pages_Xpath/crunch_page.robot
 Resource          All_Pages_Xpath/public_xpath.robot
 Library           python_Lib/ui_keywords.py
@@ -47,7 +48,8 @@ enter_workspace_calls
     sleep  1s
     # click Users page menu
     click element   ${enter_calls}
-    sleep  3s
+    wait until element is visible    ${occurred_within_choose}
+    wait until element is visible    ${ws_calls_first_data_show}
 
 enter_group_calls
     # click workspace ADMINISTRATION menu
