@@ -344,12 +344,12 @@ enter_users_invitations
 
 turn_on_user_directory
     ${count}  get element count   ${directory_turn_on}
-    Run Keyword If   '${count}'=='1'    click element   ${directory_turn_on}
+    Run Keyword If   '${count}'=='1'    click element   ${directory_switch_button}
     sleep  2s
 
 turn_off_user_directory
     ${count}  get element count   ${directory_turn_off}
-    Run Keyword If   '${count}'=='1'    click element   ${directory_turn_off}
+    Run Keyword If   '${count}'=='1'    click element   ${directory_switch_button}
     sleep  2s
 
 show_the_directory_tab_on_the_dock

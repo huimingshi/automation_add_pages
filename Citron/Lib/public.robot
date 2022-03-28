@@ -54,16 +54,16 @@ Login
     Sleep    1s
     Maximize Browser Window
     # 输入账号
-    wait until element is visible   ${loginname_input}
+    wait until element is visible   ${loginname_input}    10s
     Input Text    ${loginname_input}    ${username}
     # 点击NEXT
-    wait until element is visible   ${next_button}
+    wait until element is visible   ${next_button}     10s
     Click Button    ${next_button}
     # 输入密码
-    wait until element is visible  ${loginpsd_input}
+    wait until element is visible  ${loginpsd_input}      10s
     Input Password    ${loginpsd_input}    ${password}
     # 点击LOG IN
-    wait until element is visible   ${login_button}
+    wait until element is visible   ${login_button}    10s
     Click Button    ${login_button}
     Sleep    3s
 
@@ -73,16 +73,16 @@ Login_crunch
     Maximize Browser Window
     Sleep    1s
     # 输入账号
-    wait until element is visible    ${loginname_input}
+    wait until element is visible    ${loginname_input}    10s
     Input Text    ${loginname_input}    ${crunch_site_username}
     # 点击NEXT
-    wait until element is visible     ${next_button}
+    wait until element is visible     ${next_button}    10s
     Click Button    ${next_button}
     # 输入密码
-    wait until element is visible     ${loginpsd_input}
+    wait until element is visible     ${loginpsd_input}    10s
     Input Password    ${loginpsd_input}    ${crunch_site_password}
     # 点击LOG IN
-    wait until element is visible     ${login_button}
+    wait until element is visible     ${login_button}    10s
     Click Button    ${login_button}
     Sleep    2s
 

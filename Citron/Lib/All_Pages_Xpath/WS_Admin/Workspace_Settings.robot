@@ -19,6 +19,7 @@ ${disable_external_users}                       xpath=//h1[contains(.,'Security:
 ${workspace_directory}                          xpath=//h1[contains(.,'Workspace Directory')]/../..                                                                         # Workspace Directory button
 ${directory_turn_on}                            xpath=//h1[contains(.,'Workspace Directory')]/../..//div[@class="react-toggle"]                                             # turn on Workspace Directory
 ${directory_turn_off}                           xpath=//h1[contains(.,'Workspace Directory')]/../..//div[@class="react-toggle react-toggle--checked"]                       # turn off Workspace Directory
+${directory_switch_button}                      xpath=//h1[contains(.,'Workspace Directory')]/../..//div[@class="react-toggle-track"]                                       # on/off switch button:Workspace Directory
 ${tagging_and_comments}                         xpath=//h1[contains(.,'After Call: Tagging and Comments')]/../..                                                            # After Call: Tagging and Comments button
 ${survey_expand}                                xpath=//h1[contains(.,'After Call: End of Call Survey')]/../..//button[contains(.,'Expand')]                                # After Call: End of Call Survey Expand button
 ${switch_survey_close}                          xpath=//h1[contains(.,'After Call: End of Call Survey')]/../..//div[@class="react-toggle"]                                  # After Call: End of Call Survey open
