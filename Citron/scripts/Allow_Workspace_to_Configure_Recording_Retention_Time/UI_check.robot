@@ -8,14 +8,14 @@ Resource          ../../Lib/public.robot
 UI_testcase
     [Documentation]    UI check
     [Tags]    UI check
-#    [Setup]     restore_the_settings_to_the_initial_value
+    [Setup]     restore_the_settings_to_the_initial_value
     # log in with workspaces admin
     Login_workspaces_admin_one
     # enter Workspace Settings page
     enter_workspace_settings_page
     # UI check
     ui_check_test
-#    [Teardown]    Close
+    [Teardown]    Close
 
 Enabled_Disabled_Retention_Policy_for_Recordings
     [Documentation]    Enabled Retention Policy for Recordings
