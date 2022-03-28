@@ -37,15 +37,18 @@ make_sure_RaSC_text_visiable
 
 set_recordings_and_screen_captures_on
     # set Recordings and Screen Captures feature = ON
-    ${text}   get text  ${RaSC_pre_xpath}//div[@class="retention-options"]/span[1]
-    Run Keyword If   '${text}'=='${RaSC_off_status_text}'    click element   ${RaSC_switch_button}
+    ${count}   get element count   ${RaSC_pre_xpath}//div[@class="react-toggle"]
+    Run Keyword If   '${count}'=='1'    click element   ${RaSC_switch_button}
     sleep  2s
+    ${text}   get text  ${RaSC_pre_xpath}//div[@class="retention-options"]/span[1]
+    should be equal as strings    ${text}   ${RaSC_on_status_text}
 
 set_recordings_and_screen_captures_off
     # set Recordings and Screen Captures feature = OFF
-    ${text}   get text  ${RaSC_pre_xpath}//div[@class="retention-options"]/span[1]
-    Run Keyword If   '${text}'=='${RaSC_on_status_text}'    click element   ${RaSC_switch_button}
-    sleep  2s
+    ${count}   get element count   ${RaSC_pre_xpath}//div[@class="react-toggle react-toggle--checked"]
+    Run Keyword If   '${count}'=='1'    click element   ${RaSC_switch_button}
+    wait until element is visible      ${RaSC_off_status_text_xpath}      10s
+    sleep   2s
 
 ui_check_test
     # make sure setting visiable
@@ -58,12 +61,9 @@ ui_check_test
     should be equal as strings   ${description}   You can configure a policy that controls how long Recordings will be retained in Help Lightning. If this feature is on, then Call Recordings older than the specified age will be deleted from our system. If this feature is off, then Call Recordings will be kept for a default period of 60 days.
     # State text (disabled)
     set_recordings_and_screen_captures_off
-    ${text}  get text    ${RaSC_pre_xpath}//div[@class="retention-options"]/span[1]
-    should be equal as strings   ${text}   ${RaSC_off_status_text}
+    refresh_web_page
     # State text (enabled)
     set_recordings_and_screen_captures_on
-    ${text}  get text    ${RaSC_pre_xpath}//div[@class="retention-options"]/span[1]
-    should be equal as strings   ${text}   ${RaSC_on_status_text}
     # Note text
     ${note_text}    get text    ${RaSC_pre_xpath}//span[@class="retention-note"]
     should be equal as strings   ${note_text}    It may take up to 48 hours for Recordings to be deleted after the policy is enabled.

@@ -37,6 +37,7 @@ ${RaSC_switch_button}                           xpath=//h1[contains(.,'Retention
 ${RaSC_set_day}                                 xpath=//input[@name="retentionValue"]                                                                                       # set day input :Retention Policy: Recordings and Screen Captures
 ${RaSC_save_button}                             xpath=//form[@class="retention-field"]//button[@type="submit"]                                                              # Save button :Retention Policy: Recordings and Screen Captures
 ${RaSC_cancel_button}                           xpath=//form[@class="retention-field"]//button[contains(.,'Cancel')]                                                        # Cancel button :Retention Policy: Recordings and Screen Captures
+${RaSC_off_status_text_xpath}                   xpath=//span[text()="Recordings will be deleted after the default value of 60 days."]
 
 # Retention Policy: Call Logs
 ${CL_pre_xpath}                                 xpath=//h1[contains(.,'Retention Policy: Call Logs')]/../..                                                                 # pre xpath :Retention Policy: Call Logs
