@@ -502,6 +502,7 @@ Small_range_591
     ${invite_mhs_url}   send_meeting_room_link    ${driver2}    MHS
     # TU1 call EU1 via EU1's MHS link
     user_make_call_via_meeting_link    ${driver1}    ${invite_mhs_url}
+    user_anwser_call    ${driver2}
     # VP: TU1 can only invite, can not send 3PI
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on

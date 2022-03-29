@@ -51,15 +51,37 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
     else:
         print('登陆时输入email成功')
     try:    # enter password
-        driver.find_element_by_xpath(password_input).click()
-        driver.find_element_by_xpath(password_input).send_keys(password)
-        driver.find_element_by_xpath(submit_button).click()
+        for i in range(3):
+            ele_list = driver.find_elements_by_xpath(password_input)
+            if len(ele_list) == 1:
+                driver.find_element_by_xpath(password_input).send_keys(password)
+                driver.find_element_by_xpath(submit_button).click()
+                break
+            elif i == 2:
+                raise Exception('password输入框不可点击')
+            else:
+                driver.find_element_by_xpath(submit_button).click()
     except Exception as e:
         print('登陆时输入password失败',e)
         screen_shot_func(driver, '登陆时输入password失败')
         raise Exception
     else:
         print('登陆时输入password成功')
+    try:
+        for i in range(3):
+            time.sleep(5)
+            currentPageUrl = driver.current_url
+            print("当前页面的url是：", currentPageUrl)
+            if currentPageUrl == test_web:
+                break
+            elif i == 2:
+                raise Exception
+            else:
+                driver.find_element_by_xpath(submit_button).click()
+    except Exception as e:
+        print('登陆失败',e)
+        screen_shot_func(driver, '登陆失败')
+        raise AssertionError
     if accept == 'accept':
         driver.implicitly_wait(8)
         count = driver.find_elements_by_xpath(accept_disclaimer)
@@ -342,7 +364,9 @@ def exit_call(driver,call_time=20):
     hang_up_the_phone(driver)
     # User exit call
     try:
-        driver.find_element_by_xpath('//button[@class="promptButton submenu-seperator"]').click()
+        # driver.find_element_by_xpath('//button[@class="promptButton submenu-seperator"]').click()
+        js = 'document.getElementsByClassName("promptButton submenu-seperator")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+        driver.execute_script(js)  # 执行js语句
     except Exception as e:
         print('点击Yes失败', e)
         screen_shot_func(driver, '点击Yes失败')
@@ -664,27 +688,28 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
     try:
         # 点击Send My Help Space Invitation
         driver.find_element_by_xpath(send_my_help_space_invitation).click()
-        # # 输入email
-        # email_ele = driver.find_element_by_xpath(send_link_email_input)
-        # email_ele.click()
-        # email_ele.send_keys('Huiming.shi.helplightning+123456789@outlook.com')
     except Exception as e:
         print('打开Send My Help Space Invitation窗口失败',e)
         screen_shot_func(driver, '打开Send_My_Help_Space_Invitation窗口失败')
         raise Exception
     # 选择MHS-link或者OTU-link
-    if which_meeting == 'MHS':
-        # 去勾选
-        text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
-        if text_value == 'true':
-            driver.find_element_by_xpath(checkbox_xpath).click()
-            time.sleep(2)
-    elif which_meeting == 'OTU':
-        # 勾选
-        text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
-        if text_value == 'false':
-            driver.find_element_by_xpath(checkbox_xpath).click()
-            time.sleep(2)
+    try:
+        if which_meeting == 'MHS':
+            # 去勾选
+            text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
+            if text_value == 'true':
+                driver.find_element_by_xpath(checkbox_xpath).click()
+                time.sleep(2)
+        elif which_meeting == 'OTU':
+            # 勾选
+            text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
+            if text_value == 'false':
+                driver.find_element_by_xpath(checkbox_xpath).click()
+                time.sleep(2)
+    except Exception as e:
+        print(f'选择{which_meeting}_link失败', e)
+        screen_shot_func(driver, f'选择{which_meeting}_link失败')
+        raise Exception
     # 复制
     try:
         driver.find_element_by_xpath('//i[@class="far fa-copy "]').click()
@@ -696,19 +721,24 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
         print('复制成功')
     # 粘贴
     sys_type = get_system_type()
-    if sys_type == 'Windows':
-        try:
-            ele = driver.find_element_by_xpath(my_help_space_message)
-            ele.click()
-            ele.send_keys(Keys.CONTROL, 'v')
-        except Exception as e:
-            print('Windows操作系统粘贴失败',e)
-            screen_shot_func(driver, 'Windows操作系统粘贴失败')
-            raise Exception
+    try:
+        if sys_type == 'Windows':
+            try:
+                ele = driver.find_element_by_xpath(my_help_space_message)
+                ele.click()
+                ele.send_keys(Keys.CONTROL, 'v')
+            except Exception as e:
+                print('Windows操作系统粘贴失败',e)
+                screen_shot_func(driver, 'Windows操作系统粘贴失败')
+                raise Exception
+            else:
+                print('Windows操作系统粘贴成功')
         else:
-            print('Windows操作系统粘贴成功')
-    else:
-        paste_on_a_non_windows_system(driver, my_help_space_message)
+            paste_on_a_non_windows_system(driver, my_help_space_message)
+    except Exception as e:
+        print('粘贴失败', e)
+        screen_shot_func(driver, '粘贴失败')
+        raise Exception
     # 验证复制后粘贴结果正确
     invite_url = driver.find_element_by_xpath(get_invite_link).get_attribute("textContent")  # Get the invitation link
     print('复制的link为:',invite_url)
@@ -808,7 +838,9 @@ def click_switch_ws_button(driver):
     :return:
     """
     try:
-        driver.find_element_by_xpath('//span[@role="listbox"]//i').click()
+        # driver.find_element_by_xpath('//span[@role="listbox"]//i').click()
+        js = 'document.getElementsByClassName("far fa-chevron-circle-right fa-lg")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+        driver.execute_script(js)  # 执行js语句
     except Exception as e:
         print('点击切换workspace按钮失败', e)
         screen_shot_func(driver, '点击切换workspace按钮失败')
@@ -1071,6 +1103,7 @@ def get_all_data_on_the_page(driver,search_key = 'cardName'):
     print(size)
     print(height_size)
     print(quarter_of_the_height)
+    driver.implicitly_wait(int(6))
     while True:
         ele_list_1 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')   # 取每次循环的第一行数据（每5条数据一次循环）
         ele_list_2 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+4}"]//div[@class="{search_key}"]')   # 取每次循环的最后一行数据（每5条数据一次循环）
@@ -1166,6 +1199,10 @@ def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',sen
     """
     try:
         driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
+        ele_list = driver.find_elements_by_xpath(end_call_before_connecting)
+        if len(ele_list) == 0:
+            js = 'document.getElementsByClassName("k-button callButton")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+            driver.execute_script(js)  # 执行js语句
     except Exception as e:
         print('点击call按钮失败', e)
         screen_shot_func(driver,'点击call按钮失败')

@@ -39,11 +39,41 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     :return:
     """
     try:
-        driver.find_element_by_xpath(invite_user_div).click()  # 右上角三个横杠
-        driver.find_element_by_xpath(enter_invite_user_page).click()  # 进入 invite page
+        for i in range(3):
+            ele_list = driver.find_elements_by_xpath(invite_user_div)
+            if len(ele_list) == 1:
+                ele_list[0].click()    # 点击右上角三个横杠
+                break
+            elif i == 2:
+                raise Exception('右上角三个横杠按钮不可点击')
+        for i in range(3):
+            ele_list = driver.find_elements_by_xpath(enter_invite_user_page)
+            if len(ele_list) == 1:
+                ele_list[0].click()  # 点击Invite图标，进入 invite page
+                break
+            elif len(ele_list) == 0:
+                driver.find_element_by_xpath(invite_user_div).click()    # 点击右上角三个横杠
+            elif i == 2:
+                raise Exception('Invite图标不可点击')
         if enter_send_invite == 'yes':
-            driver.find_element_by_xpath(send_invite_in_calling).click()  # 进入Send Invite page
-            time.sleep(1)
+            for i in range(3):
+                ele_list = driver.find_elements_by_xpath(send_invite_in_calling)       # 进入Send Invite page
+                if len(ele_list) == 1:
+                    ele_list[0].click()       # 进入Send Invite page
+                    break
+                elif len(ele_list) == 0:
+                    driver.find_element_by_xpath(enter_invite_user_page).click()  # 点击Invite图标，进入 invite page
+                elif i == 2:
+                    raise Exception('进入send_invite页面失败')
+        elif enter_send_invite != 'yes':
+            for i in range(3):
+                ele_list = driver.find_elements_by_xpath(contacts_list_in_calling)       # 进入Send Invite page
+                if len(ele_list) == 1:
+                    break
+                elif len(ele_list) == 0:
+                    driver.find_element_by_xpath(enter_invite_user_page).click()  # 点击Invite图标，进入 invite page
+                elif i == 2:
+                    raise Exception('进入contacts_list页面失败')
     except Exception as e:
         print('打开邀请其他用户页面失败',e)
         screen_shot_func(driver,'打开邀请其他用户页面失败')
@@ -168,8 +198,21 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
             time.sleep(2)
             element.click()
             element.send_keys(who)
-            time.sleep(5)
-            driver1.find_element_by_xpath(click_call_button).click()  # click Call button
+            time.sleep(3)
+            for i in range(5):
+                ele_list = driver1.find_elements_by_xpath(click_call_button)
+                if len(ele_list) == 1:
+                    ele_list[0].click()  # click Call button
+                    driver1.implicitly_wait(int(1))
+                    ele_list_1 = driver1.find_elements_by_xpath(end_call_before_connecting)
+                    ele_list_2 = driver1.find_elements_by_xpath(send_invite_button)
+                    if len(ele_list_1) == 1 or len(ele_list_2) == 1:
+                        driver1.implicitly_wait(int(15))
+                        break
+                elif i == 4:
+                    raise Exception('点击call失败')
+                else:
+                    time.sleep(3)
         except Exception as e:
             print('点击call失败', e)
             screen_shot_func(driver1, '点击call失败')
@@ -563,9 +606,13 @@ def user_decline_call(driver,type = 'direct'):
     """
     try:
         if type == 'direct':
-            driver.find_element_by_xpath(decline_disclaimer).click()
+            # driver.find_element_by_xpath(decline_disclaimer).click()
+            js = 'document.getElementsByClassName("k-button danger-btn big-btn")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+            driver.execute_script(js)  # 执行js语句
         elif type == 'in_calling':
-            driver.find_element_by_xpath(decline_call).click()
+            # driver.find_element_by_xpath(decline_call).click()
+            js = 'document.getElementsByClassName("btn btn-lg btn-primary btn-block")[1].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+            driver.execute_script(js)  # 执行js语句
     except Exception as e:
         print('user_decline_call失败',e)
         screen_shot_func(driver,'user_decline_call失败')
@@ -584,11 +631,15 @@ def user_anwser_call(driver,anwser_type = 'direct'):
         if anwser_type == 'direct':
             ele_list = driver.find_elements_by_xpath(anwser_call_button)
             assert len(ele_list) == 1
-            ele_list[0].click()
+            # ele_list[0].click()
+            js = 'document.getElementsByClassName("k-button success-btn big-btn")[0].click();'    # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+            driver.execute_script(js)  # 执行js语句
         elif anwser_type == 'no_direct':
             ele_list = driver.find_elements_by_xpath(external_join_call_anwser_button)
             assert len(ele_list) == 1
-            ele_list[0].click()
+            # ele_list[0].click()
+            js = 'document.getElementsByClassName("btn btn-lg btn-primary btn-block")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+            driver.execute_script(js)  # 执行js语句
     except AssertionError:
         screen_shot_func(driver, '没找到接受Call的按钮')
         raise AssertionError
@@ -654,7 +705,21 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
         element.click()
         element.send_keys(on_call_group_name)
         time.sleep(5)
-        driver1.find_element_by_xpath(f'//div[@class="cardName" and @title="{on_call_group_name}"]/../../../..//button[@class="k-button callButton"]').click()   # 给on-call group（on-call group 1） 进行call
+        for i in range(5):
+            ele_list = driver1.find_elements_by_xpath(f'//div[@class="cardName" and @title="{on_call_group_name}"]/../../../..//button[@class="k-button callButton"]')
+            if len(ele_list) == 1:
+                ele_list[0].click()  # click Call button
+                driver1.implicitly_wait(int(1))
+                ele_list_1 = driver1.find_elements_by_xpath(end_call_before_connecting)
+                ele_list_2 = driver1.find_elements_by_xpath(send_invite_button)
+                if len(ele_list_1) == 1 or len(ele_list_2) == 1:
+                    driver1.implicitly_wait(int(15))
+                    break
+            elif i == 4:
+                raise Exception('首行数据还未展示')
+            else:
+                time.sleep(3)
+        # driver1.find_element_by_xpath(f'//div[@class="cardName" and @title="{on_call_group_name}"]/../../../..//button[@class="k-button callButton"]').click()   # 给on-call group（on-call group 1） 进行call
     except Exception as e:
         print('点击call失败', e)
         screen_shot_func(driver1, '点击call失败')

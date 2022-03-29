@@ -41,6 +41,7 @@ send_my_help_space_invitation = '//button[contains(.,"Send My Help Space Invitat
 get_invite_link = '//div[@class="invite-link"]'
 my_help_space_message = '//input[@name="message"]'
 send_invite_in_calling = '//a[@id="inviteDialog-tab-2"]'
+contacts_list_in_calling = '//a[@id="inviteDialog-tab-1"]'
 current_account = '//button[@id="currentAccount"]'
 my_account_name = '//input[@placeholder="Name"]'
 first_tree_menu = '//div[@role="tree"]/div[1]'

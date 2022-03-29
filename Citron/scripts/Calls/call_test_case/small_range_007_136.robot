@@ -439,10 +439,9 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     exit_call     ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
-    # 关闭通话结束展示页面
-    close_call_ending_page      ${driver2}
     # User B logout
-    logout_citron    ${driver2}
+#    logout_citron    ${driver2}
+    exit_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -470,7 +469,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     switch_tree    1
     # 判断在Recents页面，匿名用户的通话记录没有Call按钮
     anonymous_user_call_can_not_call_again   ${driver1}
-    [Teardown]     exit_driver   ${driver1}   ${driver2}   ${driver3}  ${driver4}
+    [Teardown]     exit_driver   ${driver1}  ${driver3}  ${driver4}
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
@@ -487,15 +486,14 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     exit_call     ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
-    # 关闭通话结束展示页面
-    close_call_ending_page      ${driver2}
     # User B logout
-    logout_citron    ${driver2}
+#    logout_citron    ${driver2}
+    exit_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    can_connect_call_or_not    ${driver1}   ${a_team_user_username}
+    can_connect_call_or_not    ${driver1}   ${a_team_user_name}
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
@@ -508,7 +506,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     ${driver4}   start_an_empty_window
     # VP: call establish successfully
     check_call_can_reach_to_or_not   ${driver1}  ${driver4}   ${meeting_link}    1
-    [Teardown]     exit_driver   ${driver1}   ${driver2}   ${driver3}  ${driver4}
+    [Teardown]     exit_driver   ${driver1}   ${driver3}  ${driver4}
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
@@ -529,10 +527,9 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     exit_call     ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
-    # 关闭通话结束展示页面
-    close_call_ending_page      ${driver2}
     # User B logout
-    logout_citron    ${driver2}
+#    logout_citron    ${driver2}
+    exit_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -547,7 +544,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     # VP: call establish successfully
     check_call_can_reach_to_or_not   ${driver1}   ${driver3}   ${meeting_link}    1
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
+    ...             AND             exit_driver   ${driver1}   ${driver3}
 
 Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
