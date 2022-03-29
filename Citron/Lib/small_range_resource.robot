@@ -531,12 +531,12 @@ switch_workspace_check_directory
 
 open_disable_external_users
     ${count}   get element count   ${disable_external_users}//div[@class="react-toggle"]
-    Run Keyword If   '${count}'=='1'    click element   ${disable_external_users}//div[@class="react-toggle"]
+    Run Keyword If   '${count}'=='1'    click element   ${disable_external_users}//div[@class="react-toggle-track"]
     sleep  2s
 
 close_disable_external_users
     ${count}   get element count   ${disable_external_users}//div[@class="react-toggle react-toggle--checked"]
-    Run Keyword If   '${count}'=='1'   click element    ${disable_external_users}//div[@class="react-toggle react-toggle--checked"]
+    Run Keyword If   '${count}'=='1'   click element    ${disable_external_users}//div[@class="react-toggle-track"]
     sleep  2s
 
 make_sure_workspaces_disable_external_feature

@@ -65,7 +65,6 @@ Login
     # 点击LOG IN
     wait until element is visible   ${login_button}    10s
     Click Button    ${login_button}
-    Sleep    3s
 
 Login_crunch
     Open Browser    ${crunch_website}     ${browser_type}
@@ -97,9 +96,12 @@ Open_register_personal_website
 Login_site_admin
     # 登录系统
     Login    ${site_admin_username}    ${site_admin_password}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
     Wait Until Page Contains    ${log_in_success_tag}  20s
@@ -112,9 +114,12 @@ Login_site_admin
 Login_premium_user
     # 登录系统
     Login    ${crunch_site_username}    ${crunch_site_password}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to"
     Wait Until Page Contains    ${log_in_success_tag}  20s
@@ -127,9 +132,12 @@ Login_premium_user
 Login_workspaces_admin
     # 登录系统
     Login    ${workspace_admin_username}     ${workspace_admin_password}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
     Wait Until Page Contains    ${log_in_success_tag}    20s
@@ -142,9 +150,12 @@ Login_workspaces_admin
 Login_another_workspaces_admin
     # 登录系统
     Login    ${another_workspace_admin_username}     ${another_workspace_admin_password}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
     Wait Until Page Contains    ${log_in_success_tag}   20s
@@ -157,9 +168,12 @@ Login_another_workspaces_admin
 Login_another_group_admin
     # 登录系统
     Login    ${another_group_admin_username}     ${another_group_admin_password}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
     Wait Until Page Contains    ${log_in_success_tag}   20s
@@ -172,9 +186,12 @@ Login_another_group_admin
 Login_workspaces_admin_one
     # 登录系统
     Login    ${workspace_admin_username_one}     ${workspace_admin_password_one}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
     Wait Until Page Contains    ${log_in_success_tag}   20s
@@ -187,9 +204,12 @@ Login_workspaces_admin_one
 Login_group_admin
     # 登录系统
     Login    ${group_admin_username}    ${group_admin_password}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
     Wait Until Page Contains    ${log_in_success_tag}   20s
@@ -203,9 +223,12 @@ Login_new_added_user
     [Arguments]    ${user_username}
     # 登录系统
     Login    ${user_username}    ${public_pass}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to"
     Wait Until Page Contains    ${log_in_success_tag}   20s
@@ -226,9 +249,12 @@ Login_new_added_user_whitout_workspaces
 Login_normal_for_calls
     # 登录系统
     Login    ${normal_username_for_calls}     ${normal_password_for_calls}
-    sleep    3s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
     Wait Until Page Contains    ${log_in_success_tag}   20s

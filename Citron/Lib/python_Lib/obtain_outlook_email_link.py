@@ -34,27 +34,6 @@ def from_email_get_content():
     return mailContent
 
 def get_email_link(tag):
-    # # 创建一个pop3对象，这个时候实际上已经连接上服务器了
-    # pp = poplib.POP3_SSL(host)
-    # # 设置调试模式，可以看到与服务器的交互信息
-    # pp.set_debuglevel(1)
-    # # 向服务器发送用户名
-    # pp.user(username)
-    # # 向服务器发送密码
-    # pp.pass_(password)
-    # # 获取服务器上信件信息，返回是一个列表，第一项是一共有多上封邮件，第二项是共有多少字节
-    # ret = pp.stat()
-    # print("ret is :", ret)
-    # resp, mails, octets = pp.list()
-    # # 获取最新一封邮件
-    # # Poplib模块的retr()函数使用来下载邮件的。它每次刚好下载一封邮件，我们必须传递给他想要下载的邮件的数字。
-    # # print mails#['1 2721', '2 2784', '3 2986', '4 28987', '5 10056', '6 753', '7 763']
-    # # 注意索引号从1开始，那么最新的一封邮件就是索引最大的那个数值
-    # lenString = len(mails)
-    # resp1, mailContent, octets1 = pp.retr(lenString)  # mailContent:邮件内容
-    # # 退出
-    # pp.quit()
-    # # print("邮件内容是:",mailContent)
     mailContent = from_email_get_content()
     contain_tag = 0
     i = 0
@@ -108,27 +87,6 @@ def get_email_link(tag):
         return 'There is no such email'
 
 def get_email_verification_code():
-    # # 创建一个pop3对象，这个时候实际上已经连接上服务器了
-    # pp = poplib.POP3_SSL(host)
-    # # 设置调试模式，可以看到与服务器的交互信息
-    # pp.set_debuglevel(1)
-    # # 向服务器发送用户名
-    # pp.user(username)
-    # # 向服务器发送密码
-    # pp.pass_(password)
-    # # 获取服务器上信件信息，返回是一个列表，第一项是一共有多上封邮件，第二项是共有多少字节
-    # ret = pp.stat()
-    # print("ret is :", ret)
-    # resp, mails, octets = pp.list()
-    # # 获取最新一封邮件
-    # # Poplib模块的retr()函数使用来下载邮件的。它每次刚好下载一封邮件，我们必须传递给他想要下载的邮件的数字。
-    # # print mails#['1 2721', '2 2784', '3 2986', '4 28987', '5 10056', '6 753', '7 763']
-    # # 注意索引号从1开始，那么最新的一封邮件就是索引最大的那个数值
-    # lenString = len(mails)
-    # resp1, mailContent, octets1 = pp.retr(lenString)  # mailContent:邮件内容
-    # # 退出
-    # pp.quit()
-    # # print("邮件内容是:",mailContent)
     mailContent = from_email_get_content()
     list = []
     contain_tag = 0

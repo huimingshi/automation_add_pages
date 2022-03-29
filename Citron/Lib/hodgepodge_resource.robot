@@ -872,7 +872,7 @@ disclaimer_popped_up_automate
     Open Browser    ${web_url}      ${browser_type}
     Sleep    1s
     # The disclaimer should be popped up automate
-    element should be visible  ${accept_disclaimer}    20s
+    wait until element is visible   ${accept_disclaimer}     20s
 
 open_disable_external_users
     ${count}   get element count   ${disable_external_users}//div[@class="react-toggle"]
