@@ -60,7 +60,7 @@ Login
     wait until element is visible   ${next_button}     10s
     Click Button    ${next_button}
     # 输入密码
-    wait until element is visible  ${loginpsd_input}      10s
+    wait until element is visible  ${loginpsd_input}      20s
     Input Password    ${loginpsd_input}    ${password}
     # 点击LOG IN
     wait until element is visible   ${login_button}    10s
@@ -78,7 +78,7 @@ Login_crunch
     wait until element is visible     ${next_button}    10s
     Click Button    ${next_button}
     # 输入密码
-    wait until element is visible     ${loginpsd_input}    10s
+    wait until element is visible     ${loginpsd_input}    20s
     Input Password    ${loginpsd_input}    ${crunch_site_password}
     # 点击LOG IN
     wait until element is visible     ${login_button}    10s
@@ -102,10 +102,6 @@ Login_site_admin
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}  20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
@@ -120,12 +116,8 @@ Login_premium_user
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to"
-    Wait Until Page Contains    ${log_in_success_tag}  20s
-    sleep  1s
     # close 弹框
-    wait until element is visible    ${button_of_popup}
+    wait until element is visible    ${button_of_popup}  20s
     Click Button    ${button_of_popup}
     sleep    1s
 
@@ -138,10 +130,6 @@ Login_workspaces_admin
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}    20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
@@ -156,10 +144,6 @@ Login_another_workspaces_admin
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}   20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
@@ -174,10 +158,6 @@ Login_another_group_admin
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}   20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
@@ -192,10 +172,6 @@ Login_workspaces_admin_one
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}   20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
@@ -210,10 +186,6 @@ Login_group_admin
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}   20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
@@ -229,10 +201,6 @@ Login_new_added_user
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to"
-    Wait Until Page Contains    ${log_in_success_tag}   20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
@@ -255,10 +223,6 @@ Login_normal_for_calls
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}   20s
-    sleep  1s
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
