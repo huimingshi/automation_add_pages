@@ -116,8 +116,8 @@ ${end_call_whole_page}                          //html                          
 ${end_button_before_call}                       //div[@id="connecting_progress_bar_container"]/button[text()="End"]                                 # End Call按钮
 ${choose_give_receive_help_mode}                //div[@class="FirstUserGuide"]                                                                      # 通话过程中选择Give或者Receive模式
 ${open_Menu_Items}                              //h1[text()="Menu Items"]/..//div[@class="react-toggle"]                                            # Settings的Menu Items打开按钮
-
-
+${exit_call_yes_button}                         //button[text()="Yes"]                                                                              # 退出通话时的Yes按钮
+${exit_call_no_button}                          //button[text()="No"]                                                                               # 退出通话时的No按钮
 
 
 

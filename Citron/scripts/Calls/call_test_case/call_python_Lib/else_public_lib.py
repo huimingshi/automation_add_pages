@@ -308,7 +308,15 @@ def hang_up_the_phone(driver):
     :return:
     """
     try:
-        driver.find_element_by_xpath(end_call_button).click()
+        for i in range(3):
+            ele_list = driver.find_elements_by_xpath(end_call_button)
+            if len(ele_list) == 1:
+                ele_list[0].click()
+                break
+            elif i == 2:
+                print('找不到挂断按钮')
+                raise Exception('找不到挂断按钮')
+            # driver.find_element_by_xpath(end_call_button).click()
     except Exception as e:
         print('点击挂断按钮失败',e)
         screen_shot_func(driver, '点击挂断按钮失败')
@@ -331,7 +339,17 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     hang_up_the_phone(driver)
     # User Leave call
     try:
-        driver.find_element_by_xpath(leave_call_button).click()
+        for i in range(3):
+            ele_list = driver.find_elements_by_xpath(leave_call_button)
+            if len(ele_list) == 1:
+                ele_list[0].click()
+                break
+            elif i == 2:
+                print('找不到Leave_call按钮')
+                raise Exception('找不到Leave_call按钮')
+            else:
+                driver.find_element_by_xpath(end_call_button).click()
+        # driver.find_element_by_xpath(leave_call_button).click()
     except Exception as e:
         print('点击Leave_call失败', e)
         screen_shot_func(driver, '点击Leave_call失败')
@@ -352,7 +370,7 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
             screen_shot_func(driver, '选择另一个共同主持后点击Leave_call失败')
             raise Exception('选择另一个共同主持后点击Leave_call失败')
 
-def exit_call(driver,call_time=20):
+def exit_call(driver,call_time=1):
     """
     # 结束call
     :param driver:
@@ -364,9 +382,19 @@ def exit_call(driver,call_time=20):
     hang_up_the_phone(driver)
     # User exit call
     try:
+        for i in range(3):
+            ele_list = driver.find_elements_by_xpath('//button[@class="promptButton submenu-seperator"]')
+            if len(ele_list) == 1:
+                ele_list[0].click()
+                break
+            elif i == 2:
+                print('找不到Yes按钮')
+                raise Exception('找不到Yes按钮')
+            else:
+                driver.find_element_by_xpath(end_call_button).click()
         # driver.find_element_by_xpath('//button[@class="promptButton submenu-seperator"]').click()
-        js = 'document.getElementsByClassName("promptButton submenu-seperator")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
-        driver.execute_script(js)  # 执行js语句
+        # js = 'document.getElementsByClassName("promptButton submenu-seperator")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
+        # driver.execute_script(js)  # 执行js语句
     except Exception as e:
         print('点击Yes失败', e)
         screen_shot_func(driver, '点击Yes失败')
@@ -384,16 +412,16 @@ def end_call_for_all(driver,call_time=20):
     hang_up_the_phone(driver)
     # 点击End_Call_for_All
     try:
-        ele_list = driver.find_elements_by_xpath(end_call_for_all_button)
-        if len(ele_list) == 1:
-            ele_list[0].click()
-        else:
-            time.sleep(3)
+        for i in range(3):
             ele_list = driver.find_elements_by_xpath(end_call_for_all_button)
             if len(ele_list) == 1:
                 ele_list[0].click()
+                break
+            elif i == 2:
+                print('找不到End_Call_for_All按钮')
+                raise Exception('找不到End_Call_for_All按钮')
             else:
-                raise Exception('点击End_Call_for_All失败')
+                driver.find_element_by_xpath(end_call_button).click()
     except Exception as e:
         print('点击End Call for All失败', e)
         screen_shot_func(driver, '点击End_Call_for_All失败')
@@ -1025,7 +1053,6 @@ def re_login_citron(driver,username,password='*IK<8ik,8ik,'):
     except AssertionError:
         print('没出现登陆失败的提示信息Authentication Failed')
         raise AssertionError
-
 
 def switch_to_settings_page(driver,whitch_setting = 'Workspace Settings',which_tree = '2', if_click_tree = 'click_tree'):
     """

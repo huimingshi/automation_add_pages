@@ -551,11 +551,11 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         if deal_with_disclaimer == 'accept':
             ele_list = driver.find_elements_by_xpath(accept_disclaimer)
             if len(ele_list) == 1:
-                driver.find_element_by_xpath(accept_disclaimer).click()
+                ele_list[0].click()
         elif deal_with_disclaimer == 'decline':
             ele_list = driver.find_elements_by_xpath(decline_disclaimer)
             if len(ele_list) == 1:
-                driver.find_element_by_xpath(decline_disclaimer).click()
+                ele_list[0].click()
                 ele_list = driver.find_elements_by_xpath('//div[@id="whiteboard_message" and text()="Disclaimer must be accepted."]')
                 assert len(ele_list) == 1
     except AssertionError:
@@ -822,7 +822,7 @@ def enter_face_to_face_mode(driver):
         screen_shot_func(driver, '进入f2f模式失败')
         raise Exception
 
-def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialog = 'has_dialog'):
+def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialog = 'has_dialog',give_or_receive = 'give'):
     """
     进入giver模式
     :param driver:
@@ -830,6 +830,7 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
     :param who_receive_help:  选择receiver的name
     :param roles: 通话者数目
     :param has_dialog: 是否有对话框出现
+    :param give_or_receive: 想进入哪种模式；默认是give为giver模式，其他为receiver模式
     :return:
     """
     try:
@@ -838,8 +839,10 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
             driver.find_element_by_xpath(f'//div[@class="user-base"]/strong[text()="{who_give_help}"]').click()
             driver.find_element_by_xpath(f'//div[@class="user-base"]/strong[text()="{who_receive_help}"]').click()
             driver.find_element_by_xpath('//div[@class="user-footer"]/button[text()="Continue"]').click()
-        elif has_dialog == 'has_dialog' and roles == '2':
+        elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
             driver.find_element_by_xpath('//span[text()="I will give help"]').click()
+        elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
+            driver.find_element_by_xpath('//span[text()="I need help"]').click()
         elif has_dialog == 'has_no_dialog' and roles == '2':
             driver.find_element_by_xpath(f2f_on_mode).click()
             driver.find_element_by_xpath('//*[@*="#rh_off"]/../..').click()
@@ -935,7 +938,7 @@ if __name__ == '__main__':
     # driver7 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766553@outlook.com', '*IK<8ik,8ik,')
     # driver8 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com', '*IK<8ik,8ik,')
     driver9 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU5@outlook.com', '*IK<8ik,8ik,')
-    # driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU2@outlook.com', '*IK<8ik,8ik,')
+    driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU2@outlook.com', '*IK<8ik,8ik,')
     # driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU3@outlook.com', '*IK<8ik,8ik,')
     # driver12 = driver_set_up_and_logIn('Huiming.shi.helplightning+Expert_B@outlook.com', '*IK<8ik,8ik,')
     # driver13 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')

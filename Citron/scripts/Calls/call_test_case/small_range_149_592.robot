@@ -338,13 +338,89 @@ Join_call_196_200
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}        ${call_oncall_user_password}
     # EU2 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User2_username}        ${call_oncall_user_password}
+    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}        ${call_oncall_user_password}
     # EU1 calls EU2. EU2 answers call,
-    make_calls_with_who     ${driver1}     ${driver1}     ${Expert_User2_username}
-    # TU3 登录
-    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}        ${call_oncall_user_password}
+    make_calls_with_who     ${driver1}     ${driver2}     ${Expert_User2_username}
     # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    sleep  1000s
+    sleep   10s
+    hang_up_the_phone     ${driver1}
+    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver1}
+    hang_up_the_phone     ${driver2}
+    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver2}
+    # EU1 switches to Giver.
+    enter_giver_mode     ${driver1}     no_one     no_one     2
+    # EU1 invites TU3. TU3 answers call.
+    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}        ${call_oncall_user_password}
+    enter_contacts_search_user     ${driver1}    ${Team_User1_name}
+    click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
+    user_anwser_call     ${driver3}
+    # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
+    which_page_is_currently_on     ${driver1}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#gh_on"]
+    which_page_is_currently_on     ${driver2}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]
+    which_page_is_currently_on     ${driver3}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#gh_on"]     not_currently_on
+    which_page_is_currently_on     ${driver3}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]     not_currently_on
+    # TU3 leaves call.
+    exit_call     ${driver3}    5
+    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+    hang_up_the_phone     ${driver1}
+    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver1}
+    hang_up_the_phone     ${driver2}
+    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver2}
+    # End call.
+    exit_call     ${driver1}
+    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
+
+Join_call_201_205
+    [Documentation]     In call	  2PC
+    [Tags]     small range 201-205 lines
+    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+    ...         AND               enter_workspace_settings_page     # 进入settings页面
+    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+    ...         AND               Close
+    # EU1 登录
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}        ${call_oncall_user_password}
+    # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
+    ${invite_url}    send_meeting_room_link    ${driver1}    OTU
+    ${driver2}   anonymous_open_meeting_link     ${invite_url}
+    user_anwser_call     ${driver1}
+    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+    sleep   10s
+    hang_up_the_phone     ${driver1}
+    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver1}
+    hang_up_the_phone     ${driver2}
+    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver2}
+    # EU1 switches to receiver, enters freezing, photo or pdf mode.
+    enter_giver_mode    ${driver1}   no_one    no_one    2    has_dialog    receive
+    enter_FGD_mode    ${driver1}      Document
+    # Anonymous user 2 clicks on the same link. EU1 answers call.
+    ${driver3}   anonymous_open_meeting_link     ${invite_url}
+    user_anwser_call     ${driver1}    no_direct
+    # Anonymous user 1 leaves call.
+    exit_call     ${driver3}
+    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+    sleep   10s
+    hang_up_the_phone     ${driver1}
+    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver1}
+    hang_up_the_phone     ${driver2}
+    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver2}
+    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
 
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
@@ -533,7 +609,6 @@ Small_range_592
     # TU1 call EU1 from contact list
     make_calls_with_who     ${driver1}    ${driver2}    ${ws_branding_A_user}    anwser    is_personal
     # VP: The personal contact from different site does not have invite 3rd parcipant icon
-    open_invite_3rd_participant_dialog     ${driver2}     no_enter
-    which_page_is_currently_on     ${driver2}    ${invite_send_invite_tab}    not_currently_on
+    which_page_is_currently_on     ${driver2}     ${invite_user_in_calling}     not_currently_on
     [Teardown]      run keywords    Close
     ...             AND             exit_driver     ${driver1}    ${driver2}
