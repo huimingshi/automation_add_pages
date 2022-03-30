@@ -332,6 +332,20 @@ Join_call_188_195
     [Teardown]      run keywords    Close
     ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}    ${driver4}    ${driver5}    ${driver6}    ${driver7}
 
+Join_call_196_200
+    [Documentation]     In call	  2PC
+    [Tags]     small range 196-200 lines
+    # EU1 登录
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}        ${call_oncall_user_password}
+    # EU2 登录
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User2_username}        ${call_oncall_user_password}
+    # EU1 calls EU2. EU2 answers call,
+    make_calls_with_who     ${driver1}     ${driver1}     ${Expert_User2_username}
+    # TU3 登录
+    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}        ${call_oncall_user_password}
+    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+    sleep  1000s
+
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
     [Tags]    small range 560-580 lines
