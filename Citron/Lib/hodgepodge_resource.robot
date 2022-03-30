@@ -309,6 +309,7 @@ upload_a_photo
     # Button "Upload a photo" displays under the avatar.
     # Click on "Upload a photo", and upload a new photo
     ${picture_path}   get_modify_picture_path    picture.jpg
+    wait until element is visible    ${upload_a_photo}   10s
     choose file  ${upload_a_photo}   ${picture_path}
     wait until element is visible    ${my_account_update_success_tag}
     # Button changes to "Change your avatar".
@@ -328,6 +329,7 @@ change_your_avatar
     element should be visible    ${remove_avatar}
     # Click on "Change your avatar", and upload a new photo
     ${modify_picture_path}   get_modify_picture_path
+    wait until element is visible    ${upload_a_photo}    10s
     choose file  ${upload_a_photo}  ${modify_picture_path}
     # Validate avatar is updated successfully
     wait until element is visible    ${my_account_update_success_tag}
@@ -719,6 +721,7 @@ click_deatils
 modify_basic_info
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
+    wait until element is visible    ${button_Upload}    10s
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}

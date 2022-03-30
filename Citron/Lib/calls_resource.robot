@@ -721,11 +721,13 @@ click_to_edit_branding_setting
 
 change_branding_big_logo
     ${picture_path}   get_modify_picture_path    Logo1.jpg
+    wait until element is visible      ${change_big_logo}    10s
     choose file   ${change_big_logo}   ${picture_path}
     sleep  2s
 
 change_branding_default_avatat
     ${picture_path}   get_modify_picture_path    avatar1.jpg
+    wait until element is visible      ${change_default_avatar}    10s
     choose file   ${change_default_avatar}   ${picture_path}
     sleep  2s
 

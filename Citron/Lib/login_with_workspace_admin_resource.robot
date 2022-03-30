@@ -180,6 +180,7 @@ click_deatils
 modify_basic_info
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
+    wait until element is visible    ${button_Upload}    10s
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
@@ -1244,6 +1245,7 @@ create_standard_member_group
     sleep  0.5s
     # Choose File
     ${picture_path}   get_modify_picture_path    picture.jpg
+    wait until element is visible   ${choose_file}    10s
     Choose file    ${choose_file}     ${picture_path}
     sleep  0.5s
     # Choose Group Administrators
@@ -1281,6 +1283,7 @@ add_group_admin_user_and_avator
     # Add Group Admin user & avator
     # Choose File
     ${picture_path}   get_modify_picture_path    picture.jpg
+    wait until element is visible    ${choose_file}    10s
     Choose file    ${choose_file}     ${picture_path}
     sleep  0.5s
     # Choose Group Administrators
@@ -1338,6 +1341,7 @@ modify_standard_members_group
     sleep  0.5s
     # modify File
     ${modify_picture_path}   get_modify_picture_path
+    wait until element is visible    ${choose_file}    10s
     Choose file    ${choose_file}     ${modify_picture_path}
     sleep  0.5s
     # modify Group Administrators
@@ -1409,6 +1413,7 @@ create_on_call_group_keyword
     sleep  0.5s
     # Choose File
     ${picture_path}   get_modify_picture_path    picture.jpg
+    wait until element is visible   ${choose_file}   10s
     Choose file    ${choose_file}     ${picture_path}
     sleep  0.5s
     # Choose Group Administrators
@@ -1465,6 +1470,7 @@ modify_on_call_group
     sleep  0.5s
     # modify File
     ${modify_picture_path}   get_modify_picture_path
+    wait until element is visible    ${choose_file}    10s
     Choose file    ${choose_file}     ${modify_picture_path}
     sleep  0.5s
     # modify Group Administrators

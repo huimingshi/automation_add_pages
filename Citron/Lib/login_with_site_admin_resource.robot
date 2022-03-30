@@ -810,6 +810,7 @@ upload_a_photo
     click_user_details
     # upload photo
     ${picture_path}   get_modify_picture_path     picture.jpg
+    wait until element is visible    ${upload_photo_button}    10s
     Choose file    ${upload_photo_button}    ${picture_path}
     sleep  0.5s
     wait until element is visible    ${remove_avatar_button}
@@ -875,6 +876,7 @@ select_a_worksapce_and_click_at_details
     should contain   ${get_value}   read-only
     # upload photo
     ${picture_path}   get_modify_picture_path    picture.jpg
+    wait until element is visible     ${details_pre_xpath}//input[@type="file"]    10s
     Choose file     ${details_pre_xpath}//input[@type="file"]    ${picture_path}
     sleep  3s
     wait until element is not visible    ${prompt_information}    20s
@@ -903,6 +905,7 @@ change_avatar_then_remove
     ${before_modify_avatar}  get element attribute    ${details_pre_xpath}//img[@class="avatar-preview"]    src
     # change avatar
     ${modify_picture_path}   get_modify_picture_path
+    wait until element is visible    ${details_pre_xpath}//input[@type="file"]   10s
     Choose file    ${details_pre_xpath}//input[@type="file"]     ${modify_picture_path}
     # check message
     wait until element is visible   ${message_text}   5s

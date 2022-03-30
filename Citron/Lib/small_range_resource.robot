@@ -785,6 +785,7 @@ modify_user_name_avator
     # modify user name & Avatar
     # upload Avatar
     ${modify_picture_path}   get_modify_picture_path
+    wait until element is visible    ${button_Upload}    10s
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
