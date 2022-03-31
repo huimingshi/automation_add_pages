@@ -58,6 +58,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                 driver.find_element_by_xpath(submit_button).click()
                 break
             elif i == 2:
+                print('password输入框不可点击')
                 raise Exception('password输入框不可点击')
             else:
                 driver.find_element_by_xpath(submit_button).click()
@@ -75,6 +76,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             if currentPageUrl == test_web:
                 break
             elif i == 2:
+                print('未进入到登录后的页面')
                 raise Exception
             else:
                 driver.find_element_by_xpath(submit_button).click()
@@ -1284,14 +1286,15 @@ def first_call_record_tag_and_comment(driver,expect_tag,*args):
     # 获取首行call记录的tag
     print(expect_tag)
     try:
-        for i in range(10):
+        for i in range(3):
             get_tag = driver.find_element_by_xpath('//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="tags"]').get_attribute('textContent')
             print(get_tag)
             if get_tag == expect_tag:
                 break
             else:
                 time.sleep(2)
-            if i == 9:
+            if i == 2:
+                print('tag与预期不一致')
                 raise AssertionError
     except AssertionError:
         screen_shot_func(driver,'tag与预期不一致')
@@ -1411,6 +1414,7 @@ def reset_disclaimer(driver):
             elif len(ele_list) == 0:
                 break
             elif i == 9:
+                print('Disclaimer提示信息未散去')
                 raise Exception('提示信息未散去')
     except AssertionError:
         screen_shot_func(driver, 'Reset_All_Accepted_Disclaimers未生效')
@@ -1523,9 +1527,16 @@ def verify_username_in_recents_page(driver,*args):
     count = len(args)
     try:
         for i in range(count):
-            name = driver.find_element_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
-            assert name == args[i]
+            ele_list = driver.find_elements_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]')
+            if len(ele_list) == 1:
+                name = driver.find_element_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
+                assert name == args[i]
+            else:
+                driver.find_element_by_xpath('//button[text()="Refresh"]').click()
+                name = driver.find_element_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
+                assert name == args[i]
     except AssertionError:
+        print('recents页面预期name和实际不一致')
         screen_shot_func(driver,'recents页面预期name和实际不一致')
         raise AssertionError
     except Exception as e:
