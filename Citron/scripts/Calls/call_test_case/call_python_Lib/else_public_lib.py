@@ -390,8 +390,6 @@ def exit_call(driver,call_time=1):
             elif i == 2:
                 print('找不到Yes按钮')
                 raise Exception('找不到Yes按钮')
-            else:
-                driver.find_element_by_xpath(end_call_button).click()
         # driver.find_element_by_xpath('//button[@class="promptButton submenu-seperator"]').click()
         # js = 'document.getElementsByClassName("promptButton submenu-seperator")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
         # driver.execute_script(js)  # 执行js语句

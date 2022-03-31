@@ -222,8 +222,9 @@ Small_range_710_723
     ###### Click EU2's OTU link	VP: Get message like "EU2 is in another call"       723行
     user_make_call_via_meeting_link   ${driver7}     ${invite_url_otu}
     which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
-    [Teardown]      run keywords     exit_call    ${driver1}
-    ...             AND              exit_driver    ${driver1}  ${driver2}   ${driver3}   ${driver4}   ${driver5}   ${driver6}   ${driver7}
+#    [Teardown]      run keywords     exit_call    ${driver1}
+#    ...             AND              exit_driver    ${driver1}  ${driver2}   ${driver3}   ${driver4}   ${driver5}   ${driver6}   ${driver7}
+    [Teardown]      exit_driver    ${driver1}  ${driver2}   ${driver3}   ${driver4}   ${driver5}   ${driver6}   ${driver7}
 
 Small_range_724_742
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
@@ -347,8 +348,9 @@ Small_range_745
     # VP: This User does not have invite 3rd participant icon on menu bar
     sleep  10s
     which_page_is_currently_on    ${driver1}    ${invite_user_in_calling}   not_currently_on
-    [Teardown]      run keywords    exit_call     ${driver2}
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+#    [Teardown]      run keywords    exit_call     ${driver2}
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
+    [Teardown]       exit_driver     ${driver1}    ${driver2}
 
 Small_range_746
     [Documentation]     3PI - Meeting call     Pre-condition: user is belong to workspace WS-A and WS-B	User is currently on WS-B
@@ -368,8 +370,9 @@ Small_range_746
     # VP: contact list is same as team list from ws-A
     ${user_list_2}    get_all_data_on_the_page    ${driver1}      contact-name
     lists should be equal  ${user_list_1}   ${user_list_2}
-    [Teardown]      run keywords    exit_call     ${driver2}
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+#    [Teardown]      run keywords    exit_call     ${driver2}
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
+    [Teardown]       exit_driver     ${driver1}    ${driver2}
 
 Small_range_751
     [Documentation]      Resolution Check    Web on PC   VP: Resolution = 1280x720
@@ -386,8 +389,9 @@ Small_range_751
     sleep  20s    # 等待通话稳定
     # 检查Debug页面的Resolution是否为1280x720
     open_debug_dialog_check_resolution   ${driver2}
-    [Teardown]      run keywords    exit_call    ${driver1}
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+#    [Teardown]      run keywords    exit_call    ${driver1}
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
+    [Teardown]       exit_driver     ${driver1}    ${driver2}
 
 Small_range_799_802
     [Documentation]      Set Declaimer ->'delete user' is selected    Normal call

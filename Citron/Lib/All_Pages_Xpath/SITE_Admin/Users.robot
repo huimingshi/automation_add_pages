@@ -19,6 +19,7 @@ ${send_reset_password_email}            xpath=//button[contains(.,'Send Reset Pa
 ${update_user_button}                   xpath=//button[contains(.,'Update User')]                                                   # Update User button
 ${cancel_add_user_button}               xpath=//div[@class="UserInvite"]//button[contains(.,'Cancel')]                              # Cancel button
 ${upload_photo_button}                  xpath=//input[@type="file"]                                                                 # Upload a photo button
+${upload_avator_button_xpath}           xpath=//button[contains(.,'Upload a photo...')]                                             # Upload a photo... button
 ${remove_avatar_button}                 xpath=//button[contains(.,"Remove avatar")]                                                 # Remove avatar button
 ${license_type_select}                  xpath=//span[@role="listbox"]/span[@class="k-select"]                                       # license type select button
 ${team_license_type}                    xpath=//div[@class='k-list-scroller']//div[@class='Content']//b[contains(.,'Team')]         # team license type

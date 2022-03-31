@@ -17,6 +17,7 @@ ${deactivated_users_page}               xpath=//span[contains(.,'Deactivated Use
 ${activate_user_button}                 xpath=//button[contains(.,'Activate User')]                                             # Activate User button
 # user modify
 ${button_Upload}                        xpath=//input[@type="file"]                                                             # Upload a photo
+${upload_avatar_button}                 xpath=//button[contains(.,'Upload a photo...')]                                         # Upload a photo... button
 ${button_Remove}                        xpath=//button[contains(.,"Remove avatar")]                                             # Remove avatar button
 ${username_input}                       xpath=//input[@placeholder="Username"]                                                  # Username entry box
 ${name_input}                           xpath=//input[@placeholder="Name"]                                                      # Name entry box

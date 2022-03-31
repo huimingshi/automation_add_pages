@@ -22,8 +22,6 @@ Favorite_tap_group_name_to_start_expert_call
     switch_to_diffrent_page   ${driver1}   ${py_favorites_page}   ${py_favorites_switch_success}    ${py_get_number_of_rows}
     # make call with on-call
     make_call_to_onCall  ${driver1}  ${driver2}
-    # call on-call User exit call
-    exit_call   ${driver1}
     [Teardown]   run keywords    exit_driver  ${driver1}   ${driver2}
     ...          AND             Close
 
@@ -38,8 +36,6 @@ Send_meeting_room_link_By_Premium_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser call
     user_anwser_call   ${driver}
-    # Premium User exit call
-    exit_call  ${driver}
     [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Send_meeting_room_link_By_Enterprise_User
@@ -53,8 +49,6 @@ Send_meeting_room_link_By_Enterprise_User
     ${driver1}  anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser call
     user_anwser_call   ${driver}
-    # Enterprise User exit call
-    exit_call  ${driver}
     [Teardown]   exit_driver  ${driver}  ${driver1}
 
 Send_one_time_meeting_room_link_By_Premium_User
@@ -68,8 +62,6 @@ Send_one_time_meeting_room_link_By_Premium_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser then exit call
     user_anwser_call   ${driver}
-    # Premium User exit call
-    exit_call  ${driver}
     [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Send_one_time_meeting_room_link_By_Enterprise_User
@@ -83,8 +75,6 @@ Send_one_time_meeting_room_link_By_Enterprise_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser then exit call
     user_anwser_call   ${driver}
-    # Enterprise User exit call
-    exit_call  ${driver}
     [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button

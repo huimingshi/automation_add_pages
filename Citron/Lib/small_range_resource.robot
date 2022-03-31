@@ -22,12 +22,14 @@ user_login_citron_without_close_tutorial
     [Arguments]  ${username}
     # 登录系统
     Login    ${username}    ${public_pass}
-    sleep    1s
-    ${count}  get element count  ${accept_button}
-    Run Keyword If   '${count}'=='1'    click element   ${accept_button}
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}  10s
+    FOR   ${i}    IN RANGE   0    8
+        ${count}   get element count   ${accept_button}
+        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
+    # 等待Torturial弹框出现弹框
+    wait until element is visible    ${button_of_popup}   10s
 
 user_login_citron_without_accept_disclaimer
     [Arguments]  ${username}
@@ -785,7 +787,7 @@ modify_user_name_avator
     # modify user name & Avatar
     # upload Avatar
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${button_Upload}    10s
+    wait until element is visible    ${upload_avatar_button}    10s
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}

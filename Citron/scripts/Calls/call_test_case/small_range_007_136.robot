@@ -290,8 +290,8 @@ During_Call_open_invite_the_3rd_participant_page
     enter_contacts_search_user   ${driver2}    ${random}
     display_name_avator_in_contact_list   ${driver2}    ${random}   original_default_avatar_url
     close_invite_3th_page   ${driver2}
-    # 结束通话
-    exit_call     ${driver1}    1
+#    # 结束通话
+#    exit_call     ${driver1}    1
     [Teardown]      run keywords     my_account_change_name_and_avator    ${driver3}   ${big_admin_another_first_WS_name}    change   ${modify_picture_path}
     ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
 
@@ -421,8 +421,9 @@ unable_to_reach_user_message_displays
     enter_contacts_search_user    ${driver1}   ${a_team_user_name}
     # 校验在通话中Contacts页面中未登录的user，点击后是否会弹出{username} is unreachable的提示信息
     click_user_in_contacts_call   ${driver1}   ${a_team_user_name}   can_not_reach
-    [Teardown]      run keywords     exit_call      ${driver1}    1
-    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
+#    [Teardown]      run keywords     exit_call      ${driver1}    1
+#    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
+    [Teardown]       exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.

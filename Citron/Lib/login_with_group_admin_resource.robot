@@ -228,7 +228,7 @@ click_deatils
 modify_basic_info
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${button_Upload}    10s
+    wait until element is visible    ${upload_avatar_button}    10s
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
@@ -256,7 +256,7 @@ modify_basic_info
 only_avatar_is_editable
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${button_Upload}    10s
+    wait until element is visible    ${upload_avatar_button}    10s
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
