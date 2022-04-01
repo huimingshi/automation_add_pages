@@ -715,8 +715,8 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
                 driver1.implicitly_wait(int(1))
                 ele_list_1 = driver1.find_elements_by_xpath(end_call_before_connecting)
                 ele_list_2 = driver1.find_elements_by_xpath(send_invite_button)
+                driver1.implicitly_wait(int(15))
                 if len(ele_list_1) == 1 or len(ele_list_2) == 1:
-                    driver1.implicitly_wait(int(15))
                     break
             elif i == 4:
                 print('首行数据还未展示')

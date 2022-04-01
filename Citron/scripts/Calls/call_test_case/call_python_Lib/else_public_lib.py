@@ -838,8 +838,14 @@ def get_recents_page_records_occurred_time(driver,rows = '2'):
     occurred_time_list = []
     try:
         for i in range(int(rows)):
-            occurred_time = driver.find_element_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
-            occurred_time_list.append(occurred_time)
+            ele_list = driver.find_elements_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]')
+            if len(ele_list) >= 1:
+                occurred_time = driver.find_element_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
+                occurred_time_list.append(occurred_time)
+            else:
+                driver.find_element_by_xpath('//button[text()="Refresh"]').click()
+                occurred_time = driver.find_element_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
+                occurred_time_list.append(occurred_time)
     except Exception as e:
         screen_shot_func(driver,f'获取Recents页面前{int(rows)}行数据的Occurred_time失败')
         raise (f'获取Recents页面前{int(rows)}行数据的Occurred_time失败',e)
