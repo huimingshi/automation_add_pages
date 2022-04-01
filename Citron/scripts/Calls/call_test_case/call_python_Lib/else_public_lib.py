@@ -60,8 +60,8 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             elif i == 2:
                 print('password输入框不可点击')
                 raise Exception('password输入框不可点击')
-            else:
-                driver.find_element_by_xpath(submit_button).click()
+            # else:
+            #     driver.find_element_by_xpath(submit_button).click()
     except Exception as e:
         print('登陆时输入password失败',e)
         screen_shot_func(driver, '登陆时输入password失败')
@@ -78,8 +78,8 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             elif i == 2:
                 print('未进入到登录后的页面')
                 raise Exception
-            else:
-                driver.find_element_by_xpath(submit_button).click()
+            # else:
+            #     driver.find_element_by_xpath(submit_button).click()
     except Exception as e:
         print('登陆失败',e)
         screen_shot_func(driver, '登陆失败')
@@ -349,8 +349,8 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
             elif i == 2:
                 print('找不到Leave_call按钮')
                 raise Exception('找不到Leave_call按钮')
-            else:
-                driver.find_element_by_xpath(end_call_button).click()
+            # else:
+            #     driver.find_element_by_xpath(end_call_button).click()
         # driver.find_element_by_xpath(leave_call_button).click()
     except Exception as e:
         print('点击Leave_call失败', e)
@@ -384,12 +384,12 @@ def exit_call(driver,call_time=1):
     hang_up_the_phone(driver)
     # User exit call
     try:
-        for i in range(3):
+        for i in range(5):
             ele_list = driver.find_elements_by_xpath('//button[@class="promptButton submenu-seperator"]')
             if len(ele_list) == 1:
                 ele_list[0].click()
                 break
-            elif i == 2:
+            elif i == 4:
                 print('找不到Yes按钮')
                 raise Exception('找不到Yes按钮')
         # driver.find_element_by_xpath('//button[@class="promptButton submenu-seperator"]').click()
@@ -420,8 +420,8 @@ def end_call_for_all(driver,call_time=20):
             elif i == 2:
                 print('找不到End_Call_for_All按钮')
                 raise Exception('找不到End_Call_for_All按钮')
-            else:
-                driver.find_element_by_xpath(end_call_button).click()
+            # else:
+            #     driver.find_element_by_xpath(end_call_button).click()
     except Exception as e:
         print('点击End Call for All失败', e)
         screen_shot_func(driver, '点击End_Call_for_All失败')
@@ -1234,8 +1234,8 @@ def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',sen
         driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
         ele_list = driver.find_elements_by_xpath(end_call_before_connecting)
         if len(ele_list) == 0:
-            js = 'document.getElementsByClassName("k-button callButton")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
-            driver.execute_script(js)  # 执行js语句
+            print('再点击一次Call按钮')
+            driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
     except Exception as e:
         print('点击call按钮失败', e)
         screen_shot_func(driver,'点击call按钮失败')

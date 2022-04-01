@@ -203,19 +203,19 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
             element.click()
             element.send_keys(who)
             time.sleep(3)
-            for i in range(5):
+            for i in range(10):
                 ele_list = driver1.find_elements_by_xpath(click_call_button)
                 if len(ele_list) == 1:
                     ele_list[0].click()  # click Call button
                     driver1.implicitly_wait(int(1))
                     ele_list_1 = driver1.find_elements_by_xpath(end_call_before_connecting)
                     ele_list_2 = driver1.find_elements_by_xpath(send_invite_button)
+                    driver1.implicitly_wait(int(15))
                     if len(ele_list_1) == 1 or len(ele_list_2) == 1:
-                        driver1.implicitly_wait(int(15))
                         break
-                elif i == 4:
-                    print('未找到Call按钮')
-                    raise Exception('未找到Call按钮')
+                elif i == 9:
+                    print('Contacts页面刷新出数据')
+                    raise Exception('Contacts页面刷新出数据')
         except Exception as e:
             print('点击call失败', e)
             screen_shot_func(driver1, '点击call失败')
@@ -247,12 +247,20 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
         else:
             print('点击call成功')
     try:
-        count = driver1.find_elements_by_xpath(end_call_before_connecting)
-        assert len(count) == 1
-    except AssertionError as e:
+        for i in range(3):
+            count = driver1.find_elements_by_xpath(end_call_before_connecting)
+            if len(count) == 1:
+                print(f'向{who}发起call成功')
+                break
+            elif i == 2:
+                print(f'向{who}发起call时没出现结束Call的按钮')
+                raise Exception(f'向{who}发起call时没出现结束Call的按钮')
+            else:
+                driver1.find_element_by_xpath(click_call_button).click()
+    except Exception as e:
         print(f'向{who}发起call失败', e)
         screen_shot_func(driver1,f'向{who}发起call失败')
-        raise AssertionError
+        raise Exception
     else:
         print(f'向{who}发起call成功')
     # user anwser calls
