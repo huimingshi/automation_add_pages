@@ -366,7 +366,6 @@ def enter_contacts_search_user(driver,search_name,if_click= 'no_click_show',sear
     else:
         print('通过name查询成功')
     ele_list = driver.find_elements_by_xpath(f'//div[@class="contact-name" and contains(.,"{search_name}")]')
-    # element_list = driver.find_elements_by_xpath(contacts_in_call_search_result)
     try:
         if search_result == 'has_user_data':
             assert len(ele_list) >= 1
@@ -617,13 +616,9 @@ def user_decline_call(driver,type = 'direct'):
     """
     try:
         if type == 'direct':
-            # driver.find_element_by_xpath(decline_disclaimer).click()
-            js = 'document.getElementsByClassName("k-button danger-btn big-btn")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
-            driver.execute_script(js)  # 执行js语句
+            driver.find_element_by_xpath(decline_disclaimer).click()
         elif type == 'in_calling':
-            # driver.find_element_by_xpath(decline_call).click()
-            js = 'document.getElementsByClassName("btn btn-lg btn-primary btn-block")[1].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
-            driver.execute_script(js)  # 执行js语句
+            driver.find_element_by_xpath(decline_call).click()
     except Exception as e:
         print('user_decline_call失败',e)
         screen_shot_func(driver,'user_decline_call失败')
@@ -717,18 +712,16 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
         element.send_keys(on_call_group_name)
         time.sleep(5)
         for i in range(5):
-            ele_list = driver1.find_elements_by_xpath(f'//div[@class="cardName" and @title="{on_call_group_name}"]/../../../..//button[@class="k-button callButton"]')
+            # ele_list = driver1.find_elements_by_xpath(f'//div[@class="cardName" and @title="{on_call_group_name}"]/../../../..//button[@class="k-button callButton"]')
+            ele_list = driver1.find_elements_by_xpath(click_call_button)
             if len(ele_list) == 1:
                 ele_list[0].click()  # click Call button
-                driver1.implicitly_wait(int(1))
-                ele_list_1 = driver1.find_elements_by_xpath(end_call_before_connecting)
-                ele_list_2 = driver1.find_elements_by_xpath(send_invite_button)
-                driver1.implicitly_wait(int(15))
-                if len(ele_list_1) == 1 or len(ele_list_2) == 1:
-                    break
+                break
             elif i == 4:
                 print('首行数据还未展示')
                 raise Exception('首行数据还未展示')
+            else:
+                time.sleep(15)
         # driver1.find_element_by_xpath(f'//div[@class="cardName" and @title="{on_call_group_name}"]/../../../..//button[@class="k-button callButton"]').click()   # 给on-call group（on-call group 1） 进行call
     except Exception as e:
         print('点击call失败', e)

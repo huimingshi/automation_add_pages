@@ -43,7 +43,10 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
     try:    # enter email
         driver.find_element_by_xpath(username_input).click()
         driver.find_element_by_xpath(username_input).send_keys(username)
-        driver.find_element_by_xpath(submit_button).click()
+        username_value = driver.find_element_by_xpath(username_input).get_attribute('value')
+        if username_value == username:
+            time.sleep(2)
+            driver.find_element_by_xpath(submit_button).click()
     except Exception as e:
         print('登陆时输入email失败',e)
         screen_shot_func(driver, '登陆时输入email失败')
@@ -52,16 +55,17 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         print('登陆时输入email成功')
     try:    # enter password
         for i in range(3):
-            ele_list = driver.find_elements_by_xpath(password_input)
-            if len(ele_list) == 1:
+            ele_list =  driver.find_elements_by_xpath('//input[@style="display: block;"]')
+            ele_list_psd = driver.find_elements_by_xpath(password_input)
+            if len(ele_list) == 1 and len(ele_list_psd) == 1 :
                 driver.find_element_by_xpath(password_input).send_keys(password)
                 driver.find_element_by_xpath(submit_button).click()
                 break
             elif i == 2:
                 print('password输入框不可点击')
                 raise Exception('password输入框不可点击')
-            # else:
-            #     driver.find_element_by_xpath(submit_button).click()
+            else:
+                time.sleep(2)
     except Exception as e:
         print('登陆时输入password失败',e)
         screen_shot_func(driver, '登陆时输入password失败')
@@ -107,7 +111,6 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                 raise Exception
             else:
                 print('登陆成功后接受免责声明成功')
-    driver.implicitly_wait(15)
     if close_bounced == 'close_bounced':
         try:  # close Tutorial
             if check_toturial == 'check_toturial':
@@ -134,6 +137,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             raise Exception
     elif disturb == 'set_disturb':
         set_do_not_disturb(driver)
+    driver.implicitly_wait(15)
 
 def driver_set_up_and_logIn(username,password,check_toturial = 'no_check_toturial',close_bounced='close_bounced',accept = 'accept',disturb = 'not_set_disturb'):
     """
@@ -200,9 +204,8 @@ def do_not_disturb_become_available(driver):
         ele_list = driver.find_elements_by_xpath(make_available_button)
         if len(ele_list) == 1:
             ele_list[0].click()
-            time.sleep(3)
-            ele_list = driver.find_elements_by_xpath(make_available_button)
-            assert len(ele_list) == 0
+            ele_list = driver.find_elements_by_xpath(not_disturb)
+            assert len(ele_list) == 1
     except AssertionError:
         screen_shot_func(driver,'make_available按钮依然存在')
         raise AssertionError
@@ -385,13 +388,16 @@ def exit_call(driver,call_time=1):
     # User exit call
     try:
         for i in range(5):
-            ele_list = driver.find_elements_by_xpath('//button[@class="promptButton submenu-seperator"]')
-            if len(ele_list) == 1:
+            ele_list = driver.find_elements_by_xpath('//span[@style="visibility: visible;"]')
+            ele_list_yes = driver.find_elements_by_xpath('//button[@class="promptButton submenu-seperator"]')
+            if len(ele_list_yes) == 1 and len(ele_list) == 1:
                 ele_list[0].click()
                 break
             elif i == 4:
                 print('找不到Yes按钮')
                 raise Exception('找不到Yes按钮')
+            else:
+                time.sleep(15)
         # driver.find_element_by_xpath('//button[@class="promptButton submenu-seperator"]').click()
         # js = 'document.getElementsByClassName("promptButton submenu-seperator")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
         # driver.execute_script(js)  # 执行js语句
@@ -412,16 +418,16 @@ def end_call_for_all(driver,call_time=20):
     hang_up_the_phone(driver)
     # 点击End_Call_for_All
     try:
-        for i in range(3):
+        for i in range(5):
             ele_list = driver.find_elements_by_xpath(end_call_for_all_button)
             if len(ele_list) == 1:
                 ele_list[0].click()
                 break
-            elif i == 2:
+            elif i == 4:
                 print('找不到End_Call_for_All按钮')
                 raise Exception('找不到End_Call_for_All按钮')
-            # else:
-            #     driver.find_element_by_xpath(end_call_button).click()
+            else:
+                time.sleep(15)
     except Exception as e:
         print('点击End Call for All失败', e)
         screen_shot_func(driver, '点击End_Call_for_All失败')
@@ -429,7 +435,17 @@ def end_call_for_all(driver,call_time=20):
     else:
         print('点击End Call for All成功')
     try:
-        driver.find_element_by_xpath('//button[@variant="secondary" and contains(.,"Yes")]').click()
+        for i in range(5):
+            ele_list = driver.find_elements_by_xpath('//button[@variant="secondary" and contains(.,"Yes")]')
+            if len(ele_list) == 1:
+                ele_list[0].click()
+                break
+            elif i == 4:
+                print('找不到Yes按钮')
+                raise Exception('找不到Yes按钮')
+            else:
+                time.sleep(15)
+        # driver.find_element_by_xpath('//button[@variant="secondary" and contains(.,"Yes")]').click()
     except Exception as e:
         print('点击Yes失败', e)
         screen_shot_func(driver, '点击Yes失败')
@@ -740,7 +756,15 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
         raise Exception
     # 复制
     try:
-        driver.find_element_by_xpath('//i[@class="far fa-copy "]').click()
+        for i in range(3):
+            ele_list = driver.find_elements_by_xpath('//i[@class="far fa-copy "]')
+            if len(ele_list) == 1:
+                ele_list[0].click()
+            elif i == 2:
+                print('复制按钮未出现')
+                raise Exception('复制按钮未出现')
+            else:
+                time.sleep(1)
     except Exception as e:
         print('复制失败',e)
         screen_shot_func(driver, '复制失败')
@@ -973,8 +997,15 @@ def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
     :param unreachable: 是否unreachable，默认为unreachable
     :return:
     """
+    attr_xpath = data_count_xpath + '/div[@col-id="name"]'
+    # 等待数据出现
+    for i in range(5):
+        ele_list =  driver.find_elements_by_xpath(attr_xpath)
+        if len(ele_list) >= 1:
+            break
+        else:
+            time.sleep(5)
     if unreachable == 'unreachable':
-        attr_xpath = data_count_xpath + '/div[@col-id="name"]'
         try:
             class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
             print(class_attr)
@@ -987,7 +1018,6 @@ def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
             screen_shot_func(driver, '没找到user')
             raise Exception('没找到user')
     elif unreachable == 'reachable':
-        attr_xpath = data_count_xpath + '/div[@col-id="name"]'
         try:
             class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
             print(class_attr)
@@ -1025,9 +1055,8 @@ def logout_citron(driver):
     try:
         driver.find_element_by_xpath(current_account).click()
         driver.find_element_by_xpath(log_out_button).click()
-        for i in range(2):
-            element_list = driver.find_elements_by_xpath(username_input)
-            assert len(element_list) == 1
+        element_list = driver.find_elements_by_xpath(username_input)
+        assert len(element_list) == 1
     except AssertionError:
         screen_shot_func(driver, '退出登录后不是登录页面')
         raise AssertionError
@@ -1103,14 +1132,20 @@ def switch_to_diffrent_page(driver,switch_page,switch_success_tag,data_show,swit
         driver.find_element_by_xpath(f'//div[@role="tree"]/div[{int(which_tree)}]').click()
     try:
         driver.find_element_by_xpath(f'//span[contains(.,"{switch_page}")]').click()
-        for i in range(2):
+        for i in range(3):
             element_list = driver.find_elements_by_xpath(switch_success_tag)
             if len(element_list) == 1:
                 element_list_data = driver.find_elements_by_xpath(data_show)
                 if len(element_list_data) > 0:
                     break
+                elif i == 2:
+                    print('未切换到指定页面成功')
+                    raise Exception('未切换到指定页面成功')
                 else:
                     time.sleep(1)
+            elif i == 2:
+                print('未切换到指定页面成功')
+                raise Exception('未切换到指定页面成功')
             else:
                 time.sleep(1)
     except Exception as e:
@@ -1232,10 +1267,10 @@ def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',sen
     """
     try:
         driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
-        ele_list = driver.find_elements_by_xpath(end_call_before_connecting)
-        if len(ele_list) == 0:
-            print('再点击一次Call按钮')
-            driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
+        # ele_list = driver.find_elements_by_xpath(end_call_before_connecting)
+        # if len(ele_list) == 0:
+        #     print('再点击一次Call按钮')
+        #     driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
     except Exception as e:
         print('点击call按钮失败', e)
         screen_shot_func(driver,'点击call按钮失败')
