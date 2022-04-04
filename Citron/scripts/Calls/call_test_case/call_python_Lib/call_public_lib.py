@@ -207,12 +207,13 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
                 ele_list = driver1.find_elements_by_xpath(click_call_button)
                 if len(ele_list) == 1:
                     ele_list[0].click()  # click Call button
-                    driver1.implicitly_wait(int(1))
-                    ele_list_1 = driver1.find_elements_by_xpath(end_call_before_connecting)
-                    ele_list_2 = driver1.find_elements_by_xpath(send_invite_button)
-                    driver1.implicitly_wait(int(15))
-                    if len(ele_list_1) == 1 or len(ele_list_2) == 1:
-                        break
+                    break
+                    # driver1.implicitly_wait(int(1))
+                    # ele_list_1 = driver1.find_elements_by_xpath(end_call_before_connecting)
+                    # ele_list_2 = driver1.find_elements_by_xpath(send_invite_button)
+                    # driver1.implicitly_wait(int(15))
+                    # if len(ele_list_1) == 1 or len(ele_list_2) == 1:
+                    #     break
                 elif i == 9:
                     print('Contacts页面刷新出数据')
                     raise Exception('Contacts页面刷新出数据')

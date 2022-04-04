@@ -56,9 +56,9 @@ Small_range_152
     sleep  10s
     # VP:hints dialog is closed on screen of 3pc call
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-#    [Teardown]      run keywords    end_call_for_all   ${driver1}
-#    ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
-    [Teardown]       exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]      run keywords    end_call_for_all   ${driver1}
+    ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
+#    [Teardown]       exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_153_160
     [Documentation]    Enterprise user call contact in F2F mode
@@ -107,9 +107,9 @@ Small_range_153_160
     enter_face_to_face_mode     ${driver1}
     # VP: hint dialog is not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-#    [Teardown]      run keywords    exit_call   ${driver1}
-#    ...             AND             exit_driver    ${driver1}   ${driver2}
-    [Teardown]       exit_driver    ${driver1}   ${driver2}
+    [Teardown]      run keywords    exit_call   ${driver1}
+    ...             AND             exit_driver    ${driver1}   ${driver2}
+#    [Teardown]       exit_driver    ${driver1}   ${driver2}
 
 Small_range_161
     [Documentation]    WebApp specific
@@ -130,9 +130,9 @@ Small_range_161
     # VP: Have Switch Camera button
     enter_giver_mode    ${driver1}   none   none   2
     enter_FGD_mode   ${driver1}    Swap Camera
-#    [Teardown]      run keywords    exit_call   ${driver1}
-#    ...             AND             exit_driver    ${driver1}   ${driver2}
-    [Teardown]       exit_driver    ${driver1}   ${driver2}
+    [Teardown]      run keywords    exit_call   ${driver1}
+    ...             AND             exit_driver    ${driver1}   ${driver2}
+#    [Teardown]       exit_driver    ${driver1}   ${driver2}
 
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly

@@ -62,10 +62,22 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                 driver.find_element_by_xpath(submit_button).click()
                 break
             elif i == 2:
-                print('password输入框不可点击')
-                raise Exception('password输入框不可点击')
+                print('password输入框未出现')
+                print('再点击下NEXT按钮')
+                driver.find_element_by_xpath(submit_button).click()
+                for j in range(3):
+                    ele_list = driver.find_elements_by_xpath('//input[@style="display: block;"]')
+                    ele_list_psd = driver.find_elements_by_xpath(password_input)
+                    if len(ele_list) == 1 and len(ele_list_psd) == 1:
+                        driver.find_element_by_xpath(password_input).send_keys(password)
+                        driver.find_element_by_xpath(submit_button).click()
+                        break
+                    elif j == 2:
+                        print('password输入框还是未出现')
+                    else:
+                        raise Exception('password输入框还是未出现')
             else:
-                time.sleep(2)
+                time.sleep(1)
     except Exception as e:
         print('登陆时输入password失败',e)
         screen_shot_func(driver, '登陆时输入password失败')
