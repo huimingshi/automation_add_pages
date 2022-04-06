@@ -587,7 +587,7 @@ Disclaimer_808_809
     ###### 809 line
     ${driver2}   anonymous_open_meeting_link   ${invite_url}   decline
     # 退出driver
-    exit_driver   ${driver2}
+    exit_one_driver   ${driver2}
 
     ###### 808 line
     ${driver3}   anonymous_open_meeting_link   ${invite_url}

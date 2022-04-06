@@ -93,7 +93,8 @@ Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     exit_call  ${driver1}
     # No Take Survey button
     check_survey_switch_success   ${driver1}
-    [Teardown]   exit_driver     ${driver1}    ${driver2}
+    [Teardown]      run keywords     Close
+    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_No_Take_Survey_button
     [Documentation]    Set Survey on  Value is in White List	Make a call via Citron & Client	After ending call	VP: Take Survey button.  After ending call,	VP: The tutorial screen shows up.
@@ -116,7 +117,8 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
     close_call_ending_page  ${driver2}
     # After ending call,	VP: The tutorial screen shows up.
     check_tutorial_screen_shows_up  ${driver2}
-    [Teardown]   exit_driver     ${driver1}    ${driver2}
+    [Teardown]      run keywords     Close
+    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 #Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_button
 #    [Documentation]    Set Survey on  Set URL=Null	Make a call via Citron & Client	After ending call	VP: No Take Survey button.

@@ -78,8 +78,10 @@ User_Directory_User_open_invite_3rd_participant_dialog
     open_invite_3rd_participant_dialog    ${driver1}   no_enter
     # User check on Directory	VP: All users of WS1 shows up
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
-    [Teardown]      run keywords    exit_call   ${driver2}   1     # end call
-    ...             AND             Close
+#    [Teardown]      run keywords    exit_call   ${driver2}   1     # end call
+#    ...             AND             Close
+#    ...             AND             exit_driver   ${driver1}   ${driver2}
+    [Teardown]      run keywords    Close
     ...             AND             exit_driver   ${driver1}   ${driver2}
 
 User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
@@ -98,8 +100,10 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     open_invite_3rd_participant_dialog    ${driver1}   no_enter
     # VP: user has no Directory checkbox
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   0
-    [Teardown]      run keywords    exit_call   ${driver2}   1    # end call
-    ...             AND             Close
+#    [Teardown]      run keywords    exit_call   ${driver2}   1    # end call
+#    ...             AND             Close
+#    ...             AND             exit_driver   ${driver1}   ${driver2}
+    [Teardown]      run keywords    Close
     ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Disable_External_Users_check_case_1
@@ -136,14 +140,14 @@ Disable_External_Users_check_case_1
 Disable_External_Users_check_case_2
     [Documentation]    Personal user or user from another site workspace logs in,VP: they should not be able to call this site workspace user via meeting link
     [Tags]         small range 96+97+98+99  line   有bug：https://vipaar.atlassian.net/browse/CITRON-3248   MHS link不应该打通
-    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
-    ...         AND               Close    # close browser
-    ...         AND               Login_premium_user    # log in with premium admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#    ...         AND               Login_premium_user    # log in with premium admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
     # Expert user log in
     ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}    ${an_expert_user_password}
     ${time_started_1}   get_start_time_of_the_last_call   ${driver1}
@@ -159,14 +163,14 @@ Disable_External_Users_check_case_2
 #    should be equal as strings    ${time_started_4}   ${time_started_2}
     # VP: they should not be able to call this site workspace user via on-call group link
     check_call_can_reach_to_or_not   ${driver1}  ${driver2}   https://app-stage.helplightning.net.cn/help?enterprise_id=2799&group_id=5562&group_name=on-call+group+2   0    # this is (on-call group 2) On-Call Group Url
-    # exit driver
-    exit_driver   ${driver2}
+#    # exit driver
+    exit_one_driver   ${driver2}
     # user from another site log in
     Login_new_added_user   ${other_site_user_1_username}
     # VP: they should not be able to direct Call this site workspace user any longer
     check_should_not_be_able_to_direct_call
     [Teardown]      run keywords     Close
-    ...             AND              exit_driver   ${driver1}   ${driver2}
+    ...             AND              exit_driver   ${driver1}
 
 Disable_External_Users_check_case_3
     [Documentation]    Anonymous user  VP: he should be able to call this site workspace user via meeting link   VP: he should be able to call this site workspace via on-call group link
@@ -210,8 +214,10 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     ${driver3}  start_an_empty_window
     # anonymous user can accept the call successfully
     check_call_can_reach_to_or_not  ${driver1}   ${driver3}   ${invite_url}   1
-    [Teardown]      run keywords    exit_call   ${driver2}   2
-    ...             AND             Close
+#    [Teardown]      run keywords    exit_call   ${driver2}   2
+#    ...             AND             Close
+#    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
+    [Teardown]      run keywords    Close
     ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 All_active_users_in_the_entire_enterprise_should_show
@@ -290,8 +296,8 @@ During_Call_open_invite_the_3rd_participant_page
     enter_contacts_search_user   ${driver2}    ${random}
     display_name_avator_in_contact_list   ${driver2}    ${random}   original_default_avatar_url
     close_invite_3th_page   ${driver2}
-#    # 结束通话
-#    exit_call     ${driver1}    1
+    # 结束通话
+    exit_call     ${driver1}    1
     [Teardown]      run keywords     my_account_change_name_and_avator    ${driver3}   ${big_admin_another_first_WS_name}    change   ${modify_picture_path}
     ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
 
@@ -423,7 +429,7 @@ unable_to_reach_user_message_displays
     click_user_in_contacts_call   ${driver1}   ${a_team_user_name}   can_not_reach
 #    [Teardown]      run keywords     exit_call      ${driver1}    1
 #    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
-    [Teardown]       exit_driver   ${driver1}   ${driver2}   ${driver3}
+    [Teardown]      exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.
@@ -442,7 +448,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     close_call_ending_page      ${driver1}
     # User B logout
 #    logout_citron    ${driver2}
-    exit_driver   ${driver2}
+    exit_one_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -489,7 +495,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     close_call_ending_page      ${driver1}
     # User B logout
 #    logout_citron    ${driver2}
-    exit_driver   ${driver2}
+    exit_one_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -530,7 +536,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     close_call_ending_page      ${driver1}
     # User B logout
 #    logout_citron    ${driver2}
-    exit_driver   ${driver2}
+    exit_one_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}

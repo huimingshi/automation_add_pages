@@ -7,6 +7,7 @@ from library_for_screenshot import screen_shot_func,get_system_type
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from public_lib import public_check_element,kill_all_browser
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -58,7 +59,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             ele_list =  driver.find_elements_by_xpath('//input[@style="display: block;"]')
             ele_list_psd = driver.find_elements_by_xpath(password_input)
             if len(ele_list) == 1 and len(ele_list_psd) == 1 :
-                driver.find_element_by_xpath(password_input).send_keys(password)
+                ele_list_psd[0].send_keys(password)
                 driver.find_element_by_xpath(submit_button).click()
                 break
             elif i == 2:
@@ -69,7 +70,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                     ele_list = driver.find_elements_by_xpath('//input[@style="display: block;"]')
                     ele_list_psd = driver.find_elements_by_xpath(password_input)
                     if len(ele_list) == 1 and len(ele_list_psd) == 1:
-                        driver.find_element_by_xpath(password_input).send_keys(password)
+                        ele_list_psd[0].send_keys(password)
                         driver.find_element_by_xpath(submit_button).click()
                         break
                     elif j == 2:
@@ -101,7 +102,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         screen_shot_func(driver, '登陆失败')
         raise AssertionError
     if accept == 'accept':
-        driver.implicitly_wait(8)
+        driver.implicitly_wait(10)
         count = driver.find_elements_by_xpath(accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             try:
@@ -356,17 +357,15 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     hang_up_the_phone(driver)
     # User Leave call
     try:
-        for i in range(3):
-            ele_list = driver.find_elements_by_xpath(leave_call_button)
-            if len(ele_list) == 1:
-                ele_list[0].click()
+        for i in range(5):
+            ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
+            ele_list_leave_call = driver.find_elements_by_xpath(leave_call_button)
+            if len(ele_list) == 1 and len(ele_list_leave_call) == 1:
+                ele_list_leave_call[0].click()
                 break
-            elif i == 2:
+            elif i == 4:
                 print('找不到Leave_call按钮')
                 raise Exception('找不到Leave_call按钮')
-            # else:
-            #     driver.find_element_by_xpath(end_call_button).click()
-        # driver.find_element_by_xpath(leave_call_button).click()
     except Exception as e:
         print('点击Leave_call失败', e)
         screen_shot_func(driver, '点击Leave_call失败')
@@ -400,16 +399,16 @@ def exit_call(driver,call_time=1):
     # User exit call
     try:
         for i in range(5):
-            ele_list = driver.find_elements_by_xpath('//span[@style="visibility: visible;"]')
+            ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
             ele_list_yes = driver.find_elements_by_xpath('//button[@class="promptButton submenu-seperator"]')
             if len(ele_list_yes) == 1 and len(ele_list) == 1:
-                ele_list[0].click()
+                ele_list_yes[0].click()
                 break
             elif i == 4:
                 print('找不到Yes按钮')
                 raise Exception('找不到Yes按钮')
             else:
-                time.sleep(15)
+                time.sleep(1)
         # driver.find_element_by_xpath('//button[@class="promptButton submenu-seperator"]').click()
         # js = 'document.getElementsByClassName("promptButton submenu-seperator")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
         # driver.execute_script(js)  # 执行js语句
@@ -417,8 +416,10 @@ def exit_call(driver,call_time=1):
         print('点击Yes失败', e)
         screen_shot_func(driver, '点击Yes失败')
         raise Exception
+    else:
+        print('点击Yes成功')
 
-def end_call_for_all(driver,call_time=20):
+def end_call_for_all(driver,call_time=1):
     """
     End Call for All
     :param driver:
@@ -431,9 +432,10 @@ def end_call_for_all(driver,call_time=20):
     # 点击End_Call_for_All
     try:
         for i in range(5):
-            ele_list = driver.find_elements_by_xpath(end_call_for_all_button)
-            if len(ele_list) == 1:
-                ele_list[0].click()
+            ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
+            ele_list_end_call = driver.find_elements_by_xpath(end_call_for_all_button)
+            if len(ele_list) == 1 and len(ele_list_end_call) == 1:
+                ele_list_end_call[0].click()
                 break
             elif i == 4:
                 print('找不到End_Call_for_All按钮')
@@ -447,21 +449,23 @@ def end_call_for_all(driver,call_time=20):
     else:
         print('点击End Call for All成功')
     try:
-        for i in range(5):
-            ele_list = driver.find_elements_by_xpath('//button[@variant="secondary" and contains(.,"Yes")]')
-            if len(ele_list) == 1:
-                ele_list[0].click()
-                break
-            elif i == 4:
-                print('找不到Yes按钮')
-                raise Exception('找不到Yes按钮')
-            else:
-                time.sleep(15)
-        # driver.find_element_by_xpath('//button[@variant="secondary" and contains(.,"Yes")]').click()
+        public_check_element(driver,'//button[@variant="secondary" and contains(.,"Yes")]','end_call_for_all时找不到Yes按钮',)
+        # for i in range(5):
+        #     ele_list = driver.find_elements_by_xpath('//button[@variant="secondary" and contains(.,"Yes")]')
+        #     if len(ele_list) == 1:
+        #         ele_list[0].click()
+        #         break
+        #     elif i == 4:
+        #         print('end_call_for_all时找不到Yes按钮')
+        #         raise Exception('end_call_for_all时找不到Yes按钮')
+        #     else:
+        #         time.sleep(1)
     except Exception as e:
         print('点击Yes失败', e)
         screen_shot_func(driver, '点击Yes失败')
         raise Exception
+    else:
+        print('点击Yes成功')
 
 def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_on'):
     """
@@ -580,6 +584,22 @@ def add_tags_and_comment(driver,which_tag = 1,which_comment = 'good_experience')
     return  first_tag_text
 
 def exit_driver(*args):
+    """
+    # exit drivers
+    :param driver1:
+    :param driver2:
+    :return:
+    """
+    # exit driver
+    kill_all_browser()
+    # for driver in args:
+    #     try:
+    #         driver.quit()
+    #         time.sleep(1)
+    #     except Exception:
+    #         print(f'当前{driver}不存在')
+
+def exit_one_driver(*args):
     """
     # exit drivers
     :param driver1:
@@ -1011,12 +1031,16 @@ def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
     """
     attr_xpath = data_count_xpath + '/div[@col-id="name"]'
     # 等待数据出现
-    for i in range(5):
-        ele_list =  driver.find_elements_by_xpath(attr_xpath)
-        if len(ele_list) >= 1:
-            break
-        else:
-            time.sleep(5)
+    public_check_element(driver, attr_xpath, '数据未出现', if_click = None)
+    # for i in range(5):
+    #     ele_list =  driver.find_elements_by_xpath(attr_xpath)
+    #     if len(ele_list) >= 1:
+    #         break
+    #     elif i == 4:
+    #         print('数据未出现')
+    #         raise Exception('数据未出现')
+    #     else:
+    #         time.sleep(1)
     if unreachable == 'unreachable':
         try:
             class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
@@ -1460,15 +1484,16 @@ def reset_disclaimer(driver):
         driver.find_element_by_xpath('//div[@role="dialog"]//button[text()="OK"]').click()
         ele_list = driver.find_elements_by_xpath("//button[text()='Reset All Accepted Disclaimers']")
         assert len(ele_list) == 1
-        for i in range(10):
-            ele_list = driver.find_elements_by_xpath("//button[text()='Reset All Accepted Disclaimers']")
-            if len(ele_list) == 1:
-                time.sleep(2)
-            elif len(ele_list) == 0:
-                break
-            elif i == 9:
-                print('Disclaimer提示信息未散去')
-                raise Exception('提示信息未散去')
+        public_check_element(driver, "//button[text()='Reset All Accepted Disclaimers']", 'Disclaimer提示信息未散去', if_click=1, if_show=None)
+        # for i in range(10):
+        #     ele_list = driver.find_elements_by_xpath("//button[text()='Reset All Accepted Disclaimers']")
+        #     if len(ele_list) == 1:
+        #         time.sleep(2)
+        #     elif len(ele_list) == 0:
+        #         break
+        #     elif i == 9:
+        #         print('Disclaimer提示信息未散去')
+        #         raise Exception('提示信息未散去')
     except AssertionError:
         screen_shot_func(driver, 'Reset_All_Accepted_Disclaimers未生效')
         raise AssertionError
@@ -1690,7 +1715,6 @@ def get_picture_path(picture_name = 'avatar1.jpg'):
         modify_picture_path = final_path + f'//{picture_name}'
         print(modify_picture_path)
         return modify_picture_path
-
 
 if __name__ == '__main__':
     # driver = driver_set_up_and_logIn('Huiming.shi.helplightning@outlook.com','*IK<8ik,8ik,')

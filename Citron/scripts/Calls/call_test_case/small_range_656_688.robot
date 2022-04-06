@@ -103,7 +103,7 @@ Small_range_660
     # 获取meeting link
     ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
     # Joiner's App is killed
-    exit_driver    ${driver2}
+    exit_one_driver    ${driver2}
     # caller calls via meeting link
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
     # Owner decline call
@@ -191,7 +191,7 @@ Small_range_663
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User C 退出
-    exit_driver  ${driver3}
+    exit_one_driver    ${driver3}
     # User A invites User C] who doesn't login on any device
     enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
     click_user_in_contacts_call   ${driver1}     ${Expert_User3_name}    can_not_reach
@@ -333,7 +333,7 @@ Small_range_665
 #    # Guest 2] calls one participant via meeting link
 #    user_make_call_via_meeting_link    ${driver3}   ${invite_url}
 #    # Owner] kill app during incoming call
-#    exit_driver  ${driver1}
+#    exit_one_driver  ${driver1}
 #    sleep  58s
 #    # VP: "xxx didn't answer your call"
 #    which_page_is_currently_on    ${driver3}    ${did_not_answer_your_call}

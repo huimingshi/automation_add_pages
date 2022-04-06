@@ -56,9 +56,9 @@ Small_range_152
     sleep  10s
     # VP:hints dialog is closed on screen of 3pc call
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-    [Teardown]      run keywords    end_call_for_all   ${driver1}
-    ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
-#    [Teardown]       exit_driver    ${driver1}   ${driver2}   ${driver3}
+#    [Teardown]      run keywords    end_call_for_all   ${driver1}
+#    ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]       exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_153_160
     [Documentation]    Enterprise user call contact in F2F mode
@@ -88,7 +88,7 @@ Small_range_153_160
     # Turn on "Show menu hints" setting
     switch_to_other_tab    ${driver1}    ${open_Menu_Items}
     # Kill/close app and relaunch
-    exit_driver    ${driver1}
+    exit_one_driver    ${driver1}
     ${driver1}   driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
     # VP: hints setting is on status
     enter_my_account_settings_page    ${driver1}
@@ -107,9 +107,9 @@ Small_range_153_160
     enter_face_to_face_mode     ${driver1}
     # VP: hint dialog is not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-    [Teardown]      run keywords    exit_call   ${driver1}
-    ...             AND             exit_driver    ${driver1}   ${driver2}
-#    [Teardown]       exit_driver    ${driver1}   ${driver2}
+#    [Teardown]      run keywords    exit_call   ${driver1}
+#    ...             AND             exit_driver    ${driver1}   ${driver2}
+    [Teardown]       exit_driver    ${driver1}   ${driver2}
 
 Small_range_161
     [Documentation]    WebApp specific
@@ -455,7 +455,7 @@ Small_range_560_580
     user_anwser_call    ${driver3}
     # EU1 leave call
     leave_call    ${driver1}
-    exit_driver    ${driver1}
+    exit_one_driver    ${driver1}
     # EU2 invite EU4 from Directory
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
     enter_contacts_search_user     ${driver2}    ${Expert_User4_name}
@@ -463,7 +463,7 @@ Small_range_560_580
     user_anwser_call    ${driver4}
     # EU4 leave call
     exit_call    ${driver4}
-    exit_driver    ${driver4}
+    exit_one_driver    ${driver4}
     # EU3 invite TU1
     ${driver5}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
     enter_contacts_search_user     ${driver3}    ${Team_User1_name}
@@ -471,7 +471,7 @@ Small_range_560_580
     user_anwser_call    ${driver5}
     # EU2 leave call
     leave_call    ${driver2}
-    exit_driver    ${driver2}
+    exit_one_driver    ${driver2}
     # VP: TU1 can invite
     enter_contacts_search_user     ${driver5}    ${Team_User2_name}
     # VP: TU1 can not send 3PI link
@@ -487,21 +487,21 @@ Small_range_560_580
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     # EU5 leave call
     exit_call    ${driver6}
-    exit_driver    ${driver6}
+    exit_one_driver    ${driver6}
     # TU2 click 3PI link to join    VP: directly joint automatically, do not need anyone's accept
     ${driver7}    driver_set_up_and_logIn    ${Team_User2_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver7}    ${invite_url}
     which_page_is_currently_on    ${driver7}    ${end_call_button}
     # TU2 leave call
     exit_call    ${driver7}
-    exit_driver    ${driver7}
+    exit_one_driver    ${driver7}
     # Anonymous user click 3PI to join
     ${driver8}    anonymous_open_meeting_link    ${invite_url}
     # VP: EU3 get Accept dialog     EU3 accept
     user_anwser_call    ${driver3}   no_direct
     # EU3 leave call
     leave_call    ${driver3}
-    exit_driver    ${driver3}
+    exit_one_driver    ${driver3}
     sleep   80s
     # Expert user from different enterprise click 3PI link
     ${driver9}    driver_set_up_and_logIn    ${ws3_branding_C_user}     ${universal_password}
@@ -556,17 +556,17 @@ Small_range_583_585
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     make_calls_with_who     ${driver3}    ${driver1}    ${Expert_User1_username}    no_anwser
     which_page_is_currently_on    ${driver3}    ${user_is_currently_on_another_call}
-    exit_driver    ${driver3}
+    exit_one_driver    ${driver3}
     # Someone click EU1 or EU2's MHS link	Someone get messgage about EU1 is on another call
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
     which_page_is_currently_on    ${driver4}    ${user_is_currently_on_another_call}
-    exit_driver    ${driver4}
+    exit_one_driver    ${driver4}
     # someone click EU1 or EU2's OTU link	Someone get messgage about EU1 is on another call
     ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver5}    ${invite_otu_url}
     which_page_is_currently_on    ${driver5}    ${user_is_currently_on_another_call}
-    exit_driver    ${driver5}
+    exit_one_driver    ${driver5}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver     ${driver1}    ${driver2}
 

@@ -137,7 +137,7 @@ Small_range_977_993
     ${css_value}   get_css_value   ${driver1}   ${Settings_tab_Allow_access}        color                           # Settings tab页面的Allow access to your Camera and Microphone.按钮
     check_get_color_correct    ${get_value}   ${css_value}
     # Workspace admin logout
-    exit_driver     ${driver1}
+    exit_one_driver     ${driver1}
 
     Comment    Site admin login
     # Site admin login and switch to WS1,VP: All context with "Help Lightning" is branded, accent color is orange, for following sceen
