@@ -48,6 +48,15 @@ ${enter_directory_page}             xpath=//span[contains(.,'Directory')]       
 
 
 *** Keywords ***
+click_next_again
+    Click Button    ${next_button}
+    FOR   ${i}    IN RANGE   0    20
+        ${count}   get element count   xpath=//input[@style="display: block;"]
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If      '${count_1}'=='0'    sleep   2s
+        Exit For Loop If    '${i}'=='19'
+    END
+
 Login
     [Arguments]    ${username}    ${password}
     Open Browser    ${citron_website}     ${browser_type}
@@ -59,8 +68,14 @@ Login
     # 点击NEXT
     wait until element is visible   ${next_button}     10s
     Click Button    ${next_button}
+    FOR   ${i}    IN RANGE   0    20
+        ${count}   get element count   xpath=//input[@style="display: block;"]
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If      '${count}'=='0'    sleep   2s
+        Run Keyword If      '${i}'=='19'    click_next_again
+    END
     # 输入密码
-    wait until element is visible  ${loginpsd_input}      20s
+#    wait until element is visible  ${loginpsd_input}      20s
     Input Password    ${loginpsd_input}    ${password}
     # 点击LOG IN
     wait until element is visible   ${login_button}    10s
