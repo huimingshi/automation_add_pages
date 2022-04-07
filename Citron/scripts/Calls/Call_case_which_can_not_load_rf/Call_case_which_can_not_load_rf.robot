@@ -63,7 +63,7 @@ Calls_filter_by_dialer
     filter_by_different_fields   ${driver}    1    Huiming.shi.helplightning+123456789    owner_name
     [Teardown]   exit_this_driver   ${driver}
 
-Calls_filter_byparticipant
+Calls_filter_by_participant
     [Documentation]    filter by participant
     [Tags]    filter by participant
     # log in with workspace admin

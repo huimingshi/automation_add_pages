@@ -17,6 +17,7 @@ ${citron_website}                   https://app-stage.helplightning.net.cn/     
 ${crunch_website}                   https://crunch-stage.helplightning.net.cn/                          # crunch website
 ${loginname_input}                  xpath=//input[@autocomplete="username"]                             # 用户名输入框
 ${next_button}                      xpath=//button[@type="submit"]                                      # NEXT按钮
+${loginpsd_display}                 xpath=//input[@style="display: block;"]                             # 密码输入框出现
 ${loginpsd_input}                   xpath=//input[@autocomplete="current-password"]                     # 密码输入框
 ${login_button}                     xpath=//button[@type="submit"]                                      # LOG IN按钮
 ${accept_button}                    xpath=//button[contains(.,'ACCEPT')]                                # ACCEPT button
@@ -51,7 +52,7 @@ ${enter_directory_page}             xpath=//span[contains(.,'Directory')]       
 click_next_again
     Click Button    ${next_button}
     FOR   ${i}    IN RANGE   0    20
-        ${count}   get element count   xpath=//input[@style="display: block;"]
+        ${count}   get element count   ${loginpsd_display}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If      '${count_1}'=='0'    sleep   2s
         Exit For Loop If    '${i}'=='19'
@@ -69,13 +70,12 @@ Login
     wait until element is visible   ${next_button}     10s
     Click Button    ${next_button}
     FOR   ${i}    IN RANGE   0    20
-        ${count}   get element count   xpath=//input[@style="display: block;"]
+        ${count}   get element count   ${loginpsd_display}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If      '${count}'=='0'    sleep   2s
         Run Keyword If      '${i}'=='19'    click_next_again
     END
     # 输入密码
-#    wait until element is visible  ${loginpsd_input}      20s
     Input Password    ${loginpsd_input}    ${password}
     # 点击LOG IN
     wait until element is visible   ${login_button}    10s

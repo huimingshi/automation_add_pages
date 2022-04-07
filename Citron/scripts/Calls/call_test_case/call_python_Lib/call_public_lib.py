@@ -41,42 +41,11 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     """
     try:
         public_check_element(driver, invite_user_div, '右上角三个横杠按钮不可点击')
-        # for i in range(5):
-        #     ele_list = driver.find_elements_by_xpath(invite_user_div)
-        #     if len(ele_list) == 1:
-        #         ele_list[0].click()    # 点击右上角三个横杠
-        #         break
-        #     elif i == 4:
-        #         print('右上角三个横杠按钮不可点击')
-        #         raise Exception('右上角三个横杠按钮不可点击')
         public_check_element(driver, enter_invite_user_page, 'Invite图标不可点击')
-        # for i in range(5):
-        #     ele_list = driver.find_elements_by_xpath(enter_invite_user_page)
-        #     if len(ele_list) == 1:
-        #         ele_list[0].click()  # 点击Invite图标，进入 invite page
-        #         break
-        #     elif i == 4:
-        #         print('Invite图标不可点击')
-        #         raise Exception('Invite图标不可点击')
         if enter_send_invite == 'yes':
             public_check_element(driver, send_invite_in_calling, '进入send_invite页面失败')
-            # for i in range(5):
-            #     ele_list = driver.find_elements_by_xpath(send_invite_in_calling)       # 进入Send Invite page
-            #     if len(ele_list) == 1:
-            #         ele_list[0].click()       # 进入Send Invite page
-            #         break
-            #     elif i == 4:
-            #         print('进入send_invite页面失败')
-            #         raise Exception('进入send_invite页面失败')
         elif enter_send_invite != 'yes':
             public_check_element(driver, contacts_list_in_calling, '进入contacts_list页面失败')
-            # for i in range(5):
-            #     ele_list = driver.find_elements_by_xpath(contacts_list_in_calling)       # 进入Send Invite page
-            #     if len(ele_list) == 1:
-            #         break
-            #     elif i == 4:
-            #         print('进入contacts_list页面失败')
-            #         raise Exception('进入contacts_list页面失败')
     except Exception as e:
         print('打开邀请其他用户页面失败',e)
         screen_shot_func(driver,'打开邀请其他用户页面失败')
@@ -157,36 +126,9 @@ def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no
     try:
         if int(count_expect) == 1:
             public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段未出现', if_click=None)
-            # for i in range(5):
-            #     ele_list = driver.find_elements_by_xpath('//label[contains(.,"Show Directory")]')
-            #     if len(ele_list) == 1:
-            #         break
-            #     elif i == 4:
-            #         print('Show Directory字段未出现')
-            #         raise Exception
-            #     else:
-            #         time.sleep(1)
         elif int(count_expect) == 0:
             public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
-            # for i in range(5):
-            #     ele_list = driver.find_elements_by_xpath('//label[contains(.,"Show Directory")]')
-            #     if len(ele_list) == 0:
-            #         break
-            #     elif i == 4:
-            #         print('Show Directory字段出现了')
-            #         raise Exception
-            #     else:
-            #         time.sleep(1)
         public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
-        # for i in range(5):
-        #     ele_list = driver.find_elements_by_xpath('//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div')
-        #     if len(ele_list) == 1:
-        #         break
-        #     elif i == 4:
-        #         print('Contacts列表没有数据')
-        #         raise Exception
-        #     else:
-        #         time.sleep(1)
     except Exception:
         screen_shot_func(driver, '是否出现Show_Directory与预期不符')
         raise Exception
@@ -227,14 +169,6 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
             element.send_keys(who)
             time.sleep(3)
             public_check_element(driver1, click_call_button, 'Contacts页面刷新出数据')
-            # for i in range(5):
-            #     ele_list = driver1.find_elements_by_xpath(click_call_button)
-            #     if len(ele_list) == 1:
-            #         ele_list[0].click()  # click Call button
-            #         break
-            #     elif i == 4:
-            #         print('Contacts页面刷新出数据')
-            #         raise Exception('Contacts页面刷新出数据')
         except Exception as e:
             print('点击call失败', e)
             screen_shot_func(driver1, '点击call失败')
@@ -265,23 +199,6 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
             raise Exception
         else:
             print('点击call成功')
-    # try:
-    #     for i in range(3):
-    #         count = driver1.find_elements_by_xpath(end_call_before_connecting)
-    #         if len(count) == 1:
-    #             print(f'向{who}发起call成功')
-    #             break
-    #         elif i == 2:
-    #             print(f'向{who}发起call时没出现结束Call的按钮')
-    #             raise Exception(f'向{who}发起call时没出现结束Call的按钮')
-    #         else:
-    #             driver1.find_element_by_xpath(click_call_button).click()
-    # except Exception as e:
-    #     print(f'向{who}发起call失败', e)
-    #     screen_shot_func(driver1,f'向{who}发起call失败')
-    #     raise Exception
-    # else:
-    #     print(f'向{who}发起call成功')
     # user anwser calls
     if answer == 'anwser':
         try:
@@ -424,18 +341,6 @@ def click_user_in_contacts_call(driver,username,can_reach = 'can_reach'):
         raise Exception
     if can_reach == 'can_not_reach':
         public_check_element(driver, f'//div[@class="message" and contains(.,"{username} is unreachable.")]', f'未出现{username}_is_unreachable_提示信息')
-        # for i in range(2):
-        #     ele_list = driver.find_elements_by_xpath(f'//div[@class="message" and contains(.,"{username} is unreachable.")]')
-        #     if len(ele_list) == 1:
-        #         break
-        #     else:
-        #         time.sleep(1)
-        #     try:
-        #         print(i)
-        #         assert i != 1
-        #     except AssertionError:
-        #         screen_shot_func(driver, f'未出现{username}_is_unreachable_提示信息')
-        #         raise AssertionError(f'未出现{username} is unreachable.的提示信息')
 
 def display_name_avator_in_contact_list(driver,search_name,expect_src):
     """
@@ -693,8 +598,10 @@ def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,fla
         driver_support.find_element_by_xpath(accept_disclaimer).click()
     time.sleep(8)
     count_support = driver_support.find_elements_by_xpath(end_call_before_connecting)
+    driver_master.implicitly_wait(int(8))
     count_master_1 = driver_master.find_elements_by_xpath(anwser_call_button)
     count_master_2 = driver_master.find_elements_by_xpath(external_join_call_anwser_button)
+    driver_master.implicitly_wait(int(15))
     print('如果下面assert断言出现AssertionError了，则表示电话不应该打通的却打通了，或者电话应该打通却没有打通')
     try:
         assert len(count_support) == int(flag)
@@ -732,17 +639,6 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
         element.send_keys(on_call_group_name)
         time.sleep(5)
         public_check_element(driver1, click_call_button, '首行数据还未展示')
-        # for i in range(5):
-        #     ele_list = driver1.find_elements_by_xpath(click_call_button)
-        #     if len(ele_list) == 1:
-        #         ele_list[0].click()  # click Call button
-        #         break
-        #     elif i == 4:
-        #         print('首行数据还未展示')
-        #         raise Exception('首行数据还未展示')
-        #     else:
-        #         time.sleep(1)
-        # driver1.find_element_by_xpath(f'//div[@class="cardName" and @title="{on_call_group_name}"]/../../../..//button[@class="k-button callButton"]').click()   # 给on-call group（on-call group 1） 进行call
     except Exception as e:
         print('点击call失败', e)
         screen_shot_func(driver1, '点击call失败')
@@ -962,7 +858,7 @@ if __name__ == '__main__':
     # driver8 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com', '*IK<8ik,8ik,')
     driver9 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU5@outlook.com', '*IK<8ik,8ik,')
     driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU2@outlook.com', '*IK<8ik,8ik,')
-    driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU3@outlook.com', '*IK<8ik,8ik,')
+    # driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU3@outlook.com', '*IK<8ik,8ik,')
     # driver12 = driver_set_up_and_logIn('Huiming.shi.helplightning+Expert_B@outlook.com', '*IK<8ik,8ik,')
     # driver13 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')
     # driver14 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_A@outlook.com', '*IK<8ik,8ik,')

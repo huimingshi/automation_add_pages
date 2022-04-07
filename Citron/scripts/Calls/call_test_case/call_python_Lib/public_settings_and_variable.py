@@ -64,6 +64,7 @@ take_survey_after_call = '//button[contains(.,"Take Survey")]'   # call结束后
 end_call_for_all_button = '//button[contains(.,"End Call for All")]'    # End Call for All
 leave_call_button = '//button[contains(.,"Leave Call")]'    # Leave Call
 visibility_finishi_call = '//span[@style="visibility: visible;"]'    # 校验可以挂断电话的按钮是否出现
+exit_call_yes = '//button[@class="promptButton submenu-seperator"]'   # 结束通话的Yes按钮
 debug_tools_close_xpath = '//h1[text()="Debug Tools"]/..//div[@class="react-toggle"]'     # 打开Debug Tools设置
 recording_settings = '//button[@id="recording-settings"]'                   # REC设置
 record_this_session = '//a[text()="Record this session"]/../..'

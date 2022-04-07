@@ -83,13 +83,16 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     :return:
     """
     driver = webdriver.Chrome(chrome_options=option)
-    driver.implicitly_wait(int(8))
+    driver.implicitly_wait(int(15))
     driver.get(test_web)
     driver.maximize_window()
     try:    # enter email
         driver.find_element_by_xpath(username_input).click()
         driver.find_element_by_xpath(username_input).send_keys(username)
-        driver.find_element_by_xpath(submit_button).click()
+        username_value = driver.find_element_by_xpath(username_input).get_attribute('value')
+        if username_value == username:
+            time.sleep(2)
+            driver.find_element_by_xpath(submit_button).click()
     except Exception as e:
         print('登陆时输入email失败',e)
         screen_shot_func(driver, '登陆时输入email失败')
@@ -97,20 +100,67 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     else:
         print('登陆时输入email成功')
     try:    # enter password
-        driver.find_element_by_xpath(password_input).click()
-        driver.find_element_by_xpath(password_input).send_keys(password)
-        driver.find_element_by_xpath(submit_button).click()
+        for i in range(3):
+            ele_list =  driver.find_elements_by_xpath('//input[@style="display: block;"]')
+            ele_list_psd = driver.find_elements_by_xpath(password_input)
+            if len(ele_list) == 1 and len(ele_list_psd) == 1 :
+                ele_list_psd[0].send_keys(password)
+                driver.find_element_by_xpath(submit_button).click()
+                break
+            elif i == 2:
+                print('password输入框未出现')
+                print('再点击下NEXT按钮')
+                driver.find_element_by_xpath(submit_button).click()
+                for j in range(3):
+                    ele_list = driver.find_elements_by_xpath('//input[@style="display: block;"]')
+                    ele_list_psd = driver.find_elements_by_xpath(password_input)
+                    if len(ele_list) == 1 and len(ele_list_psd) == 1:
+                        ele_list_psd[0].send_keys(password)
+                        driver.find_element_by_xpath(submit_button).click()
+                        break
+                    elif j == 2:
+                        print('password输入框还是未出现')
+                    else:
+                        raise Exception('password输入框还是未出现')
+            else:
+                time.sleep(1)
     except Exception as e:
         print('登陆时输入password失败',e)
         screen_shot_func(driver, '登陆时输入password失败')
         raise Exception
     else:
         print('登陆时输入password成功')
+    try:
+        for i in range(3):
+            time.sleep(5)
+            currentPageUrl = driver.current_url
+            print("当前页面的url是：", currentPageUrl)
+            if currentPageUrl == test_web:
+                break
+            elif i == 2:
+                print('未进入到登录后的页面')
+                raise Exception
+    except Exception as e:
+        print('登陆失败',e)
+        screen_shot_func(driver, '登陆失败')
+        raise AssertionError
     if accept == 'accept':
+        driver.implicitly_wait(10)
         count = driver.find_elements_by_xpath(accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             try:
                 driver.find_element_by_xpath(accept_disclaimer).click()
+                time.sleep(2)
+                count = driver.find_elements_by_xpath(accept_disclaimer)
+                if len(count) == 1:  # close Disclaimer
+                    try:
+                        driver.find_element_by_xpath(accept_disclaimer).click()
+                    except Exception as e:
+                        print('登陆成功后再次接受免责声明失败', e)
+                        screen_shot_func(driver, '登录成功后再次接受免责声明失败')
+                        raise Exception
+                    else:
+                        print('登陆成功后再次接受免责声明成功')
             except Exception as e:
                 print('登陆成功后接受免责声明失败', e)
                 screen_shot_func(driver, '登录后接受免责声明失败')
@@ -120,12 +170,16 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     if close_bounced == 'close_bounced':
         try:  # close Tutorial
             driver.find_element_by_xpath(close_tutorial_button).click()
+        except AssertionError:
+            screen_shot_func(driver, '展示的不是Welcome to Help Lightning!')
+            raise AssertionError
         except Exception as e:
             print('登陆成功后关闭教程失败', e)
             screen_shot_func(driver, '登录成功后关闭教程失败')
             raise Exception
         else:
             print('登陆成功后关闭教程成功')
+    driver.implicitly_wait(15)
     return driver
 
 def filter_by_different_fields(driver,index,search_text,text_id):
@@ -140,12 +194,7 @@ def filter_by_different_fields(driver,index,search_text,text_id):
     try:
         index = int(index)
         driver.find_element_by_xpath(f'//div[@class="ag-header-row"]/div[{index}]//button[@ref="eButtonShowMainFilter"]').click()
-        ele_list = driver.find_elements_by_xpath(filterType)
-        if ele_list != 1:
-            driver.find_element_by_xpath(f'//div[@class="ag-header-row"]/div[{index}]//button[@ref="eButtonShowMainFilter"]').click()
-        else:
-            driver.find_element_by_xpath(filterType).click()
-        time.sleep(2)
+        driver.find_element_by_xpath(filterType).click()
         driver.find_element_by_xpath('//option[contains(.,"Not contains")]').click()
         driver.find_element_by_xpath(filterText).click()
         driver.find_element_by_xpath(filterText).send_keys(search_text)

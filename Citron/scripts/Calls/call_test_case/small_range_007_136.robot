@@ -434,8 +434,8 @@ unable_to_reach_user_message_displays
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.
     [Tags]     small range  122+123+127+130  line
-    # 获取最新的邮件
-    ${meeting_link_old}     obtain_meeting_link_from_email
+#    # 获取最新的邮件
+#    ${meeting_link_old}     obtain_meeting_link_from_email
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is expert user log in
@@ -457,7 +457,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
+#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is expert user log in
     ${driver3}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
     # VP: call establish successfully
@@ -481,8 +481,8 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
     [Tags]     small range  122+124+128  line
-    # 获取最新的邮件
-    ${meeting_link_old}     obtain_meeting_link_from_email
+#    # 获取最新的邮件
+#    ${meeting_link_old}     obtain_meeting_link_from_email
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is team user log in
@@ -504,7 +504,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
+#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is team user log in
     ${driver3}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # VP: call establish successfully
@@ -522,8 +522,8 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
     ...         AND               Close    # close browser
-    # 获取最新的邮件
-    ${meeting_link_old}     obtain_meeting_link_from_email
+#    # 获取最新的邮件
+#    ${meeting_link_old}     obtain_meeting_link_from_email
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is  another enterprise user log in
@@ -545,7 +545,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
+#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is another enterprise user log in
     ${driver3}   driver_set_up_and_logIn   ${other_site_user_2_username}    ${other_site_user_2_password}
     # VP: call establish successfully
@@ -556,8 +556,8 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
 Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
     [Tags]     small range  131+132+133  line
-    # 获取最新的邮件
-    ${meeting_link_old}     obtain_meeting_link_from_email
+#    # 获取最新的邮件
+#    ${meeting_link_old}     obtain_meeting_link_from_email
     # Team user log in
     ${driver1}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # 在Contacts页面查询user
@@ -567,7 +567,7 @@ Team_user_A_signs_in_User_B_is_expert_user
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
+#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is expert user log in
     ${driver2}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
     check_call_can_reach_to_or_not    ${driver1}   ${driver2}   ${meeting_link}    1
