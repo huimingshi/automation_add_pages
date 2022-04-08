@@ -520,6 +520,7 @@ Disclaimer_805
     expand_which_setting    ${driver2}     Before Call: Disclaimer      # EXPAND Before Call: Disclaimer
     reset_disclaimer   ${driver2}
     # App stays on the background for 40s.	App is back to forefront.
+    sleep   40s
     refresh_browser_page   ${driver1}
     # App is reconnected to server. Disclaimer should be shown up.
     disclaimer_should_be_shown_up_or_not   ${driver1}
@@ -676,9 +677,9 @@ Small_range_823
     enter_FGD_mode     ${driver1}      Photo
     rec_is_on_or_off     ${driver1}
     rec_is_on_or_off     ${driver2}
-    enter_FGD_mode     ${driver2}      Freeze
-    rec_is_on_or_off     ${driver1}
-    rec_is_on_or_off     ${driver2}
+#    enter_FGD_mode     ${driver2}      Freeze
+#    rec_is_on_or_off     ${driver1}
+#    rec_is_on_or_off     ${driver2}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
@@ -886,9 +887,9 @@ Small_range_834
     enter_FGD_mode     ${driver1}      Photo
     rec_is_on_or_off     ${driver1}    on    can_change
     rec_is_on_or_off     ${driver2}    on    can_not_change
-    enter_FGD_mode     ${driver2}      Freeze
-    rec_is_on_or_off     ${driver1}    on    can_change
-    rec_is_on_or_off     ${driver2}    on    can_not_change
+#    enter_FGD_mode     ${driver2}      Freeze
+#    rec_is_on_or_off     ${driver1}    on    can_change
+#    rec_is_on_or_off     ${driver2}    on    can_not_change
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close

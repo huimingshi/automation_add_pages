@@ -1,14 +1,12 @@
 #----------------------------------------------------------------------------------------------------#
 import time
-from library_for_screenshot import screen_shot_func
+from public_lib import screen_shot_func,get_system_type,public_check_element
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
 from else_public_lib import paste_on_a_non_windows_system,user_accept_disclaimer,get_picture_path
 from else_public_lib import end_call_for_all as user_end_call_for_all
-from library_for_screenshot import get_system_type
 from selenium import webdriver
-from public_lib import public_check_element
 from selenium.webdriver.common.action_chains import ActionChains
 
 #----------------------------------------------------------------------------------------------------#
@@ -159,7 +157,6 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
     :param is_personal: 是否呼叫的是personal标签页中的user，默认不是
     :return:
     """
-    # make calls with who
     if is_personal == 'not_personal':
         try:
             element = driver1.find_element_by_id(search_input)
@@ -168,7 +165,9 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
             element.click()
             element.send_keys(who)
             time.sleep(3)
-            public_check_element(driver1, click_call_button, 'Contacts页面刷新出数据')
+            user_name = who.split('@')[0]
+            public_check_element(driver1, f'//div[@class="card"]/div[contains(.,"{user_name}")]', 'Contacts页面未刷新出数据', if_click=0, if_show=1)
+            public_check_element(driver1, click_call_button, 'Contacts页面未刷新出数据')
         except Exception as e:
             print('点击call失败', e)
             screen_shot_func(driver1, '点击call失败')
@@ -560,17 +559,9 @@ def user_anwser_call(driver,anwser_type = 'direct'):
     """
     try:
         if anwser_type == 'direct':
-            ele_list = driver.find_elements_by_xpath(anwser_call_button)
-            assert len(ele_list) == 1
-            # ele_list[0].click()
-            js = 'document.getElementsByClassName("k-button success-btn big-btn")[0].click();'    # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
-            driver.execute_script(js)  # 执行js语句
+            public_check_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
         elif anwser_type == 'no_direct':
-            ele_list = driver.find_elements_by_xpath(external_join_call_anwser_button)
-            assert len(ele_list) == 1
-            # ele_list[0].click()
-            js = 'document.getElementsByClassName("btn btn-lg btn-primary btn-block")[0].click();'  # 会出现Anwser按钮存在，但点击无效，是时候出绝招了：js大法
-            driver.execute_script(js)  # 执行js语句
+            public_check_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
     except AssertionError:
         screen_shot_func(driver, '没找到接受Call的按钮')
         raise AssertionError

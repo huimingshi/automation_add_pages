@@ -3,11 +3,10 @@ import time
 import os,sys
 import platform
 from selenium import webdriver
-from library_for_screenshot import screen_shot_func,get_system_type
+from public_lib import screen_shot_func,get_system_type,public_check_element,kill_all_browser
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-from public_lib import public_check_element,kill_all_browser
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -85,20 +84,17 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         raise Exception
     else:
         print('登陆时输入password成功')
-    try:
-        for i in range(40):
-            time.sleep(1)
-            currentPageUrl = driver.current_url
-            print("当前页面的url是：", currentPageUrl)
-            if currentPageUrl == test_web:
-                break
-            elif i == 2:
-                print('未进入到登录后的页面')
-                raise Exception
-    except Exception as e:
-        print('登陆失败',e)
-        screen_shot_func(driver, '登陆失败')
-        raise AssertionError
+    # 校验是否进入到主页
+    for i in range(40):
+        time.sleep(1)
+        currentPageUrl = driver.current_url
+        print("当前页面的url是：", currentPageUrl)
+        if currentPageUrl == test_web:
+            break
+        elif i == 39:
+            print('未进入到登录后的页面')
+            screen_shot_func(driver, '登陆失败')
+            raise Exception
     if accept == 'accept':
         count = driver.find_elements_by_xpath(accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
@@ -760,15 +756,7 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
         raise Exception
     # 复制
     try:
-        for i in range(3):
-            ele_list = driver.find_elements_by_xpath('//i[@class="far fa-copy "]')
-            if len(ele_list) == 1:
-                ele_list[0].click()
-            elif i == 2:
-                print('复制按钮未出现')
-                raise Exception('复制按钮未出现')
-            else:
-                time.sleep(1)
+        public_check_element(driver, '//i[@class="far fa-copy "]', '复制按钮未出现')
     except Exception as e:
         print('复制失败',e)
         screen_shot_func(driver, '复制失败')
@@ -1140,7 +1128,9 @@ def switch_to_diffrent_page(driver,switch_page,switch_success_tag,data_show,swit
                     break
                 elif i == 4:
                     print(f'切换到{switch_page}页面后数据未加载出')
-                    raise Exception(f'切换到{switch_page}页面后数据未加载出')
+                    if switch_page == 'Recents':
+                        driver.find_element_by_xpath('//button[text()="Refresh"]').click()
+                        public_check_element(driver, data_show, f'刷新{switch_page}页面后数据仍然未加载出', if_click=0, if_show=1)
                 else:
                     time.sleep(1)
             elif i == 4:

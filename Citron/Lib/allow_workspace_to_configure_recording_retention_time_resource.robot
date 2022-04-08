@@ -16,7 +16,7 @@ enter_workspace_settings_page
     click element   ${enter_workspace_menu}
     sleep  1s
     click element    ${enter_Workspace_settings}
-    wait until element is visible      ${enter_ws_settings_success}
+    wait until element is visible      ${enter_ws_settings_success}     20s
 
 enter_enterprises_audit_log
     # enter crunch Audit Logs page

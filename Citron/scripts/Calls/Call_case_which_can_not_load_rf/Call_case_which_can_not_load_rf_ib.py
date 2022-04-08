@@ -311,6 +311,7 @@ def switch_last_365_days(driver):
             raise AssertionError
         else:
             print('切换到Last 365 Days成功')
+    time.sleep(10)
 
 def exit_this_driver(driver):
     """

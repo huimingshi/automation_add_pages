@@ -129,10 +129,9 @@ Small_range_161
     which_page_is_currently_on    ${driver1}    //img[@class="starHint"]
     # VP: Have Switch Camera button
     enter_giver_mode    ${driver1}   none   none   2
-    enter_FGD_mode   ${driver1}    Swap Camera
+#    enter_FGD_mode   ${driver1}    Swap Camera
     [Teardown]      run keywords    exit_call   ${driver1}
     ...             AND             exit_driver    ${driver1}   ${driver2}
-#    [Teardown]       exit_driver    ${driver1}   ${driver2}
 
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly
