@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
 from else_public_lib import paste_on_a_non_windows_system,user_accept_disclaimer,get_picture_path
 from else_public_lib import end_call_for_all as user_end_call_for_all
+from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -17,9 +18,9 @@ def open_debug_dialog_check_resolution(driver):
     :param driver:
     :return:
     """
+    public_check_element(driver,invite_user_div,'点击右上角三个横杠失败')
+    public_check_element(driver, enter_debug_page, '进入debug_page失败')
     try:
-        driver.find_element_by_xpath(invite_user_div).click()  # 右上角三个横杠
-        driver.find_element_by_xpath(enter_debug_page).click()  # 进入 debug page
         resolution_get = driver.find_element_by_xpath('//span[@id="pubresolution"]').get_attribute("textContent")
         assert resolution_get == '1280x720'
     except AssertionError:
@@ -37,19 +38,12 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     :param enter_send_invite: 是否需要进入send invite页面，默认’yes‘进入，其他表示不进入
     :return:
     """
-    try:
-        public_check_element(driver, invite_user_div, '右上角三个横杠按钮不可点击')
-        public_check_element(driver, enter_invite_user_page, 'Invite图标不可点击')
-        if enter_send_invite == 'yes':
-            public_check_element(driver, send_invite_in_calling, '进入send_invite页面失败')
-        elif enter_send_invite != 'yes':
-            public_check_element(driver, contacts_list_in_calling, '进入contacts_list页面失败')
-    except Exception as e:
-        print('打开邀请其他用户页面失败',e)
-        screen_shot_func(driver,'打开邀请其他用户页面失败')
-        raise Exception
-    else:
-        print('打开邀请其他用户页面成功')
+    public_check_element(driver, invite_user_div, '右上角三个横杠按钮不可点击')
+    public_check_element(driver, enter_invite_user_page, 'Invite图标不可点击')
+    if enter_send_invite == 'yes':
+        public_check_element(driver, send_invite_in_calling, '进入send_invite页面失败')
+    elif enter_send_invite != 'yes':
+        public_check_element(driver, contacts_list_in_calling, '进入contacts_list页面失败')
 
 def send_invite_in_calling_page(driver,if_send = 'not_send'):
     """
@@ -61,14 +55,7 @@ def send_invite_in_calling_page(driver,if_send = 'not_send'):
     # 进入send invite页面
     open_invite_3rd_participant_dialog(driver)
     # 复制
-    try:
-        driver.find_element_by_xpath('//div[@class="image-container"]').click()
-    except Exception as e:
-        print('复制失败',e)
-        screen_shot_func(driver, '复制失败')
-        raise Exception
-    else:
-        print('复制成功')
+    public_check_element(driver, '//div[@class="image-container"]', '点击复制按钮失败')
     # 粘贴
     sys_type = get_system_type()   # 判断是哪种操作系统，Windows和非Windows的粘贴操作不一样
     if sys_type == 'Windows':
@@ -121,17 +108,12 @@ def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no
     :param if_click: 是否勾选‘Show Directory’；默认'no_click_show'不勾选；'click_show'为勾选
     :return:
     """
-    try:
-        if int(count_expect) == 1:
-            public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段未出现', if_click=None)
-        elif int(count_expect) == 0:
-            public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
-        public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
-    except Exception:
-        screen_shot_func(driver, '是否出现Show_Directory与预期不符')
-        raise Exception
-    if if_click == 'click_show':
-        click_show_directory_when_invite_3rd(driver)
+    # try:
+    if int(count_expect) == 1:
+        public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段未出现', if_click=None)
+    elif int(count_expect) == 0:
+        public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
+    public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
 
 def click_show_directory_when_invite_3rd(driver):
     """
@@ -139,13 +121,8 @@ def click_show_directory_when_invite_3rd(driver):
     :param driver:
     :return:
     """
-    try:
-        driver.find_element_by_xpath('//div[@id="inviteDialog-pane-1"]//input[@type="checkbox"]').click()
-        time.sleep(3)
-    except Exception as e:
-        print('勾选Show_Directory失败', e)
-        screen_shot_func(driver, '勾选Show_Directory失败')
-        raise Exception
+    public_check_element(driver, '//div[@id="inviteDialog-pane-1"]//input[@type="checkbox"]', '勾选Show_Directory失败')
+    time.sleep(3)
 
 def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_personal'):
     """
@@ -164,20 +141,28 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
             time.sleep(2)
             element.click()
             element.send_keys(who)
-            time.sleep(3)
-            user_name = who.split('@')[0]
-            public_check_element(driver1, f'//div[@class="card"]/div[contains(.,"{user_name}")]', 'Contacts页面未刷新出数据', if_click=0, if_show=1)
-            public_check_element(driver1, click_call_button, 'Contacts页面未刷新出数据')
+            time.sleep(5)
         except Exception as e:
-            print('点击call失败', e)
-            screen_shot_func(driver1, '点击call失败')
+            print(f'输入{who}失败', e)
+            screen_shot_func(driver1, f'输入{who}失败')
             raise Exception
         else:
-            print('点击call成功')
+            print(f'输入{who}成功')
+        user_name = who.split('@')[0]
+        ele_ment = driver1.find_elements_by_xpath(f'//div[@class="card"]/div[text()="{user_name}"]')
+        print('0000000000000000000000000000000000',len(ele_ment))
+        if len(ele_ment) < 1:
+            refresh_page(driver1)
+            element = driver1.find_element_by_id(search_input)
+            element.click()
+            element.send_keys(who)
+            time.sleep(5)
+        public_check_element(driver1, f'//div[@class="card"]/div[text()="{user_name}"]', f'{user_name}未加载出',if_click = None,if_show = 1)
+        public_check_element(driver1, click_call_button, '点击Call按钮失败')
     else:
+        public_check_element(driver1, '//a[@id="user-tabs-tab-2"]', '点击personal_contacts页面失败')
+        time.sleep(3)
         try:
-            driver1.find_element_by_xpath('//a[@id="user-tabs-tab-2"]').click()
-            time.sleep(3)
             element = driver1.find_element_by_xpath('//div[@id="user-tabs-pane-2"]//input[@id="filter-text-box"]')
             element.clear()
             time.sleep(2)
@@ -258,14 +243,7 @@ def user_end_call_by_self(driver):
     :return:
     """
     # End call
-    try:
-        driver.find_element_by_xpath(end_call_before_connecting).click()
-    except Exception as e:
-        print('End call失败',e)
-        screen_shot_func(driver, 'End call失败')
-        raise Exception
-    else:
-        print('End call成功')
+    public_check_element(driver, end_call_before_connecting, '主动End_call失败')
 
 def enter_contacts_search_user(driver,search_name,if_click= 'no_click_show',search_result = 'has_user_data'):
     """
@@ -317,12 +295,7 @@ def close_invite_3th_page(driver):
     :return:
     """
     # 关闭
-    try:
-        driver.find_element_by_xpath(close_invite_3th_page_xpath).click()
-    except Exception as e:
-        print('关闭invite page失败',e)
-        screen_shot_func(driver, '关闭invite page失败')
-        raise Exception
+    public_check_element(driver, close_invite_3th_page_xpath, '关闭invite_page失败')
 
 def click_user_in_contacts_call(driver,username,can_reach = 'can_reach'):
     """
@@ -332,14 +305,9 @@ def click_user_in_contacts_call(driver,username,can_reach = 'can_reach'):
     :param can_reach: 是否可以邀请进入到call，默认为可以邀请，如果为can_not_reach，会弹出{username} is unreachable的提示信息
     :return:
     """
-    try:
-        driver.find_element_by_xpath(f'//div[@class="contact-name" and (text()="{username}")]').click()
-    except Exception as e:
-        print(f'点击{username}失败',e)
-        screen_shot_func(driver, f'点击{username}失败')
-        raise Exception
+    public_check_element(driver, f'//div[@class="contact-name" and (text()="{username}")]', f'点击{username}失败')
     if can_reach == 'can_not_reach':
-        public_check_element(driver, f'//div[@class="message" and contains(.,"{username} is unreachable.")]', f'未出现{username}_is_unreachable_提示信息')
+        public_check_element(driver, f'//div[@class="message" and contains(.,"{username} is unreachable.")]', f'未出现{username}_is_unreachable_提示信息',if_click = None,if_show = 1)
 
 def display_name_avator_in_contact_list(driver,search_name,expect_src):
     """
@@ -396,12 +364,7 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     else:
         print(f'向{who}发起call成功')
     # who anwser calls
-    try:
-        driver2.find_element_by_xpath(anwser_call_button).click()
-    except Exception as e:
-        print('点击ANWSER按钮失败',e)
-        screen_shot_func(driver2, '点击ANWSER按钮失败')
-        raise Exception
+    public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
     time.sleep(10)
     # 进入send invite 页面
     open_invite_3rd_participant_dialog(driver1)
@@ -425,13 +388,7 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     # Accept Disclaimer
     user_accept_disclaimer(driver3)
     # Anwser cross enterprise call request
-    try:
-        driver1.find_element_by_xpath(external_join_call_anwser_button).click()
-    except Exception as e:
-        print('接受cross enterprise的call失败',e)
-        screen_shot_func(driver1, '接受cross_enterprise的call失败')
-        raise Exception
-    # Anonymous User join call
+    public_check_element(driver1, external_join_call_anwser_button, '接受cross_enterprise的call失败')
     driver4 = webdriver.Chrome(chrome_options=option)
     driver4.implicitly_wait(int(6))
     driver4.get(invite_url)
@@ -439,30 +396,18 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     # Accept Disclaimer
     user_accept_disclaimer(driver4)
     # Anwser Anonymous User call request
-    try:
-        driver1.find_element_by_xpath(external_join_call_anwser_button).click()
-    except Exception as e:
-        print('接受Anonymous的call失败',e)
-        screen_shot_func(driver1, '接受Anonymous的call失败')
-        raise Exception
+    public_check_element(driver1, external_join_call_anwser_button, '接受Anonymous的call失败')
 
     # call on hold
     time.sleep(int(10))
     # screenshots
-    try:
-        driver2.find_element_by_xpath('//div[@class="menu roleMenu"]/div[@class="menu withsub  "]').click()
-        driver2.find_element_by_xpath('//div[@class="user-list"]/div[1]').click()
-        driver2.find_element_by_xpath('//div[@class="user-list"]/div[2]').click()
-        driver2.find_element_by_xpath('//button[@class="btn btn-primary" and contains(.,"Continue")]').click()
-        for i in range(3):
-            driver2.find_element_by_xpath('//input[@class="capture_button"]').click()
-            time.sleep(3)
-    except Exception as e:
-        print('screenshots失败',e)
-        screen_shot_func(driver2, 'screenshots失败')
-        raise Exception
-    else:
-        print('screenshots成功')
+    public_check_element(driver2, '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]', '点击失败')
+    public_check_element(driver2, '//div[@class="user-list"]/div[1]', '点击失败')
+    public_check_element(driver2, '//div[@class="user-list"]/div[2]', '点击失败')
+    public_check_element(driver2, '//button[@class="btn btn-primary" and contains(.,"Continue")]', '点击continue失败')
+    for i in range(3):
+        public_check_element(driver2, '//input[@class="capture_button"]', 'screenshots失败')
+        time.sleep(3)
     # End Call for All
     user_end_call_for_all(driver2)
     return driver4
@@ -538,17 +483,10 @@ def user_decline_call(driver,type = 'direct'):
     :param type:Decline Call 的类型；分为直接decline 和在通话页面上decline；默认直接decline；direct or in_calling
     :return:
     """
-    try:
-        if type == 'direct':
-            driver.find_element_by_xpath(decline_disclaimer).click()
-        elif type == 'in_calling':
-            driver.find_element_by_xpath(decline_call).click()
-    except Exception as e:
-        print('user_decline_call失败',e)
-        screen_shot_func(driver,'user_decline_call失败')
-        raise Exception('user_decline_call失败')
-    else:
-        print('User DECLINE call成功')
+    if type == 'direct':
+        public_check_element(driver, decline_disclaimer, 'user_decline_call失败')
+    elif type == 'in_calling':
+        public_check_element(driver, decline_call, 'user_decline_call失败')
 
 def user_anwser_call(driver,anwser_type = 'direct'):
     """
@@ -557,20 +495,10 @@ def user_anwser_call(driver,anwser_type = 'direct'):
     :param anwser_type: 应答类型，分为直接Anwser和外部用户加入Anwser，默认直接Anwser;    direct  or  no_direct
     :return:
     """
-    try:
-        if anwser_type == 'direct':
-            public_check_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
-        elif anwser_type == 'no_direct':
-            public_check_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
-    except AssertionError:
-        screen_shot_func(driver, '没找到接受Call的按钮')
-        raise AssertionError
-    except Exception as e:
-        print('User接受call失败',e)
-        screen_shot_func(driver, 'User接受call失败')
-        raise Exception
-    else:
-        print('User接受call成功')
+    if anwser_type == 'direct':
+        public_check_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
+    elif anwser_type == 'no_direct':
+        public_check_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
 
 def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,flag = '1'):
     """
@@ -647,19 +575,9 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
     else:
         print('发起call成功')
     if accept == 'accept':
-        try:
-            driver2.find_element_by_xpath(anwser_call_button).click()
-        except Exception as e:
-            print('点击ANWSER按钮失败',e)
-            screen_shot_func(driver2, '点击ANWSER按钮失败')
-            raise Exception
+        public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
     elif accept == 'no_accept':
-        try:
-            driver2.find_element_by_xpath(decline_disclaimer).click()
-        except Exception as e:
-            print('点击DECLINE按钮失败',e)
-            screen_shot_func(driver2, '点击DECLINE按钮失败')
-            raise Exception
+        public_check_element(driver2, decline_disclaimer, '点击DECLINE按钮失败')
 
 def obtain_meeting_link_from_email(check_otu = 'no_check_otu'):
     """
@@ -724,13 +642,8 @@ def enter_face_to_face_mode(driver):
     :param driver:
     :return:
     """
-    try:
-        driver.find_element_by_xpath('//*[@*="#rh_on"]').click()
-        driver.find_element_by_xpath('//*[@*="#f2f_off"]/../..').click()
-    except Exception as e:
-        print('进入f2f模式失败', e)
-        screen_shot_func(driver, '进入f2f模式失败')
-        raise Exception
+    public_check_element(driver, '//*[@*="#rh_on"]', '进入f2f模式第一步失败')
+    public_check_element(driver, '//*[@*="#f2f_off"]/../..', '进入f2f模式第二步失败')
 
 def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialog = 'has_dialog',give_or_receive = 'give'):
     """
@@ -743,23 +656,18 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
     :param give_or_receive: 想进入哪种模式；默认是give为giver模式，其他为receiver模式
     :return:
     """
-    try:
-        if roles == '3':
-            driver.find_element_by_xpath(f2f_on_mode).click()
-            driver.find_element_by_xpath(f'//div[@class="user-base"]/strong[text()="{who_give_help}"]').click()
-            driver.find_element_by_xpath(f'//div[@class="user-base"]/strong[text()="{who_receive_help}"]').click()
-            driver.find_element_by_xpath('//div[@class="user-footer"]/button[text()="Continue"]').click()
-        elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
-            driver.find_element_by_xpath('//span[text()="I will give help"]').click()
-        elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
-            driver.find_element_by_xpath('//span[text()="I need help"]').click()
-        elif has_dialog == 'has_no_dialog' and roles == '2':
-            driver.find_element_by_xpath(f2f_on_mode).click()
-            driver.find_element_by_xpath('//*[@*="#rh_off"]/../..').click()
-    except Exception as e:
-        print('进入giver模式失败', e)
-        screen_shot_func(driver, '进入giver模式失败')
-        raise Exception
+    if roles == '3':
+        public_check_element(driver, f2f_on_mode, '点击失败')
+        public_check_element(driver, f'//div[@class="user-base"]/strong[text()="{who_give_help}"]', '第一步失败')
+        public_check_element(driver, f'//div[@class="user-base"]/strong[text()="{who_receive_help}"]', '第二步失败')
+        public_check_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', '第三步失败')
+    elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
+        public_check_element(driver, '//span[text()="I will give help"]', '选择I_will_give_help失败')
+    elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
+        public_check_element(driver, '//span[text()="I need help"]', '选择I_need_help失败')
+    elif has_dialog == 'has_no_dialog' and roles == '2':
+        public_check_element(driver, f2f_on_mode, '点击第一步失败')
+        public_check_element(driver, '//*[@*="#rh_off"]/../..', '点击第二步失败')
 
 def enter_FGD_mode(driver,witch_mode):
     """

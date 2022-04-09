@@ -6,6 +6,7 @@ Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
+Force Tags        small_range
 
 *** Test Cases ***
 #Small_range_149_151
@@ -56,9 +57,9 @@ Small_range_152
     sleep  10s
     # VP:hints dialog is closed on screen of 3pc call
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-#    [Teardown]      run keywords    end_call_for_all   ${driver1}
-#    ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
-    [Teardown]       exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]      run keywords    end_call_for_all   ${driver1}
+    ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
+#    [Teardown]       exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_153_160
     [Documentation]    Enterprise user call contact in F2F mode
@@ -107,9 +108,9 @@ Small_range_153_160
     enter_face_to_face_mode     ${driver1}
     # VP: hint dialog is not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-#    [Teardown]      run keywords    exit_call   ${driver1}
-#    ...             AND             exit_driver    ${driver1}   ${driver2}
-    [Teardown]       exit_driver    ${driver1}   ${driver2}
+    [Teardown]      run keywords    exit_call   ${driver1}
+    ...             AND             exit_driver    ${driver1}   ${driver2}
+#    [Teardown]       exit_driver    ${driver1}   ${driver2}
 
 Small_range_161
     [Documentation]    WebApp specific
@@ -376,8 +377,8 @@ Join_call_196_200
     which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
     which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
     hang_up_the_phone     ${driver2}
-#    # End call.
-#    exit_call     ${driver1}
+    # End call.
+    exit_call     ${driver1}
     [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
 
 Join_call_201_205
@@ -395,7 +396,7 @@ Join_call_201_205
     ${driver2}   anonymous_open_meeting_link     ${invite_url}
     user_anwser_call     ${driver1}
     # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    sleep   10s
+    sleep   20s
     hang_up_the_phone     ${driver1}
     which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
     which_page_is_currently_on     ${driver1}     ${exit_call_no_button}

@@ -6,6 +6,7 @@ Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
+Force Tags        small_range
 
 *** Test Cases ***
 Small_range_623_two_users_login
@@ -91,6 +92,7 @@ Small_range_628_629
     user_anwser_call     ${driver1}
     # End Call.
     exit_call    ${driver1}
+    close_call_ending_page    ${driver1}
     # VP:Expert B shows his enterprise's Disclaimer window.
     refresh_browser_page    ${driver1}   no_care
     disclaimer_should_be_shown_up_or_not     ${driver1}
@@ -151,9 +153,9 @@ Small_range_630_631
     refresh_browser_page    ${driver4}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
-#    [Teardown]      run keywords    exit_call       ${driver2}     1
-#    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
-    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+    [Teardown]      run keywords    exit_call       ${driver2}     1
+    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+#    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
 
 Small_range_632
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
@@ -204,10 +206,10 @@ Small_range_632
     refresh_browser_page    ${driver4}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
-#    [Teardown]      run keywords    exit_call       ${driver2}     1
-#    ...             AND             exit_call       ${driver3}
-#    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
-    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+    [Teardown]      run keywords    exit_call       ${driver2}
+    ...             AND             exit_call       ${driver3}
+    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+#    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
     # Verify: In Citron -> Admin -> Calls, the participant’s name should correctly shows up
     # big_admin 登录
     ...             AND             Login_premium_user
@@ -331,9 +333,9 @@ Small_range_634
     refresh_browser_page    ${driver4}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
-#    [Teardown]      run keywords    exit_call       ${driver2}      1
-#    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
-    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+    [Teardown]      run keywords    exit_call       ${driver2}      1
+    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+#    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
 
 Small_range_636
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
@@ -408,8 +410,8 @@ Small_range_637_642
     can_connect_call_or_not    ${driver1}    ${another_on_call_group_name}   can_connect    no_send_invite
     # the same customer receives incoming call	customer accepts call
     user_anwser_call    ${driver2}
-#    # enter call view
-#    exit_call   ${driver1}
+    # enter call view
+    exit_call   ${driver1}
     [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_638_640
@@ -451,8 +453,8 @@ Small_range_638_640
     can_connect_call_or_not    ${driver3}   ${User_Aa_name}   can_connect    no_send_invite
     # the same customer receives incoming call	customer accepts call
     user_anwser_call    ${driver1}
-#    # enter call view
-#    exit_call   ${driver3}
+    # enter call view
+    exit_call   ${driver3}
     [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_639
@@ -514,8 +516,8 @@ Small_range_646
     sleep  30s
     # Expert A answer call
     user_anwser_call     ${driver3}
-#    # VP: Expert A can successfully enter Face to Face mode
-#    exit_call    ${driver3}
+    # VP: Expert A can successfully enter Face to Face mode
+    exit_call    ${driver3}
     [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_647_648_649_650
@@ -535,9 +537,8 @@ Small_range_647_648_649_650
     click_user_in_contacts_call     ${driver1}    ${AaA_on_call_group_name}
     # expertB answer rollover call
     user_anwser_call    ${driver3}
-#    [Teardown]      run keywords        end_call_for_all    ${driver1}    # VP: 3PC call established successfully
-#    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
-    [Teardown]       exit_driver         ${driver1}   ${driver2}   ${driver3}
+    [Teardown]      run keywords        end_call_for_all    ${driver1}    # VP: 3PC call established successfully
+    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
 
 Small_range_651_652_653
     [Documentation]     3PI - Expert call
@@ -556,9 +557,8 @@ Small_range_651_652_653
     ${driver3}   anonymous_open_meeting_link    ${invite_url}
     # VP:expertA receive Accept dialog
     user_anwser_call    ${driver2}    no_direct
-#    [Teardown]      run keywords        end_call_for_all    ${driver2}    # VP: 3PC call established successfully
-#    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
-    [Teardown]       exit_driver         ${driver1}   ${driver2}   ${driver3}
+    [Teardown]      run keywords        end_call_for_all    ${driver2}    # VP: 3PC call established successfully
+    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
 
 Small_range_654_655
     [Documentation]     3PI - Expert call
@@ -581,7 +581,6 @@ Small_range_654_655
     # VP: Expert A and TU1 should not show accept/decline dialog window
     disclaimer_should_be_shown_up_or_not   ${driver2}  not_appear
     disclaimer_should_be_shown_up_or_not   ${driver1}  not_appear
-#    [Teardown]      run keywords        end_call_for_all    ${driver1}    # VP: 3PC call established successfully
-#    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
-    [Teardown]       exit_driver         ${driver1}   ${driver2}   ${driver3}
+    [Teardown]      run keywords        end_call_for_all    ${driver1}    # VP: 3PC call established successfully
+    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
 

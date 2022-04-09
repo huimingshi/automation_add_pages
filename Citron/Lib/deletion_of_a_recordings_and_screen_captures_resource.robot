@@ -40,7 +40,7 @@ enter_workspace_workspace_settings
     click element   ${enter_Workspace_settings}
     sleep  2s
     # Wait until enter page
-    wait until element is visible   ${workspace_settings_tag}
+    wait until element is visible   ${workspace_settings_tag}    20
 
 enter_workspace_calls
     # click workspace ADMINISTRATION menu

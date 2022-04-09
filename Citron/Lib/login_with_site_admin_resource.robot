@@ -147,7 +147,7 @@ enter_workspace_workspace_settings
     # click Users page menu
     click element   ${enter_Workspace_settings}
     # Wait until enter page
-    wait until element is visible   ${enter_ws_settings_success}
+    wait until element is visible   ${enter_ws_settings_success}    20
     sleep  2s
 
 enter_site_calls
@@ -171,7 +171,7 @@ enter_site_site_settings
     sleep  0.5s
     # enter site  Site Setting page
     click element   ${enter_Site_settings}
-    wait until element is visible   xpath=//span[contains(.,'Primary Contact')]
+    wait until element is visible   xpath=//span[contains(.,'Primary Contact')]    20
 
 enter_site_workspace_settings
     # enter workspace administration menu
@@ -179,7 +179,7 @@ enter_site_workspace_settings
     sleep  0.5s
     # enter site  Site Setting page
     click element   ${enter_Workspace_settings}
-    wait until element is visible   ${workspace_settings_tag}
+    wait until element is visible   ${workspace_settings_tag}   20
     sleep   3s
 
 has_default_workspace
@@ -1412,7 +1412,7 @@ tag_column_should_not_be_shown_up
     element should not be visible   ${tags_column}
     # back to workspace settings page
     click element   ${enter_Workspace_settings}
-    wait until element is visible   ${workspace_settings_tag}
+    wait until element is visible   ${workspace_settings_tag}    20
     sleep  3s
 
 tag_column_should_be_shown_up

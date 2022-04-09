@@ -33,23 +33,27 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
     :param description:    元素未出现的描述信息
     :return:
     """
-    for i in range(5):
-        ele_list = driver.find_elements_by_xpath(xpath)
-        if if_show and if_click:
-            if len(ele_list) >= 1:
-                ele_list[0].click()
-                break
-        elif if_show and not if_click:
-            if len(ele_list) >= 1:
-                break
-        elif not if_show:
-            if len(ele_list) == 0:
-                break
-        elif i == 4:
-            print(description)
-            raise Exception(description)
-        else:
-            time.sleep(1)
+    try:
+        for i in range(5):
+            ele_list = driver.find_elements_by_xpath(xpath)
+            if if_show and if_click:
+                if len(ele_list) >= 1:
+                    ele_list[0].click()
+                    break
+            elif if_show and not if_click:
+                if len(ele_list) >= 1:
+                    break
+            elif not if_show:
+                if len(ele_list) == 0:
+                    break
+            elif i == 4:
+                print(description)
+                raise Exception
+            else:
+                time.sleep(1)
+    except Exception:
+        screen_shot_func(driver, description)
+        raise Exception
 
 def kill_all_browser():
     # kill所有的chromedriver进程

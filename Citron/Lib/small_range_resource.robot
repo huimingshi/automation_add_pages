@@ -302,7 +302,7 @@ enter_workspace_settings_page
     click element  ${enter_Workspace_settings}
     sleep  2s
     # Wait until enter page
-    wait until element is visible   ${enter_ws_settings_success}
+    wait until element is visible   ${enter_ws_settings_success}    20
 
 enter_workspace_groups_page
     # click workspace ADMINISTRATION page menu

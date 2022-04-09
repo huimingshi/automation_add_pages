@@ -39,3 +39,8 @@
 - 需注意，下载到本地的‘msedgedriver.exe’文件要改名为‘MicrosoftWebDriver.exe’，否则会报WebDriverException异常
 
 ---
+
+## 如何只执行citron的case？
+  进入到Citron目录下，cmd中执行命令：robot --exclude small_range scripts
+## 如何只执行small range的case？
+  进入到Citron目录下，cmd中执行命令：robot --include small_range scripts

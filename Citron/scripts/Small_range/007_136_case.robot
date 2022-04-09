@@ -3,6 +3,7 @@ Library           Selenium2Library
 Library           OperatingSystem
 Resource          ../../Lib/small_range_resource.robot
 Resource          ../../Lib/public.robot
+Force Tags        small_range
 
 
 *** Test Cases ***

@@ -6,6 +6,7 @@ Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
+Force Tags        small_range
 
 *** Test Cases ***
 Small_range_689_690_691_692
@@ -346,11 +347,10 @@ Small_range_745
     # another User 接受Call
     user_anwser_call   ${driver2}
     # VP: This User does not have invite 3rd participant icon on menu bar
-    sleep  10s
+    sleep  20s
     which_page_is_currently_on    ${driver1}    ${invite_user_in_calling}   not_currently_on
-#    [Teardown]      run keywords    exit_call     ${driver2}
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
-    [Teardown]       exit_driver     ${driver1}    ${driver2}
+    [Teardown]      run keywords    exit_call     ${driver2}
+    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_746
     [Documentation]     3PI - Meeting call     Pre-condition: user is belong to workspace WS-A and WS-B	User is currently on WS-B
@@ -370,9 +370,9 @@ Small_range_746
     # VP: contact list is same as team list from ws-A
     ${user_list_2}    get_all_data_on_the_page    ${driver1}      contact-name
     lists should be equal  ${user_list_1}   ${user_list_2}
-#    [Teardown]      run keywords    exit_call     ${driver2}
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
-    [Teardown]       exit_driver     ${driver1}    ${driver2}
+    [Teardown]      run keywords    exit_call     ${driver2}
+    ...             AND             exit_driver     ${driver1}    ${driver2}
+#    [Teardown]       exit_driver     ${driver1}    ${driver2}
 
 Small_range_751
     [Documentation]      Resolution Check    Web on PC   VP: Resolution = 1280x720
@@ -389,9 +389,8 @@ Small_range_751
     sleep  20s    # 等待通话稳定
     # 检查Debug页面的Resolution是否为1280x720
     open_debug_dialog_check_resolution   ${driver2}
-#    [Teardown]      run keywords    exit_call    ${driver1}
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
-    [Teardown]       exit_driver     ${driver1}    ${driver2}
+    [Teardown]      run keywords    exit_call    ${driver1}
+    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_799_802
     [Documentation]      Set Declaimer ->'delete user' is selected    Normal call
@@ -423,7 +422,7 @@ Small_range_799_802
     click_user_in_contacts_call    ${driver3}     ${normal_username_for_calls_name}
     user_anwser_call      ${driver1}
     # End call, User A, User B & User C enter the call tag & comment.
-    leave call    ${driver3}
+    leave_call    ${driver3}
     exit_call    ${driver2}     5
 
     # 进入到workspace settings page
@@ -514,7 +513,7 @@ Disclaimer_805
     ${driver1}   driver_set_up_and_logIn   ${personal_user_username}        ${personal_user_password}
     # Enterprise Admin登录
     ${driver2}   driver_set_up_and_logIn   ${workspace_admin_username}      ${workspace_admin_password}
-    # Enterprise Admin进入到WS下的Settings页面
+    # Workspace Admin进入到WS下的Settings页面
     switch_to_settings_page   ${driver2}
     # Enterprise Admin Reset Disclaimer
     expand_which_setting    ${driver2}     Before Call: Disclaimer      # EXPAND Before Call: Disclaimer
@@ -639,10 +638,10 @@ Small_range_820_821
     rec_is_on_or_off     ${driver1}
     rec_is_on_or_off     ${driver2}
     rec_is_on_or_off     ${driver3}
-    enter_FGD_mode     ${driver3}      Freeze
-    rec_is_on_or_off     ${driver1}
-    rec_is_on_or_off     ${driver2}
-    rec_is_on_or_off     ${driver3}
+#    enter_FGD_mode     ${driver3}      Freeze
+#    rec_is_on_or_off     ${driver1}
+#    rec_is_on_or_off     ${driver2}
+#    rec_is_on_or_off     ${driver3}
     # end call
     end_call_for_all     ${driver1}
     [Teardown]      run keywords    Close

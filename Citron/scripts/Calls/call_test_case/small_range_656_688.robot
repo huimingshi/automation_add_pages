@@ -6,6 +6,7 @@ Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
+Force Tags        small_range
 
 *** Test Cases ***
 Small_range_656
@@ -496,7 +497,7 @@ Small_range_675
     # Inviter receives User A is Not Available along with Not Available Message
     which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
     [Teardown]      run keywords    do_not_disturb_become_available     ${driver1}
-#    ...             AND             exit_call       ${driver2}
+    ...             AND             exit_call       ${driver2}
     ...             AND             exit_driver     ${driver1}    ${driver2}   ${driver3}
 
 Small_range_677_678_679_680
