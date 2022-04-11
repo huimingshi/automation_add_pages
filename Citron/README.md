@@ -2,7 +2,7 @@
 
 ---
 
-## 需要改动的配置项
+### 需要改动的配置项
 - Lib/python_Lib/ui_keywords.py模块的第十一行，修改file_path为当前主机上的浏览器的默认下载路径
 - Lib/public.robot的第十一行，修改${browser_type}为你想启动的浏览器
 ### Lib目录简介
@@ -16,7 +16,7 @@
 <br><br>
 ---
 ---
-## 执行脚本的主机上所需要安装的一系列第三方库和环境
+### 执行脚本的主机上所需要安装的一系列第三方库和环境
 1.保证主机上安装了python3,python3配置到系统环境变量中
 
 2.保证主机上安装了浏览器驱动（驱动版本和浏览器版本必须匹配），且浏览器驱动在环境变量中已配置
@@ -32,7 +32,7 @@
 ...
 ---
 
-## 多种浏览器驱动的下载路径
+### 多种浏览器驱动的下载路径
 1、Chrome驱动下载地址：http://chromedriver.storage.googleapis.com/index.html
 
 2、edge驱动下载地址：https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ 
@@ -40,7 +40,7 @@
 
 ---
 
-## 如何只执行citron的case？
+### 如何只执行citron的case？
   进入到Citron目录下，cmd中执行命令：robot --exclude small_range scripts
-## 如何只执行small range的case？
+### 如何只执行small range的case？
   进入到Citron目录下，cmd中执行命令：robot --include small_range scripts
