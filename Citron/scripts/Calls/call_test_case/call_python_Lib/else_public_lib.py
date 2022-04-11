@@ -468,19 +468,6 @@ def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_o
         except AssertionError:
             screen_shot_func(driver,'当前页面与预期页面不一致')
             raise AssertionError('当前页面与预期页面不一致')
-    # try:
-    #     if currently_on == 'currently_on':
-    #         public_check_element(driver, page_tag_xpath, '当前页面与预期页面不一致', if_click=None, if_show=1)
-    #         # ele_list = driver.find_elements_by_xpath(page_tag_xpath)
-    #         # print(len(ele_list))
-    #         # assert len(ele_list) >= 1
-    #     elif currently_on == 'not_currently_on':
-    #         ele_list = driver.find_elements_by_xpath(page_tag_xpath)
-    #         print(ele_list)
-    #         assert len(ele_list) == 0
-    # except AssertionError:
-    #     screen_shot_func(driver,'当前页面与预期页面不一致')
-    #     raise AssertionError('当前页面与预期页面不一致')
 
 def give_star_rating(driver,star):
     """
@@ -946,28 +933,16 @@ def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
     print(class_attr)
     if unreachable == 'unreachable':
         try:
-            # class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
-            # print(class_attr)
             assert 'unreachableText' in class_attr
         except AssertionError:
             screen_shot_func(driver, '本该置灰user却没置灰')
             raise AssertionError('本该置灰展示user的，但没置灰展示')
-        except Exception as e:
-            print('没找到user',e)
-            screen_shot_func(driver, '没找到user')
-            raise Exception('没找到user')
     elif unreachable == 'reachable':
         try:
-            # class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
-            # print(class_attr)
             assert 'unreachableText' not in class_attr
         except AssertionError:
             screen_shot_func(driver, '不该置灰user却置灰了')
             raise AssertionError('本不该置灰展示user的，但置灰展示了')
-        except Exception as e:
-            print('没找到user',e)
-            screen_shot_func(driver, '没找到user')
-            raise Exception('没找到user')
 
 def judge_reachable_in_recents(driver,username):
     """
