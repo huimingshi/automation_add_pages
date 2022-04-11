@@ -114,6 +114,9 @@ def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no
     elif int(count_expect) == 0:
         public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
     public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
+    if if_click != 'no_click_show':
+        # public_check_element(driver, '//div[@class="checkbox"]//input[@type="checkbox"]', '点击Show_Directory失败')
+        click_show_directory_when_invite_3rd(driver)
 
 def click_show_directory_when_invite_3rd(driver):
     """

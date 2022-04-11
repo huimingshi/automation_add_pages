@@ -25,6 +25,7 @@ Force Tags        small_range
 #    # User C与User B进行Call
 #    make_calls_with_who    ${driver3}   ${driver2}    ${big_admin_third_WS_username}
 #    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+#   which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
 #    # 点击查询到的User A
 #    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
@@ -89,6 +90,7 @@ Force Tags        small_range
 #    # User C与User B进行Call
 #    make_calls_with_who    ${driver3}   ${driver2}    ${big_admin_third_WS_username}
 #    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+#    which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
 #    # 点击查询到的User A
 #    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
@@ -109,6 +111,7 @@ Force Tags        small_range
 #    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
 #    # A call B, invite C
 #    make_calls_with_who    ${driver1}   ${driver2}    ${big_admin_third_WS_username}
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
 #    enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
 #    # 点击查询到的User C
 #    click_user_in_contacts_call   ${driver1}   ${switch_workspace_name}
@@ -150,6 +153,7 @@ Force Tags        small_range
 #    # User C与User B进行Call
 #    make_calls_with_who    ${driver3}   ${driver2}    ${big_admin_third_WS_username}
 #    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+#    which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
 #    # 点击查询到的User A
 #    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
@@ -257,6 +261,7 @@ Call_survey_608_610
     # make call with on-call
     make_call_to_onCall   ${driver1}   ${driver2}
     # Customer invite a enterprise user
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user   ${driver1}    ${personal_user_name}
     click_user_in_contacts_call    ${driver1}    ${personal_user_name}
     # enterprise user 接受call

@@ -60,6 +60,7 @@ Small_range_696_697_698_699
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # UserA sends a 3pi link to logged in UserC.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_invite_in_calling_page    ${driver1}
     close_invite_3th_page    ${driver1}
     # UserC click the 3PI link join the call.
@@ -81,6 +82,7 @@ Small_range_700_701_702_703
     # UserA 接受Call
     user_anwser_call   ${driver1}
     # UserA sends a 3pi link to anonymous UserC.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_invite_in_calling_page    ${driver1}
     close_invite_3th_page    ${driver1}
     # UserC click the link join the call.
@@ -107,6 +109,7 @@ Small_range_704_705_706_707
     # UserA 接受Call
     user_anwser_call   ${driver1}
     # UserA sends a 3pi link to team license UserC.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_invite_in_calling_page    ${driver1}
     close_invite_3th_page    ${driver1}
     # UserC click the link join the call.
@@ -134,6 +137,7 @@ Small_range_708_709
     # ExpetA 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_AaA_username}     ${universal_password}
     # EU1 invte on-call group
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}     ${AaA_on_call_group_name}
     click_user_in_contacts_call    ${driver1}     ${AaA_on_call_group_name}
     # ExpetA 接受Call
@@ -159,6 +163,7 @@ Small_range_710_723
     # EU3 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     ###### EU1 invite EU3 from Team contact    710行
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
     click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
     # EU3 接受Call
@@ -181,6 +186,7 @@ Small_range_710_723
     ${user_directory_list_1}   get_all_data_on_the_page   ${driver1}    contact-name
     close_invite_3th_page     ${driver1}
     lists should be equal     ${user_directory_list}     ${user_directory_list_1}
+    exit_one_driver     ${driver3}
     ###### VP:Title and location are shown in Contact list         712行
     open_invite_3rd_participant_dialog     ${driver1}    no_enter
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
@@ -196,12 +202,15 @@ Small_range_710_723
     ###### EU2 invite EU4 from Directory        714行
     # EU4 登录
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
     click_user_in_contacts_call   ${driver2}    ${Expert_User4_name}
     ###### VP: 3PC call established successfully    EU4 leave call         712+715行
     user_anwser_call    ${driver4}
     exit_call    ${driver4}
+    exit_one_driver     ${driver4}
     ###### EU1 send 3PI link to eMail      716行
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}   send_invite_in_calling_page    ${driver1}
     close_invite_3th_page    ${driver1}
     ###### EU5 click 3PI link        717行
@@ -210,6 +219,7 @@ Small_range_710_723
     user_make_call_via_meeting_link   ${driver5}   ${invite_url}
     ###### VP: directly join call, don't need anyone's accept    EU5 leave call         717+718行
     exit_call     ${driver5}
+    exit_one_driver     ${driver5}
     ###### EU1's contact directly call EU1	VP: contact get message like "EU1 is in another call"       721行
     # EU1's contact TU1 登录
     ${driver6}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
@@ -223,9 +233,8 @@ Small_range_710_723
     ###### Click EU2's OTU link	VP: Get message like "EU2 is in another call"       723行
     user_make_call_via_meeting_link   ${driver7}     ${invite_url_otu}
     which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
-#    [Teardown]      run keywords     exit_call    ${driver1}
-#    ...             AND              exit_driver    ${driver1}  ${driver2}   ${driver3}   ${driver4}   ${driver5}   ${driver6}   ${driver7}
-    [Teardown]      exit_driver    ${driver1}  ${driver2}   ${driver3}   ${driver4}   ${driver5}   ${driver6}   ${driver7}
+    [Teardown]      run keywords     exit_call    ${driver1}
+    ...             AND              exit_driver    ${driver1}  ${driver2}   ${driver6}   ${driver7}
 
 Small_range_724_742
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
@@ -243,6 +252,7 @@ Small_range_724_742
     # EU3 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     ###### EU1 invite EU3 from Team contact       724行
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
     click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
     # EU3 接受Call
@@ -252,6 +262,7 @@ Small_range_724_742
     ###### EU2 invite EU4 from Directory       726行
     # EU4 登录
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
     click_user_in_contacts_call   ${driver2}    ${Expert_User4_name}
     ###### VP: 3PC call established successfully    EU4 leave call       726+727行
@@ -267,6 +278,7 @@ Small_range_724_742
     ###### VP: directly join call, don't need anyone's accept    EU5 leave call       730+731行
     exit_call     ${driver5}
     ###### EU2 send 3PI link 2 to eMail       731行
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url_2}   send_invite_in_calling_page    ${driver2}
     close_invite_3th_page    ${driver2}
     ###### Expert user from another enterprise click 3PI link 1 to join       732行
@@ -316,9 +328,11 @@ Small_range_743_744
     # EU2 接受Call
     user_anwser_call   ${driver2}
     ###### EU1 send 3PI link 1 to eMail       728行
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_invite_in_calling_page    ${driver1}
     close_invite_3th_page    ${driver1}
     ###### EU2 send 3PI link 2 to eMail       731行
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url_2}   send_invite_in_calling_page    ${driver2}
     close_invite_3th_page    ${driver2}
     # 结束Call
@@ -418,6 +432,7 @@ Small_range_799_802
     ${driver3}    driver_set_up_and_logIn    ${email}                           ${universal_password}
     # Normal call    User A, User B & User C are in a call
     make_calls_with_who    ${driver3}   ${driver2}   ${normal_username_for_calls_B}
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
     enter_contacts_search_user     ${driver3}     ${normal_username_for_calls_name}
     click_user_in_contacts_call    ${driver3}     ${normal_username_for_calls_name}
     user_anwser_call      ${driver1}
@@ -545,6 +560,7 @@ Disclaimer_806_807
 
     #######  806 line
     # User A 进入到邀请第三位用户进入call 的页面，并查询User C
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user   ${driver1}   ${big_admin_third_WS_name}
     # 点击查询到的User C
     click_user_in_contacts_call   ${driver1}   ${big_admin_third_WS_name}
@@ -621,8 +637,11 @@ Small_range_820_821
     # 接受Call
     user_anwser_call      ${driver1}     no_direct
     # VP: REC is on, can not changed
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
     rec_is_on_or_off     ${driver3}
     # Change mode of giver/receiver/Observer;In mode of Freeze/GHoP/Doc Share
     # In each mode, Say some words while do telestrations.	VP: REC is still on
@@ -664,7 +683,9 @@ Small_range_823
     # Call on-call group from contact list
     make_call_to_onCall     ${driver1}    ${driver2}    ${Expert_Group_1}
     # VP: REC is on, can not changed. What's more, on both sides, REC logo should be shown up.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}
     # In mode of Freeze/GHoP/Doc Share，VP: REC is still on
     enter_giver_mode     ${driver1}      none    none     2
@@ -712,7 +733,9 @@ Small_range_825_826
     user_make_call_via_meeting_link      ${driver2}     ${invite_url}
     user_anwser_call     ${driver1}
     # VP: REC is off, only owner can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     off   can_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}     off   none
     # Change role of giver/receiver
     enter_giver_mode     ${driver1}      none    none     2
@@ -744,10 +767,13 @@ Small_range_827
     # Expert  get incoming call
     make_call_to_onCall     ${driver1}    ${driver2}    ${Expert_Group_1}
     # VP: REC is off, only expert can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     off   none
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}     off   can_change
     # invite another expert to join as 3PC
     ${driver3}   driver_set_up_and_logIn   ${ws3_branding_C_user}        ${switch_workspace_password}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${ws3_branding_C_username}
     click_user_in_contacts_call   ${driver1}     ${ws3_branding_C_username}
     user_anwser_call    ${driver3}
@@ -777,7 +803,9 @@ Small_range_829
     # Call enterprise contact
     make_calls_with_who     ${driver1}    ${driver2}    ${site_admin_username}
     # VP: REC is off, only caller can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     off   can_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}     off   none
     # Change role of giver/receiver
     enter_giver_mode     ${driver1}      none    none     2
@@ -817,7 +845,9 @@ Small_range_831_832
     user_make_call_via_meeting_link      ${driver2}     ${invite_url}
     user_anwser_call     ${driver1}
     # VP: REC is on, only owner can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     on   can_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}     on   can_not_change
     # end call
     exit_call    ${driver1}
@@ -841,16 +871,20 @@ Small_range_833
     # call on-call group from contact list
     make_call_to_onCall     ${driver1}    ${driver2}    ${Expert_Group_1}
     # VP: REC is on, only expert can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     on   can_not_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}     on   can_change
     # invite another expert to join as 3PC
     ${driver3}   driver_set_up_and_logIn   ${ws3_branding_C_user}        ${switch_workspace_password}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${ws3_branding_C_username}
     click_user_in_contacts_call   ${driver1}     ${ws3_branding_C_username}
     user_anwser_call    ${driver3}
     # first expert leave call
     leave_call     ${driver2}
     # VP: other participant can not change rec
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
     rec_is_on_or_off     ${driver3}     on   can_not_change
     # 结束Call
     exit_call     ${driver1}
@@ -874,7 +908,9 @@ Small_range_834
     # Call enterprise contact
     make_calls_with_who     ${driver1}    ${driver2}    ${site_admin_username}
     # VP: REC is off, only caller can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     on   can_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}     on   none
     # Change role of giver/receiver
     enter_giver_mode     ${driver1}      none    none     2
@@ -910,7 +946,6 @@ Small_range_836
     which_page_is_currently_on    ${driver1}     ${anwser_call_button}
     which_page_is_currently_on    ${driver2}     ${anwser_call_button}
     user_anwser_call     ${driver1}
-    sleep  10s
     which_page_is_currently_on    ${driver1}     ${invite_user_in_calling}
     which_page_is_currently_on    ${driver2}     ${py_contacts_switch_success}
     # Verify User 1-1 & User 1-2 should have this incoming call record in recent tab.

@@ -51,6 +51,7 @@ Small_range_152
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # 3rd user join as 3pc call
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}   ${Expert_User3_name}
     click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
     user_anwser_call    ${driver3}
@@ -155,6 +156,7 @@ Join_call_162_167
     # DU5 登录
     ${driver5}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
     # EU1 sends 3pi link.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver1}
     # EU3, PU (personal user 4, DU (different enterprise user) 5, AU (anonymous user) 6 clicks on 3pi link in rapid sequence.
     user_make_call_via_meeting_link    ${driver3}    ${invite_url}
@@ -189,6 +191,7 @@ Join_call_168_178
     ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}        ${call_oncall_user_password}
     # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
     make_call_to_onCall     ${driver1}    ${driver2}    ${On_call_group_001}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}    send_invite_in_calling_page    ${driver2}
     close_invite_3th_page    ${driver2}
     # Anonymous user 3 clicks on 3pi link. EU1 answers call.
@@ -198,6 +201,7 @@ Join_call_168_178
     which_page_is_currently_on    ${driver3}    ${end_call_button}
     # TU2 invites TU4.   TU4 declines call.
     ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}       ${call_oncall_user_password}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
     click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
     user_decline_call    ${driver4}
@@ -246,14 +250,17 @@ Join_call_179_187
     ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
     user_make_call_via_meeting_link    ${driver2}    ${invite_mhs_url}
     user_anwser_call    ${driver1}
+    # EU1 sends 3pi link.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    ${invite_url}     send_invite_in_calling_page    ${driver1}
     # TU3 登录
     ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}        ${call_oncall_user_password}
     # EU4 登录
     ${driver4}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
     # PU5 登录
     ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
-    # EU1 sends 3pi link.
-    ${invite_url}     send_invite_in_calling_page    ${driver1}
+#    # EU1 sends 3pi link.
+#    ${invite_url}     send_invite_in_calling_page    ${driver1}
     # Following participants try to join call in rapid sequence: TU3 via MHS link. EU4 via MHS link.personal user 5 via MHS link.
     user_make_call_via_meeting_link    ${driver3}    ${invite_mhs_url}
     user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
@@ -307,6 +314,7 @@ Join_call_188_195
     # PU5 登录
     ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
     # EU1 sends 3pi link.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver1}
     # Following participants try to join call in rapid sequence: TU3 via MHS link. EU4 via MHS link.personal user 5 via MHS link.
     user_make_call_via_meeting_link    ${driver3}    ${invite_otu_url}
@@ -358,6 +366,7 @@ Join_call_196_200
     enter_giver_mode     ${driver1}     no_one     no_one     2
     # EU1 invites TU3. TU3 answers call.
     ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}        ${call_oncall_user_password}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Team_User1_name}
     click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
     user_anwser_call     ${driver3}
@@ -450,6 +459,7 @@ Small_range_560_580
     close_invite_3th_page     ${driver2}
     # EU1 invite EU3 from Team contact
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Expert_User3_name}
     click_user_in_contacts_call     ${driver1}    ${Expert_User3_name}
     user_anwser_call    ${driver3}
@@ -478,6 +488,7 @@ Small_range_560_580
     which_page_is_currently_on     ${driver5}    ${invite_send_invite_tab}    not_currently_on
     close_invite_3th_page     ${driver5}
     # EU3 send 3PI link to eMail
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver3}
     close_invite_3th_page    ${driver3}
     log to console   ${invite_url}
@@ -532,6 +543,7 @@ Small_range_581_582
     # Expert 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_AaA_username}     ${universal_password}
     # EU1 invte on-call group
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${AaA_on_call_group_name}
     click_user_in_contacts_call     ${driver1}    ${AaA_on_call_group_name}
     # VP: on-call group members can get rollover call    ExpetA answer rollover call	VP: rollover call stops
@@ -580,6 +592,7 @@ Small_range_590
     # TU1 call EU1 from contact list
     make_calls_with_who     ${driver1}    ${driver2}    ${Expert_User1_username}
     # VP: TU1 can only invite, can not send 3PI
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
     [Teardown]      run keywords    Close
@@ -597,6 +610,7 @@ Small_range_591
     user_make_call_via_meeting_link    ${driver1}    ${invite_mhs_url}
     user_anwser_call    ${driver2}
     # VP: TU1 can only invite, can not send 3PI
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
     [Teardown]      run keywords    Close

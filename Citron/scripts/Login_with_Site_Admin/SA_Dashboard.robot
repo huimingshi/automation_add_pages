@@ -25,4 +25,4 @@ Site_Admin_Dashboard
     select_all_workspaces
     # Occurred Within
     occurred_within
-#    [Teardown]    Close
+    [Teardown]    Close

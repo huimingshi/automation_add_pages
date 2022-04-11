@@ -210,6 +210,7 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     # Contact of WS1 call the user directly
     make_calls_with_who   ${driver1}   ${driver2}   ${big_admin_first_WS_username}
     # In calling page, clicks Invite -> Send Invitation papge
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}  send_invite_in_calling_page   ${driver1}
     # 启动一个空的窗口
     ${driver3}  start_an_empty_window
@@ -287,6 +288,7 @@ During_Call_open_invite_the_3rd_participant_page
     # Contact of WS1 call the user directly
     make_calls_with_who   ${driver2}   ${driver1}   ${switch_workspace_username}
     # VP: show a 'loading...' , and once stop, contact name should be shown up.
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user   ${driver2}    ${big_admin_another_first_WS_name}
     display_name_avator_in_contact_list   ${driver2}    ${big_admin_another_first_WS_name}   modify_picture
     close_invite_3th_page   ${driver2}
@@ -425,6 +427,7 @@ unable_to_reach_user_message_displays
     # User C has signed out of every instance of mobile app and web.
     logout_citron  ${driver3}
     # 进入Contacts界面，并查询user
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}   ${a_team_user_name}
     # 校验在通话中Contacts页面中未登录的user，点击后是否会弹出{username} is unreachable的提示信息
     click_user_in_contacts_call   ${driver1}   ${a_team_user_name}   can_not_reach
@@ -481,8 +484,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
     [Tags]     small range  122+124+128  line
-#    # 获取最新的邮件
-#    ${meeting_link_old}     obtain_meeting_link_from_email
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is team user log in
@@ -494,7 +495,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
     # User B logout
-#    logout_citron    ${driver2}
     exit_one_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
@@ -504,7 +504,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is team user log in
     ${driver3}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # VP: call establish successfully

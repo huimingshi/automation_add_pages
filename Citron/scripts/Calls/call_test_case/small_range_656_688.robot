@@ -145,6 +145,7 @@ Small_range_662
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User B invites callee [User C]
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user    ${driver2}     ${Expert_User3_name}
     click_user_in_contacts_call   ${driver2}     ${Expert_User3_name}
     # User C] doesn't answer call until time out
@@ -194,6 +195,7 @@ Small_range_663
     # User C 退出
     exit_one_driver    ${driver3}
     # User A invites User C] who doesn't login on any device
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
     click_user_in_contacts_call   ${driver1}     ${Expert_User3_name}    can_not_reach
     # 结束Call
@@ -238,6 +240,7 @@ Small_range_664
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User A] invites User C
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
     click_user_in_contacts_call   ${driver1}     ${Expert_User3_name}
     # User C] clicks on decline button
@@ -290,6 +293,7 @@ Small_range_665
     make_calls_with_who    ${driver3}   ${driver4}   ${Expert_User4_username}
 
     # caller calls one participant who is in another call via normal call
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${Expert_User4_name}
     click_user_in_contacts_call   ${driver1}     ${Expert_User4_name}
     which_page_is_currently_on    ${driver1}    ${user_is_currently_on_another_call}
@@ -492,6 +496,7 @@ Small_range_675
     # User A login and set Do not disturb
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    no_check_toturial    close_bounced     accept    set_disturb
     # InCall user invite User A to 3PC call
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user   ${driver2}    ${Expert_User1_name}
     click_user_in_contacts_call   ${driver2}   ${Expert_User1_name}
     # Inviter receives User A is Not Available along with Not Available Message

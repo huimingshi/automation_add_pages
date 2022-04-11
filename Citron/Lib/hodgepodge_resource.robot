@@ -94,6 +94,7 @@ enter_workspace_users
     click element   ${enter_users}
     sleep  2s
     # Wait until the first row shows up
+    wait until element is visible    ${button_add_user}    10
     wait until element is visible    ${first_row_shows_up}    10
 
 enter_workspace_workspace_settings

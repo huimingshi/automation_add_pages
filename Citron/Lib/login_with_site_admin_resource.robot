@@ -1164,10 +1164,13 @@ the_workspace_field_should_be_the_selected_one_before_loging_out
     should be equal as strings   ${workspace_text_get}   ${workspace_text}
 
 display_six_widgets
-    sleep  15s
-    # widgets: Calls by Groups, Tag Ranking, Call Volume, Average Time on Call, Completed Calls, Users
-    ${count}  get element count  xpath=//div[@id="MainDashboardTab"]//th[@class="DashboardWidgetTitle"]
-    should be equal as numbers   ${count}  6
+    FOR   ${i}    IN RANGE   0    5
+        sleep  15s
+        ${count}   get element count   xpath=//div[@id="MainDashboardTab"]//th[@class="DashboardWidgetTitle"]
+        Exit For Loop If    '${count}'=='6'
+        Run Keyword If      '${count}'!='6'    sleep   1s
+        Run Keyword If      '${i}'=='4'     should be equal as numbers    ${count}    6
+    END
     # Check out the six widgets
     @{widgets_list}=    Create List    Call Volume   Average Time on Call   Completed Calls   Users   Calls by Group    Tag Rankings
     FOR   ${one}   IN  @{widgets_list}
@@ -1237,7 +1240,7 @@ occurred_within
     should not be equal as strings   ${time_before_2}   ${time_after_2}
     # get all the widgets on the dashboard report after Select one of value form drop menu
     ${completed_calls_count_after}   get text   ${number_of_completed_calls}
-    should not be equal as integers   ${completed_calls_count_after}   ${completed_calls_count_before}
+    should not be equal as strings  ${completed_calls_count_after}   ${completed_calls_count_before}
 
 select_one_of_value_in_occurred_within_field
     # Select one of value in 'Occurred Within' field

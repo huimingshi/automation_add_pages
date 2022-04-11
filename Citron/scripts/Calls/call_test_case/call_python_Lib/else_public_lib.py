@@ -330,7 +330,7 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     # 维持通话20s
     time.sleep(int(call_time))
     for i in range(5):
-        ele_list = driver.find_elements_by_xpath('//div[@class="F2FVideo ShowOpenTokVideos"]/div')
+        ele_list = driver.find_elements_by_xpath(count_of_call_user)
         if len(ele_list) > 3:
             break
         elif 1 == 4:
@@ -380,7 +380,7 @@ def exit_call(driver,call_time=20):
     # 维持通话20s
     time.sleep(int(call_time))
     for i in range(5):
-        ele_list = driver.find_elements_by_xpath('//div[@class="F2FVideo ShowOpenTokVideos"]/div')
+        ele_list = driver.find_elements_by_xpath(count_of_call_user)
         if len(ele_list) > 3:
             break
         elif 1 == 4:
@@ -410,7 +410,7 @@ def exit_call(driver,call_time=20):
     else:
         print('点击Yes成功')
 
-def end_call_for_all(driver,call_time=20):
+def end_call_for_all(driver,call_time=30):
     """
     End Call for All
     :param driver:
@@ -419,7 +419,7 @@ def end_call_for_all(driver,call_time=20):
     # 维持通话20s
     time.sleep(int(call_time))
     for i in range(5):
-        ele_list = driver.find_elements_by_xpath('//div[@class="F2FVideo ShowOpenTokVideos"]/div')
+        ele_list = driver.find_elements_by_xpath(count_of_call_user)
         if len(ele_list) > 3:
             break
         elif 1 == 4:
@@ -458,18 +458,29 @@ def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_o
     :param currently_on: 是否在当前页面，默认是在；在：currently_on；不在：not_currently_on
     :return:
     """
-    try:
-        if currently_on == 'currently_on':
-            ele_list = driver.find_elements_by_xpath(page_tag_xpath)
-            print(len(ele_list))
-            assert len(ele_list) >= 1
-        elif currently_on == 'not_currently_on':
-            ele_list = driver.find_elements_by_xpath(page_tag_xpath)
-            print(ele_list)
+    if currently_on == 'currently_on':
+        public_check_element(driver, page_tag_xpath, '当前页面与预期页面不一致', if_click=None, if_show=1)
+    elif currently_on == 'not_currently_on':
+        ele_list = driver.find_elements_by_xpath(page_tag_xpath)
+        print(ele_list)
+        try:
             assert len(ele_list) == 0
-    except AssertionError:
-        screen_shot_func(driver,'当前页面与预期页面不一致')
-        raise AssertionError('当前页面与预期页面不一致')
+        except AssertionError:
+            screen_shot_func(driver,'当前页面与预期页面不一致')
+            raise AssertionError('当前页面与预期页面不一致')
+    # try:
+    #     if currently_on == 'currently_on':
+    #         public_check_element(driver, page_tag_xpath, '当前页面与预期页面不一致', if_click=None, if_show=1)
+    #         # ele_list = driver.find_elements_by_xpath(page_tag_xpath)
+    #         # print(len(ele_list))
+    #         # assert len(ele_list) >= 1
+    #     elif currently_on == 'not_currently_on':
+    #         ele_list = driver.find_elements_by_xpath(page_tag_xpath)
+    #         print(ele_list)
+    #         assert len(ele_list) == 0
+    # except AssertionError:
+    #     screen_shot_func(driver,'当前页面与预期页面不一致')
+    #     raise AssertionError('当前页面与预期页面不一致')
 
 def give_star_rating(driver,star):
     """
@@ -733,7 +744,7 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
             screen_shot_func(driver,'url信息未出现')
             raise Exception
         else:
-            time.sleep(1)
+            time.sleep(10)
     public_check_element(driver, '//i[@class="far fa-copy "]', '复制按钮未出现')
     sys_type = get_system_type()
     try:
@@ -931,10 +942,12 @@ def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
     attr_xpath = data_count_xpath + '/div[@col-id="name"]'
     # 等待数据出现
     public_check_element(driver, attr_xpath, '数据未出现', if_click = None)
+    class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
+    print(class_attr)
     if unreachable == 'unreachable':
         try:
-            class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
-            print(class_attr)
+            # class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
+            # print(class_attr)
             assert 'unreachableText' in class_attr
         except AssertionError:
             screen_shot_func(driver, '本该置灰user却没置灰')
@@ -945,8 +958,8 @@ def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
             raise Exception('没找到user')
     elif unreachable == 'reachable':
         try:
-            class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
-            print(class_attr)
+            # class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
+            # print(class_attr)
             assert 'unreachableText' not in class_attr
         except AssertionError:
             screen_shot_func(driver, '不该置灰user却置灰了')
@@ -1022,9 +1035,9 @@ def switch_to_settings_page(driver,whitch_setting = 'Workspace Settings',which_t
     """
     if if_click_tree == 'click_tree':
         public_check_element(driver, f'//div[@role="tree"]/div[{int(which_tree)}]', '切换菜单失败')
-        # driver.find_element_by_xpath(f'//div[@role="tree"]/div[{int(which_tree)}]').click()
+        time.sleep(2)
     public_check_element(driver, f'//span[contains(.,"{whitch_setting}")]', '点击settings页面失败')
-    # driver.find_element_by_xpath(f'//span[contains(.,"{whitch_setting}")]').click()
+    time.sleep(2)
     try:
         if whitch_setting == 'Workspace Settings':
             ele_list = driver.find_elements_by_xpath('//h1[text()="Workspace Settings"]')

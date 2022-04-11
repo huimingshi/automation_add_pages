@@ -117,6 +117,7 @@ Small_range_1047
     ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
     # Site user send 3PI link
     make_calls_with_who      ${driver2}     ${driver1}     ${normal_username_for_calls_name}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver2}   send
     # Open email and SMS of phone number,VP: SMS and Email content has customer text.
     check_invitation_message_correct_from_email     I Am Dark Horse
@@ -135,6 +136,7 @@ Small_range_1050
     ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
     # Site user send 3PI link
     make_calls_with_who      ${driver2}     ${driver1}     ${normal_username_for_calls_name}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver2}   send
     # Open email and SMS of phone number,VP: email and SMS shows customer text
     check_invitation_message_correct_from_email      =E5=BE=B7=E7=8E=9B=E8=A5=BF=E4=BA=9A+[]-()
@@ -153,6 +155,7 @@ Small_range_1053
     ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
     # Site user send 3PI link
     make_calls_with_who      ${driver2}     ${driver1}     ${normal_username_for_calls_name}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver2}   send
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email      You have been invited to join Huiming.shi.helplightning+0123456789 on a auto_default_workspace's support call using Help Lightning.

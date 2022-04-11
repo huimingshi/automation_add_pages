@@ -51,7 +51,7 @@ ${enter_directory_page}             xpath=//span[contains(.,'Directory')]       
 *** Keywords ***
 click_next_again
     Click Button    ${next_button}
-    FOR   ${i}    IN RANGE   0    20
+    FOR   ${i}    IN RANGE   0    30
         ${count}   get element count   ${loginpsd_display}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If      '${count}'=='0'    sleep   2s
@@ -60,9 +60,12 @@ click_next_again
 
 click_login_again
     Click Button    ${login_button}
-    FOR   ${i}    IN RANGE   0    20
+    FOR   ${i}    IN RANGE   0    30
         ${url}=   Get Location
+#        Exit For Loop If    '${url}'=='${citron_website}'    or    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'    or   '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
         Exit For Loop If    '${url}'=='${citron_website}'
+        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'
+        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
         Run Keyword If      '${url}'!='${citron_website}'    sleep   2s
         Exit For Loop If    '${i}'=='19'
     END
@@ -78,7 +81,7 @@ Login
     # 点击NEXT
     wait until element is visible   ${next_button}     10s
     Click Button    ${next_button}
-    FOR   ${i}    IN RANGE   0    20
+    FOR   ${i}    IN RANGE   0    30
         ${count}   get element count   ${loginpsd_display}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If      '${count}'=='0'    sleep   2s
@@ -90,9 +93,12 @@ Login
     # 点击LOG IN
     wait until element is visible   ${login_button}    10s
     Click Button    ${login_button}
-    FOR   ${i}    IN RANGE   0    20
+    FOR   ${i}    IN RANGE   0    30
         ${url}=   Get Location
+#        Exit For Loop If    '${url}'=='${citron_website}'    or    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'    or   '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
         Exit For Loop If    '${url}'=='${citron_website}'
+        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'
+        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
         Run Keyword If      '${url}'!='${citron_website}'    sleep   2s
         Run Keyword If      '${i}'=='19'    click_login_again
     END
@@ -240,7 +246,29 @@ Login_new_added_user
 Login_new_added_user_whitout_workspaces
     [Arguments]    ${user_username}
     # 登录系统
-    Login    ${user_username}    ${public_pass}
+#    Login    ${user_username}    ${public_pass}
+    Open Browser    ${citron_website}     ${browser_type}
+    Sleep    1s
+    Maximize Browser Window
+    # 输入账号
+    wait until element is visible   ${loginname_input}    10s
+    Input Text    ${loginname_input}    ${user_username}
+    # 点击NEXT
+    wait until element is visible   ${next_button}     10s
+    Click Button    ${next_button}
+    FOR   ${i}    IN RANGE   0    30
+        ${count}   get element count   ${loginpsd_display}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If      '${count}'=='0'    sleep   2s
+        Run Keyword If      '${i}'=='19'    click_next_again
+    END
+    # 输入密码
+    wait until element is visible   ${loginpsd_input}
+    Input Password    ${loginpsd_input}    ${public_pass}
+    # 点击LOG IN
+    wait until element is visible   ${login_button}    10s
+    Click Button    ${login_button}
+    # 出现提示信息
     wait until element is visible    xpath=//span[contains(.,'You have not been assigned to a Workspace in your Organization. Please contact your administrator.')]
     sleep  3s
     element should be visible    xpath=//a[contains(.,'Forgot Password?')]

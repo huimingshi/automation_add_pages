@@ -872,6 +872,7 @@ reset_all_accepted_disclaimers
     wait until element is visible    ${reset_all_accepted_disclaimers_ok}
     click element   ${reset_all_accepted_disclaimers_ok}
     wait until element is visible   xpath=//span[text()='Reset All Accepted Disclaimers']
+    wait until element is not visible   xpath=//span[text()='Reset All Accepted Disclaimers']    20s
 
 expand_option_delete_user
     # EXPAND delete user 选项

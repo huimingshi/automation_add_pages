@@ -350,6 +350,7 @@ Small_range_636
     # User B 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}     ${universal_password}
     # expert invites user B
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user    ${driver2}     ${User_Bb_name}
     click_user_in_contacts_call     ${driver2}    ${User_Bb_name}
     # user B answers call
@@ -387,6 +388,7 @@ Small_range_637_642
     # User B 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}     ${universal_password}
     # expert invites user B
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user    ${driver2}     ${User_Bb_name}
     click_user_in_contacts_call     ${driver2}    ${User_Bb_name}
     # user B declines call
@@ -427,6 +429,7 @@ Small_range_638_640
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}     ${universal_password}
     # user A invites user C
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${User_Cc_name}
     click_user_in_contacts_call     ${driver1}    ${User_Cc_name}
     # user B answers call
@@ -470,6 +473,7 @@ Small_range_639
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}     ${universal_password}
     # user A invites user C
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${User_Cc_name}
     click_user_in_contacts_call     ${driver1}    ${User_Cc_name}
     # user C doesn't answer call
@@ -533,6 +537,7 @@ Small_range_647_648_649_650
     # expertB 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_BbB_username}    ${universal_password}
     # EU1 invite on-call group
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${AaA_on_call_group_name}
     click_user_in_contacts_call     ${driver1}    ${AaA_on_call_group_name}
     # expertB answer rollover call
@@ -551,6 +556,7 @@ Small_range_651_652_653
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${AaA_on_call_group_name}   # search on-call-group in Team page
     make_call_to_onCall     ${driver1}   ${driver2}    ${AaA_on_call_group_name}
     # expertA send 3PI link to anonymous user
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}   send_invite_in_calling_page    ${driver2}
     close_invite_3th_page    ${driver2}
     # Anonymous user click 3PI link
@@ -574,6 +580,7 @@ Small_range_654_655
     # EU2 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # TU1 invite EU2
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${Expert_User2_name}
     click_user_in_contacts_call     ${driver1}    ${Expert_User2_name}
     # EU2 clicks answer button to join call

@@ -126,8 +126,8 @@ def get_external_invitation_message(expect_get_content):
 
 if __name__ == '__main__':
     # print(get_email_link('Change My Password:'))
-    # print(get_email_link('Click here to set your password:'))
+    print(get_email_link('Click here to set your password:'))
     # print(get_email_link('Accept Invitation'))
     # print(get_email_link('confirmation_token'))
     # print(get_email_verification_code())
-    print(get_external_invitation_message("You have been invited to join Huiming.shi.helplightning+personal on a auto_default_workspace's support call using Help Lightning."))
+    # print(get_external_invitation_message("You have been invited to join Huiming.shi.helplightning+personal on a auto_default_workspace's support call using Help Lightning."))
