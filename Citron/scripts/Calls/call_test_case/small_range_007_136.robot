@@ -79,10 +79,8 @@ User_Directory_User_open_invite_3rd_participant_dialog
     open_invite_3rd_participant_dialog    ${driver1}   no_enter
     # User check on Directory	VP: All users of WS1 shows up
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
-#    [Teardown]      run keywords    exit_call   ${driver2}   1     # end call
-#    ...             AND             Close
-#    ...             AND             exit_driver   ${driver1}   ${driver2}
-    [Teardown]      run keywords    Close
+    [Teardown]      run keywords    exit_call   ${driver2}   1     # end call
+    ...             AND             Close
     ...             AND             exit_driver   ${driver1}   ${driver2}
 
 User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
@@ -101,10 +99,8 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     open_invite_3rd_participant_dialog    ${driver1}   no_enter
     # VP: user has no Directory checkbox
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   0
-#    [Teardown]      run keywords    exit_call   ${driver2}   1    # end call
-#    ...             AND             Close
-#    ...             AND             exit_driver   ${driver1}   ${driver2}
-    [Teardown]      run keywords    Close
+    [Teardown]      run keywords    exit_call   ${driver2}   1    # end call
+    ...             AND             Close
     ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Disable_External_Users_check_case_1
@@ -141,30 +137,30 @@ Disable_External_Users_check_case_1
 Disable_External_Users_check_case_2
     [Documentation]    Personal user or user from another site workspace logs in,VP: they should not be able to call this site workspace user via meeting link
     [Tags]         small range 96+97+98+99  line   有bug：https://vipaar.atlassian.net/browse/CITRON-3248   MHS link不应该打通
-#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
-#    ...         AND               Close    # close browser
-#    ...         AND               Login_premium_user    # log in with premium admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
+    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
+    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+    ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
+    ...         AND               Close    # close browser
+    ...         AND               Login_premium_user    # log in with premium admin
+    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+    ...         AND               Close    # close browser
     # Expert user log in
     ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}    ${an_expert_user_password}
     ${time_started_1}   get_start_time_of_the_last_call   ${driver1}
     # user from another site log in
     ${driver2}  driver_set_up_and_logIn    ${other_site_user_1_username}   ${other_site_user_1_password}
     ${time_started_2}   get_start_time_of_the_last_call   ${driver2}
-#    # VP: they should not be able to call this site workspace user via meeting link
-#    check_call_can_reach_to_or_not   ${driver1}   ${driver2}   https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+an_expert_user1     0     # MHS link
-#    # VP: this record should not appear in recent list for both participants
-#    ${time_started_3}   record_should_not_appear_in_recent_list   ${driver1}
-#    should be equal as strings    ${time_started_3}   ${time_started_1}
-#    ${time_started_4}   record_should_not_appear_in_recent_list   ${driver2}
-#    should be equal as strings    ${time_started_4}   ${time_started_2}
+    # VP: they should not be able to call this site workspace user via meeting link
+    check_call_can_reach_to_or_not   ${driver1}   ${driver2}   https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+an_expert_user1     0     # MHS link
+    # VP: this record should not appear in recent list for both participants
+    ${time_started_3}   record_should_not_appear_in_recent_list   ${driver1}
+    should be equal as strings    ${time_started_3}   ${time_started_1}
+    ${time_started_4}   record_should_not_appear_in_recent_list   ${driver2}
+    should be equal as strings    ${time_started_4}   ${time_started_2}
     # VP: they should not be able to call this site workspace user via on-call group link
     check_call_can_reach_to_or_not   ${driver1}  ${driver2}   https://app-stage.helplightning.net.cn/help?enterprise_id=2799&group_id=5562&group_name=on-call+group+2   0    # this is (on-call group 2) On-Call Group Url
-#    # exit driver
+    # exit driver
     exit_one_driver   ${driver2}
     # user from another site log in
     Login_new_added_user   ${other_site_user_1_username}
@@ -216,10 +212,8 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     ${driver3}  start_an_empty_window
     # anonymous user can accept the call successfully
     check_call_can_reach_to_or_not  ${driver1}   ${driver3}   ${invite_url}   1
-#    [Teardown]      run keywords    exit_call   ${driver2}   2
-#    ...             AND             Close
-#    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
-    [Teardown]      run keywords    Close
+    [Teardown]      run keywords    exit_call   ${driver2}   2
+    ...             AND             Close
     ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 All_active_users_in_the_entire_enterprise_should_show
@@ -437,8 +431,6 @@ unable_to_reach_user_message_displays
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.
     [Tags]     small range  122+123+127+130  line
-#    # 获取最新的邮件
-#    ${meeting_link_old}     obtain_meeting_link_from_email
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is expert user log in
@@ -450,7 +442,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
     # User B logout
-#    logout_citron    ${driver2}
     exit_one_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
@@ -460,7 +451,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is expert user log in
     ${driver3}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
     # VP: call establish successfully
@@ -521,8 +511,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
     ...         AND               Close    # close browser
-#    # 获取最新的邮件
-#    ${meeting_link_old}     obtain_meeting_link_from_email
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is  another enterprise user log in
@@ -534,7 +522,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
     # User B logout
-#    logout_citron    ${driver2}
     exit_one_driver   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
@@ -544,7 +531,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is another enterprise user log in
     ${driver3}   driver_set_up_and_logIn   ${other_site_user_2_username}    ${other_site_user_2_password}
     # VP: call establish successfully
@@ -555,8 +541,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
 Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
     [Tags]     small range  131+132+133  line
-#    # 获取最新的邮件
-#    ${meeting_link_old}     obtain_meeting_link_from_email
     # Team user log in
     ${driver1}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # 在Contacts页面查询user
@@ -566,7 +550,6 @@ Team_user_A_signs_in_User_B_is_expert_user
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
-#    should not be equal as strings   ${meeting_link_old}   ${meeting_link}
     # User B is expert user log in
     ${driver2}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
     check_call_can_reach_to_or_not    ${driver1}   ${driver2}   ${meeting_link}    1

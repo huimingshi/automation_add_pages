@@ -60,7 +60,6 @@ Small_range_152
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
     [Teardown]      run keywords    end_call_for_all   ${driver1}
     ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
-#    [Teardown]       exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_153_160
     [Documentation]    Enterprise user call contact in F2F mode
@@ -111,7 +110,6 @@ Small_range_153_160
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
     [Teardown]      run keywords    exit_call   ${driver1}
     ...             AND             exit_driver    ${driver1}   ${driver2}
-#    [Teardown]       exit_driver    ${driver1}   ${driver2}
 
 Small_range_161
     [Documentation]    WebApp specific
@@ -268,9 +266,11 @@ Join_call_179_187
     # VP: EU1 gets accept/decline request from TU3.   EU1 declines call.   TU3 doesn’t  join call.
     user_decline_call    ${driver1}    in_calling
     which_page_is_currently_on    ${driver3}    ${your_call_was_declined}
+    exit_one_driver    ${driver3}
     # EU1 gets accept/decline request from EU4    EU1 declines call.   VP: EU4 doesn’t  join call.
     user_decline_call    ${driver1}    in_calling
     which_page_is_currently_on    ${driver4}    ${your_call_was_declined}
+    exit_one_driver    ${driver4}
     # EU1 gets accept/decline request from PU5.   EU1 accepts call.	   VP: PU5 joins call.
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver5}    ${end_call_button}
@@ -287,11 +287,12 @@ Join_call_179_187
     # EU1 gets accept/decline request from AU7."    EU1 declines call.    VP: AU7 doesn’t join call.
     user_decline_call    ${driver1}    in_calling
     which_page_is_currently_on    ${driver7}    ${your_call_was_declined}
+    exit_one_driver    ${driver7}
     # EU1 gets accept/decline request from AU8."    EU1 accepts call.	VP: AU8 joins call.
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver8}    ${end_call_button}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}    ${driver4}    ${driver5}    ${driver6}    ${driver7}    ${driver8}
+    ...             AND             exit_driver    ${driver1}    ${driver2}    ${driver5}    ${driver6}      ${driver8}
 
 Join_call_188_195
     [Documentation]     Join call	MPC via OTU link.
@@ -326,6 +327,7 @@ Join_call_188_195
     # EU1 gets accept/decline request from EU4    EU1 declines call.   VP: EU4 doesn’t  join call.
     user_decline_call    ${driver1}    in_calling
     which_page_is_currently_on    ${driver4}    ${your_call_was_declined}
+    exit_one_driver    ${driver4}
     # EU1 gets accept/decline request from PU5.   EU1 accepts call.	   VP: PU5 joins call.
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver5}    ${end_call_button}
@@ -340,8 +342,9 @@ Join_call_188_195
     # EU1 gets accept/decline request from AU7."    EU1 declines call.    VP: AU7 doesn’t join call.
     user_decline_call    ${driver1}    in_calling
     which_page_is_currently_on    ${driver7}    ${your_call_was_declined}
+    exit_one_driver    ${driver7}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}    ${driver4}    ${driver5}    ${driver6}    ${driver7}
+    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}   ${driver5}    ${driver6}
 
 Join_call_196_200
     [Documentation]     In call	  2PC
@@ -529,7 +532,7 @@ Small_range_560_580
     user_make_call_via_meeting_link    ${driver8}    ${invite_url}
     which_page_is_currently_on    ${driver8}    ${this_call_is_over}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}   ${driver3}    ${driver4}    ${driver5}    ${driver6}    ${driver7}    ${driver8}    ${driver9}
+    ...             AND             exit_driver       ${driver5}     ${driver8}    ${driver9}
 
 Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list

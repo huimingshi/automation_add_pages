@@ -259,6 +259,7 @@ Small_range_724_742
     user_anwser_call    ${driver3}
     ###### VP: 3PC call established successfully    EU3 leave call       724+725行
     exit_call     ${driver3}
+    exit_one_driver    ${driver3}
     ###### EU2 invite EU4 from Directory       726行
     # EU4 登录
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
@@ -268,6 +269,7 @@ Small_range_724_742
     ###### VP: 3PC call established successfully    EU4 leave call       726+727行
     user_anwser_call    ${driver4}
     exit_call    ${driver4}
+    exit_one_driver    ${driver4}
     ###### EU1 send 3PI link 1 to eMail       728行
     ${invite_url_1}   send_invite_in_calling_page    ${driver1}
     close_invite_3th_page    ${driver1}
@@ -277,6 +279,7 @@ Small_range_724_742
     user_make_call_via_meeting_link   ${driver5}   ${invite_url_1}
     ###### VP: directly join call, don't need anyone's accept    EU5 leave call       730+731行
     exit_call     ${driver5}
+    exit_one_driver    ${driver5}
     ###### EU2 send 3PI link 2 to eMail       731行
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url_2}   send_invite_in_calling_page    ${driver2}
@@ -302,17 +305,19 @@ Small_range_724_742
     which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
     ##### EU2 leave call   VP: call is not end    737行
     leave_call   ${driver2}
+    exit_one_driver    ${driver2}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ###### Anonymous user click link 2    VP: EU1 get Accept dialog    EU1 accept    738+739行
     ${driver9}    anonymous_open_meeting_link    ${invite_url_2}
     user_anwser_call      ${driver1}     no_direct
     ###### VP: 3PC call established successfully    Anonymous leave call    739+740行
     exit_call   ${driver9}
+    exit_one_driver    ${driver9}
     ###### EU2 click 3PI link 2 to join       741行
     user_make_call_via_meeting_link   ${driver2}    ${invite_url_2}
     ###### VP: 3PC call established successfully    End 3PC call    741+742行
     end_call_for_all       ${driver1}
-    [Teardown]    exit_driver    ${driver1}   ${driver2}   ${driver3}   ${driver4}   ${driver5}   ${driver6}   ${driver7}   ${driver8}   ${driver9}
+    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
 
 Small_range_743_744
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
@@ -386,7 +391,6 @@ Small_range_746
     lists should be equal  ${user_list_1}   ${user_list_2}
     [Teardown]      run keywords    exit_call     ${driver2}
     ...             AND             exit_driver     ${driver1}    ${driver2}
-#    [Teardown]       exit_driver     ${driver1}    ${driver2}
 
 Small_range_751
     [Documentation]      Resolution Check    Web on PC   VP: Resolution = 1280x720

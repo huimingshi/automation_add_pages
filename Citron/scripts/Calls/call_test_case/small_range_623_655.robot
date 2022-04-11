@@ -147,6 +147,7 @@ Small_range_630_631
     user_decline_call   ${driver5}
     # VP: Expert B No disclaimer window since he has accepted it.
     disclaimer_should_be_shown_up_or_not    ${driver5}    not_appear
+    exit_one_driver    ${driver5}
     # VP: customer gets message "No Experts are currently available to take your call."
     which_page_is_currently_on    ${driver3}     ${no_experts_are_available}
     # Expert A 刷新Recents页面
@@ -154,8 +155,7 @@ Small_range_630_631
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
     [Teardown]      run keywords    exit_call       ${driver2}     1
-    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
-#    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}
 
 Small_range_632
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
@@ -209,7 +209,6 @@ Small_range_632
     [Teardown]      run keywords    exit_call       ${driver2}
     ...             AND             exit_call       ${driver3}
     ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
-#    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
     # Verify: In Citron -> Admin -> Calls, the participant’s name should correctly shows up
     # big_admin 登录
     ...             AND             Login_premium_user
@@ -275,7 +274,7 @@ Small_range_633
     which_page_is_currently_on     ${driver5}    ${contacts_page_send_email}
     which_page_is_currently_on     ${driver2}    ${end_call_button}
     # 结束Call
-    exit_call       ${driver2}     1
+    exit_call       ${driver2}
     exit_call       ${driver3}
     # Expert A 关闭通话结束页面
     close_call_ending_page    ${driver4}
@@ -335,7 +334,6 @@ Small_range_634
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
     [Teardown]      run keywords    exit_call       ${driver2}      1
     ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
-#    [Teardown]       exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
 
 Small_range_636
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
