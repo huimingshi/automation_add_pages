@@ -31,7 +31,7 @@ enter_group_users
     click element   ${enter_users}
     # Wait until the first row shows up
     wait until element is visible    ${button_add_user}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${first_row_shows_up}    20
 
 new_enterprice
     # new enterprice
@@ -117,8 +117,8 @@ enter_site_workspaces
     # click Users page menu
     click element   ${enter_workspaces}
     # Wait until the first row shows up
-    wait until element is visible    ${create_workspace_button}
-    wait until element is visible    ${first_data_show}    10
+    wait until element is visible    ${create_workspace_button}    20
+    wait until element is visible    ${first_data_show}    20
 
 enter_site_users
     # enter SITE ADMINISTRATION Users page
@@ -127,8 +127,8 @@ enter_site_users
     # click Users page menu
     click element   ${enter_users}
     # Wait until the first row shows up
-    wait until element is visible    ${button_add_user}
-    wait until element is visible    ${first_data_show}    10
+    wait until element is visible    ${button_add_user}    20
+    wait until element is visible    ${first_data_show}    20
 
 enter_site_analytics
     # enter SITE ADMINISTRATION Users page
@@ -138,7 +138,7 @@ enter_site_analytics
     click element   ${enter_analytics}
     sleep  1s
     # Wait until Dashboard appear
-    wait until element is visible    xpath=//b[contains(.,'Dashboard')]    10
+    wait until element is visible    xpath=//b[contains(.,'Dashboard')]    20
 
 enter_workspace_workspace_settings
     # click workspace ADMINISTRATION page menu
@@ -310,7 +310,7 @@ users_share_this_filter
     share_this_filter
     # this searched result workspace list should be shown up in the new tab
     element should be visible   ${button_add_user}
-    wait until element is visible    ${first_data_show}   10s
+    wait until element is visible    ${first_data_show}   20
     ${count}  get element count   ${get_number_of_rows}
     should not be equal as strings   ${count}  0
     # Switch to the first Windows page
@@ -322,7 +322,7 @@ calls_share_this_filter
     share_this_filter
     # this searched result workspace list should be shown up in the new tab
     element should be visible    xpath=//label[contains(.,'Occurred Within')]
-    wait until element is visible    ${first_data_show}   10s
+    wait until element is visible    ${first_data_show}   20
     ${count}  get element count   ${get_number_of_rows}
     should not be equal as strings   ${count}  0
     # Switch to the first Windows page
@@ -810,7 +810,7 @@ upload_a_photo
     click_user_details
     # upload photo
     ${picture_path}   get_modify_picture_path     picture.jpg
-    wait until element is visible    ${upload_avator_button_xpath}    10s
+    wait until element is visible    ${upload_avator_button_xpath}    20
     Choose file    ${upload_photo_button}    ${picture_path}
     sleep  0.5s
     wait until element is visible    ${remove_avatar_button}
@@ -876,7 +876,7 @@ select_a_worksapce_and_click_at_details
     should contain   ${get_value}   read-only
     # upload photo
     ${picture_path}   get_modify_picture_path    picture.jpg
-    wait until element is visible     ${details_pre_xpath}//button[contains(.,'Upload a photo...')]       10s
+    wait until element is visible     ${details_pre_xpath}//button[contains(.,'Upload a photo...')]       20
     Choose file     ${details_pre_xpath}//input[@type="file"]    ${picture_path}
     sleep  3s
     wait until element is not visible    ${prompt_information}    20s
@@ -905,7 +905,7 @@ change_avatar_then_remove
     ${before_modify_avatar}  get element attribute    ${details_pre_xpath}//img[@class="avatar-preview"]    src
     # change avatar
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${details_pre_xpath}//button[contains(.,"Change avatar...")]      10s
+    wait until element is visible    ${details_pre_xpath}//button[contains(.,"Change avatar...")]      20
     Choose file    ${details_pre_xpath}//input[@type="file"]     ${modify_picture_path}
     # check message
     wait until element is visible   ${message_text}   5s
@@ -1072,7 +1072,7 @@ deactivate_user
 enter_deactivated_users_page
     # enter Deactivated Users page
     click element   ${deactivated_users_page}
-    wait until element is visible    ${first_data_show}   10
+    wait until element is visible    ${first_data_show}   20
 
 select_deactivated_users
     [Arguments]   ${email}
@@ -1151,7 +1151,7 @@ re_log_in_citron
     Run Keyword If   '${count}'=='1'    click element   ${accept_button}
     sleep  1s
     Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}  10s
+    Wait Until Page Contains    ${log_in_success_tag}     20
     sleep  1s
     # close popup
     Click Button    ${button_of_popup}

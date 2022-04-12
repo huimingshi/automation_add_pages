@@ -1,6 +1,7 @@
 #----------------------------------------------------------------------------------------------------#
 # set up
 import time
+import os
 import platform
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -157,10 +158,10 @@ def exit_drivers(*args):
     :param driver2:
     :return:
     """
-    # exit driver
-    for driver in args:
-        driver.quit()
-        time.sleep(5)
+    # kill所有的chromedriver进程
+    os.system('taskkill /F /im chromedriver.exe')
+    # 退出所有的浏览器
+    os.system('taskkill /f /t /im chrome.exe')
 
 def get_system_type():
     """

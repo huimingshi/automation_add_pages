@@ -187,10 +187,18 @@ enter_workspace_settings_page
     # click workspace ADMINISTRATION page menu
     click element   ${enter_workspace_menu}
     sleep  1s
-    # click Users page menu
+    # click settings page menu
     click element   ${enter_Workspace_settings}
     sleep  2s
     # Wait until enter page
+    FOR   ${i}    IN RANGE   0    10
+        ${count}   get element count   ${enter_ws_settings_success}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If      '${count}'=='0'    sleep   2s
+        Run Keyword If      '${i}'=='19'    refresh_web_page
+    END
+    # click settings page menu
+    click element   ${enter_Workspace_settings}
     wait until element is visible   ${enter_ws_settings_success}   20
 
 enter_recents_page
@@ -721,13 +729,13 @@ click_to_edit_branding_setting
 
 change_branding_big_logo
     ${picture_path}   get_modify_picture_path    Logo1.jpg
-    wait until element is visible    xpath=//button[text()="Change logo..."]    10
+    wait until element is visible    xpath=//button[text()="Change logo..."]    20
     choose file   ${change_big_logo}   ${picture_path}
     sleep  2s
 
 change_branding_default_avatat
     ${picture_path}   get_modify_picture_path    avatar1.jpg
-    wait until element is visible     xpath=//button[text()="Change avatar..."]    10
+    wait until element is visible     xpath=//button[text()="Change avatar..."]    20
     choose file   ${change_default_avatar}   ${picture_path}
     sleep  2s
 

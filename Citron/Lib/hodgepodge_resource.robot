@@ -94,8 +94,8 @@ enter_workspace_users
     click element   ${enter_users}
     sleep  2s
     # Wait until the first row shows up
-    wait until element is visible    ${button_add_user}    10
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${button_add_user}    20
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_workspace_workspace_settings
     # click workspace ADMINISTRATION page menu
@@ -310,7 +310,7 @@ upload_a_photo
     # Button "Upload a photo" displays under the avatar.
     # Click on "Upload a photo", and upload a new photo
     ${picture_path}   get_modify_picture_path    picture.jpg
-    wait until element is visible    ${upload_avatar}   10s
+    wait until element is visible    ${upload_avatar}   20
     choose file  ${upload_a_photo}   ${picture_path}
     wait until element is visible    ${my_account_update_success_tag}
     # Button changes to "Change your avatar".
@@ -382,8 +382,8 @@ my_account_change_password
     sleep  0.5s
     # click  CHANGE PASSWORD button
     click element     xpath=//button[contains(.,'Change Password')]
-    wait until element is visible   ${update_password_success_tag}
-    wait until element is not visible    ${update_password_success_tag}   20s
+    wait until element is visible   ${update_password_success_tag}      20s
+    wait until element is not visible    ${update_password_success_tag}    20s
 
 primary_contact_modify_message
     [Arguments]    ${random}   ${email}   ${index}
@@ -430,7 +430,7 @@ option_delete_user_is_selected_or_not
 enter_enterprises_audit_log
     # enter crunch Audit Logs page
     click element    ${audit_log_menu}
-    wait until element is visible     ${audit_log_table}//tr[2]    20s
+    wait until element is visible     ${audit_log_table}//tr[2]    30s
     sleep  3s
 
 modify_record_in_crunch_is_correct
@@ -721,7 +721,7 @@ click_deatils
 modify_basic_info
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${button_Upload}    10s
+    wait until element is visible    ${button_Upload}    20
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
@@ -946,7 +946,7 @@ set_survey_null
     click element    ${survey_url_save}
     sleep  1s
     # Check that the emptying is successful
-    wait until element is visible   xpath=//button[text()="Click to set a URL"]    10s
+    wait until element is visible   xpath=//button[text()="Click to set a URL"]    20
 
 set_survey_in_white_list
     # clear survey url

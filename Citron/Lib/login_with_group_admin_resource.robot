@@ -24,7 +24,7 @@ enter_group_users
     click element   ${enter_users}
     # Wait until the first row shows up
     wait until element is visible    ${button_add_user}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_workspace_users
     # click workspace ADMINISTRATION page menu
@@ -34,7 +34,7 @@ enter_workspace_users
     click element   ${enter_users}
     # Wait until the first row shows up
     wait until element is visible    ${button_add_user}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_group_groups
     # click workspace ADMINISTRATION page menu
@@ -44,12 +44,12 @@ enter_group_groups
     click element   ${enter_groups}
     # Wait until the first row shows up
     wait until element is visible    ${switch_to_groups_success}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_invitations_page
     # Enter Invitations page
     click element   ${invitations_page}
-    wait until element is visible    ${first_data_show}   10
+    wait until element is visible    ${first_data_show}   20
 
 enter_group_analytics
     # click workspace ADMINISTRATION menu
@@ -58,7 +58,7 @@ enter_group_analytics
     # click Users page menu
     click element   ${enter_analytics}
     # Wait until Dashboard appear
-    wait until element is visible    xpath=//b[contains(.,'Dashboard')]    10
+    wait until element is visible    xpath=//b[contains(.,'Dashboard')]    20
 
 enter_group_calls
     # click workspace ADMINISTRATION menu
@@ -228,7 +228,7 @@ click_deatils
 modify_basic_info
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${upload_avatar_button}    10s
+    wait until element is visible    ${upload_avatar_button}    20
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
@@ -256,7 +256,7 @@ modify_basic_info
 only_avatar_is_editable
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${upload_avatar_button}    10s
+    wait until element is visible    ${upload_avatar_button}    20
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
@@ -441,7 +441,7 @@ deactivate_user
 enter_deactivated_users_page
     # enter Deactivated Users page
     click element   ${deactivated_users_page}
-    wait until element is visible    ${first_data_show}    10
+    wait until element is visible    ${first_data_show}    20
     sleep  1s
 
 search_deactivated_user
@@ -468,7 +468,7 @@ reactivate_user
 enter_active_users_page
     # enter Active Users page
     click element   ${active_users_page}
-    wait until element is visible    ${first_data_show}     10
+    wait until element is visible    ${first_data_show}     20
 
 search_active_user
     [Arguments]  ${username}
@@ -619,7 +619,7 @@ check_file_if_exists_delete
 enter_REPORT_VIEW_page
     # click Report View button
     click element  ${report_view_button}
-    wait until element is visible    ${first_data_show}   10
+    wait until element is visible    ${first_data_show}    20
 
 export_to_CSV
     # Export to CSV
@@ -775,7 +775,7 @@ choose_last_365_days
     ${count}   get element count   xpath=//label[contains(.,'Occurred Within')]/following-sibling::select/option
     click element    xpath=//label[contains(.,'Occurred Within')]/following-sibling::select/option[${count}]
     # Wait until first line appear
-    wait until element is visible    xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[1]      10
+    wait until element is visible    xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[1]      20
 
 lists_should_be_same
     [Arguments]   ${get_calls_groups_list}   ${get_groups_groups_list}
@@ -921,7 +921,7 @@ resend_invitation
     sleep  1s
     click element   ${resend_invitation}
     sleep  1s
-    element should be visible   ${Invitation_has_been_sent}    10s
+    element should be visible   ${Invitation_has_been_sent}    20
     element should be visible    ${resend_invitation}
 
 resend_all_invitation
@@ -930,7 +930,7 @@ resend_all_invitation
     sleep  1s
     click element   ${resend_all_invitation}
     sleep  1s
-    element should be visible   ${Invitations_has_been_sent}    10s
+    element should be visible   ${Invitations_has_been_sent}    20
     element should be visible    ${resend_invitation}
 
 cancel_invitation

@@ -141,9 +141,9 @@ Disable_External_Users_check_case_2
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
     ...         AND               Close    # close browser
-    ...         AND               Login_premium_user    # log in with premium admin
+    ...         AND               Login_site_admin    # log in with premium admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+    ...         AND               open_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
     # Expert user log in
     ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}    ${an_expert_user_password}
@@ -151,13 +151,13 @@ Disable_External_Users_check_case_2
     # user from another site log in
     ${driver2}  driver_set_up_and_logIn    ${other_site_user_1_username}   ${other_site_user_1_password}
     ${time_started_2}   get_start_time_of_the_last_call   ${driver2}
-    # VP: they should not be able to call this site workspace user via meeting link
-    check_call_can_reach_to_or_not   ${driver1}   ${driver2}   https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+an_expert_user1     0     # MHS link
-    # VP: this record should not appear in recent list for both participants
-    ${time_started_3}   record_should_not_appear_in_recent_list   ${driver1}
-    should be equal as strings    ${time_started_3}   ${time_started_1}
-    ${time_started_4}   record_should_not_appear_in_recent_list   ${driver2}
-    should be equal as strings    ${time_started_4}   ${time_started_2}
+#    # VP: they should not be able to call this site workspace user via meeting link
+#    check_call_can_reach_to_or_not   ${driver1}   ${driver2}   https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+an_expert_user1     0     # MHS link
+#    # VP: this record should not appear in recent list for both participants
+#    ${time_started_3}   record_should_not_appear_in_recent_list   ${driver1}
+#    should be equal as strings    ${time_started_3}   ${time_started_1}
+#    ${time_started_4}   record_should_not_appear_in_recent_list   ${driver2}
+#    should be equal as strings    ${time_started_4}   ${time_started_2}
     # VP: they should not be able to call this site workspace user via on-call group link
     check_call_can_reach_to_or_not   ${driver1}  ${driver2}   https://app-stage.helplightning.net.cn/help?enterprise_id=2799&group_id=5562&group_name=on-call+group+2   0    # this is (on-call group 2) On-Call Group Url
     # exit driver
@@ -167,7 +167,7 @@ Disable_External_Users_check_case_2
     # VP: they should not be able to direct Call this site workspace user any longer
     check_should_not_be_able_to_direct_call
     [Teardown]      run keywords     Close
-    ...             AND              exit_driver   ${driver1}
+    ...             AND              exit_one_driver    ${driver1}
 
 Disable_External_Users_check_case_3
     [Documentation]    Anonymous user  VP: he should be able to call this site workspace user via meeting link   VP: he should be able to call this site workspace via on-call group link

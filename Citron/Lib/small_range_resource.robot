@@ -29,7 +29,7 @@ user_login_citron_without_close_tutorial
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
     # 等待Torturial弹框出现弹框
-    wait until element is visible    ${button_of_popup}   10s
+    wait until element is visible    ${button_of_popup}     20
 
 user_login_citron_without_accept_disclaimer
     [Arguments]  ${username}
@@ -119,8 +119,8 @@ confirm_erase_my_account
 refresh_browser_tutorial
     Execute JavaScript    window.location.reload()
     sleep  5s
-    Wait Until Page Contains    ${log_in_success_tag}  10s
-    wait until element is visible   ${let_go_button}  10s
+    Wait Until Page Contains    ${log_in_success_tag}    20
+    wait until element is visible   ${let_go_button}    20
 
 click_next_until_last_page
     # click Let's ge button
@@ -139,7 +139,7 @@ last_page_click_get_started
     click_next_until_last_page
     # Last page	Clicks 'Get Started' button
     click element      ${get_started_button}
-    wait until page does not contain   ${log_in_success_tag}  10s
+    wait until page does not contain   ${log_in_success_tag}    20
 
 log_out_from_citron
     # log out
@@ -167,7 +167,7 @@ re_log_in_citron
 
 no_tutorial
     # there is no tutorial
-    wait until page does not contain      ${log_in_success_tag}  10s
+    wait until page does not contain      ${log_in_success_tag}    20
 
 re_log_in_citron_no_tutorial
     [Arguments]   ${username}
@@ -460,7 +460,7 @@ switch_workspace_check_recents_list
     ${text_1}   get text    ${recents_first_call}
     # switch to second workspace
     switch_to_second_workspace
-    wait until element is visible   ${recents_first_call}   10s
+    wait until element is visible   ${recents_first_call}     20
     # second workspace team user
     ${text_2}   get text   ${recents_first_call}
     should not be equal as strings   ${text_1}   ${text_2}
@@ -787,7 +787,7 @@ modify_user_name_avator
     # modify user name & Avatar
     # upload Avatar
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${upload_avatar_button}    10s
+    wait until element is visible    ${upload_avatar_button}      20
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
@@ -964,7 +964,7 @@ admin_add_on_call_group_keyword
 
 group_operate_end_tag
     # Wait until the second row shows up
-    wait until element is visible    ${first_data_show}    10s
+    wait until element is visible    ${first_data_show}     20
     wait until element is not visible   ${prompt_information}   20s
 
 click_create_group_button

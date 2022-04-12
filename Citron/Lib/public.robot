@@ -14,7 +14,10 @@ ${register_website}                 https://app-stage.helplightning.net.cn/regis
 ${register_account}                 xpath=//button[contains(.,'Create My Help Lightning Account')]      # Create My Help Lightning Account
 # log in
 ${citron_website}                   https://app-stage.helplightning.net.cn/                             # citron website
+${login_citron_success_1}           https://app-stage.helplightning.net.cn/admin/workspace/users
+${login_citron_success_2}           https://app-stage.helplightning.net.cn/admin/workspaces
 ${crunch_website}                   https://crunch-stage.helplightning.net.cn/                          # crunch website
+${login_crunch_success}             https://crunch-stage.helplightning.net.cn/users
 ${loginname_input}                  xpath=//input[@autocomplete="username"]                             # 用户名输入框
 ${next_button}                      xpath=//button[@type="submit"]                                      # NEXT按钮
 ${loginpsd_display}                 xpath=//input[@style="display: block;"]                             # 密码输入框出现
@@ -55,19 +58,18 @@ click_next_again
         ${count}   get element count   ${loginpsd_display}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If      '${count}'=='0'    sleep   2s
-        Exit For Loop If    '${i}'=='19'
+        Exit For Loop If    '${i}'=='29'
     END
 
 click_login_again
     Click Button    ${login_button}
     FOR   ${i}    IN RANGE   0    30
         ${url}=   Get Location
-#        Exit For Loop If    '${url}'=='${citron_website}'    or    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'    or   '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
         Exit For Loop If    '${url}'=='${citron_website}'
-        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'
-        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
+        Exit For Loop If    '${url}'=='${login_citron_success_1}'
+        Exit For Loop If    '${url}'=='${login_citron_success_2}'
         Run Keyword If      '${url}'!='${citron_website}'    sleep   2s
-        Exit For Loop If    '${i}'=='19'
+        Exit For Loop If    '${i}'=='29'
     END
 
 Login
@@ -85,7 +87,7 @@ Login
         ${count}   get element count   ${loginpsd_display}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If      '${count}'=='0'    sleep   2s
-        Run Keyword If      '${i}'=='19'    click_next_again
+        Run Keyword If      '${i}'=='29'    click_next_again
     END
     # 输入密码
     wait until element is visible   ${loginpsd_input}
@@ -95,12 +97,20 @@ Login
     Click Button    ${login_button}
     FOR   ${i}    IN RANGE   0    30
         ${url}=   Get Location
-#        Exit For Loop If    '${url}'=='${citron_website}'    or    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'    or   '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
         Exit For Loop If    '${url}'=='${citron_website}'
-        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspace/users'
-        Exit For Loop If    '${url}'=='https://app-stage.helplightning.net.cn/admin/workspaces'
+        Exit For Loop If    '${url}'=='${login_citron_success_1}'
+        Exit For Loop If    '${url}'=='${login_citron_success_2}'
         Run Keyword If      '${url}'!='${citron_website}'    sleep   2s
-        Run Keyword If      '${i}'=='19'    click_login_again
+        Run Keyword If      '${i}'=='29'    click_login_again
+    END
+
+click_login_crunch_again
+    Click Button    ${login_button}
+    FOR   ${i}    IN RANGE   0    30
+        ${url}=   Get Location
+        Exit For Loop If    '${url}'=='${login_crunch_success}'
+        Run Keyword If      '${url}'!='${login_crunch_success}'    sleep   2s
+        Exit For Loop If    '${i}'=='29'
     END
 
 Login_crunch
@@ -114,13 +124,26 @@ Login_crunch
     # 点击NEXT
     wait until element is visible     ${next_button}    10s
     Click Button    ${next_button}
+    FOR   ${i}    IN RANGE   0    30
+        ${count}    get element count    ${loginpsd_display}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If      '${count}'=='0'    sleep   2s
+        Run Keyword If      '${i}'=='29'    click_next_again
+    END
     # 输入密码
     wait until element is visible     ${loginpsd_input}    20s
     Input Password    ${loginpsd_input}    ${crunch_site_password}
     # 点击LOG IN
     wait until element is visible     ${login_button}    10s
     Click Button    ${login_button}
+    FOR   ${i}    IN RANGE   0    30
+        ${url}=   Get Location
+        Exit For Loop If    '${url}'=='${login_crunch_success}'
+        Run Keyword If      '${url}'!='${login_crunch_success}'    sleep   2s
+        Run Keyword If      '${i}'=='29'    click_login_crunch_again
+    END
     Sleep    2s
+    wait until element is visible    xpath=//h3[text()="Users"]     10s
 
 Open_register_personal_website
     # Open register personal website

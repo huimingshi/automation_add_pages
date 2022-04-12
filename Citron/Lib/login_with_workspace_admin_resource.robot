@@ -23,8 +23,8 @@ enter_workspace_users
     # click Users page menu
     click element   ${enter_users}
     # Wait until the first row shows up
-    wait until element is visible    ${button_add_user}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${button_add_user}    20
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_site_users
     # click site ADMINISTRATION page menu
@@ -33,8 +33,8 @@ enter_site_users
     # click Users page menu
     click element   ${enter_users}
     # Wait until the first row shows up
-    wait until element is visible    ${button_add_user}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${button_add_user}     20
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_workspace_groups
     # click workspace ADMINISTRATION page menu
@@ -43,8 +43,8 @@ enter_workspace_groups
     # click Users page menu
     click element   ${enter_groups}
     # Wait until the first row shows up
-    wait until element is visible    ${switch_to_groups_success}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${switch_to_groups_success}    20
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_workspace_analytics
     # click workspace ADMINISTRATION menu
@@ -54,7 +54,7 @@ enter_workspace_analytics
     click element   ${enter_analytics}
     sleep  2s
     # Wait until Dashboard appear
-    wait until element is visible    xpath=//b[contains(.,'Dashboard')]    10
+    wait until element is visible    xpath=//b[contains(.,'Dashboard')]    20
 
 enter_workspace_calls
     # click workspace ADMINISTRATION menu
@@ -180,7 +180,7 @@ click_deatils
 modify_basic_info
     # upload photo
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${upload_avatar_button}    10s
+    wait until element is visible    ${upload_avatar_button}    20
     Choose file    ${button_Upload}     ${modify_picture_path}
     sleep  0.5s
     wait until element is visible    ${button_Remove}
@@ -711,7 +711,7 @@ cancel_all_invitation
 enter_REPORT_VIEW_page
     # click Report View button
     click element  ${report_view_button}
-    wait until element is visible   ${first_data_show}   10
+    wait until element is visible   ${first_data_show}   20
 
 sort_invitations_by_name
     ${count}   get element count   ${get_number_of_rows}
@@ -1050,17 +1050,17 @@ if_del_button
 enter_deactivated_users_page
     # enter Deactivated Users page
     click element   ${deactivated_users_page}
-    wait until element is visible    ${first_data_show}   10
+    wait until element is visible    ${first_data_show}   20
 
 enter_invitations_page
     # Enter Invitations page
     click element   ${invitations_page}
-    wait until element is visible    ${first_data_show}   10
+    wait until element is visible    ${first_data_show}   20
 
 enter_active_users_page
     # enter Active Users page
     click element   ${active_users_page}
-    wait until element is visible    ${first_data_show}    10
+    wait until element is visible    ${first_data_show}    20
 
 search_deactivated_user
     [Arguments]  ${username}
@@ -1245,11 +1245,11 @@ create_standard_member_group
     sleep  0.5s
     # Choose File
     ${picture_path}   get_modify_picture_path    picture.jpg
-    wait until element is visible   ${choose_file}    10s
+    wait until element is visible   ${choose_file}    20
     Choose file    ${choose_file}     ${picture_path}
     sleep  0.5s
     # Choose Group Administrators
-    wait until element is visible   ${choose_group_admin}   10s
+    wait until element is visible   ${choose_group_admin}   20
     click element   ${choose_group_admin}
     sleep  1s
     input text   ${choose_group_admin}    ${group_admin_name}
@@ -1283,7 +1283,7 @@ add_group_admin_user_and_avator
     # Add Group Admin user & avator
     # Choose File
     ${picture_path}   get_modify_picture_path    picture.jpg
-    wait until element is visible    ${choose_file}    10s
+    wait until element is visible    ${choose_file}    20
     Choose file    ${choose_file}     ${picture_path}
     sleep  0.5s
     # Choose Group Administrators
@@ -1341,7 +1341,7 @@ modify_standard_members_group
     sleep  0.5s
     # modify File
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${choose_file}    10s
+    wait until element is visible    ${choose_file}    20
     Choose file    ${choose_file}     ${modify_picture_path}
     sleep  0.5s
     # modify Group Administrators
@@ -1413,11 +1413,11 @@ create_on_call_group_keyword
     sleep  0.5s
     # Choose File
     ${picture_path}   get_modify_picture_path    picture.jpg
-    wait until element is visible   ${choose_file}   10s
+    wait until element is visible   ${choose_file}   20
     Choose file    ${choose_file}     ${picture_path}
     sleep  0.5s
     # Choose Group Administrators
-    wait until element is visible   ${choose_group_admin}   10s
+    wait until element is visible   ${choose_group_admin}   20
     click element   ${choose_group_admin}
     sleep  1s
     input text   ${choose_group_admin}    ${group_admin_name}
@@ -1438,7 +1438,7 @@ click_create_group_button
     click element   xpath=//div[@class="modal-body"]//button[contains(.,'Create Group')]
     sleep  4s
     # Wait until the first row shows up
-    wait until element is visible    ${first_row_shows_up}    10s
+    wait until element is visible    ${first_row_shows_up}    20
     wait until element is not visible   ${prompt_information}   20s
 
 create_on_call_group
@@ -1470,7 +1470,7 @@ modify_on_call_group
     sleep  0.5s
     # modify File
     ${modify_picture_path}   get_modify_picture_path
-    wait until element is visible    ${choose_file}    10s
+    wait until element is visible    ${choose_file}    20
     Choose file    ${choose_file}     ${modify_picture_path}
     sleep  0.5s
     # modify Group Administrators
@@ -1535,7 +1535,7 @@ search_group_detail
     input text  ${input_search}  ${group_name}
     sleep  1s
     # Wait until the first row shows up
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${first_row_shows_up}   20
     sleep  5s
     # click DETAILS button
     click_deatils
@@ -1645,14 +1645,14 @@ enter_users_page
     click element   ${enter_users}
     # Wait until the first row shows up
     wait until element is visible    ${button_add_user}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${first_row_shows_up}    20
 
 enter_groups_page
     # enter Groups page
     click element   ${enter_groups}
     # Wait until the first row shows up
     wait until element is visible    ${switch_to_groups_success}
-    wait until element is visible    ${first_row_shows_up}    10
+    wait until element is visible    ${first_row_shows_up}    20
 
 search_special_group
     # search group：Group_only_for_test_groups_members
@@ -1844,7 +1844,7 @@ choose_last_365_days
     ${count}   get element count   xpath=//label[contains(.,'Occurred Within')]/following-sibling::select/option
     click element    xpath=//label[contains(.,'Occurred Within')]/following-sibling::select/option[${count}]
     # Wait until first line appear
-    wait until element is visible    ${ws_calls_first_data_show}      10
+    wait until element is visible    ${ws_calls_first_data_show}     20
 
 choose_last_2_weeks
     # choose Last 365 Days
@@ -1852,7 +1852,7 @@ choose_last_2_weeks
     sleep  1s
     click element    xpath=//label[contains(.,'Occurred Within')]/following-sibling::select/option[@value="last_2_weeks"]
     # Wait until first line appear
-    wait until element is visible    ${ws_calls_first_data_show}     10
+    wait until element is visible    ${ws_calls_first_data_show}     20
 
 calls_choose_one_group_then_clear
     # get calls numbers
@@ -2061,7 +2061,7 @@ search_invitation_by_email
     click element   ${input_search}
     sleep  0.5s
     input text   ${input_search}  ${email}
-    wait until element is visible    ${first_data_show}    10s
+    wait until element is visible    ${first_data_show}    20
 
 expand_workspaces_switch
     # Expand workspace

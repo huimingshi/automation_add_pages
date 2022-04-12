@@ -43,7 +43,7 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     if enter_send_invite == 'yes':
         public_check_element(driver, send_invite_in_calling, '进入send_invite页面失败')
     elif enter_send_invite != 'yes':
-        public_check_element(driver, contacts_list_in_calling, '进入contacts_list页面失败')
+        public_check_element(driver, contacts_list_in_calling, '进入contacts_list页面失败',if_click=None)
 
 def send_invite_in_calling_page(driver,if_send = 'not_send'):
     """

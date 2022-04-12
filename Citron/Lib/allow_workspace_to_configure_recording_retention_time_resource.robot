@@ -47,7 +47,7 @@ set_recordings_and_screen_captures_off
     # set Recordings and Screen Captures feature = OFF
     ${count}   get element count   ${RaSC_pre_xpath}//div[@class="react-toggle react-toggle--checked"]
     Run Keyword If   '${count}'=='1'    click element   ${RaSC_switch_button}
-    wait until element is visible      ${RaSC_off_status_text_xpath}      10s
+    wait until element is visible      ${RaSC_off_status_text_xpath}      20
     sleep   2s
 
 ui_check_test

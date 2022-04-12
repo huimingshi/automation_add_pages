@@ -89,7 +89,7 @@ normal_user_select_one_call_has_screen_capture
 
 click_delete_button
     # Click Delete button
-    wait until element is visible   ${click_on_ellipses}    10s
+    wait until element is visible   ${click_on_ellipses}    20
     click element   ${click_on_ellipses}
     sleep  1s
     click element    ${delete_screen_capture}
@@ -129,7 +129,7 @@ delete_record_in_crunch_is_correct
 
 delete_menu_is_not_visible
     # delete menu is not visible
-    wait until element is visible    ${click_on_ellipses}    10s
+    wait until element is visible    ${click_on_ellipses}   20
     click element   ${click_on_ellipses}
     sleep  1s
     element should not be visible    ${delete_screen_capture}
