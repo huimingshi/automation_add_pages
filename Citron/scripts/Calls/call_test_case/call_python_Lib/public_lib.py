@@ -6,6 +6,9 @@ import os
 import time
 import platform
 
+from selenium.webdriver.common.by import By
+
+
 def get_system_type():
     """
     # get current system type
@@ -35,7 +38,8 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
     """
     try:
         for i in range(5):
-            ele_list = driver.find_elements_by_xpath(xpath)
+            # ele_list = driver.find_elements_by_xpath(xpath)
+            ele_list = get_xpath_elements(driver, xpath)
             if if_show and if_click:
                 if len(ele_list) >= 1:
                     ele_list[0].click()
@@ -60,3 +64,23 @@ def kill_all_browser():
     os.system('taskkill /F /im chromedriver.exe')
     # 退出所有的浏览器
     os.system('taskkill /f /t /im chrome.exe')
+
+def get_xpath_element(driver,xpath):
+    """
+    通过xpath寻找元素，driver.find_element_by_xpath(xpath)
+    :param driver: 浏览器驱动
+    :param xpath: 元素的xpath
+    :return:
+    """
+    element = driver.find_element(By.XPATH, xpath)
+    return element
+
+def get_xpath_elements(driver,xpath):
+    """
+    通过xpath寻找元素，driver.find_element_by_xpath(xpath)
+    :param driver: 浏览器驱动
+    :param xpath: 元素的xpath
+    :return:
+    """
+    elements_list = driver.find_elements(By.XPATH, xpath)
+    return elements_list

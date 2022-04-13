@@ -1,12 +1,12 @@
 #----------------------------------------------------------------------------------------------------#
 import time
 import os,sys
-import platform
 from selenium import webdriver
-from public_lib import screen_shot_func,get_system_type,public_check_element,kill_all_browser
+from public_lib import *
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.select import Select
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -41,12 +41,16 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
     :return:
     """
     try:    # enter email
-        driver.find_element_by_xpath(username_input).click()
-        driver.find_element_by_xpath(username_input).send_keys(username)
-        username_value = driver.find_element_by_xpath(username_input).get_attribute('value')
+        # driver.find_element_by_xpath(username_input).click()
+        get_xpath_element(driver,username_input).click()
+        # driver.find_element_by_xpath(username_input).send_keys(username)
+        get_xpath_element(driver,username_input).send_keys(username)
+        # username_value = driver.find_element_by_xpath(username_input).get_attribute('value')
+        username_value = get_xpath_element(driver,username_input).get_attribute('value')
         if username_value == username:
             time.sleep(1)
-            driver.find_element_by_xpath(submit_button).click()
+            # driver.find_element_by_xpath(submit_button).click()
+            get_xpath_element(driver,submit_button).click()
     except Exception as e:
         print('登陆时输入email失败',e)
         screen_shot_func(driver, '登陆时输入email失败')
@@ -55,22 +59,29 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         print('登陆时输入email成功')
     try:    # enter password
         for i in range(3):
-            ele_list =  driver.find_elements_by_xpath('//input[@style="display: block;"]')
-            ele_list_psd = driver.find_elements_by_xpath(password_input)
+            # ele_list =  driver.find_elements_by_xpath('//input[@style="display: block;"]')
+            ele_list = get_xpath_elements(driver,'//input[@style="display: block;"]')
+            # ele_list_psd = driver.find_elements_by_xpath(password_input)
+            ele_list_psd = get_xpath_elements(driver,password_input)
             if len(ele_list) == 1 and len(ele_list_psd) == 1 :
                 ele_list_psd[0].send_keys(password)
-                driver.find_element_by_xpath(submit_button).click()
+                # driver.find_element_by_xpath(submit_button).click()
+                get_xpath_element(driver,submit_button).click()
                 break
             elif i == 2:
                 print('password输入框未出现')
                 print('再点击下NEXT按钮')
-                driver.find_element_by_xpath(submit_button).click()
+                # driver.find_element_by_xpath(submit_button).click()
+                get_xpath_element(driver,submit_button).click()
                 for j in range(3):
-                    ele_list = driver.find_elements_by_xpath('//input[@style="display: block;"]')
-                    ele_list_psd = driver.find_elements_by_xpath(password_input)
+                    # ele_list = driver.find_elements_by_xpath('//input[@style="display: block;"]')
+                    ele_list = get_xpath_elements(driver,'//input[@style="display: block;"]')
+                    # ele_list_psd = driver.find_elements_by_xpath(password_input)
+                    ele_list_psd = get_xpath_elements(driver,password_input)
                     if len(ele_list) == 1 and len(ele_list_psd) == 1:
                         ele_list_psd[0].send_keys(password)
-                        driver.find_element_by_xpath(submit_button).click()
+                        # driver.find_element_by_xpath(submit_button).click()
+                        get_xpath_element(driver,submit_button).click()
                         break
                     elif j == 2:
                         print('password输入框还是未出现')
@@ -105,16 +116,20 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                     screen_shot_func(driver, '再次登陆失败')
                     raise Exception
     if accept == 'accept':
-        count = driver.find_elements_by_xpath(accept_disclaimer)
+        # count = driver.find_elements_by_xpath(accept_disclaimer)
+        count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             try:
-                driver.find_element_by_xpath(accept_disclaimer).click()
+                # driver.find_element_by_xpath(accept_disclaimer).click()
+                get_xpath_element(driver,accept_disclaimer).click()
                 time.sleep(2)
                 driver.implicitly_wait(int(2))
-                count = driver.find_elements_by_xpath(accept_disclaimer)
+                # count = driver.find_elements_by_xpath(accept_disclaimer)
+                count = get_xpath_elements(driver,accept_disclaimer)
                 if len(count) == 1:  # close Disclaimer
                     try:
-                        driver.find_element_by_xpath(accept_disclaimer).click()
+                        # driver.find_element_by_xpath(accept_disclaimer).click()
+                        get_xpath_element(driver,accept_disclaimer).click()
                     except Exception as e:
                         print('登陆成功后再次接受免责声明失败', e)
                         screen_shot_func(driver, '登录成功后再次接受免责声明失败')
@@ -131,9 +146,11 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
     if close_bounced == 'close_bounced':
         try:  # close Tutorial
             if check_toturial == 'check_toturial':
-                ele_list = driver.find_elements_by_xpath('//h1[text()="Welcome to Help Lightning!"]')
+                # ele_list = driver.find_elements_by_xpath('//h1[text()="Welcome to Help Lightning!"]')
+                ele_list = get_xpath_elements(driver,'//h1[text()="Welcome to Help Lightning!"]')
                 assert len(ele_list) == 1
-            driver.find_element_by_xpath(close_tutorial_button).click()
+            # driver.find_element_by_xpath(close_tutorial_button).click()
+            get_xpath_element(driver,close_tutorial_button).click()
         except AssertionError:
             screen_shot_func(driver, '展示的不是Welcome to Help Lightning!')
             raise AssertionError
@@ -145,9 +162,11 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             print('登陆成功后关闭教程成功')
     if disturb == 'not_set_disturb':
         try:
-            ele_list = driver.find_elements_by_xpath(not_disturb)
+            # ele_list = driver.find_elements_by_xpath(not_disturb)
+            ele_list = get_xpath_elements(driver,not_disturb)
             if len(ele_list) == 0:
-                driver.find_element_by_xpath(make_available_button).click()
+                # driver.find_element_by_xpath(make_available_button).click()
+                get_xpath_element(driver,make_available_button).click()
         except Exception as e:
             print('取消免打扰模式失败',e)
             screen_shot_func(driver,'取消免打扰模式失败')
@@ -167,10 +186,8 @@ def driver_set_up_and_logIn(username,password,check_toturial = 'no_check_toturia
     :param check_toturial:是否检查导航页面的welcome信息，默认不检查no_check_toturial，检查check_toturial
     :return:
     """
-    driver = webdriver.Chrome(chrome_options=option)
-    driver.implicitly_wait(int(15))
+    driver = start_an_empty_window()
     driver.get(test_web)
-    driver.maximize_window()
     logIn_citron(driver, username, password, check_toturial, close_bounced, accept, disturb)
     return driver
 
@@ -181,14 +198,19 @@ def set_do_not_disturb(driver):
     :return:
     """
     try:
-        ele_list = driver.find_elements_by_xpath(not_disturb)
+        # ele_list = driver.find_elements_by_xpath(not_disturb)
+        ele_list = get_xpath_elements(driver,not_disturb)
         if len(ele_list) == 1:
-            driver.find_element_by_xpath(not_disturb).click()
-            textarea_ele = driver.find_element_by_xpath('//textarea[@placeholder="Status Message (optional)"]')
+            # driver.find_element_by_xpath(not_disturb).click()
+            get_xpath_element(driver,not_disturb).click()
+            # textarea_ele = driver.find_element_by_xpath('//textarea[@placeholder="Status Message (optional)"]')
+            textarea_ele = get_xpath_element(driver,'//textarea[@placeholder="Status Message (optional)"]')
             textarea_ele.click()
             textarea_ele.send_keys('Please Do not disturb')
-            driver.find_element_by_xpath('//button[@type="submit" and text()="Save"]').click()
-            ele_list = driver.find_elements_by_xpath(make_available_button)
+            # driver.find_element_by_xpath('//button[@type="submit" and text()="Save"]').click()
+            get_xpath_element(driver,'//button[@type="submit" and text()="Save"]').click()
+            # ele_list = driver.find_elements_by_xpath(make_available_button)
+            ele_list = get_xpath_elements(driver,make_available_button)
             assert len(ele_list) == 1
     except AssertionError:
         print('设置免打扰模式失败')
@@ -199,7 +221,8 @@ def set_do_not_disturb(driver):
         screen_shot_func(driver, '设置免打扰模式失败')
         raise Exception
     try:
-        textContent = driver.find_element_by_xpath('//div[@role="alert"]/div').get_attribute('textContent')
+        # textContent = driver.find_element_by_xpath('//div[@role="alert"]/div').get_attribute('textContent')
+        textContent = get_xpath_element(driver,'//div[@role="alert"]/div').get_attribute('textContent')
         print(textContent)
         assert textContent == 'Your status is currently set to Do Not Disturb.Make Available'
     except AssertionError:
@@ -218,10 +241,12 @@ def do_not_disturb_become_available(driver):
     :return:
     """
     try:
-        ele_list = driver.find_elements_by_xpath(make_available_button)
+        # ele_list = driver.find_elements_by_xpath(make_available_button)
+        ele_list = get_xpath_elements(driver,make_available_button)
         if len(ele_list) == 1:
             ele_list[0].click()
-            ele_list = driver.find_elements_by_xpath(not_disturb)
+            # ele_list = driver.find_elements_by_xpath(not_disturb)
+            ele_list = get_xpath_elements(driver,not_disturb)
             assert len(ele_list) == 1
     except AssertionError:
         screen_shot_func(driver,'make_available按钮依然存在')
@@ -263,12 +288,15 @@ def my_account_change_name_and_avator(driver,change_name,change_avator,picture_p
     # public_check_element(driver, '//div[@class="dropdown open btn-group btn-group-lg btn-group-link"]', '展开我的账号失败',if_click=None, if_show=1)
     public_check_element(driver, '//span[contains(.,"My Account")]','进入My_Account_Settings页面失败')
     # 判断是否需要更改name
-    name_attribute = driver.find_element_by_xpath(my_account_name).get_attribute('value')
+    # name_attribute = driver.find_element_by_xpath(my_account_name).get_attribute('value')
+    name_attribute = get_xpath_element(driver,my_account_name).get_attribute('value')
     if name_attribute != change_name:
         try:
-            driver.find_element_by_xpath(my_account_name).clear()
+            # driver.find_element_by_xpath(my_account_name).clear()
+            get_xpath_element(driver,my_account_name).clear()
             time.sleep(2)
-            driver.find_element_by_xpath(my_account_name).send_keys(change_name)
+            # driver.find_element_by_xpath(my_account_name).send_keys(change_name)
+            get_xpath_element(driver,my_account_name).send_keys(change_name)
         except Exception as e:
             print('更改name失败',e)
             screen_shot_func(driver, '更改name失败')
@@ -277,16 +305,20 @@ def my_account_change_name_and_avator(driver,change_name,change_avator,picture_p
             print('更改name成功')
     # 判断是否需要更改avator
     if change_avator == 'change':
-        driver.find_element_by_xpath('//input[@type="file"]').send_keys(picture_path)
+        # driver.find_element_by_xpath('//input[@type="file"]').send_keys(picture_path)
+        get_xpath_element(driver,'//input[@type="file"]').send_keys(picture_path)
     elif change_avator == 'delete':
         # 获取alert对话框的按钮，点击按钮，弹出alert对话框
-        driver.find_element_by_xpath('//button[contains(.,"Remove avatar")]').click()
+        # driver.find_element_by_xpath('//button[contains(.,"Remove avatar")]').click()
+        get_xpath_element(driver,'//button[contains(.,"Remove avatar")]').click()
         time.sleep(1)
-        driver.find_element_by_xpath('//button[@class="k-button k-primary ml-4" and text()="Ok"]').click()
+        # driver.find_element_by_xpath('//button[@class="k-button k-primary ml-4" and text()="Ok"]').click()
+        get_xpath_element(driver,'//button[@class="k-button k-primary ml-4" and text()="Ok"]').click()
         time.sleep(1)
     public_check_element(driver, '//button[@type="submit" and contains(.,"Update")]', '点击Update失败')
     for i in range(10):
-        element_list = driver.find_elements_by_xpath('//div[@class="k-notification-content"]')
+        # element_list = driver.find_elements_by_xpath('//div[@class="k-notification-content"]')
+        element_list = get_xpath_elements(driver,'//div[@class="k-notification-content"]')
         if len(element_list) == 0:
             break
         else:
@@ -302,7 +334,8 @@ def get_all_comments_in_call_end(driver,*args):
     :return:
     """
     try:
-        ele_list = driver.find_elements_by_xpath('//div[@class="comment-text row"]')
+        # ele_list = driver.find_elements_by_xpath('//div[@class="comment-text row"]')
+        ele_list = get_xpath_elements(driver,'//div[@class="comment-text row"]')
         for i in range(len(ele_list)):
             get_comment = ele_list[i].get_attribute("textContent")   # 获取comment
             assert get_comment == args[i]
@@ -330,7 +363,8 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     # 维持通话20s
     time.sleep(int(call_time))
     for i in range(5):
-        ele_list = driver.find_elements_by_xpath(count_of_call_user)
+        # ele_list = driver.find_elements_by_xpath(count_of_call_user)
+        ele_list = get_xpath_elements(driver,count_of_call_user)
         if len(ele_list) > 3:
             break
         elif 1 == 4:
@@ -343,8 +377,10 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     # User Leave call
     try:
         for i in range(5):
-            ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
-            ele_list_leave_call = driver.find_elements_by_xpath(leave_call_button)
+            # ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
+            ele_list = get_xpath_elements(driver,visibility_finishi_call)
+            # ele_list_leave_call = driver.find_elements_by_xpath(leave_call_button)
+            ele_list_leave_call = get_xpath_elements(driver,leave_call_button)
             if len(ele_list) == 1 and len(ele_list_leave_call) == 1:
                 ele_list_leave_call[0].click()
                 break
@@ -357,11 +393,14 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
         raise Exception
     if select_co_host == 'need_select':
         try:
-            driver.find_element_by_xpath(f'//strong[text()="{username}"]/../../../../..//div[@class="react-toggle-track"]').click()
+            # driver.find_element_by_xpath(f'//strong[text()="{username}"]/../../../../..//div[@class="react-toggle-track"]').click()
+            get_xpath_element(driver,f'//strong[text()="{username}"]/../../../../..//div[@class="react-toggle-track"]').click()
             time.sleep(2)
-            driver.find_element_by_xpath(leave_call_button).click()
+            # driver.find_element_by_xpath(leave_call_button).click()
+            get_xpath_element(driver,leave_call_button).click()
             time.sleep(1)
-            ele_list = driver.find_elements_by_xpath(leave_call_button)
+            # ele_list = driver.find_elements_by_xpath(leave_call_button)
+            ele_list = get_xpath_elements(driver,leave_call_button)
             assert len(ele_list) == 0
         except AssertionError:
             screen_shot_func(driver, '未选择另一个共同主持')
@@ -380,7 +419,8 @@ def exit_call(driver,call_time=20):
     # 维持通话20s
     time.sleep(int(call_time))
     for i in range(5):
-        ele_list = driver.find_elements_by_xpath(count_of_call_user)
+        # ele_list = driver.find_elements_by_xpath(count_of_call_user)
+        ele_list = get_xpath_elements(driver,count_of_call_user)
         if len(ele_list) > 3:
             break
         elif 1 == 4:
@@ -393,8 +433,10 @@ def exit_call(driver,call_time=20):
     # User exit call
     try:
         for i in range(5):
-            ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
-            ele_list_yes = driver.find_elements_by_xpath(exit_call_yes)
+            # ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
+            ele_list = get_xpath_elements(driver,visibility_finishi_call)
+            # ele_list_yes = driver.find_elements_by_xpath(exit_call_yes)
+            ele_list_yes = get_xpath_elements(driver,exit_call_yes)
             if len(ele_list_yes) == 1 and len(ele_list) == 1:
                 ele_list_yes[0].click()    # 可能会报错Message: stale element reference: element is not attached to the page document，参考：https://blog.csdn.net/zhangvalue/article/details/102921631
                 break
@@ -419,7 +461,8 @@ def end_call_for_all(driver,call_time=30):
     # 维持通话20s
     time.sleep(int(call_time))
     for i in range(5):
-        ele_list = driver.find_elements_by_xpath(count_of_call_user)
+        # ele_list = driver.find_elements_by_xpath(count_of_call_user)
+        ele_list = get_xpath_elements(driver,count_of_call_user)
         if len(ele_list) > 3:
             break
         elif 1 == 4:
@@ -432,8 +475,10 @@ def end_call_for_all(driver,call_time=30):
     # 点击End_Call_for_All
     try:
         for i in range(5):
-            ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
-            ele_list_end_call = driver.find_elements_by_xpath(end_call_for_all_button)
+            # ele_list = driver.find_elements_by_xpath(visibility_finishi_call)
+            ele_list = get_xpath_elements(driver,visibility_finishi_call)
+            # ele_list_end_call = driver.find_elements_by_xpath(end_call_for_all_button)
+            ele_list_end_call = get_xpath_elements(driver,end_call_for_all_button)
             if len(ele_list) == 1 and len(ele_list_end_call) == 1:
                 ele_list_end_call[0].click()
                 break
@@ -461,7 +506,8 @@ def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_o
     if currently_on == 'currently_on':
         public_check_element(driver, page_tag_xpath, '当前页面与预期页面不一致', if_click=None, if_show=1)
     elif currently_on == 'not_currently_on':
-        ele_list = driver.find_elements_by_xpath(page_tag_xpath)
+        # ele_list = driver.find_elements_by_xpath(page_tag_xpath)
+        ele_list = get_xpath_elements(driver,page_tag_xpath)
         print(ele_list)
         try:
             assert len(ele_list) == 0
@@ -500,7 +546,6 @@ def del_tags_in_call_details(driver):
     # 删除第一个tag
     public_check_element(driver, '//ul[@role="listbox"]/li[1]/span[@aria-label="delete"]', '删除第一个tag失败')
     public_check_element(driver, '//div[@class="CallInfo container-box"]//button[@class="k-button k-primary pull-right"]', '点击保存按钮失败')
-
     close_details_page(driver)
 
 def add_tags_and_comment(driver,which_tag = 1,which_comment = 'good_experience'):
@@ -512,15 +557,19 @@ def add_tags_and_comment(driver,which_tag = 1,which_comment = 'good_experience')
     """
     tag_xpath = f'//div[@class="k-list-scroller"]//li[{int(which_tag)}]'
     try:
-        ele_list = driver.find_elements_by_xpath(tag_xpath)
+        # ele_list = driver.find_elements_by_xpath(tag_xpath)
+        ele_list = get_xpath_elements(driver,tag_xpath)
         if len(ele_list) == 1:
-            ele_tag = driver.find_element_by_xpath(tag_xpath)
+            # ele_tag = driver.find_element_by_xpath(tag_xpath)
+            ele_tag = get_xpath_element(driver,tag_xpath)
             first_tag_text = ele_tag.get_attribute("textContent")
             print(first_tag_text)
             ele_tag.click()
         else:
-            driver.find_element_by_xpath(add_tag_input).click()
-            ele_tag = driver.find_element_by_xpath(tag_xpath)
+            # driver.find_element_by_xpath(add_tag_input).click()
+            get_xpath_element(driver,add_tag_input).click()
+            # ele_tag = driver.find_element_by_xpath(tag_xpath)
+            ele_tag = get_xpath_element(driver,tag_xpath)
             first_tag_text = ele_tag.get_attribute("textContent")
             print(first_tag_text)
             ele_tag.click()
@@ -529,9 +578,12 @@ def add_tags_and_comment(driver,which_tag = 1,which_comment = 'good_experience')
         screen_shot_func(driver, '添加tag失败')
         raise Exception
     try:
-        driver.find_element_by_xpath(add_comment).click()
-        driver.find_element_by_xpath(add_comment).send_keys(which_comment)
-        driver.find_element_by_xpath('//div[@class="call-info-form-group form-group"]//button[contains(.,"Save")]').click()
+        # driver.find_element_by_xpath(add_comment).click()
+        get_xpath_element(driver,add_comment).click()
+        # driver.find_element_by_xpath(add_comment).send_keys(which_comment)
+        get_xpath_element(driver,add_comment).send_keys(which_comment)
+        # driver.find_element_by_xpath('//div[@class="call-info-form-group form-group"]//button[contains(.,"Save")]').click()
+        get_xpath_element(driver,'//div[@class="call-info-form-group form-group"]//button[contains(.,"Save")]').click()
     except Exception as e:
         print('添加comment失败',e)
         screen_shot_func(driver, '添加comment失败')
@@ -570,7 +622,8 @@ def user_accept_disclaimer(driver):
     :return:
     """
     # 关闭Disclaimer
-    count = driver.find_elements_by_xpath(accept_disclaimer)
+    # count = driver.find_elements_by_xpath(accept_disclaimer)
+    count = get_xpath_elements(driver,accept_disclaimer)
     if len(count) == 1:  # close Disclaimer
         public_check_element(driver, accept_disclaimer, '接受免责声明失败')
 
@@ -582,19 +635,22 @@ def check_tag_and_com_switch_success(driver,has_tag = 0):
     :return:
     """
     for i in range(3):
-        count = driver.find_elements_by_xpath(five_star_high_praise)
+        # count = driver.find_elements_by_xpath(five_star_high_praise)
+        count = get_xpath_elements(driver,five_star_high_praise)
         if len(count) == 1:
             break
         time.sleep(2)
     try:
-        tag_count = driver.find_elements_by_xpath('//span[@class="k-widget k-multiselect k-header"]')
+        # tag_count = driver.find_elements_by_xpath('//span[@class="k-widget k-multiselect k-header"]')
+        tag_count = get_xpath_elements(driver,'//span[@class="k-widget k-multiselect k-header"]')
         print(tag_count)
         assert len(tag_count) == int(has_tag)
     except AssertionError:
         print(f'tag输入框的个数应该为{int(has_tag)}')
         screen_shot_func(driver, f'tag输入框的个数应该为{int(has_tag)}')
         raise AssertionError
-    com_count = driver.find_elements_by_xpath(add_comment)
+    # com_count = driver.find_elements_by_xpath(add_comment)
+    com_count = get_xpath_elements(driver,add_comment)
     print(len(com_count))
     try:
         assert len(com_count) == int(has_tag)
@@ -612,11 +668,13 @@ def check_survey_switch_success(driver,status = '0',click_button = 'no_click'):
     :return:
     """
     for i in range(3):
-        count = driver.find_elements_by_xpath(five_star_high_praise)
+        # count = driver.find_elements_by_xpath(five_star_high_praise)
+        count = get_xpath_elements(driver,five_star_high_praise)
         if len(count) == 1:
             break
         time.sleep(2)
-    count = driver.find_elements_by_xpath(take_survey_after_call)
+    # count = driver.find_elements_by_xpath(take_survey_after_call)
+    count = get_xpath_elements(driver,take_survey_after_call)
     if status == '0':
         try:
             assert len(count) == 0
@@ -628,7 +686,8 @@ def check_survey_switch_success(driver,status = '0',click_button = 'no_click'):
         try:
             assert len(count) == 1
             if click_button == 'click':
-                driver.find_element_by_xpath(take_survey_after_call).click()
+                # driver.find_element_by_xpath(take_survey_after_call).click()
+                get_xpath_element(driver,take_survey_after_call).click()
                 time.sleep(6)       # 等待Survey页面加载出来
         except AssertionError:
             print('该出现take survey按钮的')
@@ -647,7 +706,8 @@ def close_call_ending_page(driver):
     """
     switch_to_last_window(driver)  # 切换到最新页面
     try:
-        ele_list = driver.find_elements_by_xpath('//div[@class="EndCallPageContent"]//span[@role="presentation"]')
+        # ele_list = driver.find_elements_by_xpath('//div[@class="EndCallPageContent"]//span[@role="presentation"]')
+        ele_list = get_xpath_elements(driver,'//div[@class="EndCallPageContent"]//span[@role="presentation"]')
         if len(ele_list) == 1:
             print('可以关闭通话结束页面')
             ele_list[0].click()
@@ -665,7 +725,8 @@ def check_tutorial_screen_shows_up(driver):
     :return:
     """
     try:
-        count = driver.find_elements_by_xpath(close_tutorial_button)
+        # count = driver.find_elements_by_xpath(close_tutorial_button)
+        count = get_xpath_elements(driver,close_tutorial_button)
         assert len(count) == 1
     except AssertionError:
         print('该出现tutorial的')
@@ -680,7 +741,8 @@ def paste_on_a_non_windows_system(driver,paste_xpath):
     :return:
     """
     try:
-        ele = driver.find_element_by_xpath(paste_xpath)
+        # ele = driver.find_element_by_xpath(paste_xpath)
+        ele = get_xpath_element(driver,paste_xpath)
         actions = ActionChains(driver)
         actions.move_to_element(ele)
         actions.click(ele)  # select the element where to paste text
@@ -705,15 +767,19 @@ def open_send_meeting_dialog(driver,which_meeting):
     try:
         if which_meeting == 'MHS':
             # 去勾选
-            text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
+            # text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
+            text_value = get_xpath_element(driver,checkbox_xpath).get_attribute('value')
             if text_value == 'true':
-                driver.find_element_by_xpath(checkbox_xpath).click()
+                # driver.find_element_by_xpath(checkbox_xpath).click()
+                get_xpath_element(driver,checkbox_xpath).click()
                 time.sleep(2)
         elif which_meeting == 'OTU':
             # 勾选
-            text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
+            # text_value = driver.find_element_by_xpath(checkbox_xpath).get_attribute('value')
+            text_value = get_xpath_element(driver,checkbox_xpath).get_attribute('value')
             if text_value == 'false':
-                driver.find_element_by_xpath(checkbox_xpath).click()
+                # driver.find_element_by_xpath(checkbox_xpath).click()
+                get_xpath_element(driver,checkbox_xpath).click()
                 time.sleep(2)
     except Exception as e:
         print(f'选择{which_meeting}_link失败', e)
@@ -731,7 +797,8 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
     open_send_meeting_dialog(driver,which_meeting)
     # 复制
     for i in range(5):
-        text = driver.find_element_by_xpath('//div[@class="invite-link"]').get_attribute("textContent")
+        # text = driver.find_element_by_xpath('//div[@class="invite-link"]').get_attribute("textContent")
+        text = get_xpath_element(driver,'//div[@class="invite-link"]').get_attribute("textContent")
         print(text)
         if text.startswith(r'https://'):
             break
@@ -739,7 +806,8 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
             public_check_element(driver, '//form[@class="InviteToHelpSpaceView form-horizontal"]//button[text()="Cancel"]', '点击取消按钮失败')
             open_send_meeting_dialog(driver, which_meeting)
             for i in range(5):
-                text = driver.find_element_by_xpath('//div[@class="invite-link"]').get_attribute("textContent")
+                # text = driver.find_element_by_xpath('//div[@class="invite-link"]').get_attribute("textContent")
+                text = get_xpath_element(driver,'//div[@class="invite-link"]').get_attribute("textContent")
                 print(text)
                 if text.startswith(r'https://'):
                     break
@@ -755,7 +823,8 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
     try:
         if sys_type == 'Windows':
             try:
-                ele = driver.find_element_by_xpath(my_help_space_message)
+                # ele = driver.find_element_by_xpath(my_help_space_message)
+                ele = get_xpath_element(driver,my_help_space_message)
                 ele.click()
                 ele.send_keys(Keys.CONTROL, 'v')
             except Exception as e:
@@ -771,9 +840,11 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
         screen_shot_func(driver, '粘贴失败')
         raise Exception
     # 验证复制后粘贴结果正确
-    invite_url = driver.find_element_by_xpath(get_invite_link).get_attribute("textContent")  # Get the invitation link
+    # invite_url = driver.find_element_by_xpath(get_invite_link).get_attribute("textContent")  # Get the invitation link
+    invite_url = get_xpath_element(driver,get_invite_link).get_attribute("textContent")  # Get the invitation link
     print('复制的link为:',invite_url)
-    attribute = driver.find_element_by_xpath(my_help_space_message).get_attribute('value')
+    # attribute = driver.find_element_by_xpath(my_help_space_message).get_attribute('value')
+    attribute = get_xpath_element(driver,my_help_space_message).get_attribute('value')
     print('粘贴的link为:',attribute)
     try:
         assert attribute == invite_url     # 验证复制后粘贴结果正确
@@ -785,11 +856,13 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
     if if_send == 'send':
         try:
             # 输入email
-            email_ele = driver.find_element_by_xpath(send_link_email_input)
+            # email_ele = driver.find_element_by_xpath(send_link_email_input)
+            email_ele = get_xpath_element(driver,send_link_email_input)
             email_ele.click()
             email_ele.send_keys('Huiming.shi.helplightning+123456789@outlook.com')
             # 点击Send Invite按钮
-            driver.find_element_by_xpath(send_link_send_invite).click()
+            # driver.find_element_by_xpath(send_link_send_invite).click()
+            get_xpath_element(driver,send_link_send_invite).click()
         except Exception as e:
             print('点击Send Invite按钮失败',e)
             screen_shot_func(driver, '点击Send_Invite按钮失败')
@@ -807,19 +880,23 @@ def get_start_time_of_the_last_call(driver):
     driver.switch_to.window(driver.window_handles[0])  # 切换到第一个页面
     time.sleep(2)
     try:
-        driver.find_element_by_xpath(contacts_page).click()      # 进入Contacts页面
+        # driver.find_element_by_xpath(contacts_page).click()      # 进入Contacts页面
+        get_xpath_element(driver,contacts_page).click()  # 进入Contacts页面
         time.sleep(2)
-        driver.find_element_by_xpath(recents_page).click()      # 进入Recents页面
+        # driver.find_element_by_xpath(recents_page).click()      # 进入Recents页面
+        get_xpath_element(driver,recents_page).click()  # 进入Recents页面
         time.sleep(5)
     except Exception as e:
         print('切换页面失败',e)
         screen_shot_func(driver, '切换页面失败')
         raise Exception
     time_started = 'there is no call record'
-    count = driver.find_elements_by_xpath(first_time_call_started)
+    # count = driver.find_elements_by_xpath(first_time_call_started)
+    count = get_xpath_elements(driver,first_time_call_started)
     if len(count) != 0:
         try:
-            time_started = driver.find_element_by_xpath(first_time_call_started).get_attribute("textContent")
+            # time_started = driver.find_element_by_xpath(first_time_call_started).get_attribute("textContent")
+            time_started = get_xpath_element(driver,first_time_call_started).get_attribute("textContent")
         except Exception as e:
             print('获取最近一次通话开始时间失败',e)
             screen_shot_func(driver, '获取最近一次通话开始时间失败')
@@ -836,13 +913,17 @@ def get_recents_page_records_occurred_time(driver,rows = '2'):
     occurred_time_list = []
     try:
         for i in range(int(rows)):
-            ele_list = driver.find_elements_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]')
+            # ele_list = driver.find_elements_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]')
+            ele_list = get_xpath_elements(driver,f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]')
             if len(ele_list) >= 1:
-                occurred_time = driver.find_element_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
+                # occurred_time = driver.find_element_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
+                occurred_time = get_xpath_element(driver,f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
                 occurred_time_list.append(occurred_time)
             else:
-                driver.find_element_by_xpath('//button[text()="Refresh"]').click()
-                occurred_time = driver.find_element_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
+                # driver.find_element_by_xpath('//button[text()="Refresh"]').click()
+                get_xpath_element(driver,'//button[text()="Refresh"]').click()
+                # occurred_time = driver.find_element_by_xpath(f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
+                occurred_time = get_xpath_element(driver,f'//div[@row-index="{i}"]/div[@col-id="timeCallStarted"]').get_attribute("textContent")
                 occurred_time_list.append(occurred_time)
     except Exception as e:
         screen_shot_func(driver,f'获取Recents页面前{int(rows)}行数据的Occurred_time失败')
@@ -919,13 +1000,15 @@ def different_page_search_single_users(driver,which_page,search_input_xpath,data
     :return:
     """
     try:
-        ele = driver.find_element_by_xpath(search_input_xpath)
+        # ele = driver.find_element_by_xpath(search_input_xpath)
+        ele = get_xpath_elements(driver,search_input_xpath)
         ele.clear()
         time.sleep(1)
         ele.click()
         ele.send_keys(search_user)
         for i in range(2):
-            element_list = driver.find_elements_by_xpath(data_count_xpath)
+            # element_list = driver.find_elements_by_xpath(data_count_xpath)
+            element_list = get_xpath_elements(driver,data_count_xpath)
             if len(element_list) == 1:
                 break
             else:
@@ -947,7 +1030,8 @@ def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
     attr_xpath = data_count_xpath + '/div[@col-id="name"]'
     # 等待数据出现
     public_check_element(driver, attr_xpath, '数据未出现', if_click = None)
-    class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
+    # class_attr = driver.find_element_by_xpath(attr_xpath).get_attribute('class')
+    class_attr = get_xpath_element(driver,attr_xpath).get_attribute('class')
     print(class_attr)
     if unreachable == 'unreachable':
         try:
@@ -970,7 +1054,8 @@ def judge_reachable_in_recents(driver,username):
     :return:
     """
     try:
-        class_attr = driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{username}")]/../../../..').get_attribute('class')
+        # class_attr = driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{username}")]/../../../..').get_attribute('class')
+        class_attr = get_xpath_element(driver,f'//div[@class="cardName" and contains(.,"{username}")]/../../../..').get_attribute('class')
         print(class_attr)
         assert 'unreachable' not in class_attr
     except AssertionError:
@@ -987,7 +1072,8 @@ def logout_citron(driver):
     public_check_element(driver, current_account, '点击我的账号失败')
     public_check_element(driver, log_out_button, '点击退出按钮失败')
     try:
-        element_list = driver.find_elements_by_xpath(username_input)
+        # element_list = driver.find_elements_by_xpath(username_input)
+        element_list = get_xpath_elements(driver,username_input)
         assert len(element_list) == 1
     except AssertionError:
         screen_shot_func(driver, '退出登录后不是登录页面')
@@ -995,23 +1081,30 @@ def logout_citron(driver):
 
 def re_login_citron(driver,username,password='*IK<8ik,8ik,'):
     try:  # enter email
-        driver.find_element_by_xpath(username_input).click()
-        driver.find_element_by_xpath(username_input).send_keys(username)
-        driver.find_element_by_xpath(submit_button).click()
+        # driver.find_element_by_xpath(username_input).click()
+        # driver.find_element_by_xpath(username_input).send_keys(username)
+        get_xpath_element(driver,username_input).click()
+        get_xpath_element(driver,username_input).send_keys(username)
+        # driver.find_element_by_xpath(submit_button).click()
+        get_xpath_element(driver,submit_button).click()
     except Exception as e:
         print('登陆时输入email失败', e)
         screen_shot_func(driver, '登陆时输入email失败')
         raise Exception
     try:  # enter password
-        driver.find_element_by_xpath(password_input).click()
-        driver.find_element_by_xpath(password_input).send_keys(password)
-        driver.find_element_by_xpath(submit_button).click()
+        # driver.find_element_by_xpath(password_input).click()
+        get_xpath_element(driver,password_input).click()
+        # driver.find_element_by_xpath(password_input).send_keys(password)
+        get_xpath_element(driver,password_input).send_keys(password)
+        # driver.find_element_by_xpath(submit_button).click()
+        get_xpath_element(driver,submit_button).click()
     except Exception as e:
         print('登陆时输入password失败', e)
         screen_shot_func(driver, '登陆时输入password失败')
         raise Exception
     try: # 获取登陆失败的提示信息
-        ele_list = driver.find_elements_by_xpath('//span[text()="Authentication Failed"]')
+        # ele_list = driver.find_elements_by_xpath('//span[text()="Authentication Failed"]')
+        ele_list = get_xpath_elements(driver,'//span[text()="Authentication Failed"]')
         assert len(ele_list) == 1
     except AssertionError:
         print('没出现登陆失败的提示信息Authentication Failed')
@@ -1033,10 +1126,12 @@ def switch_to_settings_page(driver,whitch_setting = 'Workspace Settings',which_t
     time.sleep(2)
     try:
         if whitch_setting == 'Workspace Settings':
-            ele_list = driver.find_elements_by_xpath('//h1[text()="Workspace Settings"]')
+            # ele_list = driver.find_elements_by_xpath('//h1[text()="Workspace Settings"]')
+            ele_list = get_xpath_elements(driver,'//h1[text()="Workspace Settings"]')
             assert len(ele_list) == 1
         elif whitch_setting == 'Settings':
-            ele_list = driver.find_elements_by_xpath('//h1[text()="Debug Tools"]')
+            # ele_list = driver.find_elements_by_xpath('//h1[text()="Debug Tools"]')
+            ele_list = get_xpath_elements(driver,'//h1[text()="Debug Tools"]')
             assert len(ele_list) == 1
     except AssertionError:
         screen_shot_func(driver,f'未进入{whitch_setting}页面')
@@ -1055,22 +1150,27 @@ def switch_to_diffrent_page(driver,switch_page,switch_success_tag,data_show,swit
     """
     switch_to_last_window(driver)  # 切换到最新页面
     if switch_tree == 'switch_tree':
-        driver.find_element_by_xpath(f'//div[@role="tree"]/div[{int(which_tree)}]').click()
+        # driver.find_element_by_xpath(f'//div[@role="tree"]/div[{int(which_tree)}]').click()
+        get_xpath_element(driver,f'//div[@role="tree"]/div[{int(which_tree)}]').click()
         time.sleep(1)
     try:
-        driver.find_element_by_xpath(f'//span[contains(.,"{switch_page}")]').click()
+        # driver.find_element_by_xpath(f'//span[contains(.,"{switch_page}")]').click()
+        get_xpath_element(driver,f'//span[contains(.,"{switch_page}")]').click()
         time.sleep(1)
         for i in range(5):
-            element_list = driver.find_elements_by_xpath(switch_success_tag)
+            # element_list = driver.find_elements_by_xpath(switch_success_tag)
+            element_list = get_xpath_elements(driver,switch_success_tag)
             if len(element_list) == 1:
                 time.sleep(2)
-                element_list_data = driver.find_elements_by_xpath(data_show)
+                # element_list_data = driver.find_elements_by_xpath(data_show)
+                element_list_data = get_xpath_elements(driver,data_show)
                 if len(element_list_data) > 0:
                     break
                 elif i == 4:
                     print(f'切换到{switch_page}页面后数据未加载出')
                     if switch_page == 'Recents':
-                        driver.find_element_by_xpath('//button[text()="Refresh"]').click()
+                        # driver.find_element_by_xpath('//button[text()="Refresh"]').click()
+                        get_xpath_element(driver,'//button[text()="Refresh"]').click()
                         public_check_element(driver, data_show, f'刷新{switch_page}页面后数据仍然未加载出', if_click=0, if_show=1)
                 else:
                     time.sleep(1)
@@ -1197,14 +1297,16 @@ def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',sen
     :return:
     """
     try:
-        driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
+        # driver.find_element_by_xpath(f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
+        get_xpath_element(driver,f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]').click()
     except Exception as e:
         print('点击call按钮失败', e)
         screen_shot_func(driver,'点击call按钮失败')
         raise Exception
     if can_connect == 'can_not_connect':
         for i in range(2):
-            ele_list = driver.find_elements_by_xpath(send_invite_button)
+            # ele_list = driver.find_elements_by_xpath(send_invite_button)
+            ele_list = get_xpath_elements(driver,send_invite_button)
             if len(ele_list) == 1:
                 break
             else:
@@ -1217,7 +1319,8 @@ def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',sen
                 raise AssertionError('应该不可以启动电话的，但现在没出现Send Invite按钮')
     elif can_connect == 'can_connect':
         try:
-            ele_list = driver.find_elements_by_xpath(end_call_before_connecting)
+            # ele_list = driver.find_elements_by_xpath(end_call_before_connecting)
+            ele_list = get_xpath_elements(driver,end_call_before_connecting)
             assert len(ele_list) == 1
         except AssertionError:
             screen_shot_func(driver, '应该可以打通但没打通')
@@ -1231,7 +1334,8 @@ def anonymous_user_call_can_not_call_again(driver):
     :param driver:
     :return:
     """
-    ele_list = driver.find_elements_by_xpath('//div[@title="Anonymous User"]/../../../..//button[@class="k-button callButton"]')
+    # ele_list = driver.find_elements_by_xpath('//div[@title="Anonymous User"]/../../../..//button[@class="k-button callButton"]')
+    ele_list = get_xpath_elements(driver,'//div[@title="Anonymous User"]/../../../..//button[@class="k-button callButton"]')
     try:
         assert len(ele_list) == 0
     except AssertionError:
@@ -1250,7 +1354,8 @@ def first_call_record_tag_and_comment(driver,expect_tag,*args):
     print(expect_tag)
     try:
         for i in range(3):
-            get_tag = driver.find_element_by_xpath('//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="tags"]').get_attribute('textContent')
+            # get_tag = driver.find_element_by_xpath('//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="tags"]').get_attribute('textContent')
+            get_tag = get_xpath_element(driver,'//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="tags"]').get_attribute('textContent')
             print(get_tag)
             if get_tag == expect_tag:
                 break
@@ -1269,7 +1374,8 @@ def first_call_record_tag_and_comment(driver,expect_tag,*args):
     # 点击首行数据的Details按钮
     click_first_line_details(driver)
     # 获取首行call记录的comment列表
-    comment_ele_list = driver.find_elements_by_xpath('//div[@class="comment-text row"]')
+    # comment_ele_list = driver.find_elements_by_xpath('//div[@class="comment-text row"]')
+    comment_ele_list = get_xpath_elements(driver,'//div[@class="comment-text row"]')
     i = 0
     for ele in comment_ele_list:
         comment_text = ele.get_attribute('textContent')
@@ -1291,8 +1397,10 @@ def get_all_tag_after_call(driver):
     """
     tag_list = []
     try:
-        driver.find_element_by_xpath(add_tag_input).click()    # 点击Add tags
-        ele_list = driver.find_elements_by_xpath(f'//div[@class="k-list-scroller"]//li')
+        # driver.find_element_by_xpath(add_tag_input).click()    # 点击Add tags
+        get_xpath_element(driver,add_tag_input).click()  # 点击Add tags
+        # ele_list = driver.find_elements_by_xpath(f'//div[@class="k-list-scroller"]//li')
+        ele_list = get_xpath_elements(driver,f'//div[@class="k-list-scroller"]//li')
         for ele in ele_list:
             get_tag = ele.get_attribute("textContent")
             print(get_tag)
@@ -1321,7 +1429,8 @@ def get_css_value(driver,witch_xpath,which_CSS):
     :return:
     """
     try:
-        ele = driver.find_element_by_xpath(witch_xpath)
+        # ele = driver.find_element_by_xpath(witch_xpath)
+        ele = get_xpath_element(driver,witch_xpath)
         css_value = ele.value_of_css_property(which_CSS)
         print(css_value)
         return css_value
@@ -1338,7 +1447,8 @@ def check_contacts_list(driver,*args):
     :return:
     """
     try:
-        ele_list = driver.find_elements_by_xpath('//div[@class="ag-center-cols-container"]/div//div[@class="cardName"]')
+        # ele_list = driver.find_elements_by_xpath('//div[@class="ag-center-cols-container"]/div//div[@class="cardName"]')
+        ele_list = get_xpath_elements(driver,'//div[@class="ag-center-cols-container"]/div//div[@class="cardName"]')
         print(ele_list)
         if len(args) != 0:
             for i in range(len(ele_list)):
@@ -1363,7 +1473,8 @@ def reset_disclaimer(driver):
     public_check_element(driver, "//button[contains(.,'Reset All Accepted Disclaimers')]", '点击重置Disclaimer按钮失败')
     public_check_element(driver, '//div[@role="dialog"]//button[text()="OK"]', '重置Disclaimer时点击OK按钮失败')
     try:
-        ele_list = driver.find_elements_by_xpath("//button[text()='Reset All Accepted Disclaimers']")
+        # ele_list = driver.find_elements_by_xpath("//button[text()='Reset All Accepted Disclaimers']")
+        ele_list = get_xpath_elements(driver,"//button[text()='Reset All Accepted Disclaimers']")
         assert len(ele_list) == 1
     except AssertionError:
         screen_shot_func(driver, 'Reset_All_Accepted_Disclaimers未生效')
@@ -1386,16 +1497,6 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     time.sleep(5)
     if close_tutorial == 'close_tutorial':
         public_check_element(driver, close_tutorial_button, '刷新页面后关闭教程失败')
-        # ele_list = driver.find_elements_by_xpath(close_tutorial_button)
-        # if len(ele_list) == 1:
-        #     try:  # close Tutorial
-        #         ele_list[0].click()
-        #     except Exception as e:
-        #         print('关闭教程失败', e)
-        #         screen_shot_func(driver, '关闭教程失败')
-        #         raise Exception
-        #     else:
-        #         print('关闭教程成功')
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
     """
@@ -1405,7 +1506,8 @@ def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
     :return:
     """
     try:
-        ele_list = driver.find_elements_by_xpath("//button[contains(.,'ACCEPT')]")
+        # ele_list = driver.find_elements_by_xpath("//button[contains(.,'ACCEPT')]")
+        ele_list = get_xpath_elements(driver,"//button[contains(.,'ACCEPT')]")
         if appear == 'appear':
             assert len(ele_list) == 1
         elif appear == 'not_appear':
@@ -1435,7 +1537,6 @@ def open_debug_tools_in_settings(driver):
     ele_list = driver.find_elements_by_xpath(debug_tools_close_xpath)
     if len(ele_list) == 1:
         public_check_element(driver, debug_tools_close_xpath, '打开Debug_Tools配置失败')
-        # driver.find_element_by_xpath(debug_tools_close_xpath).click()
         time.sleep(1)
     else:
         print('Debug Tools配置已经打开了')
@@ -1460,13 +1561,16 @@ def verify_username_in_recents_page(driver,*args):
     count = len(args)
     try:
         for i in range(count):
-            ele_list = driver.find_elements_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]')
+            # ele_list = driver.find_elements_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]')
+            ele_list = get_xpath_elements(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]')
             if len(ele_list) == 1:
-                name = driver.find_element_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
+                # name = driver.find_element_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
+                name = get_xpath_element(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
                 assert name == args[i]
             else:
                 driver.find_element_by_xpath('//button[text()="Refresh"]').click()
-                name = driver.find_element_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
+                # name = driver.find_element_by_xpath(f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
+                name = get_xpath_element(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]').get_attribute("textContent")
                 assert name == args[i]
     except AssertionError:
         print('recents页面预期name和实际不一致')
@@ -1516,7 +1620,8 @@ def get_ele_text(driver,ele_xpath):
     :return:
     """
     try:
-        get_text = driver.find_element_by_xpath(ele_xpath).get_attribute('textContent')
+        # get_text = driver.find_element_by_xpath(ele_xpath).get_attribute('textContent')
+        get_text = get_xpath_element(driver,ele_xpath).get_attribute('textContent')
         return get_text
     except  Exception:
         screen_shot_func(driver, f'获取元素的文本值失败')
@@ -1531,7 +1636,8 @@ def get_ele_class_name(driver,ele_xpath,class_name):
     :return:
     """
     try:
-        get_class_value = driver.find_element_by_xpath(ele_xpath).get_attribute(f'{class_name}')
+        # get_class_value = driver.find_element_by_xpath(ele_xpath).get_attribute(f'{class_name}')
+        get_class_value = get_xpath_element(driver, ele_xpath).get_attribute(f'{class_name}')
         print(f'{class_name}的value是:',get_class_value)
         return get_class_value
     except Exception:
@@ -1554,7 +1660,6 @@ def get_picture_path(picture_name = 'avatar1.jpg'):
         dir_list[-1] = 'publicData'
         join_str = '\\\\'
         final_path = join_str.join(dir_list)
-        # modify_picture_path = final_path + '\\\\modify_picture.jpg'
         modify_picture_path = final_path + f'\\\\{picture_name}'
         return  modify_picture_path
     else:
@@ -1566,10 +1671,35 @@ def get_picture_path(picture_name = 'avatar1.jpg'):
         join_str = '//'
         final_path = join_str.join(dir_list)
         print(final_path)
-        # modify_picture_path = final_path + '//modify_picture.jpg'
         modify_picture_path = final_path + f'//{picture_name}'
         print(modify_picture_path)
         return modify_picture_path
 
+def open_html_create_call(login_user,password,call_user):
+    """
+    打开html页面进行call
+    :param login_user: 通过html登录的user
+    :param password: 密码
+    :param call_user: 需要给他进行call的user
+    :return:
+    """
+    driver = start_an_empty_window()
+    html_abs_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))),'publicData','html_login.html')
+    driver.get(html_abs_path)
+    select = get_xpath_element(driver, '//select[@id="environment-select"]')
+    Select(select).select_by_visible_text('stage-asia')
+    time.sleep(1)
+    email_input = get_xpath_element(driver,'//input[@id="email"]')
+    email_input.send_keys(login_user)
+    password_input =get_xpath_element(driver,'//input[@id="password"]')
+    password_input.send_keys(password)
+    get_xpath_element(driver, '//button[@id="login-btn"]').click()
+    public_check_element(driver, search_by_email, 'search_by_enail输入框未出现', if_click=None, if_show=1)
+    get_xpath_element(driver, search_by_email).click()
+    get_xpath_element(driver, search_by_email).send_keys(call_user)
+    get_xpath_element(driver, '//button[@id="call-btn"]').click()
+    return driver
+
 if __name__ == '__main__':
     print()
+    open_html_create_call('Huiming.shi.helplightning+8888888888@outlook.com','*IK<8ik,8ik,','Huiming.shi.helplightning+111222333@outlook.com')

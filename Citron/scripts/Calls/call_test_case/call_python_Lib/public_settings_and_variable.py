@@ -73,3 +73,4 @@ video_on_button = "//div[@class='InCall']//*[@*='#video_on']"
 return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
 count_of_call_user = '//div[@class="F2FVideo ShowOpenTokVideos"]/div'
+search_by_email = '//input[@id="user-search-email"]'
