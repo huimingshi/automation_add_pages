@@ -21,6 +21,12 @@ enter_workspace_settings_page
 enter_enterprises_audit_log
     # enter crunch Audit Logs page
     click element    ${audit_log_menu}
+    FOR   ${i}    IN RANGE   0    20
+        ${count}    get element count     ${audit_log_table}//tr[2]
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If      '${count}'!='1'    sleep   1s
+        Run Keyword If      '${i}'=='19'    refresh_web_page
+    END
     wait until element is visible     ${audit_log_table}//tr[2]      20s
     sleep  2s
 

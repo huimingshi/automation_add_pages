@@ -656,6 +656,7 @@ Small_range_1005_1007
     ${invite_url_2}     send_meeting_room_link    ${driver1}     OTU
     # Anonymous click link1 to enter call
     ${driver2}    anonymous_open_meeting_link     ${invite_url_1}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
     # VP: Anonymous's outgoing call, it should show WS 1's branding avatar.
     ${get_class_value}    get_ele_class_name    ${driver2}   ${outgoing_Call_avator}   src
     should contain    ${get_class_value}       ${WS_1_Branding_Avatar}
@@ -694,6 +695,7 @@ Small_range_1005_1007
     # User D click link1 to enter call
     close_call_ending_page    ${driver1}    #关闭通话结束页面
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
     # VP: User D's outgoing call, it should show WS 1's Branding  avatar.
     ${get_class_value}    get_ele_class_name    ${driver3}   ${outgoing_Call_avator}   src
     should contain    ${get_class_value}       ${WS_1_Branding_Avatar}

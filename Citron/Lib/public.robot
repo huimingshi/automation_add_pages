@@ -78,7 +78,7 @@ Login
     Sleep    1s
     Maximize Browser Window
     # 输入账号
-    wait until element is visible   ${loginname_input}    10s
+    wait until element is visible   ${loginname_input}    20s
     Input Text    ${loginname_input}    ${username}
     # 点击NEXT
     wait until element is visible   ${next_button}     10s
@@ -153,123 +153,94 @@ Open_register_personal_website
     Maximize Browser Window
     wait until element is visible   ${register_account}
 
-Login_site_admin
-    # 登录系统
-    Login    ${site_admin_username}    ${site_admin_password}
+check_disclaimer
     FOR   ${i}    IN RANGE   0    8
         ${count}   get element count   ${accept_button}
         Run Keyword If    '${count}'=='1'    click element   ${accept_button}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If   '${count}'=='0'    sleep   1s
     END
+    sleep    1s
+    ${count_again}   get element count   ${accept_button}
+    Run Keyword If    '${count_again}'=='1'    click element   ${accept_button}
+
+check_tutorial_again
     # close 弹框
     wait until element is visible    ${button_of_popup}
     Click Button    ${button_of_popup}
     sleep    1s
+    # 检查还有没有弹框
+    ${count}   get element count    ${button_of_popup}
+    Run Keyword If   '${count}'=='1'    click element   ${button_of_popup}
+
+Login_site_admin
+    # 登录系统
+    Login    ${site_admin_username}    ${site_admin_password}
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_premium_user
     # 登录系统
     Login    ${crunch_site_username}    ${crunch_site_password}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}  20s
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_workspaces_admin
     # 登录系统
     Login    ${workspace_admin_username}     ${workspace_admin_password}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_another_workspaces_admin
     # 登录系统
     Login    ${another_workspace_admin_username}     ${another_workspace_admin_password}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_another_group_admin
     # 登录系统
     Login    ${another_group_admin_username}     ${another_group_admin_password}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_workspaces_admin_one
     # 登录系统
     Login    ${workspace_admin_username_one}     ${workspace_admin_password_one}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_group_admin
     # 登录系统
     Login    ${group_admin_username}    ${group_admin_password}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_new_added_user
     [Arguments]    ${user_username}
     # 登录系统
     Login    ${user_username}    ${public_pass}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_new_added_user_whitout_workspaces
     [Arguments]    ${user_username}
     # 登录系统
-#    Login    ${user_username}    ${public_pass}
     Open Browser    ${citron_website}     ${browser_type}
     Sleep    1s
     Maximize Browser Window
@@ -299,16 +270,10 @@ Login_new_added_user_whitout_workspaces
 Login_normal_for_calls
     # 登录系统
     Login    ${normal_username_for_calls}     ${normal_password_for_calls}
-    FOR   ${i}    IN RANGE   0    8
-        ${count}   get element count   ${accept_button}
-        Run Keyword If    '${count}'=='1'    click element   ${accept_button}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If   '${count}'=='0'    sleep   1s
-    END
-    # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
-    sleep    1s
+    # 检查是否有Disclaimer
+    check_disclaimer
+    # 关闭tutorial
+    check_tutorial_again
 
 Login_new_added_register_personal
     [Arguments]    ${user_username}

@@ -695,13 +695,11 @@ def paste_on_a_non_windows_system(driver,paste_xpath):
     else:
         print('非Windows操作系统粘贴成功')
 
-def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
+def open_send_meeting_dialog(driver,which_meeting):
     """
-    # User发起MHS或者OTU会议，并且检查link的复制粘贴功能是否OK
+    # 打开发起MHS或者OTU会议的对话框
     :param driver:
     :param which_meeting: MHS或者OTU
-    :param if_send: 是否发送，‘send’表示发送，‘no_send’表示不发送，默认为no_send
-    :return: MHS或者OTU会议的link
     """
     public_check_element(driver, send_my_help_space_invitation, '打开Send_My_Help_Space_Invitation窗口失败')
     try:
@@ -721,6 +719,16 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
         print(f'选择{which_meeting}_link失败', e)
         screen_shot_func(driver, f'选择{which_meeting}_link失败')
         raise Exception
+
+def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
+    """
+    # User发起MHS或者OTU会议，并且检查link的复制粘贴功能是否OK
+    :param driver:
+    :param which_meeting: MHS或者OTU
+    :param if_send: 是否发送，‘send’表示发送，‘no_send’表示不发送，默认为no_send
+    :return: MHS或者OTU会议的link
+    """
+    open_send_meeting_dialog(driver,which_meeting)
     # 复制
     for i in range(5):
         text = driver.find_element_by_xpath('//div[@class="invite-link"]').get_attribute("textContent")
@@ -728,8 +736,18 @@ def send_meeting_room_link(driver,which_meeting,if_send = 'no_send'):
         if text.startswith(r'https://'):
             break
         elif i == 4:
-            screen_shot_func(driver,'url信息未出现')
-            raise Exception
+            public_check_element(driver, '//form[@class="InviteToHelpSpaceView form-horizontal"]//button[text()="Cancel"]', '点击取消按钮失败')
+            open_send_meeting_dialog(driver, which_meeting)
+            for i in range(5):
+                text = driver.find_element_by_xpath('//div[@class="invite-link"]').get_attribute("textContent")
+                print(text)
+                if text.startswith(r'https://'):
+                    break
+                elif i == 4:
+                    screen_shot_func(driver,'url信息未出现')
+                    raise Exception
+                else:
+                    time.sleep(10)
         else:
             time.sleep(10)
     public_check_element(driver, '//i[@class="far fa-copy "]', '复制按钮未出现')
@@ -1038,8 +1056,10 @@ def switch_to_diffrent_page(driver,switch_page,switch_success_tag,data_show,swit
     switch_to_last_window(driver)  # 切换到最新页面
     if switch_tree == 'switch_tree':
         driver.find_element_by_xpath(f'//div[@role="tree"]/div[{int(which_tree)}]').click()
+        time.sleep(1)
     try:
         driver.find_element_by_xpath(f'//span[contains(.,"{switch_page}")]').click()
+        time.sleep(1)
         for i in range(5):
             element_list = driver.find_elements_by_xpath(switch_success_tag)
             if len(element_list) == 1:
@@ -1365,16 +1385,17 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
         raise Exception('refresh_fail')
     time.sleep(5)
     if close_tutorial == 'close_tutorial':
-        ele_list = driver.find_elements_by_xpath(close_tutorial_button)
-        if len(ele_list) == 1:
-            try:  # close Tutorial
-                ele_list[0].click()
-            except Exception as e:
-                print('关闭教程失败', e)
-                screen_shot_func(driver, '关闭教程失败')
-                raise Exception
-            else:
-                print('关闭教程成功')
+        public_check_element(driver, close_tutorial_button, '刷新页面后关闭教程失败')
+        # ele_list = driver.find_elements_by_xpath(close_tutorial_button)
+        # if len(ele_list) == 1:
+        #     try:  # close Tutorial
+        #         ele_list[0].click()
+        #     except Exception as e:
+        #         print('关闭教程失败', e)
+        #         screen_shot_func(driver, '关闭教程失败')
+        #         raise Exception
+        #     else:
+        #         print('关闭教程成功')
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
     """

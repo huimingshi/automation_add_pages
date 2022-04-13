@@ -311,6 +311,7 @@ Small_range_724_742
     ${driver9}    anonymous_open_meeting_link    ${invite_url_2}
     user_anwser_call      ${driver1}     no_direct
     ###### VP: 3PC call established successfully    Anonymous leave call    739+740行
+    which_page_is_currently_on    ${driver9}    ${end_call_button}
     exit_call   ${driver9}
     exit_one_driver    ${driver9}
     ###### EU2 click 3PI link 2 to join       741行
@@ -488,7 +489,6 @@ Small_range_799_802
     refresh_web_page
     check_event_log_deleted_user    2  # event log中有两条deleted user
     enter_calls_menu
-#    close_call_details   # 关闭Call details页面
     # VP: In Citron->Admin  3)->Calls -> expert current it table, to check the csv file: the user name should be changed to Deleted User, email should be changed to Null.
     export_current_table
     ${owner_name_get_from_excel}    ${owner_email_get_from_excel}    check_export_file_data
