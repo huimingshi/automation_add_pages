@@ -542,7 +542,8 @@ Disclaimer_805
     refresh_browser_page   ${driver1}
     # App is reconnected to server. Disclaimer should be shown up.
     disclaimer_should_be_shown_up_or_not   ${driver1}
-    [Teardown]  Close
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Disclaimer_806_807
     [Documentation]    Set Declaimer ->'delete user' is NOT selected    2 enterprise users in call	 Invite User C who is in same enterprise who has accepted disclaimer when logs in App.

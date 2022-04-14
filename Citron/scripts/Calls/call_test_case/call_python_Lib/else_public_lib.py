@@ -1001,7 +1001,7 @@ def different_page_search_single_users(driver,which_page,search_input_xpath,data
     """
     try:
         # ele = driver.find_element_by_xpath(search_input_xpath)
-        ele = get_xpath_elements(driver,search_input_xpath)
+        ele = get_xpath_element(driver,search_input_xpath)
         ele.clear()
         time.sleep(1)
         ele.click()
@@ -1496,7 +1496,9 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
         raise Exception('refresh_fail')
     time.sleep(5)
     if close_tutorial == 'close_tutorial':
-        public_check_element(driver, close_tutorial_button, '刷新页面后关闭教程失败')
+        ele_list = get_xpath_elements(driver,close_tutorial_button)
+        if ele_list == 1:
+            public_check_element(driver, close_tutorial_button, '刷新页面后关闭教程失败')
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
     """

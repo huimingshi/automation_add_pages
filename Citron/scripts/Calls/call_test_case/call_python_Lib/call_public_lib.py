@@ -144,8 +144,7 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
     """
     if is_personal == 'not_personal':
         try:
-            # element = driver1.find_element_by_id(search_input)
-            element = get_xpath_element(driver1,search_input)
+            element = driver1.find_element_by_id(search_input)
             element.clear()
             time.sleep(2)
             element.click()
@@ -163,8 +162,7 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
         print('0000000000000000000000000000000000',len(ele_ment))
         if len(ele_ment) < 1:
             refresh_page(driver1)
-            # element = driver1.find_element_by_id(search_input)
-            element = get_xpath_element(driver1,search_input)
+            element = driver1.find_element_by_id(search_input)
             element.click()
             element.send_keys(who)
             time.sleep(5)
@@ -374,8 +372,7 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     """
     # make calls with who
     try:
-        # element = driver1.find_element_by_id(search_input)
-        element = get_xpath_element(driver1,search_input)
+        element = driver1.find_element_by_id(search_input)
         element.click()
         element.send_keys(who)
         time.sleep(3)
@@ -587,8 +584,7 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
     :return:
     """
     try:
-        # element = driver1.find_element_by_id(search_input)
-        element = get_xpath_element(driver1,search_input)
+        element = driver1.find_element_by_id(search_input)
         element.clear()
         time.sleep(1)
         element.click()
@@ -795,7 +791,7 @@ def record_or_do_not_record(if_record,who_do_it,*args):
             assert len(ele_list) == 1
             for one in args[1:]:
                 # ele_list = one.find_elements_by_xpath(f'//div[@class="message" and contains(.,"{who_do_it} has enabled recording for this call.")]')
-                ele_list = get_xpath_elements(args[0],f'//div[@class="message" and contains(.,"{who_do_it} has enabled recording for this call.")]')
+                ele_list = get_xpath_elements(one,f'//div[@class="message" and contains(.,"{who_do_it} has enabled recording for this call.")]')
                 assert len(ele_list) == 1
         elif if_record == 'do_not_record':
             # args[0].find_element_by_xpath(do_not_record).click()
@@ -805,7 +801,7 @@ def record_or_do_not_record(if_record,who_do_it,*args):
             assert len(ele_list) == 1
             for one in args[1:]:
                 # ele_list = one.find_elements_by_xpath(f'//div[@class="message" and contains(.,"{who_do_it} has turned off recording for this call.")]')
-                ele_list = get_xpath_elements(args[0],f'//div[@class="message" and contains(.,"{who_do_it} has turned off recording for this call.")]')
+                ele_list = get_xpath_elements(one,f'//div[@class="message" and contains(.,"{who_do_it} has turned off recording for this call.")]')
                 assert len(ele_list) == 1
     except AssertionError:
         screen_shot_func(args[0],'开启/关闭record的提示信息不正确')

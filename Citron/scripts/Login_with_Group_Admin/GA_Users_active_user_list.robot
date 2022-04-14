@@ -161,7 +161,7 @@ Group_Admin_add_normal_user_Choose_Team_license
     [Documentation]    Group Admin Modify mormal user
     [Tags]    有bug，CITRON-3146；已修复
     # log in with group admin
-    Login_group_admin
+    Login_new_added_user     Huiming.shi.helplightning+asdfqwerzxcv@outlook.com
     # enter group users
     enter_group_users
     # add normal user

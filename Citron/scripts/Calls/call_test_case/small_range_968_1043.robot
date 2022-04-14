@@ -1056,6 +1056,8 @@ Small_range_1032
     should start with    ${get_class_value}    ${WS3_User_B_customer_avatar}
     # 接受Call
     user_anwser_call   ${driver1}
+    sleep   10s
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
 
     # VP: In-call view is WS1's Default color of Blue for user A and B
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
