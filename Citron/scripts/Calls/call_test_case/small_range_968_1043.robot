@@ -102,7 +102,7 @@ Small_range_977_993
     # open groups, create group	VP: All context with "Help Lightning" is branded, accent color is orange
     switch_to_diffrent_page   ${driver1}   ${py_groups_page}    ${py_groups_switch_success}    ${py_get_number_of_rows}
     sleep  10
-    ${css_value}   get_css_value   ${driver1}   ${py_groups_switch_success}   background-color                      # Groups页面的Create Group按钮
+    ${css_value}   get_css_value   ${driver1}   ${create_group_button}    background-color                           # Groups页面的Create Group按钮
     check_get_color_correct    ${get_value}   ${css_value}
     ${css_value}   get_css_value   ${driver1}   ${groups_report_view}   background-color                            # Groups页面的Report View按钮
     check_get_color_correct    ${get_value}   ${css_value}
@@ -111,7 +111,7 @@ Small_range_977_993
     ${css_value}   get_css_value   ${driver1}   ${Members_button_xpath}        color                                # Members 按钮
     check_get_color_correct    ${get_value}   ${css_value}
     # create group
-    switch_to_other_tab   ${driver1}   ${py_groups_switch_success}
+    switch_to_other_tab   ${driver1}   ${create_group_button}
     ${css_value}   get_css_value   ${driver1}   ${Create_Group_Group_Type}        color                             # Create New Group页面的Group Type字段
     check_get_color_correct    ${get_value}   ${css_value}
     ${css_value}   get_css_value   ${driver1}   ${Create_Group_Group_Info}        color                             # Create New Group页面的Group Info字段
@@ -197,6 +197,7 @@ Small_range_977_993
     switch_to_settings_page   ${driver2}   # 进入settings页面
     expand_which_setting     ${driver2}     Before Call: Disclaimer   # EXPAND Before Call: Disclaimer
     reset_disclaimer      ${driver2}        # 重置Disclaimer
+    sleep  15s
     refresh_browser_page    ${driver2}    no_care       # 刷新页面
     ${css_value}   get_css_value   ${driver2}   ${Disclaimer_accept}   background-color                             # Disclaimer的accept按钮
     check_get_color_correct    ${get_value}   ${css_value}
@@ -208,6 +209,7 @@ Small_range_977_993
     ${driver3}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
     switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
     make_calls_with_who     ${driver2}    ${driver3}    ${personal_user_username}       # 进行通话
+    sleep   30s
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
     check_get_color_correct    ${get_value}   ${css_value}
@@ -656,7 +658,7 @@ Small_range_1005_1007
     ${invite_url_2}     send_meeting_room_link    ${driver1}     OTU
     # Anonymous click link1 to enter call
     ${driver2}    anonymous_open_meeting_link     ${invite_url_1}
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    sleep    15
     # VP: Anonymous's outgoing call, it should show WS 1's branding avatar.
     ${get_class_value}    get_ele_class_name    ${driver2}   ${outgoing_Call_avator}   src
     should contain    ${get_class_value}       ${WS_1_Branding_Avatar}
@@ -665,7 +667,7 @@ Small_range_1005_1007
     should start with    ${get_class_value}    ${default_avatar_src}
     # VP: in-call view for anonymous is all orange
     user_anwser_call   ${driver1}
-    sleep   10s
+    sleep   30s
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
     should contain           ${get_class_value}      ${lime_brand_orange_color}
     # End call
@@ -695,7 +697,7 @@ Small_range_1005_1007
     # User D click link1 to enter call
     close_call_ending_page    ${driver1}    #关闭通话结束页面
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
-    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    sleep   15
     # VP: User D's outgoing call, it should show WS 1's Branding  avatar.
     ${get_class_value}    get_ele_class_name    ${driver3}   ${outgoing_Call_avator}   src
     should contain    ${get_class_value}       ${WS_1_Branding_Avatar}
@@ -704,7 +706,7 @@ Small_range_1005_1007
     should start with    ${get_class_value}    ${WS_2_Branding_Avatar}
     # VP: in-call view for user D is all orange
     user_anwser_call   ${driver1}
-    sleep   10s
+    sleep   30s
     ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_whole_page}   style                         # 通话过程中的背景色
     should contain           ${get_class_value}      ${lime_brand_orange_color}
     # End call
@@ -903,7 +905,7 @@ Small_range_1018_1026
     should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Personal contacts belong to this site who using default avatar	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver3}   ${py_personal_page}    ${py_personal_switch_success}    ${py_personal_search_result}
-    ${get_class_value}    get_ele_class_name    ${driver3}   ${first_data_img}   src
+    ${get_class_value}    get_ele_class_name    ${driver3}   //div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]//div[@class="AvatarImageRenderer"]//img    src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
     should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
@@ -1032,7 +1034,7 @@ Small_range_1031
     should be equal as strings    ${get_class_value}    None
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
     should be equal as strings    ${get_class_value}    None
-    [Teardown]      exit_driver     ${driver1}    ${driver2}
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_1032
     [Documentation]     Turn off feature    User B click A's meeing link
@@ -1056,7 +1058,7 @@ Small_range_1032
     should start with    ${get_class_value}    ${WS3_User_B_customer_avatar}
     # 接受Call
     user_anwser_call   ${driver1}
-    sleep   10s
+    sleep   20s
     which_page_is_currently_on    ${driver1}    ${end_call_button}
 
     # VP: In-call view is WS1's Default color of Blue for user A and B

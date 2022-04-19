@@ -158,6 +158,7 @@ enter_site_calls
     click element   ${enter_calls}
     sleep  1s
     # choose Last 365 Days
+    wait until element is visible    ${occurred_within_choose}    20s
     click element  ${occurred_within_choose}
     sleep  0.5s
     click element  ${calls_last_365_days_select}
@@ -1019,9 +1020,9 @@ cancel_then_update_user
     click element   ${details_pre_xpath}//span[@class="k-searchbar"]/input
     sleep  0.5s
     input text     ${details_pre_xpath}//span[@class="k-searchbar"]/input   auto_default_group
-    sleep  1s
+    sleep  2s
     click element   xpath=//div[@unselectable="on"]//ul[@role='listbox']/li[1]
-    sleep  0.5s
+    sleep  1s
     # click 'UPDATE USER' button
     click element   ${details_pre_xpath}//button[contains(.,'Update User')]
     # check message

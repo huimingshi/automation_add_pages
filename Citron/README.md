@@ -41,6 +41,8 @@
 ---
 
 ### 如何只执行citron的case？
-  进入到Citron目录下，cmd中执行命令：robot --exclude small_range scripts
+  - 进入到Citron目录下，cmd中执行命令：robot --exclude small_range scripts
 ### 如何只执行small range的case？
-  进入到Citron目录下，cmd中执行命令：robot --include small_range scripts
+  - 进入到Citron目录下，cmd中执行命令：robot --include small_range scripts
+### 如何执行单个case
+  - 进入到Citron目录下，cmd中执行命令：robot --test  case名称 scripts

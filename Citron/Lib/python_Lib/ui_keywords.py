@@ -403,33 +403,6 @@ def compare_the_two_pictures(picture_id_1,picture_id_2):
     else:
         return 'The two pictures are different'
 
-# def get_picture_path():
-#     """
-#     # 获取picture.jpg绝对路径
-#     :return: picture.jpg绝对路径
-#     """
-#     dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#     print('当前目录绝对路径:',dir_path)
-#     system_type = get_system_type()
-#     if system_type == 'Windows':
-#         dir_list = dir_path.split('\\')
-#         print(dir_list)
-#         dir_list[-1] = 'publicData'
-#         join_str = '\\\\'
-#         final_path = join_str.join(dir_list)
-#         picture_path = final_path + '\\\\picture.jpg'
-#         return  picture_path
-#     else:
-#         dir_list = dir_path.split('/')
-#         print(dir_list)
-#         dir_list[-1] = 'publicData'
-#         join_str = '//'
-#         final_path = join_str.join(dir_list)
-#         print(final_path)
-#         picture_path = final_path + '//picture.jpg'
-#         print(picture_path)
-#         return picture_path
-
 def get_modify_picture_path(picture_name = 'modify_picture.jpg'):
     """
     # 获取modify_picture.jpg绝对路径

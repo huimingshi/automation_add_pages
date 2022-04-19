@@ -79,6 +79,7 @@ ${deactivated_users_Export_to_CSV}              //div[@id="user-tabs-pane-3"]//b
 ${Details_button_xpath}                         //button[@class="k-button detailsButton" and text()="Details"]                                      # Details 按钮
 ${Members_button_xpath}                         //button[@class="k-button detailsButton" and text()="Members"]                                      # Members 按钮
 ${Personal_tab_xpath}                           //span[contains(.,"Personal")]                                                                      # Personal tab页
+${create_group_button}                          //button[contains(.,'Create Group')]                                                                # Create Group button
 ${groups_report_view}                           //div[@class="Groups"]//button[text()="Report View"]                                                # Groups页面的Report View按钮
 ${Create_Group_Group_Type}                      //h3[text()="Group Type"]                                                                           # Create New Group页面的Group Type字段
 ${Create_Group_Group_Info}                      //h3[text()="Group Info"]                                                                           # Create New Group页面的Group Info字段
@@ -298,14 +299,21 @@ check_export_file_data
     ${first_lines}   read_csv_file_check_cloumns   export.csv
     ${owner_name_get}   get text     ${first_data_show}/div[@col-id="owner_name"]
     ${owner_email_get}   get text     ${first_data_show}/div[@col-id="owner_email"]
-    ${participants_get}   get text     ${first_data_show}/div[@col-id="participants"]
+    ${participants_count}   get element count     ${first_data_show}//div[@class="cardName"]
+    @{participants_list}=    Create List
+    FOR   ${i}    IN RANGE   0    ${participants_count}
+        ${participants_get}   get text   ${first_data_show}//div[@class="participant"][${i}+1]//div[@class="cardName"]
+        append to list   ${participants_list}   ${participants_get}
+    END
     ${groupsString_get}   get text     ${first_data_show}/div[@col-id="groupsString"]
     ${reasonCallEnded_get}   get text     ${first_data_show}/div[@col-id="reasonCallEnded"]
     ${callDuration_get}   get text     ${first_data_show}/div[@col-id="callDuration"]
     ${tags_get}   get text     ${first_data_show}/div[@col-id="tags"]
     should be equal as strings  ${first_lines}[0]    ${owner_name_get}
     should be equal as strings  ${first_lines}[1]    ${owner_email_get}
-    should contain   ${participants_get}   ${first_lines}[2]
+    FOR   ${i}    IN RANGE   0    ${participants_count}
+        should contain     ${first_lines}[2]    ${participants_list}[${i}]
+    END
     should be equal as strings  ${first_lines}[3]    ${groupsString_get}
     should be equal as strings  ${first_lines}[5]    ${reasonCallEnded_get}
     should be equal as strings  ${first_lines}[6]    ${callDuration_get}

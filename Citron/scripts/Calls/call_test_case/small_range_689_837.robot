@@ -476,7 +476,7 @@ Small_range_799_802
     log_in_crunch_is_correct    property 'disclaimer_accepted' to 'false'.    ${LogList}
     # close browser
     Close
-
+    sleep    30s
     # 801 line
     # VP: In Citron->Admin  1)-> Calls, to check any reference to the User becomes "Deleted User".
     Login_site_admin
@@ -666,6 +666,8 @@ Small_range_820_821
 #    rec_is_on_or_off     ${driver1}
 #    rec_is_on_or_off     ${driver2}
 #    rec_is_on_or_off     ${driver3}
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     # end call
     end_call_for_all     ${driver1}
     [Teardown]      run keywords    Close
@@ -705,6 +707,8 @@ Small_range_823
 #    enter_FGD_mode     ${driver2}      Freeze
 #    rec_is_on_or_off     ${driver1}
 #    rec_is_on_or_off     ${driver2}
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
@@ -750,6 +754,8 @@ Small_range_825_826
     # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
     record_or_do_not_record    record          ${ws3_branding_A_username}    ${driver1}    ${driver2}
     record_or_do_not_record    do_not_record        ${ws3_branding_A_username}    ${driver1}    ${driver2}
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
@@ -817,6 +823,8 @@ Small_range_829
     # VP: only owner can change rec
     rec_is_on_or_off     ${driver1}     off   can_change
     rec_is_on_or_off     ${driver2}     off   none
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
@@ -875,6 +883,7 @@ Small_range_833
     ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}        ${switch_workspace_password}
     # call on-call group from contact list
     make_call_to_onCall     ${driver1}    ${driver2}    ${Expert_Group_1}
+    sleep   20s
     # VP: REC is on, only expert can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     on   can_not_change
@@ -930,6 +939,8 @@ Small_range_834
 #    enter_FGD_mode     ${driver2}      Freeze
 #    rec_is_on_or_off     ${driver1}    on    can_change
 #    rec_is_on_or_off     ${driver2}    on    can_not_change
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close

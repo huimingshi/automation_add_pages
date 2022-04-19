@@ -130,6 +130,8 @@ Small_range_161
     # VP: Have Switch Camera button
     enter_giver_mode    ${driver1}   none   none   2
 #    enter_FGD_mode   ${driver1}    Swap Camera
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     [Teardown]      run keywords    exit_call   ${driver1}
     ...             AND             exit_driver    ${driver1}   ${driver2}
 
@@ -378,8 +380,10 @@ Join_call_196_200
     which_page_is_currently_on     ${driver2}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]
     which_page_is_currently_on     ${driver3}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#gh_on"]     not_currently_on
     which_page_is_currently_on     ${driver3}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]     not_currently_on
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     # TU3 leaves call.
-    exit_call     ${driver3}    5
+    exit_call     ${driver3}
     # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
     hang_up_the_phone     ${driver1}
     which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
@@ -420,6 +424,8 @@ Join_call_201_205
     # EU1 switches to receiver, enters freezing, photo or pdf mode.
     enter_giver_mode    ${driver1}   no_one    no_one    2    has_dialog    receive
     enter_FGD_mode    ${driver1}      Document
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
     # Anonymous user 2 clicks on the same link. EU1 answers call.
     ${driver3}   anonymous_open_meeting_link     ${invite_url}
     user_anwser_call     ${driver1}    no_direct

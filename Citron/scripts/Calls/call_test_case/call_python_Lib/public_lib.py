@@ -5,8 +5,9 @@
 import os
 import time
 import platform
-
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def get_system_type():
@@ -65,15 +66,17 @@ def kill_all_browser():
     # 退出所有的浏览器
     os.system('taskkill /f /t /im chrome.exe')
 
-def get_xpath_element(driver,xpath):
+def get_xpath_element(driver,xpath,ec = None):
     """
     通过xpath寻找元素，driver.find_element_by_xpath(xpath)
     :param driver: 浏览器驱动
     :param xpath: 元素的xpath
     :return:
     """
-    element = driver.find_element(By.XPATH, xpath)
-    return element
+    if not ec:
+        return WebDriverWait(driver, 15, 0.5).until(EC.visibility_of_element_located(('xpath',xpath)))
+    else:
+        return driver.find_element('xpath', xpath)
 
 def get_xpath_elements(driver,xpath):
     """
@@ -82,5 +85,5 @@ def get_xpath_elements(driver,xpath):
     :param xpath: 元素的xpath
     :return:
     """
-    elements_list = driver.find_elements(By.XPATH, xpath)
+    elements_list = driver.find_elements('xpath', xpath)
     return elements_list

@@ -19,10 +19,11 @@ ${login_citron_success_2}           https://app-stage.helplightning.net.cn/admin
 ${crunch_website}                   https://crunch-stage.helplightning.net.cn/                          # crunch website
 ${login_crunch_success}             https://crunch-stage.helplightning.net.cn/users
 ${loginname_input}                  xpath=//input[@autocomplete="username"]                             # 用户名输入框
-${next_button}                      xpath=//button[@type="submit"]                                      # NEXT按钮
+${next_button}                      xpath=//button[text()="Next"]                                       # NEXT按钮
 ${loginpsd_display}                 xpath=//input[@style="display: block;"]                             # 密码输入框出现
 ${loginpsd_input}                   xpath=//input[@autocomplete="current-password"]                     # 密码输入框
-${login_button}                     xpath=//button[@type="submit"]                                      # LOG IN按钮
+${login_button}                     xpath=//button[text()="Log In"]                                     # LOG IN按钮
+${crunch_login_button}              xpath=//button[text()="Login"]                                      # LOGIN按钮
 ${accept_button}                    xpath=//button[contains(.,'ACCEPT')]                                # ACCEPT button
 ${button_of_popup}                  xpath=//div[@class="modal-header"]//button[@class="close"]          # Popover close button
 ${public_pass}                      *IK<8ik,8ik,                                                        # public password
@@ -58,10 +59,30 @@ click_next_again
         ${count}   get element count   ${loginpsd_display}
         Exit For Loop If    '${count}'=='1'
         Run Keyword If      '${count}'=='0'    sleep   2s
+        Run Keyword If      '${i}'=='29'    click_next_again_again
+    END
+
+click_next_again_again
+    Click Button    ${next_button}
+    FOR   ${i}    IN RANGE   0    30
+        ${count}   get element count   ${loginpsd_display}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If      '${count}'=='0'    sleep   2s
         Exit For Loop If    '${i}'=='29'
     END
 
 click_login_again
+    Click Button    ${login_button}
+    FOR   ${i}    IN RANGE   0    30
+        ${url}=   Get Location
+        Exit For Loop If    '${url}'=='${citron_website}'
+        Exit For Loop If    '${url}'=='${login_citron_success_1}'
+        Exit For Loop If    '${url}'=='${login_citron_success_2}'
+        Run Keyword If      '${url}'!='${citron_website}'    sleep   2s
+        Run Keyword If      '${i}'=='29'    click_login_again_again
+    END
+
+click_login_again_again
     Click Button    ${login_button}
     FOR   ${i}    IN RANGE   0    30
         ${url}=   Get Location
@@ -83,11 +104,13 @@ Login
     # 点击NEXT
     wait until element is visible   ${next_button}     10s
     Click Button    ${next_button}
-    FOR   ${i}    IN RANGE   0    30
-        ${count}   get element count   ${loginpsd_display}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If      '${count}'=='0'    sleep   2s
-        Run Keyword If      '${i}'=='29'    click_next_again
+    FOR   ${i}    IN RANGE   0    90
+        sleep   2s
+        ${count_pwd}   get element count   ${loginpsd_display}
+        Exit For Loop If    '${count_pwd}'=='1'
+        ${count_next}   get element count   ${next_button}
+        Run Keyword If      '${count_next}'=='1'    Click Button    ${next_button}
+        Exit For Loop If    '${i}'=='89'
     END
     # 输入密码
     wait until element is visible   ${loginpsd_input}
@@ -95,17 +118,19 @@ Login
     # 点击LOG IN
     wait until element is visible   ${login_button}    10s
     Click Button    ${login_button}
-    FOR   ${i}    IN RANGE   0    30
+    FOR   ${i}    IN RANGE   0    89
+        sleep  2
         ${url}=   Get Location
         Exit For Loop If    '${url}'=='${citron_website}'
         Exit For Loop If    '${url}'=='${login_citron_success_1}'
         Exit For Loop If    '${url}'=='${login_citron_success_2}'
-        Run Keyword If      '${url}'!='${citron_website}'    sleep   2s
-        Run Keyword If      '${i}'=='29'    click_login_again
+        ${count_login}   get element count   ${login_button}
+        Run Keyword If      '${count_login}'=='1'    Click Button    ${login_button}
+        Exit For Loop If    '${i}'=='89'
     END
 
 click_login_crunch_again
-    Click Button    ${login_button}
+    Click Button    ${crunch_login_button}
     FOR   ${i}    IN RANGE   0    30
         ${url}=   Get Location
         Exit For Loop If    '${url}'=='${login_crunch_success}'
@@ -124,18 +149,20 @@ Login_crunch
     # 点击NEXT
     wait until element is visible     ${next_button}    10s
     Click Button    ${next_button}
-    FOR   ${i}    IN RANGE   0    30
-        ${count}    get element count    ${loginpsd_display}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If      '${count}'=='0'    sleep   2s
-        Run Keyword If      '${i}'=='29'    click_next_again
+    FOR   ${i}    IN RANGE   0    90
+        sleep   2s
+        ${count_pwd}   get element count   ${loginpsd_display}
+        Exit For Loop If    '${count_pwd}'=='1'
+        ${count_next}   get element count   ${next_button}
+        Run Keyword If      '${count_next}'=='1'    Click Button    ${next_button}
+        Exit For Loop If    '${i}'=='89'
     END
     # 输入密码
     wait until element is visible     ${loginpsd_input}    20s
     Input Password    ${loginpsd_input}    ${crunch_site_password}
     # 点击LOG IN
-    wait until element is visible     ${login_button}    10s
-    Click Button    ${login_button}
+    wait until element is visible     ${crunch_login_button}    10s
+    Click Button    ${crunch_login_button}
     FOR   ${i}    IN RANGE   0    30
         ${url}=   Get Location
         Exit For Loop If    '${url}'=='${login_crunch_success}'
@@ -250,11 +277,19 @@ Login_new_added_user_whitout_workspaces
     # 点击NEXT
     wait until element is visible   ${next_button}     10s
     Click Button    ${next_button}
-    FOR   ${i}    IN RANGE   0    30
-        ${count}   get element count   ${loginpsd_display}
-        Exit For Loop If    '${count}'=='1'
-        Run Keyword If      '${count}'=='0'    sleep   2s
-        Run Keyword If      '${i}'=='19'    click_next_again
+#    FOR   ${i}    IN RANGE   0    30
+#        ${count}   get element count   ${loginpsd_display}
+#        Exit For Loop If    '${count}'=='1'
+#        Run Keyword If      '${count}'=='0'    sleep   2s
+#        Run Keyword If      '${i}'=='19'    click_next_again
+#    END
+    FOR   ${i}    IN RANGE   0    90
+        sleep   2s
+        ${count_pwd}   get element count   ${loginpsd_display}
+        Exit For Loop If    '${count_pwd}'=='1'
+        ${count_next}   get element count   ${next_button}
+        Run Keyword If      '${count_next}'=='1'    Click Button    ${next_button}
+        Exit For Loop If    '${i}'=='89'
     END
     # 输入密码
     wait until element is visible   ${loginpsd_input}

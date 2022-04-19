@@ -57,8 +57,8 @@ accept_outlook_email
 can_not_see_the_administration
     ${tree_count}  get element count   xpath=//div[@role="tree"]/div
     should be equal as integers   ${tree_count}   1
-    ${tree_text}   get text  xpath=//div[@role="tree"]/div/span
-    should contain   ${tree_text}    德玛西亚皇子
+    ${contacts_page_count}   get element count   ${contacts_page_check}
+    should be equal as integers   ${contacts_page_count}   1
 
 check_2_menus
     click element  ${enter_workspace_menu}

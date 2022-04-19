@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<!-- This application allows a user to log in, search for a user by email, -->
+<!-- then initiate a call with them by using the Fermata API. It then -->
+<!-- jumps into webjs to answer the call. -->
+
+<!-- This simulates the flow that 3rd party integrations like Salesforce -->
+<!-- are using and helps us validate our integrations. -->
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Call Test</title>
+    <script>
+
+      var environments = [
+          {
+              name: "dev-us",
+              url: "https://api.dev.helplightning.net",
+              apikey: "9BoKBM2MQ27nPdHW0XckRw",
+              call_url: "https://app.dev.helplightning.net"
+          },
+          {
+              name: "dev-asia",
+              url: "https://api-dev.helplightning.net.cn",
+              apikey: "9BoKBM2MQ27nPdHW0XckRw",
+              call_url: "https://app-dev.helplightning.net.cn"
+          },
+          {
+              name: "stage-asia",
+              url: "https://api-stage.helplightning.net.cn",
+              apikey: "513a887436f4581b84551d17e1f5dbea",
+              call_url: "https://app-stage.helplightning.net.cn"
+          },
+          {
+              name: "production",
+              url: "https://api.helplightning.net",
+              apikey: "322f43a96e734c4c84283194c5ba8e7e",
+              call_url: "https://helplightning.net"
+          }
+      ]
+      
+      var state = {
+	  state: 0,
+          environment: environments[0],
+	  token: null,
+	  refresh: null,
+          recipient: null
+      };
+
+      Element.prototype.removeAll = function () {
+	  while (this.firstChild) { this.removeChild(this.firstChild); }
+	  return this;
+      };
+    </script>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+    <section class="hero is-primary">
+      <div class="hero-body">
+	<div class="container">
+	  <h1 class="title">
+            Call Test
+	  </h1>
+	</div>
+      </div>
+    </section>
+    <br />
+    <div class="columns">
+      <div class="column"><span /></div>
+      <div class="column">
+	<div id="error" style="display:none">
+	  <article class="message is-danger">
+	    <div class="message-body">
+	      <span id="error-msg"></span>
+	    </div>
+	  </article>
+	</div>
+	<div id="login">
+	  <fieldset id="login-fieldset" style="border: 0 none;">
+            <div class="field">
+              <label class="label">Environment</label>
+              <div class="select">
+                <select id="environment-select">
+                </select>
+              </div>
+            </div>
+            
+	    <div class="field">
+	      <label class="label">Username/Email</label>
+	      <div class="control has-icons-left has-icons-right">
+		<input id="email" class="input is-success" type="text" placeholder="joe@example.com" value="">
+		<span class="icon is-small is-left">
+		  <i class="fas fa-envelope"></i>
+		</span>
+	      </div>
+	    </div>
+	    
+	    <div class="field">
+	      <label class="label">Password</label>
+	      <div class="control has-icons-left has-icons-right">
+		<input id="password" class="input is-success" type="password" placeholder="" value="">
+		<span class="icon is-small is-left">
+		  <i class="fas fa-lock"></i>
+		</span>
+	      </div>
+	    </div>
+	    <div class="control">
+	      <button id="login-btn" class="button is-link" onclick="login();">Login</button>
+	    </div>
+	  </fieldset>
+
+	</div>
+	<div id="user-search">
+          <fieldset id="user-search-fieldset" style="border: 0 none;">
+            <div class="field">
+              <label class="label">Search by email</label>
+	      <div class="control has-icons-left has-icons-right">
+		<input id="user-search-email" class="input is-success" type="text" placeholder="joe@example.com" value="">
+		<span class="icon is-small is-left">
+		  <i class="fas fa-envelope"></i>
+		</span>
+	      </div>
+            </div>
+            <div class="control">
+              <button id="call-btn" class="button is-link" onclick="call();">Call</button>
+            </div>
+          </fieldset>
+	</div>
+      </div>
+      <div class="column"><span /></div>
+    </div>
+    <script>
+      var initialize = () => {
+          // configure the environments
+          const environmentSelector = document.querySelector('#environment-select');
+          environmentSelector.addEventListener('change', (event) => {
+              state.environment = environments[event.target.value];
+          });
+          environments.forEach((e, idx) => {
+              var o = document.createElement('option');
+              var att = document.createAttribute('value');
+              att.value = idx;
+              o.setAttributeNode(att);
+              var val = document.createTextNode(`${e.name}`);
+              o.appendChild(val);
+              
+              environmentSelector.appendChild(o);
+          });
+
+          // configure the search
+          const searchText = document.querySelector('#user-search-email');
+          searchText.addEventListener('input', (event) => {
+              searchUser(event.target.value);
+          });
+      }
+      var refreshState = () => {
+	  if (state.state == -1) {
+	      // error state
+	      document.querySelector('#login').style.display = 'none';
+	      document.querySelector('#user-search').style.display = 'none';
+
+	      document.querySelector('#error').style.display = 'block';
+	  } else if (state.state == 0) {
+	      // show the login
+	      document.querySelector('#login').style.display = 'block';
+	      document.querySelector('#user-search').style.display = 'none';
+	  } else if (state.state == 1) {
+	      // logging in...
+	      document.querySelector('#login-fieldset').disabled = true;
+	      document.querySelector('#login-btn').classList.add('is-loading');
+	      
+	  } else if (state.state == 2) {
+              // search for someone to call
+	      document.querySelector('#call-btn').disabled = true;
+	      
+	      document.querySelector('#login').style.display = 'none';
+	      document.querySelector('#user-search').style.display = 'block';
+	  }
+      }
+      
+      var login = () => {
+	  let email = document.querySelector("#email").value;
+	  let password = document.querySelector("#password").value;
+
+	  let body = {"email": email, "password": password};
+	  fetch(`${state.environment.url}/api/v1/auth`, {
+	      method: 'POST',
+	      headers: {
+		  'Content-type': 'application/json; charset=utf-8',
+		  'x-helplightning-api-key': state.environment.apikey
+	      },
+	      body: JSON.stringify(body)
+	  }).then((response) => {
+	      if (response.status == 200) {
+		  return response.json();
+	      } else {
+		  throw new Error(response.statusText);
+	      }
+	  }).then((success) => {
+	      state.token = success['token'];
+	      state.refresh = success['refresh'];
+	      state.state = 2; // transition to next state.
+              refreshState();
+	  }, (failure) => {
+	      showFailure(failure);
+	  });
+
+          state.state = 1;
+          refreshState();
+	  
+	  return false;
+      }
+
+      var searchUser = (email) => {
+          let body = {"search_term": event.target.value, "include_token": true}
+          fetch(`${state.environment.url}/api/v1/search`, {
+              method: 'POST',
+              headers: {
+		  'Content-type': 'application/json; charset=utf-8',
+		  'x-helplightning-api-key': state.environment.apikey,
+                  'authorization': state.token
+              },
+              body: JSON.stringify(body)
+          }).then((response) => {
+              if (response.status == 200) {
+                  return response.json();
+              } else {
+                  throw new Error(response.stateText);
+              }
+          }).then((success) => {
+              if (success.length == 1) {
+                  // set the recipient
+                  state.recipient = {
+                      id: success[0].id,
+                      name: success[0].name,
+                      username: success[0].username,
+                      token: success[0].token
+                  }
+	          document.querySelector('#call-btn').disabled = false;
+              } else {
+                  state.recipient = null;
+	          document.querySelector('#call-btn').disabled = true;
+              }
+          }, (failure) => {
+              // just ignore.
+          });
+      }
+
+      var call = () => {
+          // initiate a call.
+          if (state.recipient) {
+              createSession(state.recipient)
+                  .then((session) => {
+                      return requestVideo(session)
+                          .then((videoSession) => {
+                              gssInfo = videoSession.gss_info
+                              
+                              return {
+                                  sessionId: session.id,
+                                  token: gssInfo.token,
+                                  serverWSURL: gssInfo.wsserver
+                              }
+                          });
+                  }).then((videoInfo) => {
+                      // open a new pop-up window
+	              let email = document.querySelector("#email").value;
+                      window.open(`${state.environment.call_url}/webCall?displayName=Me&nameOrEmail=${email}&userToken=${state.token}&gssToken=${videoInfo.token}&gssUrl=${videoInfo.serverWSURL}`, 'webcall', 'toolbar=0,status=0,width=1500,height=900');
+                  }, (failure) => {
+                      showFailure(failure);
+                  });
+          }
+      }
+
+      var createSession = (recipient) => {
+          let body = {"contact_tokens": [recipient.token]};
+          return fetch(`${state.environment.url}/api/v1/sessions`, {
+              method: 'POST',
+              headers: {
+		  'Content-type': 'application/json; charset=utf-8',
+		  'x-helplightning-api-key': state.environment.apikey,
+                  'authorization': state.token
+              },
+              body: JSON.stringify(body)
+          }).then((response) => {
+              if (response.status == 200) {
+                  return response.json();
+              } else {
+                  throw new Error(response.stateText);
+              }
+          });
+      }
+
+      var requestVideo = (session) => {
+          let body = {"user_token": state.token};
+          return fetch(`${state.environment.url}/api/v1/session/video`, {
+              method: 'POST',
+              headers: {
+		  'Content-type': 'application/json; charset=utf-8',
+		  'x-helplightning-api-key': state.environment.apikey,
+                  'authorization': session.token
+              },
+              body: JSON.stringify(body)
+          }).then((response) => {
+              if (response.status == 200) {
+                  return response.json();
+              } else {
+                  throw new Error(response.stateText);
+              }
+          });
+      }
+      
+      var showFailure = (msg) => {
+	  state.state = -1;
+
+	  document.querySelector('#error-msg').innerHTML = `<h2>${msg}</h2>`;
+
+	  refreshState();
+      }
+
+      var getAll = (request, path, pageSize, success, failure) => {
+	  var makeRequest = (request, path, page, page_size) => {
+	      let url = `${path}?page=${page}&page_size=${page_size}`;
+	      return new Request(url, request);
+	  }
+          var nextRequest = (request, path, page, pageSize, totalPages, d) => {
+              let req = makeRequest(request, path, page, pageSize);
+              return fetch(req)
+                  .then(res => res.json())
+                  .then((res) => {
+                      d.push(res);
+
+                      if (page < totalPages) {
+                          return nextRequest(request, path, page + 1, pageSize, totalPages, d);
+                      } else {
+                          return d;
+                      }
+                  })
+          }
+
+	  let req = makeRequest(request, path, 1, 1);
+	  return fetch(req)
+	      .then(res => res.json())
+	      .then(res => {
+		  let totalEntries = res.total_entries;
+		  let pages = Math.ceil(totalEntries / pageSize);
+
+                  return nextRequest(request, path, 1, pageSize, pages, [])
+                      .then((resp) => {
+		          let reduced = resp.reduce((acc, r) => {
+			      let a = acc.concat(r.entries)
+			      return a;
+		          }, []);
+
+		          let result = {
+			      total_entries: totalEntries,
+			      page: 1,
+			      page_size: totalEntries,
+			      entries: reduced
+		          }
+
+		          return result;
+                      })
+		  })
+	      .catch(err => {
+		  throw new Error(err);
+	      });
+      }
+
+      initialize();
+      refreshState();
+    </script>
+  </body>
+</html>
