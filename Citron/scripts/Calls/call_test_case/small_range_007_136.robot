@@ -9,6 +9,31 @@ Library           call_python_Lib/else_public_lib.py
 Force Tags        small_range
 
 *** Test Cases ***
+All_active_users_in_the_entire_enterprise_should_show
+    [Documentation]    Open Directory view, All active users in the entire enterprise should show.
+    [Tags]      small range 66 line
+    [Setup]     run keywords      Login_premium_user   # log in with big_admin
+    ...         AND               switch_to_second_workspace    # 切换到Canada这个WS
+    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
+    ...         AND               Close    # close browser
+    # log in with big_admin
+    ${driver}   driver_set_up_and_logIn    ${crunch_site_username}    ${crunch_site_password}
+    # 切换到Huiming.shi_Added_WS这个WS
+    user_switch_to_second_workspace   ${driver}    ${Huiming_shi_Added_WS}
+    # 进入Directory页面
+    switch_to_diffrent_page   ${driver}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}
+    # 获取Directory页面的所有user，放到列表中
+    ${directory_user_list}  get_all_data_on_the_page   ${driver}
+    # 进入到WS下的Users页面
+    switch_to_diffrent_page   ${driver}  ${py_users_page}    ${py_users_switch_success}    ${py_get_number_of_rows}    switch_tree   2
+    # 获取Users页面的所有active user，放到列表中
+    ${active_user_list}     get_all_data_on_the_page   ${driver}
+    ${active_user_list_final}     remove_value_from_list    ${active_user_list}   ${crunch_site_username}
+    lists should be equal   ${directory_user_list}   ${active_user_list_final}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver    ${driver}
+
 Disable_External_Users_Pre_condition_In_a_site_meeting_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
     [Tags]    small range 103+104+105+107 line     有bug：https://vipaar.atlassian.net/browse/CITRON-3248   MHS link不应该打通
@@ -216,31 +241,6 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     ...             AND             Close
     ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
 
-All_active_users_in_the_entire_enterprise_should_show
-    [Documentation]    Open Directory view, All active users in the entire enterprise should show.
-    [Tags]      small range 66 line
-    [Setup]     run keywords      Login_premium_user   # log in with big_admin
-    ...         AND               switch_to_second_workspace    # 切换到Canada这个WS
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
-    ...         AND               Close    # close browser
-    # log in with big_admin
-    ${driver}   driver_set_up_and_logIn    ${crunch_site_username}    ${crunch_site_password}
-    # 切换到Huiming.shi_Added_WS这个WS
-    user_switch_to_second_workspace   ${driver}    ${Huiming_shi_Added_WS}
-    # 进入Directory页面
-    switch_to_diffrent_page   ${driver}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}
-    # 获取Directory页面的所有user，放到列表中
-    ${directory_user_list}  get_all_data_on_the_page   ${driver}
-    # 进入到WS下的Users页面
-    switch_to_diffrent_page   ${driver}  ${py_users_page}    ${py_users_switch_success}    ${py_get_number_of_rows}    switch_tree   2
-    # 获取Users页面的所有active user，放到列表中
-    ${active_user_list}     get_all_data_on_the_page   ${driver}
-    ${active_user_list_final}     remove_value_from_list    ${active_user_list}   ${crunch_site_username}
-    lists should be equal   ${directory_user_list}   ${active_user_list_final}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver}
-
 User_1_receives_an_incoming_call_from_user_2
     [Documentation]    User 1 receives an incoming call from user 2	VP: User 1 should show User 2's Display Name & Avatar	End call	User 2 changes Display name & Avatar	User 1 receives an incoming call from user 2 again	VP: User 1 should show the new Display Name & Avatar
     [Tags]     small range 31 line
@@ -446,6 +446,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    refresh_browser_page   ${driver1}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
     can_connect_call_or_not    ${driver1}   ${big_admin_first_WS_name}
     # 从邮箱获取刚发送的OTU邮件
@@ -489,6 +490,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    refresh_browser_page   ${driver1}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
     can_connect_call_or_not    ${driver1}   ${a_team_user_name}
     # 从邮箱获取刚发送的OTU邮件
@@ -526,6 +528,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    refresh_browser_page   ${driver1}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
     can_connect_call_or_not    ${driver1}   ${other_site_user_2_name}
     # 从邮箱获取刚发送的OTU邮件

@@ -46,64 +46,56 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         username_value = get_xpath_element(driver,username_input).get_attribute('value')
         if username_value == username:
             time.sleep(1)
-            get_xpath_element(driver,submit_button).click()
+            get_xpath_element(driver,next_button).click()
     except Exception as e:
         print('登陆时输入email失败',e)
         screen_shot_func(driver, '登陆时输入email失败')
         raise Exception
     else:
         print('登陆时输入email成功')
-    try:    # enter password
-        for i in range(3):
-            ele_list = get_xpath_elements(driver,'//input[@style="display: block;"]')
-            ele_list_psd = get_xpath_elements(driver,password_input)
-            if len(ele_list) == 1 and len(ele_list_psd) == 1 :
-                ele_list_psd[0].send_keys(password)
-                get_xpath_element(driver,submit_button).click()
-                break
-            elif i == 2:
-                print('password输入框未出现')
-                print('再点击下NEXT按钮')
-                get_xpath_element(driver,submit_button).click()
-                for j in range(3):
-                    ele_list = get_xpath_elements(driver,'//input[@style="display: block;"]')
-                    ele_list_psd = get_xpath_elements(driver,password_input)
-                    if len(ele_list) == 1 and len(ele_list_psd) == 1:
-                        ele_list_psd[0].send_keys(password)
-                        get_xpath_element(driver,submit_button).click()
-                        break
-                    elif j == 2:
-                        print('password输入框还是未出现')
-                    else:
-                        raise Exception('password输入框还是未出现')
-            else:
+    # 输入密码
+    driver.implicitly_wait(0.1)
+    try:
+        for i in range(100):
+            time.sleep(1)
+            ele_list = get_xpath_elements(driver, '//input[@style="display: block;"]')
+            ele_list_next = get_xpath_elements(driver, next_button)
+            if len(ele_list) == 1:
+                get_xpath_element(driver, password_input).send_keys(password)
+                get_xpath_element(driver, login_button).click()
                 time.sleep(1)
-    except Exception as e:
-        print('登陆时输入password失败',e)
+                break
+            elif len(ele_list_next) == 1:
+                get_xpath_element(driver, next_button).click()
+            elif i == 99:
+                print('password输入框还是未出现')
+                raise Exception
+    except Exception:
+        print('登陆时输入password失败')
         screen_shot_func(driver, '登陆时输入password失败')
         raise Exception
     else:
         print('登陆时输入password成功')
     # 校验是否进入到主页
-    for i in range(40):
-        time.sleep(1)
-        currentPageUrl = driver.current_url
-        print("当前页面的url是：", currentPageUrl)
-        if currentPageUrl == test_web:
-            break
-        elif i == 39:
-            print('未进入到登录后的页面')
-            public_check_element(driver, submit_button, '没找到登录按钮')
-            for i in range(40):
-                time.sleep(1)
-                currentPageUrl = driver.current_url
-                print("当前页面的url是：", currentPageUrl)
-                if currentPageUrl == test_web:
-                    break
-                elif i == 39:
-                    print('再次点击登录按钮未进入首页')
-                    screen_shot_func(driver, '再次登陆失败')
-                    raise Exception
+    try:
+        for i in range(100):
+            time.sleep(1)
+            currentPageUrl = driver.current_url
+            print("当前页面的url是：", currentPageUrl)
+            if currentPageUrl == test_web:
+                break
+            ele_list_login = get_xpath_elements(driver, login_button)
+            if len(ele_list_login) == 1:
+                get_xpath_element(driver, login_button).click()
+            elif i == 99:
+                print('再次点击登录按钮未进入首页')
+                raise Exception
+    except Exception:
+        screen_shot_func(driver, '再次登陆失败')
+        raise Exception
+    else:
+        print('进入首页')
+    driver.implicitly_wait(15)
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
@@ -388,8 +380,6 @@ def exit_call(driver,call_time=20):
             raise Exception('当前参与通话的人数不到2人')
         else:
             time.sleep(15)
-    # # 点击红色的挂断电话按钮
-    # hang_up_the_phone(driver)
     # User exit call
     try:
         for i in range(5):
@@ -430,8 +420,6 @@ def end_call_for_all(driver,call_time=30):
             raise Exception
         else:
             time.sleep(10)
-    # 点击红色的挂断电话按钮
-    # hang_up_the_phone(driver)
     # 点击End_Call_for_All
     try:
         for i in range(5):
@@ -897,7 +885,13 @@ def user_switch_to_second_workspace(driver,which_ws = 'Canada'):
     """
     # 点击切换WS按钮
     click_switch_ws_button(driver)
-    public_check_element(driver, f'//div[@class="k-list-scroller"]//li[contains(.,"{which_ws}")]', f'切换到{which_ws}失败')
+    try:
+        get_xpath_element(driver, f'//div[@class="k-list-scroller"]//li[contains(.,"{which_ws}")]').click()
+    except Exception:
+        print(f'切换到{which_ws}失败')
+        screen_shot_func(driver,f'切换到{which_ws}失败')
+        raise Exception
+    # public_check_element(driver, f'//div[@class="k-list-scroller"]//li[contains(.,"{which_ws}")]', f'切换到{which_ws}失败')
     time.sleep(2)
     # 关闭Disclaimer
     user_accept_disclaimer(driver)
@@ -1001,7 +995,7 @@ def re_login_citron(driver,username,password='*IK<8ik,8ik,'):
     try:  # enter email
         get_xpath_element(driver,username_input).click()
         get_xpath_element(driver,username_input).send_keys(username)
-        get_xpath_element(driver,submit_button).click()
+        get_xpath_element(driver,next_button).click()
     except Exception as e:
         print('登陆时输入email失败', e)
         screen_shot_func(driver, '登陆时输入email失败')
@@ -1009,7 +1003,7 @@ def re_login_citron(driver,username,password='*IK<8ik,8ik,'):
     try:  # enter password
         get_xpath_element(driver,password_input).click()
         get_xpath_element(driver,password_input).send_keys(password)
-        get_xpath_element(driver,submit_button).click()
+        get_xpath_element(driver,login_button).click()
     except Exception as e:
         print('登陆时输入password失败', e)
         screen_shot_func(driver, '登陆时输入password失败')
@@ -1589,15 +1583,32 @@ def open_html_create_call(login_user,password,call_user):
     get_xpath_element(driver, '//button[@id="call-btn"]').click()
     return driver
 
+def check_a_contains_b(driver,a,b):
+    """
+    断言两个css属性值是否相同
+    :param driver:
+    :param a:
+    :param b:
+    :return:
+    """
+    try:
+        assert b in a
+    except AssertionError:
+        screen_shot_func(driver, 'css属性值断言失败')
+        raise AssertionError
+
 if __name__ == '__main__':
     # print()
     # open_html_create_call('Huiming.shi.helplightning+8888888888@outlook.com','*IK<8ik,8ik,','Huiming.shi.helplightning+111222333@outlook.com')
     # User S belong to WS1 and WS2 log in
-    driver1 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com','*IK<8ik,8ik,')
-    # Contact of WS1 log in
-    driver2 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com','*IK<8ik,8ik,')
-    # get modify picture absolute path
-    modify_picture_path = r'E:\automation_add_pages\automation_add_pages\Citron\publicData\modify_picture.jpg'
-    # Make sure the name and avator is in its original state
-    my_account_change_name_and_avator(driver2,'Huiming.shi.helplightning+99887766551','change',modify_picture_path,'back_to_contact')
-    time.sleep(100000)
+    # driver1 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com','*IK<8ik,8ik,')
+    # # Contact of WS1 log in
+    # driver2 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com','*IK<8ik,8ik,')
+    # # get modify picture absolute path
+    # modify_picture_path = r'E:\automation_add_pages\automation_add_pages\Citron\publicData\modify_picture.jpg'
+    # # Make sure the name and avator is in its original state
+    # my_account_change_name_and_avator(driver2,'Huiming.shi.helplightning+99887766551','change',modify_picture_path,'back_to_contact')
+    # time.sleep(100000)
+    driver = driver_set_up_and_logIn('Huiming.shi.helplightning+EU1@outlook.com', '*IK<8ik,8ik,',check_toturial='check_toturial')
+    ele_text = get_ele_text(driver,'//span[@class="k-link k-header"]')
+    check_a_is_queal_b(driver,ele_text,'MY HELP LIGHTNING')

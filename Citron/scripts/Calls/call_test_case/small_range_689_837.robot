@@ -305,7 +305,6 @@ Small_range_724_742
     which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
     ##### EU2 leave call   VP: call is not end    737行
     leave_call   ${driver2}
-    exit_one_driver    ${driver2}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ###### Anonymous user click link 2    VP: EU1 get Accept dialog    EU1 accept    738+739行
     ${driver9}    anonymous_open_meeting_link    ${invite_url_2}
@@ -318,7 +317,7 @@ Small_range_724_742
     user_make_call_via_meeting_link   ${driver2}    ${invite_url_2}
     ###### VP: 3PC call established successfully    End 3PC call    741+742行
     end_call_for_all       ${driver1}
-    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
+#    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
 
 Small_range_743_744
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link

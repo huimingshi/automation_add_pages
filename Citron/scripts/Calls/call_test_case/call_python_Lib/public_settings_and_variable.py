@@ -18,6 +18,8 @@ test_web = 'https://app-stage.helplightning.net.cn/'
 username_input = '//input[@autocomplete="username"]'
 password_input = '//input[@autocomplete="current-password"]'
 submit_button = '//button[@type="submit"]'
+next_button = '//button[text()="Next"]'
+login_button = '//button[text()="Log In"]'
 search_input = "filter-text-box"
 add_comment = '//textarea[@placeholder="Add a comment..."]'
 accept_disclaimer = '//button[@class="pull-right btn btn-primary"]'     # ACCEPT Disclaimer when call或者就只是ACCEPT Disclaimer

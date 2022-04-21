@@ -461,6 +461,7 @@ Small_range_671_672_673
     two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
     verify_username_in_recents_page    ${driver1}    ${Expert_User2_name}
     # User A clicks this record.
+    refresh_browser_page   ${driver1}
     can_connect_call_or_not    ${driver1}    ${Expert_User2_name}    can_connect   no_send_invite
     # Verify:call connected
     user_anwser_call     ${driver2}

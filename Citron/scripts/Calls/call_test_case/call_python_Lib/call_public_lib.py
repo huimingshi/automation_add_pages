@@ -38,8 +38,20 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     :param enter_send_invite: 是否需要进入send invite页面，默认’yes‘进入，其他表示不进入
     :return:
     """
-    public_check_element(driver, invite_user_div, '右上角三个横杠按钮不可点击')
-    public_check_element(driver, enter_invite_user_page, 'Invite图标不可点击')
+    public_check_element(driver, invite_user_div, '右上角三个横杠按钮未展示',if_click = None,if_show = 1)
+    try:
+        get_xpath_element(driver, invite_user_div).click()
+    except Exception:
+        print('右上角三个横杠按钮不可点击')
+        screen_shot_func(driver, '右上角三个横杠按钮不可点击')
+        raise Exception
+    public_check_element(driver, enter_invite_user_page, 'Invite图标未展示',if_click = None,if_show = 1)
+    try:
+        get_xpath_element(driver, enter_invite_user_page).click()
+    except Exception:
+        print('Invite图标不可点击')
+        screen_shot_func(driver, 'Invite图标不可点击')
+        raise Exception
     if enter_send_invite == 'yes':
         public_check_element(driver, send_invite_in_calling, '进入send_invite页面失败')
     elif enter_send_invite != 'yes':
@@ -770,9 +782,9 @@ if __name__ == '__main__':
     # driver6 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com', '*IK<8ik,8ik,')
     # driver7 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766553@outlook.com', '*IK<8ik,8ik,')
     # driver8 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com', '*IK<8ik,8ik,')
-    driver9 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU1@outlook.com', '*IK<8ik,8ik,')
-    driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU2@outlook.com', '*IK<8ik,8ik,')
-    driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')
+    # driver9 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS3_branding_A@outlook.com ', '*IK<8ik,8ik,')
+    # driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS3_branding_B@outlook.com ', '*IK<8ik,8ik,')
+    # driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')
     # driver12 = driver_set_up_and_logIn('Huiming.shi.helplightning+Expert_B@outlook.com', '*IK<8ik,8ik,')
     # driver13 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')
     # driver14 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_A@outlook.com', '*IK<8ik,8ik,')
@@ -784,4 +796,5 @@ if __name__ == '__main__':
     # driverxyz = driver_set_up_and_logIn('emily.huang+bsb', 'abc123')
     # driver20 = driver_set_up_and_logIn('huiming.shi@helplightning.com', '*IK<8ik,8ik,')
     # driver21 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS3_branding_B@outlook.com', '*IK<8ik,8ik,')
-    time.sleep(10000)
+    # time.sleep(10000)
+    print()

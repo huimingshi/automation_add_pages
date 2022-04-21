@@ -39,7 +39,6 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
     """
     try:
         for i in range(5):
-            # ele_list = driver.find_elements_by_xpath(xpath)
             ele_list = get_xpath_elements(driver, xpath)
             if if_show and if_click:
                 if len(ele_list) >= 1:
@@ -74,7 +73,7 @@ def get_xpath_element(driver,xpath,ec = None):
     :return:
     """
     if not ec:
-        return WebDriverWait(driver, 15, 0.5).until(EC.visibility_of_element_located(('xpath',xpath)))
+        return WebDriverWait(driver, 20, 0.5).until(EC.visibility_of_element_located(('xpath',xpath)))
     else:
         return driver.find_element('xpath', xpath)
 
@@ -87,3 +86,9 @@ def get_xpath_elements(driver,xpath):
     """
     elements_list = driver.find_elements('xpath', xpath)
     return elements_list
+
+
+
+
+if __name__ == '__main__':
+    kill_all_browser()

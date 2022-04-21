@@ -407,6 +407,7 @@ Small_range_637_642
     #user B: expert name
     verify_username_in_recents_page     ${driver3}    ${Expert_Bb_name}
     # customer clicks on on-call group name
+    refresh_browser_page   ${driver1}
     can_connect_call_or_not    ${driver1}    ${another_on_call_group_name}   can_connect    no_send_invite
     # the same customer receives incoming call	customer accepts call
     user_anwser_call    ${driver2}
@@ -451,6 +452,7 @@ Small_range_638_640
     #user B: expert name
     verify_username_in_recents_page     ${driver3}    ${User_Aa_name}
     # make call via recent tab	expert clicks on customer's name
+    refresh_browser_page   ${driver3}
     can_connect_call_or_not    ${driver3}   ${User_Aa_name}   can_connect    no_send_invite
     # the same customer receives incoming call	customer accepts call
     user_anwser_call    ${driver1}
