@@ -317,7 +317,7 @@ Small_range_724_742
     user_make_call_via_meeting_link   ${driver2}    ${invite_url_2}
     ###### VP: 3PC call established successfully    End 3PC call    741+742行
     end_call_for_all       ${driver1}
-#    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
+    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
 
 Small_range_743_744
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
