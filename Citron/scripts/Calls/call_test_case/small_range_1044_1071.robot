@@ -107,7 +107,7 @@ Small_range_1052
 
 Small_range_1047
     [Documentation]     External invitation message     set msg to pure character    Site user send 3PI link
-    [Tags]    small range 1047 line
+    [Tags]    small range 1047 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             fill_invitation_message_content      I Am Dark Horse     # 填写信息
@@ -126,7 +126,7 @@ Small_range_1047
 
 Small_range_1050
     [Documentation]     External invitation message     Set msg to Chinese character + special charator     Site user send 3PI link
-    [Tags]    small range 1050 line
+    [Tags]    small range 1050 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             fill_invitation_message_content      德玛西亚+[]-()     # 填写信息
@@ -145,7 +145,7 @@ Small_range_1050
 
 Small_range_1053
     [Documentation]     External invitation message     Turn off feature     Site user send 3PI link
-    [Tags]    small range 1053 line
+    [Tags]    small range 1053 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
@@ -164,7 +164,7 @@ Small_range_1053
 
 #Small_range_1054_1060
 #    [Documentation]     Launch edge browser
-#    [Tags]    small range 1054-1060 lines
+#    [Tags]    small range 1054-1060 lines      call_case
 #    # Launch edge browser   Open website https://helplightning.com/
 #    ${driver1}   open_website_without_chrome   edge    https://helplightning.com/
 #    # New another tab and go to citron stage page
@@ -187,7 +187,7 @@ Small_range_1053
 
 #Small_range_1061_1067
 #    [Documentation]     Launch Firefox browser
-#    [Tags]    small range 1061-1067 lines
+#    [Tags]    small range 1061-1067 lines      call_case
 #    # Launch edge browser   Open website https://helplightning.com/
 #    ${driver1}   open_website_without_chrome     firefox    https://helplightning.com/
 #    # New another tab and go to citron stage page
@@ -210,7 +210,7 @@ Small_range_1053
 
 #Small_range_1068_1071
 #    [Documentation]     Open the HTML file[Helplightning Integration Test Tool.html]
-#    [Tags]    small range 1068-1071 lines，有bug：https://vipaar.atlassian.net/browse/WEBJS-2833
+#    [Tags]    small range 1068-1071 lines，有bug：https://vipaar.atlassian.net/browse/WEBJS-2833      call_case
 #    # 被呼叫的用户先登录
 #    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
 #    # 打开html页面并登录

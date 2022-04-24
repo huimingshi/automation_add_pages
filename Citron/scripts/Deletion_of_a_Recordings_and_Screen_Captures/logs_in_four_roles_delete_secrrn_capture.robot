@@ -8,7 +8,7 @@ Library           make_a_call_lib.py
 *** Test Cases ***
 logs_in_Citron_as_Group_admin
     [Documentation]    logs in Citron as Group admin
-    [Tags]    logs in Citron as Group admin
+    [Tags]    Citron 308-314     call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${group_admin_username}           10
@@ -36,7 +36,7 @@ logs_in_Citron_as_Group_admin
 
 logs_in_Citron_as_Normal_User
     [Documentation]    logs in Citron as Normal admin
-    [Tags]    logs in Citron as Normal admin
+    [Tags]    Citron 315        call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   10
@@ -57,7 +57,7 @@ logs_in_Citron_as_Normal_User
 
 #logs_in_Citron_as_Site_admin
 #    [Documentation]    logs in Citron as Site admin
-#    [Tags]    logs in Citron as Site admin,有bug，CITRON-3191，Site admin没有delete screen capture 的权限
+#    [Tags]    Citron 294-300,有bug，CITRON-3191，Site admin没有delete screen capture 的权限      call_case
 #    [Setup]  delete_all_jpg_and_jpeg_picture
 #    # Start two drivers and logIn
 #    ${driver1}   driver_set_up_and_logIn    ${site_admin_email}   10
@@ -85,7 +85,7 @@ logs_in_Citron_as_Normal_User
 
 logs_in_Citron_as_Workspace_admin
     [Documentation]    logs in Citron as Workspace admin
-    [Tags]    logs in Citron as Workspace admin
+    [Tags]    Citron 301-307     call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${workspace_admin_username}    10

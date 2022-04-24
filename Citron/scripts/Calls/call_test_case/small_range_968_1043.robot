@@ -11,7 +11,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_970_974
     [Documentation]     WS branding   Turn on branding for Workspace WS1
-    [Tags]    small range 970-974 lines
+    [Tags]    small range 970-974 lines     call_case
     [Setup]     run keywords    Login_premium_user
     ...         AND             switch_to_created_workspace       ${created_workspace}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page       # 进入settings页面
@@ -44,7 +44,7 @@ Small_range_970_974
 
 Small_range_977_993
     [Documentation]     Change product name to text with Chinese character+number+special character
-    [Tags]    small range 977_993 lines
+    [Tags]    small range 977_993 lines         call_case
     [Setup]     run keywords    Login_workspaces_admin
     ...         AND             enter_workspace_settings_page           # 进入settings页面
     ...         AND             expand_workspace_branding_setting       # 展开Workspace Branding设置
@@ -242,7 +242,7 @@ Small_range_977_993
 
 Small_range_995_996
     [Documentation]     WS branding     Set workspace WS2 accent color to Green, Big Logo 2 & Avatar 2, WS1 to orange, Big Logo 1 & Avatar 1      User A call user B directly
-    [Tags]    small range 995-996 lines
+    [Tags]    small range 995-996 lines     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace       ${created_workspace_branding_1}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page       # 进入settings页面
@@ -317,7 +317,7 @@ Small_range_995_996
 
 Small_range_997
     [Documentation]     User A call other site user[User B] from personal contact list, other site user has not customer avatar & WS branding = OFF
-    [Tags]    small range 997 line
+    [Tags]    small range 997 line      call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace       ${created_workspace_branding_1}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page       # 进入settings页面
@@ -385,7 +385,7 @@ Small_range_997
 
 Small_range_998
     [Documentation]     User C switch to WS2	Use A call user C from Team contact
-    [Tags]    small range 998 line
+    [Tags]    small range 998 line      call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -448,7 +448,7 @@ Small_range_998
 
 Small_range_999
     [Documentation]     User A click B's meeing link
-    [Tags]    small range 999 line
+    [Tags]    small range 999 line      call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -507,7 +507,7 @@ Small_range_999
 
 Small_range_1000_1001
     [Documentation]     Anonyoums click B's meeting link
-    [Tags]    small range 1000-1001 lines
+    [Tags]    small range 1000-1001 lines       call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -578,7 +578,7 @@ Small_range_1000_1001
 
 Small_range_1002_1004
     [Documentation]     User B send 3PI link    User C switch to WS2    User C click 3PI link to join call
-    [Tags]    small range 1002-1004 lines
+    [Tags]    small range 1002-1004 lines       call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -643,7 +643,7 @@ Small_range_1002_1004
 
 Small_range_1005_1007
     [Documentation]     User C switch to WS1    User C switch to WS2
-    [Tags]    small range 1005-1007 lines
+    [Tags]    small range 1005-1007 lines       call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -734,7 +734,7 @@ Small_range_1005_1007
 
 Small_range_1009
     [Documentation]     Click inactive 3PI link(nobody in call) that call's owner is User B
-    [Tags]    small range 1009 line
+    [Tags]    small range 1009 line     call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -765,7 +765,7 @@ Small_range_1009
 
 Small_range_1010_1017
     [Documentation]     Precondition: Expert Group 1[EG 1] in WS 1. User B is in EG 1.
-    [Tags]    small range 1010-1017 lines, 有bug：https://vipaar.atlassian.net/browse/CITRON-3345
+    [Tags]    small range 1010-1017 lines, 有bug：https://vipaar.atlassian.net/browse/CITRON-3345     call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -857,7 +857,7 @@ Small_range_1010_1017
 
 Small_range_1018_1026
     [Documentation]     Change big logo     Change Default avatar
-    [Tags]    small range 1018-1026 lines
+    [Tags]    small range 1018-1026 lines       call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace       ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -949,7 +949,7 @@ Small_range_1018_1026
 
 Small_range_1027_1030
     [Documentation]     Turn off feature
-    [Tags]    small range 1027-1030 lines
+    [Tags]    small range 1027-1030 lines       call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace       ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -978,7 +978,7 @@ Small_range_1027_1030
 
 Small_range_1031
     [Documentation]    Turn off feature    User B call user A directly
-    [Tags]    small range 1031 line
+    [Tags]    small range 1031 line     call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
@@ -1039,7 +1039,7 @@ Small_range_1031
 
 Small_range_1032
     [Documentation]     Turn off feature    User B click A's meeing link
-    [Tags]    small range 1032 line
+    [Tags]    small range 1032 line     call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
@@ -1099,7 +1099,7 @@ Small_range_1032
 
 Small_range_1033_1035
     [Documentation]     Turn off feature    Anonyoums click B's meeting link
-    [Tags]    small range 1033-1035 lines
+    [Tags]    small range 1033-1035 lines       call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
@@ -1155,7 +1155,7 @@ Small_range_1033_1035
 
 Small_range_1036_1043
     [Documentation]     Precondition: Expert Group 1[EG 1] in WS 1. User B is in EG 1.
-    [Tags]    small range 1036-1043 lines
+    [Tags]    small range 1036-1043 lines       call_case
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态

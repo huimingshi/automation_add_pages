@@ -12,7 +12,7 @@ Force Tags        small_range
 
 #Call_Tag_Comment_592_595
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 592-595  lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮
+#    [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮      call_case
 #    [Setup]     run keywords      Login_premium_user   # log in with premium admin
 #    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
 #    ...         AND               Close
@@ -77,7 +77,7 @@ Force Tags        small_range
 #
 #Call_Tag_Comment_596_599
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 596-599  lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮
+#    [Tags]     small range 596-599 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮         call_case
 #    [Setup]     run keywords      Login_premium_user   # log in with premium admin
 #    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
 #    ...         AND               Close
@@ -140,7 +140,7 @@ Force Tags        small_range
 #
 #Call_Tag_Comment_600_604
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 600-604  lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮
+#    [Tags]     small range 600-604 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮       call_case
 #    [Setup]     run keywords      Login_premium_user   # log in with premium admin
 #    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
 #    ...         AND               Close
@@ -213,7 +213,7 @@ Force Tags        small_range
 #
 #Call_Tag_Comment_605_606
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 605-606  lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮
+#    [Tags]     small range 605-606 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮       call_case
 #    [Setup]     run keywords      Login_premium_user   # log in with premium admin
 #    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
 #    ...         AND               Close
@@ -246,7 +246,7 @@ Force Tags        small_range
 
 Call_survey_608_610
     [Documentation]   Call survey(Tier of enterprise and above)   Customer call Experts group[all have survey & call tag permission]   Customer invite a enterprise user
-    [Tags]     small range 608-610 lines
+    [Tags]     small range 608-610 lines        call_case
     [Setup]     run keywords      Login_workspaces_admin            # log in with WS admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
@@ -313,7 +313,7 @@ Call_survey_608_610
 
 Call_survey_611_615
     [Documentation]   Call survey(Tier of enterprise and above)   Pre-condition:(A & B not in the same company)    3PC call
-    [Tags]     small range 611-615 lines
+    [Tags]     small range 611-615 lines        call_case
     [Setup]     run keywords      Login_premium_user                # log in with SITE admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
@@ -381,7 +381,7 @@ Call_survey_611_615
 
 Call_survey_616_618
     [Documentation]   Call survey(Tier of enterprise and above)   Anonymous call Meeting Owner
-    [Tags]     small range 616-618 lines
+    [Tags]     small range 616-618 lines        call_case
     [Setup]     run keywords      Login_workspaces_admin            # log in with WS admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态

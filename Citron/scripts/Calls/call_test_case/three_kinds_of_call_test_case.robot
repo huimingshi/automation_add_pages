@@ -10,7 +10,7 @@ Library           call_python_Lib/else_public_lib.py
 *** Test Cases ***
 Make_a_business_call_between_business_and_personal_user
     [Documentation]    Make a call between business  and  personal user
-    [Tags]    Make a call between business  and  personal user
+    [Tags]    Make a call between business  and  personal user      call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
@@ -23,7 +23,7 @@ Make_a_business_call_between_business_and_personal_user
 
 Make_a_business_call_duration_more_than_1_min
     [Documentation]    Make a business call duration > 1 min
-    [Tags]    Make a business call duration > 1 min
+    [Tags]    Make a business call duration > 1 min     call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}

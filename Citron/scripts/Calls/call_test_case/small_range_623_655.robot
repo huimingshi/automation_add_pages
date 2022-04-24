@@ -11,7 +11,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_623_two_users_login
     [Documentation]     check team list according to citron
-    [Tags]    small range 623 line
+    [Tags]    small range 623 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${User_A_username}     ${universal_password}
     # team list for user A is:Quantum Mechanics (on-call group is marked with visual indication, email field is blank for web side)  Feynman  Gell-mann  User B  (the order to show from top to below: on-call groups  alphabetically, users in external and internal groups alphabetically
@@ -29,7 +29,7 @@ Small_range_623_two_users_login
 
 Small_range_625_627
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert A set on for on-Call option.
-    [Tags]    small range 625-627 lines
+    [Tags]    small range 625-627 lines     call_case
     # Expert A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_A_username}    ${universal_password}
     # User A 登录
@@ -66,7 +66,7 @@ Small_range_625_627
 
 Small_range_628_629
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert B set on  for on-Call option.
-    [Tags]    small range 628-629 lines
+    [Tags]    small range 628-629 lines     call_case
     # Expert A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_B_username}    ${universal_password}
     #-------------------------------------------------------------------------#
@@ -105,7 +105,7 @@ Small_range_628_629
 
 Small_range_630_631
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert C set on  for on-Call option.	Expert C is in call.
-    [Tags]    small range 630-631 lines
+    [Tags]    small range 630-631 lines     call_case
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
@@ -159,7 +159,7 @@ Small_range_630_631
 
 Small_range_632
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
-    [Tags]    small range 632 line
+    [Tags]    small range 632 line      call_case
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
@@ -232,7 +232,7 @@ Small_range_632
 
 Small_range_633
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
-    [Tags]    small range 633 line
+    [Tags]    small range 633 line      call_case
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
@@ -286,7 +286,7 @@ Small_range_633
 
 Small_range_634
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
-    [Tags]    small range 634 line
+    [Tags]    small range 634 line      call_case
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
@@ -337,7 +337,7 @@ Small_range_634
 
 Small_range_636
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
-    [Tags]    small range 636 line
+    [Tags]    small range 636 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}     ${universal_password}
     # Expert 登录
@@ -375,7 +375,7 @@ Small_range_636
 
 Small_range_637_642
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
-    [Tags]    small range 637+642 lines
+    [Tags]    small range 637+642 lines     call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}     ${universal_password}
     # Expert 登录
@@ -417,7 +417,7 @@ Small_range_637_642
 
 Small_range_638_640
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
-    [Tags]    small range 638+640 lines
+    [Tags]    small range 638+640 lines     call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}     ${universal_password}
     # Expert 登录
@@ -462,7 +462,7 @@ Small_range_638_640
 
 Small_range_639
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
-    [Tags]    small range 639 line
+    [Tags]    small range 639 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}     ${universal_password}
     # Expert 登录
@@ -497,7 +497,7 @@ Small_range_639
 
 Small_range_646
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Citron site admin add expert A to another workspace WS2
-    [Tags]    small range 646 line
+    [Tags]    small range 646 line      call_case
     #------------------------------------------------------------------------------------------------------#
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
@@ -526,7 +526,7 @@ Small_range_646
 
 Small_range_647_648_649_650
     [Documentation]     3PI - Expert call
-    [Tags]    small range 647+648+649+650 lines
+    [Tags]    small range 647+648+649+650 lines     call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # expertA 登录
@@ -547,7 +547,7 @@ Small_range_647_648_649_650
 
 Small_range_651_652_653
     [Documentation]     3PI - Expert call
-    [Tags]    small range 651+652+653 lines
+    [Tags]    small range 651+652+653 lines     call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # expertA 登录
@@ -568,7 +568,7 @@ Small_range_651_652_653
 
 Small_range_654_655
     [Documentation]     3PI - Expert call
-    [Tags]    small range 654+655 lines
+    [Tags]    small range 654+655 lines     call_case
     # TU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
     # expertA 登录

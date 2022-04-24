@@ -11,7 +11,7 @@ Force Tags        small_range
 *** Test Cases ***
 #Small_range_149_151
 #    [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
-#    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show， shttps://vipaar.atlassian.net/browse/CITRON-3353
+#    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show， shttps://vipaar.atlassian.net/browse/CITRON-3353     call_case
 #    # premium user log in
 #    ${driver1}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
 #    # Contact of premium user log in
@@ -39,7 +39,7 @@ Force Tags        small_range
 
 Small_range_152
     [Documentation]    2 users in face to face mode
-    [Tags]      small range 152 line
+    [Tags]      small range 152 line     call_case
     # user1 log in
     ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}   ${universal_password}
     # user2 log in
@@ -63,7 +63,7 @@ Small_range_152
 
 Small_range_153_160
     [Documentation]    Enterprise user call contact in F2F mode
-    [Tags]      small range 153-160 lines
+    [Tags]      small range 153-160 lines       call_case
     # Enterprise user log in
     ${driver1}  driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
     # contact of Enterprise user log in
@@ -113,7 +113,7 @@ Small_range_153_160
 
 Small_range_161
     [Documentation]    WebApp specific
-    [Tags]      small range 161 line
+    [Tags]      small range 161 line        call_case
     # user1 log in
     ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}   ${universal_password}
     # user2 log in
@@ -137,7 +137,7 @@ Small_range_161
 
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly
-    [Tags]     small range 162-167 lines
+    [Tags]     small range 162-167 lines        call_case
     [Setup]     run keywords      Login_premium_user                # log in with Site Admin
     ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
@@ -179,7 +179,7 @@ Join_call_162_167
 
 Join_call_168_178
     [Documentation]     Join call	MPC via on-call group.
-    [Tags]     small range 168-178 lines
+    [Tags]     small range 168-178 lines        call_case
     [Setup]     run keywords      Login_site_admin                  # log in with Site Admin
     ...         AND               switch_to_created_workspace       ${created_workspace_branding_3}      # 进入WS_branding_setting_WS3这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
@@ -236,7 +236,7 @@ Join_call_168_178
 
 Join_call_179_187
     [Documentation]     Join call	MPC via MHS link.
-    [Tags]     small range 179-187 lines
+    [Tags]     small range 179-187 lines        call_case
     [Setup]     run keywords      Login_premium_user                # log in with Site Admin
     ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
@@ -298,7 +298,7 @@ Join_call_179_187
 
 Join_call_188_195
     [Documentation]     Join call	MPC via OTU link.
-    [Tags]     small range 188-195 lines
+    [Tags]     small range 188-195 lines        call_case
     [Setup]     run keywords      Login_premium_user                # log in with Site Admin
     ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
@@ -350,7 +350,7 @@ Join_call_188_195
 
 Join_call_196_200
     [Documentation]     In call	  2PC
-    [Tags]     small range 196-200 lines
+    [Tags]     small range 196-200 lines        call_case
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}        ${call_oncall_user_password}
     # EU2 登录
@@ -399,7 +399,7 @@ Join_call_196_200
 
 Join_call_201_205
     [Documentation]     In call	  2PC
-    [Tags]     small range 201-205 lines
+    [Tags]     small range 201-205 lines        call_case
     [Setup]     run keywords      Login_premium_user                # log in with Site Admin
     ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
@@ -445,7 +445,7 @@ Join_call_201_205
 
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
-    [Tags]    small range 560-580 lines
+    [Tags]    small range 560-580 lines     call_case
     [Setup]     run keywords      Login_premium_user                # log in with Site Admin
     ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
     ...         AND               enter_workspace_settings_page     # 进入settings页面
@@ -542,7 +542,7 @@ Small_range_560_580
 
 Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
-    [Tags]    small range 581-582 lines
+    [Tags]    small range 581-582 lines     call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # EU2 登录
@@ -563,7 +563,7 @@ Small_range_581_582
 
 Small_range_583_585
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
-    [Tags]    small range 583-585 lines
+    [Tags]    small range 583-585 lines         call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # EU2 登录
@@ -593,7 +593,7 @@ Small_range_583_585
 
 Small_range_590
     [Documentation]     3PI - Direct call     TU1 call EU1 from contact list
-    [Tags]    small range 590 line
+    [Tags]    small range 590 line      call_case
     # TU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
     # EU2 登录
@@ -609,7 +609,7 @@ Small_range_590
 
 Small_range_591
     [Documentation]     3PI - Direct call     TU1 call EU1 via EU1's MHS link
-    [Tags]    small range 590 line
+    [Tags]    small range 590 line      call_case
     # TU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
     # EU2 登录
@@ -627,7 +627,7 @@ Small_range_591
 
 Small_range_592
     [Documentation]     3PI - Direct call     Pre-condition: userS has personal contact from another site
-    [Tags]    small range 590 line
+    [Tags]    small range 590 line      call_case
     # userS 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     # personal contact 登录

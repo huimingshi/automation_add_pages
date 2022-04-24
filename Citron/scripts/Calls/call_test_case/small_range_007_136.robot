@@ -11,7 +11,7 @@ Force Tags        small_range
 *** Test Cases ***
 All_active_users_in_the_entire_enterprise_should_show
     [Documentation]    Open Directory view, All active users in the entire enterprise should show.
-    [Tags]      small range 66 line
+    [Tags]      small range 66 line       call_case
     [Setup]     run keywords      Login_premium_user   # log in with big_admin
     ...         AND               switch_to_second_workspace    # 切换到Canada这个WS
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
@@ -36,7 +36,7 @@ All_active_users_in_the_entire_enterprise_should_show
 
 Disable_External_Users_Pre_condition_In_a_site_meeting_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
-    [Tags]    small range 103+104+105+107 line     有bug：https://vipaar.atlassian.net/browse/CITRON-3248   MHS link不应该打通
+    [Tags]    small range 103+104+105+107 line     有bug：https://vipaar.atlassian.net/browse/CITRON-3248   MHS link不应该打通     call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
     ...         AND               Close
@@ -65,7 +65,7 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
 
 Disable_External_Users_Pre_condition_In_a_site_on_call_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
-    [Tags]     small range 103+104+106+108  line
+    [Tags]     small range 103+104+106+108 line    call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
     ...         AND               Close
@@ -90,7 +90,7 @@ Disable_External_Users_Pre_condition_In_a_site_on_call_link
 
 User_Directory_User_open_invite_3rd_participant_dialog
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
-    [Tags]      small range 84 line
+    [Tags]      small range 84 line     call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_workspace_directory      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
     ...         AND               Close
@@ -110,7 +110,7 @@ User_Directory_User_open_invite_3rd_participant_dialog
 
 User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
-    [Tags]      small range 85 line
+    [Tags]      small range 85 line      call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_workspace_directory      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
     ...         AND               Close
@@ -130,7 +130,7 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
 
 Disable_External_Users_check_case_1
     [Documentation]    in Citron-Admin-Calls, name of personal user and user from another site workspace should display as "External User" in call list and call details page
-    [Tags]      small range 94 line
+    [Tags]      small range 94 line      call_case
     [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
@@ -161,7 +161,7 @@ Disable_External_Users_check_case_1
 
 Disable_External_Users_check_case_2
     [Documentation]    Personal user or user from another site workspace logs in,VP: they should not be able to call this site workspace user via meeting link
-    [Tags]         small range 96+97+98+99  line   有bug：https://vipaar.atlassian.net/browse/CITRON-3248   MHS link不应该打通
+    [Tags]         small range 96+97+98+99 line   有bug：https://vipaar.atlassian.net/browse/CITRON-3248   MHS link不应该打通       call_case
     [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
@@ -196,7 +196,7 @@ Disable_External_Users_check_case_2
 
 Disable_External_Users_check_case_3
     [Documentation]    Anonymous user  VP: he should be able to call this site workspace user via meeting link   VP: he should be able to call this site workspace via on-call group link
-    [Tags]    small range 99+100  line
+    [Tags]    small range 99+100 line         call_case
     [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               open_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
@@ -223,7 +223,7 @@ Disable_External_Users_check_case_3
 
 In_calling_page_clicks_Invite_Send_Invitation_page
     [Documentation]    In calling page, clicks Invite -> Send Invitation page
-    [Tags]      small range 51 line
+    [Tags]      small range 51 line         call_case
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     # Contact of WS1 log in
@@ -243,7 +243,7 @@ In_calling_page_clicks_Invite_Send_Invitation_page
 
 User_1_receives_an_incoming_call_from_user_2
     [Documentation]    User 1 receives an incoming call from user 2	VP: User 1 should show User 2's Display Name & Avatar	End call	User 2 changes Display name & Avatar	User 1 receives an incoming call from user 2 again	VP: User 1 should show the new Display Name & Avatar
-    [Tags]     small range 31 line
+    [Tags]     small range 31 line       call_case
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     # Contact of WS1 log in
@@ -268,7 +268,7 @@ User_1_receives_an_incoming_call_from_user_2
 
 During_Call_open_invite_the_3rd_participant_page
     [Documentation]    During Call, open invite the 3rd participant page	Scrolls  the contact list 	VP: show a 'loading...' , and once stop, contact name should be shown up.	In Citron update the display name & Avatar of one member of contact list	Pull-down in Team tab to refresh	VP: the updated contact list should be shown up.
-    [Tags]      small range 32+33 line
+    [Tags]      small range 32+33 line          call_case
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     # Contact of WS1 log in
@@ -300,7 +300,7 @@ During_Call_open_invite_the_3rd_participant_page
 
 User_A_opens_Directory_tab
     [Documentation]    Team user C exists in Directory tab.     User C has signed out of every instance of mobile app and web.
-    [Tags]     small range  110  line
+    [Tags]     small range 110 line        call_case
     [Setup]     run keywords      Login_premium_user              # log in with premium admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
@@ -322,7 +322,7 @@ User_A_opens_Directory_tab
 
 User_A_opens_Personal_contact_tab
     [Documentation]    Personal users D and user E (from different site) exists in Personal contact tab.    User D and user E has signed out of every instance of mobile app and web.
-    [Tags]     small range  111  line
+    [Tags]     small range 111 line             call_case
     [Setup]     run keywords      Login_workspaces_admin          # log in with workspace admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
@@ -344,7 +344,7 @@ User_A_opens_Personal_contact_tab
 
 User_B_displays_as_reachable
     [Documentation]    Expert user B exists in recent tab. contact list.    User B  signed out of every instance of mobile app and web.
-    [Tags]     small range  112  line
+    [Tags]     small range 112 line       call_case
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     # Expert user B logs in
@@ -359,7 +359,7 @@ User_B_displays_as_reachable
 
 #User_B_stays_logged_in_on_one_device_User_B_is_user_A_contact
 #    [Documentation]    User A opens Team contact tab. User B stays logged in on one device. User B is user A’s contact. 	User B logouts.
-#    [Tags]     small range  113  line  ，有bug：https://vipaar.atlassian.net/browse/CITRON-3274
+#    [Tags]     small range 113 line  ，有bug：https://vipaar.atlassian.net/browse/CITRON-3274         call_case
 #    [Setup]     run keywords      Login_premium_user              # log in with premium admin
 #    ...         AND               enter_workspace_settings_page   # enter workspace settings page
 #    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
@@ -387,7 +387,7 @@ User_B_displays_as_reachable
 
 User_B_logouts_from_one_device
     [Documentation]    User A opens Team contact tab. User B stays logged in on two devices. User B is user A’s contact.
-    [Tags]     small range  114  line
+    [Tags]     small range 114 line     call_case
     [Setup]     run keywords      Login_premium_user              # log in with premium admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
@@ -409,7 +409,7 @@ User_B_logouts_from_one_device
 
 unable_to_reach_user_message_displays
     [Documentation]    User A and user B are in 2PC.   Team user C exists in Directory tab.   User C has signed out of every instance of mobile app and web.	User A opens invite contact view.
-    [Tags]     small range  115  line
+    [Tags]     small range 115 line       call_case
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     # Expert user B logs in
@@ -430,7 +430,7 @@ unable_to_reach_user_message_displays
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.
-    [Tags]     small range  122+123+127+130  line
+    [Tags]     small range 122+123+127+130 line        call_case
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is expert user log in
@@ -474,7 +474,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
-    [Tags]     small range  122+124+128  line
+    [Tags]     small range 122+124+128 line      call_case
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     # User B is team user log in
@@ -508,7 +508,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
-    [Tags]     small range  122+126  line
+    [Tags]     small range 122+126 line       call_case
     [Setup]     run keywords      Login_workspaces_admin          # log in with workspace admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
@@ -543,7 +543,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
 
 Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
-    [Tags]     small range  131+132+133  line
+    [Tags]     small range 131+132+133 line        call_case
     # Team user log in
     ${driver1}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # 在Contacts页面查询user
@@ -564,7 +564,7 @@ Team_user_A_signs_in_User_B_is_expert_user
 
 check_personal_user_can_see_user_S_is_unreachable_status
     [Documentation]    Pre-condition: User S belong to workspace WS1 and WS2    User S switch to WS1   User S logout of all devices
-    [Tags]     small range  135+136  line
+    [Tags]     small range 135+136 line        call_case
     [Setup]     run keywords      Login_premium_user              # log in with premium admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off

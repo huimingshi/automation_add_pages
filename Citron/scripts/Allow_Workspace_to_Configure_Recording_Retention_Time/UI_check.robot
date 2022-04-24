@@ -7,7 +7,7 @@ Resource          ../../Lib/public.robot
 *** Test Cases ***
 UI_testcase
     [Documentation]    UI check
-    [Tags]    UI check
+    [Tags]    Citron 318
     [Setup]     restore_the_settings_to_the_initial_value
     # log in with workspaces admin
     Login_workspaces_admin_one
@@ -19,7 +19,7 @@ UI_testcase
 
 Enabled_Disabled_Retention_Policy_for_Recordings
     [Documentation]    Enabled Retention Policy for Recordings
-    [Tags]    Enabled Retention Policy for Recordings
+    [Tags]    Citron 319
     # log in with workspaces admin
     Login_workspaces_admin_one
     # enter Workspace Settings page
@@ -38,7 +38,7 @@ Enabled_Disabled_Retention_Policy_for_Recordings
 
 Click_Edit_button_set_Day_to_1
     [Documentation]    Click Edit button Set Day =1
-    [Tags]    Click Edit button Set Day =1
+    [Tags]    Citron 320
     [Setup]   restore_the_settings_to_the_initial_value
     # log in with workspaces admin
     Login_workspaces_admin_one
@@ -59,7 +59,7 @@ Click_Edit_button_set_Day_to_1
 
 Click_Edit_button_set_Day_to_0_and_366
     [Documentation]    Click Edit button Set Day =1
-    [Tags]    Click Edit button Set Day =1
+    [Tags]    Citron 321-326
     # log in with workspaces admin
     Login_workspaces_admin_one
     # enter Workspace Settings page
@@ -70,16 +70,12 @@ Click_Edit_button_set_Day_to_0_and_366
 
 Turn_both_Call_Logs_and_Recordings_Screen_Captures_policies_ON
     [Documentation]    Turn both Call Logs and Recordings/Screen Captures policies ON
-    [Tags]    Turn both Call Logs and Recordings/Screen Captures policies ON
-    [Setup]   restore_the_settings_to_the_initial_value
-    # log in with workspaces admin
-    Login_workspaces_admin_one
-    # enter Workspace Settings page
-    enter_workspace_settings_page
-    # make sure setting visiable
-    make_sure_setting_visiable
-    # make sure Retention Policy: Recordings and Screen Captures State text visiable
-    make_sure_RaSC_text_visiable
+    [Tags]    Citron 327-336
+    [Setup]     run keywords      restore_the_settings_to_the_initial_value
+    ...         AND               Login_workspaces_admin_one   # log in with workspaces admin
+    ...         AND               enter_workspace_settings_page    # enter Workspace Settings page
+    ...         AND               make_sure_setting_visiable    # make sure setting visiable
+    ...         AND               make_sure_RaSC_text_visiable    # make sure Retention Policy: Recordings and Screen Captures State text visiable
     # Change Recordings/Screen Captures policy to 99 days.
     set_RaSC_day_equal_to_correct  99
     # make sure Retention Policy: Call Logs State text visiable

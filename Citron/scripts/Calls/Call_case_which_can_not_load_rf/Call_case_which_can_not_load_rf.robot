@@ -7,7 +7,7 @@ Library           Call_case_which_can_not_load_rf_ib.py
 *** Test Cases ***
 Calls_filter_by_duration_greater_than_60_test
     [Documentation]    filter by duration (greater than 60)
-    [Tags]    filter by duration (greater than 60)
+    [Tags]    Citron 267
     # log in with workspace admin
     ${driver}   log_in_lib   ${workspace_admin_username}    ${workspace_admin_password}
     # 进入到Calls页面
@@ -22,7 +22,7 @@ Calls_filter_by_duration_greater_than_60_test
 
 Site_Admin_Calls_Select_one_of_value_in_Occurred_Within_field
     [Documentation]    Select one of value in 'Occurred Within' field
-    [Tags]    Select one of value in 'Occurred Within' field
+    [Tags]    Citron 503
     # log in with workspace admin
     ${driver}   log_in_lib    ${site_admin_username}    ${site_admin_password}
     # 进入到Calls页面
@@ -35,7 +35,7 @@ Site_Admin_Calls_Select_one_of_value_in_Occurred_Within_field
 
 Calls_Click_call_tag_link_to_filter_call
     [Documentation]    Click call tag link to filter call
-    [Tags]    Click call tag link to filter call
+    [Tags]    Citron 270
     # log in with workspace admin
     ${driver}   log_in_lib    ${workspace_admin_username}    ${workspace_admin_password}
     # make sure After Call: Tagging and Comments status correct
@@ -52,7 +52,7 @@ Calls_Click_call_tag_link_to_filter_call
 
 Calls_filter_by_dialer
     [Documentation]    filter by dialer
-    [Tags]    filter by dialer
+    [Tags]    Citron 264
     # log in with workspace admin
     ${driver}   log_in_lib   ${workspace_admin_username}    ${workspace_admin_password}
     # 进入到Calls页面
@@ -65,7 +65,7 @@ Calls_filter_by_dialer
 
 Calls_filter_by_participant
     [Documentation]    filter by participant
-    [Tags]    filter by participant
+    [Tags]    Citron 264
     # log in with workspace admin
     ${driver}   log_in_lib     ${workspace_admin_username}    ${workspace_admin_password}
     # 进入到Calls页面
@@ -78,7 +78,7 @@ Calls_filter_by_participant
 
 Calls_filter_owner_email
     [Documentation]    filter by dialer email
-    [Tags]    filter by dialer email
+    [Tags]    Citron 265
     # log in with workspace admin
     ${driver}     log_in_lib     ${workspace_admin_username}    ${workspace_admin_password}
     # 进入到Calls页面
@@ -91,7 +91,7 @@ Calls_filter_owner_email
 
 Calls_filter_groups
     [Documentation]    filter by groups
-    [Tags]    filter by groups
+    [Tags]    Citron 266
     # log in with workspace admin
     ${driver}   log_in_lib     ${workspace_admin_username}    ${workspace_admin_password}
     # 进入到Calls页面

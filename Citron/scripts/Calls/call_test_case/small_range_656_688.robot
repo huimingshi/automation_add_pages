@@ -11,7 +11,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_656
     [Documentation]     No answer message   caller calls via normal way	   callee do not answer, waiting to timeout
-    [Tags]    small range 656 line
+    [Tags]    small range 656 line      call_case
     # Expert User1 登录（case中的caller）
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # Expert User2 登录（case中的callee）
@@ -35,7 +35,7 @@ Small_range_656
 
 Small_range_657
     [Documentation]     No answer message   caller calls via normal way	   callee clicks on decline button
-    [Tags]    small range 657 line
+    [Tags]    small range 657 line      call_case
     # Expert User1 登录（case中的caller）
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # Expert User2 登录（case中的callee）
@@ -59,7 +59,7 @@ Small_range_657
 
 Small_range_658
     [Documentation]     No answer message   caller calls via normal way	   caller calls one participant who is in another call
-    [Tags]    small range 658 line
+    [Tags]    small range 658 line      call_case
     # Expert User1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
@@ -96,7 +96,7 @@ Small_range_658
 
 Small_range_660
     [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
-    [Tags]    small range 660 line
+    [Tags]    small range 660 line      call_case
     # Expert User1 登录（case中的caller）
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # Expert User2 登录（case中的Joiner）
@@ -113,7 +113,7 @@ Small_range_660
 
 Small_range_661
     [Documentation]     No answer message   caller calls via meeting link	  Meeting room link[Owner's App runs in backgroup]
-    [Tags]    small range 661 line
+    [Tags]    small range 661 line      call_case
     # Expert User1 登录（case中的caller）
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # Expert User2 登录（case中的Joiner）
@@ -128,7 +128,7 @@ Small_range_661
 
 Small_range_662
     [Documentation]     User A call B enter call via normal way    User B invites callee [User C]
-    [Tags]    small range 662 line
+    [Tags]    small range 662 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -176,7 +176,7 @@ Small_range_662
 
 Small_range_663
     [Documentation]     User A call B enter call via normal way    User A invites User C] who doesn't login on any device
-    [Tags]    small range 663 line
+    [Tags]    small range 663 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -223,7 +223,7 @@ Small_range_663
 
 Small_range_664
     [Documentation]     User A call B enter call via normal way    User A] invites User C
-    [Tags]    small range 664 line
+    [Tags]    small range 664 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -272,7 +272,7 @@ Small_range_664
 
 Small_range_665
     [Documentation]     User A call B enter call via normal way    caller calls one participant who is in another call via normal call
-    [Tags]    small range 665 line
+    [Tags]    small range 665 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -316,7 +316,7 @@ Small_range_665
 
 #Small_range_666
 #    [Documentation]     Guest 1 call meeting link Owner    Guest 2] calls one participant via meeting link    Owner] kill app during incoming call
-#    [Tags]    small range 666 line，有bug：https://vipaar.atlassian.net/browse/CITRON-3288
+#    [Tags]    small range 666 line，有bug：https://vipaar.atlassian.net/browse/CITRON-3288        call_case
 #    # meeting link Owner 登录
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -366,7 +366,7 @@ Small_range_665
 
 #Small_range_667
 #    [Documentation]     Guest 1 call meeting link Owner    Guest 2] calls one participant via meeting link    Meeting Owner] declines call
-#    [Tags]    small range 66 line，有bug：https://vipaar.atlassian.net/browse/CITRON-3288
+#    [Tags]    small range 66 line，有bug：https://vipaar.atlassian.net/browse/CITRON-3288     call_case
 #    # meeting link Owner 登录
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}      ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -416,7 +416,7 @@ Small_range_665
 
 Small_range_669_670
     [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
-    [Tags]    small range 669+670 lines
+    [Tags]    small range 669+670 lines      call_case
     # User A login and set Do not disturb
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    close_bounced     accept    set_disturb
     # User B 登录
@@ -433,7 +433,7 @@ Small_range_669_670
 
 Small_range_671_672_673
     [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
-    [Tags]    small range 671+672+673 lines
+    [Tags]    small range 671+672+673 lines     call_case
     # User A set Do not Disturb from App
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    no_check_toturial     close_bounced     accept    set_disturb
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -472,7 +472,7 @@ Small_range_671_672_673
 
 Small_range_674
     [Documentation]     User set Do not Disturb(DND)   UserB call user A by meeting link
-    [Tags]    small range 674 line
+    [Tags]    small range 674 line      call_case
     # User A login and set Do not disturb
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    no_check_toturial    close_bounced     accept    set_disturb
     ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
@@ -487,7 +487,7 @@ Small_range_674
 
 Small_range_675
     [Documentation]     User set Do not Disturb(DND)    InCall user invite User A to 3PC call
-    [Tags]    small range 675 line
+    [Tags]    small range 675 line      call_case
     # User B 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # User C 登录
@@ -508,7 +508,7 @@ Small_range_675
 
 Small_range_677_678_679_680
     [Documentation]     User set Do not Disturb(DND)    Site Admin add user A to another workspace WS2
-    [Tags]    small range 677+678+679+680 lines
+    [Tags]    small range 677+678+679+680 lines     call_case
     #  user A 登录
     ${driver1}    driver_set_up_and_logIn    ${belong_two_WS_username}     ${universal_password}
     # User A send OTU link [link1]
@@ -543,7 +543,7 @@ Small_range_677_678_679_680
 
 Small_range_681_682_683
     [Documentation]     User set Do not Disturb(DND)    Site Admin add user A to another workspace WS2
-    [Tags]    small range 601+682+683 lines
+    [Tags]    small range 601+682+683 lines     call_case
     #  user A 登录
     ${driver1}    driver_set_up_and_logIn    ${belong_two_WS_username}     ${universal_password}
     # User A send OTU link [link1]
@@ -579,7 +579,7 @@ Small_range_681_682_683
 
 #Small_range_687
 #    [Documentation]     Join call via meeting call   Owner clicks on mhs link firstly
-#    [Tags]    small range 687 line，有bug：https://vipaar.atlassian.net/browse/CITRON-3290
+#    [Tags]    small range 687 line，有bug：https://vipaar.atlassian.net/browse/CITRON-3290        call_case
 #    # Owner 登录
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
 #    # 获取mhs link
@@ -592,7 +592,7 @@ Small_range_681_682_683
 
 Small_range_688
     [Documentation]     Join call via meeting call   Owner clicks on otu link firstly
-    [Tags]    small range 688 line
+    [Tags]    small range 688 line      call_case
     # Owner 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # 获取otu link

@@ -468,6 +468,7 @@ reactivate_user
 enter_active_users_page
     # enter Active Users page
     click element   ${active_users_page}
+    sleep  3s
     wait until element is visible    ${first_data_show}     20
 
 search_active_user

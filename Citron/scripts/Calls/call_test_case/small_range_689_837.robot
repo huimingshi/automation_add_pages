@@ -11,7 +11,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_689_690_691_692
     [Documentation]     3PI - Meeting call     EU1 send one time use link to anonymous UserB.
-    [Tags]    small range 689+690+691+692 lines
+    [Tags]    small range 689+690+691+692 lines         call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
@@ -30,7 +30,7 @@ Small_range_689_690_691_692
 
 Small_range_693_694_695
     [Documentation]     3PI - Meeting call     EU1 send MHS link to anonymous UserB.
-    [Tags]    small range 693+694+695 lines
+    [Tags]    small range 693+694+695 lines         call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
@@ -49,7 +49,7 @@ Small_range_693_694_695
 
 Small_range_696_697_698_699
     [Documentation]     3PI - Meeting call     UserA send one time use link to anonymous UserB.
-    [Tags]    small range 696+697+698+699 lines
+    [Tags]    small range 696+697+698+699 lines     call_case
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
@@ -73,7 +73,7 @@ Small_range_696_697_698_699
 
 Small_range_700_701_702_703
     [Documentation]     3PI - Meeting call     UserA send MHS link to anonymous UserB.
-    [Tags]    small range 700+701+702+703 lines
+    [Tags]    small range 700+701+702+703 lines     call_case
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
@@ -98,7 +98,7 @@ Small_range_700_701_702_703
 
 Small_range_704_705_706_707
     [Documentation]     3PI - Meeting call     UserA send MHS link to expert UserB.
-    [Tags]    small range 704+705+706_707 lines
+    [Tags]    small range 704+705+706_707 lines     call_case
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
@@ -124,7 +124,7 @@ Small_range_704_705_706_707
 
 Small_range_708_709
     [Documentation]     3PI - Meeting call     EU1 click EU2's MHS link
-    [Tags]    small range 708+709 lines
+    [Tags]    small range 708+709 lines     call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # EU2 登录
@@ -147,7 +147,7 @@ Small_range_708_709
 
 Small_range_710_723
     [Documentation]     3PI - Meeting call     EU1 click EU2's MHS link
-    [Tags]    small range 710-723 lines，有bug：https://vipaar.atlassian.net/browse/CITRON-3313
+    [Tags]    small range 710-723 lines，有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}    # 进入Directory页面
@@ -238,7 +238,7 @@ Small_range_710_723
 
 Small_range_724_742
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
-    [Tags]    small range 724-742 lines，有bug：https://vipaar.atlassian.net/browse/CITRON-3313
+    [Tags]    small range 724-742 lines，有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # EU2 登录
@@ -321,7 +321,7 @@ Small_range_724_742
 
 Small_range_743_744
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
-    [Tags]    small range 743-744 lines
+    [Tags]    small range 743-744 lines     call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # EU2 登录
@@ -354,7 +354,7 @@ Small_range_743_744
 
 Small_range_745
     [Documentation]     3PI - Meeting call     Pre-condition: user is beong to workspace WS-A and WS-B	User is currently on WS-B
-    [Tags]    small range 745 line
+    [Tags]    small range 745 line      call_case
     # user is beong to workspace WS-A and WS-B 登录
     ${driver1}    driver_set_up_and_logIn    ${belong_two_WS_username}     ${universal_password}
     user_switch_to_second_workspace    ${driver1}    ${Huiming_shi_Added_WS_another}
@@ -373,7 +373,7 @@ Small_range_745
 
 Small_range_746
     [Documentation]     3PI - Meeting call     Pre-condition: user is belong to workspace WS-A and WS-B	User is currently on WS-B
-    [Tags]    small range 746 line
+    [Tags]    small range 746 line      call_case
     # user is beong to workspace WS-A and WS-B 登录
     ${driver1}    driver_set_up_and_logIn    ${belong_two_WS_username}     ${universal_password}
     ${user_list_1}    get_all_data_on_the_page    ${driver1}
@@ -394,7 +394,7 @@ Small_range_746
 
 Small_range_751
     [Documentation]      Resolution Check    Web on PC   VP: Resolution = 1280x720
-    [Tags]    small range 751 line
+    [Tags]    small range 751 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${big_admin_first_WS_username}     ${universal_password}
     # User B 登录
@@ -412,7 +412,7 @@ Small_range_751
 
 Small_range_799_802
     [Documentation]      Set Declaimer ->'delete user' is selected    Normal call
-    [Tags]    small range 799 800 801 802 lines
+    [Tags]    small range 799 800 801 802 lines     call_case
     [Setup]     run keywords    check_file_if_exists_delete
     ...         AND             Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
@@ -520,7 +520,7 @@ Small_range_799_802
 
 Disclaimer_805
     [Documentation]    Disclaimer   Set Declaimer ->'delete user' is NOT selected   Enterprise Admin Reset Disclaimer
-    [Tags]     small range 805 line
+    [Tags]     small range 805 line     call_case
     [Setup]     run keywords      Login_workspaces_admin            # log in with workspace admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               expand_option_delete_user         # EXPAND delete user 选项
@@ -546,7 +546,7 @@ Disclaimer_805
 
 Disclaimer_806_807
     [Documentation]    Set Declaimer ->'delete user' is NOT selected    2 enterprise users in call	 Invite User C who is in same enterprise who has accepted disclaimer when logs in App.
-    [Tags]     small range 806-807 lines
+    [Tags]     small range 806-807 lines        call_case
     [Setup]     run keywords      Login_premium_user                # log in with Site admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               expand_option_delete_user         # EXPAND delete user 选项
@@ -592,7 +592,7 @@ Disclaimer_806_807
 
 Disclaimer_808_809
     [Documentation]   Set Declaimer ->'delete user' is NOT selected    logout app and click one-time meeting link
-    [Tags]     small range 808-809 lines
+    [Tags]     small range 808-809 lines        call_case
     [Setup]     run keywords      Login_premium_user                # log in with Site admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               expand_option_delete_user         # EXPAND delete user 选项
@@ -619,7 +619,7 @@ Disclaimer_808_809
 
 Small_range_820_821
     [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
-    [Tags]    small range 820-821 lines
+    [Tags]    small range 820-821 lines     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -674,7 +674,7 @@ Small_range_820_821
 
 Small_range_823
     [Documentation]     Call on-call group from contact list
-    [Tags]    small range 823 line
+    [Tags]    small range 823 line      call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -715,7 +715,7 @@ Small_range_823
 
 Small_range_825_826
     [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
-    [Tags]    small range 825+826 lines
+    [Tags]    small range 825+826 lines     call_case
     [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
     ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -762,7 +762,7 @@ Small_range_825_826
 
 Small_range_827
     [Documentation]     Expert  get incoming call
-    [Tags]    small range 827 line
+    [Tags]    small range 827 line      call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -798,7 +798,7 @@ Small_range_827
 
 Small_range_829
     [Documentation]     Call enterprise contact
-    [Tags]    small range 829 line
+    [Tags]    small range 829 line      call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -831,7 +831,7 @@ Small_range_829
 
 Small_range_831_832
     [Documentation]     Call recording feature     Pre-condition：set to Default-ON
-    [Tags]    small range 831+832 lines
+    [Tags]    small range 831+832 lines     call_case
     [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
     ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -868,7 +868,7 @@ Small_range_831_832
 
 Small_range_833
     [Documentation]     call on-call group from contact list
-    [Tags]    small range 827 line
+    [Tags]    small range 827 line      call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -906,7 +906,7 @@ Small_range_833
 
 Small_range_834
     [Documentation]     Call enterprise contact
-    [Tags]    small range 834 line
+    [Tags]    small range 834 line      call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
     ...         AND             enter_workspace_settings_page           # 进入settings页面
@@ -947,7 +947,7 @@ Small_range_834
 
 Small_range_836
     [Documentation]     Special Recent call	    One user logins on two devices
-    [Tags]    small range 836 line
+    [Tags]    small range 836 line      call_case
     # User 1 logins app on 2 devices
     # User 1 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}        ${switch_workspace_password}
