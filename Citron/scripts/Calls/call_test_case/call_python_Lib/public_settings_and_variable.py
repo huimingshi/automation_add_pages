@@ -8,9 +8,14 @@ option.add_argument("--disable-extensions")
 
 # Pass the argument 1 to allow and 2 to block
 option.add_experimental_option("prefs", {
-    "profile.default_content_setting_values.notifications": 1,
-    "profile.default_content_setting_values.media_stream_mic": 1
+    "profile.default_content_setting_values.notifications": 1,   # chrome开启通知
+    "profile.default_content_setting_values.media_stream_mic": 1 ,   # chrome开启麦克风
+    "profile.default_content_setting_values.media_stream_camera": 1    # chrome开启摄像头
 })
+# # chrome不显示是收到自动软件控制
+# option.add_experimental_option('excludeSwitches', ['enable-automation'])
+# 忽略证书错误，不需要手动点高级选项
+option.add_argument('--ignore-certificate-errors')
 
 # ----------------------------------------------------------------------------------------------------#
 # variable

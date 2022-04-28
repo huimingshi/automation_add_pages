@@ -317,6 +317,8 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     """
     # 维持通话20s
     time.sleep(int(call_time))
+    # 确保进入通话中
+    make_sure_enter_call(driver)
     for i in range(5):
         ele_list = get_xpath_elements(driver,count_of_call_user)
         if len(ele_list) > 3:
@@ -363,6 +365,17 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
             screen_shot_func(driver, '选择另一个共同主持后点击Leave_call失败')
             raise Exception('选择另一个共同主持后点击Leave_call失败')
 
+def make_sure_enter_call(driver):
+    for i in range(5):
+        ele_list = get_xpath_elements(driver, '//div[@id="connecting_call_label" and text()="Joining Call..."]')
+        if len(ele_list) ==0:
+            break
+        elif i == 4:
+            screen_shot_func(driver, '还在Joining_Call状态')
+            raise Exception('还在Joining_Call状态')
+        else:
+            time.sleep(15)
+
 def exit_call(driver,call_time=20):
     """
     # 结束call
@@ -371,6 +384,8 @@ def exit_call(driver,call_time=20):
     """
     # 维持通话20s
     time.sleep(int(call_time))
+    # 确保进入通话中
+    make_sure_enter_call(driver)
     for i in range(5):
         ele_list = get_xpath_elements(driver,count_of_call_user)
         if len(ele_list) >= 3:
@@ -411,6 +426,8 @@ def end_call_for_all(driver,call_time=30):
     """
     # 维持通话20s
     time.sleep(int(call_time))
+    # 确保进入通话中
+    make_sure_enter_call(driver)
     for i in range(10):
         ele_list = get_xpath_elements(driver,count_of_call_user)
         if len(ele_list) > 3:
