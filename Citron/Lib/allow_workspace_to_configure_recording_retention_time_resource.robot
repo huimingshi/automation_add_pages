@@ -14,7 +14,8 @@ Library           python_Lib/ui_keywords.py
 enter_workspace_settings_page
     # enter Workspace Settings page
     click element   ${enter_workspace_menu}
-    sleep  1s
+#    sleep  1s
+    wait until element is visible      ${enter_Workspace_settings}
     click element    ${enter_Workspace_settings}
     wait until element is visible      ${enter_ws_settings_success}     20s
 
@@ -38,6 +39,7 @@ make_sure_setting_visiable
 
 make_sure_RaSC_text_visiable
     # make sure State text visiable
+    wait until element is visible     ${RaSC_pre_xpath}//button[contains(.,'Expand')]
     click element   ${RaSC_pre_xpath}//button[contains(.,'Expand')]
     sleep  1s
 
@@ -82,8 +84,6 @@ enable_retention_policy_on_off_modified_record_in_crunch
     # make sure State text visiable
     make_sure_RaSC_text_visiable
     # Enabled Disabled Retention Policy for Recordings
-#    ${text}   get text  ${RaSC_pre_xpath}//div[@class="retention-options"]/span[1]
-#    Run Keyword If   '${text}'=='${RaSC_off_status_text}'    click element   ${RaSC_switch_button}
     FOR   ${i}   IN RANGE   4
         click element    ${RaSC_switch_button}
         sleep  0.5s
@@ -105,6 +105,7 @@ set_RaSC_day_equal_to_correct
     # set day equal to a number
     [Arguments]   ${day_number}
     # Click Edit button
+    wait until element is visible     ${RaSC_click_to_edit}
     click element    ${RaSC_click_to_edit}
     sleep  1s
     # set day equal to a number
