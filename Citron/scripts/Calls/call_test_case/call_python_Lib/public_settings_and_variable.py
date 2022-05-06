@@ -1,22 +1,43 @@
 #----------------------------------------------------------------------------------------------------#
 # Chrome set up
-from selenium.webdriver.chrome.options import Options
-option = Options()
-option.add_argument("--disable-infobars")
-option.add_argument("start-maximized")
-option.add_argument("--disable-extensions")
+from selenium import webdriver
+from Citron.public_switch.public_switch_py import BROWSER_TYPE
+if BROWSER_TYPE == 'Chrome':
+    from selenium.webdriver.chrome.options import Options
+    option = Options()
+    option.add_argument("--disable-infobars")
+    option.add_argument("start-maximized")
+    option.add_argument("--disable-extensions")
 
-# Pass the argument 1 to allow and 2 to block
-option.add_experimental_option("prefs", {
-    "profile.default_content_setting_values.notifications": 1,   # chrome开启通知
-    "profile.default_content_setting_values.media_stream_mic": 1 ,   # chrome开启麦克风
-    "profile.default_content_setting_values.media_stream_camera": 1    # chrome开启摄像头
-})
-# # chrome不显示是收到自动软件控制
-# option.add_experimental_option('excludeSwitches', ['enable-automation'])
-# 忽略证书错误，不需要手动点高级选项
-option.add_argument('--ignore-certificate-errors')
+    # Pass the argument 1 to allow and 2 to block
+    option.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.notifications": 1,   # chrome开启通知
+        "profile.default_content_setting_values.media_stream_mic": 1 ,   # chrome开启麦克风
+        "profile.default_content_setting_values.media_stream_camera": 1    # chrome开启摄像头
+    })
+    # # chrome不显示是收到自动软件控制
+    # option.add_experimental_option('excludeSwitches', ['enable-automation'])
+    # 忽略证书错误，不需要手动点高级选项
+    option.add_argument('--ignore-certificate-errors')
+elif BROWSER_TYPE == 'Firefox':
+    from selenium.webdriver.firefox.options import Options
 
+    option = Options()
+    option.add_argument("--disable-infobars")
+    option.add_argument("start-maximized")
+    option.add_argument("--disable-extensions")
+
+    # Pass the argument 1 to allow and 2 to block
+    option.set_capability("prefs", {
+        "profile.default_content_setting_values.notifications": 1,
+        "profile.default_content_setting_values.media_stream_mic": 1
+    })
+    # 忽略证书错误，不需要手动点高级选项
+    option.add_argument('--ignore-certificate-errors')
+    profile = webdriver.FirefoxProfile()
+    profile.set_preference('intl.accept_languages', 'en-US, en')
+    profile.set_preference("permissions.default.microphone", 1)
+    profile.set_preference("webdriver_accept_untrusted_certs", True)
 # ----------------------------------------------------------------------------------------------------#
 # variable
 test_web = 'https://app-stage.helplightning.net.cn/'

@@ -2,20 +2,37 @@
 import time
 import platform
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Citron.public_switch.public_switch_py import BROWSER_TYPE, IMPLICIT_WAIT
 
-option = Options()
-option.add_argument("--disable-infobars")
-option.add_argument("start-maximized")
-option.add_argument("--disable-extensions")
+if BROWSER_TYPE == 'Chrome':
+    from selenium.webdriver.chrome.options import Options
+    option = Options()
+    option.add_argument("--disable-infobars")
+    option.add_argument("start-maximized")
+    option.add_argument("--disable-extensions")
 
-# Pass the argument 1 to allow and 2 to block
-option.add_experimental_option("prefs", {
-    "profile.default_content_setting_values.notifications": 1,
-    "profile.default_content_setting_values.media_stream_mic": 1
-})
+    # Pass the argument 1 to allow and 2 to block
+    option.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.notifications": 1,
+        "profile.default_content_setting_values.media_stream_mic": 1
+    })
+elif BROWSER_TYPE == 'Firefox':
+    from selenium.webdriver.firefox.options import Options
+    option = Options()
+    option.add_argument("--disable-infobars")
+    option.add_argument("start-maximized")
+    option.add_argument("--disable-extensions")
+
+    # Pass the argument 1 to allow and 2 to block
+    option.set_capability("prefs", {
+        "profile.default_content_setting_values.notifications": 1,
+        "profile.default_content_setting_values.media_stream_mic": 1
+    })
+    option.add_argument('--ignore-certificate-errors')
+    profile = webdriver.FirefoxProfile()
+    profile.set_preference('intl.accept_languages', 'en-US, en')
 #----------------------------------------------------------------------------------------------------#
 # variable
 test_web = 'https://app-stage.helplightning.net.cn/'
@@ -64,8 +81,11 @@ def test_filter_set_up():
     # Browser Front-loading
     :return:
     """
-    driver = webdriver.Chrome()
-    driver.implicitly_wait(10)
+    if BROWSER_TYPE == 'Chrome':
+        driver = webdriver.Chrome()
+    elif BROWSER_TYPE == 'Firefox':
+        driver = webdriver.Firefox()
+    driver.implicitly_wait(IMPLICIT_WAIT)
     driver.get(test_web)
     driver.maximize_window()
     return driver
@@ -101,8 +121,11 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     :param accept: 是否接受免责声明，默认accept接受
     :return:
     """
-    driver = webdriver.Chrome(chrome_options=option)
-    driver.implicitly_wait(int(15))
+    if BROWSER_TYPE == 'Chrome':
+        driver = webdriver.Chrome(options=option)
+    elif BROWSER_TYPE == 'Firefox':
+        driver = webdriver.Firefox(options=option)
+    driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.get(test_web)
     driver.maximize_window()
     try:    # enter email
@@ -119,7 +142,7 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     else:
         print('登陆时输入email成功')
     # 输入密码
-    driver.implicitly_wait(0.1)
+    driver.implicitly_wait(1)
     try:
         for i in range(100):
             time.sleep(1)
@@ -160,7 +183,7 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
         raise Exception
     else:
         print('进入首页')
-    driver.implicitly_wait(15)
+    driver.implicitly_wait(int(IMPLICIT_WAIT))
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
@@ -197,7 +220,7 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
             raise Exception
         else:
             print('登陆成功后关闭教程成功')
-    driver.implicitly_wait(int(15))
+    driver.implicitly_wait(int(IMPLICIT_WAIT))
     return driver
 
 def filter_by_different_fields(driver,index,search_text,text_id):

@@ -4,11 +4,10 @@ Library           DateTime
 Library           String
 Library           python_Lib/ui_keywords.py
 Resource          ../publicData/public_data.robot
+Resource          ../public_switch/public_switch_rf.robot
 
 
 *** Variables ***
-# Browser Type
-${browser_type}                     Chrome                                                              # Browser Type
 # register
 ${register_website}                 https://app-stage.helplightning.net.cn/register/personal            # register personal website
 ${register_account}                 xpath=//button[contains(.,'Create My Help Lightning Account')]      # Create My Help Lightning Account
@@ -55,7 +54,7 @@ ${enter_directory_page}             xpath=//span[contains(.,'Directory')]       
 *** Keywords ***
 Login
     [Arguments]    ${username}    ${password}
-    Open Browser    ${citron_website}     ${browser_type}
+    Open Browser    ${citron_website}     ${BROWSER_TYPE}
     Sleep    1s
     Maximize Browser Window
     # 输入账号
@@ -99,7 +98,7 @@ click_login_crunch_again
     END
 
 Login_crunch
-    Open Browser    ${crunch_website}     ${browser_type}
+    Open Browser    ${crunch_website}     ${BROWSER_TYPE}
     Sleep    1s
     Maximize Browser Window
     Sleep    1s
@@ -134,7 +133,7 @@ Login_crunch
 
 Open_register_personal_website
     # Open register personal website
-    Open Browser    ${register_website}    ${browser_type}
+    Open Browser    ${register_website}    ${BROWSER_TYPE}
     Sleep    1s
     # Maximize Browser Window
     Maximize Browser Window
@@ -228,7 +227,7 @@ Login_new_added_user
 Login_new_added_user_whitout_workspaces
     [Arguments]    ${user_username}
     # 登录系统
-    Open Browser    ${citron_website}     ${browser_type}
+    Open Browser    ${citron_website}     ${BROWSER_TYPE}
     Sleep    1s
     Maximize Browser Window
     # 输入账号

@@ -11,8 +11,8 @@ logs_in_Citron_as_Group_admin
     [Tags]    Citron 308-314     call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${group_admin_username}           10
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}      10
+    ${driver1}   driver_set_up_and_logIn    ${group_admin_username}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}
     # Make a call
     make_calls_with_who   ${driver1}   ${driver2}   ${normal_username_for_calls}   ${call_time}
     # logs in Citron as Site admin
@@ -39,8 +39,8 @@ logs_in_Citron_as_Normal_User
     [Tags]    Citron 315        call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   10
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   10
+    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}
     # Make a call
     make_calls_with_who   ${driver1}   ${driver2}   ${normal_username_for_calls_B}   ${call_time}
     # logs in Citron as Site admin
@@ -60,8 +60,8 @@ logs_in_Citron_as_Normal_User
 #    [Tags]    Citron 294-300,有bug，CITRON-3191，Site admin没有delete screen capture 的权限      call_case
 #    [Setup]  delete_all_jpg_and_jpeg_picture
 #    # Start two drivers and logIn
-#    ${driver1}   driver_set_up_and_logIn    ${site_admin_email}   10
-#    ${driver2}   driver_set_up_and_logIn    ${group_admin_email}   10
+#    ${driver1}   driver_set_up_and_logIn    ${site_admin_email}
+#    ${driver2}   driver_set_up_and_logIn    ${group_admin_email}
 #    # Make a call
 #    make_calls_with_who   ${driver1}   ${driver2}   ${group_admin_email}   ${call_time}
 #    # logs in Citron as Site admin
@@ -88,8 +88,8 @@ logs_in_Citron_as_Workspace_admin
     [Tags]    Citron 301-307     call_case
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${workspace_admin_username}    10
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}   10
+    ${driver1}   driver_set_up_and_logIn    ${workspace_admin_username}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}
     # Make a call
     make_calls_with_who   ${driver1}   ${driver2}   ${normal_username_for_calls}   ${call_time}
 

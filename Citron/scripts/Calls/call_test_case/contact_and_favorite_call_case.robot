@@ -36,6 +36,7 @@ Send_meeting_room_link_By_Premium_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser call
     user_anwser_call   ${driver}
+    exit_call     ${driver}
     [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Send_meeting_room_link_By_Enterprise_User
@@ -49,6 +50,7 @@ Send_meeting_room_link_By_Enterprise_User
     ${driver1}  anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser call
     user_anwser_call   ${driver}
+    exit_call     ${driver}
     [Teardown]   exit_driver  ${driver}  ${driver1}
 
 Send_one_time_meeting_room_link_By_Premium_User
@@ -62,6 +64,7 @@ Send_one_time_meeting_room_link_By_Premium_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser then exit call
     user_anwser_call   ${driver}
+    exit_call     ${driver}
     [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Send_one_time_meeting_room_link_By_Enterprise_User
@@ -75,6 +78,7 @@ Send_one_time_meeting_room_link_By_Enterprise_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser then exit call
     user_anwser_call   ${driver}
+    exit_call     ${driver}
     [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button

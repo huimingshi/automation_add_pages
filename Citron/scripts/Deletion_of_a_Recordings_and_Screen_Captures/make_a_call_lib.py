@@ -4,21 +4,40 @@ import time
 import os
 import platform
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Citron.public_switch.public_switch_py import BROWSER_TYPE, IMPLICIT_WAIT
 
-option = Options()
-option.add_argument("--disable-infobars")
-option.add_argument("start-maximized")
-option.add_argument("--disable-extensions")
+if BROWSER_TYPE == 'Chrome':
+    from selenium.webdriver.chrome.options import Options
+    option = Options()
+    option.add_argument("--disable-infobars")
+    option.add_argument("start-maximized")
+    option.add_argument("--disable-extensions")
 
-# Pass the argument 1 to allow and 2 to block
-option.add_experimental_option("prefs", {
-    "profile.default_content_setting_values.notifications": 1,
-    "profile.default_content_setting_values.media_stream_mic": 1
-})
+    # Pass the argument 1 to allow and 2 to block
+    option.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.notifications": 1,
+        "profile.default_content_setting_values.media_stream_mic": 1
+    })
+elif BROWSER_TYPE == 'Firefox':
+    from selenium.webdriver.firefox.options import Options
+    option = Options()
+    option.add_argument("--disable-infobars")
+    option.add_argument("start-maximized")
+    option.add_argument("--disable-extensions")
 
+    # Pass the argument 1 to allow and 2 to block
+    option.set_capability("prefs", {
+        "profile.default_content_setting_values.notifications": 1,
+        "profile.default_content_setting_values.media_stream_mic": 1
+    })
+    # 忽略证书错误，不需要手动点高级选项
+    option.add_argument('--ignore-certificate-errors')
+    profile = webdriver.FirefoxProfile()
+    profile.set_preference('intl.accept_languages', 'en-US, en')
+    profile.set_preference("permissions.default.microphone", 1)
+    profile.set_preference("webdriver_accept_untrusted_certs", True)
 #----------------------------------------------------------------------------------------------------#
 # variable
 password = '*IK<8ik,8ik,'
@@ -58,15 +77,17 @@ def get_xpath_elements(driver,xpath):
     elements_list = driver.find_elements('xpath', xpath)
     return elements_list
 
-def driver_set_up_and_logIn(username,implicitly_time,close_bounced='close_bounced',accept = 'accept'):
+def driver_set_up_and_logIn(username,close_bounced='close_bounced',accept = 'accept'):
     """
     # Browser Front-loading
     :param driver:
-    :param implicitly_time:
     :return:
     """
-    driver = webdriver.Chrome(chrome_options=option)
-    driver.implicitly_wait(int(implicitly_time))
+    if BROWSER_TYPE == 'Chrome':
+        driver = webdriver.Chrome(options=option)
+    elif BROWSER_TYPE == 'Firefox':
+        driver = webdriver.Firefox(options=option,firefox_profile=profile)
+    driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.get(test_web)
     driver.maximize_window()
     try:    # enter email
@@ -281,10 +302,16 @@ def exit_drivers(*args):
     :param driver2:
     :return:
     """
-    # kill所有的chromedriver进程
-    os.system('taskkill /F /im chromedriver.exe')
-    # 退出所有的浏览器
-    os.system('taskkill /f /t /im chrome.exe')
+    if BROWSER_TYPE == 'Chrome':
+        # kill所有的chromedriver进程
+        os.system('taskkill /F /im chromedriver.exe')
+        # 退出所有的浏览器
+        os.system('taskkill /f /t /im chrome.exe')
+    elif BROWSER_TYPE == 'Firefox':
+        # kill所有的firefoxdriver进程
+        os.system("taskkill /im geckodriver.exe /f")
+        # 退出所有的浏览器
+        os.system('taskkill /f /t /im firefox.exe')
 
 def get_system_type():
     """

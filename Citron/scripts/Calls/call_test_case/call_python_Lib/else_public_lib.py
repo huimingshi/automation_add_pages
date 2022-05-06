@@ -2,6 +2,8 @@
 import time
 import os,sys
 from selenium import webdriver
+
+from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_lib import *
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
@@ -23,8 +25,11 @@ def start_an_empty_window():
     启动一个空的窗口
     :return:
     """
-    driver = webdriver.Chrome(chrome_options=option)
-    driver.implicitly_wait(int(15))
+    if BROWSER_TYPE == 'Chrome':
+        driver = webdriver.Chrome(options=option)
+    elif BROWSER_TYPE == 'Firefox':
+        driver = webdriver.Firefox(options=option,firefox_profile=profile)
+    driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.maximize_window()
     return driver
 
@@ -95,7 +100,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         raise Exception
     else:
         print('进入首页')
-    driver.implicitly_wait(15)
+    driver.implicitly_wait(IMPLICIT_WAIT)
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
@@ -146,7 +151,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             raise Exception
     elif disturb == 'set_disturb':
         set_do_not_disturb(driver)
-    driver.implicitly_wait(int(15))
+    driver.implicitly_wait(int(IMPLICIT_WAIT))
 
 def driver_set_up_and_logIn(username,password,check_toturial = 'no_check_toturial',close_bounced='close_bounced',accept = 'accept',disturb = 'not_set_disturb'):
     """
@@ -327,7 +332,7 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
             screen_shot_func(driver, '当前参与通话的人数不到3人')
             raise Exception
         else:
-            time.sleep(15)
+            time.sleep(int(IMPLICIT_WAIT))
     # # 点击红色的挂断电话按钮
     # hang_up_the_phone(driver)
     # User Leave call
@@ -374,7 +379,7 @@ def make_sure_enter_call(driver):
             screen_shot_func(driver, '还在Joining_Call状态')
             raise Exception('还在Joining_Call状态')
         else:
-            time.sleep(15)
+            time.sleep(int(IMPLICIT_WAIT))
 
 def exit_call(driver,call_time=20):
     """
@@ -394,7 +399,7 @@ def exit_call(driver,call_time=20):
             screen_shot_func(driver, '当前参与通话的人数不到2人')
             raise Exception('当前参与通话的人数不到2人')
         else:
-            time.sleep(15)
+            time.sleep(int(IMPLICIT_WAIT))
     # User exit call
     try:
         for i in range(5):
@@ -1626,6 +1631,15 @@ if __name__ == '__main__':
     # # Make sure the name and avator is in its original state
     # my_account_change_name_and_avator(driver2,'Huiming.shi.helplightning+99887766551','change',modify_picture_path,'back_to_contact')
     # time.sleep(100000)
-    driver = driver_set_up_and_logIn('Huiming.shi.helplightning+EU1@outlook.com', '*IK<8ik,8ik,',check_toturial='check_toturial')
-    ele_text = get_ele_text(driver,'//span[@class="k-link k-header"]')
-    check_a_is_queal_b(driver,ele_text,'MY HELP LIGHTNING')
+    # driver = driver_set_up_and_logIn('Huiming.shi.helplightning+EU1@outlook.com', '*IK<8ik,8ik,',check_toturial='check_toturial')
+    # ele_text = get_ele_text(driver,'//span[@class="k-link k-header"]')
+    # check_a_is_queal_b(driver,ele_text,'MY HELP LIGHTNING')
+    # Premium User log in
+    driver = driver_set_up_and_logIn('big_admin','asdQWE123')
+    # Premium User Send meeting room link
+    invite_url =  send_meeting_room_link(driver,'MHS')
+    # anonymous open meeting link with website
+    from Citron.scripts.Calls.call_test_case.call_python_Lib.call_public_lib import anonymous_open_meeting_link, user_anwser_call
+    driver1 = anonymous_open_meeting_link(invite_url)
+    # Premium User Aneser call
+    user_anwser_call(driver)

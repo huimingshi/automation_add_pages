@@ -8,7 +8,6 @@ from else_public_lib import paste_on_a_non_windows_system,user_accept_disclaimer
 from else_public_lib import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
-from selenium.webdriver.common.action_chains import ActionChains
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -403,7 +402,10 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     user_accept_disclaimer(driver3)
     # Anwser cross enterprise call request
     public_check_element(driver1, external_join_call_anwser_button, '接受cross_enterprise的call失败')
-    driver4 = webdriver.Chrome(chrome_options=option)
+    if BROWSER_TYPE == 'Chrome':
+        driver4 = webdriver.Chrome(options=option)
+    elif BROWSER_TYPE == 'Firefox':
+        driver4 = webdriver.Firefox(options=option,firefox_profile=profile)
     driver4.implicitly_wait(int(6))
     driver4.get(invite_url)
     driver4.maximize_window()
@@ -437,7 +439,10 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         print('获取meeting link失败')
         return '获取meeting link失败'
     try: # 启动driver打开meeting link
-        driver = webdriver.Chrome(chrome_options=option)
+        if BROWSER_TYPE == 'Chrome':
+            driver = webdriver.Chrome(options=option)
+        elif BROWSER_TYPE == 'Firefox':
+            driver = webdriver.Firefox(options=option,firefox_profile=profile)
         driver.implicitly_wait(int(6))
         driver.get(meeting_link)
         driver.maximize_window()
@@ -445,6 +450,11 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
             ele_list = get_xpath_elements(driver,accept_disclaimer)
             if len(ele_list) == 1:
                 ele_list[0].click()
+                driver.implicitly_wait(5)
+                ele_list = get_xpath_elements(driver, accept_disclaimer)
+                if len(ele_list) == 1:
+                    ele_list[0].click()
+                driver.implicitly_wait(int(IMPLICIT_WAIT))
         elif deal_with_disclaimer == 'decline':
             ele_list = get_xpath_elements(driver,decline_disclaimer)
             if len(ele_list) == 1:
@@ -534,7 +544,7 @@ def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,fla
     driver_master.implicitly_wait(int(8))
     count_master_1 = get_xpath_elements(driver_master,anwser_call_button)
     count_master_2 = get_xpath_elements(driver_master,external_join_call_anwser_button)
-    driver_master.implicitly_wait(int(15))
+    driver_master.implicitly_wait(int(IMPLICIT_WAIT))
     print('如果下面assert断言出现AssertionError了，则表示电话不应该打通的却打通了，或者电话应该打通却没有打通')
     try:
         assert len(count_support) == int(flag)

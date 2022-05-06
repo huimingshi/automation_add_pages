@@ -9,6 +9,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from Citron.public_switch.public_switch_py import BROWSER_TYPE
+
 
 def get_system_type():
     """
@@ -39,6 +41,7 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
     """
     try:
         for i in range(5):
+            time.sleep(2)
             ele_list = get_xpath_elements(driver, xpath)
             if if_show and if_click:
                 if len(ele_list) >= 1:
@@ -53,17 +56,21 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
             elif i == 4:
                 print(description)
                 raise Exception
-            else:
-                time.sleep(1)
     except Exception:
         screen_shot_func(driver, description)
         raise Exception
 
 def kill_all_browser():
-    # kill所有的chromedriver进程
-    os.system('taskkill /F /im chromedriver.exe')
-    # 退出所有的浏览器
-    os.system('taskkill /f /t /im chrome.exe')
+    if BROWSER_TYPE == 'Chrome':
+        # kill所有的chromedriver进程
+        os.system('taskkill /F /im chromedriver.exe')
+        # 退出所有的浏览器
+        os.system('taskkill /f /t /im chrome.exe')
+    elif BROWSER_TYPE == 'Firefox':
+        # kill所有的firefoxdriver进程
+        os.system("taskkill /im geckodriver.exe /f")
+        # 退出所有的浏览器
+        os.system('taskkill /f /t /im firefox.exe')
 
 def get_xpath_element(driver,xpath,ec = None):
     """

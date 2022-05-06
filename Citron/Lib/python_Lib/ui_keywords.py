@@ -3,12 +3,12 @@ import os
 import csv
 import re
 import calendar
+import sys
 import zipfile
 
-"""
-定义全局变量：切换到不同主机上，可能需要修改这些变量
-"""
-file_path = r'C:\Users\ts\Downloads'                 # 浏览器设置的文件默认下载路径
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+print(sys.path)
+from Citron.public_switch.public_switch_py import DOWNLOAD_PATH
 
 
 def get_system_type():
@@ -27,7 +27,7 @@ def all_file_name(file_path):
     :param file_path:
     :return: return a filename list
     """
-    for root, dirs, files in os.walk(file_path):
+    for root, dirs, files in os.walk(DOWNLOAD_PATH):
         return files
 
 def check_zipFile_exists():
@@ -36,7 +36,7 @@ def check_zipFile_exists():
     :return: if exists, return zip file name;
              else, return "There is no such zip file"
     """
-    files_list = all_file_name(file_path)
+    files_list = all_file_name(DOWNLOAD_PATH)
     partial_file_name = 'call-report'
     exists_tag = 0
     for file_name in files_list:
@@ -53,7 +53,7 @@ def delete_zip_file():
     :return: if exists zip file ,return "Zip file has been deleted";
              else, return "There is no zip file"
     """
-    files_list = all_file_name(file_path)
+    files_list = all_file_name(DOWNLOAD_PATH)
     partial_file_name = 'call-report'
     exists_tag = 0
     for file_name in files_list:
@@ -61,9 +61,9 @@ def delete_zip_file():
             exists_tag = 1
             system_type = get_system_type()
             if system_type == 'Windows':
-                zip_file_path = file_path + f'\\{check_zipFile_exists()[0]}'
+                zip_file_path = DOWNLOAD_PATH + f'\\{check_zipFile_exists()[0]}'
             else:
-                zip_file_path = file_path + f'/{check_zipFile_exists()[0]}'
+                zip_file_path = DOWNLOAD_PATH + f'/{check_zipFile_exists()[0]}'
             os.remove(zip_file_path)
     if exists_tag == 0:
         return "There is no zip file"
@@ -76,13 +76,13 @@ def read_zip_file_check_cloumns():
     :return:
     """
     zip_file_name = check_zipFile_exists()[0]
-    zip_file_path = path_for_download_file(file_path, zip_file_name)
+    zip_file_path = path_for_download_file(DOWNLOAD_PATH, zip_file_name)
     print("zip_file_path is ", zip_file_path)
     # 读取Zip文件
     azip = zipfile.ZipFile(zip_file_path)
     # 解压在当前工作目录
-    azip.extractall(file_path)
-    report_file_path = path_for_download_file(file_path, "report.csv")
+    azip.extractall(DOWNLOAD_PATH)
+    report_file_path = path_for_download_file(DOWNLOAD_PATH, "report.csv")
     result = os.path.exists(report_file_path)
     print(result)
     if result:
@@ -101,7 +101,7 @@ def check_jpg_picture_exists():
     :return: if exists, return jpg picture name list;
              else, return "There is no such jpg picture"
     """
-    files_list = all_file_name(file_path)
+    files_list = all_file_name(DOWNLOAD_PATH)
     partial_file_name = 'IMG_CAP_'
     exists_tag = 0
     jpg_list = []
@@ -125,9 +125,9 @@ def delete_picture_jpg_file():
     if jpg_list != "T":
         for one in jpg_list:
             if system_type == 'Windows':
-                jpg_file_path = file_path + f'\\{one}'
+                jpg_file_path = DOWNLOAD_PATH + f'\\{one}'
             else:
-                jpg_file_path = file_path + f'/{one}'
+                jpg_file_path = DOWNLOAD_PATH + f'/{one}'
             os.remove(jpg_file_path)
     return  "Jpg picture has been deleted"
 
@@ -137,7 +137,7 @@ def check_jpeg_picture_exists():
     :return: if exists, return jpg picture name list;
              else, return "There is no such jpg picture"
     """
-    files_list = all_file_name(file_path)
+    files_list = all_file_name(DOWNLOAD_PATH)
     partial_file_name = 'image_'
     exists_tag = 0
     jpeg_list = []
@@ -161,9 +161,9 @@ def delete_picture_jpeg_file():
     if jpeg_list != "T":
         for one in jpeg_list:
             if system_type == 'Windows':
-                jpeg_file_path = file_path + f'\\{one}'
+                jpeg_file_path = DOWNLOAD_PATH + f'\\{one}'
             else:
-                jpeg_file_path = file_path + f'/{one}'
+                jpeg_file_path = DOWNLOAD_PATH + f'/{one}'
             os.remove(jpeg_file_path)
     return  "Jpeg picture has been deleted"
 
@@ -175,10 +175,10 @@ def path_for_download_file(file_path, download_file_name):
     """
     system_type = get_system_type()
     if system_type == 'Windows':
-        export_file_path = file_path + f'\\{download_file_name}'
+        export_file_path = DOWNLOAD_PATH + f'\\{download_file_name}'
         return export_file_path
     else:
-        export_file_path = file_path + f'/{download_file_name}'
+        export_file_path = DOWNLOAD_PATH + f'/{download_file_name}'
         return export_file_path
 
 def short_for_month(month_english):
@@ -304,7 +304,7 @@ def check_file_and_delete(download_file_name):
     # Check whether there are existing files in the path and delete them if there are
     :return:
     """
-    export_file_path = path_for_download_file(file_path, download_file_name)
+    export_file_path = path_for_download_file(DOWNLOAD_PATH, download_file_name)
     result = os.path.exists(export_file_path)
     if result:
         os.remove(export_file_path)
@@ -317,7 +317,7 @@ def read_csv_file_check_cloumns(download_file_name):
     # Read the first line field of the CSV file
     :return:
     """
-    export_file_path = path_for_download_file(file_path, download_file_name)
+    export_file_path = path_for_download_file(DOWNLOAD_PATH, download_file_name)
     result = os.path.exists(export_file_path)
     if result:
         with open(export_file_path, 'r',encoding='utf-8') as f:
