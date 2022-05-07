@@ -5,7 +5,7 @@ from public_lib import *
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
-from else_public_lib import paste_on_a_non_windows_system,user_accept_disclaimer,get_picture_path
+from else_public_lib import paste_on_a_non_windows_system, user_accept_disclaimer, get_picture_path, make_sure_enter_call
 from else_public_lib import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
@@ -38,17 +38,18 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     :param enter_send_invite: 是否需要进入send invite页面，默认’yes‘进入，其他表示不进入
     :return:
     """
+    make_sure_enter_call(driver)
     public_check_element(driver, invite_user_div, '右上角三个横杠按钮未展示',if_click = None,if_show = 1)
     try:
         get_xpath_element(driver, invite_user_div).click()
     except Exception as e:
         print('右上角三个横杠按钮不可点击',e)
         screen_shot_func(driver, '右上角三个横杠按钮不可点击')
-        raise e
+        raise Exception
     public_check_element(driver, enter_invite_user_page, 'Invite图标未展示',if_click = None,if_show = 1)
     try:
         get_xpath_element(driver, enter_invite_user_page).click()
-    except Exception:
+    except Exception as e:
         print('Invite图标不可点击')
         screen_shot_func(driver, 'Invite图标不可点击')
         raise Exception
@@ -237,7 +238,7 @@ def show_incoming_call_name_avator(driver1,driver2,expect_src,expect_name):
     except Exception as e:
         print('未获取到打进来的call',e)
         screen_shot_func(driver1, '未获取到打进来的call')
-        raise AssertionError
+        raise Exception
     # 进行avator和name的断言
     try:
         assert expect_src in src_attribute
@@ -468,7 +469,7 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
     except AssertionError:
         print('未出现message_disclaimer_must_be_accepted')
         screen_shot_func(driver, '未出现message_disclaimer_must_be_accepted')
-        raise Exception
+        raise AssertionError
     except Exception as e:
         print('打开meeting link网页失败',e)
         screen_shot_func(driver, '打开meeting link网页失败')
@@ -597,10 +598,10 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
     try:
         count = get_xpath_elements(driver1,end_call_before_connecting)
         assert  len(count) == 1
-    except AssertionError as e:
-        print('发起call失败',e)
+    except AssertionError:
+        print('发起call失败')
         screen_shot_func(driver1, '发起call失败')
-        raise Exception
+        raise AssertionError
     else:
         print('发起call成功')
     if accept == 'accept':

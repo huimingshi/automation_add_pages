@@ -9,17 +9,18 @@ import zipfile
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 print(sys.path)
 from Citron.public_switch.public_switch_py import DOWNLOAD_PATH
+from Citron.public_switch.pubLib import get_system_type
 
 
-def get_system_type():
-    """
-    # get current system type
-    # Windows or Mac
-    :return: system type
-    """
-    system_type = platform.system()
-    print(system_type)
-    return system_type
+# def get_system_type():
+#     """
+#     # get current system type
+#     # Windows or Mac
+#     :return: system type
+#     """
+#     system_type = platform.system()
+#     print(system_type)
+#     return system_type
 
 def all_file_name(file_path):
     """

@@ -46,6 +46,7 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
     ...         AND               Close    # close browser
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # another site user E2 log in
     ${driver2}  driver_set_up_and_logIn   ${normal_username_for_calls}   ${normal_password_for_calls}
     # Send MHS link
@@ -75,6 +76,7 @@ Disable_External_Users_Pre_condition_In_a_site_on_call_link
     ...         AND               Close    # close browser
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # another site user E2 log in
     ${driver2}  driver_set_up_and_logIn   ${normal_username_for_calls}   ${normal_password_for_calls}
     # switch to second workspace
@@ -96,6 +98,7 @@ User_Directory_User_open_invite_3rd_participant_dialog
     ...         AND               Close
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Contact of WS1 log in
     ${driver2}  driver_set_up_and_logIn    ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # Contact of WS1 call the user directly
@@ -116,6 +119,7 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     ...         AND               Close
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Contact of WS2 log in
     ${driver2}  driver_set_up_and_logIn    ${big_admin_second_WS_username}   ${big_admin_second_WS_password}
     # Contact of WS2 call the user directly
@@ -248,6 +252,7 @@ User_1_receives_an_incoming_call_from_user_2
     [Tags]     small range 31 line       call_case
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Contact of WS1 log in
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # get modify picture absolute path
@@ -273,6 +278,7 @@ During_Call_open_invite_the_3rd_participant_page
     [Tags]      small range 32+33 line          call_case
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Contact of WS1 log in
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # another Contact of WS1 log in
@@ -309,6 +315,7 @@ User_A_opens_Directory_tab
     ...         AND               Close    # close browser
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # team user logs in
     ${driver2}  driver_set_up_and_logIn     ${a_team_user_username}   ${a_team_user_password}
     # logout from citron
@@ -346,9 +353,10 @@ User_A_opens_Personal_contact_tab
 
 User_B_displays_as_reachable
     [Documentation]    Expert user B exists in recent tab. contact list.    User B  signed out of every instance of mobile app and web.
-    [Tags]     small range 112 line       call_case
+    [Tags]     small range 112 line
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Expert user B logs in
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # logout from citron
@@ -368,6 +376,7 @@ User_B_displays_as_reachable
 #    ...         AND               Close    # close browser
 #    # Expert user A signs in.
 #    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+#    user_switch_to_first_workspace   ${driver1}
 #    # Expert user B logs in
 #    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
 #    # search user in Team page
@@ -396,6 +405,7 @@ User_B_logouts_from_one_device
     ...         AND               Close    # close browser
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Expert user B logs in
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # Expert user B logs in in another web
@@ -414,6 +424,7 @@ unable_to_reach_user_message_displays
     [Tags]     small range 115 line       call_case
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Expert user B logs in
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # Contact of WS1 call the user directly
@@ -435,6 +446,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     [Tags]     small range 122+123+127+130 line        call_case
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # User B is expert user log in
     ${driver2}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
     # 进行一次call
@@ -479,6 +491,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     [Tags]     small range 122+124+128 line      call_case
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # User B is team user log in
     ${driver2}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # 进行一次call
@@ -517,6 +530,7 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     ...         AND               Close    # close browser
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # User B is  another enterprise user log in
     ${driver2}   driver_set_up_and_logIn   ${other_site_user_2_username}    ${other_site_user_2_password}
     # 进行一次call
@@ -580,6 +594,7 @@ check_personal_user_can_see_user_S_is_unreachable_status
     ...         AND               Close                           # close browser
     # User S signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Contact of WS1
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # Contact of WS2  logs in

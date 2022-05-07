@@ -3,6 +3,7 @@ import time
 import os,sys
 from selenium import webdriver
 
+from Citron.public_switch.pubLib import kill_all_browser
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_lib import *
 from public_settings_and_variable import *
@@ -74,8 +75,8 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                 get_xpath_element(driver, next_button).click()
             elif i == 99:
                 print('password输入框还是未出现')
-                raise Exception
-    except Exception:
+                raise Exception('password输入框还是未出现')
+    except Exception as e:
         print('登陆时输入password失败')
         screen_shot_func(driver, '登陆时输入password失败')
         raise Exception
@@ -94,8 +95,9 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
                 get_xpath_element(driver, login_button).click()
             elif i == 99:
                 print('再次点击登录按钮未进入首页')
-                raise Exception
-    except Exception:
+                raise Exception('再次点击登录按钮未进入首页')
+    except Exception as e:
+        print('再次点击登录按钮未进入首页')
         screen_shot_func(driver, '再次登陆失败')
         raise Exception
     else:
@@ -584,9 +586,11 @@ def user_accept_disclaimer(driver):
     :return:
     """
     # 关闭Disclaimer
+    driver.implicitly_wait(6)
     count = get_xpath_elements(driver,accept_disclaimer)
     if len(count) == 1:  # close Disclaimer
         public_check_element(driver, accept_disclaimer, '接受免责声明失败')
+    driver.implicitly_wait(IMPLICIT_WAIT)
 
 def check_tag_and_com_switch_success(driver,has_tag = 0):
     """
@@ -715,7 +719,13 @@ def open_send_meeting_dialog(driver,which_meeting):
     :param driver:
     :param which_meeting: MHS或者OTU
     """
-    public_check_element(driver, send_my_help_space_invitation, '打开Send_My_Help_Space_Invitation窗口失败')
+    try:
+        get_xpath_element(driver,send_my_help_space_invitation).click()
+    except Exception as e:
+        print('打开Send_My_Help_Space_Invitation窗口失败', e)
+        screen_shot_func(driver, '打开Send_My_Help_Space_Invitation窗口失败')
+        raise Exception
+    # public_check_element(driver, send_my_help_space_invitation, '打开Send_My_Help_Space_Invitation窗口失败')
     try:
         if which_meeting == 'MHS':
             # 去勾选
@@ -837,7 +847,7 @@ def get_start_time_of_the_last_call(driver):
         except Exception as e:
             print('获取最近一次通话开始时间失败',e)
             screen_shot_func(driver, '获取最近一次通话开始时间失败')
-            raise Exception
+            raise e
     return time_started
 
 def get_recents_page_records_occurred_time(driver,rows = '2'):
@@ -909,8 +919,8 @@ def user_switch_to_second_workspace(driver,which_ws = 'Canada'):
     click_switch_ws_button(driver)
     try:
         get_xpath_element(driver, f'//div[@class="k-list-scroller"]//li[contains(.,"{which_ws}")]').click()
-    except Exception:
-        print(f'切换到{which_ws}失败')
+    except Exception as e:
+        print(f'切换到{which_ws}失败',e)
         screen_shot_func(driver,f'切换到{which_ws}失败')
         raise Exception
     # public_check_element(driver, f'//div[@class="k-list-scroller"]//li[contains(.,"{which_ws}")]', f'切换到{which_ws}失败')
@@ -951,6 +961,7 @@ def different_page_search_single_users(driver,which_page,search_input_xpath,data
             else:
                 time.sleep(1)
     except Exception as e:
+        print(f'在{which_page}页面查询用户失败',e)
         screen_shot_func(driver, f'在{which_page}页面查询用户失败')
         raise Exception(f'在{which_page}页面查询用户失败',e)
     else:
@@ -1402,7 +1413,7 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     except Exception as e:
         print('refresh_fail',e)
         screen_shot_func(driver,'refresh_fail')
-        raise Exception('refresh_fail')
+        raise Exception
     time.sleep(5)
     if close_tutorial == 'close_tutorial':
         ele_list = get_xpath_elements(driver,close_tutorial_button)
@@ -1412,7 +1423,7 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
             except Exception as e:
                 print('刷新页面后关闭教程失败',e)
                 screen_shot_func(driver, '刷新页面后关闭教程失败')
-                raise e
+                raise Exception
             # public_check_element(driver, close_tutorial_button, '刷新页面后关闭教程失败')
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
@@ -1535,9 +1546,9 @@ def get_ele_text(driver,ele_xpath):
     try:
         get_text = get_xpath_element(driver,ele_xpath).get_attribute('textContent')
         return get_text
-    except  Exception:
+    except  Exception as e:
         screen_shot_func(driver, f'获取元素的文本值失败')
-        raise  Exception
+        raise  e
 
 def get_ele_class_name(driver,ele_xpath,class_name):
     """
@@ -1551,7 +1562,7 @@ def get_ele_class_name(driver,ele_xpath,class_name):
         get_class_value = get_xpath_element(driver, ele_xpath).get_attribute(f'{class_name}')
         print(f'{class_name}的value是:',get_class_value)
         return get_class_value
-    except Exception:
+    except Exception as e:
         screen_shot_func(driver,f'获取元素的属性{class_name}值失败')
         raise Exception
 

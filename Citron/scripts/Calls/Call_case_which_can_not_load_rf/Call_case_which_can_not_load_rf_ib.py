@@ -2,8 +2,7 @@
 import time
 import platform
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from Citron.public_switch.pubLib import get_xpath_element, get_xpath_elements, kill_all_browser
 from Citron.public_switch.public_switch_py import BROWSER_TYPE, IMPLICIT_WAIT
 
 if BROWSER_TYPE == 'Chrome':
@@ -90,28 +89,6 @@ def test_filter_set_up():
     driver.maximize_window()
     return driver
 
-def get_xpath_element(driver,xpath,ec = None):
-    """
-    通过xpath寻找元素，driver.find_element_by_xpath(xpath)
-    :param driver: 浏览器驱动
-    :param xpath: 元素的xpath
-    :return:
-    """
-    if not ec:
-        return WebDriverWait(driver, 20, 0.5).until(EC.visibility_of_element_located(('xpath',xpath)))
-    else:
-        return driver.find_element('xpath', xpath)
-
-def get_xpath_elements(driver,xpath):
-    """
-    通过xpath寻找元素，driver.find_element_by_xpath(xpath)
-    :param driver: 浏览器驱动
-    :param xpath: 元素的xpath
-    :return:
-    """
-    elements_list = driver.find_elements('xpath', xpath)
-    return elements_list
-
 def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'):
     """
     # driver set up And LogIn
@@ -124,7 +101,7 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     if BROWSER_TYPE == 'Chrome':
         driver = webdriver.Chrome(options=option)
     elif BROWSER_TYPE == 'Firefox':
-        driver = webdriver.Firefox(options=option)
+        driver = webdriver.Firefox(options=option,firefox_profile=profile)
     driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.get(test_web)
     driver.maximize_window()
@@ -198,13 +175,13 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
                     except Exception as e:
                         print('登陆成功后再次接受免责声明失败', e)
                         screen_shot_func(driver, '登录成功后再次接受免责声明失败')
-                        raise Exception
+                        raise e
                     else:
                         print('登陆成功后再次接受免责声明成功')
             except Exception as e:
                 print('登陆成功后接受免责声明失败', e)
                 screen_shot_func(driver, '登录后接受免责声明失败')
-                raise Exception
+                raise e
             else:
                 print('登陆成功后接受免责声明成功')
     driver.implicitly_wait(int(8))
@@ -217,10 +194,11 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
         except Exception as e:
             print('登陆成功后关闭教程失败', e)
             screen_shot_func(driver, '登录成功后关闭教程失败')
-            raise Exception
+            raise e
         else:
             print('登陆成功后关闭教程成功')
     driver.implicitly_wait(int(IMPLICIT_WAIT))
+    time.sleep(2)
     return driver
 
 def filter_by_different_fields(driver,index,search_text,text_id):
@@ -234,21 +212,28 @@ def filter_by_different_fields(driver,index,search_text,text_id):
     """
     try:
         index = int(index)
-        driver.find_element_by_xpath(f'//div[@class="ag-header-row"]/div[{index}]//button[@ref="eButtonShowMainFilter"]').click()
-        driver.find_element_by_xpath(filterType).click()
-        driver.find_element_by_xpath('//option[contains(.,"Not contains")]').click()
-        driver.find_element_by_xpath(filterText).click()
-        driver.find_element_by_xpath(filterText).send_keys(search_text)
+        get_xpath_element(driver,f'//div[@class="ag-header-row"]/div[{index}]//button[@ref="eButtonShowMainFilter"]').click()
+        # driver.find_element_by_xpath(f'//div[@class="ag-header-row"]/div[{index}]//button[@ref="eButtonShowMainFilter"]').click()
+        get_xpath_element(driver,filterType).click()
+        # driver.find_element_by_xpath(filterType).click()
+        get_xpath_element(driver,'//option[contains(.,"Not contains")]').click()
+        # driver.find_element_by_xpath('//option[contains(.,"Not contains")]').click()
+        get_xpath_element(driver,filterText).click()
+        # driver.find_element_by_xpath(filterText).click()
+        get_xpath_element(driver,filterText).send_keys(search_text)
+        # driver.find_element_by_xpath(filterText).send_keys(search_text)
         time.sleep(5)    # 等待输入查询字段后页面刷新
     except Exception as e:
         print('筛选过程失败', e)
         screen_shot_func(driver, '筛选过程失败')
-        raise Exception
+        raise e
     else:
         print('筛选过程成功')
-    list_count = driver.find_elements_by_xpath(list_data_count)
+    list_count = get_xpath_elements(driver,list_data_count)
+    # list_count = driver.find_elements_by_xpath(list_data_count)
     for i in range(len(list_count)):
-        text = driver.find_element_by_xpath(f'//div[@class ="ag-center-cols-container"]/div[{i}+1]/div[@col-id="{text_id}"]').get_attribute("textContent")
+        text = get_xpath_element(driver,f'//div[@class ="ag-center-cols-container"]/div[{i}+1]/div[@col-id="{text_id}"]').get_attribute("textContent")
+        # text = driver.find_element_by_xpath(f'//div[@class ="ag-center-cols-container"]/div[{i}+1]/div[@col-id="{text_id}"]').get_attribute("textContent")
         try:
             assert search_text not in text
         except AssertionError:
@@ -264,30 +249,35 @@ def filter_by_duration_greater_than_60_second(driver):
     system_type = get_system_type()
     if system_type == 'Windows':
         try:
-            driver.find_element_by_xpath('//div[@class="ag-header-row"]/div[7]//button[@ref="eButtonShowMainFilter"]').click()
+            get_xpath_element(driver,'//div[@class="ag-header-row"]/div[7]//button[@ref="eButtonShowMainFilter"]').click()
+            # driver.find_element_by_xpath('//div[@class="ag-header-row"]/div[7]//button[@ref="eButtonShowMainFilter"]').click()
         except Exception as e:
             print('点击Duration的右下角按钮失败', e)
             screen_shot_func(driver, '点击Duration的右下角按钮失败')
-            raise Exception
+            raise e
         try:
-            driver.find_element_by_xpath(filterType).click()
+            get_xpath_element(driver,filterType).click()
+            # driver.find_element_by_xpath(filterType).click()
         except Exception as e:
             print('点击筛选条件失败', e)
             screen_shot_func(driver, '点击筛选条件失败')
-            raise Exception
+            raise e
         try:
-            driver.find_element_by_xpath('//option[@value="greaterThan" and contains(.,"Greater than")]').click()
+            get_xpath_element(driver,'//option[@value="greaterThan" and contains(.,"Greater than")]').click()
+            # driver.find_element_by_xpath('//option[@value="greaterThan" and contains(.,"Greater than")]').click()
         except Exception as e:
             print('选择Greater than条件失败', e)
             screen_shot_func(driver, '选择Greater_than条件失败')
-            raise Exception
+            raise e
         try:
-            driver.find_element_by_xpath(filterText).click()
-            driver.find_element_by_xpath(filterText).send_keys('60')
+            get_xpath_element(driver,filterText).click()
+            # driver.find_element_by_xpath(filterText).click()
+            get_xpath_element(driver,filterText).send_keys('60')
+            # driver.find_element_by_xpath(filterText).send_keys('60')
         except Exception as e:
             print('输入框输入60失败', e)
             screen_shot_func(driver, '输入框输入60失败')
-            raise Exception
+            raise e
         time.sleep(10)
 
 def check_greater_than_60(driver):
@@ -299,9 +289,11 @@ def check_greater_than_60(driver):
     """
     system_type = get_system_type()
     if system_type == 'Windows':
-        ele_list = driver.find_elements_by_xpath(list_data_count)
+        ele_list = get_xpath_elements(driver,list_data_count)
+        # ele_list = driver.find_elements_by_xpath(list_data_count)
         for i in range(len(ele_list)):
-            get_text = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="callDuration"]').get_attribute("textContent")
+            get_text = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="callDuration"]').get_attribute("textContent")
+            # get_text = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="callDuration"]').get_attribute("textContent")
             print(get_text)
             result = conversion_of_precise_time(get_text)
             if result == 'Less than a minute':
@@ -317,9 +309,11 @@ def enter_calls_page(driver,which_tree = 2):
     :return:
     """
     try:
-        driver.find_element_by_xpath(f'//div[@role="tree"]/div[{which_tree}]').click()
+        get_xpath_element(driver,f'//div[@role="tree"]/div[{which_tree}]').click()
+        # driver.find_element_by_xpath(f'//div[@role="tree"]/div[{which_tree}]').click()
         time.sleep(1)
-        driver.find_element_by_xpath(calls_page).click()
+        get_xpath_element(driver,calls_page).click()
+        # driver.find_element_by_xpath(calls_page).click()
         time.sleep(5)
     except Exception as e:
         print('进入calls页面失败', e)
@@ -335,17 +329,20 @@ def switch_last_365_days(driver):
     :return:
     """
     try:
-        driver.find_element_by_xpath('//select[@id="occured-within"]').click()
+        get_xpath_element(driver,'//select[@id="occured-within"]').click()
+        # driver.find_element_by_xpath('//select[@id="occured-within"]').click()
         time.sleep(1)
-        driver.find_element_by_xpath('//select[@id="occured-within"]/option[@value="last_365_days"]').click()
+        get_xpath_element(driver,'//select[@id="occured-within"]/option[@value="last_365_days"]').click()
+        # driver.find_element_by_xpath('//select[@id="occured-within"]/option[@value="last_365_days"]').click()
     except Exception as e:
         print('切换到Last 365 Days失败',e)
         screen_shot_func(driver, '切换到Last_365_days失败')
-        raise Exception
+        raise e
     else:
         try:
             time.sleep(5)
-            ele_list = driver.find_elements_by_xpath(list_data_count)
+            ele_list = get_xpath_elements(driver,list_data_count)
+            # ele_list = driver.find_elements_by_xpath(list_data_count)
             assert len(ele_list) >= 1
         except AssertionError:
             screen_shot_func(driver, '切换到Last_365_days后页面没数据')
@@ -360,8 +357,9 @@ def exit_this_driver(driver):
     :param driver:
     :return:
     """
-    driver.quit()
-    time.sleep(2)
+    # driver.quit()
+    # time.sleep(2)
+    kill_all_browser()
 
 def select_one_of_value(driver):
     """
@@ -372,22 +370,21 @@ def select_one_of_value(driver):
     system_type = get_system_type()
     if system_type == 'Windows':
         time.sleep(5)
-        system_type = get_system_type()
-        if system_type == 'Windows':
-            driver.find_element_by_xpath(occurred_input).send_keys('11/12/2021')
-        else:
-            driver.find_element_by_xpath(occurred_input).send_keys('2021/11/12')
-        time.sleep(5)
-        count = driver.find_elements_by_xpath(list_data_count)
-        print(len(count))
-        try:
-            assert len(count) == 4
-        except AssertionError as e:
-            print('数据不是4个',e)
-            screen_shot_func(driver, '数据不是4个')
-            raise AssertionError
-        else:
-            print('数据是4个')
+        if BROWSER_TYPE == 'Chrome':
+            get_xpath_element(driver,occurred_input).send_keys('11/12/2021')
+            # driver.find_element_by_xpath(occurred_input).send_keys('11/12/2021')
+            time.sleep(5)
+            count = get_xpath_elements(driver,list_data_count)
+            # count = driver.find_elements_by_xpath(list_data_count)
+            print(len(count))
+            try:
+                assert len(count) == 4
+            except AssertionError as e:
+                print('数据不是4个',e)
+                screen_shot_func(driver, '数据不是4个')
+                raise AssertionError
+            else:
+                print('数据是4个')
 
 def make_sure_TaC_status_correct(driver,status):
     """
@@ -397,9 +394,11 @@ def make_sure_TaC_status_correct(driver,status):
     :return:
     """
     try:
-        driver.find_element_by_xpath(second_tree).click()
+        get_xpath_element(driver,second_tree).click()
+        # driver.find_element_by_xpath(second_tree).click()
         time.sleep(1)
-        driver.find_element_by_xpath("//span[contains(.,'Workspace Settings')]").click()
+        get_xpath_element(driver,"//span[contains(.,'Workspace Settings')]").click()
+        # driver.find_element_by_xpath("//span[contains(.,'Workspace Settings')]").click()
         time.sleep(3)
     except Exception as e:
         print('Workspace Settings页面失败', e)
@@ -408,20 +407,24 @@ def make_sure_TaC_status_correct(driver,status):
     else:
         print('Workspace Settings页面成功')
     if status == 'open_TaC':
-        count = driver.find_elements_by_xpath(open_TaC_button)
+        count = get_xpath_elements(driver,open_TaC_button)
+        # count = driver.find_elements_by_xpath(open_TaC_button)
         if len(count) == 1:
             try:
-                driver.find_element_by_xpath(open_TaC_button).click()
+                get_xpath_element(driver,open_TaC_button).click()
+                # driver.find_element_by_xpath(open_TaC_button).click()
             except Exception as e:
                 print('打开TaC设置失败',e)
                 screen_shot_func(driver, '打开TaC设置失败')
                 raise Exception
             time.sleep(3)
     elif status == 'close_TaC':
-        count = driver.find_elements_by_xpath(close_TaC_button)
+        count = get_xpath_elements(driver,close_TaC_button)
+        # count = driver.find_elements_by_xpath(close_TaC_button)
         if len(count) == 1:
             try:
-                driver.find_element_by_xpath(close_TaC_button).click()
+                get_xpath_element(driver,close_TaC_button).click()
+                # driver.find_element_by_xpath(close_TaC_button).click()
             except Exception as e:
                 print('关闭TaC设置失败',e)
                 screen_shot_func(driver, '关闭TaC设置失败')
@@ -435,7 +438,8 @@ def click_call_tag_link_to_filter_call(driver):
     :return:
     """
     try:
-        driver.find_element_by_xpath('//div[@class="ag-header-row"]/div[8]//button[@ref="eButtonShowMainFilter"]').click()
+        get_xpath_element(driver,'//div[@class="ag-header-row"]/div[8]//button[@ref="eButtonShowMainFilter"]').click()
+        # driver.find_element_by_xpath('//div[@class="ag-header-row"]/div[8]//button[@ref="eButtonShowMainFilter"]').click()
     except Exception as e:
         print('点击tag筛选失败', e)
         screen_shot_func(driver, '点击tag筛选失败')
@@ -443,8 +447,10 @@ def click_call_tag_link_to_filter_call(driver):
     else:
         print('点击tag筛选成功')
     try:
-        driver.find_element_by_xpath(filterText).click()
-        driver.find_element_by_xpath(filterText).send_keys('11 tag')
+        get_xpath_element(driver,filterText).click()
+        # driver.find_element_by_xpath(filterText).click()
+        get_xpath_element(driver,filterText).send_keys('11 tag')
+        # driver.find_element_by_xpath(filterText).send_keys('11 tag')
     except Exception as e:
         print('根据tag筛选失败',e)
         screen_shot_func(driver, '根据tag筛选失败')
@@ -463,7 +469,8 @@ def check_filter_by_tag(driver):
     result_flag = 1
     for i in range(10):
         try:
-            get_text = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="tags"]').get_attribute("textContent")
+            get_text = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="tags"]').get_attribute("textContent")
+            # get_text = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="tags"]').get_attribute("textContent")
         except Exception as e:
             print('预期tag与实际不符',e)
             screen_shot_func(driver,'预期tag与实际不符')

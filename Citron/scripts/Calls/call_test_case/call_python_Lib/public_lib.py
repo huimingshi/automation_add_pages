@@ -2,25 +2,8 @@
 # @Time     :4/6/2022 10:23 AM
 # @Author   :Huiming Shi
 
-import os
 import time
-import platform
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-from Citron.public_switch.public_switch_py import BROWSER_TYPE
-
-
-def get_system_type():
-    """
-    # get current system type
-    # Windows or Mac
-    :return: system type
-    """
-    system_type = platform.system()
-    print(system_type)
-    return system_type
+from Citron.public_switch.pubLib import get_system_type, get_xpath_elements, get_xpath_element
 
 def screen_shot_func(driver,screen_name):
     current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
@@ -56,49 +39,10 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
                     break
             elif i == 4:
                 print(description)
-                raise description
+                raise Exception
     except Exception:
         screen_shot_func(driver, description)
-        raise description
-
-def kill_all_browser():
-    if BROWSER_TYPE == 'Chrome':
-        # kill所有的chromedriver进程
-        os.system('taskkill /F /im chromedriver.exe')
-        # 退出所有的浏览器
-        os.system('taskkill /f /t /im chrome.exe')
-    elif BROWSER_TYPE == 'Firefox':
-        # kill所有的firefoxdriver进程
-        os.system("taskkill /im geckodriver.exe /f")
-        # 退出所有的浏览器
-        os.system('taskkill /f /t /im firefox.exe')
-
-def get_xpath_element(driver,locator,ec = None,select='xpath'):
-    """
-    通过xpath寻找元素，driver.find_element_by_xpath(xpath)
-    :param driver: 浏览器驱动
-    :param locator: 元素的locator
-    :param ec: 是否需要使用EC来进行显示等待，默认需要
-    :param select: 默认是xpath寻找，也可以进行切换成id
-    :return:
-    """
-    if not ec:
-        return WebDriverWait(driver, 20, 0.5).until(EC.visibility_of_element_located((select,locator)))
-    else:
-        return driver.find_element(select, locator)
-
-def get_xpath_elements(driver,xpath):
-    """
-    通过xpath寻找元素，driver.find_element_by_xpath(xpath)
-    :param driver: 浏览器驱动
-    :param xpath: 元素的xpath
-    :return:
-    """
-    elements_list = driver.find_elements('xpath', xpath)
-    return elements_list
-
-
-
+        raise Exception
 
 if __name__ == '__main__':
     kill_all_browser()

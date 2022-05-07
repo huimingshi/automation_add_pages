@@ -15,10 +15,9 @@ if BROWSER_TYPE == 'Chrome':
         "profile.default_content_setting_values.media_stream_mic": 1 ,   # chrome开启麦克风
         "profile.default_content_setting_values.media_stream_camera": 1    # chrome开启摄像头
     })
-    # # chrome不显示是收到自动软件控制
-    # option.add_experimental_option('excludeSwitches', ['enable-automation'])
     # 忽略证书错误，不需要手动点高级选项
     option.add_argument('--ignore-certificate-errors')
+
 elif BROWSER_TYPE == 'Firefox':
     from selenium.webdriver.firefox.options import Options
 
