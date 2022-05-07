@@ -1,5 +1,6 @@
 #----------------------------------------------------------------------------------------------------#
 import time
+from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_lib import *
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
@@ -40,10 +41,10 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     public_check_element(driver, invite_user_div, '右上角三个横杠按钮未展示',if_click = None,if_show = 1)
     try:
         get_xpath_element(driver, invite_user_div).click()
-    except Exception:
-        print('右上角三个横杠按钮不可点击')
+    except Exception as e:
+        print('右上角三个横杠按钮不可点击',e)
         screen_shot_func(driver, '右上角三个横杠按钮不可点击')
-        raise Exception
+        raise e
     public_check_element(driver, enter_invite_user_page, 'Invite图标未展示',if_click = None,if_show = 1)
     try:
         get_xpath_element(driver, enter_invite_user_page).click()
@@ -149,7 +150,8 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
     """
     if is_personal == 'not_personal':
         try:
-            element = driver1.find_element_by_id(search_input)
+            element = get_xpath_element(driver1, search_input)
+            # element = driver1.find_element_by_id(search_input)
             element.clear()
             time.sleep(2)
             element.click()
@@ -166,7 +168,8 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
         print('0000000000000000000000000000000000',len(ele_ment))
         if len(ele_ment) < 1:
             refresh_page(driver1)
-            element = driver1.find_element_by_id(search_input)
+            element = get_xpath_element(driver1,search_input)
+            # element = driver1.find_element_by_id(search_input)
             element.click()
             element.send_keys(who)
             time.sleep(5)
@@ -365,7 +368,8 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     """
     # make calls with who
     try:
-        element = driver1.find_element_by_id(search_input)
+        element = get_xpath_element(driver1, search_input)
+        # element = driver1.find_element_by_id(search_input)
         element.click()
         element.send_keys(who)
         time.sleep(3)
@@ -575,7 +579,8 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
     :return:
     """
     try:
-        element = driver1.find_element_by_id(search_input)
+        element = get_xpath_element(driver1, search_input)
+        # element = driver1.find_element_by_id(search_input)
         element.clear()
         time.sleep(1)
         element.click()

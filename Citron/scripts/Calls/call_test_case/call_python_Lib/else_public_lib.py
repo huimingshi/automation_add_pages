@@ -1407,7 +1407,13 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     if close_tutorial == 'close_tutorial':
         ele_list = get_xpath_elements(driver,close_tutorial_button)
         if len(ele_list) == 1:
-            public_check_element(driver, close_tutorial_button, '刷新页面后关闭教程失败')
+            try:
+                get_xpath_element(driver, close_tutorial_button).click()   # 刷新页面后关闭教程
+            except Exception as e:
+                print('刷新页面后关闭教程失败',e)
+                screen_shot_func(driver, '刷新页面后关闭教程失败')
+                raise e
+            # public_check_element(driver, close_tutorial_button, '刷新页面后关闭教程失败')
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
     """

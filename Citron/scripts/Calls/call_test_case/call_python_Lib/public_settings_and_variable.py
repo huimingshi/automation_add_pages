@@ -46,7 +46,7 @@ password_input = '//input[@autocomplete="current-password"]'
 submit_button = '//button[@type="submit"]'
 next_button = '//button[text()="Next"]'
 login_button = '//button[text()="Log In"]'
-search_input = "filter-text-box"
+search_input = '//input[@id="filter-text-box"]'
 add_comment = '//textarea[@placeholder="Add a comment..."]'
 accept_disclaimer = '//button[@class="pull-right btn btn-primary"]'     # ACCEPT Disclaimer when call或者就只是ACCEPT Disclaimer
 close_tutorial_button = '//div[@class="modal-header"]//button[@class="close"]'
@@ -59,7 +59,7 @@ end_call_button = "//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_
 add_tag_input = '//input[@placeholder="Add tags to filter calls..."]'       # call结束后的add tag
 add_tag_input_after = '//span[@class="k-searchbar"]/input[@type="text"]'    # call结束后已经添加tag后，再添加tag
 end_call_before_connecting = '//button[@class="btn btn-lg btn-danger"]'
-invite_user_div = "//div[@class='InCall']//*[@*='#options_menu']"   # 通话中界面右上角的三个横岗
+invite_user_div = "//div[@class='InCall']//*[@*='#options_menu']/.."   # 通话中界面右上角的三个横岗
 enter_invite_user_page = '//span[contains(.,"Invite")]/../../div[@class="submenu-container"][1]'
 enter_debug_page = '//span[contains(.,"Invite")]/../../div[@class="submenu-container"][2]'
 close_bounced_after_call_end = '//button[@class="k-button k-button-icon closeButton"]'

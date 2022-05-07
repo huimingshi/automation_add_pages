@@ -226,10 +226,12 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     [Tags]      small range 51 line         call_case
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    user_switch_to_first_workspace   ${driver1}
     # Contact of WS1 log in
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
     # Contact of WS1 call the user directly
     make_calls_with_who   ${driver1}   ${driver2}   ${big_admin_first_WS_username}
+    sleep  20s
     # In calling page, clicks Invite -> Send Invitation papge
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}  send_invite_in_calling_page   ${driver1}

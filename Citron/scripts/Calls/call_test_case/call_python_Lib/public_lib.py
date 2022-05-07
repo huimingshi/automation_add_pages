@@ -45,7 +45,8 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
             ele_list = get_xpath_elements(driver, xpath)
             if if_show and if_click:
                 if len(ele_list) >= 1:
-                    ele_list[0].click()
+                    get_xpath_element(driver,xpath).click()
+                    # ele_list[0].click()
                     break
             elif if_show and not if_click:
                 if len(ele_list) >= 1:
@@ -55,10 +56,10 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
                     break
             elif i == 4:
                 print(description)
-                raise Exception
+                raise description
     except Exception:
         screen_shot_func(driver, description)
-        raise Exception
+        raise description
 
 def kill_all_browser():
     if BROWSER_TYPE == 'Chrome':
@@ -72,17 +73,19 @@ def kill_all_browser():
         # 退出所有的浏览器
         os.system('taskkill /f /t /im firefox.exe')
 
-def get_xpath_element(driver,xpath,ec = None):
+def get_xpath_element(driver,locator,ec = None,select='xpath'):
     """
     通过xpath寻找元素，driver.find_element_by_xpath(xpath)
     :param driver: 浏览器驱动
-    :param xpath: 元素的xpath
+    :param locator: 元素的locator
+    :param ec: 是否需要使用EC来进行显示等待，默认需要
+    :param select: 默认是xpath寻找，也可以进行切换成id
     :return:
     """
     if not ec:
-        return WebDriverWait(driver, 20, 0.5).until(EC.visibility_of_element_located(('xpath',xpath)))
+        return WebDriverWait(driver, 20, 0.5).until(EC.visibility_of_element_located((select,locator)))
     else:
-        return driver.find_element('xpath', xpath)
+        return driver.find_element(select, locator)
 
 def get_xpath_elements(driver,xpath):
     """
