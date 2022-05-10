@@ -160,7 +160,7 @@ Small_range_1053
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email      You have been invited to join Huiming.shi.helplightning+0123456789 on a auto_default_workspace's support call using Help Lightning.
     [Teardown]      exit_driver
-    [Teardown]      exit_driver     ${driver1}     ${driver2}
+#    [Teardown]      exit_driver     ${driver1}     ${driver2}
 
 #Small_range_1054_1060
 #    [Documentation]     Launch edge browser
