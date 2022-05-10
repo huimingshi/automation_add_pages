@@ -153,9 +153,6 @@ def driver_set_up_and_logIn(username,close_bounced='close_bounced',accept = 'acc
     if close_bounced == 'close_bounced':
         try:  # close Tutorial
             get_xpath_element(driver,close_tutorial_button).click()
-        except AssertionError:
-            screen_shot_func(driver, '展示的不是Welcome to Help Lightning!')
-            raise AssertionError
         except Exception as e:
             print('登陆成功后关闭教程失败', e)
             screen_shot_func(driver, '登录成功后关闭教程失败')

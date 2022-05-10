@@ -32,7 +32,8 @@ logs_in_Citron_as_Group_admin
     delete_record_in_crunch_is_correct    User citron_group_admin (56528) deletes incall attachment from Enterprise (auto_default_workspace).
     [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
     ...         AND           Close
-    ...         AND           exit_drivers   ${driver1}  ${driver2}
+    ...         AND           exit_drivers
+#    ...         AND           exit_drivers   ${driver1}  ${driver2}
 
 logs_in_Citron_as_Normal_User
     [Documentation]    logs in Citron as Normal admin
@@ -53,7 +54,8 @@ logs_in_Citron_as_Normal_User
     delete_menu_is_not_visible
     [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
     ...         AND           Close
-    ...         AND           exit_drivers   ${driver1}  ${driver2}
+    ...         AND           exit_drivers
+#    ...         AND           exit_drivers   ${driver1}  ${driver2}
 
 #logs_in_Citron_as_Site_admin
 #    [Documentation]    logs in Citron as Site admin
@@ -81,7 +83,8 @@ logs_in_Citron_as_Normal_User
 #    delete_record_in_crunch_is_correct    User huiming.shi (56404) deletes incall attachment from Enterprise (auto_default_workspace).
 #    [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_pictur
 #    ...         AND           Close
-#    ...         AND           exit_drivers   ${driver1}  ${driver2}
+#    ...         AND           exit_drivers
+##    ...         AND           exit_drivers   ${driver1}  ${driver2}
 
 logs_in_Citron_as_Workspace_admin
     [Documentation]    logs in Citron as Workspace admin
@@ -110,4 +113,5 @@ logs_in_Citron_as_Workspace_admin
     delete_record_in_crunch_is_correct    User citron (56213) deletes incall attachment from Enterprise (auto_default_workspace).
     [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
     ...         AND           Close
-    ...         AND           exit_drivers   ${driver1}  ${driver2}
+    ...         AND           exit_drivers
+#    ...         AND           exit_drivers   ${driver1}  ${driver2}

@@ -35,7 +35,8 @@ Force Tags        small_range
 #    # Back to F2F mode	VP: hint dialog disappear
 #    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
 #    [Teardown]      run keywords    exit_call   ${driver2}   1
-#    ...             AND             exit_driver   ${driver1}   ${driver2}
+#    ...             AND             exit_driver
+##    ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Small_range_152
     [Documentation]    2 users in face to face mode
@@ -58,8 +59,10 @@ Small_range_152
     sleep  10s
     # VP:hints dialog is closed on screen of 3pc call
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-    [Teardown]      run keywords    end_call_for_all   ${driver1}
-    ...             AND             exit_driver    ${driver1}   ${driver2}   ${driver3}
+    # 结束call
+    end_call_for_all   ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_153_160
     [Documentation]    Enterprise user call contact in F2F mode
@@ -108,8 +111,10 @@ Small_range_153_160
     enter_face_to_face_mode     ${driver1}
     # VP: hint dialog is not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-    [Teardown]      run keywords    exit_call   ${driver1}
-    ...             AND             exit_driver    ${driver1}   ${driver2}
+    # 结束call
+    exit_call   ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver    ${driver1}   ${driver2}
 
 Small_range_161
     [Documentation]    WebApp specific
@@ -132,8 +137,10 @@ Small_range_161
 #    enter_FGD_mode   ${driver1}    Swap Camera
     # 返回Face to Face模式
     back_to_face_to_face_mode    ${driver1}
-    [Teardown]      run keywords    exit_call   ${driver1}
-    ...             AND             exit_driver    ${driver1}   ${driver2}
+    # 结束call
+    exit_call   ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver    ${driver1}   ${driver2}
 
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly
@@ -175,7 +182,8 @@ Join_call_162_167
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 
 Join_call_168_178
     [Documentation]     Join call	MPC via on-call group.
@@ -232,7 +240,8 @@ Join_call_168_178
     user_anwser_call    ${driver6}
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 
 Join_call_179_187
     [Documentation]     Join call	MPC via MHS link.
@@ -294,7 +303,8 @@ Join_call_179_187
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver8}    ${end_call_button}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}    ${driver5}    ${driver6}      ${driver8}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}    ${driver5}    ${driver6}      ${driver8}
 
 Join_call_188_195
     [Documentation]     Join call	MPC via OTU link.
@@ -346,7 +356,8 @@ Join_call_188_195
     which_page_is_currently_on    ${driver7}    ${your_call_was_declined}
     exit_one_driver    ${driver7}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}   ${driver5}    ${driver6}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}   ${driver5}    ${driver6}
 
 Join_call_196_200
     [Documentation]     In call	  2PC
@@ -395,7 +406,8 @@ Join_call_196_200
     hang_up_the_phone     ${driver2}
     # End call.
     exit_call     ${driver1}
-    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
+    [Teardown]    exit_driver
+#    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
 
 Join_call_201_205
     [Documentation]     In call	  2PC
@@ -441,7 +453,8 @@ Join_call_201_205
     which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
     which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
     hang_up_the_phone     ${driver2}
-    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
+    [Teardown]    exit_driver
+#    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
 
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
@@ -538,7 +551,8 @@ Small_range_560_580
     user_make_call_via_meeting_link    ${driver8}    ${invite_url}
     which_page_is_currently_on    ${driver8}    ${this_call_is_over}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver       ${driver5}     ${driver8}    ${driver9}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver       ${driver5}     ${driver8}    ${driver9}
 
 Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
@@ -559,7 +573,8 @@ Small_range_581_582
     user_anwser_call    ${driver3}
     which_page_is_currently_on    ${driver3}    ${end_call_button}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}   ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}   ${driver3}
 
 Small_range_583_585
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
@@ -589,7 +604,8 @@ Small_range_583_585
     which_page_is_currently_on    ${driver5}    ${user_is_currently_on_another_call}
     exit_one_driver    ${driver5}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_590
     [Documentation]     3PI - Direct call     TU1 call EU1 from contact list
@@ -605,7 +621,8 @@ Small_range_590
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_591
     [Documentation]     3PI - Direct call     TU1 call EU1 via EU1's MHS link
@@ -623,7 +640,8 @@ Small_range_591
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_592
     [Documentation]     3PI - Direct call     Pre-condition: userS has personal contact from another site
@@ -637,4 +655,5 @@ Small_range_592
     # VP: The personal contact from different site does not have invite 3rd parcipant icon
     which_page_is_currently_on     ${driver2}     ${invite_user_in_calling}     not_currently_on
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}

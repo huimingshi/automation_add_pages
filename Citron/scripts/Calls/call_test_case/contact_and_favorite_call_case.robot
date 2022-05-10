@@ -22,8 +22,9 @@ Favorite_tap_group_name_to_start_expert_call
     switch_to_diffrent_page   ${driver1}   ${py_favorites_page}   ${py_favorites_switch_success}    ${py_get_number_of_rows}
     # make call with on-call
     make_call_to_onCall  ${driver1}  ${driver2}
-    [Teardown]   run keywords    exit_driver  ${driver1}   ${driver2}
-    ...          AND             Close
+    [Teardown]   run keywords    Close
+    ...          AND             exit_driver
+#    ...          AND             exit_driver  ${driver1}   ${driver2}
 
 Send_meeting_room_link_By_Premium_User
     [Documentation]    Send meeting room link By Premium User
@@ -37,7 +38,8 @@ Send_meeting_room_link_By_Premium_User
     # Premium User Aneser call
     user_anwser_call   ${driver}
     exit_call     ${driver}
-    [Teardown]   exit_driver  ${driver}   ${driver1}
+    [Teardown]   exit_driver
+#    [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Send_meeting_room_link_By_Enterprise_User
     [Documentation]    Send meeting room link By Enterprise User
@@ -50,8 +52,9 @@ Send_meeting_room_link_By_Enterprise_User
     ${driver1}  anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser call
     user_anwser_call   ${driver}
-    exit_call     ${driver}
-    [Teardown]   exit_driver  ${driver}  ${driver1}
+    exit_call     ${driver}   no_check
+    [Teardown]   exit_driver
+#    [Teardown]   exit_driver  ${driver}  ${driver1}
 
 Send_one_time_meeting_room_link_By_Premium_User
     [Documentation]    Send  one-time meeting room link By Premium User
@@ -65,7 +68,8 @@ Send_one_time_meeting_room_link_By_Premium_User
     # Premium User Aneser then exit call
     user_anwser_call   ${driver}
     exit_call     ${driver}
-    [Teardown]   exit_driver  ${driver}   ${driver1}
+    [Teardown]   exit_driver
+#    [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Send_one_time_meeting_room_link_By_Enterprise_User
     [Documentation]    Send  one-time meeting room link By Enterprise User
@@ -78,8 +82,9 @@ Send_one_time_meeting_room_link_By_Enterprise_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser then exit call
     user_anwser_call   ${driver}
-    exit_call     ${driver}
-    [Teardown]   exit_driver  ${driver}   ${driver1}
+    exit_call     ${driver}   no_check
+    [Teardown]   exit_driver
+#    [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     [Documentation]    Set Survey off	Make a call via Citron & Client	After ending call	VP: No Take Survey button.
@@ -98,7 +103,8 @@ Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     # No Take Survey button
     check_survey_switch_success   ${driver1}
     [Teardown]      run keywords     Close
-    ...             AND              exit_driver   ${driver1}   ${driver2}
+    ...             AND              exit_driver
+#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_No_Take_Survey_button
     [Documentation]    Set Survey on  Value is in White List	Make a call via Citron & Client	After ending call	VP: Take Survey button.  After ending call,	VP: The tutorial screen shows up.
@@ -122,7 +128,8 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
     # After ending call,	VP: The tutorial screen shows up.
     check_tutorial_screen_shows_up  ${driver2}
     [Teardown]      run keywords     Close
-    ...             AND              exit_driver   ${driver1}   ${driver2}
+    ...             AND              exit_driver
+#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 #Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_button
 #    [Documentation]    Set Survey on  Set URL=Null	Make a call via Citron & Client	After ending call	VP: No Take Survey button.
@@ -141,5 +148,6 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
 #    exit_call  ${driver1}
 #    # No Take Survey button
 #    check_survey_switch_success   ${driver1}
-#    [Teardown]   run keywords    exit_driver  ${driver1}   ${driver2}
-#    ...          AND             Close
+#    [Teardown]   run keywords    Close
+#    ...          AND             exit_driver
+#    ...          AND             exit_driver  ${driver1}   ${driver2}

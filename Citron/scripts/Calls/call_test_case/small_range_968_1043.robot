@@ -40,7 +40,8 @@ Small_range_970_974
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
     should be equal as strings    ${get_ele_text}     Thank you for using Help Lightning
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_977_993
     [Documentation]     Change product name to text with Chinese character+number+special character
@@ -238,7 +239,8 @@ Small_range_977_993
     ${css_value}   get_css_value   ${driver2}   ${Login_page_next_button}   background-color                        # 登录页面的Next按钮
     should be equal as strings    rgba(0, 169, 224, 1)     ${css_value}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver2}    ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver2}    ${driver3}
 
 Small_range_995_996
     [Documentation]     WS branding     Set workspace WS2 accent color to Green, Big Logo 2 & Avatar 2, WS1 to orange, Big Logo 1 & Avatar 1      User A call user B directly
@@ -313,7 +315,8 @@ Small_range_995_996
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_997
     [Documentation]     User A call other site user[User B] from personal contact list, other site user has not customer avatar & WS branding = OFF
@@ -381,7 +384,8 @@ Small_range_997
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_998
     [Documentation]     User C switch to WS2	Use A call user C from Team contact
@@ -444,7 +448,8 @@ Small_range_998
     check_a_contains_b    ${driver1}     ${get_class_value}        ${WS_1_Big_Logo}
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_999
     [Documentation]     User A click B's meeing link
@@ -503,7 +508,8 @@ Small_range_999
     check_a_contains_b    ${driver1}     ${get_class_value}        ${WS_1_Big_Logo}
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_1000_1001
     [Documentation]     Anonyoums click B's meeting link
@@ -574,7 +580,8 @@ Small_range_1000_1001
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
     ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
     check_a_contains_b    ${driver3}     ${get_class_value}        ${WS_1_Big_Logo}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_1002_1004
     [Documentation]     User B send 3PI link    User C switch to WS2    User C click 3PI link to join call
@@ -639,7 +646,8 @@ Small_range_1002_1004
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
     ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
     check_a_contains_b    ${driver3}     ${get_class_value}        ${WS_1_Big_Logo}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_1005_1007
     [Documentation]     User C switch to WS1    User C switch to WS2
@@ -730,7 +738,8 @@ Small_range_1005_1007
     check_a_contains_b    ${driver1}     ${get_class_value}        ${WS_1_Big_Logo}
     ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
     check_a_contains_b    ${driver3}     ${get_class_value}        ${WS_1_Big_Logo}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_1009
     [Documentation]     Click inactive 3PI link(nobody in call) that call's owner is User B
@@ -761,7 +770,8 @@ Small_range_1009
     # Avatar should be User B customer avatar.
     ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
     check_a_contains_b    ${driver3}     ${get_class_value}        ${WS_1_Big_Logo}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_1010_1017
     [Documentation]     Precondition: Expert Group 1[EG 1] in WS 1. User B is in EG 1.
@@ -853,7 +863,8 @@ Small_range_1010_1017
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
     ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
     check_a_contains_b    ${driver3}     ${get_class_value}        ${WS_1_Big_Logo}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_1018_1026
     [Documentation]     Change big logo     Change Default avatar
@@ -945,7 +956,8 @@ Small_range_1018_1026
     should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     exit_call      ${driver2}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_1027_1030
     [Documentation]     Turn off feature
@@ -974,7 +986,8 @@ Small_range_1027_1030
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
     should start with    ${get_class_value}     ${default_avatar_src}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver      ${driver1}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver      ${driver1}
 
 Small_range_1031
     [Documentation]    Turn off feature    User B call user A directly
@@ -1035,7 +1048,8 @@ Small_range_1031
 #    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
 #    should be equal as strings    ${get_class_value}    None
-    [Teardown]      exit_driver     ${driver1}    ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_1032
     [Documentation]     Turn off feature    User B click A's meeing link
@@ -1095,7 +1109,8 @@ Small_range_1032
 #    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
 #    should be equal as strings    ${get_class_value}    None
-    [Teardown]      exit_driver     ${driver1}    ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_1033_1035
     [Documentation]     Turn off feature    Anonyoums click B's meeting link
@@ -1151,7 +1166,8 @@ Small_range_1033_1035
 #    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
 #    should be equal as strings    ${get_class_value}    None
-    [Teardown]      exit_driver     ${driver1}    ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_1036_1043
     [Documentation]     Precondition: Expert Group 1[EG 1] in WS 1. User B is in EG 1.
@@ -1245,4 +1261,5 @@ Small_range_1036_1043
 #    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
 #    should be equal as strings    ${get_class_value}    None
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}

@@ -73,7 +73,8 @@ Force Tags        small_range
 ##    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}      good_experience_3    good_experience_2   good_experience_1
 ##    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}      good_experience_3    good_experience_2   good_experience_1
 #    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}
+#    ...             AND             exit_driver
+##    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}
 #
 #Call_Tag_Comment_596_599
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
@@ -136,7 +137,8 @@ Force Tags        small_range
 #    # User C should see all tags and comments from call recents
 #    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_6    good_experience_5   good_experience_4
 #    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}
+#    ...             AND             exit_driver
+##    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}
 #
 #Call_Tag_Comment_600_604
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
@@ -209,7 +211,8 @@ Force Tags        small_range
 #    # VP: Anonymous user does not have tag comment fields
 #    check_tag_and_com_switch_success   ${driver4}
 #    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}   ${driver4}
+#    ...             AND             exit_driver
+##    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}   ${driver4}
 #
 #Call_Tag_Comment_605_606
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
@@ -242,7 +245,8 @@ Force Tags        small_range
 #    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    first_call_record_tag_and_comment   ${driver3}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
 #    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver   ${driver1}  ${driver3}
+#    ...             AND             exit_driver
+##    ...             AND             exit_driver   ${driver1}  ${driver3}
 
 Call_survey_608_610
     [Documentation]   Call survey(Tier of enterprise and above)   Customer call Experts group[all have survey & call tag permission]   Customer invite a enterprise user
@@ -309,7 +313,8 @@ Call_survey_608_610
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     # 切换到Recents页面
     first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}     good_experience_15    good_experience_14   good_experience_13
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Call_survey_611_615
     [Documentation]   Call survey(Tier of enterprise and above)   Pre-condition:(A & B not in the same company)    3PC call
@@ -377,7 +382,8 @@ Call_survey_611_615
     # return to the previous page before entering call.
     which_page_is_currently_on   ${driver3}   ${py_contacts_switch_success}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Call_survey_616_618
     [Documentation]   Call survey(Tier of enterprise and above)   Anonymous call Meeting Owner
@@ -424,4 +430,5 @@ Call_survey_616_618
     # VP: return to the previous page before entering call
     which_page_is_currently_on    ${driver2}    ${five_star_high_praise}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}

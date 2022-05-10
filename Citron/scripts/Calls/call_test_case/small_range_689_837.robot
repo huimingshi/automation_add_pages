@@ -25,8 +25,10 @@ Small_range_689_690_691_692
     user_make_call_via_meeting_link    ${driver3}   ${invite_url}
     # VP: EU1 get Accept dialog     EU1 接受Call
     user_anwser_call   ${driver1}     no_direct
-    [Teardown]      run keywords    end_call_for_all     ${driver1}      # VP: 3PC call established successfully
-    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}
+    # VP: 3PC call established successfully
+    end_call_for_all     ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_693_694_695
     [Documentation]     3PI - Meeting call     EU1 send MHS link to anonymous UserB.
@@ -44,8 +46,10 @@ Small_range_693_694_695
     user_make_call_via_meeting_link    ${driver3}   ${invite_url}
     # VP: EU1 get Accept dialog     EU1 接受Call
     user_anwser_call   ${driver1}     no_direct
-    [Teardown]      run keywords    end_call_for_all     ${driver1}      # VP: 3PC call established successfully
-    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}
+    # VP: 3PC call established successfully
+    end_call_for_all     ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_696_697_698_699
     [Documentation]     3PI - Meeting call     UserA send one time use link to anonymous UserB.
@@ -68,8 +72,9 @@ Small_range_696_697_698_699
     # UserA left session.
     leave_call   ${driver1}   need_select
     # Expected : session does not end and still active.
-    exit_call    ${driver3}     5
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    exit_call    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_700_701_702_703
     [Documentation]     3PI - Meeting call     UserA send MHS link to anonymous UserB.
@@ -94,7 +99,8 @@ Small_range_700_701_702_703
     # Expected : session end
     which_page_is_currently_on     ${driver2}   ${five_star_high_praise}
     which_page_is_currently_on     ${driver3}   ${five_star_high_praise}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_704_705_706_707
     [Documentation]     3PI - Meeting call     UserA send MHS link to expert UserB.
@@ -120,7 +126,8 @@ Small_range_704_705_706_707
     # Expected : session end
     which_page_is_currently_on     ${driver2}   ${five_star_high_praise}
     which_page_is_currently_on     ${driver3}   ${five_star_high_praise}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_708_709
     [Documentation]     3PI - Meeting call     EU1 click EU2's MHS link
@@ -142,8 +149,10 @@ Small_range_708_709
     click_user_in_contacts_call    ${driver1}     ${AaA_on_call_group_name}
     # ExpetA 接受Call
     user_anwser_call    ${driver3}
-    [Teardown]      run keywords    end_call_for_all     ${driver1}      # VP: 3PC call established successfully
-    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}
+    # VP: 3PC call established successfully
+    end_call_for_all     ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_710_723
     [Documentation]     3PI - Meeting call     EU1 click EU2's MHS link
@@ -233,8 +242,9 @@ Small_range_710_723
     ###### Click EU2's OTU link	VP: Get message like "EU2 is in another call"       723行
     user_make_call_via_meeting_link   ${driver7}     ${invite_url_otu}
     which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
-    [Teardown]      run keywords     exit_call    ${driver1}
-    ...             AND              exit_driver    ${driver1}  ${driver2}   ${driver6}   ${driver7}
+    exit_call    ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver    ${driver1}  ${driver2}   ${driver6}   ${driver7}
 
 Small_range_724_742
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
@@ -317,7 +327,8 @@ Small_range_724_742
     user_make_call_via_meeting_link   ${driver2}    ${invite_url_2}
     ###### VP: 3PC call established successfully    End 3PC call    741+742行
     end_call_for_all       ${driver1}
-    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
+    [Teardown]      exit_driver
+#    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
 
 Small_range_743_744
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
@@ -350,7 +361,8 @@ Small_range_743_744
     ###### Anonymous user click 3PI link 2	VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."       744行
     ${driver10}    anonymous_open_meeting_link    ${invite_url_2}
     which_page_is_currently_on    ${driver10}    ${this_call_is_over}
-    [Teardown]    exit_driver    ${driver1}   ${driver2}   ${driver3}   ${driver10}
+    [Teardown]      exit_driver
+#    [Teardown]    exit_driver    ${driver1}   ${driver2}   ${driver3}   ${driver10}
 
 Small_range_745
     [Documentation]     3PI - Meeting call     Pre-condition: user is beong to workspace WS-A and WS-B	User is currently on WS-B
@@ -368,8 +380,9 @@ Small_range_745
     # VP: This User does not have invite 3rd participant icon on menu bar
     sleep  20s
     which_page_is_currently_on    ${driver1}    ${invite_user_in_calling}   not_currently_on
-    [Teardown]      run keywords    exit_call     ${driver2}
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    exit_call     ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_746
     [Documentation]     3PI - Meeting call     Pre-condition: user is belong to workspace WS-A and WS-B	User is currently on WS-B
@@ -389,8 +402,9 @@ Small_range_746
     # VP: contact list is same as team list from ws-A
     ${user_list_2}    get_all_data_on_the_page    ${driver1}      contact-name
     lists should be equal  ${user_list_1}   ${user_list_2}
-    [Teardown]      run keywords    exit_call     ${driver2}
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    exit_call     ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_751
     [Documentation]      Resolution Check    Web on PC   VP: Resolution = 1280x720
@@ -407,8 +421,9 @@ Small_range_751
     sleep  20s    # 等待通话稳定
     # 检查Debug页面的Resolution是否为1280x720
     open_debug_dialog_check_resolution   ${driver2}
-    [Teardown]      run keywords    exit_call    ${driver1}
-    ...             AND             exit_driver     ${driver1}    ${driver2}
+    exit_call    ${driver1}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_799_802
     [Documentation]      Set Declaimer ->'delete user' is selected    Normal call
@@ -515,8 +530,8 @@ Small_range_799_802
     # VP: User A client:3) Check the call record should not be recalled for User C from User A's recent call
     recents_page_first_line_has_no_call_button
     [Teardown]      run keywords    check_file_if_exists_delete
-    ...             AND             exit_driver     ${driver1}    ${driver2}     ${driver3}
-    ...             AND             Close
+    ...             AND             exit_driver
+#    ...             AND             exit_driver     ${driver1}    ${driver2}     ${driver3}
 
 Disclaimer_805
     [Documentation]    Disclaimer   Set Declaimer ->'delete user' is NOT selected   Enterprise Admin Reset Disclaimer
@@ -542,7 +557,8 @@ Disclaimer_805
     # App is reconnected to server. Disclaimer should be shown up.
     disclaimer_should_be_shown_up_or_not   ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver   ${driver1}   ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Disclaimer_806_807
     [Documentation]    Set Declaimer ->'delete user' is NOT selected    2 enterprise users in call	 Invite User C who is in same enterprise who has accepted disclaimer when logs in App.
@@ -588,7 +604,8 @@ Disclaimer_806_807
     # User A end call
     exit_call   ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver  ${driver1}   ${driver2}   ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver  ${driver1}   ${driver2}   ${driver3}
 
 Disclaimer_808_809
     [Documentation]   Set Declaimer ->'delete user' is NOT selected    logout app and click one-time meeting link
@@ -615,7 +632,8 @@ Disclaimer_808_809
     user_anwser_call   ${driver1}
     exit_call  ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Small_range_820_821
     [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
@@ -670,7 +688,8 @@ Small_range_820_821
     # end call
     end_call_for_all     ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Small_range_823
     [Documentation]     Call on-call group from contact list
@@ -711,7 +730,8 @@ Small_range_823
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}
 
 Small_range_825_826
     [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
@@ -758,7 +778,8 @@ Small_range_825_826
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}
 
 Small_range_827
     [Documentation]     Expert  get incoming call
@@ -794,7 +815,8 @@ Small_range_827
     # 结束Call
     end_call_for_all     ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Small_range_829
     [Documentation]     Call enterprise contact
@@ -827,7 +849,8 @@ Small_range_829
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}
 
 Small_range_831_832
     [Documentation]     Call recording feature     Pre-condition：set to Default-ON
@@ -864,7 +887,8 @@ Small_range_831_832
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}
 
 Small_range_833
     [Documentation]     call on-call group from contact list
@@ -902,7 +926,8 @@ Small_range_833
     # 结束Call
     exit_call     ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Small_range_834
     [Documentation]     Call enterprise contact
@@ -943,7 +968,8 @@ Small_range_834
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}
 
 Small_range_836
     [Documentation]     Special Recent call	    One user logins on two devices
@@ -972,4 +998,5 @@ Small_range_836
     switch_to_diffrent_page    ${driver2}   ${py_recents_page}    ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_2}   get_recents_page_records_occurred_time    ${driver2}
     Should Be Equal    ${occurred_time_list_1}   ${occurred_time_list_2}
-    [Teardown]      exit_driver    ${driver1}    ${driver2}    ${driver3}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver    ${driver1}    ${driver2}    ${driver3}

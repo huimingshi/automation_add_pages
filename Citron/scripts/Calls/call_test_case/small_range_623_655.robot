@@ -25,7 +25,8 @@ Small_range_623_two_users_login
     check_contacts_list   ${driver2}
     # user A searches on-call group with name
     different_page_search_single_users   ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}
-    [Teardown]   exit_driver    ${driver1}    ${driver2}
+    [Teardown]   exit_driver
+#    [Teardown]   exit_driver    ${driver1}    ${driver2}
 
 Small_range_625_627
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert A set on for on-Call option.
@@ -62,7 +63,8 @@ Small_range_625_627
     # Expert A clicks Accept button.
     user_decline_or_accept_disclaimer    ${driver3}   accept
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}
 
 Small_range_628_629
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert B set on  for on-Call option.
@@ -101,7 +103,8 @@ Small_range_628_629
     # VP: Expert B returns to call end page. .
     which_page_is_currently_on    ${driver1}    ${tutorial_page_xpaths}
     [Teardown]      run keywords    Close
-    ...             AND             exit_driver    ${driver1}    ${driver2}
+    ...             AND             exit_driver
+#    ...             AND             exit_driver    ${driver1}    ${driver2}
 
 Small_range_630_631
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert C set on  for on-Call option.	Expert C is in call.
@@ -154,8 +157,10 @@ Small_range_630_631
     refresh_browser_page    ${driver4}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
-    [Teardown]      run keywords    exit_call       ${driver2}     1
-    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}
+    # 结束call
+    exit_call       ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}
 
 Small_range_632
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
@@ -282,7 +287,8 @@ Small_range_633
     refresh_browser_page    ${driver4}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
-    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
 
 Small_range_634
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
@@ -332,8 +338,10 @@ Small_range_634
     refresh_browser_page    ${driver4}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
-    [Teardown]      run keywords    exit_call       ${driver2}      1
-    ...             AND             exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
+    # 结束call
+    exit_call       ${driver2}
+    [Teardown]      exit_driver
+#    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}    ${driver4}    ${driver5}
 
 Small_range_636
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
@@ -371,7 +379,8 @@ Small_range_636
     verify_username_in_recents_page     ${driver1}    ${another_on_call_group_name}
     #user B: expert name
     verify_username_in_recents_page     ${driver3}    ${Expert_Bb_name}
-    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]     exit_driver
+#    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_637_642
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
@@ -413,7 +422,8 @@ Small_range_637_642
     user_anwser_call    ${driver2}
     # enter call view
     exit_call   ${driver1}
-    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]     exit_driver
+#    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_638_640
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
@@ -458,7 +468,8 @@ Small_range_638_640
     user_anwser_call    ${driver1}
     # enter call view
     exit_call   ${driver3}
-    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]     exit_driver
+#    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_639
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
@@ -493,7 +504,8 @@ Small_range_639
     verify_username_in_recents_page     ${driver1}    ${User_Cc_name}     ${another_on_call_group_name}
     #user B: expert name
     verify_username_in_recents_page     ${driver3}    ${User_Aa_name}
-    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]     exit_driver
+#    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_646
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Citron site admin add expert A to another workspace WS2
@@ -522,7 +534,8 @@ Small_range_646
     user_anwser_call     ${driver3}
     # VP: Expert A can successfully enter Face to Face mode
     exit_call    ${driver3}
-    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
+    [Teardown]     exit_driver
+#    [Teardown]     exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_647_648_649_650
     [Documentation]     3PI - Expert call
@@ -542,8 +555,10 @@ Small_range_647_648_649_650
     click_user_in_contacts_call     ${driver1}    ${AaA_on_call_group_name}
     # expertB answer rollover call
     user_anwser_call    ${driver3}
-    [Teardown]      run keywords        end_call_for_all    ${driver1}    # VP: 3PC call established successfully
-    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
+    # # VP: 3PC call established successfully
+    end_call_for_all    ${driver1}
+    [Teardown]     exit_driver
+#    [Teardown]      exit_driver         ${driver1}   ${driver2}   ${driver3}
 
 Small_range_651_652_653
     [Documentation]     3PI - Expert call
@@ -563,8 +578,10 @@ Small_range_651_652_653
     ${driver3}   anonymous_open_meeting_link    ${invite_url}
     # VP:expertA receive Accept dialog
     user_anwser_call    ${driver2}    no_direct
-    [Teardown]      run keywords        end_call_for_all    ${driver2}    # VP: 3PC call established successfully
-    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
+    # VP: 3PC call established successfully
+    end_call_for_all    ${driver2}
+    [Teardown]     exit_driver
+#    [Teardown]      exit_driver         ${driver1}   ${driver2}   ${driver3}
 
 Small_range_654_655
     [Documentation]     3PI - Expert call
@@ -588,6 +605,7 @@ Small_range_654_655
     # VP: Expert A and TU1 should not show accept/decline dialog window
     disclaimer_should_be_shown_up_or_not   ${driver2}  not_appear
     disclaimer_should_be_shown_up_or_not   ${driver1}  not_appear
-    [Teardown]      run keywords        end_call_for_all    ${driver1}    # VP: 3PC call established successfully
-    ...             AND                 exit_driver         ${driver1}   ${driver2}   ${driver3}
-
+    # VP: 3PC call established successfully
+    end_call_for_all    ${driver1}
+    [Teardown]     exit_driver
+#    [Teardown]      exit_driver         ${driver1}   ${driver2}   ${driver3}
