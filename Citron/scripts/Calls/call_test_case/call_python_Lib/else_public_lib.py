@@ -2,7 +2,7 @@
 import time
 import os
 from Citron.public_switch.pubLib import *
-from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
+from Citron.public_switch.public_switch_py import IMPLICIT_WAIT, PAGE_LOAD_TIMEOUT
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -50,12 +50,6 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
     if username_value == username:
         time.sleep(1)
         public_click_element(driver,next_button,description = 'NEXT按钮')
-    # except Exception as e:
-    #     print('登陆时输入email失败',e)
-    #     screen_shot_func(driver, '登陆时输入email失败')
-    #     raise Exception
-    # else:
-    #     print('登陆时输入email成功')
     # 输入密码
     driver.implicitly_wait(0.1)
     # try:
@@ -74,14 +68,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             print('password输入框还是未出现')
             screen_shot_func(driver, '登陆时输入password失败')
             raise Exception('password输入框还是未出现')
-    # except Exception as e:
-    #     print('登陆时输入password失败',e)
-    #     screen_shot_func(driver, '登陆时输入password失败')
-    #     raise Exception
-    # else:
-    #     print('登陆时输入password成功')
     # 校验是否进入到主页
-    # try:
     for i in range(100):
         time.sleep(1)
         currentPageUrl = driver.current_url
@@ -95,12 +82,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             print('再次点击登录按钮未进入首页')
             screen_shot_func(driver, '再次登陆失败')
             raise Exception('再次点击登录按钮未进入首页')
-    # except Exception as e:
-    #     print('再次点击登录按钮未进入首页',e)
-    #     screen_shot_func(driver, '再次登陆失败')
-    #     raise Exception
-    # else:
-    #     print('进入首页')
+    # close Disclaimer
     driver.implicitly_wait(IMPLICIT_WAIT)
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
@@ -112,6 +94,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             if len(count) == 1:  # close Disclaimer
                 public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
     driver.implicitly_wait(int(8))
+    # close Tutorial
     if close_bounced == 'close_bounced':
         # try:  # close Tutorial
         if check_toturial == 'check_toturial':
@@ -141,6 +124,7 @@ def driver_set_up_and_logIn(username,password,check_toturial = 'no_check_toturia
     :return:
     """
     driver = start_an_empty_window()
+    driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
     driver.get(test_web)
     logIn_citron(driver, username, password, check_toturial, close_bounced, accept, disturb)
     return driver
@@ -252,10 +236,6 @@ def get_all_comments_in_call_end(driver,*args):
     for i in range(len(ele_list)):
         get_comment = ele_list[i].get_attribute("textContent")   # 获取comment
         public_assert(driver,get_comment,args[i],action='获取的comments和预期不符')
-    #         assert get_comment == args[i]
-    # except AssertionError:
-    #     screen_shot_func(driver,'获取的comments和预期不符')
-    #     raise AssertionError
 
 def hang_up_the_phone(driver):
     """

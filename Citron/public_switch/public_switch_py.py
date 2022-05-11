@@ -10,3 +10,12 @@ DOWNLOAD_PATH = r'C:\Users\ts\Downloads'
 
 # 默认的隐式等待时间
 IMPLICIT_WAIT = 15
+
+# 设置默认的超时时间s
+PAGE_LOAD_TIMEOUT = 180
+
+# 显示等待超时时间
+WEBDRIVERWAIT_TIMEOUT = 20
+
+# 显示等待轮询时间
+POLL_FREQUENCY = 0.5

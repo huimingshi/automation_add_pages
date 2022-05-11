@@ -8,7 +8,8 @@ import traceback
 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from Citron.public_switch.public_switch_py import BROWSER_TYPE
+from Citron.public_switch.public_switch_py import BROWSER_TYPE, WEBDRIVERWAIT_TIMEOUT, POLL_FREQUENCY
+
 
 def get_system_type():
     """
@@ -64,7 +65,7 @@ def get_xpath_element(driver,locator,ec = None,select='xpath',description = '元
     """
     if not ec:
         try:
-            return WebDriverWait(driver, 20, 0.5).until(EC.visibility_of_element_located((select,locator)))
+            return WebDriverWait(driver, WEBDRIVERWAIT_TIMEOUT, POLL_FREQUENCY).until(EC.visibility_of_element_located((select,locator)))
         except Exception as e:
             print('元素未找到',e)
             msg = traceback.format_exc()
