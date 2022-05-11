@@ -408,15 +408,19 @@ def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,fla
     js = "window.open('{}','_blank');"
     driver_support.execute_script(js.format(meeting_link))
     driver_support.switch_to.window(driver_support.window_handles[-1])  # 切换到最新页面
-    for i in range(30):
+    driver_support.implicitly_wait(3)
+    for i in range(40):
+        ele_list_2 = get_xpath_elements(driver_support,please_wait)
+        ele_list_1 = get_xpath_elements(driver_support, zhuanquanquan)
         ele_list = get_xpath_elements(driver_support,'//div[@id="connecting_call_label" and text()="Waiting for an incoming call..."]')
-        if len(ele_list) == 0:
+        if len(ele_list) == 0 and len(ele_list_1) == 0 and len(ele_list_2) == 0:
             break
-        elif i == 29:
-            screen_shot_func(driver_support, '还在Waiting_for_an_incoming_call状态')
-            raise Exception('还在Waiting_for_an_incoming_call状态')
+        elif i == 39:
+            screen_shot_func(driver_support, '未处于可以判断是否可以拨通call的状态')
+            raise Exception('未处于可以判断是否可以拨通call的状态')
         else:
-            time.sleep(1)
+            time.sleep(3)
+    driver_support.implicitly_wait(IMPLICIT_WAIT)
     count = get_xpath_elements(driver_support,accept_disclaimer)
     if len(count) == 1:
         public_click_element(driver_support,accept_disclaimer,description = 'accept_disclaimer按钮')

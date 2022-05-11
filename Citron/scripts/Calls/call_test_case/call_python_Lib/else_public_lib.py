@@ -292,15 +292,19 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
         public_assert(driver,len(ele_list),0,action='未选择另一个共同主持')
 
 def make_sure_enter_call(driver):
-    for i in range(10):
+    driver.implicitly_wait(3)
+    for i in range(40):
+        ele_list_2 = get_xpath_elements(driver, please_wait)
+        ele_list_1 = get_xpath_elements(driver,zhuanquanquan)
         ele_list = get_xpath_elements(driver, '//div[@id="connecting_call_label" and text()="Joining Call..."]')
-        if len(ele_list) ==0:
+        if len(ele_list) == 0 and len(ele_list_1) == 0 and len(ele_list_2) == 0:
             break
-        elif i == 9:
-            screen_shot_func(driver, '还在Joining_Call状态')
-            raise Exception('还在Joining_Call状态')
+        elif i == 39:
+            screen_shot_func(driver, '通话还未拨通成功')
+            raise Exception('通话还未拨通成功')
         else:
-            time.sleep(int(IMPLICIT_WAIT))
+            time.sleep(int(3))
+    driver.implicitly_wait(IMPLICIT_WAIT)
 
 def exit_call(driver,check_user_count='check',call_time=10):
     """

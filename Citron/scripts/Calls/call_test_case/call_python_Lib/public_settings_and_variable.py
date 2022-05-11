@@ -102,3 +102,5 @@ f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
 count_of_call_user = '//div[@class="F2FVideo ShowOpenTokVideos"]/div'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
+please_wait = '//div[@class="InvalidLinkView"]/h2[text()="Please wait."]'
+zhuanquanquan = '//div[@id="whiteboard_progress_bar_container"]'
