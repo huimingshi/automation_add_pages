@@ -37,14 +37,14 @@ def kill_all_browser():
     else:
         if BROWSER_TYPE == 'Chrome':
             # kill所有的chromedriver进程
-            os.system('''ps -ef | grep chromedriver | grep -v grep | awk '{print "kill -9" $2}'| sh''')
+            os.system("kill -9 `ps -ef | grep chromedriver.exe  | awk '{print $2}'`")
             # 退出所有的浏览器
-            os.system("ps -ef | grep 'Google Chrome Helper' | awk '{print $2}' | xargs kill -9")
+            os.system("kill -9 `ps -ef | grep hrome  | awk '{print $2}'`")
         elif BROWSER_TYPE == 'Firefox':
             # kill所有的firefoxdriver进程
-            os.system('''ps -ef | grep geckodriver | grep -v grep | awk '{print "kill -9" $2}'| sh''')
+            os.system("kill -9 `ps -ef | grep geckodriver.exe  | awk '{print $2}'`")
             # 退出所有的浏览器
-            os.system("kill -9 $(ps -x | grep 'firefox' | awk '{print $1}')")
+            os.system("kill -9 `ps -ef | grep irefox  | awk '{print $2}'`")
 
 def screen_shot_func(driver,screen_name):
     current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))

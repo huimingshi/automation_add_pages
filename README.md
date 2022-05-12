@@ -3,8 +3,9 @@
 ---
 
 ### 需要改动的配置项
-- Lib/python_Lib/ui_keywords.py模块的第十一行，修改file_path为当前主机上的浏览器的默认下载路径
-- Lib/public.robot的第十一行，修改${browser_type}为你想启动的浏览器
+- Citron/public_switch/public_switch_py.py模块的第6行，修改BROWSER_TYPE为你想运行的浏览器类型：Chrome/Firefox
+- Citron/public_switch/public_switch_py.py模块的第9行，修改file_path为当前主机上的浏览器的默认下载路径
+- Citron/public_switch/public_switch_rf.robot的第3行，修改BROWSER_TYPE为你想运行的浏览器类型：Chrome/Firefox
 ### Lib目录简介
 - Lib路径下的文件，都是封装的scripts下的脚本执行所需调用的关键字，包括关键字的参数，xpath定位路径
 - 其中Lib/python_Lib目录下的文件，都是通过python封装的关键字，供其他代码调用
