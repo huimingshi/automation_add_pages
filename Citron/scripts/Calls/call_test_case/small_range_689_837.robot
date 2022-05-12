@@ -17,6 +17,8 @@ Small_range_689_690_691_692
     ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # EU1 接受Call
     user_anwser_call   ${driver1}
     # TU1 登录
@@ -40,6 +42,8 @@ Small_range_693_694_695
     ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # EU1 接受Call
     user_anwser_call   ${driver1}
     # EU2 登录
@@ -63,6 +67,8 @@ Small_range_696_697_698_699
     ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # EU1 接受Call
     user_anwser_call   ${driver1}
     # User C 登录
@@ -90,6 +96,8 @@ Small_range_700_701_702_703
     ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # UserA 接受Call
     user_anwser_call   ${driver1}
     # UserA sends a 3pi link to anonymous UserC.
@@ -98,6 +106,8 @@ Small_range_700_701_702_703
     close_invite_3th_page    ${driver1}
     # UserC click the link join the call.
     ${driver3}    anonymous_open_meeting_link    ${invite_url_1}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     # UserA 接受Call
     user_anwser_call   ${driver1}    no_direct
     # UserA left session.
@@ -344,6 +354,8 @@ Small_range_724_742
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ###### Anonymous user click link 2    VP: EU1 get Accept dialog    EU1 accept    738+739行
     ${driver9}    anonymous_open_meeting_link    ${invite_url_2}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver9}
     user_anwser_call      ${driver1}     no_direct
     ###### VP: 3PC call established successfully    Anonymous leave call    739+740行
     which_page_is_currently_on    ${driver9}    ${end_call_button}
@@ -664,6 +676,8 @@ Disclaimer_808_809
 
     ###### 808 line
     ${driver3}   anonymous_open_meeting_link   ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     # Anonymous enter the outgoing call window.	The owner should receive the incoming call	After accepting, the call should be successfully connected.
     user_anwser_call   ${driver1}
     exit_call  ${driver1}
@@ -687,6 +701,8 @@ Small_range_820_821
     ${invite_url}    send_meeting_room_link     ${driver1}    OTU
     # Anonymous user call meeting owner
     ${driver2}   anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # 接受Call
     user_anwser_call      ${driver1}
     # Another enterprise user join call

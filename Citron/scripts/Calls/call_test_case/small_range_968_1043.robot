@@ -528,6 +528,8 @@ Small_range_1000_1001
     ${invite_url}     send_meeting_room_link    ${driver2}     OTU
     # Anonyoums click B's meeting link
     ${driver3}    anonymous_open_meeting_link     ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     # VP: Anonymous's outgoing call, it should show User B's customer  avatar.
     ${get_class_value}    get_ele_class_name    ${driver3}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver3}     ${get_class_value}       ${User_B_customer_avatar}
@@ -676,7 +678,8 @@ Small_range_1005_1007
     ${invite_url_2}     send_meeting_room_link    ${driver1}     OTU
     # Anonymous click link1 to enter call
     ${driver2}    anonymous_open_meeting_link     ${invite_url_1}
-    sleep    15
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # VP: Anonymous's outgoing call, it should show WS 1's branding avatar.
     ${get_class_value}    get_ele_class_name    ${driver2}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver2}     ${get_class_value}       ${WS_1_Branding_Avatar}
@@ -839,6 +842,8 @@ Small_range_1010_1017
     # Anonymous clicks EG's universal link
     close_call_ending_page    ${driver2}
     ${driver3}    anonymous_open_meeting_link     https://app-stage.helplightning.net.cn/help?enterprise_id=6769&group_id=10995&group_name=Expert_Group_1
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     # VP: Anonymous's outgoing call, it should HL Default Avatar [Grey 'H' Logo] calls EG 1[the background of expert logo should be WS 1 branding accent color]
     ${get_class_value}    get_ele_class_name    ${driver3}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver3}     ${get_class_value}       ${default_avatar_src}
@@ -1139,6 +1144,8 @@ Small_range_1033_1035
     ${invite_url}     send_meeting_room_link    ${driver1}     OTU
     # Anonyoums click B's meeting link
     ${driver2}    anonymous_open_meeting_link     ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # VP: Anonymous's outgoing call, it should show User B's customer  avatar.
     ${get_class_value}    get_ele_class_name    ${driver2}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver2}     ${get_class_value}       ${WS3_User_B_customer_avatar}
@@ -1238,6 +1245,8 @@ Small_range_1036_1043
     # Anonymous clicks EG's universal link
     close_call_ending_page    ${driver2}
     ${driver3}    anonymous_open_meeting_link     https://app-stage.helplightning.net.cn/help?enterprise_id=6788&group_id=10997&group_name=Expert_Group_1
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     # VP: Anonymous's outgoing call, it should HL Default Avatar [Grey 'H' Logo] calls EG 1[the background of expert logo should be WS 1 default color Blue]
     ${get_class_value}    get_ele_class_name    ${driver3}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver3}     ${get_class_value}       ${default_avatar_src}

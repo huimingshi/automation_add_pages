@@ -170,6 +170,8 @@ Join_call_162_167
     user_make_call_via_meeting_link    ${driver4}    ${invite_url}
     user_make_call_via_meeting_link    ${driver5}    ${invite_url}
     ${driver6}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver6}
     # EU3 joins call automatically.
     which_page_is_currently_on    ${driver3}    ${end_call_button}
     # EU1 gets accept/decline request from PU4.   EU1 accepts call.    PU4 joins call
@@ -204,6 +206,8 @@ Join_call_168_178
     close_invite_3th_page    ${driver2}
     # Anonymous user 3 clicks on 3pi link. EU1 answers call.
     ${driver3}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     user_anwser_call    ${driver2}   no_direct
     # VP: AU3 joins call.
     which_page_is_currently_on    ${driver3}    ${end_call_button}
@@ -295,7 +299,11 @@ Join_call_179_187
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver6}
     ${driver7}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver7}
     ${driver8}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver8}
     # VP: EU1 gets accept/decline request from DU6."   EU1 accepts call.   VP: DU6 joins call.
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver6}    ${end_call_button}
@@ -323,6 +331,8 @@ Join_call_188_195
     # Anonymous user 2 clicks on EU1’s OTU link. EU1 answers call.
     ${invite_otu_url}   send_meeting_room_link    ${driver1}   OTU
     ${driver2}    anonymous_open_meeting_link    ${invite_otu_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     user_anwser_call    ${driver1}
     # TU3 登录
     ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}        ${call_oncall_user_password}
@@ -354,6 +364,8 @@ Join_call_188_195
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver6}
     ${driver7}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver7}
     # VP: EU1 gets accept/decline request from DU6."   EU1 accepts call.   VP: DU6 joins call.
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver6}    ${end_call_button}
@@ -428,6 +440,8 @@ Join_call_201_205
     # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
     ${invite_url}    send_meeting_room_link    ${driver1}    OTU
     ${driver2}   anonymous_open_meeting_link     ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     user_anwser_call     ${driver1}
     # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
     sleep   20s
@@ -446,6 +460,8 @@ Join_call_201_205
     back_to_face_to_face_mode    ${driver1}
     # Anonymous user 2 clicks on the same link. EU1 answers call.
     ${driver3}   anonymous_open_meeting_link     ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     user_anwser_call     ${driver1}    no_direct
     # Anonymous user 1 leaves call.
     exit_call     ${driver3}
@@ -540,6 +556,8 @@ Small_range_560_580
     exit_one_driver    ${driver7}
     # Anonymous user click 3PI to join
     ${driver8}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver8}
     # VP: EU3 get Accept dialog     EU3 accept
     user_anwser_call    ${driver3}   no_direct
     # EU3 leave call

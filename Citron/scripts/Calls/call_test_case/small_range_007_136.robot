@@ -494,6 +494,8 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
 
     # anonymous open meeting link with website
     ${driver4}   anonymous_open_meeting_link    ${meeting_link}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver4}
     # User A Aneser call
     user_anwser_call   ${driver1}
     # User A exit call

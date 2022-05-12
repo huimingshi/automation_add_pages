@@ -209,6 +209,8 @@ Force Tags        small_range
 #    first_call_record_tag_and_comment   ${driver3}     ${third_tag_text}     good_experience_9
 #    # Anonymous click link2 to enter call
 #    ${driver4}   anonymous_open_meeting_link   ${invite_url}
+#     # 确保call连接成功，但未接听
+#     make_sure_enter_call   ${driver4}
 #    user_anwser_call   ${driver3}
 #    # owner end call
 #    exit_call   ${driver4}
@@ -409,6 +411,8 @@ Call_survey_616_618
     ${invite_url}  send_meeting_room_link   ${driver1}   OTU
     # Anonymous call Meeting Owner
     ${driver3}   anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     # Owner accept
     user_anwser_call  ${driver1}
     # the 3rd enterprise user who is in the same enterprise with owner join in it.

@@ -88,6 +88,8 @@ Small_range_628_629
     disclaimer_should_be_shown_up_or_not     ${driver2}
     #Anonymous clicks Accept button.
     user_decline_or_accept_disclaimer    ${driver2}      accept
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
     # VP: Anonymous enter the outgoing call window.
     which_page_is_currently_on    ${driver2}      ${end_call_before_anwser}
     # Expert B receives an incoming call from Anonymous.
@@ -576,6 +578,8 @@ Small_range_651_652_653
     close_invite_3th_page    ${driver2}
     # Anonymous user click 3PI link
     ${driver3}   anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
     # VP:expertA receive Accept dialog
     user_anwser_call    ${driver2}    no_direct
     # VP: 3PC call established successfully
