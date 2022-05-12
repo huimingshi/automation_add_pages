@@ -177,8 +177,12 @@ Force Tags        small_range
 #    ${invite_url}  send_meeting_room_link   ${driver3}  OTU
 #    # A and B click [link2] to enter call
 #    user_make_call_via_meeting_link   ${driver1}    ${invite_url}
+#     # 确保建立call，但未接听
+#     make_sure_enter_call    ${driver1}
 #    user_anwser_call  ${driver3}
 #    user_make_call_via_meeting_link   ${driver2}    ${invite_url}
+#     # 确保建立call，但未接听
+#     make_sure_enter_call    ${driver2}
 #    user_anwser_call  ${driver3}    no_direct
 #    # owner end call
 #    end_call_for_all   ${driver3}
@@ -338,8 +342,12 @@ Call_survey_611_615
     # User A, B and C are in a MHS call. User B is owner.
     ${invite_url}  send_meeting_room_link   ${driver2}   MHS
     user_make_call_via_meeting_link   ${driver1}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     user_anwser_call  ${driver2}
     user_make_call_via_meeting_link   ${driver3}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     user_anwser_call  ${driver2}    no_direct
     # End call.
     end_call_for_all    ${driver2}
@@ -405,6 +413,8 @@ Call_survey_616_618
     user_anwser_call  ${driver1}
     # the 3rd enterprise user who is in the same enterprise with owner join in it.
     user_make_call_via_meeting_link   ${driver2}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # Owner accept
     user_anwser_call  ${driver1}    no_direct
     # Owner End call

@@ -110,6 +110,8 @@ Small_range_660
     exit_one_driver    ${driver2}
     # caller calls via meeting link
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # Owner decline call
     which_page_is_currently_on   ${driver1}    ${that_user_is_unreachable}
     [Teardown]   exit_driver
@@ -126,6 +128,8 @@ Small_range_661
     ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
     # caller calls via meeting link
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # Guest cancel call
     user_end_call_by_self    ${driver1}
     [Teardown]   exit_driver
@@ -336,6 +340,8 @@ Small_range_665
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
 #    # Guest 1 call meeting link Owner
 #    user_make_call_via_meeting_link    ${driver2}   ${invite_url}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver2}
 #    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
 #    # meeting link Owner 接受Call
@@ -346,6 +352,8 @@ Small_range_665
 #    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
 #    # Guest 2] calls one participant via meeting link
 #    user_make_call_via_meeting_link    ${driver3}   ${invite_url}
+#     # 确保建立call，但未接听
+#     make_sure_enter_call    ${driver3}
 #    # Owner] kill app during incoming call
 #    exit_one_driver  ${driver1}
 #    sleep  58s
@@ -389,6 +397,8 @@ Small_range_665
 #    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
 #    # Guest 1 call meeting link Owner
 #    user_make_call_via_meeting_link    ${driver2}   ${invite_url}
+#     # 确保建立call，但未接听
+#     make_sure_enter_call    ${driver2}
 #    # meeting link Owner 接受Call
 #    user_anwser_call   ${driver1}
 #    # Guest 2] 登录
@@ -397,6 +407,8 @@ Small_range_665
 #    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
 #    # Guest 2] calls one participant via meeting link
 #    user_make_call_via_meeting_link    ${driver3}   ${invite_url}
+#     # 确保建立call，但未接听
+#     make_sure_enter_call    ${driver3}
 #    # Meeting Owner] declines call
 #    user_decline_call    ${driver1}    in_calling
 #    # VP1:"Your call was declined."
@@ -495,6 +507,8 @@ Small_range_674
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # UserB call user A by meeting link
     user_make_call_via_meeting_link    ${driver2}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # Verify: UserB receives User A is Not Available along with Not Available Message
     which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
     [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
@@ -546,12 +560,16 @@ Small_range_677_678_679_680
     ### 679
     # User B click otu link "link1"
     user_make_call_via_meeting_link   ${driver2}  ${invite_url_otu}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # VP: A receive incoming call, can enter call successfully
     user_anwser_call   ${driver1}
     exit_call    ${driver2}
     ### 680
     # User B click mhs link "link2"
     user_make_call_via_meeting_link   ${driver2}  ${invite_url_mhs}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # VP: B see DND message, with ougoing call fails
     which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
     [Teardown]      run keywords    close_call_ending_page     ${driver1}
@@ -583,11 +601,15 @@ Small_range_681_682_683
     which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
     ### 682
     user_make_call_via_meeting_link   ${driver2}  ${invite_url_otu}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # VP: A receive incoming call, can enter call successfully
     user_anwser_call   ${driver1}
     exit_call    ${driver2}
     ### 683
     user_make_call_via_meeting_link   ${driver2}  ${invite_url_mhs}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # VP: B see DND message, with ougoing call fails
     which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
     [Teardown]      run keywords    close_call_ending_page     ${driver1}
@@ -605,6 +627,8 @@ Small_range_681_682_683
 #    ${invite_url}    send_meeting_room_link   ${driver1}  MHS   no_send
 #    # Owner clicks on mhs link firstly
 #    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
+#     # 确保建立call，但未接听
+#     make_sure_enter_call    ${driver1}
 #    # Owner sees message “You are attempting to join your own My Help Space, but there is no one else in the call.”
 #    which_page_is_currently_on     ${driver1}      这块没法填写准确的xpath
 #    [Teardown]      exit_driver
@@ -621,8 +645,12 @@ Small_range_688
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # Owner clicks on otu link firstly
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # The first guest clicks on otu link
     user_make_call_via_meeting_link    ${driver2}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # Owner and the first guest auto joins call.
     exit_call     ${driver2}
     [Teardown]   exit_driver

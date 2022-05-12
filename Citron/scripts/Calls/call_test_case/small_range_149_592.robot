@@ -258,6 +258,8 @@ Join_call_179_187
     # TU2 clicks on EU1’s MHS link. EU1 answers call.
     ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
     user_make_call_via_meeting_link    ${driver2}    ${invite_mhs_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     user_anwser_call    ${driver1}
     # EU1 sends 3pi link.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
@@ -290,6 +292,8 @@ Join_call_179_187
     ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
     # Following participants try to join call in rapid sequence: different enterprise user 6 via 3pi link. anonymous user 7 via 3pi link.anonymous user 8 via MHS link.
     user_make_call_via_meeting_link    ${driver6}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver6}
     ${driver7}    anonymous_open_meeting_link    ${invite_url}
     ${driver8}    anonymous_open_meeting_link    ${invite_url}
     # VP: EU1 gets accept/decline request from DU6."   EU1 accepts call.   VP: DU6 joins call.
@@ -347,6 +351,8 @@ Join_call_188_195
     ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
     # Following participants try to join call in rapid sequence: different enterprise user 6 via 3pi link. anonymous user 7 via 3pi link.anonymous user 8 via MHS link.
     user_make_call_via_meeting_link    ${driver6}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver6}
     ${driver7}    anonymous_open_meeting_link    ${invite_url}
     # VP: EU1 gets accept/decline request from DU6."   EU1 accepts call.   VP: DU6 joins call.
     user_anwser_call    ${driver1}   no_direct
@@ -517,6 +523,8 @@ Small_range_560_580
     # EU5 click 3PI link to join    VP: directly joint automatically, do not need anyone's accept
     ${driver6}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver6}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver6}
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     # EU5 leave call
     exit_call    ${driver6}
@@ -524,6 +532,8 @@ Small_range_560_580
     # TU2 click 3PI link to join    VP: directly joint automatically, do not need anyone's accept
     ${driver7}    driver_set_up_and_logIn    ${Team_User2_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver7}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver7}
     which_page_is_currently_on    ${driver7}    ${end_call_button}
     # TU2 leave call
     exit_call    ${driver7}
@@ -539,6 +549,8 @@ Small_range_560_580
     # Expert user from different enterprise click 3PI link
     ${driver9}    driver_set_up_and_logIn    ${ws3_branding_C_user}     ${universal_password}
     user_make_call_via_meeting_link    ${driver9}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver9}
     # VP:TU1 get Accept dialog	TU1 accept
     user_anwser_call    ${driver5}   no_direct
     # End 3PC call
@@ -546,9 +558,13 @@ Small_range_560_580
     sleep   30s
     # Login user click previous 3PI link       VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."
     user_make_call_via_meeting_link    ${driver9}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver9}
     which_page_is_currently_on    ${driver9}    ${this_call_is_over}
     # Anonymous user click 3PI         VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."
     user_make_call_via_meeting_link    ${driver8}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver8}
     which_page_is_currently_on    ${driver8}    ${this_call_is_over}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
@@ -596,11 +612,15 @@ Small_range_583_585
     # Someone click EU1 or EU2's MHS link	Someone get messgage about EU1 is on another call
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver4}
     which_page_is_currently_on    ${driver4}    ${user_is_currently_on_another_call}
     exit_one_driver    ${driver4}
     # someone click EU1 or EU2's OTU link	Someone get messgage about EU1 is on another call
     ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     user_make_call_via_meeting_link    ${driver5}    ${invite_otu_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver5}
     which_page_is_currently_on    ${driver5}    ${user_is_currently_on_another_call}
     exit_one_driver    ${driver5}
     [Teardown]      run keywords    Close

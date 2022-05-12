@@ -23,6 +23,8 @@ Small_range_689_690_691_692
     ${driver3}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
     # TU1 click EU1's one-time link
     user_make_call_via_meeting_link    ${driver3}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # VP: EU1 get Accept dialog     EU1 接受Call
     user_anwser_call   ${driver1}     no_direct
     # VP: 3PC call established successfully
@@ -44,6 +46,8 @@ Small_range_693_694_695
     ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # EU2 click EU1's MHS link
     user_make_call_via_meeting_link    ${driver3}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     # VP: EU1 get Accept dialog     EU1 接受Call
     user_anwser_call   ${driver1}     no_direct
     # VP: 3PC call established successfully
@@ -69,6 +73,8 @@ Small_range_696_697_698_699
     close_invite_3th_page    ${driver1}
     # UserC click the 3PI link join the call.
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     # UserA left session.
     leave_call   ${driver1}   need_select
     # Expected : session does not end and still active.
@@ -112,6 +118,8 @@ Small_range_704_705_706_707
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # UserB clicks link and join the call.
     user_make_call_via_meeting_link   ${driver2}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # UserA 接受Call
     user_anwser_call   ${driver1}
     # UserA sends a 3pi link to team license UserC.
@@ -121,6 +129,8 @@ Small_range_704_705_706_707
     # UserC click the link join the call.
     ${driver3}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
     user_make_call_via_meeting_link   ${driver3}   ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     # UserA left session.
     end_call_for_all   ${driver1}
     # Expected : session end
@@ -139,6 +149,8 @@ Small_range_708_709
     ${invite_url}    send_meeting_room_link    ${driver2}    MHS   no_send
     # EU1 click EU2's MHS link
     user_make_call_via_meeting_link   ${driver1}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # EU2 接受Call
     user_anwser_call   ${driver2}
     # ExpetA 登录
@@ -167,6 +179,8 @@ Small_range_710_723
     ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
     ###### EU1 click EU2's MHS link       710行
     user_make_call_via_meeting_link   ${driver1}   ${invite_url_mhs}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # EU2 接受Call
     user_anwser_call   ${driver2}
     # EU3 登录
@@ -226,6 +240,8 @@ Small_range_710_723
     # EU5 登录
     ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     user_make_call_via_meeting_link   ${driver5}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver5}
     ###### VP: directly join call, don't need anyone's accept    EU5 leave call         717+718行
     exit_call     ${driver5}
     exit_one_driver     ${driver5}
@@ -241,6 +257,8 @@ Small_range_710_723
     which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
     ###### Click EU2's OTU link	VP: Get message like "EU2 is in another call"       723行
     user_make_call_via_meeting_link   ${driver7}     ${invite_url_otu}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver7}
     which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
     exit_call    ${driver1}
     [Teardown]      exit_driver
@@ -257,6 +275,8 @@ Small_range_724_742
     ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
     ###### EU1 click EU2's OTU link         724行
     user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # EU2 接受Call
     user_anwser_call   ${driver2}
     # EU3 登录
@@ -287,6 +307,8 @@ Small_range_724_742
     # EU5 登录
     ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     user_make_call_via_meeting_link   ${driver5}   ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver5}
     ###### VP: directly join call, don't need anyone's accept    EU5 leave call       730+731行
     exit_call     ${driver5}
     exit_one_driver    ${driver5}
@@ -298,6 +320,8 @@ Small_range_724_742
     # Expert user from another enterprise 登录
     ${driver6}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
     user_make_call_via_meeting_link   ${driver6}    ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver6}
     ###### VP: EU2 get Accept dialog    EU2 accept       732+733行
     user_anwser_call    ${driver2}    no_direct
     ###### EU1's contact directly call EU1	VP: contact get message like "EU1 is in another call"       734行
@@ -312,6 +336,8 @@ Small_range_724_742
     which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
     ###### Click EU2's MHS link	VP: Get message like "EU2 is in another call"       736行
     user_make_call_via_meeting_link   ${driver8}     ${invite_url_mhs}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver8}
     which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
     ##### EU2 leave call   VP: call is not end    737行
     leave_call   ${driver2}
@@ -325,6 +351,8 @@ Small_range_724_742
     exit_one_driver    ${driver9}
     ###### EU2 click 3PI link 2 to join       741行
     user_make_call_via_meeting_link   ${driver2}    ${invite_url_2}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     ###### VP: 3PC call established successfully    End 3PC call    741+742行
     end_call_for_all       ${driver1}
     [Teardown]      exit_driver
@@ -341,6 +369,8 @@ Small_range_743_744
     ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
     ###### EU1 click EU2's OTU link         724行
     user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # EU2 接受Call
     user_anwser_call   ${driver2}
     ###### EU1 send 3PI link 1 to eMail       728行
@@ -357,6 +387,8 @@ Small_range_743_744
     # EU3 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     user_make_call_via_meeting_link   ${driver3}    ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     which_page_is_currently_on    ${driver3}    ${this_call_is_over}
     ###### Anonymous user click 3PI link 2	VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."       744行
     ${driver10}    anonymous_open_meeting_link    ${invite_url_2}
@@ -375,6 +407,8 @@ Small_range_745
     ${invite_url}    send_meeting_room_link    ${driver2}    MHS   no_send
     # User1 click User2's MHS link
     user_make_call_via_meeting_link   ${driver1}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # another User 接受Call
     user_anwser_call   ${driver2}
     # VP: This User does not have invite 3rd participant icon on menu bar
@@ -395,6 +429,8 @@ Small_range_746
     ${invite_url}    send_meeting_room_link    ${driver2}    MHS   no_send
     # User1 click User2's MHS link
     user_make_call_via_meeting_link   ${driver1}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # another User 接受Call
     user_anwser_call   ${driver2}
     # VP: This User has invite 3rd participant icon on menu bar
@@ -656,6 +692,8 @@ Small_range_820_821
     # Another enterprise user join call
     ${driver3}   driver_set_up_and_logIn   ${Expert_User5_username}        ${switch_workspace_password}
     user_make_call_via_meeting_link      ${driver3}     ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     # 接受Call
     user_anwser_call      ${driver1}     no_direct
     # VP: REC is on, can not changed
@@ -759,6 +797,8 @@ Small_range_825_826
     # MHS owner get incoming call from another company user whose rec is on
     ${invite_url}    send_meeting_room_link     ${driver1}    MHS
     user_make_call_via_meeting_link      ${driver2}     ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     user_anwser_call     ${driver1}
     # VP: REC is off, only owner can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}
@@ -878,6 +918,8 @@ Small_range_831_832
     # MHS owner get incoming call from another company user whose rec is default-on
     ${invite_url}    send_meeting_room_link     ${driver1}    MHS
     user_make_call_via_meeting_link      ${driver2}     ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     user_anwser_call     ${driver1}
     # VP: REC is on, only owner can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}

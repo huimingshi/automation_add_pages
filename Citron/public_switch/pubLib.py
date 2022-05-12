@@ -54,18 +54,19 @@ def screen_shot_func(driver,screen_name):
     else:
         driver.save_screenshot('./' + current_time + screen_name + 'screenshot.png')
 
-def get_xpath_element(driver,locator,ec = None,select='xpath',description = '元素'):
+def get_xpath_element(driver,locator,ec = None,select='xpath',description = '元素',timeout = WEBDRIVERWAIT_TIMEOUT):
     """
     通过xpath寻找元素，driver.find_element_by_xpath(xpath)
     :param driver: 浏览器驱动
     :param locator: 元素的locator
     :param ec: 是否需要使用EC来进行显示等待，默认需要
     :param select: 默认是xpath寻找，也可以进行切换成id
+    :param description: 描述信息
     :return:
     """
     if not ec:
         try:
-            return WebDriverWait(driver, WEBDRIVERWAIT_TIMEOUT, POLL_FREQUENCY).until(EC.visibility_of_element_located((select,locator)))
+            return WebDriverWait(driver, timeout, POLL_FREQUENCY).until(EC.visibility_of_element_located((select,locator)))
         except Exception as e:
             print('元素未找到',e)
             msg = traceback.format_exc()
@@ -118,7 +119,6 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
         if if_show and if_click:
             if len(ele_list) >= 1:
                 public_click_element(driver,xpath,description=description)
-                # get_xpath_element(driver,xpath,description=description).click()
                 break
         elif if_show and not if_click:
             if len(ele_list) >= 1:

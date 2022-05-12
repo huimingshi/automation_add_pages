@@ -592,6 +592,8 @@ Small_range_654_655
     ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}    ${universal_password}
     # TU1 call on-call group via expert link
     user_make_call_via_meeting_link    ${driver1}    https://app-stage.helplightning.net.cn/help?enterprise_id=6614&group_id=10705&group_name=Expert_AaA_on_call_group     # Expert_AaA_on_call_group这个group的On-Call Group Url
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # expertA answer call
     user_anwser_call   ${driver2}
     # EU2 登录

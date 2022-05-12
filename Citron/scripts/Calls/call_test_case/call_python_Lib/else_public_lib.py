@@ -397,7 +397,7 @@ def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_o
     :return:
     """
     if currently_on == 'currently_on':
-        public_check_element(driver, page_tag_xpath, '当前页面与预期页面不一致', if_click=None, if_show=1)
+        get_xpath_element(driver, page_tag_xpath, ec=None, select='xpath', description='当前页面与预期页面不一致', timeout=int(60))
     elif currently_on == 'not_currently_on':
         ele_list = get_xpath_elements(driver,page_tag_xpath)
         print(ele_list)

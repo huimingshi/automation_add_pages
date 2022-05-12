@@ -466,6 +466,8 @@ Small_range_999
     ${invite_url}     send_meeting_room_link    ${driver2}     OTU
     # User A click B's meeing link
     user_make_call_via_meeting_link      ${driver1}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
     # VP: User A's outgoing call, it shoud show User B's customer  avatar.
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver1}     ${get_class_value}       ${User_B_customer_avatar}
@@ -536,6 +538,9 @@ Small_range_1000_1001
     user_anwser_call   ${driver2}
     # User A click B's meeing link
     user_make_call_via_meeting_link      ${driver1}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
+    # 接听call
     user_anwser_call   ${driver2}   no_direct
 
     # In-call view for A, B and anonymous is WS1's color of orange
@@ -598,6 +603,9 @@ Small_range_1002_1004
     ${invite_url}     send_meeting_room_link    ${driver2}     OTU
     # User A click B's meeing link
     user_make_call_via_meeting_link      ${driver1}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
+    # 接听call
     user_anwser_call   ${driver2}
     # User C登录
     ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
@@ -608,6 +616,8 @@ Small_range_1002_1004
     close_invite_3th_page    ${driver2}
     # User C click 3PI link to join call
     user_make_call_via_meeting_link    ${driver3}     ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     # VP: User C's outgoing call, it should show User B's customer Avatar
     ${get_class_value}    get_ele_class_name    ${driver3}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver3}     ${get_class_value}       ${User_B_customer_avatar}
@@ -705,7 +715,8 @@ Small_range_1005_1007
     # User D click link1 to enter call
     close_call_ending_page    ${driver1}    #关闭通话结束页面
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
-    sleep   15
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     # VP: User D's outgoing call, it should show WS 1's Branding  avatar.
     ${get_class_value}    get_ele_class_name    ${driver3}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver3}     ${get_class_value}       ${WS_1_Branding_Avatar}
@@ -764,6 +775,8 @@ Small_range_1009
     ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
     # Click inactive 3PI link(nobody in call) that call's owner is User B
     user_make_call_via_meeting_link     ${driver3}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
     # VP: text and color are branded orange
     ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_whole_page}   style                     # 整个页面
     check_a_contains_b    ${driver3}     ${get_class_value}      ${organizer_brand_orange_color}
@@ -1065,6 +1078,8 @@ Small_range_1032
     ${invite_url}     send_meeting_room_link    ${driver1}     OTU
     # User B click A's meeing link
     user_make_call_via_meeting_link      ${driver2}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
     # VP: User B's outgoing call, it shoud show WS 1 default Avatar Grey 'H'.
     ${get_class_value}    get_ele_class_name    ${driver2}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver2}     ${get_class_value}       ${default_avatar_src}

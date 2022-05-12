@@ -5,7 +5,8 @@ from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
-from else_public_lib import paste_on_a_non_windows_system, user_accept_disclaimer, make_sure_enter_call
+from else_public_lib import paste_on_a_non_windows_system, user_accept_disclaimer
+from else_public_lib import make_sure_enter_call as m_s_e_c
 from else_public_lib import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
@@ -30,7 +31,8 @@ def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
     :param enter_send_invite: 是否需要进入send invite页面，默认’yes‘进入，其他表示不进入
     :return:
     """
-    make_sure_enter_call(driver)
+    # 确保进入call
+    m_s_e_c(driver)
     public_check_element(driver, invite_user_div, '右上角三个横杠按钮未展示',if_click = None,if_show = 1)
     public_click_element(driver, invite_user_div, description='右上角三个横杠按钮')
     public_check_element(driver, enter_invite_user_page, 'Invite图标未展示',if_click = None,if_show = 1)
@@ -458,7 +460,17 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
     public_click_element(driver1, search_input,description = '查询框')
     element.send_keys(on_call_group_name)
     time.sleep(5)
-    public_check_element(driver1, click_call_button, '首行数据还未展示')
+    ele_ment = get_xpath_elements(driver1, f'//div[@class="group-card"]/div[text()="{on_call_group_name}"]')
+    print('0000000000000000000000000000000000', len(ele_ment))
+    if len(ele_ment) < 1:
+        refresh_page(driver1)
+        element = get_xpath_element(driver1, search_input, description='搜索框')
+        public_click_element(driver1, search_input, description='搜索框')
+        element.send_keys(on_call_group_name)
+        time.sleep(5)
+    public_check_element(driver1, f'//div[@class="group-card"]/div[text()="{on_call_group_name}"]', f'{on_call_group_name}未加载出', if_click=None,if_show=1)
+    public_check_element(driver1, click_call_button, '点击Call按钮失败')
+    # public_check_element(driver1, click_call_button, '首行数据还未展示')
     time.sleep(3)
     count = get_xpath_elements(driver1,end_call_before_connecting)
     public_assert(driver1,len(count) , 1,action='发起call失败')
