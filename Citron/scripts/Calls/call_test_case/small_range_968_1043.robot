@@ -210,7 +210,7 @@ Small_range_977_993
     ${driver3}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
     switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
     make_calls_with_who     ${driver2}    ${driver3}    ${personal_user_username}       # 进行通话
-    sleep   30s
+    sleep   45s
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
     check_get_color_correct    ${get_value}   ${css_value}
