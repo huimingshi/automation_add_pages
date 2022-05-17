@@ -347,11 +347,12 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         ele_list = get_xpath_elements(driver,accept_disclaimer)
         if len(ele_list) == 1:
             public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
-            driver.implicitly_wait(5)
-            ele_list = get_xpath_elements(driver, accept_disclaimer)
-            if len(ele_list) == 1:
-                public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
-            driver.implicitly_wait(int(IMPLICIT_WAIT))
+            # time.sleep(10)
+            # driver.implicitly_wait(5)
+            # ele_list = get_xpath_elements(driver, accept_disclaimer)
+            # if len(ele_list) == 1:
+            #     public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+            # driver.implicitly_wait(int(IMPLICIT_WAIT))
     elif deal_with_disclaimer == 'decline':
         ele_list = get_xpath_elements(driver,decline_disclaimer)
         if len(ele_list) == 1:
@@ -635,6 +636,15 @@ def record_or_do_not_record(if_record,who_do_it,*args):
             ele_list = get_xpath_elements(one,f'//div[@class="message" and contains(.,"{who_do_it} has turned off recording for this call.")]')
             public_assert(args[0], len(ele_list), 1, action='开启or关闭record的提示信息不正确')
 
+def proceed_with_camera_off(driver):
+    """
+    Proceed with my camera Off
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,"//canvas[@id='webglCameraOff']")
+    if len(ele_list) == 1:
+        public_click_element(driver,"//canvas[@id='webglCameraOff']",description='proceed_with_camera_off按钮')
 
 if __name__ == '__main__':
     from else_public_lib import driver_set_up_and_logIn, logout_citron

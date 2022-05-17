@@ -30,7 +30,7 @@ All_active_users_in_the_entire_enterprise_should_show
     # 获取Users页面的所有active user，放到列表中
     ${active_user_list}     get_all_data_on_the_page   ${driver}
     ${active_user_list_final}     remove_value_from_list    ${active_user_list}   ${crunch_site_username}
-    lists should be equal   ${directory_user_list}   ${active_user_list_final}
+    two_option_is_equal   ${driver}   ${directory_user_list}   ${active_user_list_final}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 #    ...             AND             exit_driver    ${driver}
@@ -469,28 +469,33 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     user_switch_to_first_workspace   ${driver1}
     # User B is expert user log in
-    ${driver2}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
+    ${driver2}   driver_set_up_and_logIn   ${for_expert_call_username}    ${public_pass}
     # 进行一次call
-    make_calls_with_who   ${driver1}    ${driver2}    ${big_admin_first_WS_username}
+    make_calls_with_who   ${driver1}    ${driver2}    ${for_expert_call_username}
     # 结束通话
     exit_call     ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
+    close_call_ending_page      ${driver2}
     # User B logout
-    exit_one_driver   ${driver2}
+    logout_citron   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     refresh_browser_page   ${driver1}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    can_connect_call_or_not    ${driver1}   ${big_admin_first_WS_name}
+    can_connect_call_or_not    ${driver1}   ${for_expert_call_name}
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
     # User B is expert user log in
-    ${driver3}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
+    ${driver3}   driver_set_up_and_logIn   ${for_expert_call_username}    ${big_admin_first_WS_password}
     # VP: call establish successfully
     check_call_can_reach_to_or_not   ${driver1}  ${driver3}   ${meeting_link}    1
+    # 切换到首个句柄
+    switch_first_window   ${driver3}
+    # User B logout
+    logout_citron   ${driver3}
 
     # anonymous open meeting link with website
     ${driver4}   anonymous_open_meeting_link    ${meeting_link}
@@ -517,28 +522,33 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     user_switch_to_first_workspace   ${driver1}
     # User B is team user log in
-    ${driver2}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
+    ${driver2}   driver_set_up_and_logIn   ${for_team_call_username}    ${public_pass}
     # 进行一次call
-    make_calls_with_who   ${driver1}    ${driver2}    ${a_team_user_username}
+    make_calls_with_who   ${driver1}    ${driver2}    ${for_team_call_username}
     # 结束通话
     exit_call     ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
+    close_call_ending_page      ${driver2}
     # User B logout
-    exit_one_driver   ${driver2}
+    logout_citron   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     refresh_browser_page   ${driver1}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    can_connect_call_or_not    ${driver1}   ${a_team_user_name}
+    can_connect_call_or_not    ${driver1}   ${for_team_call_name}
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
     # User B is team user log in
-    ${driver3}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
+    ${driver3}   driver_set_up_and_logIn   ${for_team_call_username}    ${public_pass}
     # VP: call establish successfully
     check_call_can_reach_to_or_not   ${driver1}  ${driver3}   ${meeting_link}    1
+    # 切换到首个句柄
+    switch_first_window   ${driver3}
+    # User B logout
+    logout_citron   ${driver3}
     # 启动一个空的窗口
     ${driver4}   start_an_empty_window
     # VP: call establish successfully
@@ -557,28 +567,33 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     user_switch_to_first_workspace   ${driver1}
     # User B is  another enterprise user log in
-    ${driver2}   driver_set_up_and_logIn   ${other_site_user_2_username}    ${other_site_user_2_password}
+    ${driver2}   driver_set_up_and_logIn   ${for_other_site_call_username}    ${public_pass}
     # 进行一次call
-    make_calls_with_who   ${driver1}    ${driver2}    ${other_site_user_2_username}   anwser   is_personal
+    make_calls_with_who   ${driver1}    ${driver2}    ${for_other_site_call_username}   anwser   is_personal
     # 结束通话
     exit_call     ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
+    close_call_ending_page      ${driver2}
     # User B logout
-    exit_one_driver   ${driver2}
+    logout_citron   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     refresh_browser_page   ${driver1}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    can_connect_call_or_not    ${driver1}   ${other_site_user_2_name}
+    can_connect_call_or_not    ${driver1}   ${for_other_site_call_name}
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
     # User B is another enterprise user log in
-    ${driver3}   driver_set_up_and_logIn   ${other_site_user_2_username}    ${other_site_user_2_password}
+    ${driver3}   driver_set_up_and_logIn   ${for_other_site_call_username}    ${other_site_user_2_password}
     # VP: call establish successfully
     check_call_can_reach_to_or_not   ${driver1}   ${driver3}   ${meeting_link}    1
+    # 切换到首个句柄
+    switch_first_window   ${driver3}
+    # User B logout
+    logout_citron   ${driver3}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 #    ...             AND             exit_driver   ${driver1}   ${driver3}
@@ -589,15 +604,19 @@ Team_user_A_signs_in_User_B_is_expert_user
     # Team user log in
     ${driver1}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # 在Contacts页面查询user
-    different_page_search_single_users   ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}   ${big_admin_first_WS_username}
+    different_page_search_single_users   ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}   ${for_expert_call_username}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    can_connect_call_or_not    ${driver1}   ${big_admin_first_WS_name}
+    can_connect_call_or_not    ${driver1}   ${for_expert_call_name}
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
     # User B is expert user log in
-    ${driver2}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
+    ${driver2}   driver_set_up_and_logIn   ${for_expert_call_username}    ${public_pass}
     check_call_can_reach_to_or_not    ${driver1}   ${driver2}   ${meeting_link}    1
+    # 切换到首个句柄
+    switch_first_window   ${driver2}
+    # User B logout
+    logout_citron   ${driver2}
     # 启动一个空的窗口
     ${driver3}   start_an_empty_window
     # User B is anonymous user clicks on this OTU link.
@@ -608,19 +627,19 @@ Team_user_A_signs_in_User_B_is_expert_user
 check_personal_user_can_see_user_S_is_unreachable_status
     [Documentation]    Pre-condition: User S belong to workspace WS1 and WS2    User S switch to WS1   User S logout of all devices
     [Tags]     small range 135+136 line        call_case
-    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-    ...         AND               switch_to_second_workspace      # 切换到第二个WS
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-    ...         AND               Close                           # close browser
-    ...         AND               Login_workspaces_admin          # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-    ...         AND               Close                           # close browser
+#    [Setup]     run keywords      Login_premium_user              # log in with premium admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+#    ...         AND               switch_to_second_workspace      # 切换到第二个WS
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+#    ...         AND               Close                           # close browser
+#    ...         AND               Login_workspaces_admin          # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+#    ...         AND               Close                           # close browser
     # User S signs in.
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    ${driver1}  driver_set_up_and_logIn   ${for_check_user_online_or_not}   ${public_pass}
     user_switch_to_first_workspace   ${driver1}
     # Contact of WS1
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
@@ -629,22 +648,25 @@ check_personal_user_can_see_user_S_is_unreachable_status
     # Personal contact of WS2 logs in in another web
     ${driver4}  driver_set_up_and_logIn     ${other_site_user_3_username}   ${other_site_user_3_password}
     # VP: Contact of WS2 see User S is online status
-    different_page_search_single_users    ${driver3}    ${py_contacts_page}     ${py_input_search}     ${py_get_number_of_rows}    ${switch_workspace_username}
+    different_page_search_single_users    ${driver3}    ${py_contacts_page}     ${py_input_search}     ${py_get_number_of_rows}    ${for_check_user_online_or_not}
     judge_reachable_or_not    ${driver3}    ${py_get_number_of_rows}    reachable
     # VP: Personal contact of WS2 see User S is online status
     switch_to_other_tab   ${driver4}    ${Personal_tab_xpath}
-    different_page_search_single_users    ${driver4}    ${py_personal_page}     ${py_personal_user_search}    ${py_personal_search_result}    ${switch_workspace_username}
+    different_page_search_single_users    ${driver4}    ${py_personal_page}     ${py_personal_user_search}    ${py_personal_search_result}    ${for_check_user_online_or_not}
     judge_reachable_or_not    ${driver4}    ${py_personal_search_result}    reachable
+    logout_citron    ${driver4}
     sleep  4
     # User S logout of all devices
     logout_citron    ${driver1}
     # VP: Contact of WS1 see user S is unreachable status
-    different_page_search_single_users    ${driver2}    ${py_contacts_page}     ${py_input_search}     ${py_get_number_of_rows}    ${switch_workspace_username}
+    different_page_search_single_users    ${driver2}    ${py_contacts_page}     ${py_input_search}     ${py_get_number_of_rows}    ${for_check_user_online_or_not}
     judge_reachable_or_not    ${driver2}    ${py_get_number_of_rows}    unreachable
+    logout_citron    ${driver2}
     # VP: contact of WS2 see user s is unreachable status
-    different_page_search_single_users    ${driver3}    ${py_contacts_page}     ${py_input_search}     ${py_get_number_of_rows}    ${switch_workspace_username}
+    different_page_search_single_users    ${driver3}    ${py_contacts_page}     ${py_input_search}     ${py_get_number_of_rows}    ${for_check_user_online_or_not}
     sleep  4
     judge_reachable_or_not    ${driver3}    ${py_get_number_of_rows}    unreachable
+    logout_citron    ${driver3}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
 #    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}   ${driver4}

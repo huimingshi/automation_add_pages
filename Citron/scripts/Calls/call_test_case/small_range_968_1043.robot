@@ -23,13 +23,15 @@ Small_range_970_974
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    check_toturial
     # VP: Branding name everywhere use Help Lighning
     ${get_ele_text}    get_ele_text    ${driver1}    ${first_tree_text}
-    should be equal as strings    ${get_ele_text}     MY HELP LIGHTNING
+    two_option_is_equal    ${driver1}    ${get_ele_text}     MY HELP LIGHTNING
+#    should be equal as strings    ${get_ele_text}     MY HELP LIGHTNING
     # VP: left top Logo loaded HelpLightning logo
     ${get_class_value}    get_ele_class_name    ${driver1}   ${left_top_Logo}   style
     Should be empty     ${get_class_value}
     # VP: Color is Help Lightning blue
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}    background-color
-    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
+    two_option_is_equal   ${driver1}   rgba(160, 220, 238, 1)    ${css_value}
+#    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
     # VP: Default avator use Help Lighning one
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
     should start with    ${get_class_value}     ${default_avatar_src}
@@ -38,7 +40,8 @@ Small_range_970_974
     make_calls_with_who   ${driver2}   ${driver1}   ${Expert_User1_username}
     exit_call   ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}     Thank you for using Help Lightning
+    two_option_is_equal   ${driver1}   ${get_ele_text}     Thank you for using Help Lightning
+#    should be equal as strings    ${get_ele_text}     Thank you for using Help Lightning
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 #    ...             AND             exit_driver     ${driver1}    ${driver2}
@@ -56,8 +59,10 @@ Small_range_977_993
     # Workspace admin login，VP: all helplightning blue will be changed to customerized  accent color
     ${driver1}    driver_set_up_and_logIn    ${workspace_admin_username}     ${universal_password}
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}   background-color
-    Run Keyword If   '${get_value}'=='#ff9933'    should be equal as strings    rgba(255, 153, 51, 0.2)     ${css_value}
-    ...  ELSE IF  '${get_value}'=='#00ff00'    should be equal as strings    rgba(0, 255, 0, 0.2)     ${css_value}
+#    Run Keyword If   '${get_value}'=='#ff9933'    should be equal as strings    rgba(255, 153, 51, 0.2)     ${css_value}
+#    ...  ELSE IF  '${get_value}'=='#00ff00'    should be equal as strings    rgba(0, 255, 0, 0.2)     ${css_value}
+    Run Keyword If   '${get_value}'=='#ff9933'   two_option_is_equal   ${driver1}      rgba(255, 153, 51, 0.2)     ${css_value}
+    ...  ELSE IF  '${get_value}'=='#00ff00'    two_option_is_equal   ${driver1}     rgba(0, 255, 0, 0.2)     ${css_value}
 
     Comment    Users 页面
     # open Users, inite user, deactived user page	VP: All context with "Help Lightning" is branded, accent color is orange
@@ -237,7 +242,8 @@ Small_range_977_993
     refresh_browser_page    ${driver2}
     logout_citron    ${driver2}
     ${css_value}   get_css_value   ${driver2}   ${Login_page_next_button}   background-color                        # 登录页面的Next按钮
-    should be equal as strings    rgba(0, 169, 224, 1)     ${css_value}
+    two_option_is_equal   ${driver2}   rgba(0, 169, 224, 1)     ${css_value}
+#    should be equal as strings    rgba(0, 169, 224, 1)     ${css_value}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 #    ...             AND             exit_driver    ${driver2}    ${driver3}
@@ -295,11 +301,13 @@ Small_range_995_996
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal   ${driver1}   ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal   ${driver2}   ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -364,11 +372,13 @@ Small_range_997
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal   ${driver1}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal   ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -429,11 +439,13 @@ Small_range_998
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal   ${driver1}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal   ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -491,11 +503,13 @@ Small_range_999
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver1}   ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal   ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -560,15 +574,18 @@ Small_range_1000_1001
     # VP: End Call page use WS1's branding name and orange for A and Anonymous
     end_call_for_all    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver3}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver3}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver3}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -633,15 +650,18 @@ Small_range_1002_1004
     end_call_for_all    ${driver2}
     # VP: End Call page use WS1's branding name and orange for A,B and C
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver1}     ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver3}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver3}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver3}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     #1）Accent Color[Orange] for the clouds background color.
@@ -695,11 +715,13 @@ Small_range_1005_1007
     exit_call    ${driver1}
     # VP: End Call page use WS1's branding name and orange for Anonymous
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     #1）Accent Color[Orange] for the clouds background color.
@@ -735,11 +757,13 @@ Small_range_1005_1007
     exit_call   ${driver3}
     # VP: End Call page use WS1's branding name and orange for User C and D
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver3}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver3}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver3}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     #1）Accent Color[Orange] for the clouds background color.
@@ -822,11 +846,13 @@ Small_range_1010_1017
     exit_call     ${driver2}
     # VP: End Call page use WS1's branding name and orange for A and B
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     # 1）Accent Color[Orange] for the clouds background color.
@@ -864,11 +890,13 @@ Small_range_1010_1017
     exit_call   ${driver3}
     # VP: End Call page use WS1's branding name and orange for Anonymous and User B
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver3}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${Malphite}
+    two_option_is_equal    ${driver3}    ${get_ele_text}       ${Malphite}
+#    should be equal as strings    ${get_ele_text}       ${Malphite}
     ${css_value}   get_css_value   ${driver3}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     # 1）Accent Color[Orange] for the clouds background color.
@@ -926,43 +954,50 @@ Small_range_1018_1026
     ${get_class_value}    get_ele_class_name    ${driver1}   ${second_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # on-call group's avatar in Team	VP: Test avatar is loaded
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Personal contacts belong to this site who using default avatar	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver3}   ${py_personal_page}    ${py_personal_switch_success}    ${py_personal_search_result}
     ${get_class_value}    get_ele_class_name    ${driver3}   //div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]//div[@class="AvatarImageRenderer"]//img    src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver3}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Favorite contacts belong to this site	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver1}   ${py_favorites_page}   ${py_favorites_switch_success}    ${py_get_number_of_rows}
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Directory list 	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver1}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Directory list when invite in a call	VP: Test avatar is loaded
     make_calls_with_who   ${driver1}   ${driver2}   ${ws3_branding_A_username}   no_care
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     switch_to_other_tab     ${driver1}   ${end_button_before_call}    # 提前End Call
     # Recents belong to this workspace	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Call team contact and answer  	team contact invite 3rd participant	   View Contact list 	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     make_calls_with_who     ${driver1}    ${driver2}     ${ws3_branding_A_username}
@@ -971,7 +1006,8 @@ Small_range_1018_1026
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img_in_invite_page}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
-    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
+    two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
+#    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     exit_call      ${driver2}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
@@ -993,13 +1029,15 @@ Small_range_1027_1030
     user_switch_to_second_workspace    ${driver1}     ${WS_branding_setting_WS3}
     # VP: Branding name everywhere use Help Lighning
     ${get_ele_text}    get_ele_text    ${driver1}    ${first_tree_text}
-    should be equal as strings    ${get_ele_text}     MY HELP LIGHTNING
+    two_option_is_equal    ${driver1}    ${get_ele_text}     MY HELP LIGHTNING
+#    should be equal as strings    ${get_ele_text}     MY HELP LIGHTNING
     # VP: left top Logo loaded HelpLightning logo
     ${get_class_value}    get_ele_class_name    ${driver1}   ${left_top_Logo}   style
     Should be empty     ${get_class_value}
     # VP: Color is Help Lightning blue
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}    background-color
-    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
+    two_option_is_equal   ${driver1}    rgba(160, 220, 238, 1)    ${css_value}
+#    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
     # VP: Default avator use Help Lighning one
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
     should start with    ${get_class_value}     ${default_avatar_src}
@@ -1046,11 +1084,13 @@ Small_range_1031
     # VP: End Call page use WS1's Default name and Blue for A and B
     exit_call    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -1063,9 +1103,11 @@ Small_range_1031
     # 此处受bug导致：  https://vipaar.atlassian.net/browse/CITRON-3377
 #    # 2）Use WS 1's Default Logo Grey 'H' for the company logo above “Thank You for Using Helplightning”.
 #    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver1}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver2}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
@@ -1109,11 +1151,13 @@ Small_range_1032
     # VP: End Call page use WS1's Default name and Blue for A and B
     exit_call    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -1126,9 +1170,11 @@ Small_range_1032
     # 此处受bug导致：  https://vipaar.atlassian.net/browse/CITRON-3377
 #    # 2）Use WS 1's Default Logo Grey 'H' for the company logo above “Thank You for Using Helplightning”.
 #    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver1}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver2}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
@@ -1168,11 +1214,13 @@ Small_range_1033_1035
     # VP: End Call page use WS1's default name and blue for B and Anonymous
     exit_call    ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
 
@@ -1185,9 +1233,11 @@ Small_range_1033_1035
     # 此处受bug导致：  https://vipaar.atlassian.net/browse/CITRON-3377
 #    # 2）Use WS 1's default Logo for the company logo above “Thank You for Using Helplightning”.
 #    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver1}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver2}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
@@ -1223,11 +1273,13 @@ Small_range_1036_1043
     exit_call     ${driver2}
     # VP: End Call page use WS1's default name and Blue for A and B
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver1}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver1}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     # 1）Accent Color[Blue] for the clouds background color.
@@ -1239,9 +1291,11 @@ Small_range_1036_1043
     # 此处受bug导致：  https://vipaar.atlassian.net/browse/CITRON-3377
 #    # 2）Use WS 1's default Logo for the company logo above “Thank You for Using Helplightning”.
 #    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver1}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver2}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
     # Anonymous clicks EG's universal link
     close_call_ending_page    ${driver2}
     ${driver3}    anonymous_open_meeting_link     https://app-stage.helplightning.net.cn/help?enterprise_id=6788&group_id=10997&group_name=Expert_Group_1
@@ -1266,11 +1320,13 @@ Small_range_1036_1043
     exit_call   ${driver3}
     # VP: End Call page use WS1's default name and blue for Anonymous and User B
     ${get_ele_text}    get_ele_text    ${driver2}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver2}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver2}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     ${get_ele_text}    get_ele_text    ${driver3}    ${end_call_message}
-    should be equal as strings    ${get_ele_text}       ${default_product_name}
+    two_option_is_equal    ${driver3}    ${get_ele_text}       ${default_product_name}
+#    should be equal as strings    ${get_ele_text}       ${default_product_name}
     ${css_value}   get_css_value   ${driver3}   ${end_call_message}   color
     check_get_color_is_white       ${css_value}
     # 1）Accent Color[Blue] for the clouds background color.
@@ -1282,8 +1338,10 @@ Small_range_1036_1043
     # 此处受bug导致：  https://vipaar.atlassian.net/browse/CITRON-3377
 #    # 2）Use WS 1's default Logo for the company logo above “Thank You for Using Helplightning”.
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver2}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
-#    should be equal as strings    ${get_class_value}    None
+#    two_option_is_equal    ${driver3}    ${get_class_value}    None
+##    should be equal as strings    ${get_class_value}    None
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}

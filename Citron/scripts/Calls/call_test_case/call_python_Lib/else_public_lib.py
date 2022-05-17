@@ -245,7 +245,7 @@ def hang_up_the_phone(driver):
     """
     public_check_element(driver, end_call_button, '找不到挂断按钮')
 
-def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.helplightning+EU2',call_time=10):
+def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.helplightning+EU2',call_time=25):
     """
     # Leave call
     :param driver:
@@ -254,7 +254,7 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     :param username:需要设置为另一个共同主持的user name
     :return:
     """
-    # 维持通话10s
+    # 维持通话25s
     time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
@@ -274,7 +274,6 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
         ele_list_leave_call = get_xpath_elements(driver,leave_call_button)
         if len(ele_list) == 1 and len(ele_list_leave_call) == 1:
             public_click_element(driver,leave_call_button,description='leave_call_button')
-            # ele_list_leave_call[0].click()
             break
         elif i == 4:
             print('找不到Leave_call按钮')
@@ -345,13 +344,13 @@ def exit_call(driver,check_user_count='check',call_time=10):
             hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
             time.sleep(5)
 
-def end_call_for_all(driver,call_time=10):
+def end_call_for_all(driver,call_time=25):
     """
     End Call for All
     :param driver:
     :return:
     """
-    # 维持通话10s
+    # 维持通话25s
     time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
@@ -365,27 +364,20 @@ def end_call_for_all(driver,call_time=10):
         else:
             time.sleep(10)
     # 点击End_Call_for_All
-    try:
-        for i in range(5):
-            hang_up_the_phone(driver)     # 点击红色的挂断电话按钮
-            ele_list = get_xpath_elements(driver,visibility_finishi_call)
-            ele_list_end_call = get_xpath_elements(driver,end_call_for_all_button)
-            if len(ele_list) == 1 and len(ele_list_end_call) == 1:
-                public_click_element(driver,end_call_for_all_button,description='End_call_for_all按钮')
-                # ele_list_end_call[0].click()
-                break
-            elif i == 4:
-                print('找不到End_Call_for_All按钮')
-                raise Exception('找不到End_Call_for_All按钮')
-            else:
-                hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-                time.sleep(5)
-    except Exception as e:
-        print('点击End Call for All失败', e)
-        screen_shot_func(driver, '点击End_Call_for_All失败')
-        raise Exception
-    else:
-        print('点击End Call for All成功')
+    for i in range(5):
+        hang_up_the_phone(driver)     # 点击红色的挂断电话按钮
+        ele_list = get_xpath_elements(driver,visibility_finishi_call)
+        ele_list_end_call = get_xpath_elements(driver,end_call_for_all_button)
+        if len(ele_list) == 1 and len(ele_list_end_call) == 1:
+            public_click_element(driver,end_call_for_all_button,description='End_call_for_all按钮')
+            break
+        elif i == 4:
+            print('找不到End_Call_for_All按钮')
+            raise Exception('找不到End_Call_for_All按钮')
+        else:
+            time.sleep(5)
+            hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
+            time.sleep(5)
     public_check_element(driver, '//button[@variant="secondary" and contains(.,"Yes")]', 'end_call_for_all时找不到Yes按钮', )
 
 def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_on'):
@@ -1058,6 +1050,7 @@ def first_call_record_tag_and_comment(driver,expect_tag,*args):
         comment_text = ele.get_attribute('textContent')
         print(args[i], comment_text)
         public_assert(driver,args[i] , comment_text,action='comment与预期不一致')
+        i = i + 1
     # 关闭Details页面
     close_details_page(driver)
 
@@ -1295,6 +1288,16 @@ def check_a_contains_b(driver,a,b):
     :return:
     """
     public_assert(driver,b , a,condition='in',action='css属性值断言失败')
+
+def two_option_is_equal(driver,option1,option2):
+    """
+    判断两个对象一致
+    :param driver:
+    :param option1:
+    :param option2:
+    :return:
+    """
+    public_assert(driver,option1,option2,action='两列表不一致')
 
 if __name__ == '__main__':
     # print()

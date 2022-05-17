@@ -123,7 +123,8 @@ Force Tags        small_range
 #    # 获取所有的tags列表
 #    ${tags_list_C2}    get_all_tag_after_call    ${driver3}
 #    # VP: Similar tag name of WS1 list out
-#    lists should be equal     ${tags_list_C1}    ${tags_list_C2}
+#     two_option_is_equal   ${driver3}   ${tags_list_C1}    ${tags_list_C2}
+##    lists should be equal     ${tags_list_C1}    ${tags_list_C2}
 #    # A, B , C fill in tags and comments
 #    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_4
 #    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_5
@@ -189,8 +190,10 @@ Force Tags        small_range
 #    # B and A click tag，VP: Similar tag name of WS1 list out
 #    ${tags_list_B2}    get_all_tag_after_call    ${driver2}
 #    ${tags_list_A2}    get_all_tag_after_call    ${driver1}
-#    lists should be equal   ${tags_list_B1}   ${tags_list_B2}
-#    lists should be equal   ${tags_list_A1}   ${tags_list_A2}
+#     two_option_is_equal   ${driver2}   ${tags_list_B1}   ${tags_list_B2}
+#     two_option_is_equal   ${driver1}   ${tags_list_A1}   ${tags_list_A2}
+##    lists should be equal   ${tags_list_B1}   ${tags_list_B2}
+##    lists should be equal   ${tags_list_A1}   ${tags_list_A2}
 #    # 添加tags和comment
 #    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_7
 #    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_8

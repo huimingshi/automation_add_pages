@@ -18,7 +18,8 @@ Small_range_623_two_users_login
     check_contacts_list   ${driver1}    ${Quantum_Mechanics_group_name}   Huiming.shi.helplightning+Feynman    Huiming.shi.helplightning+Gell-mann    Huiming.shi.helplightning+User_B
     # on-call group is marked with visual indication
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}     background-color
-    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
+    two_option_is_equal    ${driver1}    rgba(160, 220, 238, 1)    ${css_value}
+#    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
     # Feynman 登录
     ${driver2}    driver_set_up_and_logIn    ${Feynman_username}     ${universal_password}
     # team list for Feynman is:null

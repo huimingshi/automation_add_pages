@@ -98,6 +98,11 @@ ${switch_workspace_username}            Huiming.shi.helplightning+9988776655@out
 ${switch_workspace_name}                Huiming.shi.helplightning+9988776655
 ${switch_workspace_password}            *IK<8ik,8ik,
 
+${for_check_user_online_or_not}         Huiming.shi.helplightning+online_or_not@outlook.com                                     # 属于两个WS，用来验证WS切换和user是否在线(belong to big_admin)(belong to WS1 and WS2)
+
+${for_expert_call_username}             Huiming.shi.helplightning+998877665511111@outlook.com                                   # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
+${for_expert_call_name}                 Huiming.shi.helplightning+998877665511111
+
 ${big_admin_first_WS_username}          Huiming.shi.helplightning+99887766551@outlook.com                                       # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
 ${big_admin_first_WS_name}              Huiming.shi.helplightning+99887766551
 ${big_admin_first_WS_password}          *IK<8ik,8ik,
@@ -127,6 +132,9 @@ ${a_team_user_username}                 Huiming.shi.helplightning+a_team_user@ou
 ${a_team_user_name}                     Huiming.shi.helplightning+a_team_user
 ${a_team_user_password}                 *IK<8ik,8ik,
 
+${for_team_call_username}               Huiming.shi.helplightning+team_user1@outlook.com                                        # a team user (belong to big_admin)(has no personal user)
+${for_team_call_name}                   Huiming.shi.helplightning+team_user1
+
 ${other_site_user_1_username}           Huiming.shi.helplightning+other_site_1@outlook.com                                      # an other site user whitch used to call personal user (belong to big_admin first workspace)(is normal user in Huiming.shi.helplightning+an_expert_user)
 ${other_site_user_1_name}               Huiming.shi.helplightning+other_site_1
 ${other_site_user_1_password}           *IK<8ik,8ik,
@@ -134,6 +142,9 @@ ${other_site_user_1_password}           *IK<8ik,8ik,
 ${other_site_user_2_username}           Huiming.shi.helplightning+other_site_2@outlook.com                                      # an other site user whitch used to call personal user (belong to citron)(is normal user in Huiming.shi.helplightning+9988776655 first workspace)
 ${other_site_user_2_name}               Huiming.shi.helplightning+other_site_2
 ${other_site_user_2_password}           *IK<8ik,8ik,
+
+${for_other_site_call_username}         Huiming.shi.helplightning+other_site_21@outlook.com                                      # an other site user whitch used to call personal user (belong to citron)(is normal user in Huiming.shi.helplightning+9988776655 first workspace)
+${for_other_site_call_name}             Huiming.shi.helplightning+other_site_21
 
 ${other_site_user_3_username}           Huiming.shi.helplightning+other_site_3@outlook.com                                      # an other site user whitch used to call personal user (belong to citron)(is normal user in Huiming.shi.helplightning+9988776655 second workspace)
 ${other_site_user_3_name}               Huiming.shi.helplightning+other_site_3

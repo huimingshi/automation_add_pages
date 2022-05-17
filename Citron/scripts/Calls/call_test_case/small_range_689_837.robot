@@ -218,7 +218,8 @@ Small_range_710_723
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
     ${user_directory_list_1}   get_all_data_on_the_page   ${driver1}    contact-name
     close_invite_3th_page     ${driver1}
-    lists should be equal     ${user_directory_list}     ${user_directory_list_1}
+    two_option_is_equal    ${driver1}    ${user_directory_list}    ${user_directory_list_1}
+#    lists should be equal     ${user_directory_list}     ${user_directory_list_1}
     exit_one_driver     ${driver3}
     ###### VP:Title and location are shown in Contact list         712行
     open_invite_3rd_participant_dialog     ${driver1}    no_enter
@@ -449,7 +450,8 @@ Small_range_746
     open_invite_3rd_participant_dialog      ${driver1}    no_enter
     # VP: contact list is same as team list from ws-A
     ${user_list_2}    get_all_data_on_the_page    ${driver1}      contact-name
-    lists should be equal  ${user_list_1}   ${user_list_2}
+    two_option_is_equal   ${driver1}    ${user_list_1}   ${user_list_2}
+#    lists should be equal  ${user_list_1}   ${user_list_2}
     exit_call     ${driver2}
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}
@@ -722,16 +724,25 @@ Small_range_820_821
     # Change mode of giver/receiver/Observer;In mode of Freeze/GHoP/Doc Share
     # In each mode, Say some words while do telestrations.	VP: REC is still on
     enter_giver_mode     ${driver1}      ${ws3_branding_A_username}    ${Expert_User5_name}
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
+    proceed_with_camera_off    ${driver3}
     rec_is_on_or_off     ${driver3}
     enter_FGD_mode     ${driver1}      Document
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
+    proceed_with_camera_off    ${driver3}
     rec_is_on_or_off     ${driver3}
     enter_FGD_mode     ${driver1}      Photo
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
+    proceed_with_camera_off    ${driver3}
     rec_is_on_or_off     ${driver3}
 #    enter_FGD_mode     ${driver3}      Freeze
 #    rec_is_on_or_off     ${driver1}
@@ -768,13 +779,19 @@ Small_range_823
     rec_is_on_or_off     ${driver2}
     # In mode of Freeze/GHoP/Doc Share，VP: REC is still on
     enter_giver_mode     ${driver1}      none    none     2
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
     enter_FGD_mode     ${driver1}      Document
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
     enter_FGD_mode     ${driver1}      Photo
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
 #    enter_FGD_mode     ${driver2}      Freeze
 #    rec_is_on_or_off     ${driver1}
@@ -824,7 +841,9 @@ Small_range_825_826
     # Change role of giver/receiver
     enter_giver_mode     ${driver1}      none    none     2
     # VP: only owner can change rec
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}     off   can_change
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}     off   none
     # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
     record_or_do_not_record    record          ${ws3_branding_A_username}    ${driver1}    ${driver2}
@@ -898,7 +917,9 @@ Small_range_829
     # Change role of giver/receiver
     enter_giver_mode     ${driver1}      none    none     2
     # VP: only owner can change rec
+    proceed_with_camera_off    ${driver1}
     rec_is_on_or_off     ${driver1}     off   can_change
+    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}     off   none
     # 返回Face to Face模式
     back_to_face_to_face_mode    ${driver1}
@@ -1055,6 +1076,7 @@ Small_range_836
     close_call_ending_page    ${driver2}
     switch_to_diffrent_page    ${driver2}   ${py_recents_page}    ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_2}   get_recents_page_records_occurred_time    ${driver2}
-    Should Be Equal    ${occurred_time_list_1}   ${occurred_time_list_2}
+    two_option_is_equal    ${driver2}    ${occurred_time_list_1}   ${occurred_time_list_2}
+#    Should Be Equal    ${occurred_time_list_1}   ${occurred_time_list_2}
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver    ${driver1}    ${driver2}    ${driver3}
