@@ -1,8 +1,6 @@
 #----------------------------------------------------------------------------------------------------#
-import time
-import os
 from Citron.public_switch.pubLib import *
-from Citron.public_switch.public_switch_py import IMPLICIT_WAIT, PAGE_LOAD_TIMEOUT
+from Citron.public_switch.public_switch_py import *
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -73,7 +71,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         time.sleep(1)
         currentPageUrl = driver.current_url
         print("当前页面的url是：", currentPageUrl)
-        if currentPageUrl == test_web:
+        if currentPageUrl == TEST_WEB:
             break
         ele_list_login = get_xpath_elements(driver, login_button)
         if len(ele_list_login) == 1:
@@ -125,7 +123,7 @@ def driver_set_up_and_logIn(username,password,check_toturial = 'no_check_toturia
     """
     driver = start_an_empty_window()
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
-    driver.get(test_web)
+    driver.get(TEST_WEB)
     logIn_citron(driver, username, password, check_toturial, close_bounced, accept, disturb)
     return driver
 

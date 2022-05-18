@@ -9,12 +9,12 @@ Resource          ../public_switch/public_switch_rf.robot
 
 *** Variables ***
 # register
-${register_website}                 https://app-stage.helplightning.net.cn/register/personal            # register personal website
+${citron_website}                   https://app-stage.helplightning.net.cn/                             # citron website
+${register_website}                 ${citron_website}register/personal                                  # register personal website
 ${register_account}                 xpath=//button[contains(.,'Create My Help Lightning Account')]      # Create My Help Lightning Account
 # log in
-${citron_website}                   https://app-stage.helplightning.net.cn/                             # citron website
-${login_citron_success_1}           https://app-stage.helplightning.net.cn/admin/workspace/users
-${login_citron_success_2}           https://app-stage.helplightning.net.cn/admin/workspaces
+${login_citron_success_1}           ${citron_website}admin/workspace/users
+${login_citron_success_2}           ${citron_website}admin/workspaces
 ${crunch_website}                   https://crunch-stage.helplightning.net.cn/                          # crunch website
 ${login_crunch_success}             https://crunch-stage.helplightning.net.cn/users
 ${loginname_input}                  xpath=//input[@autocomplete="username"]                             # 用户名输入框

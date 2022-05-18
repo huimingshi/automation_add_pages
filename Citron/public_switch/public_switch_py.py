@@ -8,6 +8,9 @@ BROWSER_TYPE = 'Chrome'
 # 浏览器设置的文件默认下载路径
 DOWNLOAD_PATH = r'C:\Users\ts\Downloads'
 
+# Citron的地址
+TEST_WEB = 'https://app-stage.helplightning.net.cn/'
+
 # 默认的隐式等待时间
 IMPLICIT_WAIT = 15
 

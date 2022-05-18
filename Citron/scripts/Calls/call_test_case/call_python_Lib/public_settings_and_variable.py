@@ -39,7 +39,7 @@ elif BROWSER_TYPE == 'Firefox':
     profile.set_preference("webdriver_accept_untrusted_certs", True)
 # ----------------------------------------------------------------------------------------------------#
 # variable
-test_web = 'https://app-stage.helplightning.net.cn/'
+# test_web = 'https://app-stage.helplightning.net.cn/'
 username_input = '//input[@autocomplete="username"]'
 password_input = '//input[@autocomplete="current-password"]'
 submit_button = '//button[@type="submit"]'
