@@ -16,7 +16,7 @@ ${register_account}                 xpath=//button[contains(.,'Create My Help Li
 ${login_citron_success_1}           ${citron_website}admin/workspace/users
 ${login_citron_success_2}           ${citron_website}admin/workspaces
 ${crunch_website}                   https://crunch-stage.helplightning.net.cn/                          # crunch website
-${login_crunch_success}             https://crunch-stage.helplightning.net.cn/users
+${login_crunch_success}             ${crunch_website}users                                              # login crunch success
 ${loginname_input}                  xpath=//input[@autocomplete="username"]                             # 用户名输入框
 ${next_button}                      xpath=//button[text()="Next"]                                       # NEXT按钮
 ${loginpsd_display}                 xpath=//input[@style="display: block;"]                             # 密码输入框出现
