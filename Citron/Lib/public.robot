@@ -8,9 +8,6 @@ Resource          ../public_switch/public_switch_rf.robot
 
 
 *** Variables ***
-# 两个web地址
-${citron_website}                   https://app-stage.helplightning.net.cn/                             # citron website
-${crunch_website}                   https://crunch-stage.helplightning.net.cn/                          # crunch website
 # register
 ${register_website}                 ${citron_website}register/personal                                  # register personal website
 ${register_account}                 xpath=//button[contains(.,'Create My Help Lightning Account')]      # Create My Help Lightning Account
