@@ -1337,8 +1337,8 @@ sort_calls_by_occurred
     click element    ${sort_by_occurred}
     sleep  1s
     @{OccurredList}=    Create List
-    ${count}   get element count   ${get_number_of_rows}
-    FOR   ${i}   IN RANGE  ${count}
+#    ${count}   get element count   ${get_number_of_rows}
+    FOR   ${i}   IN RANGE  10
         ${get_occurred_text}   get text    xpath=//div[@row-index="${i}"]/div[@col-id="timeCallStarted"]
         ${get_occurred_text}   changed_data_to_the_exact_time   ${get_occurred_text}
         Append To List    ${OccurredList}    ${get_occurred_text}
@@ -1351,7 +1351,7 @@ sort_calls_by_occurred
     click element    ${sort_by_occurred}
     sleep  1s
     @{OccurredList}=    Create List
-    FOR   ${i}   IN RANGE  ${count}
+    FOR   ${i}   IN RANGE  10
         ${get_occurred_text}   get text    xpath=//div[@row-index="${i}"]/div[@col-id="timeCallStarted"]
         ${get_occurred_text}   changed_data_to_the_exact_time   ${get_occurred_text}
         Append To List    ${OccurredList}    ${get_occurred_text}

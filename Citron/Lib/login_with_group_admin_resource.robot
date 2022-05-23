@@ -950,7 +950,7 @@ cancel_all_invitation
     click element   ${cancel_all_invitation}
     sleep  1s
     click element    ${latest_modified_window_ok_button}
-    sleep  1s
+    sleep  5s
     element should not be visible   ${cancel_invitation}
 
 search_invitation_by_email
