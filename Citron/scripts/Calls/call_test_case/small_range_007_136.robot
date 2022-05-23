@@ -68,7 +68,7 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
 
 Disable_External_Users_Pre_condition_In_a_site_on_call_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
-    [Tags]     small range 103+104+106+108 line    call_case
+    [Tags]     small range 103+104+106+108 line    call_case    firefox报错
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
     ...         AND               Close

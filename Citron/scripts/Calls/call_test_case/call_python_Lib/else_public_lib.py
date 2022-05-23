@@ -86,11 +86,11 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
-            time.sleep(2)
-            driver.implicitly_wait(int(2))
-            count = get_xpath_elements(driver,accept_disclaimer)
-            if len(count) == 1:  # close Disclaimer
-                public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
+            # time.sleep(2)
+            # driver.implicitly_wait(int(2))
+            # count = get_xpath_elements(driver,accept_disclaimer)
+            # if len(count) == 1:  # close Disclaimer
+            #     public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
     driver.implicitly_wait(int(8))
     # close Tutorial
     if close_bounced == 'close_bounced':
@@ -579,7 +579,7 @@ def open_send_meeting_dialog(driver,which_meeting):
     :param driver:
     :param which_meeting: MHS或者OTU
     """
-    public_check_element(driver, send_my_help_space_invitation, '打开Send_My_Help_Space_Invitation窗口失败')
+    public_click_element(driver, send_my_help_space_invitation, description = '打开Send_My_Help_Space_Invitation窗口')
     if which_meeting == 'MHS':
         # 去勾选
         text_value = get_xpath_element(driver,checkbox_xpath,description = 'checkbox').get_attribute('value')
@@ -700,14 +700,14 @@ def two_list_has_one_same_element(driver,list1,list2):
     """
     public_assert(driver,list1[0] , list2[-1],action='两组数据没有重复的记录')
 
-def click_switch_ws_button(driver):
+def click_switch_ws_button(driver,sleep_time = 5):
     """
     点击切换workspace按钮
     :param driver:
     :return:
     """
     public_check_element(driver, '//span[@role="listbox"]//i', '点击切换workspace按钮失败')
-    time.sleep(4)
+    time.sleep(int(sleep_time))
 
 def user_switch_to_first_workspace(driver):
     """
@@ -717,7 +717,7 @@ def user_switch_to_first_workspace(driver):
     """
     # 点击切换WS按钮
     click_switch_ws_button(driver)
-    public_check_element(driver, '//div[@class="k-list-scroller"]//li[1]', '切换到第一个workspace失败')
+    public_click_element(driver, '//div[@class="k-list-scroller"]//li[1]', description = '切换到第一个workspace失败')
     time.sleep(2)
     # 关闭Disclaimer
     user_accept_disclaimer(driver)
@@ -1126,11 +1126,12 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     :return:
     """
     driver.refresh()
-    time.sleep(5)
+    time.sleep(20)
     if close_tutorial == 'close_tutorial':
         ele_list = get_xpath_elements(driver,close_tutorial_button)
         if len(ele_list) == 1:
             public_click_element(driver, close_tutorial_button,description = 'close_tutorial按钮')   # 刷新页面后关闭教程
+        # public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')  # 刷新页面后关闭教程
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
     """

@@ -135,7 +135,7 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
         element = get_xpath_element(driver1,'//div[@id="user-tabs-pane-2"]//input[@id="filter-text-box"]',description = 'personal标签页搜索框')
         element.clear()
         time.sleep(2)
-        public_click_element(driver1,'//div[@id="user-tabs-pane-2"]//input[@id="filter-text-box"]',description = 'personal标签页搜索框')
+        public_click_element(driver1,'//div[@id="user-tabs-pane-2"]//input[@id="filter-text-box"]',description = 'personal标签页搜索框进行点击')
         element.send_keys(who)
         time.sleep(3)
         for i in range(3):
