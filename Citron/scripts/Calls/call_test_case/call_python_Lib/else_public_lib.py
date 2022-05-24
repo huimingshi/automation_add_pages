@@ -1304,11 +1304,12 @@ if __name__ == '__main__':
     # User S belong to WS1 and WS2 log in
     # driver1 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com','*IK<8ik,8ik,')
     # # Contact of WS1 log in
-    driver2 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com','*IK<8ik,8ik,')
+    # driver0 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com','*IK<8ik,8ik,')
+    driver = driver_set_up_and_logIn('big_admin','asdQWE123')
     # # get modify picture absolute path
     # modify_picture_path = r'E:\automation_add_pages\automation_add_pages\Citron\publicData\modify_picture.jpg'
     # # Make sure the name and avator is in its original state
-    my_account_change_name_and_avator(driver2,'Huiming.shi.helplightning+99887766551','change',modify_picture_path,'back_to_contact')
+    # my_account_change_name_and_avator(driver2,'Huiming.shi.helplightning+99887766551','change',modify_picture_path,'back_to_contact')
     # time.sleep(100000)
     # driver = driver_set_up_and_logIn('Huiming.shi.helplightning+EU1@outlook.com', '*IK<8ik,8ik,',check_toturial='check_toturial')
     # ele_text = get_ele_text(driver,'//span[@class="k-link k-header"]')
@@ -1316,7 +1317,7 @@ if __name__ == '__main__':
     # Premium User log in
     # driver = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com','*IK<8ik,8ik,')
     # Premium User Send meeting room link
-    # invite_url =  send_meeting_room_link(driver,'MHS')
+    invite_url =  send_meeting_room_link(driver,'MHS')
     # # anonymous open meeting link with website
     # from Citron.scripts.Calls.call_test_case.call_python_Lib.call_public_lib import anonymous_open_meeting_link, user_anwser_call
     # driver1 = anonymous_open_meeting_link(invite_url)

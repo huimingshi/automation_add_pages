@@ -150,11 +150,11 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
     if answer == 'anwser':
         ele_list = get_xpath_elements(driver2,anwser_call_button)
         if len(ele_list) == 1:
-            public_click_element(driver2,anwser_call_button)
+            public_click_element(driver2,anwser_call_button,description='ANWSER_CALL按钮')
         else:
             ele_list = get_xpath_elements(driver2,anwser_call_button)
             if len(ele_list) == 1:
-                public_click_element(driver2,anwser_call_button)
+                public_click_element(driver2,anwser_call_button,description='ANWSER_CALL按钮')
             else:
                 screen_shot_func(driver1,'点击ANSWER按钮失败')
                 raise Exception('点击ANSWER按钮失败')

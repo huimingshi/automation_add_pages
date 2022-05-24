@@ -37,6 +37,11 @@ elif BROWSER_TYPE == 'Firefox':
     profile.set_preference('intl.accept_languages', 'en-US, en')
     profile.set_preference("permissions.default.microphone", 1)
     profile.set_preference("webdriver_accept_untrusted_certs", True)
+    profile.set_preference("browser.link.open_newwindow", 3)
+    profile.set_preference("browser.link.open_newwindow.restriction", 2)
+    profile.set_preference("browser.tabs.remote.autostart", False)
+    profile.set_preference("browser.tabs.remote.autostart.1", False)
+    profile.set_preference("browser.tabs.remote.autostart.2", False)
 # ----------------------------------------------------------------------------------------------------#
 # variable
 # test_web = 'https://app-stage.helplightning.net.cn/'
