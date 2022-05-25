@@ -56,7 +56,7 @@ Small_range_152
     enter_contacts_search_user    ${driver1}   ${Expert_User3_name}
     click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
     user_anwser_call    ${driver3}
-    sleep  10s
+    sleep  20s
     # VP:hints dialog is closed on screen of 3pc call
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
     # 结束call

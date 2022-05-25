@@ -128,6 +128,9 @@ ${an_team_user_password}                *IK<8ik,8ik,
 ${never_log_in_username}                Huiming.shi.helplightning+never_log_in@outlook.com                                      # an Expert user which never log in (belong to big_admin)
 ${never_log_in_name}                    Huiming.shi.helplightning+never_log_in
 
+${check_team_offline_username}          Huiming.shi.helplightning+check_team_offline@outlook.com                                # a team user (belong to big_admin)(has no personal user)
+${check_team_offline_name}              Huiming.shi.helplightning+check_team_offline                                            # 临时创建的user，不用于其他case
+
 ${a_team_user_username}                 Huiming.shi.helplightning+a_team_user@outlook.com                                       # a team user (belong to big_admin)(has no personal user)
 ${a_team_user_name}                     Huiming.shi.helplightning+a_team_user
 ${a_team_user_password}                 *IK<8ik,8ik,

@@ -331,13 +331,13 @@ User_A_opens_Directory_tab
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     user_switch_to_first_workspace   ${driver1}
     # team user logs in
-    ${driver2}  driver_set_up_and_logIn     ${a_team_user_username}   ${a_team_user_password}
+    ${driver2}  driver_set_up_and_logIn     ${check_team_offline_username}   ${a_team_user_password}
     # logout from citron
     logout_citron  ${driver2}
     # switch to directory page
     switch_to_diffrent_page   ${driver1}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}
     # search user in Directory page
-    different_page_search_single_users   ${driver1}   ${py_directory_page}    ${py_input_search}   ${py_get_number_of_rows}    ${a_team_user_name}
+    different_page_search_single_users   ${driver1}   ${py_directory_page}    ${py_input_search}   ${py_get_number_of_rows}    ${check_team_offline_name}
     # VP: User C displays with greyed out pattern, including the icon, all text (name, title, location), but not including the favorite star.
     judge_reachable_or_not   ${driver1}    ${py_get_number_of_rows}
     [Teardown]      run keywords     Close
@@ -425,13 +425,13 @@ User_B_logouts_from_one_device
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     user_switch_to_first_workspace   ${driver1}
     # Expert user B logs in
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
+    ${driver2}  driver_set_up_and_logIn     ${a_team_user_username}   ${big_admin_first_WS_password}
     # Expert user B logs in in another web
-    ${driver3}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
+    ${driver3}  driver_set_up_and_logIn     ${a_team_user_username}   ${big_admin_first_WS_password}
     # User B logouts from one device.
     logout_citron  ${driver2}
     # search user in Team page
-    different_page_search_single_users    ${driver1}    ${py_team_page}    ${py_team_user_search}    ${py_team_search_result}    ${big_admin_first_WS_name}
+    different_page_search_single_users    ${driver1}    ${py_team_page}    ${py_team_user_search}    ${py_team_search_result}    ${a_team_user_name}
     # VP: User B should keep active.
     judge_reachable_or_not  ${driver1}   ${py_team_search_result}    reachable
     [Teardown]      run keywords     Close

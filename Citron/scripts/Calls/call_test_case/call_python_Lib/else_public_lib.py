@@ -1,4 +1,6 @@
 #----------------------------------------------------------------------------------------------------#
+import time
+
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import *
 from public_settings_and_variable import *
@@ -29,6 +31,16 @@ def start_an_empty_window():
     driver.maximize_window()
     return driver
 
+@ERR_NAME_NOT_RESOLVED
+def open_citron_url(driver):
+    """
+    打开Citron网址
+    :param driver:
+    :return:
+    """
+    driver.get(TEST_WEB)
+
+@ERR_NAME_NOT_RESOLVED
 def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',close_bounced='close_bounced',accept = 'accept',disturb = 'not_set_disturb'):
     """
     封装页面的登录操作和关闭弹框操作
@@ -67,7 +79,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             screen_shot_func(driver, '登陆时输入password失败')
             raise Exception('password输入框还是未出现')
     # 校验是否进入到主页
-    for i in range(100):
+    for i in range(200):
         time.sleep(1)
         currentPageUrl = driver.current_url
         print("当前页面的url是：", currentPageUrl)
@@ -76,7 +88,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         ele_list_login = get_xpath_elements(driver, login_button)
         if len(ele_list_login) == 1:
             public_click_element(driver, login_button,description = 'LOGIN按钮')
-        elif i == 99:
+        elif i == 199:
             print('再次点击登录按钮未进入首页')
             screen_shot_func(driver, '再次登陆失败')
             raise Exception('再次点击登录按钮未进入首页')
@@ -123,7 +135,8 @@ def driver_set_up_and_logIn(username,password,check_toturial = 'no_check_toturia
     """
     driver = start_an_empty_window()
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
-    driver.get(TEST_WEB)
+    # driver.get(TEST_WEB)
+    open_citron_url(driver)
     logIn_citron(driver, username, password, check_toturial, close_bounced, accept, disturb)
     return driver
 
@@ -159,6 +172,9 @@ def do_not_disturb_become_available(driver):
     if len(ele_list) == 1:
         public_click_element(driver,make_available_button,description = '取消免受打扰按钮')
         ele_list = get_xpath_elements(driver,not_disturb)
+        if len(ele_list) != 1:
+            public_click_element(driver, make_available_button, description='再次取消免受打扰按钮')
+            ele_list = get_xpath_elements(driver, not_disturb)
         public_assert(driver,len(ele_list),1,condition='=',action='make_available按钮依然存在')
 
 def click_my_account(driver):
@@ -1133,7 +1149,7 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
             public_click_element(driver, close_tutorial_button,description = 'close_tutorial按钮')   # 刷新页面后关闭教程
         # public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')  # 刷新页面后关闭教程
 
-def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
+def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear',wait_time = IMPLICIT_WAIT):
     """
     # Disclaimer should be shown up or not
     :param driver:
@@ -1141,11 +1157,13 @@ def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear'):
     :return:
     """
     # try:
+    driver.implicitly_wait(int(wait_time))
     ele_list = get_xpath_elements(driver,"//button[contains(.,'ACCEPT')]")
     if appear == 'appear':
         public_assert(driver,len(ele_list) , 1,action='disclaimer是否出现与预期不符合')
     elif appear == 'not_appear':
         public_assert(driver, len(ele_list), 0, action='disclaimer是否出现与预期不符合')
+    driver.implicitly_wait(IMPLICIT_WAIT)
 
 def user_decline_or_accept_disclaimer(driver,accept_or_decline = 'decline'):
     """

@@ -5,7 +5,7 @@ import os
 import platform
 import time
 import traceback
-
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from Citron.public_switch.public_switch_py import BROWSER_TYPE, WEBDRIVERWAIT_TIMEOUT, POLL_FREQUENCY
@@ -184,6 +184,16 @@ def public_assert(driver,string1,string2,condition = '=',action=None):
     except AssertionError:
         screen_shot_func(driver,action)
         raise AssertionError
+
+def ERR_NAME_NOT_RESOLVED(func):
+    def inner(driver,*args,**kwargs):
+        try:
+            func(driver,*args,**kwargs)
+        except WebDriverException:
+            print('网页打开报错')
+            screen_shot_func(driver,'网页打开报错')
+            raise WebDriverException('网页打开报错')
+    return inner
 
 if __name__ == '__main__':
     print(get_picture_path())

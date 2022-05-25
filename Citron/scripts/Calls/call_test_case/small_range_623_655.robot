@@ -152,8 +152,8 @@ Small_range_630_631
     # expert B receives incoming call，expert B declines call
     user_decline_call   ${driver5}
     # VP: Expert B No disclaimer window since he has accepted it.
-    disclaimer_should_be_shown_up_or_not    ${driver5}    not_appear
-    exit_one_driver    ${driver5}
+    disclaimer_should_be_shown_up_or_not    ${driver5}    not_appear      2
+#    exit_one_driver    ${driver5}
     # VP: customer gets message "No Experts are currently available to take your call."
     which_page_is_currently_on    ${driver3}     ${no_experts_are_available}
     # Expert A 刷新Recents页面

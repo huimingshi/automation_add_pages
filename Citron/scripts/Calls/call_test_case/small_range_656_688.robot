@@ -100,14 +100,14 @@ Small_range_658
 Small_range_660
     [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
     [Tags]    small range 660 line      call_case
-    # Expert User1 登录（case中的caller）
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-    # Expert User2 登录（case中的Joiner）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    # Expert User1 登录（case中的caller），这个user属于big_admin
+    ${driver1}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_1@outlook.com     ${universal_password}
+    # Expert User2 登录（case中的Joiner），这个user属于big_admin
+    ${driver2}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_2@outlook.com     ${universal_password}
     # 获取meeting link
     ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
     # Joiner's App is killed
-    exit_one_driver    ${driver2}
+    logout_citron    ${driver2}
     # caller calls via meeting link
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
     # 确保建立call，但未接听

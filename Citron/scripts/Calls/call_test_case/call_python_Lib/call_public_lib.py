@@ -346,12 +346,11 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         ele_list = get_xpath_elements(driver,accept_disclaimer)
         if len(ele_list) == 1:
             public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
-            # time.sleep(10)
-            # driver.implicitly_wait(5)
-            # ele_list = get_xpath_elements(driver, accept_disclaimer)
-            # if len(ele_list) == 1:
-            #     public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
-            # driver.implicitly_wait(int(IMPLICIT_WAIT))
+            driver.implicitly_wait(5)
+            ele_list = get_xpath_elements(driver, accept_disclaimer)
+            if len(ele_list) == 1:
+                public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+            driver.implicitly_wait(int(IMPLICIT_WAIT))
     elif deal_with_disclaimer == 'decline':
         ele_list = get_xpath_elements(driver,decline_disclaimer)
         if len(ele_list) == 1:

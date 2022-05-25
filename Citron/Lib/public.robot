@@ -272,7 +272,7 @@ Login_new_added_register_personal
 refresh_web_page
     # 刷新页面
     Execute JavaScript    window.location.reload()
-    sleep   3s
+    sleep   10s
     ${ele_count}   get element count    ${button_of_popup}
     Run Keyword If   '${ele_count}'=='1'    click element     ${button_of_popup}    # 关闭导航弹窗
     sleep   1s

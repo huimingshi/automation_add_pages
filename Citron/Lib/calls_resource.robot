@@ -44,14 +44,14 @@ ${five_star_high_praise}                        //span[@class="star"]/div[contai
 ${end_call_before_anwser}                       //div[@id="connecting_progress_bar_container"]/button[text()="End"]                                 # 接通Call之前的主动End通话的按钮
 ${anwser_call_button}                           //button[contains(.,"ANSWER")]                                                                      # ANSWER call 按钮
 ${tutorial_page_xpaths}                         //div[@class="modal-body"]//div[@class="row"]                                                       # Tutorial页面上的xpath集合
-${no_experts_are_available}                     //div[text()="No Experts are currently available to take your call."]                               # No Experts are currently available to take your call.提示信息
+${no_experts_are_available}                     //div[@class="EndCallPage"]//div[text()="No Experts are currently available to take your call."]    # No Experts are currently available to take your call.提示信息
 ${contacts_page_send_email}                     //button[text()="Send My Help Space Invitation"]                                                    # Send My Help Space Invitation
 ${recents_page_tag}                             //div[@class="Recents"]                                                                             # Recents页面的标志
 ${did_not_answer_your_call}                     //div[contains(.,"didn't answer your call.")]                                                       # didn't answer your call.
 ${declined_your_call}                           //div[contains(.,"declined your call.")]                                                            # declined your call
 ${your_call_was_declined}                       //div[contains(.,"Your call was declined.")]                                                        # Your call was declined.
 ${user_is_currently_on_another_call}            //div[contains(.,"User is currently on another call.")]                                             # User is currently on another call
-${that_user_is_unreachable}                     //div[contains(.,"That user is unreachable.")]                                                      # That user is unreachable
+${that_user_is_unreachable}                     //div[@class="EndCallPageContent"]//div[contains(.,"That user is unreachable.")]                    # That user is unreachable
 ${this_call_is_over}                            //div[contains(.,"This call is over. Please contact the host to invite you to another call.")]      # This call is over
 ${pleas_do_not_disturb}                         //div[contains(.,"Please Do not disturb")]                                                          # User设置请勿打扰后，call这个user的话会出现这个提示信息：Please Do not disturb
 ${contact_title_xpath}                          //div[@class="contact-title" and @title="请勿动该账号，自动化测试专用账号"]                               # 显示title
