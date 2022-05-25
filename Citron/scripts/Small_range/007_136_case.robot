@@ -317,7 +317,7 @@ User_A_taps_unreachable_user_B_from_team_contacts_tab
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
     # seacrh user B in team page
-    team_page_search   ${big_admin_first_WS_username}   1
+    team_page_search   ${never_log_in_username}   1
     # click Call button
     team_click_call_button
     # 点击Send Invite按钮
@@ -338,8 +338,8 @@ User_A_taps_unreachable_user_B_from_personal_contacts_tab
     Login_new_added_user    ${switch_workspace_username}
     # 进入personal页面
     enter_personal_contact_page
-    # seacrh user B in personal page
-    personal_page_search   ${other_site_user_2_username}   1
+    # seacrh user B in personal page，这个用户属于Huiming.shi
+    personal_page_search   Huiming.shi.helplightning+never_login_personal   1
     # click Call button
     personal_click_call_button
     # 点击Send Invite按钮
@@ -361,7 +361,7 @@ User_A_taps_unreachable_user_B_from_directory_tab
     # 进入 directory 页面
     enter_directory_page
     # seacrh user B in directory page
-    page_search   ${big_admin_first_WS_name}   1
+    page_search   ${never_log_in_name}   1
     # click Call button
     page_click_call_button
     # 点击Send Invite按钮
@@ -381,33 +381,17 @@ User_A_taps_unreachable_user_B_from_favorites_tab
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
     # seacrh user B in team page
-    team_page_search   ${big_admin_first_WS_username}   1
+    team_page_search   ${never_log_in_username}   1
     # 添加user到favorites
     add_to_favorite_from_all_page
     # 进入到Favorites页面
     enter_favorites_page
     # seacrh user B in Favorites page
-    page_search   ${big_admin_first_WS_username}   1
+    page_search   ${never_log_in_username}   1
     # click Call button
     page_click_call_button
     # 点击Send Invite按钮
     click_send_invite_button    send_invite
-    sleep  25s
-    # 检查邮箱
-    ${email_link_2}  get_send_invite_email
-    [Teardown]    Close
-
-Click_Cancel
-    [Documentation]    Click Cancel.
-    [Tags]    small range  129  line
-    # log in citron with site admin
-    Login_new_added_user    ${switch_workspace_username}
-    # 进入到Recents页面
-    enter_recents_page
-    # click Call button
-    page_click_call_button
-    # 点击Send Invite按钮
-    click_send_invite_button    cancel
     sleep  25s
     # 检查邮箱
     ${email_link_2}  get_send_invite_email

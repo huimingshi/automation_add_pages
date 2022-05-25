@@ -163,7 +163,7 @@ add_normal_user_choose_team_license
     # Enter groups
     click element  ${groups_input}
     sleep  1s
-    click element    xpath=//div[@unselectable="on"]//span[text()="auto_default_group"]
+    click element    xpath=//div[@unselectable="on"]//span[text()="default"]
     sleep  0.5s
     click element   ${button_ADD}
     sleep  1s

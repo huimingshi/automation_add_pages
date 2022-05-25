@@ -464,7 +464,7 @@ unable_to_reach_user_message_displays
 
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.
-    [Tags]     small range 122+123+127+130 line        call_case
+    [Tags]     small range 122+123+127+129+130 line        call_case
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
     user_switch_to_first_workspace   ${driver1}
@@ -474,15 +474,17 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     make_calls_with_who   ${driver1}    ${driver2}    ${for_expert_call_username}
     # 结束通话
     exit_call     ${driver1}
+    # 关闭通话结束展示页面并退出
+    close_call_ending_page      ${driver2}
+    logout_citron   ${driver2}
     # 关闭通话结束展示页面
     close_call_ending_page      ${driver1}
-    close_call_ending_page      ${driver2}
-    # User B logout
-    logout_citron   ${driver2}
     # 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     refresh_browser_page   ${driver1}
+    # Click Cancel.	Nothing happens.     129 line
+    can_connect_call_or_not    ${driver1}   ${for_expert_call_name}   can_not_connect   click_cancel
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
     can_connect_call_or_not    ${driver1}   ${for_expert_call_name}
     # 从邮箱获取刚发送的OTU邮件

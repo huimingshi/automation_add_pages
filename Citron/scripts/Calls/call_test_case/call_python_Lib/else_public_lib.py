@@ -1027,6 +1027,8 @@ def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',sen
         public_assert(driver,len(ele_list) , 1,action='应该可以打通但没打通')
     if send_invite == 'send_invite':
         public_check_element(driver, send_invite_button, '点击Send_Invite按钮失败')
+    elif send_invite == 'click_cancel':
+        public_click_element(driver, '//div[@class="modal-content"]//button[text()="Cancel"]', description='点击Send_Invite按钮失败')
 
 def anonymous_user_call_can_not_call_again(driver):
     """
