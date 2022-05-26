@@ -45,6 +45,7 @@ ${end_call_before_anwser}                       //div[@id="connecting_progress_b
 ${anwser_call_button}                           //button[contains(.,"ANSWER")]                                                                      # ANSWER call 按钮
 ${tutorial_page_xpaths}                         //div[@class="modal-body"]//div[@class="row"]                                                       # Tutorial页面上的xpath集合
 ${no_experts_are_available}                     //div[@class="EndCallPage"]//div[text()="No Experts are currently available to take your call."]    # No Experts are currently available to take your call.提示信息
+${no_experts_are_available_tips}                //div[@class="AlertContainer"]//div[text()="No Experts are currently available to take your call."]
 ${contacts_page_send_email}                     //button[text()="Send My Help Space Invitation"]                                                    # Send My Help Space Invitation
 ${recents_page_tag}                             //div[@class="Recents"]                                                                             # Recents页面的标志
 ${did_not_answer_your_call}                     //div[contains(.,"didn't answer your call.")]                                                       # didn't answer your call.

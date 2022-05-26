@@ -236,7 +236,7 @@ Join_call_168_178
     click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
     # All experts in on-call group 2 declines call.   Display message “No experts are available to take your call”.
     user_decline_call    ${driver6}
-    which_page_is_currently_on    ${driver1}    ${no_experts_are_available}
+    which_page_is_currently_on    ${driver1}    ${no_experts_are_available_tips}
     # TU2 invites on-call group 2
     enter_contacts_search_user     ${driver1}    ${On_call_group_002}
     click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
