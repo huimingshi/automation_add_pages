@@ -5,7 +5,7 @@
 # small range的call类型的case需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
 SMALL_RANGE_BROWSER_TYPE = 'Chrome'
 
-# citron的call类型的case需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
+# citron的除去call的需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
 CITRON_BROWSER_TYPE = 'Firefox'
 
 # 浏览器设置的文件默认下载路径
