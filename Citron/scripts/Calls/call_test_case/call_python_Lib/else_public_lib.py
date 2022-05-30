@@ -23,9 +23,9 @@ def start_an_empty_window():
     启动一个空的窗口
     :return:
     """
-    if BROWSER_TYPE == 'Chrome':
+    if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
         driver = webdriver.Chrome(options=option)
-    elif BROWSER_TYPE == 'Firefox':
+    elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
         driver = webdriver.Firefox(options=option,firefox_profile=profile)
     driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.maximize_window()

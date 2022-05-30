@@ -2,8 +2,11 @@
 # @Time     :5/6/2022 2:57 PM
 # @Author   :Huiming Shi
 
-# 需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
-BROWSER_TYPE = 'Chrome'
+# small range的call类型的case需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
+SMALL_RANGE_BROWSER_TYPE = 'Chrome'
+
+# citron的call类型的case需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
+CITRON_BROWSER_TYPE = 'Firefox'
 
 # 浏览器设置的文件默认下载路径
 DOWNLOAD_PATH = r'C:\Users\ts\Downloads'

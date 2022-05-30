@@ -297,9 +297,9 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     user_accept_disclaimer(driver3)
     # Anwser cross enterprise call request
     public_check_element(driver1, external_join_call_anwser_button, '接受cross_enterprise的call失败')
-    if BROWSER_TYPE == 'Chrome':
+    if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
         driver4 = webdriver.Chrome(options=option)
-    elif BROWSER_TYPE == 'Firefox':
+    elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
         driver4 = webdriver.Firefox(options=option,firefox_profile=profile)
     driver4.implicitly_wait(int(6))
     driver4.get(invite_url)
@@ -334,9 +334,9 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         print('获取meeting link失败')
         return '获取meeting link失败'
     # try: # 启动driver打开meeting link
-    if BROWSER_TYPE == 'Chrome':
+    if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
         driver = webdriver.Chrome(options=option)
-    elif BROWSER_TYPE == 'Firefox':
+    elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
         driver = webdriver.Firefox(options=option,firefox_profile=profile)
     driver.implicitly_wait(int(6))
     driver.get(meeting_link)

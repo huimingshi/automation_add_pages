@@ -3,9 +3,9 @@ import time
 import platform
 from selenium import webdriver
 from Citron.public_switch.pubLib import *
-from Citron.public_switch.public_switch_py import BROWSER_TYPE, IMPLICIT_WAIT
+from Citron.public_switch.public_switch_py import CITRON_BROWSER_TYPE, IMPLICIT_WAIT
 
-if BROWSER_TYPE == 'Chrome':
+if CITRON_BROWSER_TYPE == 'Chrome':
     from selenium.webdriver.chrome.options import Options
     option = Options()
     option.add_argument("--disable-infobars")
@@ -17,7 +17,7 @@ if BROWSER_TYPE == 'Chrome':
         "profile.default_content_setting_values.notifications": 1,
         "profile.default_content_setting_values.media_stream_mic": 1
     })
-elif BROWSER_TYPE == 'Firefox':
+elif CITRON_BROWSER_TYPE == 'Firefox':
     from selenium.webdriver.firefox.options import Options
     option = Options()
     option.add_argument("--disable-infobars")
@@ -70,9 +70,9 @@ def test_filter_set_up():
     # Browser Front-loading
     :return:
     """
-    if BROWSER_TYPE == 'Chrome':
+    if CITRON_BROWSER_TYPE == 'Chrome':
         driver = webdriver.Chrome()
-    elif BROWSER_TYPE == 'Firefox':
+    elif CITRON_BROWSER_TYPE == 'Firefox':
         driver = webdriver.Firefox()
     driver.implicitly_wait(IMPLICIT_WAIT)
     driver.get(test_web)
@@ -88,9 +88,9 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     :param accept: 是否接受免责声明，默认accept接受
     :return:
     """
-    if BROWSER_TYPE == 'Chrome':
+    if CITRON_BROWSER_TYPE == 'Chrome':
         driver = webdriver.Chrome(options=option)
-    elif BROWSER_TYPE == 'Firefox':
+    elif CITRON_BROWSER_TYPE == 'Firefox':
         driver = webdriver.Firefox(options=option,firefox_profile=profile)
     driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.get(test_web)
@@ -138,14 +138,13 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
-            # try:
             public_click_element(driver,accept_disclaimer,description = 'accept_disclaimer')
-            time.sleep(2)
-            driver.implicitly_wait(int(2))
-            count = get_xpath_elements(driver,accept_disclaimer)
-            if len(count) == 1:  # close Disclaimer
-                # try:
-                public_click_element(driver,accept_disclaimer,description = 'accept_disclaimer')
+            # time.sleep(2)
+            # driver.implicitly_wait(int(2))
+            # count = get_xpath_elements(driver,accept_disclaimer)
+            # if len(count) == 1:  # close Disclaimer
+            #     # try:
+            #     public_click_element(driver,accept_disclaimer,description = 'accept_disclaimer')
     driver.implicitly_wait(int(8))
     # close Tutorial
     if close_bounced == 'close_bounced':
@@ -252,7 +251,7 @@ def select_one_of_value(driver):
     system_type = get_system_type()
     if system_type == 'Windows':
         time.sleep(5)
-        if BROWSER_TYPE == 'Chrome':
+        if CITRON_BROWSER_TYPE == 'Chrome':
             get_xpath_element(driver,occurred_input,description = '日历时间输入框').send_keys('11/12/2021')
             time.sleep(5)
             for i in range(10):

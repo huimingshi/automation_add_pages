@@ -1,8 +1,8 @@
 #----------------------------------------------------------------------------------------------------#
 # Chrome set up
 from selenium import webdriver
-from Citron.public_switch.public_switch_py import BROWSER_TYPE
-if BROWSER_TYPE == 'Chrome':
+from Citron.public_switch.public_switch_py import SMALL_RANGE_BROWSER_TYPE
+if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
     from selenium.webdriver.chrome.options import Options
     option = Options()
     option.add_argument("--disable-infobars")
@@ -18,7 +18,7 @@ if BROWSER_TYPE == 'Chrome':
     # 忽略证书错误，不需要手动点高级选项
     option.add_argument('--ignore-certificate-errors')
 
-elif BROWSER_TYPE == 'Firefox':
+elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
     from selenium.webdriver.firefox.options import Options
 
     option = Options()

@@ -3,9 +3,9 @@
 import time
 from selenium import webdriver
 from Citron.public_switch.pubLib import *
-from Citron.public_switch.public_switch_py import BROWSER_TYPE, IMPLICIT_WAIT
+from Citron.public_switch.public_switch_py import SMALL_RANGE_BROWSER_TYPE, IMPLICIT_WAIT
 
-if BROWSER_TYPE == 'Chrome':
+if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
     from selenium.webdriver.chrome.options import Options
     option = Options()
     option.add_argument("--disable-infobars")
@@ -21,7 +21,7 @@ if BROWSER_TYPE == 'Chrome':
     # 忽略证书错误，不需要手动点高级选项
     option.add_argument('--ignore-certificate-errors')
 
-elif BROWSER_TYPE == 'Firefox':
+elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
     from selenium.webdriver.firefox.options import Options
     option = Options()
     option.add_argument("--disable-infobars")
@@ -68,9 +68,9 @@ def driver_set_up_and_logIn(username,close_bounced='close_bounced',accept = 'acc
     :param driver:
     :return:
     """
-    if BROWSER_TYPE == 'Chrome':
+    if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
         driver = webdriver.Chrome(options=option)
-    elif BROWSER_TYPE == 'Firefox':
+    elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
         driver = webdriver.Firefox(options=option,firefox_profile=profile)
     driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.get(test_web)
