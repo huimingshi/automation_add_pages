@@ -255,9 +255,15 @@ def select_one_of_value(driver):
         if BROWSER_TYPE == 'Chrome':
             get_xpath_element(driver,occurred_input,description = '日历时间输入框').send_keys('11/12/2021')
             time.sleep(5)
-            count = get_xpath_elements(driver,list_data_count)
-            print(len(count))
-            public_assert(driver,len(count) , 4,action='数据不是4个')
+            for i in range(10):
+                count = get_xpath_elements(driver,list_data_count)
+                print(len(count))
+                if len(count) == 4:
+                    break
+                elif i == 9:
+                    public_assert(driver,len(count) , 4,action='数据不是4个')
+                else:
+                    time.sleep(1)
 
 def make_sure_TaC_status_correct(driver,status):
     """
@@ -287,26 +293,8 @@ def click_call_tag_link_to_filter_call(driver):
     :param driver:
     :return:
     """
-    # try:
     public_click_element(driver,'//div[@class="ag-header-row"]/div[8]//button[@ref="eButtonShowMainFilter"]',description = 'tag选择器')
-        # driver.find_element_by_xpath('//div[@class="ag-header-row"]/div[8]//button[@ref="eButtonShowMainFilter"]').click()
-    # except Exception as e:
-    #     print('点击tag筛选失败', e)
-    #     screen_shot_func(driver, '点击tag筛选失败')
-    #     raise Exception
-    # else:
-    #     print('点击tag筛选成功')
-    # try:
-    public_click_element(driver,filterText,description = 'tag输入框')
-    # driver.find_element_by_xpath(filterText).click()
     get_xpath_element(driver,filterText,description = 'tag输入框').send_keys('11 tag')
-        # driver.find_element_by_xpath(filterText).send_keys('11 tag')
-    # except Exception as e:
-    #     print('根据tag筛选失败',e)
-    #     screen_shot_func(driver, '根据tag筛选失败')
-    #     raise Exception
-    # else:
-    #     print('根据tag筛选成功')
     time.sleep(5)
 
 def check_filter_by_tag(driver):
@@ -318,13 +306,7 @@ def check_filter_by_tag(driver):
     """
     result_flag = 1
     for i in range(10):
-        # try:
         get_text = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="tags"]',description = 'tag值').get_attribute("textContent")
-            # get_text = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@col-id="tags"]').get_attribute("textContent")
-        # except Exception as e:
-        #     print('预期tag与实际不符',e)
-        #     screen_shot_func(driver,'预期tag与实际不符')
-        #     raise Exception
         print(get_text)
         if '11 tag' not in get_text:
             result_flag = 0
