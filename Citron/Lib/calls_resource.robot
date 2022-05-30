@@ -395,6 +395,7 @@ add_tag_and_comments
     ${get_tag}   get text   xpath=//div[@class="ag-center-cols-container"]//div[@row-index="0"]/div[@col-id="tags"]
     should be equal as strings   ${first_tag}  ${get_tag}
     # click Details button for the first record
+    wait until element is not visible    ${prompt_information}
     click_first_line_details
     # Check whether the comment is added successfully
     ${get_comment}  get text  xpath=//div[@class="Comments"]/div[1]//div[@class="comment-text row"]
@@ -402,7 +403,7 @@ add_tag_and_comments
 
 update_tags
     # Gets the text of the first tag
-    ${first_tag}   get text     xpath=//ul[@role="listbox"]/li/span
+    ${first_tag}   get text     xpath=//ul[@role="listbox"]/li/a/span
     # update tag
     click element   xpath=//span[@class="k-searchbar"]/input
     sleep  1s
