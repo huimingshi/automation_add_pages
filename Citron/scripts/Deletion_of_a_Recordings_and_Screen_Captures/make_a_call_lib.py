@@ -2,7 +2,7 @@
 # set up
 import time
 from selenium import webdriver
-from Citron.public_switch.pubLib import get_system_type, kill_all_browser, get_xpath_element, get_xpath_elements
+from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import BROWSER_TYPE, IMPLICIT_WAIT
 
 if BROWSER_TYPE == 'Chrome':
@@ -53,6 +53,11 @@ tip_close = '//span[@class="close-button" and contains(.,"Close")]'
 add_comment = '//textarea[@placeholder="Add a comment..."]'
 accept_disclaimer = '//button[contains(.,"ACCEPT")]'
 close_tutorial_button = '//div[@class="modal-header"]//button[@class="close"]'
+click_call_button = '//button[@class="k-button callButton"]'
+anwser_call_button = '//button[@class="k-button success-btn big-btn"]'
+end_call_button = "//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']"    # 结束Call的红色按钮
+visibility_finishi_call = '//span[@style="visibility: visible;"]'    # 校验可以挂断电话的按钮是否出现
+exit_call_yes = '//button[@class="promptButton submenu-seperator"]'   # 结束通话的Yes按钮
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -70,95 +75,55 @@ def driver_set_up_and_logIn(username,close_bounced='close_bounced',accept = 'acc
     driver.implicitly_wait(int(IMPLICIT_WAIT))
     driver.get(test_web)
     driver.maximize_window()
-    try:    # enter email
-        get_xpath_element(driver,username_input).click()
-        get_xpath_element(driver,username_input).send_keys(username)
-        username_value = get_xpath_element(driver,username_input).get_attribute('value')
-        if username_value == username:
-            time.sleep(1)
-            get_xpath_element(driver,next_button).click()
-    except Exception as e:
-        print('登陆时输入email失败',e)
-        screen_shot_func(driver, '登陆时输入email失败')
-        raise Exception
-    else:
-        print('登陆时输入email成功')
+    # enter email
+    public_click_element(driver,username_input,description='username输入框')
+    get_xpath_element(driver,username_input,description='username输入框').send_keys(username)
+    username_value = get_xpath_element(driver,username_input,description='用户名输入框').get_attribute('value')
+    if username_value == username:
+        time.sleep(1)
+        public_check_element(driver,next_button,description='NEXT按钮')
     # 输入密码
     driver.implicitly_wait(0.1)
-    try:
-        for i in range(100):
+    for i in range(100):
+        time.sleep(1)
+        ele_list = get_xpath_elements(driver, '//input[@style="display: block;"]')
+        ele_list_next = get_xpath_elements(driver, next_button)
+        if len(ele_list) == 1:
+            get_xpath_element(driver, password_input,description='密码输入框').send_keys(password)
+            public_click_element(driver, login_button,description='LOGIN按钮')
             time.sleep(1)
-            ele_list = get_xpath_elements(driver, '//input[@style="display: block;"]')
-            ele_list_next = get_xpath_elements(driver, next_button)
-            if len(ele_list) == 1:
-                get_xpath_element(driver, password_input).send_keys(password)
-                get_xpath_element(driver, login_button).click()
-                time.sleep(1)
-                break
-            elif len(ele_list_next) == 1:
-                get_xpath_element(driver, next_button).click()
-            elif i == 99:
-                print('password输入框还是未出现')
-                raise Exception
-    except Exception:
-        print('登陆时输入password失败')
-        screen_shot_func(driver, '登陆时输入password失败')
-        raise Exception
-    else:
-        print('登陆时输入password成功')
+            break
+        elif len(ele_list_next) == 1:
+            public_click_element(driver, next_button,description='NEXT按钮')
+        elif i == 99:
+            print('password输入框还是未出现')
+            screen_shot_func(driver, '登陆时输入password失败')
+            raise Exception('password输入框还是未出现')
     # 校验是否进入到主页
-    try:
-        for i in range(100):
-            time.sleep(1)
-            currentPageUrl = driver.current_url
-            print("当前页面的url是：", currentPageUrl)
-            if currentPageUrl == test_web:
-                break
-            ele_list_login = get_xpath_elements(driver, login_button)
-            if len(ele_list_login) == 1:
-                get_xpath_element(driver, login_button).click()
-            elif i == 99:
-                print('再次点击登录按钮未进入首页')
-                raise Exception
-    except Exception:
-        screen_shot_func(driver, '再次登陆失败')
-        raise Exception
-    else:
-        print('进入首页')
+    for i in range(200):
+        time.sleep(1)
+        currentPageUrl = driver.current_url
+        print("当前页面的url是：", currentPageUrl)
+        if currentPageUrl == test_web:
+            break
+        ele_list_login = get_xpath_elements(driver, login_button)
+        if len(ele_list_login) == 1:
+            public_click_element(driver, login_button,description='LOGIN按钮')
+        elif i == 199:
+            print('再次点击登录按钮未进入首页')
+            raise Exception
     driver.implicitly_wait(15)
+    # close Disclaimer
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
-            try:
-                get_xpath_element(driver,accept_disclaimer).click()
-                time.sleep(2)
-                driver.implicitly_wait(int(2))
-                count = get_xpath_elements(driver,accept_disclaimer)
-                if len(count) == 1:  # close Disclaimer
-                    try:
-                        get_xpath_element(driver,accept_disclaimer).click()
-                    except Exception as e:
-                        print('登陆成功后再次接受免责声明失败', e)
-                        screen_shot_func(driver, '登录成功后再次接受免责声明失败')
-                        raise Exception
-                    else:
-                        print('登陆成功后再次接受免责声明成功')
-            except Exception as e:
-                print('登陆成功后接受免责声明失败', e)
-                screen_shot_func(driver, '登录后接受免责声明失败')
-                raise Exception
-            else:
-                print('登陆成功后接受免责声明成功')
+            public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
     driver.implicitly_wait(int(8))
+    # close Tutorial
     if close_bounced == 'close_bounced':
-        try:  # close Tutorial
-            get_xpath_element(driver,close_tutorial_button).click()
-        except Exception as e:
-            print('登陆成功后关闭教程失败', e)
-            screen_shot_func(driver, '登录成功后关闭教程失败')
-            raise Exception
-        else:
-            print('登陆成功后关闭教程成功')
+        ele_list = get_xpath_elements(driver, close_tutorial_button)
+        if len(ele_list) == 1:
+            public_click_element(driver, close_tutorial_button, description='关闭tutorial按钮')
     driver.implicitly_wait(int(15))
     return driver
 
@@ -170,70 +135,67 @@ def make_calls_with_who(driver1, driver2, who, call_time):
     :param call_time:
     :return:
     """
-    # make calls with who
-    try:
-        get_xpath_element(driver1,search_input).click()
-        # driver1.find_element_by_id(search_input).click()
-        get_xpath_element(driver1,search_input).send_keys(who)
-        # driver1.find_element_by_id(search_input).send_keys(who)
-    except Exception as e:
-        print('查询用户失败',e)
-        screen_shot_func(driver1, '查询用户失败')
-        raise Exception
-    time.sleep(3)
-    try:
-        get_xpath_element(driver1,'//button[@class="k-button callButton"]').click()
-        # driver1.find_element_by_xpath('//button[@class="k-button callButton"]').click()
-    except Exception as e:
-        print('点击call失败',e)
-        screen_shot_func(driver1, '点击call失败')
-        raise Exception
-    else:
-        print('点击call成功')
+    element = get_xpath_element(driver1, search_input,description = '搜索框')
+    element.clear()
+    time.sleep(2)
+    public_click_element(driver1, search_input,description = '搜索框')
+    element.send_keys(who)
     time.sleep(5)
-    # anwser calls
-    try:
-        get_xpath_element(driver2,'//button[contains(.,"ANSWER")]').click()
-        # driver2.find_element_by_xpath('//button[contains(.,"ANSWER")]').click()
-    except Exception as e:
-        print('点击ANWSER按钮失败',e)
-        screen_shot_func(driver2, '点击ANWSER按钮失败')
-        raise Exception
+    user_name = who.split('@')[0]
+    ele_ment = get_xpath_elements(driver1,f'//div[@class="card"]/div[text()="{user_name}"]')
+    print('0000000000000000000000000000000000',len(ele_ment))
+    if len(ele_ment) < 1:
+        refresh_browser_page(driver1)
+        element = get_xpath_element(driver1,search_input,description = '搜索框')
+        public_click_element(driver1,search_input,description = '搜索框')
+        element.send_keys(who)
+        time.sleep(5)
+    public_check_element(driver1, f'//div[@class="card"]/div[text()="{user_name}"]', f'{user_name}未加载出',if_click = None,if_show = 1)
+    public_check_element(driver1, click_call_button, '点击Call按钮失败')
+    # user anwser calls
+    ele_list = get_xpath_elements(driver2,anwser_call_button)
+    if len(ele_list) == 1:
+        public_click_element(driver2,anwser_call_button,description='ANWSER_CALL按钮')
+    else:
+        ele_list = get_xpath_elements(driver2,anwser_call_button)
+        if len(ele_list) == 1:
+            public_click_element(driver2,anwser_call_button,description='ANWSER_CALL按钮')
+        else:
+            screen_shot_func(driver1,'点击ANSWER按钮失败')
+            raise Exception('点击ANSWER按钮失败')
     # call on hold
     time.sleep(int(call_time))
     # screenshots
-    try:
-        get_xpath_element(driver1,'//div[@class="menu roleMenu"]/div[@class="menu withsub  "]').click()
-        # driver1.find_element_by_xpath('//div[@class="menu roleMenu"]/div[@class="menu withsub  "]').click()
-        get_xpath_element(driver1,'//div[@class="submenu-container"]').click()
-        # driver1.find_element_by_xpath('//div[@class="submenu-container"]').click()
-        for i in range(4):
-            get_xpath_element(driver1,'//input[@class="capture_button"]').click()
-            # driver1.find_element_by_xpath('//input[@class="capture_button"]').click()
-            time.sleep(3)
-    except Exception as e:
-        print('截图4次失败', e)
-        screen_shot_func(driver1, '截图4次失败')
-        raise Exception
-    else:
-        print('截图4次成功')
+    public_click_element(driver1,'//div[@class="menu roleMenu"]/div[@class="menu withsub  "]',description='截图前的第一个按钮')
+    public_click_element(driver1,'//div[@class="submenu-container"]',description='截图前的第二个按钮')
+    for i in range(4):
+        public_click_element(driver1,'//input[@class="capture_button"]',description='截图按钮')
+        time.sleep(3)
     # quit call
-    try:
-        get_xpath_element(driver1,"//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']").click()
-        # driver1.find_element_by_xpath("//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']").click()
-    except Exception as e:
-        print('驱动1尝试点击挂断按钮失败', e)
-        screen_shot_func(driver1, '点击挂断按钮失败失败')
-        raise Exception
-    else:
-        print('驱动1尝试点击挂断按钮成功')
-    try:
-        get_xpath_element(driver1,'//button[@class="promptButton submenu-seperator" and contains(.,"Yes")]').click()
-        # driver1.find_element_by_xpath('//button[@class="promptButton submenu-seperator" and contains(.,"Yes")]').click()
-    except Exception as e:
-        print('点击Yes按钮失败',e)
-        screen_shot_func(driver1, '点击yes按钮失败')
-        raise Exception
+    for i in range(5):
+        hang_up_the_phone(driver1)  # 点击红色的挂断电话按钮
+        ele_list = get_xpath_elements(driver1, visibility_finishi_call)
+        ele_list_yes = get_xpath_elements(driver1, exit_call_yes)
+        if len(ele_list_yes) == 1 and len(ele_list) == 1:
+            public_click_element(driver1, exit_call_yes, description='Yes按钮')
+            # ele_list_yes[0].click()    # 可能会报错Message: stale element reference: element is not attached to the page document，参考：https://blog.csdn.net/zhangvalue/article/details/102921631
+            break
+        elif i == 4:
+            print('找不到Yes按钮')
+            screen_shot_func(driver1, '找不到Yes按钮')
+            raise Exception('找不到Yes按钮')
+        else:
+            time.sleep(5)
+            hang_up_the_phone(driver1)  # 点击红色的挂断电话按钮
+            time.sleep(5)
+
+def hang_up_the_phone(driver):
+    """
+    点击红色的挂断电话按钮
+    :param driver:
+    :return:
+    """
+    public_check_element(driver, end_call_button, '找不到挂断按钮')
 
 def exit_drivers(*args):
     """
@@ -244,13 +206,19 @@ def exit_drivers(*args):
     """
     kill_all_browser()
 
-def screen_shot_func(driver,screen_name):
-    current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
-    sys_type = get_system_type()
-    if sys_type == 'Windows':
-        driver.save_screenshot('.\\' + current_time + screen_name + 'screenshot.png')
-    else:
-        driver.save_screenshot('./' + current_time + screen_name + 'screenshot.png')
+def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
+    """
+    刷新浏览器的某个页面
+    :param driver:
+    :param close_tutorial: 是否关闭导航页面；默认关闭
+    :return:
+    """
+    driver.refresh()
+    time.sleep(20)
+    if close_tutorial == 'close_tutorial':
+        ele_list = get_xpath_elements(driver,close_tutorial_button)
+        if len(ele_list) == 1:
+            public_click_element(driver, close_tutorial_button,description = 'close_tutorial按钮')   # 刷新页面后关闭教程
 
 #----------------------------------------------------------------------------------------------------#
 if __name__ == '__main__':

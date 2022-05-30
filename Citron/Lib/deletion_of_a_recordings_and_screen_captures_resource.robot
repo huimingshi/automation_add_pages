@@ -13,7 +13,7 @@ Library           python_Lib/ui_keywords.py
 # user for call
 ${site_admin_email}                             huiming.shi@helplightning.com
 ${normal_usernameA_for_calls}                   Huiming.shi.helplightning+123456789
-${call_time}                                    10
+${call_time}                                    20
 
 
 *** Keywords ***

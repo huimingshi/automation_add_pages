@@ -10,7 +10,7 @@ Library           call_python_Lib/else_public_lib.py
 *** Test Cases ***
 Favorite_tap_group_name_to_start_expert_call
     [Documentation]    tap group name to start expert call in Favorite
-    [Tags]    citron  35 line
+    [Tags]    citron  35 line     call_case
     [Setup]     run keywords    Login_new_added_user   ${call_oncall_user_username}    # 登录
     ...         AND             add_to_favorite        on-call group 1  # 保证on-call group已添加favorite
     ...         AND             Close                  # 关闭driver
@@ -28,7 +28,7 @@ Favorite_tap_group_name_to_start_expert_call
 
 Send_meeting_room_link_By_Premium_User
     [Documentation]    Send meeting room link By Premium User
-    [Tags]    citron 25 line
+    [Tags]    citron 25 line     call_case
     # Premium User log in
     ${driver}  driver_set_up_and_logIn  ${crunch_site_username}   ${crunch_site_password}
     # Premium User Send meeting room link
@@ -37,13 +37,13 @@ Send_meeting_room_link_By_Premium_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser call
     user_anwser_call   ${driver}
-    exit_call     ${driver}
+    exit_call     ${driver1}
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver  ${driver}   ${driver1}
 
 Send_meeting_room_link_By_Enterprise_User
     [Documentation]    Send meeting room link By Enterprise User
-    [Tags]    citron 26 line
+    [Tags]    citron 26 line     call_case
     # Enterprise User log in
     ${driver}  driver_set_up_and_logIn  ${enterprise_username}   ${enterprise_password}
     # Enterprise User Send meeting room link
@@ -58,7 +58,7 @@ Send_meeting_room_link_By_Enterprise_User
 
 Send_one_time_meeting_room_link_By_Premium_User
     [Documentation]    Send  one-time meeting room link By Premium User
-    [Tags]    citron 27 line
+    [Tags]    citron 27 line     call_case
     # Premium User log in
     ${driver}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
     # Premium User Send meeting room link
@@ -73,7 +73,7 @@ Send_one_time_meeting_room_link_By_Premium_User
 
 Send_one_time_meeting_room_link_By_Enterprise_User
     [Documentation]    Send  one-time meeting room link By Enterprise User
-    [Tags]    citron 28 line
+    [Tags]    citron 28 line     call_case
     # Enterprise User log in
     ${driver}  driver_set_up_and_logIn  ${enterprise_username}   ${enterprise_password}
     # Enterprise User Send meeting room link
@@ -88,7 +88,7 @@ Send_one_time_meeting_room_link_By_Enterprise_User
 
 Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     [Documentation]    Set Survey off	Make a call via Citron & Client	After ending call	VP: No Take Survey button.
-    [Tags]    citron 59 line
+    [Tags]    citron 59 line     call_case
     [Setup]     run keywords    Login_workspaces_admin      # log in with workspaces admin
     ...         AND             enter_workspace_workspace_settings      # enter workspace users
     ...         AND             set_survey_close        # Set Survey close
@@ -108,7 +108,7 @@ Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
 
 Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_No_Take_Survey_button
     [Documentation]    Set Survey on  Value is in White List	Make a call via Citron & Client	After ending call	VP: Take Survey button.  After ending call,	VP: The tutorial screen shows up.
-    [Tags]    citron 62 line
+    [Tags]    citron 62 line     call_case
     [Setup]     run keywords    Login_workspaces_admin      # log in with workspaces admin
     ...         AND             enter_workspace_workspace_settings      # enter workspace users
     ...         AND             set_survey_open        # Set Survey open
@@ -133,7 +133,7 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
 
 #Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_button
 #    [Documentation]    Set Survey on  Set URL=Null	Make a call via Citron & Client	After ending call	VP: No Take Survey button.
-#    [Tags]    citron 63 line   ，有bug：https://vipaar.atlassian.net/browse/CITRON-3344，MAC系统的Chrome浏览器不能设置Survey URL为空值
+#    [Tags]    citron 63 line   ，有bug：https://vipaar.atlassian.net/browse/CITRON-3344，MAC系统的Chrome浏览器不能设置Survey URL为空值        call_case
 #    [Setup]     run keywords    Login_workspaces_admin      # log in with workspaces admin
 #    ...         AND             enter_workspace_workspace_settings      # enter workspace users
 #    ...         AND             set_survey_open        # Set Survey open
