@@ -1,4 +1,6 @@
 #----------------------------------------------------------------------------------------------------#
+import time
+
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_settings_and_variable import *
@@ -346,9 +348,11 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         ele_list = get_xpath_elements(driver,accept_disclaimer)
         if len(ele_list) == 1:
             public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
+            time.sleep(3)
             driver.implicitly_wait(5)
             ele_list = get_xpath_elements(driver, accept_disclaimer)
             if len(ele_list) == 1:
+                print('还需要再一次ACCCEPT_Disclaimer')
                 public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
             driver.implicitly_wait(int(IMPLICIT_WAIT))
     elif deal_with_disclaimer == 'decline':

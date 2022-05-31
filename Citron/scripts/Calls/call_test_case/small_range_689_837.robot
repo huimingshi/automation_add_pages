@@ -1031,6 +1031,8 @@ Small_range_834
     rec_is_on_or_off     ${driver2}     on   none
     # Change role of giver/receiver
     enter_giver_mode     ${driver1}      none    none     2
+    # Proceed with my camera Off
+    proceed_with_camera_off    ${driver1}
     # In mode of Freeze/GHoP/Doc Share
     # VP: only caller can change rec
     enter_FGD_mode     ${driver1}      Document

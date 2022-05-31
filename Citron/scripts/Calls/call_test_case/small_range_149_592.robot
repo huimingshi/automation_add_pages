@@ -108,6 +108,9 @@ Small_range_153_160
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
     # Switch to giver or receiver
     enter_giver_mode    ${driver1}     none    none     2     has_no_dialog
+    # Proceed with my camera Off
+    proceed_with_camera_off    ${driver1}
+    # 切换回Face to Face模式
     enter_face_to_face_mode     ${driver1}
     # VP: hint dialog is not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
@@ -134,6 +137,8 @@ Small_range_161
     which_page_is_currently_on    ${driver1}    //img[@class="starHint"]
     # VP: Have Switch Camera button
     enter_giver_mode    ${driver1}   none   none   2
+    # Proceed with my camera Off
+    proceed_with_camera_off    ${driver1}
 #    enter_FGD_mode   ${driver1}    Swap Camera
     # 返回Face to Face模式
     back_to_face_to_face_mode    ${driver1}
@@ -398,6 +403,8 @@ Join_call_196_200
     hang_up_the_phone     ${driver2}
     # EU1 switches to Giver.
     enter_giver_mode     ${driver1}     no_one     no_one     2
+    # Proceed with my camera Off
+    proceed_with_camera_off    ${driver1}
     # EU1 invites TU3. TU3 answers call.
     ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}        ${call_oncall_user_password}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
@@ -455,6 +462,9 @@ Join_call_201_205
     hang_up_the_phone     ${driver2}
     # EU1 switches to receiver, enters freezing, photo or pdf mode.
     enter_giver_mode    ${driver1}   no_one    no_one    2    has_dialog    receive
+    # Proceed with my camera Off
+    proceed_with_camera_off    ${driver1}
+    # 切换回FGD模式
     enter_FGD_mode    ${driver1}      Document
     # 返回Face to Face模式
     back_to_face_to_face_mode    ${driver1}

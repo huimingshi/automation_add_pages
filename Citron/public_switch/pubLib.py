@@ -205,6 +205,7 @@ def public_assert(driver,string1,string2,condition = '=',action=None):
         screen_shot_func(driver,action)
         raise AssertionError
 
+# 定义一个装饰器，当打开citron时出现WebDriverException：ERR_NAME_NOT_RESOLVED时进行截图
 def ERR_NAME_NOT_RESOLVED(func):
     def inner(driver,*args,**kwargs):
         try:

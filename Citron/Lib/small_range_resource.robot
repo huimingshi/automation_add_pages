@@ -362,7 +362,7 @@ show_the_directory_tab_on_the_dock
 expand_workspaces_switch
     # Expand workspace
     click element   ${expand_workspace_button}
-    sleep  1s
+    sleep  2s
 
 show_first_workspace_name
     # VP: App show first workspace name of workspace options
@@ -411,6 +411,7 @@ switch_to_third_workspace
     # choose third workspace
     click element   ${Slytherin_workspace}
     sleep  3
+    element should be visible   xpath=//div[@class="workspace-dropdown-container"]//span[contains(.,"Slytherin ")]
     ${ele_count}     get element count    ${accept_disclaimer}
     Run Keyword If   '${ele_count}'=='1'    click element    ${accept_disclaimer}
 
@@ -420,6 +421,7 @@ switch_to_second_workspace
     # choose second workspace
     click element   ${Canada_workspace}
     sleep  3
+    element should be visible   xpath=//div[@class="workspace-dropdown-container"]//span[contains(.,"Canada")]
     ${ele_count}     get element count    ${accept_disclaimer}
     Run Keyword If   '${ele_count}'=='1'    click element    ${accept_disclaimer}
 

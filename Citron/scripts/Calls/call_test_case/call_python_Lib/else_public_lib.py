@@ -915,14 +915,14 @@ def get_all_data_on_the_page(driver,search_key = 'cardName'):
     print(quarter_of_the_height)
     driver.implicitly_wait(int(6))
     while True:
-        ele_list_1 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')   # 取每次循环的第一行数据（每5条数据一次循环）
-        ele_list_2 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+4}"]//div[@class="{search_key}"]')   # 取每次循环的最后一行数据（每5条数据一次循环）
+        ele_list_1 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')   # 取每次循环的第一行数据（每4条数据一次循环）
+        ele_list_2 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')   # 取每次循环的最后一行数据（每4条数据一次循环）
         if len(ele_list_1) == 1 and len(ele_list_2) == 1:  # 如果当前循环下，首条和尾条数据都存在，就获取name放到user_list中
-            for j in range(i,i+5):  # 获取5条数据的name放到user_list中
+            for j in range(i,i+4):  # 获取4条数据的name放到user_list中
                 get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
                 # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
                 user_list.append(get_name)
-            i = i + 5   # 设置每5次一个循环
+            i = i + 4   # 设置每4次一个循环
             print(i)
         else:
             # 如果当前循环下，尾条数据不存在，就进行向下滑动(每次向下滑动 当前浏览器的高度像素的四分之一)
@@ -930,29 +930,17 @@ def get_all_data_on_the_page(driver,search_key = 'cardName'):
             js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'
             driver.execute_script(js)
             # 判断滑动后，尾条数据是否还能展示
-            print(i+4)
-            ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+4}"]//div[@class="{search_key}"]')
+            print(i+3)
+            ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')
             # 滑动后，尾条数据不展示
             if len(ele_list_3) != 1:
                 # 判断尾条前一条数据是否展示
-                print(i + 3)
-                ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')
-                # 数据不展示，就打印下数据不展示
-                if len(ele_list_3) != 1:
-                    print(f'{i+4}行元素不显示了')
-                # 数据展示，就把最后一轮循环的数据添加到user_list中
-                else:
-                    print(f'添加到{i+4}行数据')
-                    for j in range(i, i + 4):
-                        get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                        # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                        user_list.append(get_name)
-                    break
-                # 后面都是这个逻辑，往前推一个数据进行判断
                 print(i + 2)
                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+2}"]//div[@class="{search_key}"]')
+                # 数据不展示，就打印下数据不展示
                 if len(ele_list_3) != 1:
                     print(f'{i+3}行元素不显示了')
+                # 数据展示，就把最后一轮循环的数据添加到user_list中
                 else:
                     print(f'添加到{i+3}行数据')
                     for j in range(i, i + 3):
@@ -960,6 +948,7 @@ def get_all_data_on_the_page(driver,search_key = 'cardName'):
                         # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
                         user_list.append(get_name)
                     break
+                # 后面都是这个逻辑，往前推一个数据进行判断
                 print(i + 1)
                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+1}"]//div[@class="{search_key}"]')
                 if len(ele_list_3) != 1:
@@ -977,10 +966,21 @@ def get_all_data_on_the_page(driver,search_key = 'cardName'):
                     print(f'{i+1}行元素不显示了')
                 else:
                     print(f'添加到{i+1}行数据')
-                    get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                    # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                    user_list.append(get_name)
+                    for j in range(i, i + 1):
+                        get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                        # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                        user_list.append(get_name)
                     break
+                # print(i)
+                # ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')
+                # if len(ele_list_3) != 1:
+                #     print(f'{i+1}行元素不显示了')
+                # else:
+                #     print(f'添加到{i+1}行数据')
+                #     get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                #     # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                #     user_list.append(get_name)
+                #     break
                 print(i-1)
                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i-1}"]//div[@class="{search_key}"]')
                 if len(ele_list_3) != 1:
@@ -991,6 +991,101 @@ def get_all_data_on_the_page(driver,search_key = 'cardName'):
                     break
     print(len(user_list))
     return user_list
+
+# def get_all_data_on_the_page(driver,search_key = 'cardName'):
+#     """
+#     获取当前页面的所有user数据
+#     :param driver:
+#     :param search_key:xpath中的关键值，普通页面（Directory或者Users页面）和通话中邀请第三位用户的页面的user对应的xpath不同
+#     :return: user list
+#     """
+#     i = 0
+#     user_list = []
+#     quarter_of_the_height_n = 0
+#     size = driver.get_window_size()  # 获取当前浏览器的像素
+#     height_size = int(size['height'])  # 获取当前浏览器的高度像素
+#     quarter_of_the_height = int(height_size/4)  # 获取当前浏览器的高度像素的四分之一，作为每次滑动的增加值
+#     print(size)
+#     print(height_size)
+#     print(quarter_of_the_height)
+#     driver.implicitly_wait(int(6))
+#     while True:
+#         ele_list_1 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')   # 取每次循环的第一行数据（每5条数据一次循环）
+#         ele_list_2 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+4}"]//div[@class="{search_key}"]')   # 取每次循环的最后一行数据（每5条数据一次循环）
+#         if len(ele_list_1) == 1 and len(ele_list_2) == 1:  # 如果当前循环下，首条和尾条数据都存在，就获取name放到user_list中
+#             for j in range(i,i+5):  # 获取5条数据的name放到user_list中
+#                 get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                 # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                 user_list.append(get_name)
+#             i = i + 5   # 设置每5次一个循环
+#             print(i)
+#         else:
+#             # 如果当前循环下，尾条数据不存在，就进行向下滑动(每次向下滑动 当前浏览器的高度像素的四分之一)
+#             quarter_of_the_height_n = quarter_of_the_height_n + quarter_of_the_height
+#             js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'
+#             driver.execute_script(js)
+#             # 判断滑动后，尾条数据是否还能展示
+#             print(i+4)
+#             ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+4}"]//div[@class="{search_key}"]')
+#             # 滑动后，尾条数据不展示
+#             if len(ele_list_3) != 1:
+#                 # 判断尾条前一条数据是否展示
+#                 print(i + 3)
+#                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')
+#                 # 数据不展示，就打印下数据不展示
+#                 if len(ele_list_3) != 1:
+#                     print(f'{i+4}行元素不显示了')
+#                 # 数据展示，就把最后一轮循环的数据添加到user_list中
+#                 else:
+#                     print(f'添加到{i+4}行数据')
+#                     for j in range(i, i + 4):
+#                         get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                         # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                         user_list.append(get_name)
+#                     break
+#                 # 后面都是这个逻辑，往前推一个数据进行判断
+#                 print(i + 2)
+#                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+2}"]//div[@class="{search_key}"]')
+#                 if len(ele_list_3) != 1:
+#                     print(f'{i+3}行元素不显示了')
+#                 else:
+#                     print(f'添加到{i+3}行数据')
+#                     for j in range(i, i + 3):
+#                         get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                         # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                         user_list.append(get_name)
+#                     break
+#                 print(i + 1)
+#                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+1}"]//div[@class="{search_key}"]')
+#                 if len(ele_list_3) != 1:
+#                     print(f'{i+2}行元素不显示了')
+#                 else:
+#                     print(f'添加到{i+2}行数据')
+#                     for j in range(i, i + 2):
+#                         get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                         # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                         user_list.append(get_name)
+#                     break
+#                 print(i)
+#                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')
+#                 if len(ele_list_3) != 1:
+#                     print(f'{i+1}行元素不显示了')
+#                 else:
+#                     print(f'添加到{i+1}行数据')
+#                     get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                     # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
+#                     user_list.append(get_name)
+#                     break
+#                 print(i-1)
+#                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i-1}"]//div[@class="{search_key}"]')
+#                 if len(ele_list_3) != 1:
+#                     print(f'{i}行元素不显示了')
+#                     break
+#                 else:
+#                     print(f'只显示到{i}行元素')
+#                     break
+#     print(len(user_list))
+#     return user_list
 
 def remove_value_from_list(list,value):
     """
