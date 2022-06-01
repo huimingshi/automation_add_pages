@@ -540,13 +540,14 @@ Small_range_799_802
     log_in_crunch_is_correct    property 'disclaimer_accepted' to 'false'.    ${LogList}
     # close browser
     Close
-    sleep    30s
+    sleep    60s
     # 801 line
     # VP: In Citron->Admin  1)-> Calls, to check any reference to the User becomes "Deleted User".
     Login_site_admin
     enter_workspace_calls_page
     enter_which_call_details     1    # 进入第一条call记录的details
     refresh_web_page
+    # 这边如果报错了，说明通话记录未加载过来，获取的是下一条通话记录的participant，所以前面等了60s
     check_details_participant_count     3   # participant数目为3
     refresh_web_page
     check_details_participant_name      Deleted User    # Deleted User在participant中

@@ -113,9 +113,11 @@ enter_primary_contact
 
 enter_contact_personal_page
     click element   ${enter_first_menu_tree}
-    sleep  1s
+    sleep  2s
+    wait until element is visible   ${enter_contacts_page}
     click element   ${enter_contacts_page}
-    sleep  1s
+    sleep  3s
+    wait until element is visible  ${enter_personal_page}
     click element   ${enter_personal_page}
     sleep  2s
 
