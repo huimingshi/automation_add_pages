@@ -19,7 +19,7 @@ Small_range_656
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
     # caller calls via normal way, callee do not answer
-    make_calls_with_who   ${driver1}   ${driver2}      ${Expert_User2_username}    no_care
+    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
     # waiting to timeout
     sleep  60s
     # Verify: "xxx didn't answer your call" In recent tab
@@ -44,7 +44,7 @@ Small_range_657
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
     # caller calls via normal way
-    make_calls_with_who   ${driver1}   ${driver2}      ${Expert_User2_username}    no_care
+    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
     # callee clicks on decline button
     user_decline_call    ${driver2}
     # VP1: Your call was declined.2
@@ -72,11 +72,11 @@ Small_range_658
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}     3        # 获取Recents页面前三行call记录的时间
     # caller calls via normal way
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    make_calls_with_who   ${driver1}   ${driver2}      ${Expert_User2_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
     # Expert User3 登录（case中的caller）
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     # caller calls one participant who is in another call
-    make_calls_with_who   ${driver3}    ${driver2}     ${Expert_User2_username}   no_care
+    contacts_witch_page_make_call   ${driver3}    ${driver2}    ${py_team_page}  ${Expert_User2_name}   no_care
     # VP1: "/Target user/ is currently on another call.
     which_page_is_currently_on   ${driver3}    ${user_is_currently_on_another_call}
     # VP2: rating dialog doesn’t display.
@@ -148,7 +148,7 @@ Small_range_662
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}     3
     # User A call B enter call via normal way
-    make_calls_with_who    ${driver1}   ${driver2}   ${Expert_User2_username}
+    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -197,7 +197,7 @@ Small_range_663
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
     # User A call B enter call via normal way
-    make_calls_with_who    ${driver1}   ${driver2}   ${Expert_User2_username}
+    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -245,7 +245,7 @@ Small_range_664
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
     # User A call B enter call via normal way
-    make_calls_with_who    ${driver1}   ${driver2}   ${Expert_User2_username}
+    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -293,7 +293,7 @@ Small_range_665
     # User B 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # User A call B enter call via normal way
-    make_calls_with_who    ${driver1}   ${driver2}   ${Expert_User2_username}
+    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
 
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
@@ -302,7 +302,7 @@ Small_range_665
     switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_D1}   get_recents_page_records_occurred_time   ${driver4}    3
     # User A call B enter call via normal way
-    make_calls_with_who    ${driver3}   ${driver4}   ${Expert_User4_username}
+    contacts_witch_page_make_call    ${driver3}   ${driver4}    ${py_team_page}  ${Expert_User4_name}
 
     # caller calls one participant who is in another call via normal call
     which_page_is_currently_on    ${driver1}    ${end_call_button}
@@ -447,7 +447,7 @@ Small_range_669_670
     # Become available from app
     do_not_disturb_become_available    ${driver1}
     # UserB call user A
-    make_calls_with_who     ${driver2}    ${driver1}   ${Expert_User1_username}
+    contacts_witch_page_make_call     ${driver2}    ${driver1}    ${py_team_page}  ${Expert_User1_name}
     # Verify:call connected
     exit_call    ${driver1}
     # 关闭call结束页面
@@ -469,7 +469,7 @@ Small_range_671_672_673
     ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
     switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     # User B call user A from contact list
-    make_calls_with_who    ${driver2}   ${driver1}    ${Expert_User1_username}   no_care
+    contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}  ${Expert_User1_name}   no_care
     # Verify: UserB receives a UI indicator that User A is Not Available along with Not Available Message set by citron
     which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
     close_call_ending_page    ${driver2}
@@ -523,7 +523,7 @@ Small_range_675
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     # User B make calls with User C
-    make_calls_with_who    ${driver2}   ${driver3}   ${Expert_User3_username}
+    contacts_witch_page_make_call    ${driver2}   ${driver3}    ${py_team_page}  ${Expert_User3_name}
     # User A login and set Do not disturb
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    no_check_toturial    close_bounced     accept    set_disturb
     # InCall user invite User A to 3PC call
@@ -554,7 +554,7 @@ Small_range_677_678_679_680
     ${invite_url_mhs}   send_meeting_room_link   ${driver1}   MHS   no_send
     ### 678
     # User B call A from contact list
-    make_calls_with_who    ${driver2}   ${driver1}    ${belong_two_WS_username}
+    contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}  ${belong_two_WS_name}
     # 结束Call;VP: A receive incoming call, can enter call successfully
     exit_call    ${driver2}
     ### 679
@@ -596,7 +596,7 @@ Small_range_681_682_683
     user_switch_to_second_workspace   ${driver1}    ${Huiming_shi_Added_WS}
     ### 681
     # WS2 contact call User A
-    make_calls_with_who    ${driver2}   ${driver1}    ${belong_two_WS_username}   no_care
+    contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}  ${belong_two_WS_name}   no_care
     # VP: WS2 contact get DND message
     which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
     ### 682

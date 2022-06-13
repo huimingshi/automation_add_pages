@@ -1248,13 +1248,13 @@ def get_css_value(driver,witch_xpath,which_CSS):
 
 def check_contacts_list(driver,*args):
     """
-    获取并检查Contacts页面的name列表
+    获取并检查Contacts下Team页面的name列表
     :param driver:
     :param args: 预期的name列表
     :return:
     """
     # try:
-    ele_list = get_xpath_elements(driver,'//div[@class="ag-center-cols-container"]/div//div[@class="cardName"]')
+    ele_list = get_xpath_elements(driver,'//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div//div[@class="cardName"]')
     print(ele_list)
     if len(args) != 0:
         for i in range(len(ele_list)):

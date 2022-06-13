@@ -16,7 +16,7 @@ Make_a_business_call_between_business_and_personal_user
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
     ${driver2}   driver_set_up_and_logIn    ${group_admin_username}   ${group_admin_password}
     # make a call
-    make_calls_with_who   ${driver1}   ${driver2}   ${group_admin_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${group_admin_name}
     exit_call   ${driver1}   ${less_than_1_min}
     [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
     ...         AND           exit_driver
@@ -30,7 +30,7 @@ Make_a_business_call_duration_more_than_1_min
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
     ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
     # make a call
-    make_calls_with_who  ${driver1}  ${driver2}  ${normal_username_for_calls_B}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${normal_name_for_calls_B}
     exit_call   ${driver1}   ${more_than_1_min}
     [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
     ...         AND           exit_driver

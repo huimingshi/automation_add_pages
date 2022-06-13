@@ -116,7 +116,7 @@ Small_range_1047
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}       ${universal_password}
     ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
     # Site user send 3PI link
-    make_calls_with_who      ${driver2}     ${driver1}     ${normal_username_for_calls_name}
+    contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver2}   send
     # Open email and SMS of phone number,VP: SMS and Email content has customer text.
@@ -135,7 +135,7 @@ Small_range_1050
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}       ${universal_password}
     ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
     # Site user send 3PI link
-    make_calls_with_who      ${driver2}     ${driver1}     ${normal_username_for_calls_name}
+    contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver2}   send
     # Open email and SMS of phone number,VP: email and SMS shows customer text
@@ -154,7 +154,7 @@ Small_range_1053
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}       ${universal_password}
     ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
     # Site user send 3PI link
-    make_calls_with_who      ${driver2}     ${driver1}     ${normal_username_for_calls_name}
+    contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver2}   send
     # Open email and SMS of phone number,VP:Default message content
@@ -181,7 +181,7 @@ Small_range_1053
 #    logIn_citron   ${driver2}   ${normal_username_for_calls_B}    ${universal_password}
 #    # Someone call userA
 #    # Click the incoming call notification，Answer call
-#    make_calls_with_who    ${driver2}    ${driver1}   ${normal_username_for_calls_name}
+#    contacts_witch_page_make_call    ${driver2}    ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
 #    exit_call   ${driver2}
 #    [Teardown]    exit_driver
 ##    [Teardown]    exit_driver    ${driver1}   ${driver2}
@@ -205,7 +205,7 @@ Small_range_1053
 #    logIn_citron   ${driver2}   ${normal_username_for_calls_B}    ${universal_password}
 #    # Someone call userA
 #    # Click the incoming call notification，Answer call
-#    make_calls_with_who    ${driver2}    ${driver1}   ${normal_username_for_calls_name}
+#    contacts_witch_page_make_call    ${driver2}    ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
 #    exit_call   ${driver2}
 #    [Teardown]    exit_driver
 ##    [Teardown]    exit_driver    ${driver1}   ${driver2}

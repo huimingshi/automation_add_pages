@@ -37,7 +37,7 @@ Small_range_970_974
     should start with    ${get_class_value}     ${default_avatar_src}
     # VP: Call ending screen
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-    make_calls_with_who   ${driver2}   ${driver1}   ${Expert_User1_username}
+    contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}   ${Expert_User1_name}
     exit_call   ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
     two_option_is_equal   ${driver1}   ${get_ele_text}     Thank you for using Help Lightning
@@ -214,7 +214,7 @@ Small_range_977_993
     # Select mode hint in F2F mode
     ${driver3}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
     switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
-    make_calls_with_who     ${driver2}    ${driver3}    ${personal_user_username}       # 进行通话
+    contacts_witch_page_make_call     ${driver2}    ${driver3}   ${py_team_page}   ${personal_user_name}       # 进行通话
     sleep   45s
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
@@ -273,7 +273,7 @@ Small_range_995_996
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
     # User A call user B directly
-    make_calls_with_who    ${driver1}   ${driver2}    ${ws_branding_B_user}   no_anwser
+    contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_team_page}   ${ws_branding_B_name}   no_anwser
     # VP: User A's outgoing call, it shoud show User B's customer  avatar.
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver1}     ${get_class_value}       ${User_B_customer_avatar}
@@ -344,7 +344,7 @@ Small_range_997
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     # User A call other site user[User B] from personal contact list
-    make_calls_with_who    ${driver1}   ${driver2}    ${Expert_User5_username}   no_anwser    is_personal
+    contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User5_name}   no_anwser    is_personal
     # VP: User A's outgoing call, it should show Default avatar [Grey 'H' Logo].
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver1}     ${get_class_value}       ${default_avatar_src}
@@ -411,7 +411,7 @@ Small_range_998
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
     user_switch_to_second_workspace    ${driver2}    ${WS_branding_setting_WS2}
     # Use A call user C from Team contact
-    make_calls_with_who    ${driver1}   ${driver2}    ${ws_branding_C_user}   no_anwser
+    contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_team_page}   ${ws_branding_C_name}   no_anwser
     # VP: User A's outgoing call, it shoud show WS 1's branding  avatar.
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver1}     ${get_class_value}       ${WS_1_Branding_Avatar}
@@ -792,7 +792,7 @@ Small_range_1009
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
     # 进行call
-    make_calls_with_who     ${driver2}    ${driver1}   ${ws_branding_A_user}
+    contacts_witch_page_make_call     ${driver2}    ${driver1}   ${py_team_page}   ${ws_branding_A_name}
     # 获取3PI link
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}    send_invite_in_calling_page     ${driver2}
@@ -984,7 +984,7 @@ Small_range_1018_1026
     two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
 #    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Directory list when invite in a call	VP: Test avatar is loaded
-    make_calls_with_who   ${driver1}   ${driver2}   ${ws3_branding_A_username}   no_care
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${ws3_branding_A_username}   no_care
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
@@ -1000,7 +1000,7 @@ Small_range_1018_1026
 #    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Call team contact and answer  	team contact invite 3rd participant	   View Contact list 	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    make_calls_with_who     ${driver1}    ${driver2}     ${ws3_branding_A_username}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${ws3_branding_A_username}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}     ${ws3_branding_A_username}
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img_in_invite_page}   src
@@ -1057,7 +1057,7 @@ Small_range_1031
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}     ${universal_password}
     # User B call user A directly
-    make_calls_with_who    ${driver2}   ${driver1}    ${ws3_branding_A_user}   no_anwser
+    contacts_witch_page_make_call    ${driver2}   ${driver1}   ${py_team_page}   ${ws3_branding_A_username}   no_anwser
     # VP: User B's outgoing call, it should show WS 1 default Avatar Grey 'H'
     ${get_class_value}    get_ele_class_name    ${driver2}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver2}     ${get_class_value}       ${default_avatar_src}

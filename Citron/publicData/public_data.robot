@@ -14,6 +14,7 @@ ${cognito_login_email}                  emily.huang+cognito@helplightning.com   
 ${cognito_login_password}               Abc12345                                                                                # cognito login password
 
 ${site_admin_username}                  huiming.shi@helplightning.com                                                           # site admin username
+${site_admin_name}                      huiming.shi
 ${site_admin_password}                  *IK<8ik,8ik,                                                                            # site admin password
 
 ${site_admin_username_auto}             hlnauto+basic                                                                           # site admin username
@@ -26,6 +27,7 @@ ${workspace_admin_username}             Huiming.shi.helplightning@outlook.com   
 ${workspace_admin_password}             *IK<8ik,8ik,                                                                            # workspace admin password
 
 ${group_admin_username}                 Huiming.shi.helplightning+8888888888@outlook.com                                        # group admin username (belong to citron)
+${group_admin_name}                     Huiming.shi.helplightning+8888888888
 ${group_admin_password}                 *IK<8ik,8ik,                                                                            # group admin password
 
 ${workspace_admin_username_one}         Huiming.shi.helplightning+99998888@outlook.com                                          # workspace admin username(This is a workspace admin with only one group)
@@ -222,8 +224,10 @@ ${ws_branding_A_user}                   Huiming.shi.helplightning+test_WS_brandi
 ${ws_branding_A_name}                   Huiming.shi.helplightning+test_WS_branding_A
 
 ${ws_branding_B_user}                   Huiming.shi.helplightning+test_WS_branding_B@outlook.com                                # WS_branding_setting_WS1下的user
+${ws_branding_B_name}                   Huiming.shi.helplightning+test_WS_branding_B
 
 ${ws_branding_C_user}                   Huiming.shi.helplightning+test_WS_branding_C@outlook.com                                # WS_branding_setting_WS1和WS_branding_setting_WS2下的user
+${ws_branding_C_name}                   Huiming.shi.helplightning+test_WS_branding_C
 
 ${ws_branding_D_user}                   Huiming.shi.helplightning+test_WS_branding_D@outlook.com                                # WS_branding_setting_WS2下的user
 

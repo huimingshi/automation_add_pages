@@ -259,12 +259,12 @@ Small_range_710_723
     ###### EU1's contact directly call EU1	VP: contact get message like "EU1 is in another call"       721行
     # EU1's contact TU1 登录
     ${driver6}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
-    make_calls_with_who    ${driver6}   ${driver1}   ${Expert_User1_username}   no_care
+    contacts_witch_page_make_call    ${driver6}   ${driver1}   ${py_team_page}   ${Expert_User1_name}   no_care
     which_page_is_currently_on    ${driver6}    ${user_is_currently_on_another_call}
     ###### EU2's contact directly call EU2	VP: contact get message like "EU1 is in another call"       722行
     # EU1's contact TU2 登录
     ${driver7}    driver_set_up_and_logIn    ${Team_User2_username}     ${universal_password}
-    make_calls_with_who    ${driver7}   ${driver2}   ${Expert_User2_username}   no_care
+    contacts_witch_page_make_call    ${driver7}   ${driver2}   ${py_team_page}   ${Expert_User2_name}   no_care
     which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
     ###### Click EU2's OTU link	VP: Get message like "EU2 is in another call"       723行
     user_make_call_via_meeting_link   ${driver7}     ${invite_url_otu}
@@ -338,12 +338,12 @@ Small_range_724_742
     ###### EU1's contact directly call EU1	VP: contact get message like "EU1 is in another call"       734行
     # EU1's contact TU1 登录
     ${driver7}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
-    make_calls_with_who    ${driver7}   ${driver1}   ${Expert_User1_username}   no_care
+    contacts_witch_page_make_call    ${driver7}   ${driver1}   ${py_team_page}   ${Expert_User1_name}   no_care
     which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
     ###### EU2's contact directly call EU2	VP: contact get message like "EU1 is in another call"       735行
     # EU1's contact TU2 登录
     ${driver8}    driver_set_up_and_logIn    ${Team_User2_username}     ${universal_password}
-    make_calls_with_who    ${driver8}   ${driver2}   ${Expert_User2_username}   no_care
+    contacts_witch_page_make_call    ${driver8}   ${driver2}   ${py_team_page}   ${Expert_User2_name}   no_care
     which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
     ###### Click EU2's MHS link	VP: Get message like "EU2 is in another call"       736行
     user_make_call_via_meeting_link   ${driver8}     ${invite_url_mhs}
@@ -467,7 +467,7 @@ Small_range_751
     switch_to_settings_page    ${driver2}    Settings    1    no_click_tree
     open_debug_tools_in_settings   ${driver2}
     # 进行Call
-    make_calls_with_who   ${driver1}   ${driver2}    ${big_admin_third_WS_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${big_admin_third_WS_name}
     sleep  20s    # 等待通话稳定
     # 检查Debug页面的Resolution是否为1280x720
     open_debug_dialog_check_resolution   ${driver2}
@@ -500,7 +500,7 @@ Small_range_799_802
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${email}                           ${universal_password}
     # Normal call    User A, User B & User C are in a call
-    make_calls_with_who    ${driver3}   ${driver2}   ${normal_username_for_calls_B}
+    contacts_witch_page_make_call    ${driver3}   ${driver2}   ${py_team_page}   ${normal_name_for_calls_B}
     which_page_is_currently_on    ${driver3}    ${end_call_button}
     enter_contacts_search_user     ${driver3}     ${normal_username_for_calls_name}
     click_user_in_contacts_call    ${driver3}     ${normal_username_for_calls_name}
@@ -627,7 +627,7 @@ Disclaimer_806_807
     # User C 登录
     ${driver3}   driver_set_up_and_logIn   ${big_admin_third_WS_username}      ${big_admin_third_WS_password}
     # A和B进行Call
-    make_calls_with_who    ${driver1}   ${driver2}    ${big_admin_first_WS_username}
+    contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_team_page}   ${big_admin_first_WS_name}
 
     #######  806 line
     # User A 进入到邀请第三位用户进入call 的页面，并查询User C
@@ -909,7 +909,7 @@ Small_range_829
     # Expert 登录
     ${driver2}   driver_set_up_and_logIn   ${site_admin_username}        ${switch_workspace_password}
     # Call enterprise contact
-    make_calls_with_who     ${driver1}    ${driver2}    ${site_admin_username}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
     # VP: REC is off, only caller can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     off   can_change
@@ -1024,7 +1024,7 @@ Small_range_834
     # Expert 登录
     ${driver2}   driver_set_up_and_logIn   ${site_admin_username}        ${switch_workspace_password}
     # Call enterprise contact
-    make_calls_with_who     ${driver1}    ${driver2}    ${site_admin_username}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
     # VP: REC is off, only caller can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     on   can_change
@@ -1064,7 +1064,7 @@ Small_range_836
     # User 2 登录
     ${driver3}   driver_set_up_and_logIn   ${ws3_branding_B_user}        ${switch_workspace_password}
     # User 2 makes a call with user 1
-    make_calls_with_who     ${driver3}    ${driver1}    ${ws3_branding_A_user}    no_care
+    contacts_witch_page_make_call     ${driver3}    ${driver1}   ${py_team_page}   ${ws3_branding_A_username}    no_care
     # User 1-1 answer this call, at that time, User 1-2 auto-ends this call
     which_page_is_currently_on    ${driver1}     ${anwser_call_button}
     which_page_is_currently_on    ${driver2}     ${anwser_call_button}
