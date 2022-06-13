@@ -815,9 +815,9 @@ search_personal_contact
 add_to_favorite
     [Arguments]   ${user_or_group}
     # enter 1000Users
-    click element   ${input_search}
+    click element   ${team_input_search}
     sleep  0.5s
-    input text   ${input_search}   ${user_or_group}
+    input text   ${team_input_search}   ${user_or_group}
     sleep  2s
     sleep  2s
     ${get_attribute}  get element attribute   ${favorite_button}     class

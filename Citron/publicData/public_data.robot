@@ -7,6 +7,7 @@ ${enterprise_username}                  emily.huang+bsb                         
 ${enterprise_password}                  abc123                                                                                  # enterprise password
 
 ${belong_enterprise_username}           Huiming.shi.helplightning+enterprise_user@outlook.com
+${belong_enterprise_name}               Huiming.shi.helplightning+enterprise_user
 
 ${cognito_login_username}               xiaoyan.yan+cognito@helplightning.com                                                   # cognito username
 ${cognito_login_email}                  emily.huang+cognito@helplightning.com                                                   # cognito login email
@@ -82,6 +83,7 @@ ${normal_username_for_calls_name}       Huiming.shi.helplightning+123456789
 ${normal_password_for_calls}            *IK<8ik,8ik,
 
 ${normal_username_for_calls_B}          Huiming.shi.helplightning+0123456789@outlook.com                                        # B normal user for make calls(belong to huiming.shi)
+${normal_name_for_calls_B}              Huiming.shi.helplightning+0123456789
 ${normal_password_for_calls_B}          *IK<8ik,8ik,
 
 ${personal_user_username}               Huiming.shi.helplightning+personal@outlook.com                                          # personal user for make calls(belong to citron)
@@ -99,6 +101,7 @@ ${switch_workspace_name}                Huiming.shi.helplightning+9988776655
 ${switch_workspace_password}            *IK<8ik,8ik,
 
 ${for_check_user_online_or_not}         Huiming.shi.helplightning+online_or_not@outlook.com                                     # 属于两个WS，用来验证WS切换和user是否在线(belong to big_admin)(belong to WS1 and WS2)
+${online_or_not_name}                   Huiming.shi.helplightning+online_or_not
 
 ${for_expert_call_username}             Huiming.shi.helplightning+998877665511111@outlook.com                                   # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
 ${for_expert_call_name}                 Huiming.shi.helplightning+998877665511111
@@ -137,6 +140,9 @@ ${a_team_user_password}                 *IK<8ik,8ik,
 
 ${for_team_call_username}               Huiming.shi.helplightning+team_user1@outlook.com                                        # a team user (belong to big_admin)(has no personal user)
 ${for_team_call_name}                   Huiming.shi.helplightning+team_user1
+
+${personal_user1_username}              Huiming.shi.helplightning+personal_user_1@outlook.com                                   # big_admin下的user，用于进行personal user的验证
+${personal_user1_name}                  Huiming.shi.helplightning+personal_user_1
 
 ${other_site_user_1_username}           Huiming.shi.helplightning+other_site_1@outlook.com                                      # an other site user whitch used to call personal user (belong to big_admin first workspace)(is normal user in Huiming.shi.helplightning+an_expert_user)
 ${other_site_user_1_name}               Huiming.shi.helplightning+other_site_1
@@ -213,6 +219,7 @@ ${another_WS_name}                      Huiming.shi.helplightning+another_WS_use
 
 # 下列账号都属于Huiming.shi下的我自己创建的WS中的User或者group
 ${ws_branding_A_user}                   Huiming.shi.helplightning+test_WS_branding_A@outlook.com                                # WS_branding_setting_WS1下的user(有personal user)
+${ws_branding_A_name}                   Huiming.shi.helplightning+test_WS_branding_A
 
 ${ws_branding_B_user}                   Huiming.shi.helplightning+test_WS_branding_B@outlook.com                                # WS_branding_setting_WS1下的user
 

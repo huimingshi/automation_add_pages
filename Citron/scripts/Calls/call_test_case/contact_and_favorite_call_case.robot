@@ -21,7 +21,7 @@ Favorite_tap_group_name_to_start_expert_call
     # 进入favorite页面
     switch_to_diffrent_page   ${driver1}   ${py_favorites_page}   ${py_favorites_switch_success}    ${py_get_number_of_rows}
     # make call with on-call
-    make_call_to_onCall  ${driver1}  ${driver2}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_favorites_page}
     [Teardown]   run keywords    Close
     ...          AND             exit_driver
 #    ...          AND             exit_driver  ${driver1}   ${driver2}
@@ -37,7 +37,6 @@ Send_meeting_room_link_By_Premium_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser call
     user_anwser_call   ${driver}
-    exit_call     ${driver1}
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver  ${driver}   ${driver1}
 
@@ -52,7 +51,6 @@ Send_meeting_room_link_By_Enterprise_User
     ${driver1}  anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser call
     user_anwser_call   ${driver}
-    exit_call     ${driver}   no_check
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver  ${driver}  ${driver1}
 
@@ -67,7 +65,6 @@ Send_one_time_meeting_room_link_By_Premium_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser then exit call
     user_anwser_call   ${driver}
-    exit_call     ${driver}
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver  ${driver}   ${driver1}
 
@@ -82,7 +79,6 @@ Send_one_time_meeting_room_link_By_Enterprise_User
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser then exit call
     user_anwser_call   ${driver}
-    exit_call     ${driver}   no_check
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver  ${driver}   ${driver1}
 
@@ -97,7 +93,7 @@ Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
     ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
     # make call
-    make_calls_with_who  ${driver1}  ${driver2}   ${normal_username_for_calls_B}
+    contacts_witch_page_make_call    ${driver1}    ${driver2}    ${py_team_page}    ${normal_name_for_calls_B}
     # call on-call User exit call
     exit_call  ${driver1}
     # No Take Survey button
@@ -118,7 +114,7 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
     ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}    no_check_toturial   open_bounced    accept    no_care
     # make call
-    make_calls_with_who  ${driver1}  ${driver2}   ${normal_username_for_calls_B}
+    contacts_witch_page_make_call    ${driver1}    ${driver2}    ${py_team_page}    ${normal_name_for_calls_B}
     # call on-call User exit call
     exit_call  ${driver1}
     # No Take Survey button

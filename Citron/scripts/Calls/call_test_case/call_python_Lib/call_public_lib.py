@@ -11,6 +11,7 @@ from else_public_lib import make_sure_enter_call as m_s_e_c
 from else_public_lib import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -446,6 +447,54 @@ def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,fla
         raise AssertionError
     if int(flag) == 1:
         public_click_element(driver_support,end_call_before_connecting,description = '提前End_call按钮')
+
+def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call group 1',accept='accept'):
+    """
+    Contacts页面进行call操作
+    :param driver1:
+    :param driver2:
+    :param witch_page: 哪个page? Favorites/Team/Personal/Directory四个页面
+    :param who: 与谁进行call? on-call group或者是某个user
+    :param accept:对端是否accept此次call
+    :return:
+    """
+    contacts_search_input_format = contacts_search_input.format(witch_page.lower())    # 目前只做了Contacts页面的make call
+    # 查询on-call group或者是某个user
+    element = get_xpath_element(driver1, contacts_search_input_format, description='查询框')
+    element.clear()
+    time.sleep(1)
+    public_click_element(driver1, contacts_search_input_format, description='查询框')
+    element.send_keys(who)
+    time.sleep(5)
+    contacts_search_result = f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[text()="{who}"]'
+    ele_ment = get_xpath_elements(driver1, contacts_search_result)
+    print('0000000000000000000000000000000000', len(ele_ment))
+    if len(ele_ment) < 1:
+        refresh_page(driver1)
+        element = get_xpath_element(driver1, contacts_search_input_format, description='搜索框')
+        public_click_element(driver1, contacts_search_input_format, description='搜索框')
+        element.send_keys(who)
+        time.sleep(5)
+    public_check_element(driver1, contacts_search_result,f'{who}未加载出', if_click=None, if_show=1)
+    # 鼠标悬停
+    ellipsis_xpath = f'//div[text()="{who}"]/../../../..//div[@class="ellipsis-menu-div"]'
+    ellipsis = get_xpath_element(driver1,ellipsis_xpath,description='悬浮按钮')
+    ActionChains(driver1).move_to_element(ellipsis).perform()
+    # 选择Audio
+    audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Audio+"]/..'
+    public_click_element(driver1,audio_xpath,description='启动Audio按钮')
+    # 需要Accept Declaimer
+    count = get_xpath_elements(driver1, accept_disclaimer)
+    if len(count) == 1:
+        public_click_element(driver1, accept_disclaimer, '点击ANWSER按钮失败')
+    # 断言是否呼叫成功
+    count = get_xpath_elements(driver1, end_call_before_connecting)
+    public_assert(driver1, len(count), 1, action='发起call失败')
+    # 另一端ACCEPT OR DECLINE
+    if accept == 'accept':
+        public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
+    elif accept == 'no_accept':
+        public_check_element(driver2, decline_disclaimer, '点击DECLINE按钮失败')
 
 def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',accept='accept'):
     """

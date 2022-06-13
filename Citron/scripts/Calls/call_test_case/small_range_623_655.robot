@@ -49,7 +49,7 @@ Small_range_625_627
     #-------------------------------------------------------------------------#
     # Expert A receives an incoming from contact on-call group name.
     different_page_search_single_users    ${driver2}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}  # search on-call-group in Team page
-    make_call_to_onCall     ${driver2}   ${driver1}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver2}   ${driver1}  ${py_team_page}  ${Quantum_Mechanics_group_name}
     # End Call.
     exit_call     ${driver2}
     # VP:Expert A shows his enterprise's Disclaimer window.
@@ -122,7 +122,7 @@ Small_range_630_631
     # customer makes expert call via group name
     different_page_search_single_users    ${driver11}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
-    make_call_to_onCall     ${driver11}   ${driver22}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver11}   ${driver22}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # 结束通话
     exit_call       ${driver11}
     # 退出driver
@@ -134,7 +134,7 @@ Small_range_630_631
     ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}    ${universal_password}
     # Expert C is in call.
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # User B 登录   case中的customer
     ${driver3}    driver_set_up_and_logIn    ${User_B_username}     ${universal_password}
     # Expert A 登录
@@ -146,7 +146,7 @@ Small_range_630_631
     # customer makes expert call via group name
     different_page_search_single_users    ${driver3}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
-    make_call_to_onCall     ${driver3}   ${driver4}    ${Quantum_Mechanics_group_name}    no_accept
+    contacts_witch_page_make_call     ${driver3}   ${driver4}   ${py_team_page}   ${Quantum_Mechanics_group_name}    no_accept
     # VP: Expert A No disclaimer window since he has accepted it.
     disclaimer_should_be_shown_up_or_not    ${driver4}    not_appear
     # expert B receives incoming call，expert B declines call
@@ -178,7 +178,7 @@ Small_range_632
     # customer makes expert call via group name
     different_page_search_single_users    ${driver11}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
-    make_call_to_onCall     ${driver11}   ${driver22}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver11}   ${driver22}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # 结束通话
     exit_call       ${driver11}
     # 退出driver
@@ -190,7 +190,7 @@ Small_range_632
     ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}    ${universal_password}
     # Expert C is in call.
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # User B 登录   case中的customer
     ${driver3}    driver_set_up_and_logIn    ${User_B_username}     ${universal_password}
     # Expert A 登录
@@ -202,7 +202,7 @@ Small_range_632
     # customer makes expert call via group name
     different_page_search_single_users    ${driver3}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A no answer call
-    make_call_to_onCall     ${driver3}   ${driver4}    ${Quantum_Mechanics_group_name}       no_care
+    contacts_witch_page_make_call     ${driver3}   ${driver4}   ${py_team_page}   ${Quantum_Mechanics_group_name}       no_care
     # expert B receives incoming call after timeout 40s,expert B answers call
     sleep  30s
     user_anwser_call     ${driver5}
@@ -251,7 +251,7 @@ Small_range_633
     # customer makes expert call via group name
     different_page_search_single_users    ${driver11}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
-    make_call_to_onCall     ${driver11}   ${driver22}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver11}   ${driver22}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # 结束通话
     exit_call       ${driver11}
     # 退出driver
@@ -263,7 +263,7 @@ Small_range_633
     ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}    ${universal_password}
     # Expert C is in call.
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # User B 登录   case中的customer
     ${driver3}    driver_set_up_and_logIn    ${User_B_username}     ${universal_password}
     # Expert A 登录
@@ -275,7 +275,7 @@ Small_range_633
     # customer makes expert call via group name
     different_page_search_single_users    ${driver3}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A answers call
-    make_call_to_onCall     ${driver3}   ${driver4}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver3}   ${driver4}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # VP: expert A enter call view
     which_page_is_currently_on     ${driver4}    ${end_call_button}
     # other experts should not receive incoming call
@@ -306,7 +306,7 @@ Small_range_634
     # customer makes expert call via group name
     different_page_search_single_users    ${driver11}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
-    make_call_to_onCall     ${driver11}   ${driver22}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver11}   ${driver22}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # 结束通话
     exit_call       ${driver11}
     # 退出driver
@@ -318,7 +318,7 @@ Small_range_634
     ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}    ${universal_password}
     # Expert C is in call.
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${Quantum_Mechanics_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
     # User B 登录   case中的customer
     ${driver3}    driver_set_up_and_logIn    ${User_B_username}     ${universal_password}
     # Expert A 登录
@@ -330,7 +330,7 @@ Small_range_634
     # customer makes expert call via group name
     different_page_search_single_users    ${driver3}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A not care call
-    make_call_to_onCall     ${driver3}   ${driver4}    ${Quantum_Mechanics_group_name}    no_care
+    contacts_witch_page_make_call     ${driver3}   ${driver4}   ${py_team_page}   ${Quantum_Mechanics_group_name}    no_care
     # customer cancels call
     user_end_call_by_self   ${driver3}
     # VP: No expert has incoming call anymore.
@@ -355,7 +355,7 @@ Small_range_636
     ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}    ${universal_password}
     # expert and user A are in a call
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${another_on_call_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${another_on_call_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
     # User B 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}     ${universal_password}
     # expert invites user B
@@ -394,7 +394,7 @@ Small_range_637_642
     ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}    ${universal_password}
     # expert and user A are in a call
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${another_on_call_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${another_on_call_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
     # User B 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}     ${universal_password}
     # expert invites user B
@@ -420,7 +420,7 @@ Small_range_637_642
     verify_username_in_recents_page     ${driver3}    ${Expert_Bb_name}
     # customer clicks on on-call group name
     refresh_browser_page   ${driver1}
-    can_connect_call_or_not    ${driver1}    ${another_on_call_group_name}   can_connect    no_send_invite
+    recents_page_check_call    ${driver1}    ${another_on_call_group_name}   can_connect    no_send_invite
     # the same customer receives incoming call	customer accepts call
     user_anwser_call    ${driver2}
     # enter call view
@@ -437,7 +437,7 @@ Small_range_638_640
     ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}    ${universal_password}
     # expert and user A are in a call
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${another_on_call_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${another_on_call_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}     ${universal_password}
     # user A invites user C
@@ -466,7 +466,7 @@ Small_range_638_640
     verify_username_in_recents_page     ${driver3}    ${User_Aa_name}
     # make call via recent tab	expert clicks on customer's name
     refresh_browser_page   ${driver3}
-    can_connect_call_or_not    ${driver3}   ${User_Aa_name}   can_connect    no_send_invite
+    recents_page_check_call    ${driver3}   ${User_Aa_name}   can_connect    no_send_invite
     # the same customer receives incoming call	customer accepts call
     user_anwser_call    ${driver1}
     # enter call view
@@ -483,7 +483,7 @@ Small_range_639
     ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}    ${universal_password}
     # expert and user A are in a call
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${another_on_call_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${another_on_call_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}     ${universal_password}
     # user A invites user C
@@ -520,7 +520,7 @@ Small_range_646
     ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}     ${universal_password}
     # expert A 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_Aa_username}    ${universal_password}
-    make_call_to_onCall     ${driver1}   ${driver3}    ${another_on_call_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver3}   ${py_team_page}   ${another_on_call_group_name}
     exit_call    ${driver3}
     close_call_ending_page  ${driver1}
     close_call_ending_page  ${driver3}
@@ -530,7 +530,7 @@ Small_range_646
     # Expert A switch to WS2
     user_switch_to_second_workspace    ${driver3}    BigAdmin Premium
     # User of WS1 directly click on-call group name in contact list
-    make_call_to_onCall     ${driver1}   ${driver2}    ${another_on_call_group_name}    no_care
+    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}    no_care
     # VP: If other experts do not answer call, Expert A will receive incoming call
     sleep  30s
     # Expert A answer call
@@ -549,7 +549,7 @@ Small_range_647_648_649_650
     ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}    ${universal_password}
     # EU1 call on-call group from Team contacts
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${AaA_on_call_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${AaA_on_call_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}  ${py_team_page}    ${AaA_on_call_group_name}
     # expertB 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_BbB_username}    ${universal_password}
     # EU1 invite on-call group
@@ -572,7 +572,7 @@ Small_range_651_652_653
     ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}    ${universal_password}
     # EU1 call on-call group from Team contacts
     different_page_search_single_users    ${driver1}   ${py_contacts_page}    ${py_input_search}    ${py_get_number_of_rows}    ${AaA_on_call_group_name}   # search on-call-group in Team page
-    make_call_to_onCall     ${driver1}   ${driver2}    ${AaA_on_call_group_name}
+    contacts_witch_page_make_call     ${driver1}   ${driver2}  ${py_team_page}    ${AaA_on_call_group_name}
     # expertA send 3PI link to anonymous user
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}   send_invite_in_calling_page    ${driver2}

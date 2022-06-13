@@ -487,7 +487,7 @@ Small_range_671_672_673
     verify_username_in_recents_page    ${driver1}    ${Expert_User2_name}
     # User A clicks this record.
     refresh_browser_page   ${driver1}
-    can_connect_call_or_not    ${driver1}    ${Expert_User2_name}    can_connect   no_send_invite
+    recents_page_check_call    ${driver1}    ${Expert_User2_name}    can_connect   no_send_invite
     # Verify:call connected
     user_anwser_call     ${driver2}
     exit_call    ${driver1}

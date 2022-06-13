@@ -17,45 +17,45 @@ UI_testcase
     ui_check_test
     [Teardown]    Close
 
-Enabled_Disabled_Retention_Policy_for_Recordings
-    [Documentation]    Enabled Retention Policy for Recordings
-    [Tags]    Citron 319
-    # log in with workspaces admin
-    Login_workspaces_admin_one
-    # enter Workspace Settings page
-    enter_workspace_settings_page
-    # Enabled Retention Policy for Recordings
-    enable_retention_policy_on_off_modified_record_in_crunch
-    # close browser
-    Close
-    # log in with crunch site admin
-    Login_crunch
-    # enter crunch Audit Logs page
-    enter_enterprises_audit_log
-    # The message 'User who enabled policy, and date/time of the event.' should be added.
-    modify_record_in_crunch_is_correct    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) and enabled feature 'recording_retention_policy'.    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) and disabled feature 'recording_retention_policy'.
-    [Teardown]    Close
-
-Click_Edit_button_set_Day_to_1
-    [Documentation]    Click Edit button Set Day =1
-    [Tags]    Citron 320
-    [Setup]   restore_the_settings_to_the_initial_value
-    # log in with workspaces admin
-    Login_workspaces_admin_one
-    # enter Workspace Settings page
-    enter_workspace_settings_page
-    # Click Edit button Set Day =1 and =60
-    set_RaSC_day_equal_to_1_and_60
-    # close browser
-    Close
-    # log in with crunch site admin
-    Login_crunch
-    # enter crunch Audit Logs page
-    enter_enterprises_audit_log
-    # The message 'User who enabled policy, and date/time of the event.' should be added.
-    modify_record_in_crunch_is_correct    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '1'.    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '60'.
-    [Teardown]   Run Keywords   Close
-    ...          AND            restore_the_settings_to_the_initial_value
+#Enabled_Disabled_Retention_Policy_for_Recordings
+#    [Documentation]    Enabled Retention Policy for Recordings
+#    [Tags]    Citron 319     有bug：https://vipaar.atlassian.net/browse/CITRON-3426   crunch没有相应的日志
+#    # log in with workspaces admin
+#    Login_workspaces_admin_one
+#    # enter Workspace Settings page
+#    enter_workspace_settings_page
+#    # Enabled Retention Policy for Recordings
+#    enable_retention_policy_on_off_modified_record_in_crunch
+#    # close browser
+#    Close
+#    # log in with crunch site admin
+#    Login_crunch
+#    # enter crunch Audit Logs page
+#    enter_enterprises_audit_log
+#    # The message 'User who enabled policy, and date/time of the event.' should be added.
+#    modify_record_in_crunch_is_correct    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) and enabled feature 'recording_retention_policy'.    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) and disabled feature 'recording_retention_policy'.
+#    [Teardown]    Close
+#
+#Click_Edit_button_set_Day_to_1
+#    [Documentation]    Click Edit button Set Day =1
+#    [Tags]    Citron 320         有bug：https://vipaar.atlassian.net/browse/CITRON-3426   crunch没有相应的日志
+#    [Setup]   restore_the_settings_to_the_initial_value
+#    # log in with workspaces admin
+#    Login_workspaces_admin_one
+#    # enter Workspace Settings page
+#    enter_workspace_settings_page
+#    # Click Edit button Set Day =1 and =60
+#    set_RaSC_day_equal_to_1_and_60
+#    # close browser
+#    Close
+#    # log in with crunch site admin
+#    Login_crunch
+#    # enter crunch Audit Logs page
+#    enter_enterprises_audit_log
+#    # The message 'User who enabled policy, and date/time of the event.' should be added.
+#    modify_record_in_crunch_is_correct    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '1'.    User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '60'.
+#    [Teardown]   Run Keywords   Close
+#    ...          AND            restore_the_settings_to_the_initial_value
 
 Click_Edit_button_set_Day_to_0_and_366
     [Documentation]    Click Edit button Set Day =1
@@ -70,7 +70,7 @@ Click_Edit_button_set_Day_to_0_and_366
 
 Turn_both_Call_Logs_and_Recordings_Screen_Captures_policies_ON
     [Documentation]    Turn both Call Logs and Recordings/Screen Captures policies ON
-    [Tags]    Citron 327-336
+    [Tags]    Citron 327-336    crunch的check功能删除？
     [Setup]     run keywords      restore_the_settings_to_the_initial_value
     ...         AND               Login_workspaces_admin_one   # log in with workspaces admin
     ...         AND               enter_workspace_settings_page    # enter Workspace Settings page

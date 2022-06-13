@@ -30,13 +30,13 @@ ${py_team_user_search}                          //div[@id="user-tabs-pane-1"]//i
 ${py_personal_user_search}                      //div[@id="user-tabs-pane-2"]//input[@id="filter-text-box"]                                         # personal search input box
 ${py_input_search}                              //input[@id="filter-text-box"]                                                                      # search entry box
 ${py_get_number_of_rows}                        //div[@class="ag-center-cols-container"]/div                                                        # Get number of rows
-${py_directory_switch_success}                  //h1[contains(.,"Directory")]                                                                       # switch to Directory page successfully
+${py_directory_switch_success}                  //a[@id="user-tabs-tab-directory" and @aria-selected="true"]                                        # switch to Directory page successfully
 ${py_users_switch_success}                      //span[contains(.,"Active Users")]                                                                  # switch to Users page successfully
 ${py_groups_switch_success}                     //h1[text()="Groups"]                                                                               # switch to Groups page successfully
 ${py_contacts_switch_success}                   //h1[contains(.,"Contacts")]                                                                        # switch to Contacts page successfully
-${py_personal_switch_success}                   //li[@class="active"]/a[@id="user-tabs-tab-2"]                                                      # switch to Personal page successfully
+${py_personal_switch_success}                   //a[@id="user-tabs-tab-personal" and @aria-selected="true"]                                         # switch to Personal page successfully
 ${py_recents_switch_success}                    //h1[contains(.,"Recent Calls")]                                                                    # switch to Recents page successfully
-${py_favorites_switch_success}                  //h1[contains(.,"Favorites")]                                                                       # switch to Favorites page successfully
+${py_favorites_switch_success}                  //a[@id="user-tabs-tab-favorites" and @aria-selected="true"]                                        # switch to Favorites page successfully
 ${login_page_username}                          //input[@autocomplete="username"]                                                                   # 登录页面的输入用户名的xpath
 ${invite_user_in_calling}                       //div[@class="menus"]//*[@*="#options_menu"]                                                        # 在通话中的页面邀请user的按钮（右上角三个横杠）
 ${end_call_button}                              //div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']                                  # 通话中的结束通话红色按钮

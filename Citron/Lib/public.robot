@@ -150,8 +150,14 @@ check_disclaimer
 
 check_tutorial_again
     # close 弹框
-    wait until element is visible    ${button_of_popup}
-    Click Button    ${button_of_popup}
+    FOR   ${i}    IN RANGE   0    15
+        ${count}   get element count   ${button_of_popup}
+        Run Keyword If    '${count}'=='1'    click element   ${button_of_popup}
+        Exit For Loop If    '${count}'=='1'
+        Run Keyword If   '${count}'=='0'    sleep   1s
+    END
+#    wait until element is visible    ${button_of_popup}     20s
+#    Click Button    ${button_of_popup}
     sleep    1s
     # 检查还有没有弹框
     ${count}   get element count    ${button_of_popup}

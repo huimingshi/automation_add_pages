@@ -51,6 +51,7 @@ submit_button = '//button[@type="submit"]'
 next_button = '//button[text()="Next"]'
 login_button = '//button[text()="Log In"]'
 search_input = '//input[@id="filter-text-box"]'
+contacts_search_input = '//div[@id="user-tabs-pane-{}"]//input[@id="filter-text-box"]'
 add_comment = '//textarea[@placeholder="Add a comment..."]'
 accept_disclaimer = '//button[@class="pull-right btn btn-primary"]'     # ACCEPT Disclaimer when call或者就只是ACCEPT Disclaimer
 close_tutorial_button = '//div[@class="modal-header"]//button[@class="close"]'
@@ -64,7 +65,7 @@ add_tag_input = '//input[@placeholder="Add tags to filter calls..."]'       # ca
 add_tag_input_after = '//span[@class="k-searchbar"]/input[@type="text"]'    # call结束后已经添加tag后，再添加tag
 end_call_before_connecting = '//button[@class="btn btn-lg btn-danger"]'
 invite_user_div = "//div[@class='InCall']//*[@*='#options_menu']/.."   # 通话中界面右上角的三个横岗
-enter_invite_user_page = '//span[contains(.,"Invite")]/../../div[@class="submenu-container"][1]'
+enter_invite_user_page = '//div[@class="submenu-icons"]//span[text()="Invite"]/..'
 enter_debug_page = '//span[contains(.,"Invite")]/../../div[@class="submenu-container"][2]'
 close_bounced_after_call_end = '//button[@class="k-button k-button-icon closeButton"]'
 checkbox_xpath = '//input[@name="oneTime" and @type="checkbox"]'
@@ -104,8 +105,10 @@ do_not_record = '//a[text()="Do not record"]/../..'
 video_on_button = "//div[@class='InCall']//*[@*='#video_on']"
 return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
-count_of_call_user = '//div[@class="F2FVideo ShowOpenTokVideos"]/div'
+# count_of_call_user = '//div[@class="F2FVideo ShowOpenTokVideos"]/div'
+count_of_call_user = '//h6[@class="participantName"]'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
 please_wait = '//div[@class="InvalidLinkView"]/h2[text()="Please wait."]'
 zhuanquanquan = '//div[@id="whiteboard_progress_bar_container"]'
+notification_content = '//div[@class="k-notification-content"]'      # 底下抛出的绿色的提示信息，比如修改成功，发送成功

@@ -209,16 +209,9 @@ def my_account_change_name_and_avator(driver,change_name,change_avator,picture_p
     # 判断是否需要更改name
     name_attribute = get_xpath_element(driver,my_account_name,description = '我的账号').get_attribute('value')
     if name_attribute != change_name:
-        try:
-            get_xpath_element(driver,my_account_name,description = '我的账号').clear()
-            time.sleep(2)
-            get_xpath_element(driver,my_account_name,description = '我的账号').send_keys(change_name)
-        except Exception as e:
-            print('更改name失败',e)
-            screen_shot_func(driver, '更改name失败')
-            raise Exception
-        else:
-            print('更改name成功')
+        get_xpath_element(driver,my_account_name,description = '我的账号').clear()
+        time.sleep(2)
+        get_xpath_element(driver,my_account_name,description = '我的账号').send_keys(change_name)
     # 判断是否需要更改avator
     if change_avator == 'change':
         get_xpath_element(driver,'//input[@type="file"]',ec='ec').send_keys(picture_path)
@@ -230,9 +223,12 @@ def my_account_change_name_and_avator(driver,change_name,change_avator,picture_p
         time.sleep(1)
     public_check_element(driver, '//button[@type="submit" and contains(.,"Update")]', '点击Update失败')
     for i in range(10):
-        element_list = get_xpath_elements(driver,'//div[@class="k-notification-content"]')
-        if len(element_list) == 0:
+        element_list = get_xpath_elements(driver,notification_content)
+        if len(element_list) == 1:
             break
+        elif i == 9:
+            screen_shot_func(driver, '没有出现绿色的提示信息')
+            raise Exception
         else:
             time.sleep(1)
     if back_to_contact == 'back_to_contact':
@@ -274,7 +270,7 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     make_sure_enter_call(driver)
     for i in range(5):
         ele_list = get_xpath_elements(driver,count_of_call_user)
-        if len(ele_list) > 3:
+        if len(ele_list) > 2:
             break
         elif i == 4:
             screen_shot_func(driver, '当前参与通话的人数不到3人')
@@ -333,7 +329,7 @@ def exit_call(driver,check_user_count='check',call_time=10):
     if check_user_count == 'check':
         for i in range(5):
             ele_list = get_xpath_elements(driver,count_of_call_user)
-            if len(ele_list) >= 3:
+            if len(ele_list) >= 2:
                 break
             elif i == 4:
                 screen_shot_func(driver, '当前参与通话的人数不到2人')
@@ -370,7 +366,7 @@ def end_call_for_all(driver,call_time=25):
     make_sure_enter_call(driver)
     for i in range(10):
         ele_list = get_xpath_elements(driver,count_of_call_user)
-        if len(ele_list) > 3:
+        if len(ele_list) > 2:
             break
         elif i == 9:
             screen_shot_func(driver, '当前参与通话的人数不到3人')
@@ -761,23 +757,23 @@ def switch_to_other_tab(driver,tab_xpath):
     public_check_element(driver, tab_xpath, '切换元素失败')
     time.sleep(3)
 
-def different_page_search_single_users(driver,which_page,search_input_xpath,data_count_xpath,search_user):
+def contacts_different_page_search_user(driver,which_page,search_user):
     """
     在不同的页面进行user查询
     :param driver:
-    :param which_page: 哪个页面
-    :param search_input_xpath: 查询框的xpath
-    :param data_count_xpath: 展示的data数对应的xpath
+    :param which_page: Contacts下的哪个页面? Favorites/Team/Personal/Directory四个页面
     :param search_user: 要查询的用户
     :return:
     """
-    ele = get_xpath_element(driver,search_input_xpath,description = f'{which_page}页面查询输入框')
+    contacts_search_input_format = contacts_search_input.format(which_page.lower())
+    ele = get_xpath_element(driver,contacts_search_input_format,description = f'{which_page}页面查询输入框')
     ele.clear()
     time.sleep(1)
-    public_click_element(driver,search_input_xpath,description = f'{which_page}页面查询输入框')
+    public_click_element(driver,contacts_search_input_format,description = f'{which_page}页面查询输入框')
     ele.send_keys(search_user)
     for i in range(3):
-        element_list = get_xpath_elements(driver,data_count_xpath)
+        user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[text()="{search_user}"]'
+        element_list = get_xpath_elements(driver,user_xpath)
         if len(element_list) == 1:
             break
         elif i == 2:
@@ -786,18 +782,19 @@ def different_page_search_single_users(driver,which_page,search_input_xpath,data
         else:
             time.sleep(int(IMPLICIT_WAIT))
 
-def judge_reachable_or_not(driver,data_count_xpath,unreachable = 'unreachable'):
+def contacts_judge_reachable_or_not(driver,which_page,which_user,unreachable = 'unreachable'):
     """
     判断用户是否reachable
     :param driver:
-    :param data_count_xpath: 数据对应的xpath
+    :param which_page: Contacts下的哪个页面? Favorites/Team/Personal/Directory四个页面
+    :param which_user: 要判断是否在线的用户
     :param unreachable: 是否unreachable，默认为unreachable
     :return:
     """
-    attr_xpath = data_count_xpath + '/div[@col-id="name"]'
+    user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[text()="{which_user}"]/../../..'
     # 等待数据出现
-    public_check_element(driver, attr_xpath, '数据未出现', if_click = None)
-    class_attr = get_xpath_element(driver,attr_xpath,ec='ec').get_attribute('class')
+    public_check_element(driver, user_xpath, '数据未出现', if_click = None)
+    class_attr = get_xpath_element(driver,user_xpath,ec='ec').get_attribute('class')
     print(class_attr)
     if unreachable == 'unreachable':
         public_assert(driver,'unreachableText',class_attr,condition='in',action='本该置灰user却没置灰')
@@ -875,32 +872,51 @@ def switch_to_diffrent_page(driver,switch_page,switch_success_tag,data_show,swit
     if switch_tree == 'switch_tree':
         public_click_element(driver,f'//div[@role="tree"]/div[{int(which_tree)}]',description = f'{which_tree}目录树')
         time.sleep(1)
+    if switch_page == 'Favorites' or switch_page == 'Directory' or switch_page == 'Personal':
+        public_click_element(driver, '//span[contains(.,"Contacts")]', description='Contacts页面')
     public_click_element(driver,f'//span[contains(.,"{switch_page}")]',description = f'{switch_page}页面')
     time.sleep(1)
-    for i in range(5):
-        element_list = get_xpath_elements(driver,switch_success_tag)
-        if len(element_list) == 1:
-            time.sleep(2)
-            element_list_data = get_xpath_elements(driver,data_show)
-            if len(element_list_data) > 0:
-                break
+    if switch_page == 'Favorites' or switch_page == 'Directory' or switch_page == 'Personal':
+        for i in range(5):
+            element_list = get_xpath_elements(driver, switch_success_tag)
+            if len(element_list) == 1:
+                time.sleep(2)
+                element_list_data = get_xpath_elements(driver, f'//div[@id="user-tabs-pane-{switch_page.lower()}"]//div[@class="ag-center-cols-container"]/div')
+                if len(element_list_data) > 0:
+                    break
             elif i == 4:
-                print(f'切换到{switch_page}页面后数据未加载出')
-                if switch_page == 'Recents':
-                    public_click_element(driver,'//button[text()="Refresh"]',description = 'Refresh按钮')
-                    public_check_element(driver, data_show, f'刷新{switch_page}页面后数据仍然未加载出', if_click=0, if_show=1)
+                print(f'未切换到Contacts下的{switch_page}页面')
+                screen_shot_func(driver, f'未切换到Contacts下的{switch_page}页面')
+                raise Exception(f'未切换到Contacts下的{switch_page}页面')
             else:
                 time.sleep(1)
-        elif i == 4:
-            print(f'未切换到{switch_page}页面')
-            raise Exception(f'未切换到{switch_page}页面')
-        else:
-            time.sleep(1)
+    else:
+        for i in range(5):
+            element_list = get_xpath_elements(driver,switch_success_tag)
+            if len(element_list) == 1:
+                time.sleep(2)
+                element_list_data = get_xpath_elements(driver,data_show)
+                if len(element_list_data) > 0:
+                    break
+                elif i == 4:
+                    print(f'切换到{switch_page}页面后数据未加载出')
+                    if switch_page == 'Recents':
+                        public_click_element(driver,'//button[text()="Refresh"]',description = 'Refresh按钮')
+                        public_check_element(driver, data_show, f'刷新{switch_page}页面后数据仍然未加载出', if_click=0, if_show=1)
+                else:
+                    time.sleep(1)
+            elif i == 4:
+                print(f'未切换到{switch_page}页面')
+                screen_shot_func(driver,f'未切换到{switch_page}页面')
+                raise Exception(f'未切换到{switch_page}页面')
+            else:
+                time.sleep(1)
 
-def get_all_data_on_the_page(driver,search_key = 'cardName'):
+def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
     """
     获取当前页面的所有user数据
     :param driver:
+    :param witch_page: 哪个页面
     :param search_key:xpath中的关键值，普通页面（Directory或者Users页面）和通话中邀请第三位用户的页面的user对应的xpath不同
     :return: user list
     """
@@ -927,7 +943,10 @@ def get_all_data_on_the_page(driver,search_key = 'cardName'):
         else:
             # 如果当前循环下，尾条数据不存在，就进行向下滑动(每次向下滑动 当前浏览器的高度像素的四分之一)
             quarter_of_the_height_n = quarter_of_the_height_n + quarter_of_the_height
-            js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'
+            if witch_page == 'Directory':
+                js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[2].scrollTop={quarter_of_the_height_n}'
+            else:
+                js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'
             driver.execute_script(js)
             # 判断滑动后，尾条数据是否还能展示
             print(i+3)
@@ -1098,7 +1117,26 @@ def remove_value_from_list(list,value):
     print(len(list))
     return list
 
-def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',send_invite = 'send_invite'):
+def contacts_page_send_email(driver,username):
+    """
+    在Favorites/Team/Personal/Directory页面点击Invite按钮
+    :param driver:
+    :param username:
+    :return:
+    """
+    invite_xpath = f'//div[text()="{username}"]/../../../..//div[@class="button invite-btn-container"]'
+    public_click_element(driver,invite_xpath,description='Invite按钮')
+    for i in range(10):
+        element_list = get_xpath_elements(driver,notification_content)
+        if len(element_list) == 1:
+            break
+        elif i == 9:
+            screen_shot_func(driver, '没有出现绿色的提示信息')
+            raise Exception
+        else:
+            time.sleep(1)
+
+def recents_page_check_call(driver,user_name,can_connect = 'can_not_connect',send_invite = 'send_invite'):
     """
     判断在Recents页面点击Call按钮能否打通这个Call
     :param driver:
@@ -1107,7 +1145,13 @@ def can_connect_call_or_not(driver,user_name,can_connect = 'can_not_connect',sen
     :param send_invite: 不能打通时，是否需要发送邀请
     :return:
     """
-    public_click_element(driver,f'//div[@class="cardName" and contains(.,"{user_name}")]/../../../..//button[contains(.,"Call")]',description = 'Call按钮')
+    # 鼠标悬停
+    ellipsis_xpath = f'//div[text()="{user_name}"]/../../../..//div[@class="ellipsis-menu-div"]'
+    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='悬浮按钮')
+    ActionChains(driver).move_to_element(ellipsis).perform()
+    # 选择Audio
+    audio_xpath = f'//div[text()="{user_name}"]/../../../..//span[text()="Audio+"]/..'
+    public_click_element(driver, audio_xpath, description='启动Audio按钮')
     if can_connect == 'can_not_connect':
         for i in range(3):
             ele_list = get_xpath_elements(driver,send_invite_button)

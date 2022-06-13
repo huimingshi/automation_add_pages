@@ -272,7 +272,7 @@ Call_survey_608_610
     # enterprise user登录
     ${driver3}   driver_set_up_and_logIn    ${personal_user_username}           ${personal_user_password}
     # make call with on-call
-    make_call_to_onCall   ${driver1}   ${driver2}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}
     # Customer invite a enterprise user
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user   ${driver1}    ${personal_user_name}
@@ -377,7 +377,7 @@ Call_survey_611_615
     close_last_window   ${driver3}
     close_last_window   ${driver3}
     refresh_browser_page    ${driver3}
-    make_calls_with_who   ${driver1}   ${driver3}   ${big_admin_first_WS_username}   no_anwser    not_personal
+    contacts_witch_page_make_call   ${driver1}   ${driver3}   ${py_team_page}   ${big_admin_first_WS_username}   no_anwser
     # Accept Call
     user_anwser_call    ${driver3}
     # Enter call view. And the tag screen or survey web view will be closed
@@ -389,7 +389,7 @@ Call_survey_611_615
     # C receives an incoming call from A
     close_call_ending_page   ${driver1}
     refresh_browser_page    ${driver3}
-    make_calls_with_who   ${driver1}   ${driver3}   ${big_admin_first_WS_username}   no_anwser    not_personal
+    contacts_witch_page_make_call   ${driver1}   ${driver3}   ${py_team_page}   ${big_admin_first_WS_username}   no_anwser
     # Cancel
     user_decline_call   ${driver3}
     # return to the previous page before entering call.

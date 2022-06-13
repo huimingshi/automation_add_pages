@@ -48,7 +48,7 @@ Small_range_152
     # user3 log in
     ${driver3}  driver_set_up_and_logIn     ${Expert_User3_username}   ${universal_password}
     # 2 users in face to face mode
-    make_calls_with_who   ${driver1}   ${driver2}   ${Expert_User2_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # 3rd user join as 3pc call
@@ -71,14 +71,14 @@ Small_range_153_160
     ${driver1}  driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
     # contact of Enterprise user log in
     ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}    ${universal_password}
-    make_calls_with_who   ${driver1}   ${driver2}   ${belong_enterprise_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
     # uncheck "Continue to show hints" checkbox
     switch_to_other_tab     ${driver1}     //div[@class="checkbox"]//input[@type="checkbox"]
     # End call, then make another call
     exit_call    ${driver1}
     close_call_ending_page    ${driver1}
     close_call_ending_page    ${driver2}
-    make_calls_with_who   ${driver1}   ${driver2}   ${belong_enterprise_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
     # VP: hint dialog does not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
     # End call
@@ -99,7 +99,7 @@ Small_range_153_160
     which_page_is_currently_on     ${driver1}    //h1[text()="Menu Items"]/..//div[@class="react-toggle react-toggle--checked"]
     # call contact in F2F mode
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    make_calls_with_who   ${driver1}   ${driver2}   ${belong_enterprise_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_contacts_page}    ${belong_enterprise_name}
     # VP: hint dialog shows
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # click Close on hint dialog
@@ -127,7 +127,7 @@ Small_range_161
     # user2 log in
     ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}   ${universal_password}
     # call contact in F2F mode
-    make_calls_with_who   ${driver1}   ${driver2}   ${Expert_User2_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Mute,Camera and End Call icon are at 50% opacity;
@@ -160,7 +160,7 @@ Join_call_162_167
     # TU2 登录
     ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}           ${personal_user_password}
     # EU1 calls TU2. TU2 answers call
-    make_calls_with_who   ${driver1}   ${driver2}   ${Team_User1_username}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}  ${py_team_page}   ${Team_User1_name}
     # EU3 登录
     ${driver3}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
     # PU4 登录
@@ -205,7 +205,7 @@ Join_call_168_178
     # EU1 登录
     ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}        ${call_oncall_user_password}
     # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
-    make_call_to_onCall     ${driver1}    ${driver2}    ${On_call_group_001}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}    send_invite_in_calling_page    ${driver2}
     close_invite_3th_page    ${driver2}
@@ -390,7 +390,7 @@ Join_call_196_200
     # EU2 登录
     ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}        ${call_oncall_user_password}
     # EU1 calls EU2. EU2 answers call,
-    make_calls_with_who     ${driver1}     ${driver2}     ${Expert_User2_username}
+    contacts_witch_page_make_call     ${driver1}     ${driver2}   ${py_team_page}    ${Expert_User2_name}
     # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
     sleep   10s
     hang_up_the_phone     ${driver1}
@@ -501,7 +501,7 @@ Small_range_560_580
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # EU1 call EU2 from contact list
-    make_calls_with_who     ${driver1}    ${driver2}    ${Expert_User2_username}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: Invite contact tab is default for EU1 and EU2;Send 3PI link is available;
     open_invite_3rd_participant_dialog     ${driver1}    no_enter
     close_invite_3th_page     ${driver1}
@@ -606,7 +606,7 @@ Small_range_581_582
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # EU1 call EU2 from contact list
-    make_calls_with_who     ${driver1}    ${driver2}    ${Expert_User2_username}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # Expert 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_AaA_username}     ${universal_password}
     # EU1 invte on-call group
@@ -631,10 +631,10 @@ Small_range_583_585
     ${invite_otu_url}   send_meeting_room_link    ${driver1}   OTU
     ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
     # EU1 call EU2 from contact list
-    make_calls_with_who     ${driver1}    ${driver2}    ${Expert_User2_username}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${Expert_User2_name}
     # Someone directly call EU1 or EU2	Someone get messgage about EU1 is on another call
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
-    make_calls_with_who     ${driver3}    ${driver1}    ${Expert_User1_username}    no_anwser
+    contacts_witch_page_make_call     ${driver3}    ${driver1}   ${py_team_page}   ${Expert_User1_name}    no_anwser
     which_page_is_currently_on    ${driver3}    ${user_is_currently_on_another_call}
     exit_one_driver    ${driver3}
     # Someone click EU1 or EU2's MHS link	Someone get messgage about EU1 is on another call
@@ -663,7 +663,7 @@ Small_range_590
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # TU1 call EU1 from contact list
-    make_calls_with_who     ${driver1}    ${driver2}    ${Expert_User1_username}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User1_name}
     # VP: TU1 can only invite, can not send 3PI
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
@@ -699,7 +699,7 @@ Small_range_592
     # personal contact 登录
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
     # TU1 call EU1 from contact list
-    make_calls_with_who     ${driver1}    ${driver2}    ${ws_branding_A_user}    anwser    is_personal
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${ws_branding_A_name}
     # VP: The personal contact from different site does not have invite 3rd parcipant icon
     which_page_is_currently_on     ${driver2}     ${invite_user_in_calling}     not_currently_on
     [Teardown]      run keywords    Close

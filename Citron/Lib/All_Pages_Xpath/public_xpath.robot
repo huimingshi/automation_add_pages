@@ -23,7 +23,7 @@ ${close_details_button}                     xpath=//div[@class="modal-header"]//
 ${report_view_button}                       xpath=//button[contains(.,'Report View')]                                                               # Report View button
 ${share_this_filter_button}                 xpath=//button[contains(.,'Share This Filter')]                                                         # Share This Filter button
 ${export_to_CSV_button}                     xpath=//button[contains(.,'Export to CSV')]                                                             # Export to CSV button
-${input_search}                             xpath=//input[@id="filter-text-box"]                                                                    # search entry box
+${team_input_search}                        xpath=//div[@id="user-tabs-pane-team"]//input[@id="filter-text-box"]                                    # Team search entry box
 ${universal_password}                       *IK<8ik,8ik,                                                                                            # Universal password
 ${workspace_role_list}                      xpath=//span[@role="listbox"]//i                                                                        # workspace role list
 ${second_workspace_xpath}                   xpath=//ul[@role="listbox" and @class="k-list k-reset"]/li[2]                                           # second workspace xpath
