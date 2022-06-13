@@ -468,7 +468,7 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     time.sleep(5)
     contacts_search_result = f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[text()="{who}"]'
     ele_ment = get_xpath_elements(driver1, contacts_search_result)
-    print('0000000000000000000000000000000000', len(ele_ment))
+    print(f'{witch_page}输入框个数', len(ele_ment))
     if len(ele_ment) < 1:
         refresh_page(driver1)
         element = get_xpath_element(driver1, contacts_search_input_format, description='搜索框')
@@ -483,13 +483,13 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     # 选择Audio
     audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Audio+"]/..'
     public_click_element(driver1,audio_xpath,description='启动Audio按钮')
-    # # 需要Accept Declaimer
-    # count = get_xpath_elements(driver1, accept_disclaimer)
-    # if len(count) == 1:
-    #     public_click_element(driver1, accept_disclaimer, '点击ANWSER按钮失败')
-    # 断言是否呼叫成功
-    count = get_xpath_elements(driver1, end_call_before_connecting)
-    public_assert(driver1, len(count), 1, action='发起call失败')
+    # 需要Accept Declaimer
+    count = get_xpath_elements(driver1, accept_disclaimer)
+    if len(count) == 1:
+        public_click_element(driver1, accept_disclaimer, '点击ANWSER按钮失败')
+    # # 断言是否呼叫成功
+    # count = get_xpath_elements(driver1, end_call_before_connecting)
+    # public_assert(driver1, len(count), 1, action='发起call失败')
     # 另一端ACCEPT OR DECLINE
     if accept == 'accept':
         public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')

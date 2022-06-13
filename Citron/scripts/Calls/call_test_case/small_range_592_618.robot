@@ -377,7 +377,7 @@ Call_survey_611_615
     close_last_window   ${driver3}
     close_last_window   ${driver3}
     refresh_browser_page    ${driver3}
-    contacts_witch_page_make_call   ${driver1}   ${driver3}   ${py_team_page}   ${big_admin_first_WS_username}   no_anwser
+    contacts_witch_page_make_call   ${driver1}   ${driver3}   ${py_team_page}   ${big_admin_first_WS_name}   no_anwser
     # Accept Call
     user_anwser_call    ${driver3}
     # Enter call view. And the tag screen or survey web view will be closed
@@ -389,7 +389,7 @@ Call_survey_611_615
     # C receives an incoming call from A
     close_call_ending_page   ${driver1}
     refresh_browser_page    ${driver3}
-    contacts_witch_page_make_call   ${driver1}   ${driver3}   ${py_team_page}   ${big_admin_first_WS_username}   no_anwser
+    contacts_witch_page_make_call   ${driver1}   ${driver3}   ${py_team_page}   ${big_admin_first_WS_name}   no_anwser
     # Cancel
     user_decline_call   ${driver3}
     # return to the previous page before entering call.
