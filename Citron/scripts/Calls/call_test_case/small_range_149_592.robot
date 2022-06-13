@@ -99,7 +99,7 @@ Small_range_153_160
     which_page_is_currently_on     ${driver1}    //h1[text()="Menu Items"]/..//div[@class="react-toggle react-toggle--checked"]
     # call contact in F2F mode
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_contacts_page}    ${belong_enterprise_name}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
     # VP: hint dialog shows
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # click Close on hint dialog
@@ -699,7 +699,8 @@ Small_range_592
     # personal contact 登录
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
     # TU1 call EU1 from contact list
-    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${ws_branding_A_name}
+    switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_personal_page}   ${ws_branding_A_name}
     # VP: The personal contact from different site does not have invite 3rd parcipant icon
     which_page_is_currently_on     ${driver2}     ${invite_user_in_calling}     not_currently_on
     [Teardown]      run keywords    Close

@@ -483,10 +483,10 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     # 选择Audio
     audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Audio+"]/..'
     public_click_element(driver1,audio_xpath,description='启动Audio按钮')
-    # 需要Accept Declaimer
-    count = get_xpath_elements(driver1, accept_disclaimer)
-    if len(count) == 1:
-        public_click_element(driver1, accept_disclaimer, '点击ANWSER按钮失败')
+    # # 需要Accept Declaimer
+    # count = get_xpath_elements(driver1, accept_disclaimer)
+    # if len(count) == 1:
+    #     public_click_element(driver1, accept_disclaimer, '点击ANWSER按钮失败')
     # 断言是否呼叫成功
     count = get_xpath_elements(driver1, end_call_before_connecting)
     public_assert(driver1, len(count), 1, action='发起call失败')
@@ -627,10 +627,8 @@ def enter_FGD_mode(driver,witch_mode):
         time.sleep(2)
         public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Document"]/..',ec='ec')
         get_xpath_element(driver,'//input[@name="upload-file"]',ec='ec').send_keys(get_picture_path('test_citron.pdf'))
-        ele_list = get_xpath_elements(driver,'//div[@class="DocToolBar show"]/button[text()="Share"]')
-        public_assert(driver, len(ele_list), 1, action='切换FGD模式失败')
-        public_click_element(driver,"//div[@class='InCall']//*[@*='#pdf_on']",ec='ec')
-        public_click_element(driver,return_vidoe_on)
+        # public_click_element(driver,"//div[@class='InCall']//*[@*='#pdf_on']",ec='ec')
+        # public_click_element(driver,return_vidoe_on)
     elif witch_mode == "Photo":
         public_click_element(driver,video_on_button,ec='ec')
         time.sleep(2)
