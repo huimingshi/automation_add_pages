@@ -66,7 +66,7 @@ add_tag_input_after = '//span[@class="k-searchbar"]/input[@type="text"]'    # ca
 end_call_before_connecting = '//button[@class="btn btn-lg btn-danger"]'
 invite_user_div = "//div[@class='InCall']//*[@*='#options_menu']/.."   # 通话中界面右上角的三个横岗
 enter_invite_user_page = '//div[@class="submenu-icons"]//span[text()="Invite"]/..'
-enter_debug_page = '//span[contains(.,"Invite")]/../../div[@class="submenu-container"][2]'
+enter_debug_page = '//span[text()="Debug"]/..'
 close_bounced_after_call_end = '//button[@class="k-button k-button-icon closeButton"]'
 checkbox_xpath = '//input[@name="oneTime" and @type="checkbox"]'
 first_time_call_started = '//div[@row-index="0"]/div[@col-id="timeCallStarted"]'
@@ -102,8 +102,12 @@ debug_tools_close_xpath = '//h1[text()="Debug Tools"]/..//div[@class="react-togg
 recording_settings = '//button[@id="recording-settings"]'                   # REC设置
 record_this_session = '//a[text()="Record this session"]/../..'
 do_not_record = '//a[text()="Do not record"]/../..'
-video_on_button = "//div[@class='InCall']//*[@*='#video_on']"
+webglCameraOff = "//canvas[@id='webglCameraOff']"
+video_on_button = '//div[@class="InCall"]//div[@class="menus false"]/div[@class="menu withsub  "]'
 return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
+pdf_on_button = "//div[@class='InCall']//*[@*='#pdf_on']"
+ghop_on_button = "//div[@class='InCall']//*[@*='#ghop_on']/../.."
+upload_file = '//input[@name="upload-file"]'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
 # count_of_call_user = '//div[@class="F2FVideo ShowOpenTokVideos"]/div'
 count_of_call_user = '//h6[@class="participantName"]'

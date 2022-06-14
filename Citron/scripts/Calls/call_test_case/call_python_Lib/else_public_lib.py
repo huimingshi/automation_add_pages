@@ -931,17 +931,17 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
     print(quarter_of_the_height)
     driver.implicitly_wait(int(6))
     while True:
-        if witch_page == 'Directory':
-            ele_list_1 = driver.find_elements_by_xpath(f'//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')  # 取每次循环的第一行数据（每4条数据一次循环）
-            ele_list_2 = driver.find_elements_by_xpath(f'//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div[@row-index="{i + 3}"]//div[@class="{search_key}"]')  # 取每次循环的最后一行数据（每4条数据一次循环）
+        if witch_page == 'Directory' or witch_page == 'Team':
+            ele_list_1 = driver.find_elements_by_xpath(f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')  # 取每次循环的第一行数据（每4条数据一次循环）
+            ele_list_2 = driver.find_elements_by_xpath(f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[@class="ag-center-cols-container"]/div[@row-index="{i + 3}"]//div[@class="{search_key}"]')  # 取每次循环的最后一行数据（每4条数据一次循环）
         else:
             ele_list_1 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')   # 取每次循环的第一行数据（每4条数据一次循环）
             ele_list_2 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')   # 取每次循环的最后一行数据（每4条数据一次循环）
         if len(ele_list_1) == 1 and len(ele_list_2) == 1:  # 如果当前循环下，首条和尾条数据都存在，就获取name放到user_list中
             print('获取一轮4条数据')
-            if witch_page == 'Directory':
+            if witch_page == 'Directory' or witch_page == 'Team':
                 for j in range(i,i+4):  # 获取4条数据的name放到user_list中
-                    get_name = get_xpath_element(driver,f'//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                    get_name = get_xpath_element(driver,f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
             else:
                 for j in range(i, i + 4):  # 获取4条数据的name放到user_list中
                     get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
@@ -951,7 +951,7 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
         else:
             # 如果当前循环下，尾条数据不存在，就进行向下滑动(每次向下滑动 当前浏览器的高度像素的四分之一)
             quarter_of_the_height_n = quarter_of_the_height_n + quarter_of_the_height
-            if witch_page == 'Directory':
+            if witch_page == 'Directory' or witch_page == 'Team':
                 js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[2].scrollTop={quarter_of_the_height_n}'
             else:
                 js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'

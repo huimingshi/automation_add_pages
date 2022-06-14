@@ -826,7 +826,7 @@ Small_range_1010_1017
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${EG_user_B_user}     ${universal_password}
     # User A directly call EG 1
-    make_call_to_onCall     ${driver1}     ${driver2}    ${Expert_Group_1}    no_care
+    contacts_witch_page_make_call    ${driver1}     ${driver2}   ${py_team_page}   ${Expert_Group_1}    no_care
     # VP: User A's outgoing call, it should WS 1's branding avatar calls EG 1[the background of expert logo should be WS 1 branding accent color]
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver1}     ${get_class_value}       ${WS_1_Branding_Avatar}
@@ -1253,7 +1253,7 @@ Small_range_1036_1043
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}     ${universal_password}
     # User A directly call EG 1
-    make_call_to_onCall     ${driver1}     ${driver2}     ${Expert_Group_1}     no_care
+    contacts_witch_page_make_call      ${driver1}     ${driver2}    ${py_team_page}    ${Expert_Group_1}     no_care
     # VP: User A's outgoing call, it should WS 1's default avatar [Grey 'H'] calls EG 1[the background of expert logo should be WS 1 default accent color of Blue]
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver1}     ${get_class_value}       ${default_avatar_src}

@@ -219,7 +219,6 @@ Small_range_710_723
     ${user_directory_list_1}   get_all_data_on_the_page   ${driver1}   ${py_invite_page}   contact-name
     close_invite_3th_page     ${driver1}
     two_option_is_equal    ${driver1}    ${user_directory_list}    ${user_directory_list_1}
-#    lists should be equal     ${user_directory_list}     ${user_directory_list_1}
     exit_one_driver     ${driver3}
     ###### VP:Title and location are shown in Contact list         712行
     open_invite_3rd_participant_dialog     ${driver1}    no_enter
@@ -772,7 +771,7 @@ Small_range_823
     # On-call user登录
     ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}        ${switch_workspace_password}
     # Call on-call group from contact list
-    make_call_to_onCall     ${driver1}    ${driver2}    ${Expert_Group_1}
+    contacts_witch_page_make_call    ${driver1}    ${driver2}   ${py_team_page}   ${Expert_Group_1}
     # VP: REC is on, can not changed. What's more, on both sides, REC logo should be shown up.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}
@@ -872,7 +871,7 @@ Small_range_827
     # Expert 登录
     ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}        ${switch_workspace_password}
     # Expert  get incoming call
-    make_call_to_onCall     ${driver1}    ${driver2}    ${Expert_Group_1}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}  ${py_team_page}   ${Expert_Group_1}
     # VP: REC is off, only expert can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     rec_is_on_or_off     ${driver1}     off   none
@@ -985,7 +984,7 @@ Small_range_833
     # Expert 登录
     ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}        ${switch_workspace_password}
     # call on-call group from contact list
-    make_call_to_onCall     ${driver1}    ${driver2}    ${Expert_Group_1}
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_Group_1}
     sleep   20s
     # VP: REC is on, only expert can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}

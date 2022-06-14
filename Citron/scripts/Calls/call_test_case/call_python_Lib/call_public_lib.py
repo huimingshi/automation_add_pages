@@ -24,6 +24,7 @@ def open_debug_dialog_check_resolution(driver):
     public_check_element(driver,invite_user_div,'点击右上角三个横杠失败')
     public_check_element(driver, enter_debug_page, '进入debug_page失败')
     resolution_get = get_xpath_element(driver,'//span[@id="pubresolution"]',description = '进入debug查找resolution').get_attribute("textContent")
+    print(resolution_get)
     public_assert(driver,resolution_get , '1280x720',action='resolution不是1280x720')
 
 def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
@@ -484,9 +485,11 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Audio+"]/..'
     public_click_element(driver1,audio_xpath,description='启动Audio按钮')
     # 需要Accept Declaimer
+    driver1.implicitly_wait(5)
     count = get_xpath_elements(driver1, accept_disclaimer)
     if len(count) == 1:
         public_click_element(driver1, accept_disclaimer, '点击accept_disclaimer失败')
+    driver1.implicitly_wait(IMPLICIT_WAIT)
     # # 断言是否呼叫成功
     # count = get_xpath_elements(driver1, end_call_before_connecting)
     # public_assert(driver1, len(count), 1, action='发起call失败')
@@ -623,28 +626,40 @@ def enter_FGD_mode(driver,witch_mode):
     :return:
     """
     if witch_mode == "Document":
-        public_click_element(driver,video_on_button,ec='ec')
+        public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
         time.sleep(2)
-        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Document"]/..',ec='ec')
-        get_xpath_element(driver,'//input[@name="upload-file"]',ec='ec').send_keys(get_picture_path('test_citron.pdf'))
-        # public_click_element(driver,"//div[@class='InCall']//*[@*='#pdf_on']",ec='ec')
-        # public_click_element(driver,return_vidoe_on)
+        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Document"]/..',ec='ec',description='选择Document')
+        get_xpath_element(driver,upload_file,ec='ec',description='上传pdf文件').send_keys(get_picture_path('test_citron.pdf'))
+        # 返回原始状态
+        public_click_element(driver, pdf_on_button, ec='ec', description='pdf_on_button')
+        ele_list = get_xpath_elements(driver,return_vidoe_on)
+        if len(ele_list) == 1:
+            public_click_element(driver,return_vidoe_on,ec='ec', description='返回原始状态')
+        else:
+            public_click_element(driver, pdf_on_button, ec='ec', description='pdf_on_button')
     elif witch_mode == "Photo":
-        public_click_element(driver,video_on_button,ec='ec')
+        ele_list = get_xpath_elements(driver, video_on_button)
+        if len(ele_list) == 1:
+            public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
+        else:
+            public_click_element(driver, pdf_on_button, ec='ec', description='点击video按钮')
         time.sleep(2)
-        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Photo"]/..',ec='ec')
-        get_xpath_element(driver,'//input[@name="upload-file"]',ec='ec').send_keys(get_picture_path())
-        ele_list = get_xpath_elements(driver,'//div[text()="Now Entering Photo Mode"]')
-        public_assert(driver, len(ele_list), 1, action='切换FGD模式失败')
-        public_click_element(driver,"//div[@class='InCall']//*[@*='#ghop_on']/../..",ec='ec')
-        public_click_element(driver,return_vidoe_on,ec='ec')
+        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Photo"]/..',ec='ec',description='选择Photo')
+        get_xpath_element(driver,upload_file,ec='ec',description='上传jpg文件').send_keys(get_picture_path())
+        # 返回原始状态
+        public_click_element(driver,ghop_on_button,ec='ec',description='ghop_on_button')
+        ele_list = get_xpath_elements(driver,return_vidoe_on)
+        if len(ele_list) == 1:
+            public_click_element(driver,return_vidoe_on,ec='ec', description='返回原始状态')
+        else:
+            public_click_element(driver, ghop_on_button, ec='ec',description='ghop_on_button')
     elif witch_mode == "Swap Camera":
-        public_click_element(driver,video_on_button,ec='ec')
+        public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
         time.sleep(2)
         public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Swap Camera"]/..',ec='ec')
         screen_shot_func(driver, 'MAC电脑上查看下点击Swap_Camera后页面状态')
     elif witch_mode == "Freeze":
-        public_click_element(driver,video_on_button,ec='ec')
+        public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
         time.sleep(2)
         public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Freeze"]/..',ec='ec')
         screen_shot_func(driver, 'MAC电脑上查看下点击Freeze后页面状态')
@@ -691,9 +706,9 @@ def proceed_with_camera_off(driver):
     :param driver:
     :return:
     """
-    ele_list = get_xpath_elements(driver,"//canvas[@id='webglCameraOff']")
+    ele_list = get_xpath_elements(driver,webglCameraOff)
     if len(ele_list) == 1:
-        public_click_element(driver,"//canvas[@id='webglCameraOff']",description='proceed_with_camera_off按钮')
+        public_click_element(driver,webglCameraOff,description='proceed_with_camera_off按钮')
 
 if __name__ == '__main__':
     from else_public_lib import driver_set_up_and_logIn, logout_citron
