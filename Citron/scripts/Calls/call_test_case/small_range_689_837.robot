@@ -182,7 +182,7 @@ Small_range_710_723
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}    # 进入Directory页面
-    ${user_directory_list}   get_all_data_on_the_page   ${driver1}
+    ${user_directory_list}   get_all_data_on_the_page   ${driver1}    ${py_directory_page}
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
@@ -216,7 +216,7 @@ Small_range_710_723
     ###### VP: user list is same with User directory ones     712行
     open_invite_3rd_participant_dialog     ${driver1}    no_enter
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
-    ${user_directory_list_1}   get_all_data_on_the_page   ${driver1}    contact-name
+    ${user_directory_list_1}   get_all_data_on_the_page   ${driver1}   ${py_invite_page}   contact-name
     close_invite_3th_page     ${driver1}
     two_option_is_equal    ${driver1}    ${user_directory_list}    ${user_directory_list_1}
 #    lists should be equal     ${user_directory_list}     ${user_directory_list_1}
@@ -436,7 +436,7 @@ Small_range_746
     [Tags]    small range 746 line      call_case
     # user is beong to workspace WS-A and WS-B 登录
     ${driver1}    driver_set_up_and_logIn    ${belong_two_WS_username}     ${universal_password}
-    ${user_list_1}    get_all_data_on_the_page    ${driver1}
+    ${user_list_1}    get_all_data_on_the_page    ${driver1}   ${py_team_page}
     # another User beong to workspace WS-A登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver2}    MHS   no_send
@@ -449,7 +449,7 @@ Small_range_746
     # VP: This User has invite 3rd participant icon on menu bar
     open_invite_3rd_participant_dialog      ${driver1}    no_enter
     # VP: contact list is same as team list from ws-A
-    ${user_list_2}    get_all_data_on_the_page    ${driver1}      contact-name
+    ${user_list_2}    get_all_data_on_the_page    ${driver1}   ${py_invite_page}   contact-name
     two_option_is_equal   ${driver1}    ${user_list_1}   ${user_list_2}
 #    lists should be equal  ${user_list_1}   ${user_list_2}
     exit_call     ${driver2}

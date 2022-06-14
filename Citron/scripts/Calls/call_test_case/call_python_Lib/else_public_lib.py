@@ -917,7 +917,7 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
     获取当前页面的所有user数据
     :param driver:
     :param witch_page: 哪个页面
-    :param search_key:xpath中的关键值，普通页面（Directory或者Users页面）和通话中邀请第三位用户的页面的user对应的xpath不同
+    :param search_key:xpath中的关键值，普通页面（Directory或者Users页面）的search_key = 'cardName'；通话中邀请第三位用户的页面的search_key = 'contact-name'
     :return: user list
     """
     i = 0
@@ -931,13 +931,21 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
     print(quarter_of_the_height)
     driver.implicitly_wait(int(6))
     while True:
-        ele_list_1 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')   # 取每次循环的第一行数据（每4条数据一次循环）
-        ele_list_2 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')   # 取每次循环的最后一行数据（每4条数据一次循环）
+        if witch_page == 'Directory':
+            ele_list_1 = driver.find_elements_by_xpath(f'//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')  # 取每次循环的第一行数据（每4条数据一次循环）
+            ele_list_2 = driver.find_elements_by_xpath(f'//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div[@row-index="{i + 3}"]//div[@class="{search_key}"]')  # 取每次循环的最后一行数据（每4条数据一次循环）
+        else:
+            ele_list_1 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')   # 取每次循环的第一行数据（每4条数据一次循环）
+            ele_list_2 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')   # 取每次循环的最后一行数据（每4条数据一次循环）
         if len(ele_list_1) == 1 and len(ele_list_2) == 1:  # 如果当前循环下，首条和尾条数据都存在，就获取name放到user_list中
-            for j in range(i,i+4):  # 获取4条数据的name放到user_list中
-                get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                user_list.append(get_name)
+            print('获取一轮4条数据')
+            if witch_page == 'Directory':
+                for j in range(i,i+4):  # 获取4条数据的name放到user_list中
+                    get_name = get_xpath_element(driver,f'//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+            else:
+                for j in range(i, i + 4):  # 获取4条数据的name放到user_list中
+                    get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+            user_list.append(get_name)
             i = i + 4   # 设置每4次一个循环
             print(i)
         else:
@@ -952,6 +960,7 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
             print(i+3)
             ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i+3}"]//div[@class="{search_key}"]')
             # 滑动后，尾条数据不展示
+            print('滑动后，尾条数据不展示')
             if len(ele_list_3) != 1:
                 # 判断尾条前一条数据是否展示
                 print(i + 2)
@@ -1152,6 +1161,10 @@ def recents_page_check_call(driver,user_name,can_connect = 'can_not_connect',sen
     # 选择Audio
     audio_xpath = f'//div[text()="{user_name}"]/../../../..//span[text()="Audio+"]/..'
     public_click_element(driver, audio_xpath, description='启动Audio按钮')
+    # 需要Accept Declaimer
+    count = get_xpath_elements(driver, accept_disclaimer)
+    if len(count) == 1:
+        public_click_element(driver, accept_disclaimer, '点击accept_disclaimer失败')
     if can_connect == 'can_not_connect':
         for i in range(3):
             ele_list = get_xpath_elements(driver,send_invite_button)

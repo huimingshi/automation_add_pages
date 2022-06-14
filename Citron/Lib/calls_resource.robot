@@ -24,6 +24,7 @@ ${py_groups_page}                               Groups                          
 ${py_recents_page}                              Recents                                                                                             # Recents page
 ${py_favorites_page}                            Favorites                                                                                           # Favorites page
 ${py_contacts_page}                             Contacts                                                                                            # Contacts page
+${py_invite_page}                               invite_page                                                                                         # 通话过程中邀请user的页面
 ${py_team_search_result}                        //div[@id="user-tabs-pane-1"]//div[@class="ag-center-cols-container"]/div                           # team search result
 ${py_personal_search_result}                    //div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div                           # personal search result
 ${py_team_user_search}                          //div[@id="user-tabs-pane-1"]//input[@id="filter-text-box"]                                         # team search input box
@@ -49,9 +50,10 @@ ${no_experts_are_available_tips}                //div[@class="AlertContainer"]//
 ${contacts_page_send_email}                     //button[text()="Send My Help Space Invitation"]                                                    # Send My Help Space Invitation
 ${recents_page_tag}                             //div[@class="Recents"]                                                                             # Recents页面的标志
 ${did_not_answer_your_call}                     //div[contains(.,"didn't answer your call.")]                                                       # didn't answer your call.
+${your_call_was_not_anwsered}                   //div[@id="end_call_message" and text()="Your call was not answered."]                              # Your call was not answered.
 ${declined_your_call}                           //div[contains(.,"declined your call.")]                                                            # declined your call
-${your_call_was_declined}                       //div[contains(.,"Your call was declined.")]                                                        # Your call was declined.
-${user_is_currently_on_another_call}            //div[contains(.,"User is currently on another call.")]                                             # User is currently on another call
+${your_call_was_declined}                       //div[@id="end_call_message" and text()="Your call was declined."]                                  # Your call was declined.
+${user_is_currently_on_another_call}            //div[@id="end_call_message" and text()="User is currently on another call."]                       # User is currently on another call
 ${that_user_is_unreachable}                     //div[@class="EndCallPageContent"]//div[contains(.,"That user is unreachable.")]                    # That user is unreachable
 ${this_call_is_over}                            //div[contains(.,"This call is over. Please contact the host to invite you to another call.")]      # This call is over
 ${pleas_do_not_disturb}                         //div[contains(.,"Please Do not disturb")]                                                          # User设置请勿打扰后，call这个user的话会出现这个提示信息：Please Do not disturb

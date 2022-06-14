@@ -21,9 +21,9 @@ Small_range_656
     # caller calls via normal way, callee do not answer
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
     # waiting to timeout
-    sleep  60s
+    sleep  30s
     # Verify: "xxx didn't answer your call" In recent tab
-    which_page_is_currently_on   ${driver1}    ${did_not_answer_your_call}
+    which_page_is_currently_on   ${driver1}    ${your_call_was_not_anwsered}
     # VP: The two users should not see rating dialog.
     which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    not_currently_on
     which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    not_currently_on
@@ -48,7 +48,7 @@ Small_range_657
     # callee clicks on decline button
     user_decline_call    ${driver2}
     # VP1: Your call was declined.2
-    which_page_is_currently_on   ${driver1}    ${declined_your_call}
+    which_page_is_currently_on   ${driver1}    ${your_call_was_declined}
     # VP2: The two users should not see rating dialog.
     which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    not_currently_on
     which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    not_currently_on
@@ -159,9 +159,9 @@ Small_range_662
     click_user_in_contacts_call   ${driver2}     ${Expert_User3_name}
     # User C] doesn't answer call until time out
     which_page_is_currently_on    ${driver3}   ${anwser_call_button}
-    sleep  58s
+    sleep  30s
     # VP: "xxx didn't answer your call"
-    which_page_is_currently_on    ${driver2}   ${did_not_answer_your_call}
+    which_page_is_currently_on    ${driver2}   ${your_call_was_not_anwsered}
     # 结束Call
     exit_call   ${driver1}    1
     # Verify: In recent tab, User A has 1 outgoing call to User B.

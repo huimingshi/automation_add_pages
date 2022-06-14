@@ -486,7 +486,7 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     # 需要Accept Declaimer
     count = get_xpath_elements(driver1, accept_disclaimer)
     if len(count) == 1:
-        public_click_element(driver1, accept_disclaimer, '点击ANWSER按钮失败')
+        public_click_element(driver1, accept_disclaimer, '点击accept_disclaimer失败')
     # # 断言是否呼叫成功
     # count = get_xpath_elements(driver1, end_call_before_connecting)
     # public_assert(driver1, len(count), 1, action='发起call失败')
