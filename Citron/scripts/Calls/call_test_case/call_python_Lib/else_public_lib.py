@@ -1301,7 +1301,6 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
         ele_list = get_xpath_elements(driver,close_tutorial_button)
         if len(ele_list) == 1:
             public_click_element(driver, close_tutorial_button,description = 'close_tutorial按钮')   # 刷新页面后关闭教程
-        # public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')  # 刷新页面后关闭教程
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear',wait_time = IMPLICIT_WAIT):
     """

@@ -17,11 +17,6 @@ ${call_time}                                    20
 
 
 *** Keywords ***
-delete_all_jpg_and_jpeg_picture
-    # delete all jpg and jpeg picture
-    delete_picture_jpg_file
-    delete_picture_jpeg_file
-
 enter_site_calls
     # enter SITE ADMINISTRATION Users page
     click element   ${enter_site_menu}
@@ -51,13 +46,13 @@ enter_workspace_calls
     wait until element is visible    ${occurred_within_choose}
     wait until element is visible    ${ws_calls_first_data_show}
 
-enter_group_calls
-    # click workspace ADMINISTRATION menu
-    click element   ${enter_group_menu}
-    sleep  0.5s
-    # click Users page menu
-    click element   ${enter_calls}
-    sleep  3s
+#enter_group_calls
+#    # click workspace ADMINISTRATION menu
+#    click element   ${enter_group_menu}
+#    sleep  0.5s
+#    # click Users page menu
+#    click element   ${enter_calls}
+#    sleep  3s
 
 enter_normal_recents
     # click Recents button
@@ -74,9 +69,9 @@ enter_enterprises_audit_log
 select_one_call_has_screen_capture
     [Arguments]   ${call_username}
     # select one call that has Screen Capture
-    click element   ${input_search}
+    click element   ${calls_page_search_xpath}
     sleep  0.5s
-    input text   ${input_search}   ${call_username}
+    input text   ${calls_page_search_xpath}   ${call_username}
     sleep  3s
     # click DETAILS button
     click element   ${first_data_Details}

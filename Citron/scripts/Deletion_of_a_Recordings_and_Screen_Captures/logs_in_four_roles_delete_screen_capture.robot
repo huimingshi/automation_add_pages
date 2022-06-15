@@ -1,6 +1,7 @@
 *** Settings ***
 Library           Selenium2Library
 Library           OperatingSystem
+Resource          ../../Lib/calls_resource.robot
 Resource          ../../Lib/public.robot
 Resource          ../../Lib/deletion_of_a_recordings_and_screen_captures_resource.robot
 Library           make_a_call_lib.py
@@ -13,8 +14,9 @@ logs_in_Citron_as_Group_admin
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${group_admin_username}
     ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}
+    sleep   10000
     # Make a call
-    make_calls_with_who   ${driver1}   ${driver2}   ${normal_username_for_calls}   ${call_time}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${normal_username_for_calls_name}
     # logs in Citron as Site admin
     Login_group_admin
     # Administration ->Calls
@@ -43,7 +45,7 @@ logs_in_Citron_as_Normal_User
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
     ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}
     # Make a call
-    make_calls_with_who   ${driver1}   ${driver2}   ${normal_username_for_calls_B}   ${call_time}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}  ${normal_name_for_calls_B}
     # logs in Citron as Site admin
     Login_normal_for_calls
     # Administration ->Calls
@@ -94,7 +96,7 @@ logs_in_Citron_as_Workspace_admin
     ${driver1}   driver_set_up_and_logIn    ${workspace_admin_username}
     ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}
     # Make a call
-    make_calls_with_who   ${driver1}   ${driver2}   ${normal_username_for_calls}   ${call_time}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}  ${py_team_page}  ${normal_username_for_calls_name}
 
     # logs in Citron as Site admin
     Login_workspaces_admin
