@@ -33,7 +33,7 @@ Small_range_970_974
     two_option_is_equal   ${driver1}   rgba(160, 220, 238, 1)    ${css_value}
 #    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
     # VP: Default avator use Help Lighning one
-    ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
+    ${get_class_value}    get_ele_class_name    ${driver1}   //div[@id="user-tabs-pane-team"]${first_data_img}   src
     should start with    ${get_class_value}     ${default_avatar_src}
     # VP: Call ending screen
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
@@ -154,8 +154,8 @@ Small_range_977_993
     # Site admin login and switch to WS1,VP: All context with "Help Lightning" is branded, accent color is orange, for following sceen
     ${driver2}    driver_set_up_and_logIn    ${site_admin_username}     ${universal_password}
     # Contacts screen
-    ${css_value}   get_css_value   ${driver2}   ${Contacts_call_button}   color                                     # Contacts页面的Call按钮
-    check_get_color_correct    ${get_value}   ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${Contacts_call_button}   color                                     # Contacts页面的Call按钮
+#    check_get_color_correct    ${get_value}   ${css_value}
     ${css_value}   get_css_value   ${driver2}   ${Contacts_Send_link_email}   background-color                      # Send My Help Space Invitation按钮
     check_get_color_correct    ${get_value}   ${css_value}
 
@@ -215,7 +215,7 @@ Small_range_977_993
     ${driver3}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
     switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
     contacts_witch_page_make_call     ${driver2}    ${driver3}   ${py_team_page}   ${personal_user_name}       # 进行通话
-    sleep   45s
+    sleep   60s
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
     check_get_color_correct    ${get_value}   ${css_value}
@@ -224,6 +224,7 @@ Small_range_977_993
     ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
     check_get_color_correct    ${get_value}   ${css_value}
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
+    log to console  ${get_class_value}
     check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_orange_color}
 
     Comment  Invite friend screen
@@ -344,7 +345,8 @@ Small_range_997
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
     # User A call other site user[User B] from personal contact list
-    contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User5_name}   no_anwser    is_personal
+    switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
+    contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_personal_page}   ${Expert_User5_name}   no_anwser
     # VP: User A's outgoing call, it should show Default avatar [Grey 'H' Logo].
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     check_a_contains_b    ${driver1}     ${get_class_value}       ${default_avatar_src}
@@ -957,34 +959,34 @@ Small_range_1018_1026
     two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
 #    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # on-call group's avatar in Team	VP: Test avatar is loaded
-    ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
+    ${get_class_value}    get_ele_class_name    ${driver1}   //div[@id="user-tabs-pane-team"]${first_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
     two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
 #    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Personal contacts belong to this site who using default avatar	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver3}   ${py_personal_page}    ${py_personal_switch_success}    ${py_personal_search_result}
-    ${get_class_value}    get_ele_class_name    ${driver3}   //div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]//div[@class="AvatarImageRenderer"]//img    src
+    ${get_class_value}    get_ele_class_name    ${driver3}    //div[@id="user-tabs-pane-personal"]${first_data_img}    src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
     two_option_is_equal    ${driver3}    ${get_default_avatar_src_after}     ${get_class_value}
 #    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Favorite contacts belong to this site	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver1}   ${py_favorites_page}   ${py_favorites_switch_success}    ${py_get_number_of_rows}
-    ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
+    ${get_class_value}    get_ele_class_name    ${driver1}   //div[@id="user-tabs-pane-favorites"]${first_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
     two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
 #    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Directory list 	VP: Test avatar is loaded
     switch_to_diffrent_page   ${driver1}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}
-    ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
+    ${get_class_value}    get_ele_class_name    ${driver1}   //div[@id="user-tabs-pane-directory"]${first_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
     two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
 #    should be equal as strings    ${get_default_avatar_src_after}     ${get_class_value}
     # Directory list when invite in a call	VP: Test avatar is loaded
-    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${ws3_branding_A_username}   no_care
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_directory_page}   ${ws3_branding_A_username}   no_care
     ${get_class_value}    get_ele_class_name    ${driver1}   ${outgoing_Call_avator}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
@@ -1039,7 +1041,7 @@ Small_range_1027_1030
     two_option_is_equal   ${driver1}    rgba(160, 220, 238, 1)    ${css_value}
 #    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
     # VP: Default avator use Help Lighning one
-    ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img}   src
+    ${get_class_value}    get_ele_class_name    ${driver1}   //div[@id="user-tabs-pane-team"]${first_data_img}   src
     should start with    ${get_class_value}     ${default_avatar_src}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver

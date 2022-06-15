@@ -65,7 +65,7 @@ ${second_data_img}                              //div[@class="ag-center-cols-con
 ${first_data_img_in_invite_page}                //div[@class="ag-center-cols-container"]/div[@row-index="0" ]/div[@col-id="avatar.url"]//img        # 通话过程中邀请第三位参与通话时的首行数据的头像
 ${end_call_message}                             //div[@id="end_call_message"]                                                                       # end_call_message
 ${first_tree_text}                              //span[@class="k-link k-header"]                                                                    # 首层目录树的文本
-${first_data_background_color}                  //div[@class="ag-center-cols-container"]/div[1]                                                     # 首行数据的背景色
+${first_data_background_color}                  //div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[1]                     # 首行数据的背景色
 ${add_user_xpath}                               //button[text()="Add User"]                                                                         # Add User按钮
 ${edit_members_xpath}                           //button[text()="Edit Members"]                                                                     # Edit Members按钮
 ${add_device_xpath}                             //button[text()="Add Device"]                                                                       # Add Device按钮
