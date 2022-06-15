@@ -549,21 +549,39 @@ def obtain_meeting_link_from_email(check_otu = 'no_check_otu'):
             raise AssertionError('当前邮件不是OTU邮件')
     return meeting_link
 
-def rec_is_on_or_off(driver,witch_status = 'on',change_or_not = 'can_not_change'):
+def make_show_recording_settings(driver):
+    """
+    确保通话过程中左上角的recording settings按钮能显示
+    :param driver:
+    :return:
+    """
+    while True:
+        ele_list = get_xpath_elements(driver,call_top_message)
+        if len(ele_list) != 0:
+            public_click_element(driver,call_top_message,description='top提示信息')
+        else:
+            break
+
+def rec_is_on_or_off(driver,witch_status = 'on',change_or_not = 'can_not_change',click_share = False):
     """
     通话过程中REC的状态，是否可切换状态
     :param driver:
     :param witch_status:   on or off；默认on为开，off为关，none为不展示REC图标
     :param change_or_not:   can_not_change or can_change；默认can_not_change为不可改变，can_change为可改变
+    :param click_share: 是否出现Share蓝色按钮，默认没有，若有的话需要点击
     :return:
     """
     # try:
     if change_or_not == 'can_not_change' and witch_status == 'on':
+        if click_share:
+            public_click_element(driver, share_button, description='Share按钮')
         ele_list = get_xpath_elements(driver,recording_settings)
         public_assert(driver,len(ele_list) , 0,action='实际REC不是预期状态')
         ele_list = get_xpath_elements(driver,'//div[@class="InCall"]/img[@class="Rec"]')
         public_assert(driver, len(ele_list), 1, action='实际REC不是预期状态')
     elif change_or_not == 'can_change' and witch_status == 'on':
+        if click_share:
+            public_click_element(driver, share_button, description='Share按钮')
         public_click_element(driver,recording_settings,description = 'recording_setting')
         time.sleep(2)
         ele_list = get_xpath_elements(driver,do_not_record)
@@ -572,6 +590,8 @@ def rec_is_on_or_off(driver,witch_status = 'on',change_or_not = 'can_not_change'
         print('再次点击切换按钮')
         public_assert(driver, len(ele_list), 1, action='实际REC不是预期状态')
     elif change_or_not == 'can_change' and witch_status == 'off':
+        if click_share:
+            public_click_element(driver, share_button, description='Share按钮')
         public_click_element(driver,recording_settings,description = 'recording_setting')
         time.sleep(2)
         ele_list = get_xpath_elements(driver,record_this_session)
@@ -580,6 +600,8 @@ def rec_is_on_or_off(driver,witch_status = 'on',change_or_not = 'can_not_change'
         print('再次点击切换按钮')
         public_assert(driver, len(ele_list), 1, action='实际REC不是预期状态')
     elif change_or_not == 'can_not_change' and witch_status == 'none':
+        if click_share:
+            public_click_element(driver, share_button, description='Share按钮')
         ele_list = get_xpath_elements(driver,recording_settings)
         public_assert(driver, len(ele_list), 0, action='实际REC不是预期状态')
         ele_list = get_xpath_elements(driver,'//div[@class="InCall"]/img[@class="Rec"]')

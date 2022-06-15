@@ -116,3 +116,5 @@ select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
 please_wait = '//div[@class="InvalidLinkView"]/h2[text()="Please wait."]'
 zhuanquanquan = '//div[@id="whiteboard_progress_bar_container"]'
 notification_content = '//div[@class="k-notification-content"]'      # 底下抛出的绿色的提示信息，比如修改成功，发送成功
+call_top_message = '//div[@class="AlertContainer"]//div[@class="message"]'    # 通话过程中最上方的提示信息，比如Checking Network Quality或者No camera detected
+share_button = '//div[@class="DocToolBar show"]/button[text()="Share"]'      # 通话过程中左下角的Share按钮
