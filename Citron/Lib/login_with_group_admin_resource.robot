@@ -355,7 +355,7 @@ modify_user_groups
     sleep  1s
     click element  ${first_groups_delete_button}
     sleep  1s
-    page should contain element   ${no_groups_tips}
+#    page should contain element   ${no_groups_tips}
     # 滑动到底
     swipe_browser_to_bottom
     sleep  0.5s

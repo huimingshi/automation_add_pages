@@ -35,6 +35,7 @@ enter_group_users
 
 new_enterprice
     # new enterprice
+    wait until element is visible    ${new_enterprice_button}
     click element   ${new_enterprice_button}
     sleep  0.5s
     ${random}   evaluate    int(time.time()*1000000)    time
@@ -253,9 +254,9 @@ list_all_workspaces_for_this_site
 search_single_workspaces
     # Enter key values in Search field
     [Arguments]    ${workspaces_name}   ${expect_count}
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text  ${input_search}    ${workspaces_name}
+    input text  ${search_input}    ${workspaces_name}
     sleep  2s
     ${count}  get element count   ${get_number_of_rows}
     should be equal as integers  ${count}   ${expect_count}
@@ -587,7 +588,7 @@ search_single_user
 search_new_added_user
     [Arguments]   ${user_name}
     # Enter key words in Search field
-    input text   ${input_search}  ${user_name}
+    input text   ${search_input}  ${user_name}
     sleep  3s
     ${count}   get element count   ${get_number_of_rows}
     should be equal as integers   ${count}  1
@@ -1080,9 +1081,9 @@ select_deactivated_users
     # enter Deactivated Users page
     enter_deactivated_users_page
     # Select Deactivated Users
-    click element  ${input_search}
+    click element  ${search_input}
     sleep  0.5s
-    input text  ${input_search}  ${email}
+    input text  ${search_input}  ${email}
     sleep  3s
     ${count}   get element count  ${get_number_of_rows}
     should be equal as integers   ${count}   1
@@ -1273,9 +1274,9 @@ select_one_of_value_in_page_size
 
 enter_key_words_in_search_field
     # Enter key words in Search field
-    click element  ${input_search}
+    click element  ${search_input}
     sleep  0.5s
-    input text  ${input_search}   @outlook.com
+    input text  ${search_input}   @outlook.com
     sleep  3s
     ${count}   Get Element Count    ${get_number_of_rows}   # Gets how many rows are in the result of the query
     should not be equal as numbers  ${count}  0
@@ -1283,7 +1284,7 @@ enter_key_words_in_search_field
         ${get_owner_text}   get text    xpath=//div[@class="ag-center-cols-container"]/div[@row-index="${i}"]/div[@col-id="owner_email"]
         should contain    ${get_owner_text}    @outlook.com
     END
-    clear element text   ${input_search}
+    clear element text   ${search_input}
     sleep  3s
 
 select_all_workspace_in_workspace_field

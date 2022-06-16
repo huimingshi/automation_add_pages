@@ -156,18 +156,18 @@ add_user_clear_group
 search_user_details
     [Arguments]   ${email_search}
     # search
-    click element    ${input_search}
+    click element    ${search_input}
     sleep  0.5s
-    input text   ${input_search}    ${email_search}
+    input text   ${search_input}    ${email_search}
     sleep  2s
     click_deatils
 
 search_user_is_missing
     [Arguments]   ${email_search}
     # search
-    click element    ${input_search}
+    click element    ${search_input}
     sleep  0.5s
-    input text   ${input_search}    ${email_search}
+    input text   ${search_input}    ${email_search}
     sleep  2s
     ${count}   get element count    ${get_number_of_rows}
     should be equal as integers  ${count}   0
@@ -904,9 +904,9 @@ sort_invitations_by_timestamp
 search_list_by_name
     # search list by name
     ${get_name_text_first}   get text    ${first_row_shows_up}      # Gets the name value of the first line
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text  ${input_search}  ${get_name_text_first}
+    input text  ${search_input}  ${get_name_text_first}
     sleep  5s
     ${count}   Get Element Count    ${get_number_of_rows}   # Gets how many rows are in the result of the query
     should not be equal as numbers  ${count}  0
@@ -918,9 +918,9 @@ search_list_by_name
 search_list_by_email
     # search list by email
     ${get_email_text_first}   get text    xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[3]     # Gets the name value of the first line
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text  ${input_search}  ${get_email_text_first}
+    input text  ${search_input}  ${get_email_text_first}
     sleep  5s
     ${count}   Get Element Count    ${get_number_of_rows}   # Gets how many rows are in the result of the query
     should not be equal as numbers  ${count}  0
@@ -931,9 +931,9 @@ search_list_by_email
 
 search_list_by_role
     # search list by role
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text  ${input_search}  User
+    input text  ${search_input}  User
     wait until element is visible     xpath=//div[@class="ag-center-cols-container"]/div[@row-index="1"]    #等到第二条数据出现
     sleep   1s
     ${count}   Get Element Count    ${get_number_of_rows}   # Gets how many rows are in the result of the query
@@ -1065,9 +1065,9 @@ enter_active_users_page
 search_deactivated_user
     [Arguments]  ${username}
     # search deactivated user
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text   ${input_search}  ${username}
+    input text   ${search_input}  ${username}
     sleep  2s
     element should be visible    ${first_line_data}
 
@@ -1075,12 +1075,12 @@ search_active_user
     [Arguments]  ${username}
     wait until element is not visible     ${prompt_information}    20s
     # Clear the query box
-    Press Key    ${input_search}    \\8
+    Press Key    ${search_input}    \\8
     sleep  0.5s
     # search activated user
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text   ${input_search}  ${username}
+    input text   ${search_input}  ${username}
     sleep  2s
     element should be visible    ${first_line_data}
     sleep  1s
@@ -1527,12 +1527,12 @@ create_on_call_group_no_member_visibility
 search_group_detail
     [Arguments]   ${group_name}
     # Clear the query box
-    Press Key    ${input_search}    \\8
+    Press Key    ${search_input}    \\8
     sleep  0.5s
     # Query group
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text  ${input_search}  ${group_name}
+    input text  ${search_input}  ${group_name}
     sleep  1s
     # Wait until the first row shows up
     wait until element is visible    ${first_row_shows_up}   20
@@ -2051,16 +2051,16 @@ gets_groups_list_when_adding_workspace
 search_on_call_groups
     # search_on_call_groups
     [Arguments]   ${group_name}
-    click element    ${input_search}
-    input text   ${input_search}    ${group_name}
+    click element    ${search_input}
+    input text   ${search_input}    ${group_name}
     sleep  3s
 
 search_invitation_by_email
     [Arguments]   ${email}
     # search invitation by email
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text   ${input_search}  ${email}
+    input text   ${search_input}  ${email}
     wait until element is visible    ${first_data_show}    20
 
 expand_workspaces_switch
