@@ -69,9 +69,9 @@ enter_enterprises_audit_log
 select_one_call_has_screen_capture
     [Arguments]   ${call_username}
     # select one call that has Screen Capture
-    click element   ${calls_page_search_xpath}
+    click element   ${search_input}
     sleep  0.5s
-    input text   ${calls_page_search_xpath}   ${call_username}
+    input text   ${search_input}   ${call_username}
     sleep  3s
     # click DETAILS button
     click element   ${first_data_Details}

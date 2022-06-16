@@ -709,14 +709,15 @@ reset_all_accepted_disclaimers_cancel
 search_user_details
     [Arguments]   ${email_search}
     # search
-    click element    ${input_search}
+    click element    ${search_input}
     sleep  0.5s
-    input text   ${input_search}    ${email_search}
+    input text   ${search_input}    ${email_search}
     sleep  2s
     click_deatils
 
 click_deatils
     # click DETAILS button
+    sleep  2s
     click element  ${button_DETAILS}
     sleep  2s
 
@@ -780,7 +781,7 @@ enter_phone_with_country_code
     Press Key    ${mobile_phone_input}    \\8
     sleep  0.5s
     press key  ${mobile_phone_input}  ${phone_number}
-    sleep  1s
+    sleep  2s
     ${get_count}   get element count   ${wrong_phone_tag}
     should be equal as integers   ${get_count}     ${count}
     Run Keyword If   '${cancel_or_confirm}'=='0'     click element    ${cancel_button}
