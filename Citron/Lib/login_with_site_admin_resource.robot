@@ -255,6 +255,7 @@ list_all_workspaces_for_this_site
 search_single_workspaces
     # Enter key values in Search field
     [Arguments]    ${workspaces_name}   ${expect_count}
+    wait until element is visible  ${search_input}
     click element   ${search_input}
     sleep  0.5s
     input text  ${search_input}    ${workspaces_name}
@@ -471,6 +472,7 @@ confirm_create_workspace
     click element  ${workspace_create_button}
     ${prompt information}   Catenate    ${workspace_name}    was successfully created.
     wait until element is visible   xpath=//span[contains(.,'${prompt information}')]
+    wait until element is not visible    xpath=//span[contains(.,'${prompt information}')]   20s
     [Return]   ${workspace_name}
 
 cancel_create_workspace
@@ -504,12 +506,14 @@ create_and_add_another_workspace
 
 click_workspace_details
     # Clicks Details button
+    wait until element is visible    ${details_button}
     click element     ${details_button}
     sleep  1s
     wait until element is visible   ${edit_members_button}
 
 click_user_details
     # Clicks Details button
+    wait until element is visible    ${details_button}
     click element     ${details_button}
     sleep  1s
     wait until element is visible    ${send_reset_password_email}
@@ -751,6 +755,7 @@ deactivate_workspace_cancel
     sleep  1s
     # Close the bounced
     click element   xpath=//div[@class="modal-header"]//span[contains(.,'×')]
+    sleep  1s
 
 deactivate_workspace_ok
     # Clicks 'Deactivate workspace' button
@@ -1071,7 +1076,7 @@ deactivate_user
     wait until element is visible    ${message_text}
     ${message}  get text    ${message_text}
     should be equal as strings  ${message}    Account has been deactivated
-    wait until element is not visible    ${message_text}
+    wait until element is not visible    ${message_text}    20s
 
 enter_deactivated_users_page
     # enter Deactivated Users page
