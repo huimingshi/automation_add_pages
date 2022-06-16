@@ -28,6 +28,7 @@ ${workspace_admin_password}             *IK<8ik,8ik,                            
 
 ${group_admin_username}                 Huiming.shi.helplightning+8888888888@outlook.com                                        # group admin username (belong to citron)
 ${group_admin_name}                     Huiming.shi.helplightning+8888888888
+${group_admin_real_name}                citron_group_admin
 ${group_admin_password}                 *IK<8ik,8ik,                                                                            # group admin password
 
 ${workspace_admin_username_one}         Huiming.shi.helplightning+99998888@outlook.com                                          # workspace admin username(This is a workspace admin with only one group)

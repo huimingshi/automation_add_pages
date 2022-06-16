@@ -14,6 +14,7 @@ ${get_started_button}                       xpath=//button[@id="nextBtn" and con
 ${erase_my_account}                         xpath=//div[@role="dialog"]//button[text()='Erase My Account']                                          # Erase My Account
 ${cancel_erase_my_account}                  xpath=//div[@role="dialog"]//button[text()='Cancel']                                                    # Cancel Erase My Account
 # all
+${get_count_of_team}                        xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div                      # Get number of Team
 ${get_number_of_rows}                       xpath=//div[@class="ag-center-cols-container"]/div                                                      # Get number of rows
 ${first_row_shows_up}                       xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[2]//div[@class="cardName"]       # Wait until the first row shows up
 ${first_data_show}                          xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]                                      # Wait until the first row shows up

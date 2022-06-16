@@ -4,6 +4,7 @@ Library           Selenium2Library
 Library           DateTime
 Library           String
 Resource          public.robot
+Resource          All_Pages_Xpath/Normal/Contacts.robot
 Resource          All_Pages_Xpath/WS_Admin/Analytics.robot
 Resource          All_Pages_Xpath/WS_Admin/Calls.robot
 Resource          All_Pages_Xpath/WS_Admin/Groups.robot
@@ -1122,25 +1123,25 @@ check_visibility_testing
 check_add_standard_member_group
     [Arguments]  ${group_name}
     # Final check
-    ${count}  get element count  ${get_number_of_rows}
+    ${count}  get element count  ${get_count_of_team}
     should be equal as integers   ${count}   3
-    ${get_group_name}  get text   xpath=//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
+    ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
-    ${get_user_name1}  get text   xpath=//div[@class="ag-center-cols-container"]/div[2]//div[@class="cardName"]
+    ${get_user_name1}  get text   ${first_team_2}
     should be equal as strings  ${get_user_name1}    ${third_user_name}
-    ${get_user_name2}  get text   xpath=//div[@class="ag-center-cols-container"]/div[3]//div[@class="cardName"]
+    ${get_user_name2}  get text   ${first_team_3}
     should be equal as strings  ${get_user_name2}    ${second_user_name}
 
 check_add_standard_member_group1
     [Arguments]  ${group_name}
     # Final check
-    ${count}  get element count  ${get_number_of_rows}
+    ${count}  get element count  ${get_count_of_team}
     should be equal as integers   ${count}   3
-    ${get_group_name}  get text   xpath=//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
+    ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
-    ${get_user_name1}  get text   xpath=//div[@class="ag-center-cols-container"]/div[2]//div[@class="cardName"]
+    ${get_user_name1}  get text   ${first_team_2}
     should be equal as strings  ${get_user_name1}    ${first_user_name}
-    ${get_user_name2}  get text   xpath=//div[@class="ag-center-cols-container"]/div[3]//div[@class="cardName"]
+    ${get_user_name2}  get text   ${first_team_3}
     should be equal as strings  ${get_user_name2}    ${third_user_name}
 
 check_add_on_call_group
@@ -1150,25 +1151,25 @@ check_add_on_call_group
 check_add_on_call_group_1
     [Arguments]  ${group_name}
     # Final check
-    ${count}  get element count  ${get_number_of_rows}
+    ${count}  get element count  ${get_count_of_team}
     should be equal as integers   ${count}   3
-    ${get_group_name}  get text   xpath=//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
+    ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
-    ${get_user_name1}  get text   xpath=//div[@class="ag-center-cols-container"]/div[2]//div[@class="cardName"]
+    ${get_user_name1}  get text   ${first_team_2}
     should be equal as strings  ${get_user_name1}    ${third_user_name}
-    ${get_user_name2}  get text   xpath=//div[@class="ag-center-cols-container"]/div[3]//div[@class="cardName"]
+    ${get_user_name2}  get text   ${first_team_3}
     should be equal as strings  ${get_user_name2}    ${second_user_name}
 
 check_add_on_call_group_2
     [Arguments]  ${group_name}
     # Final check
-    ${count}  get element count  ${get_number_of_rows}
+    ${count}  get element count  ${get_count_of_team}
     should be equal as integers   ${count}   3
-    ${get_group_name}  get text   xpath=//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
+    ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
-    ${get_user_name1}  get text   xpath=//div[@class="ag-center-cols-container"]/div[2]//div[@class="cardName"]
+    ${get_user_name1}  get text   ${first_team_2}
     should be equal as strings  ${get_user_name1}    ${first_user_name}
-    ${get_user_name2}  get text   xpath=//div[@class="ag-center-cols-container"]/div[3]//div[@class="cardName"]
+    ${get_user_name2}  get text   ${first_team_3}
     should be equal as strings  ${get_user_name2}    ${second_user_name}
 
 check_file_if_exists_delete
@@ -1252,9 +1253,9 @@ create_standard_member_group
     wait until element is visible   ${choose_group_admin}   20
     click element   ${choose_group_admin}
     sleep  1s
-    input text   ${choose_group_admin}    ${group_admin_name}
+    input text   ${choose_group_admin}    ${group_admin_real_name}
     sleep  2s
-    click element   xpath=//li[contains(.,'${group_admin_name}')]
+    click element   xpath=//li[contains(.,'${group_admin_real_name}')]
     sleep  1s
     # click CREATE GROUP button
     click_create_group_button
@@ -1289,9 +1290,9 @@ add_group_admin_user_and_avator
     # Choose Group Administrators
     click element   ${choose_group_admin}
     sleep  1s
-    input text   ${choose_group_admin}    ${group_admin_name}
+    input text   ${choose_group_admin}    ${group_admin_real_name}
     sleep  2s
-    click element   xpath=//li[contains(.,'${group_admin_name}')]
+    click element   xpath=//li[contains(.,'${group_admin_real_name}')]
     sleep  1s
     # click Update Details button
     click element   ${update_details_button}
@@ -1420,9 +1421,9 @@ create_on_call_group_keyword
     wait until element is visible   ${choose_group_admin}   20
     click element   ${choose_group_admin}
     sleep  1s
-    input text   ${choose_group_admin}    ${group_admin_name}
+    input text   ${choose_group_admin}    ${group_admin_real_name}
     sleep  1s
-    click element   xpath=//li[contains(.,'${group_admin_name}')]
+    click element   xpath=//li[contains(.,'${group_admin_real_name}')]
     sleep  1s
     # Enter On-Call Notifications
     click element   ${On_Call_notifications}
