@@ -35,7 +35,8 @@ enter_group_users
 
 new_enterprice
     # new enterprice
-    wait until element is visible    ${new_enterprice_button}
+    sleep   5s
+    wait until element is enabled  ${new_enterprice_button}
     click element   ${new_enterprice_button}
     sleep  0.5s
     ${random}   evaluate    int(time.time()*1000000)    time
@@ -72,7 +73,7 @@ fill_password_mailbox
     should contain   ${email_link}   ${Citron_web_url}
     # Open another Windows window
     Execute JavaScript    window.open('${email_link}')
-    sleep  2s
+    sleep  10s
     # change My password
     change_my_password
 
@@ -1070,9 +1071,11 @@ deactivate_user
     wait until element is visible    ${message_text}
     ${message}  get text    ${message_text}
     should be equal as strings  ${message}    Account has been deactivated
+    wait until element is not visible    ${message_text}
 
 enter_deactivated_users_page
     # enter Deactivated Users page
+    wait until element is visible   ${deactivated_users_page}
     click element   ${deactivated_users_page}
     wait until element is visible    ${first_data_show}   20
 
@@ -1313,6 +1316,7 @@ sort_calls_by_different_condition
     @{OwnerList}=    Create List
 #    ${count}   get element count   ${get_number_of_rows}
     FOR   ${i}   IN RANGE    10
+        wait until element is visible   xpath=//div[@row-index="${i}"]/div[@col-id="${col_id}"]
         ${get_owner_text}   get text    xpath=//div[@row-index="${i}"]/div[@col-id="${col_id}"]
         Append To List    ${OwnerList}    ${get_owner_text}
     END
