@@ -805,9 +805,9 @@ modify_phone_in_crunch_is_correct
 
 search_personal_contact
     # enter emily citron
-    click element   xpath=//div[@class="tab-content"]/div[2]//input[@id="filter-text-box"]
+    click element   ${personal_search_input}
     sleep  0.5s
-    input text  xpath=//div[@class="tab-content"]/div[2]//input[@id="filter-text-box"]    emily citron
+    input text   ${personal_search_input}    emily citron
     sleep  1
     # check result of search
     ${count}   get element count  xpath=//div[@class="cardName" and contains(.,'emily citron')]
@@ -816,9 +816,9 @@ search_personal_contact
 add_to_favorite
     [Arguments]   ${user_or_group}
     # enter 1000Users
-    click element   ${team_input_search}
+    click element   ${team_search_input}
     sleep  0.5s
-    input text   ${team_input_search}   ${user_or_group}
+    input text   ${team_search_input}   ${user_or_group}
     sleep  2s
     sleep  2s
     ${get_attribute}  get element attribute   ${favorite_button}     class
@@ -827,9 +827,9 @@ add_to_favorite
 search_favorite
     [Arguments]   ${user_or_group}   ${count}
     # enter 1000Users
-    click element  ${input_search}
+    click element  ${search_input}
     sleep  0.5s
-    input text   ${input_search}  ${user_or_group}
+    input text   ${search_input}  ${user_or_group}
     sleep  1
     # check result of search
     ${count}   get element count   ${get_number_of_rows}
@@ -859,9 +859,9 @@ ordered_by_alphabetically
 favorite_on_call_group_from_team_page_or_not
     [Arguments]   ${group_name}
     # enter 1000Users
-    click element   ${input_search}
+    click element   ${team_search_input}
     sleep  0.5s
-    input text   ${input_search}   ${group_name}
+    input text   ${team_search_input}   ${group_name}
     sleep  2s
     # check result of search
     ${count}   get element count   xpath=//div[@class="tab-content"]/div[1]//div[@class="ag-center-cols-container"]/div

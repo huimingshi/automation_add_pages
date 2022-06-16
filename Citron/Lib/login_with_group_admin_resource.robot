@@ -212,10 +212,10 @@ add_existing_normal_user
 search_user_details
     [Arguments]   ${email_search}
     # search
-    wait until element is visible   ${input_search}
-    click element    ${input_search}
+    wait until element is visible   ${search_input}
+    click element    ${search_input}
     sleep  0.5s
-    input text   ${input_search}    ${email_search}
+    input text   ${search_input}    ${email_search}
     sleep  2s
     click_deatils
 
@@ -447,9 +447,9 @@ enter_deactivated_users_page
 search_deactivated_user
     [Arguments]  ${username}
     # search deactivated user
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text   ${input_search}  ${username}
+    input text   ${search_input}  ${username}
     sleep  2s
     element should be visible    ${first_line_data}
 
@@ -474,12 +474,12 @@ enter_active_users_page
 search_active_user
     [Arguments]  ${username}
     # Clear the query box
-    Press Key    ${input_search}    \\8\
+    Press Key    ${search_input}    \\8\
     sleep  0.5s
     # search deactivated user
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text   ${input_search}  ${username}
+    input text   ${search_input}  ${username}
     sleep  2s
     element should be visible    ${first_line_data}
 
@@ -956,9 +956,9 @@ cancel_all_invitation
 search_invitation_by_email
     [Arguments]   ${email}
     # search invitation by email
-    click element   ${input_search}
+    click element   ${search_input}
     sleep  0.5s
-    input text   ${input_search}  ${email}
+    input text   ${search_input}  ${email}
     wait until element is visible    ${first_data_show}    5s
 
 invitation_mail_not_valid
