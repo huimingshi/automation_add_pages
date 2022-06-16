@@ -157,6 +157,7 @@ add_user_clear_group
 search_user_details
     [Arguments]   ${email_search}
     # search
+    wait until element is visible    ${search_input}
     click element    ${search_input}
     sleep  0.5s
     input text   ${search_input}    ${email_search}
@@ -471,6 +472,7 @@ add_group_user
     wait until element is visible    ${prompt_information}    3s   #  message of Add Success
     ${get_information}   get text   ${prompt_information}
     should be equal as strings    ${information}    ${get_information}
+    wait until element is not visible    ${prompt_information}     20s
     [Return]   ${email_before}
 
 modify_group_admin_groups
@@ -1115,9 +1117,9 @@ check_user_belongs_to_group
 check_visibility_testing
     [Arguments]    ${user_name}
     # Final check
-    ${count}  get element count  ${get_number_of_rows}
+    ${count}  get element count  ${get_count_of_team}
     should be equal as integers   ${count}   1
-    ${get_user_name1}  get text   xpath=//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
+    ${get_user_name1}  get text   xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
     should be equal as strings   ${get_user_name1}    ${user_name}
 
 check_add_standard_member_group
