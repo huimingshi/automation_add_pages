@@ -54,6 +54,7 @@ ${favorite_or_not}                          xpath=//div[@class="favorite-div"]/i
 ${team_favorite_or_not}                     xpath=//div[@id="user-tabs-pane-1"]//div[@class="favorite-div"]/i                                       # Team page favorite or not favorite
 ${personal_favorite_or_not}                 xpath=//div[@id="user-tabs-pane-1"]//div[@class="favorite-div"]/i                                       # Personal page favorite or not favorite
 ${enter_ws_settings_success}                xpath=//div[@class="feature-section"]                                                                   # 切换到WorkSpace Setting页面成功的标志
+${ellipsis_menu_div}                        xpath=//div[@class="ellipsis-menu-div"]                                                                 # user右边的省略号
 # menus count
 ${menus_count}                              xpath=//div[@role="group"]/div[@role="treeitem"]                                                        # count of menus
 

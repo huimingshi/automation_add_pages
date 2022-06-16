@@ -143,6 +143,7 @@ last_page_click_get_started
 
 log_out_from_citron
     # log out
+    wait until element is visible  ${current_account_xpath}
     click element   ${current_account_xpath}
     sleep  1s
     click element   xpath=//i[@class="fa fa-sign-out"]
@@ -473,7 +474,7 @@ back_to_first_workspace
     sleep  1s
     click element  ${first_WS_xpath}
     sleep  1s
-    wait until element is visible   ${call_button_xpath}
+    wait until element is visible   ${ellipsis_menu_div}
 
 enter_contacts_page
     # enter first mune
@@ -481,19 +482,18 @@ enter_contacts_page
     sleep  1s
     # click Contacts page
     click element   ${enter_contacts_page}
-    wait until element is visible     ${call_button_xpath}
+    wait until element is visible     ${ellipsis_menu_div}
 
 enter_personal_contact_page
     # enter Personal contact page
     click element    ${enter_personal_page}
     sleep  2s
-    wait until element is visible   ${call_button_xpath}
+    wait until element is visible   ${ellipsis_menu_div}
 
 enter_favorites_page
     # enter favorite page
     wait until element is visible   ${enter_favorites_page}
     click element   ${enter_favorites_page}
-    wait until element is visible     xpath=//h1[contains(.,"Favorites")]
     sleep  4s
 
 enter_recents_page
@@ -504,8 +504,8 @@ enter_recents_page
     wait until element is visible   ${second_data_show}
 
 back_to_directory_page
-    # enter first menu tree
-    click element    ${enter_first_menu_tree}
+#    # enter first menu tree
+#    click element    ${enter_first_menu_tree}
     # enter recents page
     wait until element is visible   ${enter_directory_page}
     click element   ${enter_directory_page}
@@ -588,7 +588,7 @@ enter_directory_page
     # enter Directory page
     wait until element is visible   ${enter_directory_page}
     click element   ${enter_directory_page}
-    wait until element is visible   xpath=//h1[contains(.,'Directory')]
+    sleep   5s
     wait until element is visible   ${second_data_show}
 
 page_search

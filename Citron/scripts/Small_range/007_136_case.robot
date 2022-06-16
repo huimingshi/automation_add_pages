@@ -111,7 +111,7 @@ User_Directory_open_five_view
     ...         AND             close_disable_external_users    # Switch "Disable External Feature" off
     ...         AND             turn_on_user_directory        # Switch "Workspace Directory" on
     # enter Directory page
-    refresh_web_page
+#    refresh_web_page
     enter_directory_page
     # Search with name   Search with title   Search with location
     directory_search_with_name_title_location
