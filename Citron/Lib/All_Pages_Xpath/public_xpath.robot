@@ -55,6 +55,18 @@ ${team_favorite_or_not}                     xpath=//div[@id="user-tabs-pane-1"]/
 ${personal_favorite_or_not}                 xpath=//div[@id="user-tabs-pane-1"]//div[@class="favorite-div"]/i                                       # Personal page favorite or not favorite
 ${enter_ws_settings_success}                xpath=//div[@class="feature-section"]                                                                   # 切换到WorkSpace Setting页面成功的标志
 ${ellipsis_menu_div}                        xpath=//div[@class="ellipsis-menu-div"]                                                                 # user右边的省略号
+${directory_search_count}                   xpath=//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div
+${team_search_count}                        xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div
+${favorites_search_count}                   xpath=//div[@id="user-tabs-pane-favorites"]//div[@class="ag-center-cols-container"]/div
+${personal_search_count}                    xpath=//div[@id="user-tabs-pane-personal"]//div[@class="ag-center-cols-container"]/div
+${directory_page_id}                        xpath=//div[@id="user-tabs-pane-directory"]
+${team_page_id}                             xpath=//div[@id="user-tabs-pane-team"]
+${favorites_page_id}                        xpath=//div[@id="user-tabs-pane-favorites"]
+${personal_page_id}                         xpath=//div[@id="user-tabs-pane-personal"]
+${directory_first_data_show}                xpath=//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
+${team_first_data_show}                     xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
+${favorites_first_data_show}                xpath=//div[@id="user-tabs-pane-favorites"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
+${personal_first_data_show}                 xpath=//div[@id="user-tabs-pane-personal"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
 # menus count
 ${menus_count}                              xpath=//div[@role="group"]/div[@role="treeitem"]                                                        # count of menus
 

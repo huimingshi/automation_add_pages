@@ -111,7 +111,7 @@ User_Directory_open_five_view
     ...         AND             close_disable_external_users    # Switch "Disable External Feature" off
     ...         AND             turn_on_user_directory        # Switch "Workspace Directory" on
     # enter Directory page
-#    refresh_web_page
+    enter_contacts_page
     enter_directory_page
     # Search with name   Search with title   Search with location
     directory_search_with_name_title_location
@@ -133,7 +133,7 @@ User_Directory_open_five_view
     enter_recents_page
     # Title and location should show under user's name if contact has title or location.
     check_three_field_position
-    [Teardown]    Close
+#    [Teardown]    Close
 
 Contact_Pre_condition_user_belongs_to_workspace_WS1_and_WS2
     [Documentation]    Contact   Pre-condition: user belongs to workspace WS1 and WS2

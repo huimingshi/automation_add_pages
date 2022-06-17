@@ -140,6 +140,7 @@ last_page_click_get_started
     # Last page	Clicks 'Get Started' button
     click element      ${get_started_button}
     wait until page does not contain   ${log_in_success_tag}    20
+    sleep   5s
 
 log_out_from_citron
     # log out
@@ -583,8 +584,8 @@ external_call_record_is_invisible
     list should not contain value    ${record_list}    ${normal_username_for_calls_name}
 
 enter_directory_page
-    # enter first menu tree
-    click element   ${enter_first_menu_tree}
+#    # enter first menu tree
+#    click element   ${enter_first_menu_tree}
     # enter Directory page
     wait until element is visible   ${enter_directory_page}
     click element   ${enter_directory_page}
@@ -604,21 +605,65 @@ page_search
 
 team_page_search
     [Arguments]   ${search_text}   ${search_result}
-    click element   ${team_search_input}
+    clear element text  ${team_search_input}
+    sleep  0.5s
+    click element  ${team_search_input}
     sleep  0.5s
     input text   ${team_search_input}   ${search_text}
-    sleep  3s
-    ${count}   get element count     ${team_search_result}
+    sleep  5s
+    ${count}   get element count   ${team_search_count}
+    should be equal as integers   ${count}    ${search_result}
+
+favorites_page_search
+    [Arguments]   ${search_text}   ${search_result}
+    clear element text  ${favorites_search_input}
+    sleep  0.5s
+    click element  ${favorites_search_input}
+    sleep  0.5s
+    input text   ${favorites_search_input}   ${search_text}
+    sleep  5s
+    ${count}   get element count   ${favorites_search_count}
+    should be equal as integers   ${count}    ${search_result}
+
+directory_page_search
+    [Arguments]   ${search_text}   ${search_result}
+    clear element text  ${directory_search_input}
+    sleep  0.5s
+    click element  ${directory_search_input}
+    sleep  0.5s
+    input text   ${directory_search_input}   ${search_text}
+    sleep  5s
+    ${count}   get element count   ${directory_search_count}
     should be equal as integers   ${count}    ${search_result}
 
 personal_page_search
     [Arguments]   ${search_text}   ${search_result}
-    click element   ${personal_search_input}
+    clear element text  ${personal_search_input}
+    sleep  0.5s
+    click element  ${personal_search_input}
     sleep  0.5s
     input text   ${personal_search_input}   ${search_text}
-    sleep  3s
-    ${count}   get element count    ${personal_search_result}
+    sleep  5s
+    ${count}   get element count   ${personal_search_count}
     should be equal as integers   ${count}    ${search_result}
+
+#team_page_search
+#    [Arguments]   ${search_text}   ${search_result}
+#    click element   ${team_search_input}
+#    sleep  0.5s
+#    input text   ${team_search_input}   ${search_text}
+#    sleep  3s
+#    ${count}   get element count     ${team_search_result}
+#    should be equal as integers   ${count}    ${search_result}
+
+#personal_page_search
+#    [Arguments]   ${search_text}   ${search_result}
+#    click element   ${personal_search_input}
+#    sleep  0.5s
+#    input text   ${personal_search_input}   ${search_text}
+#    sleep  3s
+#    ${count}   get element count    ${personal_search_result}
+#    should be equal as integers   ${count}    ${search_result}
 
 click_Users_user_details
     # click Details button
@@ -627,21 +672,21 @@ click_Users_user_details
 
 directory_search_with_name_title_location
     # Search with name
-    page_search   hlnauto+apple4  1
+    directory_page_search     hlnauto+apple4  1
     # Search with title
-    clear element text   ${search_input}
+    clear element text   ${directory_search_input}
     sleep  0.5s
-    page_search   fruit man4  1
+    directory_page_search   fruit man4  1
     # Search with location
-    clear element text   ${search_input}
+    clear element text   ${directory_search_input}
     sleep  0.5s
-    page_search   vb  1
+    directory_page_search   vb  1
     # Title and location should show under user's name if contact has title or location.
-    ${text}   get text   xpath=//div[@class="cardName"]
+    ${text}   get text   ${directory_page_id}//div[@class="cardName"]
     should be equal as strings   ${text}   hlnauto+apple4
-    ${text}   get text   xpath=//div[@class="text-muted cardSub"][1]
+    ${text}   get text   ${directory_page_id}//div[@class="text-muted cardSub"][1]
     should be equal as strings   ${text}   fruit man4
-    ${text}   get text   xpath=//div[@class="text-muted cardSub"][2]
+    ${text}   get text   ${directory_page_id}//div[@class="text-muted cardSub"][2]
     should be equal as strings   ${text}   vb
 
 Unfavorite_the_contact_in_favorite_tab
@@ -655,24 +700,24 @@ Unfavorite_the_contact_in_favorite_tab
     # enter Favorites page
     click element  ${enter_favorites_page}
     sleep  2s
-    wait until element is visible   ${first_data_show}
+    wait until element is visible   ${favorites_first_data_show}
     # search result after favorite
-    page_search   hlnauto+apple4   1
+    favorites_page_search   hlnauto+apple4   1
 
 Unfavorite_the_contact_in_Directory_view
     # enter Directory page
     click element  ${enter_directory_page}
     sleep  2s
-    wait until element is visible   ${first_data_show}
+    wait until element is visible   ${directory_first_data_show}
     # search favorite user
-    page_search   hlnauto+apple4   1
+    directory_page_search   hlnauto+apple4   1
     # unfavorite contact
     click element    ${favorite_or_not}
     sleep  1s
     # check result after unfavorite
-    clear element text   ${search_input}
+    clear element text   ${directory_search_input}
     sleep  0.5s
-    page_search   hlnauto+apple4   1
+    directory_page_search   hlnauto+apple4   1
     ${attribute}   get element attribute   ${favorite_or_not}    class
     should be equal as strings  ${attribute}     fal fa-star favoriteIcon star-off
 
@@ -705,15 +750,15 @@ personal_search_with_name_title_location
 
 favorite_search_with_name_title_location
     # Search with name
-    page_search   Hlnauto+p1  1
+    favorites_page_search   Hlnauto+p1  1
     # Search with title
-    clear element text  ${search_input}
+    clear element text  ${favorites_search_input}
     sleep  0.5s
-    page_search   Dolphin    1
+    favorites_page_search   Dolphin    1
     # Search with location
-    clear element text  ${search_input}
+    clear element text  ${favorites_search_input}
     sleep  0.5s
-    page_search   Sea    1
+    favorites_page_search   Sea    1
 
 check_three_field_position
     ${text}   get text   xpath=//div[@class="cardName" and @title="${normal_username_for_calls_name}"]
