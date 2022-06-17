@@ -39,8 +39,8 @@ Small_range_624
     Login_premium_user
     switch_to_created_workspace     ${created_workspace}
     enter_workspace_groups_page
-    # 在Contacts页面，搜索刚创建的on-call group
-    team_page_search   ${group_name}   1
+    # 在Groups页面，搜索刚创建的on-call group
+    page_search   ${group_name}   1
     # admin removes on-call group from citron
     delete_someone_group
     # close browser
