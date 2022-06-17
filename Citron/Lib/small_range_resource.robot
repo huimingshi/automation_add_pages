@@ -891,19 +891,6 @@ click_send_invite_button
     # 点击取消或者确认发送
     Run Keyword If   '${send_or_not}'=='send_invite'   click element     ${send_invite_button}
     ...  ELSE IF     '${send_or_not}'=='cancel'    click element    ${cancel_send_invite_button}
-    wait until element is not visible    ${send_invite_button}
-
-team_click_call_button
-    # team页面点击Call按钮
-    click element   ${team_page_call}
-
-personal_click_call_button
-    # team页面点击Call按钮
-    click element   ${personal_page_call}
-
-page_click_call_button
-    # team页面点击Call按钮
-    click element    ${call_button_xpath}
 
 get_send_invite_email
     # 从邮箱获取发送的邮件

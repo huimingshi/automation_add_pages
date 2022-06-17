@@ -327,10 +327,10 @@ User_A_taps_unreachable_user_B_from_team_contacts_tab
     ...         AND             Close  # close browser
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # seacrh user B in team page
     team_page_search   ${never_log_in_username}   1
-    # click Call button
-    team_click_call_button
     # 点击Send Invite按钮
     click_send_invite_button    send_invite
     sleep  25s
@@ -347,12 +347,12 @@ User_A_taps_unreachable_user_B_from_personal_contacts_tab
     ...         AND             Close  # close browser
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # 进入personal页面
     enter_personal_contact_page
     # seacrh user B in personal page，这个用户属于Huiming.shi
     personal_page_search   Huiming.shi.helplightning+never_login_personal   1
-    # click Call button
-    personal_click_call_button
     # 点击Send Invite按钮
     click_send_invite_button    send_invite
     sleep  25s
@@ -369,12 +369,12 @@ User_A_taps_unreachable_user_B_from_directory_tab
     ...         AND             Close  # close browser
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # 进入 directory 页面
     enter_directory_page
     # seacrh user B in directory page
     directory_page_search   ${never_log_in_name}   1
-    # click Call button
-    page_click_call_button
     # 点击Send Invite按钮
     click_send_invite_button    send_invite
     sleep  25s
@@ -399,8 +399,6 @@ User_A_taps_unreachable_user_B_from_favorites_tab
     enter_favorites_page
     # seacrh user B in Favorites page
     favorites_page_search   ${never_log_in_username}   1
-    # click Call button
-    page_click_call_button
     # 点击Send Invite按钮
     click_send_invite_button    send_invite
     sleep  25s
