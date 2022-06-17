@@ -133,7 +133,7 @@ User_Directory_open_five_view
     enter_recents_page
     # Title and location should show under user's name if contact has title or location.
     check_three_field_position
-#    [Teardown]    Close
+    [Teardown]    Close
 
 Contact_Pre_condition_user_belongs_to_workspace_WS1_and_WS2
     [Documentation]    Contact   Pre-condition: user belongs to workspace WS1 and WS2
@@ -188,11 +188,14 @@ Disable_External_Users_Switch_Disable_External_Feature_on_from_citron_for_a_spec
     [Documentation]    Disable External Users   Switch "Disable External Feature" on from citron for a specific workspace
     [Tags]    small range 91，92，101 lines
     [Setup]     run keywords    Login_premium_user   # log in citron with workspaces user
+    ...         AND             switch_to_first_workspace       # 切换到第一个WS
     ...         AND             enter_workspace_settings_page   # enter workspace settings page
     ...         AND             open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
     ...         AND             Close    # close browser
     # log in citron with an expert user
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # enter Favorotes page
     enter_favorites_page
     # this site workspace user should not see personal user and user from another site workspace in Recent/Favorites tab
@@ -206,12 +209,16 @@ Disable_External_Users_Switch_Disable_External_Feature_on_from_citron_for_a_spec
 
     # Switch "Disable External Feature" off from citron
     Login_premium_user
+    # 切换到第一个WS
+    switch_to_first_workspace
     enter_workspace_settings_page
     close_disable_external_users
     Close
 
     # log in citron with an expert user
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # Personal contact tab is back.
     enter_personal_contact_page
     [Teardown]    Close
@@ -264,6 +271,8 @@ User_A_opens_Team_contact_tab
     ...         AND             Close  # close browser
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # search user in contacts page
     team_page_search   ${never_log_in_name}   1
     # VP: User B displays with greyed out pattern, including the icon, all text (name, title, location), but not including the favorite star.
@@ -279,6 +288,8 @@ Favorite_unreachable_users
     ...         AND             Close  # close browser
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # 在 Team page查询user
     team_page_search    ${never_log_in_name}   1
     # 把userB添加到favorite中
@@ -286,13 +297,13 @@ Favorite_unreachable_users
     # 进入Favorites页面
     enter_favorites_page
     # 在Favorite页面进行查询user
-    page_search    ${never_log_in_name}   1
+    favorites_page_search    ${never_log_in_name}   1
     # VP: User B displays with greyed out pattern, including the icon, all text (name, title, location), but not including the favorite star.
     check_one_user_unreachable     unreachable
     # User A unfavorite user B from Favorite tab.
     unfavorite_user_from_all_pages
     # 在Favorite页面进行查询user
-    page_search    ${never_log_in_name}   0
+    favorites_page_search    ${never_log_in_name}   0
     # 返回Team tab页面
     enter_contacts_page
     # 在 Team page查询user
@@ -304,7 +315,7 @@ Favorite_unreachable_users
     # 进入Favorites页面
     enter_favorites_page
     # 在Favorite页面进行查询user
-    page_search    ${never_log_in_name}   0
+    favorites_page_search    ${never_log_in_name}   0
     [Teardown]    Close
 
 User_A_taps_unreachable_user_B_from_team_contacts_tab
@@ -361,7 +372,7 @@ User_A_taps_unreachable_user_B_from_directory_tab
     # 进入 directory 页面
     enter_directory_page
     # seacrh user B in directory page
-    page_search   ${never_log_in_name}   1
+    directory_page_search   ${never_log_in_name}   1
     # click Call button
     page_click_call_button
     # 点击Send Invite按钮
@@ -387,7 +398,7 @@ User_A_taps_unreachable_user_B_from_favorites_tab
     # 进入到Favorites页面
     enter_favorites_page
     # seacrh user B in Favorites page
-    page_search   ${never_log_in_username}   1
+    favorites_page_search   ${never_log_in_username}   1
     # click Call button
     page_click_call_button
     # 点击Send Invite按钮

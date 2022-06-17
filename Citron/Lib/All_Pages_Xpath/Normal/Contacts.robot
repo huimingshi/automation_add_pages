@@ -2,9 +2,10 @@
 # Contacts
 ${favorite_button}                      xpath=//div[@class="favorite-div"]//i                                                   # favorite/unfavorite button
 ${personal_search_result}               xpath=//div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div         # personal search result
-${first_team_username}                  xpath=//div[@id="user-tabs-pane-1"]//div[@row-index="0"]//div[@class="cardName"]        # team page first username
-${first_personal_username}              xpath=//div[@id="user-tabs-pane-2"]//div[@row-index="0"]//div[@class="cardName"]        # personal page first username
+${first_team_username}                  xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div      # team page first username
+${first_personal_username}              xpath=//div[@id="user-tabs-pane-personal"]//div[@row-index="0"]//div[@class="cardName"]        # personal page first username
 ${team_search_result}                   xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div      # team search result
+${favorites_search_result}              xpath=//div[@id="user-tabs-pane-favorites"]//div[@class="ag-center-cols-container"]/div      # team search result
 ${team_page_call}                       xpath=//div[@id="user-tabs-pane-1"]//button[contains(.,"Call")]                         # team page call button
 ${personal_page_call}                   xpath=//div[@id="user-tabs-pane-2"]//button[contains(.,"Call")]                         # personal page call button
 ${send_invite_button}                   xpath=//button[contains(.,"Send Invite")]                                               # Send Invite button

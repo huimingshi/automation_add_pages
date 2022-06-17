@@ -452,7 +452,8 @@ switch_workspace_check_user
     ${text_1}   get text    ${first_line_user_xpath}
     # switch to second workspace
     switch_to_second_workspace
-    wait until element is visible   ${call_button_xpath}
+    sleep   3s
+    wait until element is visible   ${ellipsis_menu_div}
     # second workspace data list
     ${text_2}   get text   ${first_line_user_xpath}
     should not be equal as strings   ${text_1}   ${text_2}
@@ -464,6 +465,7 @@ switch_workspace_check_recents_list
     ${text_1}   get text    ${recents_first_call}
     # switch to second workspace
     switch_to_second_workspace
+    sleep   3s
     wait until element is visible   ${recents_first_call}     20
     # second workspace team user
     ${text_2}   get text   ${recents_first_call}
@@ -474,7 +476,7 @@ back_to_first_workspace
     click element   ${expand_workspace_button}
     sleep  1s
     click element  ${first_WS_xpath}
-    sleep  1s
+    sleep  3s
     wait until element is visible   ${ellipsis_menu_div}
 
 enter_contacts_page
@@ -483,13 +485,14 @@ enter_contacts_page
     sleep  1s
     # click Contacts page
     click element   ${enter_contacts_page}
-    wait until element is visible     ${ellipsis_menu_div}
+    sleep   3s
+    wait until element is visible     ${team_first_data_show}
 
 enter_personal_contact_page
     # enter Personal contact page
     click element    ${enter_personal_page}
-    sleep  2s
-    wait until element is visible   ${ellipsis_menu_div}
+    sleep  3s
+    wait until element is visible   ${personal_first_data_show}
 
 enter_favorites_page
     # enter favorite page
@@ -505,29 +508,30 @@ enter_recents_page
     wait until element is visible   ${second_data_show}
 
 back_to_directory_page
-#    # enter first menu tree
-#    click element    ${enter_first_menu_tree}
-    # enter recents page
+    # enter Contacts page
+    enter_contacts_page
+    # enter directory page
     wait until element is visible   ${enter_directory_page}
     click element   ${enter_directory_page}
     sleep  2s
-    wait until element is visible   ${first_line_username}
+    wait until element is visible   ${directory_first_data_show}
 
 switch_workspace_check_directory
     # first workspace data list
     @{NameList_A}=    Create List
     FOR   ${i}   IN RANGE  1   11
-        ${get_name_text}   get text    xpath=//div[@row-index="${i}"]//div[@class="cardName"]
+        ${get_name_text}   get text    ${directory_page_id}//div[@row-index="${i}"]//div[@class="cardName"]
         Append To List    ${NameList_A}    ${get_name_text}
     END
     log to console   ${NameList_A}
     # switch to second workspace
     switch_to_second_workspace
-    wait until element is visible   ${call_button_xpath}
+    sleep   3s
+    wait until element is visible   ${directory_first_data_show}
     # second workspace data list
     @{NameList_B}=    Create List
     FOR   ${i}   IN RANGE  1   11
-        ${get_name_text}   get text    xpath=//div[@row-index="${i}"]//div[@class="cardName"]
+        ${get_name_text}   get text    ${directory_page_id}//div[@row-index="${i}"]//div[@class="cardName"]
         Append To List    ${NameList_B}    ${get_name_text}
     END
     log to console   ${NameList_B}
@@ -568,7 +572,7 @@ external_user_is_invisible
     input text  ${search_input}   Huiming.shi.helplightning+1635818847082899
     sleep  2s
     # check result
-    ${count}    get element count    ${get_number_of_rows}
+    ${count}    get element count    ${get_count_of_favorites}
     should be equal as integers    ${count}    0
 
 external_call_record_is_invisible
@@ -821,10 +825,10 @@ get_user_info
     [Arguments]   ${username}    ${expect_src}
     ${username}   evaluate   str(${username})
     # get avator
-    ${get_avator}  get element attribute   ${first_data_show}//img   src
+    ${get_avator}  get element attribute   ${team_first_data_show}//img   src
     should start with   ${get_avator}   ${expect_src}
     # get name
-    ${get_name}  get text  ${first_data_show}//div[@class="cardName"]
+    ${get_name}  get text  ${team_first_data_show}//div[@class="cardName"]
     should contain   ${get_name}   ${username}
 
 modify_user_name_avator
@@ -852,13 +856,13 @@ modify_user_name_avator
 check_one_user_unreachable_in_team
     [Arguments]   ${reachable}
     ${class_attribute}   get element attribute     ${team_search_result}/div[@col-id="name"]    class
-    Run Keyword If   '${reachable}'=='unreachable'    should be equal as strings    ${class_attribute}    ag-cell ag-cell-not-inline-editing ag-cell-with-height unreachableText ag-cell-value
+    Run Keyword If   '${reachable}'=='unreachable'    should be equal as strings    ${class_attribute}    ${unreachable_class_content}
     ...  ELSE IF  '${reachable}'=='reachable'    should be equal as strings    ${class_attribute}      ag-cell ag-cell-not-inline-editing ag-cell-with-height ag-cell-value
 
 check_one_user_unreachable
     [Arguments]   ${reachable}
-    ${class_attribute}   get element attribute     ${get_number_of_rows}/div[@col-id="name"]    class
-    Run Keyword If   '${reachable}'=='unreachable'    should be equal as strings    ${class_attribute}    ag-cell ag-cell-not-inline-editing ag-cell-with-height unreachableText ag-cell-value
+    ${class_attribute}   get element attribute     ${favorites_search_result}/div[@col-id="name"]    class
+    Run Keyword If   '${reachable}'=='unreachable'    should be equal as strings    ${class_attribute}    ${unreachable_class_content}
     ...  ELSE IF  '${reachable}'=='reachable'    should be equal as strings    ${class_attribute}      ag-cell ag-cell-not-inline-editing ag-cell-with-height ag-cell-value
 
 add_to_favorite_from_all_page

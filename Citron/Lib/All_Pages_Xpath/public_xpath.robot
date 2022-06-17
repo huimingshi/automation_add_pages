@@ -15,6 +15,9 @@ ${erase_my_account}                         xpath=//div[@role="dialog"]//button[
 ${cancel_erase_my_account}                  xpath=//div[@role="dialog"]//button[text()='Cancel']                                                    # Cancel Erase My Account
 # all
 ${get_count_of_team}                        xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div                      # Get number of Team
+${get_count_of_favorites}                   xpath=//div[@id="user-tabs-pane-favorites"]//div[@class="ag-center-cols-container"]/div                 # Get number of favorites
+${get_count_of_personal}                    xpath=//div[@id="user-tabs-pane-personal"]//div[@class="ag-center-cols-container"]/div                  # Get number of personal
+${get_count_of_directory}                   xpath=//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div                 # Get number of directory
 ${get_number_of_rows}                       xpath=//div[@class="ag-center-cols-container"]/div                                                      # Get number of rows
 ${first_row_shows_up}                       xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[2]//div[@class="cardName"]       # Wait until the first row shows up
 ${first_data_show}                          xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]                                      # Wait until the first row shows up
@@ -51,8 +54,8 @@ ${first_line_tagname}                       xpath=//div[@class="ag-center-cols-c
 ${search_input}                             xpath=//input[@id="filter-text-box"]                                                                    # search input
 ${second_data_show}                         xpath=//div[@class="ag-center-cols-container"]/div[@row-index="1"]                                      # Wait until the second row shows up
 ${favorite_or_not}                          xpath=//div[@class="favorite-div"]/i                                                                    # favorite or not favorite
-${team_favorite_or_not}                     xpath=//div[@id="user-tabs-pane-1"]//div[@class="favorite-div"]/i                                       # Team page favorite or not favorite
-${personal_favorite_or_not}                 xpath=//div[@id="user-tabs-pane-1"]//div[@class="favorite-div"]/i                                       # Personal page favorite or not favorite
+${team_favorite_or_not}                     xpath=//div[@id="user-tabs-pane-team"]//div[@class="favorite-div"]                                      # Team page favorite or not favorite
+${personal_favorite_or_not}                 xpath=//div[@id="user-tabs-pane-personal"]//div[@class="favorite-div"]                                  # Personal page favorite or not favorite
 ${enter_ws_settings_success}                xpath=//div[@class="feature-section"]                                                                   # 切换到WorkSpace Setting页面成功的标志
 ${ellipsis_menu_div}                        xpath=//div[@class="ellipsis-menu-div"]                                                                 # user右边的省略号
 ${directory_search_count}                   xpath=//div[@id="user-tabs-pane-directory"]//div[@class="ag-center-cols-container"]/div
@@ -67,6 +70,7 @@ ${directory_first_data_show}                xpath=//div[@id="user-tabs-pane-dire
 ${team_first_data_show}                     xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
 ${favorites_first_data_show}                xpath=//div[@id="user-tabs-pane-favorites"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
 ${personal_first_data_show}                 xpath=//div[@id="user-tabs-pane-personal"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
+${unreachable_class_content}                ag-cell ag-cell-not-inline-editing ag-cell-with-height unreachableText nameDetailsCell ag-cell-value
 # menus count
 ${menus_count}                              xpath=//div[@role="group"]/div[@role="treeitem"]                                                        # count of menus
 
