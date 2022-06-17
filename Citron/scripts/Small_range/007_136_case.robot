@@ -391,6 +391,8 @@ User_A_taps_unreachable_user_B_from_favorites_tab
     ...         AND             Close  # close browser
     # log in citron with site admin
     Login_new_added_user    ${switch_workspace_username}
+    # 切换到第一个WS
+    switch_to_first_workspace
     # seacrh user B in team page
     team_page_search   ${never_log_in_username}   1
     # 添加user到favorites

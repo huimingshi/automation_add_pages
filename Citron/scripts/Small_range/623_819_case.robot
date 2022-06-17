@@ -26,12 +26,12 @@ Small_range_624
     # professional_on_call_group  中的User  Huiming.shi.helplightning+random_2  登录
     Login_new_added_user    ${random_2_username}
     # 在Contacts页面，搜索刚创建的on-call group
-    page_search   ${group_name}   1
+    team_page_search   ${group_name}   1
     # 把刚创建的on-call group添加到favorite
     add_to_favorite_from_all_page
     # 进入Favorites页面
     enter_favorites_page
-    page_search   ${group_name}   1
+    favorites_page_search   ${group_name}   1
     # close browser
     Close
 
@@ -40,7 +40,7 @@ Small_range_624
     switch_to_created_workspace     ${created_workspace}
     enter_workspace_groups_page
     # 在Contacts页面，搜索刚创建的on-call group
-    page_search   ${group_name}   1
+    team_page_search   ${group_name}   1
     # admin removes on-call group from citron
     delete_someone_group
     # close browser
@@ -49,10 +49,10 @@ Small_range_624
     # professional_on_call_group  中的User  Huiming.shi.helplightning+random_2  登录
     Login_new_added_user    ${random_2_username}
     # 在Contacts页面，搜索刚创建的on-call group
-    page_search   ${group_name}   0
+    team_page_search   ${group_name}   0
     # 进入Favorites页面
     enter_favorites_page
-    page_search   ${group_name}   0
+    favorites_page_search   ${group_name}   0
     [Teardown]  Close
 
 Set_Declaimer_delete_user_is_selected_User_clicks_Decline_button
