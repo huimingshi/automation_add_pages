@@ -70,7 +70,7 @@ Click_Edit_button_set_Day_to_0_and_366
 
 Turn_both_Call_Logs_and_Recordings_Screen_Captures_policies_ON
     [Documentation]    Turn both Call Logs and Recordings/Screen Captures policies ON
-    [Tags]    Citron 327-336    crunch的check功能删除？
+    [Tags]    Citron 327-336
     [Setup]     run keywords      restore_the_settings_to_the_initial_value
     ...         AND               Login_workspaces_admin_one   # log in with workspaces admin
     ...         AND               enter_workspace_settings_page    # enter Workspace Settings page
