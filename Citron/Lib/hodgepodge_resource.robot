@@ -1136,6 +1136,7 @@ check_invitation_message_correct_from_email
 enter_which_call_details
     [Arguments]   ${which_call}
     # 进入哪一行call记录的detail
+    wait until element is visible    xpath=//div[@row-index="${which_call}"]//button[contains(text(),"Details")]
     click element   xpath=//div[@row-index="${which_call}"]//button[contains(text(),"Details")]
     wait until element is visible     ${participant_name}
 
@@ -1146,13 +1147,13 @@ close_call_details
 
 check_details_participant_count
     [Arguments]   ${participants_count}
+    element should not be visible    xpath=//table[@class="table table-striped"]//tr[${participants_count}+1]
     ${count}   get element count      ${participant_name}
     should be equal as strings    ${count}   ${participants_count}
 
 check_details_participant_name
     [Arguments]   ${participant_name}
-    ${count}    get element count   xpath=//table[@class="table table-striped"]//a[text()="${participant_name}"]
-    should be equal as strings    ${count}    1
+    wait until element is visible    xpath=//table[@class="table table-striped"]//a[text()="${participant_name}"]
 
 check_event_log_deleted_user
     [Arguments]   ${expect_count}

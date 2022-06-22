@@ -1157,11 +1157,12 @@ def recents_page_check_call(driver,user_name,can_connect = 'can_not_connect',sen
     :return:
     """
     # 鼠标悬停
-    ellipsis_xpath = f'//div[text()="{user_name}"]/../../../..//div[@class="ellipsis-menu-div"]'
+    # ellipsis_xpath = f'//div[text()="{user_name}"]/../../../..//div[@class="ellipsis-menu-div"]'
+    ellipsis_xpath = f'//div[contains(.,"{user_name}")]/../../../..//div[@class="ellipsis-menu-div"]'
     ellipsis = get_xpath_element(driver, ellipsis_xpath, description='悬浮按钮')
     ActionChains(driver).move_to_element(ellipsis).perform()
     # 选择Audio
-    audio_xpath = f'//div[text()="{user_name}"]/../../../..//span[text()="Audio+"]/..'
+    audio_xpath = f'//div[contains(.,"{user_name}")]/../../../..//span[text()="Audio+"]/..'
     public_click_element(driver, audio_xpath, description='启动Audio按钮')
     # 需要Accept Declaimer
     count = get_xpath_elements(driver, accept_disclaimer)
@@ -1182,7 +1183,7 @@ def recents_page_check_call(driver,user_name,can_connect = 'can_not_connect',sen
     if send_invite == 'send_invite':
         public_check_element(driver, send_invite_button, '点击Send_Invite按钮失败')
     elif send_invite == 'click_cancel':
-        public_click_element(driver, '//div[@class="modal-content"]//button[text()="Cancel"]', description='点击Send_Invite按钮失败')
+        public_click_element(driver, '//div[@class="modal-content"]//button[text()="Cancel"]', description='点击取消Send_Invite按钮失败')
 
 def anonymous_user_call_can_not_call_again(driver):
     """
@@ -1367,11 +1368,11 @@ def verify_username_in_recents_page(driver,*args):
         ele_list = get_xpath_elements(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]')
         if len(ele_list) == 1:
             name = get_xpath_element(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]',description = '参会者').get_attribute("textContent")
-            public_assert(driver,name , args[i],action='recents页面预期name和实际不一致')
+            public_assert(driver,args[i] ,name,condition = 'in',action='recents页面预期name和实际不一致')
         else:
             public_click_element(driver,'//button[text()="Refresh"]',description='Refresh按钮')
             name = get_xpath_element(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]',description = '参会者').get_attribute("textContent")
-            public_assert(driver, name, args[i], action='recents页面预期name和实际不一致')
+            public_assert(driver,args[i] ,name,condition = 'in',action='recents页面预期name和实际不一致')
 
 def close_last_window(driver):
     """

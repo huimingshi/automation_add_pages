@@ -21,7 +21,7 @@ ${py_users_page}                                Users                           
 ${py_personal_page}                             Personal                                                                                            # Personal page
 ${py_team_page}                                 Team                                                                                                # Team page
 ${py_groups_page}                               Groups                                                                                              # Groups page
-${py_recents_page}                              Recents                                                                                             # Recents page
+${py_recents_page}                              Calls                                                                                               # Calls page
 ${py_favorites_page}                            Favorites                                                                                           # Favorites page
 ${py_contacts_page}                             Contacts                                                                                            # Contacts page
 ${py_invite_page}                               invite_page                                                                                         # 通话过程中邀请user的页面
@@ -36,7 +36,7 @@ ${py_users_switch_success}                      //span[contains(.,"Active Users"
 ${py_groups_switch_success}                     //h1[text()="Groups"]                                                                               # switch to Groups page successfully
 ${py_contacts_switch_success}                   //h1[contains(.,"Contacts")]                                                                        # switch to Contacts page successfully
 ${py_personal_switch_success}                   //a[@id="user-tabs-tab-personal" and @aria-selected="true"]                                         # switch to Personal page successfully
-${py_recents_switch_success}                    //h1[contains(.,"Recent Calls")]                                                                    # switch to Recents page successfully
+${py_recents_switch_success}                    //h1[contains(.,"Calls")]                                                                           # switch to Calls page successfully
 ${py_favorites_switch_success}                  //a[@id="user-tabs-tab-favorites" and @aria-selected="true"]                                        # switch to Favorites page successfully
 ${login_page_username}                          //input[@autocomplete="username"]                                                                   # 登录页面的输入用户名的xpath
 ${invite_user_in_calling}                       //div[@class="menus"]//*[@*="#options_menu"]                                                        # 在通话中的页面邀请user的按钮（右上角三个横杠）

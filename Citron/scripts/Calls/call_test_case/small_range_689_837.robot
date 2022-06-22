@@ -544,14 +544,14 @@ Small_range_799_802
     # VP: In Citron->Admin  1)-> Calls, to check any reference to the User becomes "Deleted User".
     Login_site_admin
     enter_workspace_calls_page
-    enter_which_call_details     1    # 进入第一条call记录的details
+    enter_which_call_details     0    # 进入第一条call记录的details
     refresh_web_page
     # 这边如果报错了，说明通话记录未加载过来，获取的是下一条通话记录的participant，所以前面等了60s
     check_details_participant_count     3   # participant数目为3
     refresh_web_page
     check_details_participant_name      Deleted User    # Deleted User在participant中
     refresh_web_page
-    check_event_log_deleted_user    2  # event log中有两条deleted user
+#    check_event_log_deleted_user    2  # event log中有两条deleted user
     enter_calls_menu
     # VP: In Citron->Admin  3)->Calls -> expert current it table, to check the csv file: the user name should be changed to Deleted User, email should be changed to Null.
     export_current_table
