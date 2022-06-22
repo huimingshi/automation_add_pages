@@ -25,10 +25,12 @@ All_active_users_in_the_entire_enterprise_should_show
     switch_to_diffrent_page   ${driver}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}
     # 获取Directory页面的所有user，放到列表中
     ${directory_user_list}  get_all_data_on_the_page   ${driver}    ${py_directory_page}
+    ${directory_user_list}    remove_blank_for_list_ele   ${directory_user_list}
     # 进入到WS下的Users页面
     switch_to_diffrent_page   ${driver}  ${py_users_page}    ${py_users_switch_success}    ${py_get_number_of_rows}    switch_tree   2
     # 获取Users页面的所有active user，放到列表中
     ${active_user_list}     get_all_data_on_the_page   ${driver}    ${py_users_page}
+    ${active_user_list}    remove_blank_for_list_ele   ${active_user_list}
     ${active_user_list_final}     remove_value_from_list    ${active_user_list}   ${crunch_site_username}
     two_option_is_equal   ${driver}   ${directory_user_list}   ${active_user_list_final}
     [Teardown]      run keywords    Close

@@ -203,10 +203,10 @@ all_modify_records_in_crunch_is_correct
         Append To List    ${LogList}    ${get_log}
     END
     log  ${LogList}
-    should contain   ${LogList}   User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '99'.
+#    should contain   ${LogList}   User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '99'.
     should contain   ${LogList}   User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'retention_policy_days' to '1088'.
-    should contain   ${LogList}   User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '365'.
-    should contain   ${LogList}   User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '1'.
+#    should contain   ${LogList}   User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'retention_policy_days' to '365'.
+#    should contain   ${LogList}   User Huiming.shi.helplightning+99998888 (56469) updated Enterprise work_space_for_auto_test_only_one_groups (6258) property 'recording_retention_days' to '1'.
 
 fill_RaSC_day_for_restore
     # set day equal to a number

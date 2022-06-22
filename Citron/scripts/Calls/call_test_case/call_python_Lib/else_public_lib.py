@@ -942,10 +942,12 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
             if witch_page == 'Directory' or witch_page == 'Team':
                 for j in range(i,i+4):  # 获取4条数据的name放到user_list中
                     get_name = get_xpath_element(driver,f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                    user_list.append(get_name)
             else:
                 for j in range(i, i + 4):  # 获取4条数据的name放到user_list中
                     get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-            user_list.append(get_name)
+                    user_list.append(get_name)
+            # user_list.append(get_name)
             i = i + 4   # 设置每4次一个循环
             print(i)
         else:
@@ -1468,6 +1470,19 @@ def two_option_is_equal(driver,option1,option2):
     :return:
     """
     public_assert(driver,option1,option2,action='两列表不一致')
+
+def remove_blank_for_list_ele(list):
+    """
+    获取users或者directory列表时，会出现Huiming.shi.helplightning+Expert_BbB  (Not Signed In)的这种情况，所以去除掉中间的两个空格，返回新的列表
+    :param list:
+    :return:
+    """
+    remove_blank_list = []
+    for one in list:
+        if '  ' in one:
+            one= one.split('  ')[0]
+        remove_blank_list.append(one)
+    return remove_blank_list
 
 if __name__ == '__main__':
     # print()
