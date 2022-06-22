@@ -589,7 +589,7 @@ modify_call_tag_from_client
     ${call_started_time}   get text   xpath=//button[contains(.,'Details')]/../../../div[@col-id="timeCallStarted"]
     #  click Details button
     click element    xpath=//button[contains(.,'Details')]
-    wait until element is visible    ${details_save_button}
+    wait until element is visible    ${tags_save_button}
     # delete all tags
     ${count}   get element count   ${delete_tags_button}
     FOR   ${i}   IN RANGE    ${count}
@@ -607,7 +607,7 @@ modify_call_tag_from_client
     swipe_browser_to_bottom
     sleep  0.5s
     # click SAVE button
-    click element   ${details_save_button}
+    click element   ${tags_save_button}
     sleep  1s
     [Return]  ${call_started_time}   ${third_tag}
 
