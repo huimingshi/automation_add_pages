@@ -370,12 +370,23 @@ add_tag_and_comments
         click element  ${delete_tags_button}
         sleep  0.5s
     END
+    # click SAVE button
+    click element   ${tags_save_button}
+    wait until element is visible   ${prompt_information}
+    wait until element is not visible   ${prompt_information}   20s
     # click  Add tags...  input
     click element    ${add_tags_input}
     sleep  1s
     # Select the first tag
     ${first_tag}   get text    xpath=//div[@class="k-list-scroller"]//li[1]
     click element   xpath=//div[@class="k-list-scroller"]//li[1]
+    sleep  0.5s
+    # click SAVE button
+    click element   ${tags_save_button}
+    wait until element is visible   ${prompt_information}
+    wait until element is not visible   ${prompt_information}   20s
+    # 滑动到底
+    swipe_browser_to_bottom
     sleep  0.5s
     # click Add a comment...  input
     click element    ${add_comment_input}
@@ -384,12 +395,15 @@ add_tag_and_comments
     ${random}   evaluate    int(time.time()*1000000)   time
     ${comment}   Catenate   SEPARATOR=   comment  ${random}
     input text   ${add_comment_input}     ${comment}
-    # 滑动到底
-    swipe_browser_to_bottom
-    sleep  0.5s
-    # click SAVE button
-    click element   ${details_save_button}
     sleep  1s
+#    # 滑动到底
+#    swipe_browser_to_bottom
+#    sleep  0.5s
+    # click SAVE button
+    wait until element is enabled  ${comment_save_button}
+    click element   ${comment_save_button}
+    wait until element is visible   ${prompt_information}
+    wait until element is not visible   ${prompt_information}   20s
     # click x button
     click element    ${close_details_button}
     sleep  5s
@@ -400,7 +414,8 @@ add_tag_and_comments
     wait until element is not visible    ${prompt_information}
     click_first_line_details
     # Check whether the comment is added successfully
-    ${get_comment}  get text  xpath=//div[@class="Comments"]/div[1]//div[@class="comment-text row"]
+    ${ele_count}   get element count   xpath=//div[@class="calllog"]//div[@class="CallLogEntry"]
+    ${get_comment}  get text   xpath=//div[@class="calllog"]//div[@class="CallLogEntry"][${ele_count}]//p
     should be equal as strings   ${comment}   ${get_comment}
 
 update_tags
@@ -417,8 +432,9 @@ update_tags
     swipe_browser_to_bottom
     sleep  0.5s
     # click SAVE button
-    click element   ${details_save_button}
-    sleep  1s
+    click element   ${tags_save_button}
+    wait until element is visible   ${prompt_information}
+    wait until element is not visible   ${prompt_information}   20s
     # click x button
     click element    ${close_details_button}
     sleep  10s
@@ -439,8 +455,9 @@ delete_tags
     swipe_browser_to_bottom
     sleep  0.5s
     # click SAVE button
-    click element   ${details_save_button}
-    sleep  1s
+    click element   ${tags_save_button}
+    wait until element is visible   ${prompt_information}
+    wait until element is not visible   ${prompt_information}   20s
     # click x button
     click element    ${close_details_button}
     sleep  8s
@@ -451,9 +468,9 @@ delete_tags
 enter_key_words_in_search_field
     [Arguments]   ${search_text}
     # Enter key words in Search field
-    click element  ${input_search}
+    click element  ${search_input}
     sleep  0.5s
-    input text  ${input_search}   ${search_text}
+    input text  ${search_input}   ${search_text}
     sleep  3s
     ${count}   Get Element Count    ${get_number_of_rows}   # Gets how many rows are in the result of the query
     should not be equal as numbers  ${count}  0
@@ -461,7 +478,7 @@ enter_key_words_in_search_field
         ${get_owner_text}   get text    xpath=//div[@class="ag-center-cols-container"]/div[@row-index="${i}"]/div[@col-id="groupsString"]
         should contain    ${get_owner_text}    ${search_text}
     END
-    clear element text   ${input_search}
+    clear element text   ${search_input}
     sleep  3s
 
 delete_all_jpg_and_jpeg_picture

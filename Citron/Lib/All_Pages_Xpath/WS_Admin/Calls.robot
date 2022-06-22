@@ -13,7 +13,9 @@ ${add_tags_input}                           xpath=//input[@type="text" and @role
 ${delete_tags_button}                       xpath=//span[@aria-label="delete"]                                                              # delete tags button
 ${add_comment_input}                        xpath=//textarea[@placeholder="Add a comment..."]                                               # Add a comment...  input
 ${details_save_button}                      xpath=//div[@class="CallDetails"]//button[contains(.,'Save')]                                   # details SAVE button
-${close_details_button}                     xpath=//div[@class="modal-header"]//span[contains(.,'×')]                                       # close details button
+${comment_save_button}                      xpath=//div[@class="CallLogBlock row"]//button[contains(.,'Save')]                              # comment SAVE button
+${tags_save_button}                         xpath=//div[@class="block-container"]//button[contains(.,'Save')]                               # tags SAVE button
+${close_details_button}                     xpath=//div[@class="modal-header"]//span[contains(.,'×')]/..                                    # close details button
 ${calls_details_button}                     xpath=//div[@row-index="0"]//button[contains(.,'Details')]                                      # Calls Details button
 ${calls_get_counts}                         xpath=//span[@ref="lbRecordCount"]                                                              # Calls counts
 ${participant_name}                         xpath=//table[@class="table table-striped"]//a                                                  # participant name
