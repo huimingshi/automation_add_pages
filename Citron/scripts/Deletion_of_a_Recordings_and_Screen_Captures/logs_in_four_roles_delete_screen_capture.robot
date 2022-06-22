@@ -14,7 +14,6 @@ logs_in_Citron_as_Group_admin
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${group_admin_username}
     ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}
-    sleep   10000
     # Make a call
     contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${normal_username_for_calls_name}
     # logs in Citron as Site admin
