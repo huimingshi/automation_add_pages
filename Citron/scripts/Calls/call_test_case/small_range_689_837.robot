@@ -851,8 +851,8 @@ Small_range_825_826
     rec_is_on_or_off     ${driver2}     off   none
     # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
     make_show_recording_settings    ${driver1}
-    make_show_recording_settings    ${driver2}
     record_or_do_not_record    record          ${ws3_branding_A_username}    ${driver1}    ${driver2}
+    make_show_recording_settings    ${driver1}
     record_or_do_not_record    do_not_record        ${ws3_branding_A_username}    ${driver1}    ${driver2}
     # 返回Face to Face模式
     back_to_face_to_face_mode    ${driver1}

@@ -709,18 +709,20 @@ def record_or_do_not_record(if_record,who_do_it,*args):
     if if_record == 'record':
         public_click_element(args[0],record_this_session,description = 'record_this_session')
         print('点了打开')
-        ele_list = get_xpath_elements(args[0],f'//div[@class="message" and contains(.,"{who_do_it} has enabled recording for this call.")]')
-        public_assert(args[0],len(ele_list) , 1,action='开启or关闭record的提示信息不正确')
+        # ele_list = get_xpath_elements(args[0],f'//div[@class="message" and contains(.,"{who_do_it} has enabled recording for this call.")]')
+        ele_list = get_xpath_elements(args[0],enable_recording_call.format(who_do_it))
+        public_assert(args[0],len(ele_list) , 1,action='第一个浏览器开启or关闭record的提示信息不正确')
         for one in args[1:]:
-            ele_list = get_xpath_elements(one,f'//div[@class="message" and contains(.,"{who_do_it} has enabled recording for this call.")]')
-            public_assert(args[0], len(ele_list), 1, action='开启or关闭record的提示信息不正确')
+            # ele_list = get_xpath_elements(one,f'//div[@class="message" and contains(.,"{who_do_it} has enabled recording for this call.")]')
+            ele_list = get_xpath_elements(one,enable_recording_call.format(who_do_it))
+            public_assert(one, len(ele_list), 1, action='剩下的浏览器开启or关闭record的提示信息不正确')
     elif if_record == 'do_not_record':
         public_click_element(args[0],do_not_record,description = 'do_not_record')
-        ele_list = get_xpath_elements(args[0],f'//div[@class="message" and contains(.,"{who_do_it} has turned off recording for this call.")]')
-        public_assert(args[0], len(ele_list), 1, action='开启or关闭record的提示信息不正确')
+        ele_list = get_xpath_elements(args[0],turn_off_recording_call.format(who_do_it))
+        public_assert(args[0], len(ele_list), 1, action='第一个浏览器开启or关闭record的提示信息不正确')
         for one in args[1:]:
-            ele_list = get_xpath_elements(one,f'//div[@class="message" and contains(.,"{who_do_it} has turned off recording for this call.")]')
-            public_assert(args[0], len(ele_list), 1, action='开启or关闭record的提示信息不正确')
+            ele_list = get_xpath_elements(one,turn_off_recording_call.format(who_do_it))
+            public_assert(one, len(ele_list), 1, action='剩下的浏览器开启or关闭record的提示信息不正确')
 
 def proceed_with_camera_off(driver):
     """
