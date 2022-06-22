@@ -807,26 +807,26 @@ Small_range_823
 Small_range_825_826
     [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
     [Tags]    small range 825+826 lines     call_case
-#    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
-#    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-#    ...         AND             Close
+    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
+    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
+    ...         AND             enter_workspace_settings_page           # 进入settings页面
+    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
+    ...         AND             Close
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}        ${switch_workspace_password}
     # another company user登录
     ${driver2}   driver_set_up_and_logIn   ${Expert_User5_username}        ${switch_workspace_password}
     # Pre-condition：set to Default-OFF
     # VP: After setting changing,new call  should be OFF immediately . Do not need to logout.
-#    Login_site_admin              # another company user whose rec is on
-#    switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    enter_workspace_settings_page           # 进入settings页面
-#    expand_during_call_recording            # 展开During Call: Recording设置
-#    turn_on_during_call_recording           # 打开During Call: Recording设置
-#    choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-#    Close
+    Login_site_admin              # another company user whose rec is on
+    switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+    enter_workspace_settings_page           # 进入settings页面
+    expand_during_call_recording            # 展开During Call: Recording设置
+    turn_on_during_call_recording           # 打开During Call: Recording设置
+    choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
+    Close
     # MHS owner get incoming call from another company user whose rec is on
     ${invite_url}    send_meeting_room_link     ${driver1}    MHS
     user_make_call_via_meeting_link      ${driver2}     ${invite_url}
