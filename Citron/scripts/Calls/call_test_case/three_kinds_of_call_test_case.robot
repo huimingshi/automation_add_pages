@@ -8,20 +8,6 @@ Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
 
 *** Test Cases ***
-Make_a_business_call_between_business_and_personal_user
-    [Documentation]    Make a business call duration < 1 min
-    [Tags]    Make a business call duration < 1 min      call_case    citron 262
-    [Setup]  delete_all_jpg_and_jpeg_picture
-    # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
-    # make a call
-    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${normal_name_for_calls_B}
-    exit_call   ${driver1}   ${less_than_1_min}
-    [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
-    ...         AND           exit_driver
-#    ...         AND           exit_driver   ${driver1}  ${driver2}
-
 Make_a_business_call_duration_more_than_1_min
     [Documentation]    Make a business call duration > 1 min
     [Tags]    Make a business call duration > 1 min     call_case    citron 261
