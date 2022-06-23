@@ -152,7 +152,8 @@ add_normal_user
     click element   xpath=//div[@unselectable="on"]//li[1]
     sleep  0.5s
     click element   ${button_ADD}
-    sleep  1s
+    sleep  2s
+    wait until element is not visible  ${prompt_information}   20s
     [Return]   ${email_before}
 
 add_normal_user_choose_team_license
@@ -166,7 +167,8 @@ add_normal_user_choose_team_license
     click element    xpath=//div[@unselectable="on"]//span[text()="default"]
     sleep  0.5s
     click element   ${button_ADD}
-    sleep  1s
+    sleep  2s
+    wait until element is not visible  ${prompt_information}   20s
     [Return]   ${email_before}
 
 capture_complete_email
@@ -206,7 +208,8 @@ add_existing_normal_user
     click element   xpath=//div[@unselectable="on"]//li[1]
     sleep  0.5s
     click element   ${button_ADD}
-    sleep  1s
+    sleep  2s
+    wait until element is not visible  ${prompt_information}   20s
     [Return]   ${email_before}
 
 search_user_details
@@ -337,6 +340,7 @@ modify_user_groups
     swipe_browser_to_bottom
     sleep  0.5s
     click element   ${update_button}
+    sleep  2s
     wait until element is not visible  ${prompt_information}   20s
     # Remove group and submit
     # click DETAILS button
@@ -348,6 +352,7 @@ modify_user_groups
     swipe_browser_to_bottom
     sleep  0.5s
     click element   ${update_button}
+    sleep  2s
     wait until element is not visible    ${prompt_information}   20s
     # Remove all the groups and submit.
     # click DETAILS button
@@ -555,6 +560,7 @@ modify_group_admin_groups
     click element   xpath=//div[@unselectable="on"]//li[6]
     sleep  1s
     click element   ${update_button}
+    sleep  2s
     wait until element is not visible   ${prompt_information}   20s
     # Remove group and submit
     # click DETAILS button
@@ -566,6 +572,7 @@ modify_group_admin_groups
     click element  ${second_groups_delete_button}
     sleep  0.5s
     click element   ${update_button}
+    sleep  2s
     wait until element is not visible   ${prompt_information}  20s
     # Remove all the groups and submit.
     # click DETAILS button
@@ -985,7 +992,8 @@ check_cloumns_invitation_users_tab
     ${email_get}   get text   ${first_data_show}/div[@col-id="email"]
     ${license_get}   get text   ${first_data_show}/div[@col-id="license"]
     ${groups_get}   get text   ${first_data_show}/div[@col-id="pods"]
-    should be equal as strings  ${first_lines}[0]    ${name_get}
+#    should be equal as strings  ${first_lines}[0]    ${name_get}
+    should contain   ${name_get}   ${first_lines}[0]
     should be equal as strings  ${first_lines}[1]    ${email_get}
     ${license_get}   converts_string_to_lowercase   ${license_get}
     should be equal as strings  ${first_lines}[2]    ${license_get}
