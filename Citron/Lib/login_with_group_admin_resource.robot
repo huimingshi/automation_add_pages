@@ -716,6 +716,7 @@ get_groups_groups_text
     [Return]   ${get_groups_groups_list}
 
 get_dashboard_groups_text
+    wait until element is visible   ${groups_choose}   30s
     click element  ${groups_choose}
     sleep  1s
     # Gets a list of group names  on the dashboard page

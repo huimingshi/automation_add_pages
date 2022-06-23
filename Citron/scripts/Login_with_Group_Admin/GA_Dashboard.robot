@@ -10,7 +10,7 @@ Group_Admin_analytics_shows_groups_drop_down_list
     [Documentation]    Shows groups drop down list with all groups of this workspace.
     [Tags]    有bug，CITRON-3128；已修复
     # log in with group admin
-    Login_group_admin
+    Login_new_added_user    ${workspace_admin_username_two}
     # enter group groups
     enter_group_groups
     # get groups groups text
@@ -21,8 +21,6 @@ Group_Admin_analytics_shows_groups_drop_down_list
     ${get_dashboard_groups_list}   get_dashboard_groups_text
     # Groups drop-down should display with GA’s groups.
     lists_should_be_same  ${get_dashboard_groups_list}   ${get_groups_groups_list}
-    # Choose one group
-    analytics_choose_one_group
     [Teardown]    Close
 
 Group_Admin_analytics_choose_one_group
