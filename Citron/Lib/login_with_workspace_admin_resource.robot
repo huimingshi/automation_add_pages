@@ -1219,7 +1219,8 @@ check_cloumns_invitation_users_tab
     ${email_get}   get text   xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="email"]
     ${license_get}   get text   xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="license"]
     ${groups_get}   get text   xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="pods"]
-    should be equal as strings  ${first_lines}[0]    ${name_get}
+#    should be equal as strings  ${first_lines}[0]    ${name_get}
+    should contain    ${name_get}   ${first_lines}[0]
     should be equal as strings  ${first_lines}[1]    ${email_get}
     ${license_get}   converts_string_to_lowercase   ${license_get}
     should be equal as strings  ${first_lines}[2]    ${license_get}
