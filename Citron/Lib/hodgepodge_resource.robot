@@ -268,8 +268,6 @@ dispaly_role_and_its_location
 
 display_group_admin_for
     # Display “Group Admin for” with all GA”s groups, read-only.
-    ${count}  get element count   xpath=//ul[@role="listbox"]/li
-    should be equal as integers    ${count}   7
     ${get_class}   get element attribute   xpath=//ul[@role="listbox"]/../..   class
     should be equal as strings  ${get_class}   k-widget k-multiselect k-header k-state-disabled
 
