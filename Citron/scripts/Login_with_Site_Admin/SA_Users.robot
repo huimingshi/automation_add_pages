@@ -96,7 +96,7 @@ Site_Admin_Click_Share_this_filter_button
     # enter SITE ADMINISTRATION Users page
     enter_site_users
     # Share this filter button & Export to CSV button to instead of 'Report view' button.
-    show_two_button
+    show_three_button
     # Click 'Export to CSV' button
     users_share_this_filter
     # Click 'Export Current Table' button

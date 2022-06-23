@@ -19,7 +19,7 @@ Site_Admin_Clicks_Export_View_button
     # search workspaces
     search_single_workspaces      work_space_for_auto_test_only_one_groups    1
     # Share this filter button & Export to CSV button to instead of 'Report view' button.
-    show_two_button
+    show_three_button
     # Click ' Share this filter' button
     workspaces_share_this_filter
     # Click 'Export to CSV' button

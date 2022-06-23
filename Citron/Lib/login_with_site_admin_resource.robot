@@ -275,14 +275,15 @@ click_export_view_button
     click element   ${report_view_button}
     sleep  0.5s
 
-show_two_button
+show_three_button
     # Clicks Export View button
     click_export_view_button
     # Share this filter button & Export to CSV button to instead of 'Report view' button.
     ${count}   get element count    xpath=//button[@class="k-button k-primary pull-right action-button"]
-    should be equal as integers   ${count}  2
+    should be equal as integers   ${count}  3
     element should be visible    ${share_this_filter_button}
     element should be visible    ${export_to_CSV_button}
+    element should be visible    ${quick_view_button}
 
 share_this_filter
     # click Share This Filter button
