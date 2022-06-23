@@ -1119,8 +1119,8 @@ check_visibility_testing
     # Final check
     ${count}  get element count  ${get_count_of_team}
     should be equal as integers   ${count}   1
-    ${get_user_name1}  get text   xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
-    should be equal as strings   ${get_user_name1}    ${user_name}
+    ${get_user_name1}  get text   ${first_team_1}
+    should contain  ${get_user_name1}    ${user_name}
 
 check_add_standard_member_group
     [Arguments]  ${group_name}
@@ -1130,9 +1130,9 @@ check_add_standard_member_group
     ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
     ${get_user_name1}  get text   ${first_team_2}
-    should be equal as strings  ${get_user_name1}    ${third_user_name}
+    should contain  ${get_user_name1}    ${third_user_name}
     ${get_user_name2}  get text   ${first_team_3}
-    should be equal as strings  ${get_user_name2}    ${second_user_name}
+    should contain  ${get_user_name2}    ${second_user_name}
 
 check_add_standard_member_group1
     [Arguments]  ${group_name}
@@ -1142,9 +1142,9 @@ check_add_standard_member_group1
     ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
     ${get_user_name1}  get text   ${first_team_2}
-    should be equal as strings  ${get_user_name1}    ${first_user_name}
+    should contain  ${get_user_name1}    ${first_user_name}
     ${get_user_name2}  get text   ${first_team_3}
-    should be equal as strings  ${get_user_name2}    ${third_user_name}
+    should contain  ${get_user_name2}    ${third_user_name}
 
 check_add_on_call_group
     # Final check
@@ -1158,9 +1158,9 @@ check_add_on_call_group_1
     ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
     ${get_user_name1}  get text   ${first_team_2}
-    should be equal as strings  ${get_user_name1}    ${third_user_name}
+    should contain  ${get_user_name1}    ${third_user_name}
     ${get_user_name2}  get text   ${first_team_3}
-    should be equal as strings  ${get_user_name2}    ${second_user_name}
+    should contain  ${get_user_name2}    ${second_user_name}
 
 check_add_on_call_group_2
     [Arguments]  ${group_name}
@@ -1170,9 +1170,9 @@ check_add_on_call_group_2
     ${get_group_name}  get text   ${first_team_1}
     should be equal as strings  ${get_group_name}  ${group_name}
     ${get_user_name1}  get text   ${first_team_2}
-    should be equal as strings  ${get_user_name1}    ${first_user_name}
+    should contain  ${get_user_name1}    ${first_user_name}
     ${get_user_name2}  get text   ${first_team_3}
-    should be equal as strings  ${get_user_name2}    ${second_user_name}
+    should contain  ${get_user_name2}    ${second_user_name}
 
 check_file_if_exists_delete
     # Check whether there are existing files in the path and delete them if there are
@@ -1227,6 +1227,7 @@ check_cloumns_invitation_users_tab
 
 enter_create_new_group_page
     # enter Create New Group page
+    wait until element is visible  ${create_group_button}
     click element  ${create_group_button}
     sleep  0.5s
     wait until element is visible   xpath=//h3[contains(.,'Group Type')]    3s
@@ -1309,7 +1310,7 @@ check_updated_info_saved
     should start with  ${src_get}   https://s3.
     # check Group Admin
     ${get_group_name}   get text   xpath=//li[@class="k-button"]/span[1]
-    should be equal as strings  ${get_group_name}   ${group_admin_name}
+    should be equal as strings  ${get_group_name}   ${group_admin_real_name}
 
 remove_this_group_admin
     # Remove this Group Admin
