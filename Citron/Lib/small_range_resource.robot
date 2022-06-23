@@ -465,7 +465,7 @@ switch_workspace_check_recents_list
     ${text_1}   get text    ${recents_first_call}
     # switch to second workspace
     switch_to_second_workspace
-    sleep   3s
+    sleep   5s
     wait until element is visible   ${recents_first_call}     20
     # second workspace team user
     ${text_2}   get text   ${recents_first_call}
@@ -687,7 +687,7 @@ directory_search_with_name_title_location
     directory_page_search   vb  1
     # Title and location should show under user's name if contact has title or location.
     ${text}   get text   ${directory_page_id}//div[@class="cardName"]
-    should be equal as strings   ${text}   hlnauto+apple4
+    should contain   ${text}   hlnauto+apple4
     ${text}   get text   ${directory_page_id}//div[@class="text-muted cardSub"][1]
     should be equal as strings   ${text}   fruit man4
     ${text}   get text   ${directory_page_id}//div[@class="text-muted cardSub"][2]
@@ -886,11 +886,13 @@ unfavorite_user_from_personal_page
 
 click_send_invite_button
     [Arguments]   ${send_or_not}
-    # user不在线时点击call弹出弹框，点击Send Invite按钮
-    wait until element is visible   ${send_invite_button}
+    # 点击悬浮框
+    wait until element is visible   ${ellipsis_menu_button}
+    mouse over  ${ellipsis_menu_button}    # 鼠标悬浮
+    sleep  2s
     # 点击取消或者确认发送
-    Run Keyword If   '${send_or_not}'=='send_invite'   click element     ${send_invite_button}
-    ...  ELSE IF     '${send_or_not}'=='cancel'    click element    ${cancel_send_invite_button}
+    Run Keyword If   '${send_or_not}'=='send_invite'   click element     ${invite_after_ellipsis}
+#    ...  ELSE IF     '${send_or_not}'=='cancel'    click element    ${cancel_send_invite_button}
 
 get_send_invite_email
     # 从邮箱获取发送的邮件

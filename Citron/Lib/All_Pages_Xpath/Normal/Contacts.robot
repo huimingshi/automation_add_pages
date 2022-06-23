@@ -15,6 +15,8 @@ ${personal_search_input}                xpath=//div[@id="user-tabs-pane-personal
 ${favorites_search_input}               xpath=//div[@id="user-tabs-pane-favorites"]//input[@id="filter-text-box"]               # Favorites search
 ${team_search_input}                    xpath=//div[@id="user-tabs-pane-team"]//input[@id="filter-text-box"]                    # Team search
 ${directory_search_input}               xpath=//div[@id="user-tabs-pane-directory"]//input[@id="filter-text-box"]               # Directory search
+${ellipsis_menu_button}                 xpath=//div[@class="ellipsis-menu-div"]                                                 # 悬浮按钮
+${invite_after_ellipsis}                xpath=//span[text()="Invite"]/..                                                        # 悬浮鼠标后出现的Invite按钮
 ${first_team_1}                         xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]     # Team第一行数据的username
 ${first_team_2}                         xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[2]//div[@class="cardName"]     # Team第二行数据的username
 ${first_team_3}                         xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[3]//div[@class="cardName"]     # Team第三行数据的username
