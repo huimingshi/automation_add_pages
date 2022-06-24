@@ -618,17 +618,17 @@ Team_user_A_signs_in_User_B_is_expert_user
 check_personal_user_can_see_user_S_is_unreachable_status
     [Documentation]    Pre-condition: User S belong to workspace WS1 and WS2    User S switch to WS1   User S logout of all devices
     [Tags]     small range 135+136 line        call_case
-#    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-#    ...         AND               switch_to_second_workspace      # 切换到第二个WS
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-#    ...         AND               Close                           # close browser
-#    ...         AND               Login_workspaces_admin          # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-#    ...         AND               Close                           # close browser
+    [Setup]     run keywords      Login_premium_user              # log in with premium admin
+    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+    ...         AND               switch_to_second_workspace      # 切换到第二个WS
+    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+    ...         AND               Close                           # close browser
+    ...         AND               Login_workspaces_admin          # log in with workspace admin
+    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+    ...         AND               Close                           # close browser
     # User S signs in.
     ${driver1}  driver_set_up_and_logIn   ${for_check_user_online_or_not}   ${public_pass}
     # Contact of WS1

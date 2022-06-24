@@ -656,9 +656,9 @@ def enter_FGD_mode(driver,witch_mode):
         public_click_element(driver, pdf_on_button, ec='ec', description='pdf_on_button')
         ele_list = get_xpath_elements(driver,return_vidoe_on)
         if len(ele_list) == 1:
-            public_click_element(driver,return_vidoe_on,ec='ec', description='返回原始状态')
+            public_click_element(driver,return_vidoe_on, description='返回原始状态')
         else:
-            public_click_element(driver, pdf_on_button, ec='ec', description='pdf_on_button')
+            public_click_element(driver, pdf_on_button, description='pdf_on_button')
     elif witch_mode == "Photo":
         ele_list = get_xpath_elements(driver, video_on_button)
         if len(ele_list) == 1:
@@ -672,9 +672,9 @@ def enter_FGD_mode(driver,witch_mode):
         public_click_element(driver,ghop_on_button,ec='ec',description='ghop_on_button')
         ele_list = get_xpath_elements(driver,return_vidoe_on)
         if len(ele_list) == 1:
-            public_click_element(driver,return_vidoe_on,ec='ec', description='返回原始状态')
+            public_click_element(driver,return_vidoe_on, description='返回原始状态')
         else:
-            public_click_element(driver, ghop_on_button, ec='ec',description='ghop_on_button')
+            public_click_element(driver, ghop_on_button,description='ghop_on_button')
     elif witch_mode == "Swap Camera":
         public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
         time.sleep(2)

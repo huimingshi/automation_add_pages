@@ -79,7 +79,7 @@ current_account = '//button[@id="currentAccount"]'
 my_account_name = '//input[@placeholder="Name"]'
 first_tree_menu = '//div[@role="tree"]/div[1]'
 contacts_page = '//span[contains(.,"Contacts")]'
-recents_page = "//span[contains(.,'Recents')]"
+recents_page = "//span[contains(.,'Calls')]"
 personal_page = '//span[contains(.,"Personal")]'
 log_out_button = '//span[contains(.,"Logout")]'
 send_invite_button = '//button[contains(.,"Send Invite")]'

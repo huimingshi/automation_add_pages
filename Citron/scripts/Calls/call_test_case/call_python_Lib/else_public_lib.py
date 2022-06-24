@@ -772,7 +772,8 @@ def contacts_different_page_search_user(driver,which_page,search_user):
     public_click_element(driver,contacts_search_input_format,description = f'{which_page}页面查询输入框')
     ele.send_keys(search_user)
     for i in range(3):
-        user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[text()="{search_user}"]'
+        # user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[text()="{search_user}"]'
+        user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[@title="{search_user}"]'
         element_list = get_xpath_elements(driver,user_xpath)
         if len(element_list) == 1:
             break
@@ -791,7 +792,8 @@ def contacts_judge_reachable_or_not(driver,which_page,which_user,unreachable = '
     :param unreachable: 是否unreachable，默认为unreachable
     :return:
     """
-    user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[text()="{which_user}"]/../../..'
+    # user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[text()="{which_user}"]/../../..'
+    user_xpath = f'//div[@id="user-tabs-pane-{which_page.lower()}"]//div[@title="{which_user}"]/../../..'
     # 等待数据出现
     public_check_element(driver, user_xpath, '数据未出现', if_click = None)
     class_attr = get_xpath_element(driver,user_xpath,ec='ec').get_attribute('class')
@@ -942,10 +944,12 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
             if witch_page == 'Directory' or witch_page == 'Team':
                 for j in range(i,i+4):  # 获取4条数据的name放到user_list中
                     get_name = get_xpath_element(driver,f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                    get_name = get_name.split(' ')[0]
                     user_list.append(get_name)
             else:
                 for j in range(i, i + 4):  # 获取4条数据的name放到user_list中
                     get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                    get_name = get_name.split(' ')[0]
                     user_list.append(get_name)
             # user_list.append(get_name)
             i = i + 4   # 设置每4次一个循环
@@ -975,7 +979,7 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
                     print(f'添加到{i+3}行数据')
                     for j in range(i, i + 3):
                         get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                        # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                        get_name = get_name.split(' ')[0]
                         user_list.append(get_name)
                     break
                 # 后面都是这个逻辑，往前推一个数据进行判断
@@ -987,7 +991,7 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
                     print(f'添加到{i+2}行数据')
                     for j in range(i, i + 2):
                         get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                        # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                        get_name = get_name.split(' ')[0]
                         user_list.append(get_name)
                     break
                 print(i)
@@ -998,19 +1002,9 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
                     print(f'添加到{i+1}行数据')
                     for j in range(i, i + 1):
                         get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                        # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
+                        get_name = get_name.split(' ')[0]
                         user_list.append(get_name)
                     break
-                # print(i)
-                # ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]')
-                # if len(ele_list_3) != 1:
-                #     print(f'{i+1}行元素不显示了')
-                # else:
-                #     print(f'添加到{i+1}行数据')
-                #     get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                #     # get_name = driver.find_element_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i}"]//div[@class="{search_key}"]').get_attribute("textContent")
-                #     user_list.append(get_name)
-                #     break
                 print(i-1)
                 ele_list_3 = driver.find_elements_by_xpath(f'//div[@class="ag-center-cols-container"]/div[@row-index="{i-1}"]//div[@class="{search_key}"]')
                 if len(ele_list_3) != 1:
@@ -1135,7 +1129,12 @@ def contacts_page_send_email(driver,username):
     :param username:
     :return:
     """
-    invite_xpath = f'//div[text()="{username}"]/../../../..//div[@class="button invite-btn-container"]'
+    # 鼠标悬浮
+    ellipsis_xpath = f'//div[@title="{username}"]/../../../..//div[@class="ellipsis-menu-div"]'
+    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='悬浮按钮')
+    ActionChains(driver).move_to_element(ellipsis).perform()
+    # 选择Invite
+    invite_xpath = f'//div[@title="{username}"]/../../../..//div[@class="button invite-btn-container"]'
     public_click_element(driver,invite_xpath,description='Invite按钮')
     for i in range(10):
         element_list = get_xpath_elements(driver,notification_content)
@@ -1156,9 +1155,8 @@ def recents_page_check_call(driver,user_name,can_connect = 'can_not_connect',sen
     :param send_invite: 不能打通时，是否需要发送邀请
     :return:
     """
-    # 鼠标悬停
-    # ellipsis_xpath = f'//div[text()="{user_name}"]/../../../..//div[@class="ellipsis-menu-div"]'
-    ellipsis_xpath = f'//div[contains(.,"{user_name}")]/../../../..//div[@class="ellipsis-menu-div"]'
+    # 鼠标悬浮
+    ellipsis_xpath = f'//div[@title="{user_name}"]/../../../..//div[@class="ellipsis-menu-div"]'
     ellipsis = get_xpath_element(driver, ellipsis_xpath, description='悬浮按钮')
     ActionChains(driver).move_to_element(ellipsis).perform()
     # 选择Audio
