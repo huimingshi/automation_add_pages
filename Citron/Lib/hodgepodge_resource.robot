@@ -774,10 +774,10 @@ check_modify_user_success
 enter_phone_with_country_code
     [Arguments]   ${phone_number}  ${count}  ${cancel_or_confirm}
     # click Mobile Phone
-    Press Key    ${mobile_phone_input}    \\8
+    FOR   ${i}   IN RANGE   3
+        Press Key    ${mobile_phone_input}    \\8
     sleep  0.5s
-    Press Key    ${mobile_phone_input}    \\8
-    sleep  0.5s
+    END
     press key  ${mobile_phone_input}  ${phone_number}
     sleep  2s
     ${get_count}   get element count   ${wrong_phone_tag}

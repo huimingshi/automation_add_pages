@@ -752,7 +752,7 @@ get_calls_groups_text
 analytics_choose_one_group
     # get Users numbers
     sleep  5s
-    wait until element is visible     ${total_users}    20s
+    wait until element is visible     ${total_users}    120s
     ${get_user_numbers}    get text  ${total_users}
     # choose second group
     click element   ${groups_choose}

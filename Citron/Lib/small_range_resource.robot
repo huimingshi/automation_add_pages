@@ -266,10 +266,10 @@ enter_phone_with_country_code
     # click Mobile Phone
     clear element text   ${mobile_phone_input}
     sleep  0.5s
-    press key    ${mobile_phone_input}    \\8
+    FOR   ${i}   IN RANGE   3
+        Press Key    ${mobile_phone_input}    \\8
     sleep  0.5s
-    Press Key    ${mobile_phone_input}    \\8
-    sleep  0.5s
+    END
     press key    ${mobile_phone_input}    ${phone_number}
     sleep  1s
     ${get_count}   get element count   ${wrong_phone_tag}
