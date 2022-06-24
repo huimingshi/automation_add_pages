@@ -666,6 +666,15 @@ users_page_search_deleted_user
     sleep   2s
     wait until element is not visible   ${first_data_show}
 
+contacts_page_search_deleted_user
+    [Arguments]   ${username}    ${which_page_input}
+    wait until element is visible   ${which_page_input}
+    click element    ${which_page_input}
+    sleep   0.5s
+    input text    ${which_page_input}    ${username}
+    sleep   2s
+    wait until element is not visible   ${first_data_show}
+
 enter_workspace_users_invitations
     # 进入到Invitations页面
     click element      ${invitations_page}
@@ -681,7 +690,7 @@ enter_workspace_users_deactivated_users
 enter_directory_page
     click element   ${enter_directory_page}
     sleep  2s
-    wait until element is visible   ${first_line_username}
+    wait until element is visible   ${directory_first_data_show}
 
 recents_page_first_line_has_no_call_button
     # Recents页面的首条记录没有Call按钮

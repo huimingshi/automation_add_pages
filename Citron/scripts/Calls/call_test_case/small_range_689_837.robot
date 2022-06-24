@@ -569,11 +569,11 @@ Small_range_799_802
     # 802 line
     # VP: User A client:1) Check User A's Favorites, Directory, and Contacts Lists
     Login_new_added_user   ${normal_username_for_calls}
-    users_page_search_deleted_user   ${random}
+    contacts_page_search_deleted_user   1656042124716077   ${team_search_input}
     enter_directory_page
-    users_page_search_deleted_user   ${random}
+    contacts_page_search_deleted_user   1656042124716077   ${directory_search_input}
     enter_favorites_page
-    users_page_search_deleted_user   ${random}
+    contacts_page_search_deleted_user   1656042124716077   ${favorites_search_input}
     # VP: User A client:2) Check this call info of User A's recent call list
     enter_recents_page
     check_page_first_owner_is_deleted_user    name
