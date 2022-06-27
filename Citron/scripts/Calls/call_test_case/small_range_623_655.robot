@@ -231,6 +231,7 @@ Small_range_632
     ...             AND             check_details_participant_name       ${User_B_name}
     ...             AND             close_call_details
     # 查看第二条通话记录
+    ...             AND             sleep    8s
     ...             AND             enter_which_call_details    1
     ...             AND             check_details_participant_count    2
     ...             AND             check_details_participant_name       ${Expert_C_name}
