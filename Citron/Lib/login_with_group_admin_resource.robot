@@ -752,6 +752,12 @@ get_calls_groups_text
 analytics_choose_one_group
     # get Users numbers
     sleep  5s
+    FOR   ${i}    IN RANGE   0    5
+        sleep   30s
+        ${total_users_count}   get element count   ${total_users}
+        Exit For Loop If    '${total_users_count}'=='1'
+        Run Keyword If      '${total_users_count}'=='0'    refresh_web_page
+    END
     wait until element is visible     ${total_users}    120s
     ${get_user_numbers}    get text  ${total_users}
     # choose second group
