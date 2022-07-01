@@ -61,6 +61,10 @@ visibility_finishi_call = '//span[@style="visibility: visible;"]'    # 校验可
 exit_call_yes = '//button[@class="promptButton submenu-seperator"]'   # 结束通话的Yes按钮
 contacts_search_input = '//div[@id="user-tabs-pane-{}"]//input[@id="filter-text-box"]'
 decline_disclaimer = '//div[@class="modal-content"]//button[text()="DECLINE"]'    # DECLINE Disclaimer make call或者就只是DECLINE Disclaimer
+video_on_button = '//div[@class="InCall"]//div[@class="menus false"]/div[@class="menu withsub  "]'
+upload_file = '//input[@name="upload-file"]'
+please_wait = '//div[@class="InvalidLinkView"]/h2[text()="Please wait."]'
+zhuanquanquan = '//div[@id="whiteboard_progress_bar_container"]'
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -177,7 +181,7 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     ellipsis = get_xpath_element(driver1,ellipsis_xpath,description='悬浮按钮')
     ActionChains(driver1).move_to_element(ellipsis).perform()
     # 选择Audio
-    audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Audio+"]/..'
+    audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Video"]/..'
     public_click_element(driver1,audio_xpath,description='启动Audio按钮')
     # 需要Accept Declaimer
     driver1.implicitly_wait(5)
@@ -185,9 +189,20 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     if len(count) == 1:
         public_click_element(driver1, accept_disclaimer, '点击accept_disclaimer失败')
     driver1.implicitly_wait(IMPLICIT_WAIT)
-    # # 断言是否呼叫成功
-    # count = get_xpath_elements(driver1, end_call_before_connecting)
-    # public_assert(driver1, len(count), 1, action='发起call失败')
+    # 确保进入call
+    driver1.implicitly_wait(3)
+    for i in range(40):
+        ele_list_2 = get_xpath_elements(driver1, please_wait)
+        ele_list_1 = get_xpath_elements(driver1, zhuanquanquan)
+        ele_list = get_xpath_elements(driver1, '//div[@id="connecting_call_label" and text()="Joining Call..."]')
+        if len(ele_list) == 0 and len(ele_list_1) == 0 and len(ele_list_2) == 0:
+            break
+        elif i == 39:
+            screen_shot_func(driver1, '通话还未拨通成功')
+            raise Exception('通话还未拨通成功')
+        else:
+            time.sleep(int(3))
+    driver1.implicitly_wait(IMPLICIT_WAIT)
     # 另一端ACCEPT OR DECLINE
     if accept == 'accept':
         public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
@@ -195,11 +210,16 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
         public_check_element(driver2, decline_disclaimer, '点击DECLINE按钮失败')
     # call on hold
     time.sleep(int(20))
-    # screenshots
-    public_click_element(driver1, '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]',description='截图前的第一个按钮')
-    public_click_element(driver1, '//div[@class="submenu-container"]', description='截图前的第二个按钮')
+    # 进入giver mode
+    public_click_element(driver1, '//span[text()="I will give help"]', description='选择I_will_give_help失败')
+    # 上传photo
+    public_click_element(driver1, video_on_button, ec='ec', description='点击video按钮')
+    time.sleep(2)
+    public_click_element(driver1, '//div[@class="submenu-content"]//span[text()="Photo"]/..', ec='ec',description='选择Photo')
+    get_xpath_element(driver1, upload_file, ec='ec', description='上传jpg文件').send_keys(get_picture_path())
+    # 截图4次
     for i in range(4):
-        public_click_element(driver1, '//input[@class="capture_button"]', description='截图按钮')
+        public_click_element(driver1, '//input[@class="capture_button"]', description='圆形截图按钮')
         time.sleep(3)
     # quit call
     for i in range(5):

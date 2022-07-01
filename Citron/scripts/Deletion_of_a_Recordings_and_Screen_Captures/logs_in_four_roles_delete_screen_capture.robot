@@ -9,7 +9,7 @@ Library           make_a_call_lib.py
 *** Test Cases ***
 logs_in_Citron_as_Group_admin
     [Documentation]    logs in Citron as Group admin
-    [Tags]    Citron 308-314     call_case
+    [Tags]    Citron 308-314     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3407
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${group_admin_username}
@@ -38,7 +38,7 @@ logs_in_Citron_as_Group_admin
 
 logs_in_Citron_as_Normal_User
     [Documentation]    logs in Citron as Normal admin
-    [Tags]    Citron 315        call_case
+    [Tags]    Citron 315        call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3407
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
@@ -89,7 +89,7 @@ logs_in_Citron_as_Normal_User
 
 logs_in_Citron_as_Workspace_admin
     [Documentation]    logs in Citron as Workspace admin
-    [Tags]    Citron 301-307     call_case
+    [Tags]    Citron 301-307     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3407
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${workspace_admin_username}
