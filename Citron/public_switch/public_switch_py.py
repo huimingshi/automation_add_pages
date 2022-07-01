@@ -2,7 +2,7 @@
 # @Time     :5/6/2022 2:57 PM
 # @Author   :Huiming Shi
 
-# small range的call类型的case需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
+# call类型的case需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
 SMALL_RANGE_BROWSER_TYPE = 'Chrome'      # 暂不支持Firefox，请固定为Chrome
 
 # citron的除去call的case需要运行的浏览器类型；Firefox——>火狐浏览器，Chrome——>谷歌浏览器
