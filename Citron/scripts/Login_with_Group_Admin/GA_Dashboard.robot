@@ -23,16 +23,16 @@ Group_Admin_analytics_shows_groups_drop_down_list
     lists_should_be_same  ${get_dashboard_groups_list}   ${get_groups_groups_list}
     [Teardown]    Close
 
-Group_Admin_analytics_choose_one_group
-    [Documentation]    Choose one group
-    [Tags]    Choose one group
-    # log in with group admin
-    Login_new_added_user    ${group_admin_username_two}
-    # enter group analytics
-    enter_group_analytics
-    # Choose one group
-    analytics_choose_one_group
-    [Teardown]    Close
+#Group_Admin_analytics_choose_one_group
+#    [Documentation]    Choose one group
+#    [Tags]    Choose one group     有bug：https://vipaar.atlassian.net/browse/CITRON-3493
+#    # log in with group admin
+#    Login_new_added_user    ${group_admin_username_two}
+#    # enter group analytics
+#    enter_group_analytics
+#    # Choose one group
+#    analytics_choose_one_group
+#    [Teardown]    Close
 
 Group_Admin_analytics_groups_drop_down_list_should_be_hidden
     [Documentation]    Groups drop down list should be hidden.
