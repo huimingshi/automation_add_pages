@@ -115,7 +115,7 @@ only_workspaces_site_setting
 enter_site_workspaces
     # enter SITE ADMINISTRATION Workspaces page
     click element   ${enter_site_menu}
-    sleep  0.5s
+    sleep  1s
     # click Users page menu
     click element   ${enter_workspaces}
     # Wait until the first row shows up
