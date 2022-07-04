@@ -167,8 +167,8 @@ Set_Declaimer_delete_user_is_selected_User_clicks_Accept_button
     check_appear_disclaimer
     # User clicks Accept button.
     click_accept_disclaimer
-    # VP: User should successfully log in App.
-    users_successfully_login
+#    # VP: User should successfully log in App.
+#    users_successfully_login
 
     # User kill App, and then re-open App
     Close

@@ -600,6 +600,7 @@ page_search
     [Arguments]   ${search_text}   ${search_result}
     clear element text  ${search_input}
     sleep  0.5s
+    wait until element is not visible   ${prompt_information}    20s
     click element  ${search_input}
     sleep  0.5s
     input text   ${search_input}   ${search_text}
