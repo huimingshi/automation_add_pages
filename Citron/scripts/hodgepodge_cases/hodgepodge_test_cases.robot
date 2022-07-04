@@ -366,7 +366,7 @@ favorite_onCall_group_from_team_page_AND_unfavorite_onCall_group_from_team_page
 
 Anonymous_clicks_Users_meeting_room_link_who_has_accepted_the_declaimer_before_logs_in_App
     [Documentation]    Anonymous clicks User's meeting room link who has accepted the declaimer before logs in App
-    [Tags]    Anonymous clicks User's meeting room link who has accepted the declaimer before logs in App
+    [Tags]    Citron 74     Anonymous clicks User's meeting room link who has accepted the declaimer before logs in App
     [Setup]   run keywords    Login_normal_for_calls   # log in with normal user
     ...       AND             Close    # close browser
     # log in with workspaces admin
@@ -380,12 +380,12 @@ Anonymous_clicks_Users_meeting_room_link_who_has_accepted_the_declaimer_before_l
     # Reset All Accepted Disclaimers then cancel
     reset_all_accepted_disclaimers
     # The disclaimer should be popped up automate
-    disclaimer_popped_up_automate    https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning1
+    disclaimer_popped_up_automate    https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+1234567891
     [Teardown]    Close
 
 Anonymous_clicks_Users_expert_universal_link_who_has_accepted_the_declaimer_before_logs_in_App
     [Documentation]    Anonymous clicks User's expert universal link who has accepted the declaimer before logs in App
-    [Tags]    Anonymous clicks User's expert universal link who has accepted the declaimer before logs in App
+    [Tags]    Citron 76       Anonymous clicks User's expert universal link who has accepted the declaimer before logs in App
     [Setup]   run keywords   Login_normal_for_calls   # log in with normal user
     ...       AND            Close    # close browser
     # log in with workspaces admin
