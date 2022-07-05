@@ -267,6 +267,11 @@ User_1_receives_an_incoming_call_from_user_2
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
     # Contact of WS1 log in
     ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
+    # make calls with who
+    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}    ${big_admin_first_WS_name}
+    exit call   ${driver1}
+    close call ending page     ${driver1}
+    close call ending page     ${driver2}
     # get modify picture absolute path
     ${modify_picture_path}  return_modify_pirture_path
     # Make sure the name and avator is in its original state
