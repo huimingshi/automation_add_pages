@@ -443,7 +443,7 @@ def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,fla
             assert len(count_support) == int(flag)
             assert len(count_master_1) == int(flag) or len(count_master_2) == int(flag)
         elif flag == '0':
-            assert len(count_master_1) == int(flag) or len(count_master_2) == int(flag)
+            assert len(count_master_1) == int(flag) and len(count_master_2) == int(flag)
     except AssertionError:
         print('Assert断言失败')
         screen_shot_func(driver_support,'辅助browser断言失败')
