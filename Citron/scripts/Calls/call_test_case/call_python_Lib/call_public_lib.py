@@ -439,8 +439,11 @@ def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,fla
     driver_master.implicitly_wait(int(IMPLICIT_WAIT))
     print('如果下面assert断言出现AssertionError了，则表示电话不应该打通的却打通了，或者电话应该打通却没有打通')
     try:
-        assert len(count_support) == int(flag)
-        assert len(count_master_1) == int(flag) or len(count_master_2) == int(flag)
+        if flag == '1':
+            assert len(count_support) == int(flag)
+            assert len(count_master_1) == int(flag) or len(count_master_2) == int(flag)
+        elif flag == '0':
+            assert len(count_master_1) == int(flag) or len(count_master_2) == int(flag)
     except AssertionError:
         print('Assert断言失败')
         screen_shot_func(driver_support,'辅助browser断言失败')

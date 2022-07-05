@@ -631,22 +631,6 @@ display_as_external_user_in_call_list
     ${text}   get text   xpath=//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]
     should be equal as strings   ${text}    External User
 
-check_should_not_be_able_to_direct_call
-    # enter personal page
-    click element   ${enter_personal_page}
-    sleep  1s
-    # search user  Huiming.shi.helplightning+an_expert_user
-    click element   ${personal_search_input}
-    sleep  0.5s
-    input text   ${personal_search_input}   ${an_expert_user_name}
-    sleep  2s
-    wait until element is visible    ${personal_search_result}
-    # click Call button
-    click element   ${call_button_xpath}
-    sleep  10s
-    ${count}   get element count   xpath=//div[@id="connecting_progress_bar_container"]/button
-    should be equal as integers   ${count}   0
-
 return_modify_pirture_path
     # get modify picture absolute path
     ${modify_picture_path}   get_modify_picture_path

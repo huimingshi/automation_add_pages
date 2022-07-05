@@ -177,9 +177,9 @@ Disable_External_Users_check_case_2
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
     ...         AND               Close    # close browser
-    ...         AND               Login_site_admin    # log in with premium admin
+    ...         AND               Login_premium_user    # log in with premium admin
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               open_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
     # Expert user log in
     ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}    ${an_expert_user_password}
@@ -196,12 +196,14 @@ Disable_External_Users_check_case_2
 #    should be equal as strings    ${time_started_4}   ${time_started_2}
     # VP: they should not be able to call this site workspace user via on-call group link
     check_call_can_reach_to_or_not   ${driver1}  ${driver2}   https://app-stage.helplightning.net.cn/help?enterprise_id=2799&group_id=5562&group_name=on-call+group+2   0    # this is (on-call group 2) On-Call Group Url
-    # exit driver
-    exit_one_driver   ${driver2}
-    # user from another site log in
-    Login_new_added_user   ${other_site_user_1_username}
+    # 关闭第二个窗口
+    close_last_window   ${driver2}
+    # 切换到personal页面
+    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver2}   ${py_personal_page}    ${py_personal_switch_success}    ${py_personal_search_result}
     # VP: they should not be able to direct Call this site workspace user any longer
-    check_should_not_be_able_to_direct_call
+    contacts_witch_page_make_call      ${driver2}    ${driver1}   ${py_personal_page}    ${an_expert_user_name}     no_care
+    which_page_is_currently_on    ${driver1}    ${py_recents_switch_success}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver    ${driver1}
 #    ...             AND              exit_one_driver    ${driver1}
