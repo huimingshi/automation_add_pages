@@ -1278,7 +1278,7 @@ def check_contacts_list(driver,*args):
     if len(args) != 0:
         for i in range(len(ele_list)):
             user_name = ele_list[i].get_attribute('textContent')
-            public_assert(driver,user_name , args[i],action='contacts列表name与预期不符')
+            public_assert(driver,args[i] , user_name, condition='in',action='contacts列表name与预期不符')
     elif len(args) == 0:
         public_assert(driver, len(ele_list) , 0, action='contacts列表name与预期不符')
 
