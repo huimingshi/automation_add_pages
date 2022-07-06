@@ -238,19 +238,19 @@ Small_range_664
     [Tags]    small range 664 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
-#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
+    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     # User B 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
+    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
     # User A call B enter call via normal way
     contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
-#    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User A] invites User C
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
@@ -265,21 +265,21 @@ Small_range_664
     which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    not_currently_on
     # Verify: In recent tab, User A has 1 outgoing call to User B, and 1 outgoing call to User C.
     close_call_ending_page    ${driver1}
-#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
-#    two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
-#    verify_username_in_recents_page    ${driver1}    ${Expert_User3_name}   ${Expert_User2_name}
-#    #User B has 1 incoming call from User A.
-#    close_call_ending_page    ${driver2}
-#    refresh_browser_page   ${driver2}
-#    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
-#    two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
-#    verify_username_in_recents_page    ${driver2}   ${Expert_User1_name}
-#    #User C has 1 missing incoming call from User A.
-#    refresh_browser_page   ${driver3}
-#    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
-#    two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
-#    verify_username_in_recents_page    ${driver3}   ${Expert_User1_name}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
+    two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
+    verify_username_in_recents_page    ${driver1}    ${Expert_User3_name}   ${Expert_User2_name}
+    #User B has 1 incoming call from User A.
+    close_call_ending_page    ${driver2}
+    refresh_browser_page   ${driver2}
+    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
+    two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
+    verify_username_in_recents_page    ${driver2}   ${Expert_User1_name}
+    #User C has 1 missing incoming call from User A.
+    refresh_browser_page   ${driver3}
+    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
+    two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
+    verify_username_in_recents_page    ${driver3}   ${Expert_User1_name}
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}
 
