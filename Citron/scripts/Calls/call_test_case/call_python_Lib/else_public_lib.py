@@ -301,6 +301,11 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
         public_assert(driver,len(ele_list),0,action='未选择另一个共同主持')
 
 def make_sure_enter_call(driver):
+    """
+    确保进入通话状态中
+    :param driver:
+    :return:
+    """
     driver.implicitly_wait(3)
     for i in range(40):
         ele_list_2 = get_xpath_elements(driver, please_wait)

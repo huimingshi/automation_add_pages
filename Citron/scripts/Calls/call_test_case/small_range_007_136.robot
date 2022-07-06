@@ -278,6 +278,7 @@ User_1_receives_an_incoming_call_from_user_2
     my_account_change_name_and_avator   ${driver2}   ${big_admin_first_WS_name}   change   ${modify_picture_path}   back_to_contact
     # Contact of WS1 call the user directly
     contacts_witch_page_make_call   ${driver2}   ${driver1}     ${py_team_page}     ${switch_workspace_name}    no_anwser
+    make_sure_enter_call    ${driver1}
     # VP: User 1 should show User 2's Display Name & Avatar   	End call
     show_incoming_call_name_avator   ${driver1}   ${driver2}   modify_picture    ${big_admin_first_WS_name}
     # User 2 changes Display name & Avatar
