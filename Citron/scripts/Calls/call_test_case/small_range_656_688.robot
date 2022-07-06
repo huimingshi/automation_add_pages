@@ -288,9 +288,9 @@ Small_range_665
     [Tags]    small range 665 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
+#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     # User B 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # User A call B enter call via normal way
@@ -300,8 +300,8 @@ Small_range_665
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     # User D 登录
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
-    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_D1}   get_recents_page_records_occurred_time   ${driver4}    3
+#    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_D1}   get_recents_page_records_occurred_time   ${driver4}    3
     # User A call B enter call via normal way
     contacts_witch_page_make_call    ${driver3}   ${driver4}    ${py_team_page}  ${Expert_User4_name}
 
@@ -309,7 +309,7 @@ Small_range_665
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${Expert_User4_name}
     click_user_in_contacts_call   ${driver1}     ${Expert_User4_name}
-    which_page_is_currently_on    ${driver1}    ${user_is_currently_on_another_call}
+    which_page_is_currently_on    ${driver1}    ${user_is_currently_on_another_call_in_call}
     # 结束Call
     exit_call   ${driver1}
     exit_call   ${driver3}

@@ -54,6 +54,7 @@ ${your_call_was_not_anwsered_in_call}           //div[@class="message" and text(
 ${your_call_was_not_anwsered}                   //div[@id="end_call_message" and text()="Your call was not answered."]                              # Your call was not answered.
 ${declined_your_call}                           //div[@class="message" and text()="Your call was declined." ]                                       # declined your call
 ${your_call_was_declined}                       //div[@id="end_call_message" and text()="Your call was declined."]                                  # Your call was declined.
+${user_is_currently_on_another_call_in_call}    //div[@class="message" and text()="User is currently on another call."]                             # User is currently on another call
 ${user_is_currently_on_another_call}            //div[@id="end_call_message" and text()="User is currently on another call."]                       # User is currently on another call
 ${that_user_is_unreachable}                     //div[@class="EndCallPageContent"]//div[contains(.,"That user is unreachable.")]                    # That user is unreachable
 ${this_call_is_over}                            //div[@id="end_call_message" and text()="This call is over. Please contact the host to invite you to another call."]      # This call is over

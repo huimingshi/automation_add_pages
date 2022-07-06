@@ -12,6 +12,7 @@ from else_public_lib import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+import warnings
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -115,6 +116,8 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
     :param is_personal: 是否呼叫的是personal标签页中的user，默认不是
     :return:
     """
+    # 这段代码是给这个方法添加个建议不使用的警告，但仍然可以使用
+    warnings.warn('make_calls_with_who id deprecated, please user contacts_witch_page_make_call instead',DeprecationWarning)
     if is_personal == 'not_personal':
         element = get_xpath_element(driver1, search_input,description = '搜索框')
         element.clear()
@@ -511,6 +514,8 @@ def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',a
     :param accept: 是否接受Call；默认accept接受;no_accept为不接受;no_care为不管这个
     :return:
     """
+    # 这段代码是给这个方法添加个建议不使用的警告，但仍然可以使用
+    warnings.warn('make_call_to_onCall id deprecated, please user contacts_witch_page_make_call instead', DeprecationWarning)
     # 查询Oncall
     element = get_xpath_element(driver1, search_input,description = '查询框')
     element.clear()
