@@ -120,3 +120,4 @@ call_top_message = '//div[@class="AlertContainer"]//div[@class="message"]'    # 
 share_button = '//div[@class="DocToolBar show"]/button[text()="Share"]'      # 通话过程中左下角的Share按钮
 enable_recording_call = '//div[@class="message" and contains(.,"{} has enabled recording for this call.")]'
 turn_off_recording_call = '//div[@class="message" and contains(.,"{} has turned off recording for this call.")]'
+Audio_Only_button = '//div[@class="message" and text()="Audio Only"]'

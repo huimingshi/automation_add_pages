@@ -742,6 +742,11 @@ def proceed_with_camera_off(driver):
     if len(ele_list) == 1:
         public_click_element(driver,webglCameraOff,description='proceed_with_camera_off按钮')
 
+def click_audio_only(driver):
+    ele_list = get_xpath_elements(driver,Audio_Only_button)
+    if len(ele_list) == 1:
+        public_click_element(driver,Audio_Only_button,description='Audio_Only按钮')
+
 if __name__ == '__main__':
     from else_public_lib import driver_set_up_and_logIn, logout_citron
     # driver1 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com','*IK<8ik,8ik,')
