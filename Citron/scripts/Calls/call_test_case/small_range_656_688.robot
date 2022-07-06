@@ -16,21 +16,22 @@ Small_range_656
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     # Expert User2 登录（case中的callee）
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
-    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
+#    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
     # caller calls via normal way, callee do not answer
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
     # waiting to timeout
+    which_page_is_currently_on    ${driver2}   ${anwser_call_button}
     sleep  30s
     # Verify: "xxx didn't answer your call" In recent tab
     which_page_is_currently_on   ${driver1}    ${your_call_was_not_anwsered}
     # VP: The two users should not see rating dialog.
     which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    not_currently_on
     which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    not_currently_on
-    # Expert User2 刷新Recents页面
-    refresh_browser_page    ${driver2}
-    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
-    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
+#    # Expert User2 刷新Recents页面
+#    refresh_browser_page    ${driver2}
+#    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
+#    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver    ${driver1}    ${driver2}
 
@@ -159,7 +160,7 @@ Small_range_661
 #    click_user_in_contacts_call   ${driver2}     ${Expert_User3_name}
 #    # User C] doesn't answer call until time out
 #    which_page_is_currently_on    ${driver3}   ${anwser_call_button}
-#    sleep  55s
+#    sleep  30s
 #    # VP: "xxx didn't answer your call"
 #    which_page_is_currently_on    ${driver2}   ${your_call_was_not_anwsered_in_call}
 #    # 结束Call
