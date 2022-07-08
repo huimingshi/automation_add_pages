@@ -8,7 +8,7 @@ Resource          ../../Lib/public.robot
 *** Test Cases ***
 Workspace_Admin_modify_normal_user
     [Documentation]    Modify mormal user
-    [Tags]    有bug，CITRON-2993，修改License不生效        open outlook email
+    [Tags]    有bug：https://vipaar.atlassian.net/browse/CITRON-2993，修改License不生效        open outlook email
     # log in with workspaces admin
     Login_workspaces_admin
     # enter workspace users
@@ -49,7 +49,7 @@ Workspace_Admin_modify_normal_user
 
 Workspace_Admin_modify_group_admin
     [Documentation]    Modify group user
-    [Tags]    有bug，CITRON-2993，修改License不生效        open outlook email
+    [Tags]    有bug：https://vipaar.atlassian.net/browse/CITRON-2993，修改License不生效        open outlook email
     # log in with workspaces admin
     Login_workspaces_admin
     # enter workspace users
@@ -90,7 +90,7 @@ Workspace_Admin_modify_group_admin
 
 Workspace_Admin_modify_workspace_admin
     [Documentation]    Modify workspace user
-    [Tags]    有bug，CITRON-2993，修改License不生效        open outlook email
+    [Tags]    有bug：https://vipaar.atlassian.net/browse/CITRON-2993，修改License不生效        open outlook email
     # log in with workspaces admin
     Login_workspaces_admin
     # enter workspace users
