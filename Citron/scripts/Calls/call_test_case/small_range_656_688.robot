@@ -62,7 +62,7 @@ Small_range_657
 
 Small_range_658
     [Documentation]     No answer message   caller calls via normal way	   caller calls one participant who is in another call
-    [Tags]    small range 658 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3501
+    [Tags]    small range 658 line      call_case
     # Expert User1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
