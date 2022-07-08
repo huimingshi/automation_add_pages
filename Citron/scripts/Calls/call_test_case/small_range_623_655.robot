@@ -19,7 +19,6 @@ Small_range_623_two_users_login
     # on-call group is marked with visual indication
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}     background-color
     two_option_is_equal    ${driver1}    rgba(160, 220, 238, 1)    ${css_value}
-#    should be equal as strings    rgba(160, 220, 238, 1)    ${css_value}
     # Feynman 登录
     ${driver2}    driver_set_up_and_logIn    ${Feynman_username}     ${universal_password}
     # team list for Feynman is:null
@@ -153,7 +152,6 @@ Small_range_630_631
     user_decline_call   ${driver5}
     # VP: Expert B No disclaimer window since he has accepted it.
     disclaimer_should_be_shown_up_or_not    ${driver5}    not_appear      2
-#    exit_one_driver    ${driver5}
     # VP: customer gets message "No Experts are currently available to take your call."
     which_page_is_currently_on    ${driver3}     ${no_experts_are_available}
     # Expert A 刷新Recents页面
