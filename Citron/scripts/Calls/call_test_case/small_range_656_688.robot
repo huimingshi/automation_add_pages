@@ -138,7 +138,7 @@ Small_range_661
 
 Small_range_662
     [Documentation]     User A call B enter call via normal way    User B invites callee [User C]
-    [Tags]    small range 662 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3501
+    [Tags]    small range 662 line      call_case
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
