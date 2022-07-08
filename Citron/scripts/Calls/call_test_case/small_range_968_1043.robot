@@ -757,7 +757,7 @@ Small_range_1005_1007
 
 #Small_range_1009
 #    [Documentation]     Click inactive 3PI link(nobody in call) that call's owner is User B
-#    [Tags]    small range 1009 line     call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3502
+#    [Tags]    small range 1009 line     call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494
 #    # --------------------------------------------------------------------------------------------------------- #
 #    # 此处为case执行的前置条件
 #    # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
