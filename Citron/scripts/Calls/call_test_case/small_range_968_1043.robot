@@ -1073,7 +1073,7 @@ Small_range_1031
 
 Small_range_1032
     [Documentation]     Turn off feature    User B click A's meeing link
-    [Tags]    small range 1032 line     call_case
+    [Tags]    small range 1032 line     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3377
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
@@ -1138,7 +1138,7 @@ Small_range_1032
 
 Small_range_1033_1035
     [Documentation]     Turn off feature    Anonyoums click B's meeting link
-    [Tags]    small range 1033-1035 lines       call_case
+    [Tags]    small range 1033-1035 lines       call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3377
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
@@ -1199,7 +1199,7 @@ Small_range_1033_1035
 
 Small_range_1036_1043
     [Documentation]     Precondition: Expert Group 1[EG 1] in WS 1. User B is in EG 1.
-    [Tags]    small range 1036-1043 lines       call_case
+    [Tags]    small range 1036-1043 lines       call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3377
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
