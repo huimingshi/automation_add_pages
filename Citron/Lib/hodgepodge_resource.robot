@@ -774,14 +774,16 @@ check_modify_user_success
 enter_phone_with_country_code
     [Arguments]   ${phone_number}  ${count}  ${cancel_or_confirm}
     # click Mobile Phone
-    FOR   ${i}   IN RANGE   3
+    FOR   ${i}   IN RANGE   2
         Press Key    ${mobile_phone_input}    \\8
     sleep  0.5s
     END
     press key  ${mobile_phone_input}  ${phone_number}
     sleep  2s
-    ${get_count}   get element count   ${wrong_phone_tag}
-    should be equal as integers   ${get_count}     ${count}
+    Run Keyword If   '${count}'=='0'    element should not be visible     ${wrong_phone_tag}
+    ...  ELSE    element should be visible     ${wrong_phone_tag}
+#    ${get_count}   get element count   ${wrong_phone_tag}
+#    should be equal as integers   ${get_count}     ${count}
     Run Keyword If   '${cancel_or_confirm}'=='0'     click element    ${cancel_button}
     ...  ELSE    click element    ${update_button}
 
