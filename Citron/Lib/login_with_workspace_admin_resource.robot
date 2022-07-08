@@ -681,7 +681,7 @@ Confirm_invite
     ${get_prompt_information}  get text  ${message_text}
     ${information}   catenate    ${count_email}    was successfully invited.
     should be equal as strings   ${get_prompt_information}   ${information}
-    wait until element is visible      ${message_text}     20s
+    wait until element is not visible      ${message_text}     20s
 
 resend_invitation
     # RESEND invitation
