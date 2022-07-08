@@ -15,14 +15,4 @@ Site_Admin_Dashboard
     enter_site_analytics
     # widgets: Calls by Groups, Tag Ranking, Call Volume, Average Time on Call, Completed Calls, Users
     display_six_widgets
-#    # Select 1 workspace
-#    select_1_workspace   BigAdmin Premium
-#    # Select 'All Workspaces'
-#    select_all_workspaces
-#    # Select a specific WS
-#    select_1_workspace   Canada
-#    # Select 'All Workspaces'
-#    select_all_workspaces
-#    # Occurred Within
-#    occurred_within
     [Teardown]    Close
