@@ -78,7 +78,7 @@ Call_Tag_drop_down_only_list_tags_belong_to_this_company
 
 Modify_call_tag_from_client_case
     [Documentation]    Modify call tag from client
-    [Tags]    Modify call tag from client；   有bug：https://vipaar.atlassian.net/browse/CITRON-3246   can not delete tag，已修复    citron 273
+    [Tags]    Modify call tag from client；    citron 273
     [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
     ...       AND            enter_workspace_settings_page     # enter workspace settings
     ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
