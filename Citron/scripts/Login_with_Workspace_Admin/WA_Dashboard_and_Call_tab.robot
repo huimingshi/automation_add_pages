@@ -97,19 +97,19 @@ Workspace_Admin_calls_list_export
     click_export_button
     [Teardown]    Close
 
-#Workspace_Admin_view_call_details
-#    [Documentation]    View call details
-#    [Tags]   View call details；   有bug：https://vipaar.atlassian.net/browse/CITRON-3246   can not delete tag
-#    # log in with workspaces admin
-#    Login_workspaces_admin
-#    # enter workspace calls
-#    enter_workspace_calls
-#    # choose Last 365 Days
-#    choose_last_365_days
-#    # Add tag and comments
-#    add_tag_and_comments
-#    # update tags
-#    update_tags
-#    # delete tags
-#    delete_tags
-#    [Teardown]    Close
+Workspace_Admin_view_call_details
+    [Documentation]    View call details
+    [Tags]   View call details
+    # log in with workspaces admin
+    Login_workspaces_admin
+    # enter workspace calls
+    enter_workspace_calls
+    # choose Last 365 Days
+    choose_last_365_days
+    # Add tag and comments
+    add_tag_and_comments
+    # update tags
+    update_tags
+    # delete tags
+    delete_tags
+    [Teardown]    Close
