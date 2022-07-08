@@ -1944,7 +1944,7 @@ add_tag_and_comments
 
 update_tags
     # Gets the text of the first tag
-    ${first_tag}   get text     xpath=//ul[@role="listbox"]/li/span
+    ${first_tag}   get text     xpath=//ul[@role="listbox"]/li/a
     # update tag
     click element   xpath=//span[@class="k-searchbar"]/input
     sleep  1s
