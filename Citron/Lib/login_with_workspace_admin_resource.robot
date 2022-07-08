@@ -1956,7 +1956,7 @@ update_tags
     click element    ${close_details_button}
     sleep  5s
     # Check whether the tag is added successfully
-    ${get_tag}   get text   xpath=//div[@class="ag-center-cols-container"]//div[@row-index="0"]/div[@col-id="tags"]
+    ${get_tag}   get text   ${first_line_tagname}
     should be equal as strings    ${get_tag}     ${first_tag}, ${second_tag}
     wait until element is not visible    ${prompt_information}    20s
 
@@ -1980,7 +1980,7 @@ delete_tags
     click element    ${close_details_button}
     sleep  5s
     # Check whether the tag is deleted successfully
-    ${get_tag_second}   get text   xpath=//div[@class="ag-center-cols-container"]//div[@row-index="0"]/div[@col-id="tags"]
+    ${get_tag_second}   get text   ${first_line_tagname}
     should be empty   ${get_tag_second}
     wait until element is not visible    ${prompt_information}    20s
 

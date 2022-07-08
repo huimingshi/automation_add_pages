@@ -112,4 +112,4 @@ Workspace_Admin_view_call_details
     update_tags
     # delete tags
     delete_tags
-#    [Teardown]    Close
+    [Teardown]    Close
