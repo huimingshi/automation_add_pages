@@ -39,7 +39,7 @@ Calls_Create_new_call_report
 
 Call_details
     [Documentation]    Call details
-    [Tags]    Call details；   有bug：https://vipaar.atlassian.net/browse/CITRON-3246   can not delete tag，已修复    citron 270+271
+    [Tags]    Call details；    citron 270+271
     [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
     ...       AND            enter_workspace_settings_page     # enter workspace settings
     ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
