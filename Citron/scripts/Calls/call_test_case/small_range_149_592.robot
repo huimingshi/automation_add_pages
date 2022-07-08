@@ -11,7 +11,7 @@ Force Tags        small_range
 *** Test Cases ***
 #Small_range_149_151
 #    [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
-#    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show， shttps://vipaar.atlassian.net/browse/CITRON-3353     call_case
+#    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show     有bug：https://vipaar.atlassian.net/browse/CITRON-3353     call_case
 #    # premium user log in
 #    ${driver1}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
 #    # Contact of premium user log in
