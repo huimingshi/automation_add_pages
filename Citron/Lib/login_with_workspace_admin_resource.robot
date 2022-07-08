@@ -1922,17 +1922,11 @@ add_tag_and_comments
     # 点击SAVE
     click element     ${comment_save_button}
     wait until element is not visible    ${prompt_information}    20s
-#    # 滑动到底
-#    swipe_browser_to_bottom
-#    sleep  0.5s
-#    # click SAVE button
-#    click element   ${details_save_button}
-#    sleep  1s
     # click x button
     click element    ${close_details_button}
     sleep  5s
     # Check whether the tag is added successfully
-    ${get_tag}   get text   xpath=//div[@class="ag-center-cols-container"]//div[@row-index="0"]/div[@col-id="tags"]
+    ${get_tag}   get text   ${first_line_tagname}
     should be equal as strings   ${first_tag}  ${get_tag}
     # click Details button for the first record
     click element   ${calls_details_button}
@@ -1964,6 +1958,7 @@ update_tags
     # Check whether the tag is added successfully
     ${get_tag}   get text   xpath=//div[@class="ag-center-cols-container"]//div[@row-index="0"]/div[@col-id="tags"]
     should be equal as strings    ${get_tag}     ${first_tag}, ${second_tag}
+    wait until element is not visible    ${prompt_information}    20s
 
 delete_tags
     # click Details button for the first record
@@ -1987,6 +1982,7 @@ delete_tags
     # Check whether the tag is deleted successfully
     ${get_tag_second}   get text   xpath=//div[@class="ag-center-cols-container"]//div[@row-index="0"]/div[@col-id="tags"]
     should be empty   ${get_tag_second}
+    wait until element is not visible    ${prompt_information}    20s
 
 display_deactivated_users
     # check only display deactivated users under this workspace
