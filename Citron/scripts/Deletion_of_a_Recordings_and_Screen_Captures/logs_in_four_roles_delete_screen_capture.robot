@@ -60,7 +60,7 @@ Library           make_a_call_lib.py
 #
 ##logs_in_Citron_as_Site_admin
 ##    [Documentation]    logs in Citron as Site admin
-##    [Tags]    Citron 294-300,有bug，CITRON-3191，Site admin没有delete screen capture 的权限      call_case
+##    [Tags]    Citron 294-300,     有bug，https://vipaar.atlassian.net/browse/CITRON-3191，    Site admin没有delete screen capture 的权限      call_case
 ##    [Setup]  delete_all_jpg_and_jpeg_picture
 ##    # Start two drivers and logIn
 ##    ${driver1}   driver_set_up_and_logIn    ${site_admin_email}
