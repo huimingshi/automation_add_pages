@@ -24,3 +24,4 @@ ${comment_count}                            xpath=//div[@class="comment-text row
 ${view_count}                               xpath=//button[contains(.,'View')]/../..                                                        # view count
 ${call_button_xpath}                        xpath=//button[contains(.,'Call')]                                                              # Call button
 ${ws_calls_first_data_show}                 xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[1]                       # 首行数据
+${comment_content_xpath}                    xpath=//div[@class="calllog"]//div[@class="CallLogEntry"]                                       #  comment内容

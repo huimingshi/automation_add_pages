@@ -833,6 +833,12 @@ add_tag_and_comments
     ${first_tag}   get text    xpath=//div[@class="k-list-scroller"]//li[1]
     click element   xpath=//div[@class="k-list-scroller"]//li[1]
     sleep  0.5s
+    # 点击SAVE
+    click element     ${tags_save_button}
+    wait until element is not visible    ${prompt_information}    20s
+    # 滑动到底
+    swipe_browser_to_bottom
+    sleep  0.5s
     # click Add a comment...  input
     click element    ${add_comment_input}
     sleep  0.5s
@@ -840,12 +846,9 @@ add_tag_and_comments
     ${random}   evaluate    int(time.time()*1000000)   time
     ${comment}   Catenate   SEPARATOR=   comment  ${random}
     input text   ${add_comment_input}     ${comment}
-    # 滑动到底
-    swipe_browser_to_bottom
-    sleep  0.5s
-    # click SAVE button
-    click element   ${details_save_button}
-    sleep  1s
+    # 点击SAVE
+    click element     ${comment_save_button}
+    wait until element is not visible    ${prompt_information}    20s
     # click x button
     click element    ${close_details_button}
     sleep  5s
@@ -856,7 +859,8 @@ add_tag_and_comments
     click element   ${calls_details_button}
     sleep  2s
     # Check whether the comment is added successfully
-    ${get_comment}  get text  xpath=//div[@class="Comments"]/div[1]//div[@class="comment-text row"]
+    ${ele_count}   get element count    ${comment_content_xpath}
+    ${get_comment}  get text   xpath=//div[@class="calllog"]//div[@class="CallLogEntry"][${ele_count}]//p
     should be equal as strings   ${comment}   ${get_comment}
 
 update_tags
@@ -881,6 +885,7 @@ update_tags
     # Check whether the tag is added successfully
     ${get_tag}   get text   ${first_line_tagname}
     should be equal as strings    ${get_tag}     ${first_tag}, ${second_tag}
+    wait until element is not visible    ${prompt_information}    20s
 
 delete_tags
     # click Details button for the first record
@@ -904,6 +909,7 @@ delete_tags
     # Check whether the tag is deleted successfully
     ${get_tag_second}   get text   ${first_line_tagname}
     should be empty   ${get_tag_second}
+    wait until element is not visible    ${prompt_information}    20s
 
 warning_dialog
     # Check the warning dialog

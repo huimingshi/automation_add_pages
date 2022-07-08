@@ -398,9 +398,6 @@ add_tag_and_comments
     ${comment}   Catenate   SEPARATOR=   comment  ${random}
     input text   ${add_comment_input}     ${comment}
     sleep  1s
-#    # 滑动到底
-#    swipe_browser_to_bottom
-#    sleep  0.5s
     # click SAVE button
     wait until element is enabled  ${comment_save_button}
     click element   ${comment_save_button}
@@ -416,7 +413,7 @@ add_tag_and_comments
     wait until element is not visible    ${prompt_information}
     click_first_line_details
     # Check whether the comment is added successfully
-    ${ele_count}   get element count   xpath=//div[@class="calllog"]//div[@class="CallLogEntry"]
+    ${ele_count}   get element count    ${comment_content_xpath}
     ${get_comment}  get text   xpath=//div[@class="calllog"]//div[@class="CallLogEntry"][${ele_count}]//p
     should be equal as strings   ${comment}   ${get_comment}
 
