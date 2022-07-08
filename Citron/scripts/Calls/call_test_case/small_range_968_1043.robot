@@ -1009,7 +1009,7 @@ Small_range_1027_1030
 
 Small_range_1031
     [Documentation]    Turn off feature    User B call user A directly
-    [Tags]    small range 1031 line     call_case
+    [Tags]    small range 1031 line     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3377
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
