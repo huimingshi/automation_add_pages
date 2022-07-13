@@ -334,7 +334,7 @@ Small_range_634
     user_end_call_by_self   ${driver3}
     # VP: No expert has incoming call anymore.
     which_page_is_currently_on     ${driver5}    ${contacts_page_send_email}
-    which_page_is_currently_on     ${driver4}    ${recents_page_tag}
+    which_page_is_currently_on     ${driver4}    ${py_recents_switch_success}
     which_page_is_currently_on     ${driver2}    ${end_call_button}
     # Expert A 刷新Recents页面
     refresh_browser_page    ${driver4}
