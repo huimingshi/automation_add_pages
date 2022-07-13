@@ -318,7 +318,7 @@ Small_range_665
     refresh_browser_page    ${driver4}
     ${occurred_time_list_D2}    get_recents_page_records_occurred_time    ${driver4}       3
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list_D1}    ${occurred_time_list_D2}
-    verify_username_in_recents_page    ${driver4}    ${Expert_User1_name}   ${Expert_User3_name}
+    verify_username_in_recents_page    ${driver4}   ${Expert_User3_name}    ${Expert_User1_name}
     # And Caller has a outgoing call record.
     close_call_ending_page   ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
