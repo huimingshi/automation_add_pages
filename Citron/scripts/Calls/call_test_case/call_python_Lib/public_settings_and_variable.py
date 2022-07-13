@@ -110,7 +110,7 @@ ghop_on_button = "//div[@class='InCall']//*[@*='#ghop_on']/../.."
 upload_file = '//input[@name="upload-file"]'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
 # count_of_call_user = '//div[@class="F2FVideo ShowOpenTokVideos"]/div'
-count_of_call_user = '//h6[@class="participantName"]'
+count_of_call_user = '//*[@class="participantName"]'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
 please_wait = '//div[@class="InvalidLinkView"]/h2[text()="Please wait."]'
