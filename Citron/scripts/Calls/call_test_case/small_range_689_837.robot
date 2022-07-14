@@ -450,7 +450,6 @@ Small_range_746
     # VP: contact list is same as team list from ws-A
     ${user_list_2}    get_all_data_on_the_page    ${driver1}   ${py_invite_page}   contact-name
     two_option_is_equal   ${driver1}    ${user_list_1}   ${user_list_2}
-#    lists should be equal  ${user_list_1}   ${user_list_2}
     exit_call     ${driver2}
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}
