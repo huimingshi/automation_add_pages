@@ -266,14 +266,14 @@ enter_phone_with_country_code
     # click Mobile Phone
     clear element text   ${mobile_phone_input}
     sleep  0.5s
-    FOR   ${i}   IN RANGE   3
+    FOR   ${i}   IN RANGE   2
         Press Key    ${mobile_phone_input}    \\8
     sleep  0.5s
     END
     press key    ${mobile_phone_input}    ${phone_number}
     sleep  1s
-    ${get_count}   get element count   ${wrong_phone_tag}
-    should be equal as integers    ${get_count}     ${count}
+    Run Keyword If   '${count}'=='1'    element should be visible    ${wrong_phone_tag}
+    ...  ELSE IF  '${count}'=='0'    element should not be visible      ${wrong_phone_tag}
     Run Keyword If   '${cancel_or_confirm}'=='confirm'     click element    ${my_account_update_button}
 
 my_account_fields_saved_successfully
