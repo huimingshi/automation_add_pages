@@ -1366,16 +1366,18 @@ def verify_username_in_recents_page(driver,*args):
     :param args: 需要校验的name列表
     :return:
     """
-    count = len(args)
+    expect_username_list = list(args)
+    print('预期的username列表',expect_username_list)
+    count = len(expect_username_list)
+    get_username_list = []
     for i in range(count):
-        ele_list = get_xpath_elements(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]')
-        if len(ele_list) == 1:
-            name = get_xpath_element(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]',description = '参会者').get_attribute("textContent")
-            public_assert(driver,args[i] ,name,condition = 'in',action='recents页面预期name和实际不一致')
-        else:
-            public_click_element(driver,'//button[text()="Refresh"]',description='Refresh按钮')
-            name = get_xpath_element(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]',description = '参会者').get_attribute("textContent")
-            public_assert(driver,args[i] ,name,condition = 'in',action='recents页面预期name和实际不一致')
+        public_click_element(driver, '//button[text()="Refresh"]', description='Refresh按钮')
+        get_username_list.append(get_xpath_element(driver,f'//div[@row-index="{i}"]//div[@class="cardName"]',description = '参会者').get_attribute("textContent"))
+    get_username_list.sort()
+    print('排序后的实际username列表', get_username_list)
+    expect_username_list.sort()
+    print('排序后的预期username列表', expect_username_list)
+    public_assert(driver, get_username_list, expect_username_list, condition='=', action='recents页面预期name和实际不一致')
 
 def close_last_window(driver):
     """
