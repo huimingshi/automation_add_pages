@@ -348,7 +348,6 @@ def exit_call(driver,check_user_count='check',call_time=10):
         ele_list_yes = get_xpath_elements(driver,exit_call_yes)
         if len(ele_list_yes) == 1 and len(ele_list) == 1:
             public_click_element(driver,exit_call_yes,description='Yes按钮')
-            # ele_list_yes[0].click()    # 可能会报错Message: stale element reference: element is not attached to the page document，参考：https://blog.csdn.net/zhangvalue/article/details/102921631
             break
         elif i == 4:
             print('找不到Yes按钮')
