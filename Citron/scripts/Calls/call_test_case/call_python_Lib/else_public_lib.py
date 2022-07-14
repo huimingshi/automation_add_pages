@@ -268,15 +268,15 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
-    for i in range(5):
-        ele_list = get_xpath_elements(driver,count_of_call_user)
-        if len(ele_list) > 2:
-            break
-        elif i == 4:
-            screen_shot_func(driver, '当前参与通话的人数不到3人')
-            raise Exception
-        else:
-            time.sleep(int(IMPLICIT_WAIT))
+    # for i in range(5):
+    #     ele_list = get_xpath_elements(driver,count_of_call_user)
+    #     if len(ele_list) > 2:
+    #         break
+    #     elif i == 4:
+    #         screen_shot_func(driver, '当前参与通话的人数不到3人')
+    #         raise Exception
+    #     else:
+    #         time.sleep(int(IMPLICIT_WAIT))
     # User Leave call
     for i in range(5):
         hang_up_the_phone(driver)     # 点击红色的挂断电话按钮
@@ -331,16 +331,16 @@ def exit_call(driver,check_user_count='check',call_time=10):
     time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
-    if check_user_count == 'check':
-        for i in range(5):
-            ele_list = get_xpath_elements(driver,count_of_call_user)
-            if len(ele_list) >= 2:
-                break
-            elif i == 4:
-                screen_shot_func(driver, '当前参与通话的人数不到2人')
-                raise Exception('当前参与通话的人数不到2人')
-            else:
-                time.sleep(int(IMPLICIT_WAIT))
+    # if check_user_count == 'check':
+    #     for i in range(5):
+    #         ele_list = get_xpath_elements(driver,count_of_call_user)
+    #         if len(ele_list) >= 2:
+    #             break
+    #         elif i == 4:
+    #             screen_shot_func(driver, '当前参与通话的人数不到2人')
+    #             raise Exception('当前参与通话的人数不到2人')
+    #         else:
+    #             time.sleep(int(IMPLICIT_WAIT))
     # User exit call
     for i in range(5):
         hang_up_the_phone(driver)    # 点击红色的挂断电话按钮
@@ -369,15 +369,15 @@ def end_call_for_all(driver,call_time=25):
     time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
-    for i in range(10):
-        ele_list = get_xpath_elements(driver,count_of_call_user)
-        if len(ele_list) > 2:
-            break
-        elif i == 9:
-            screen_shot_func(driver, '当前参与通话的人数不到3人')
-            raise Exception
-        else:
-            time.sleep(10)
+    # for i in range(10):
+    #     ele_list = get_xpath_elements(driver,count_of_call_user)
+    #     if len(ele_list) > 2:
+    #         break
+    #     elif i == 9:
+    #         screen_shot_func(driver, '当前参与通话的人数不到3人')
+    #         raise Exception
+    #     else:
+    #         time.sleep(10)
     # 点击End_Call_for_All
     for i in range(5):
         hang_up_the_phone(driver)     # 点击红色的挂断电话按钮

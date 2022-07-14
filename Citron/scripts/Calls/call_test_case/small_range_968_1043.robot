@@ -217,7 +217,7 @@ Small_range_977_993
     ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
     check_get_color_correct    ${get_value}   ${css_value}
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-    log to console  ${get_class_value}
+    log  ${get_class_value}
     check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_orange_color}
 
     Comment  Invite friend screen
