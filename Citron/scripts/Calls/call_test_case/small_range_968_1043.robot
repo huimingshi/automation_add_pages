@@ -218,7 +218,8 @@ Small_range_977_993
     check_get_color_correct    ${get_value}   ${css_value}
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
     log  ${get_class_value}
-    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_orange_color}
+    Run Keyword If   '${get_value}'=='#ff9933'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_orange_color}
+    ...  ELSE IF  '${get_value}'=='#00ff00'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_green_color}
 
     Comment  Invite friend screen
     # Invite friend screen

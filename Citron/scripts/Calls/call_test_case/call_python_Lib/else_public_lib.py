@@ -93,12 +93,12 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             screen_shot_func(driver, '再次登陆失败')
             raise Exception('再次点击登录按钮未进入首页')
     # close Disclaimer
-    driver.implicitly_wait(IMPLICIT_WAIT)
+    driver.implicitly_wait(int(6))
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
-    driver.implicitly_wait(int(8))
+    driver.implicitly_wait(int(6))
     # close Tutorial
     if close_bounced == 'close_bounced':
         # try:  # close Tutorial
