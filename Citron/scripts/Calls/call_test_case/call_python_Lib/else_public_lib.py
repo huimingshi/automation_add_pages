@@ -98,11 +98,6 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
-            # time.sleep(2)
-            # driver.implicitly_wait(int(2))
-            # count = get_xpath_elements(driver,accept_disclaimer)
-            # if len(count) == 1:  # close Disclaimer
-            #     public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
     driver.implicitly_wait(int(8))
     # close Tutorial
     if close_bounced == 'close_bounced':
