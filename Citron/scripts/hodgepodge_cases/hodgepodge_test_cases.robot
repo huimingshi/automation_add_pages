@@ -366,7 +366,7 @@ favorite_onCall_group_from_team_page_AND_unfavorite_onCall_group_from_team_page
 
 #Anonymous_clicks_Users_meeting_room_link_who_has_accepted_the_declaimer_before_logs_in_App
 #    [Documentation]    Anonymous clicks User's meeting room link who has accepted the declaimer before logs in App
-#    [Tags]    Citron 74     Anonymous clicks User's meeting room link who has accepted the declaimer before logs in App    有bug：https://vipaar.atlassian.net/browse/CITRON-3492
+#    [Tags]    Citron 74     Anonymous clicks User's meeting room link who has accepted the declaimer before logs in App    有bug：https://vipaar.atlassian.net/browse/WEBJS-3217
 #    [Setup]   run keywords    Login_normal_for_calls   # log in with normal user
 #    ...       AND             Close    # close browser
 #    # log in with workspaces admin
