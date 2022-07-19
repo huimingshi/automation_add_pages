@@ -14,7 +14,6 @@ Library           python_Lib/ui_keywords.py
 enter_workspace_settings_page
     # enter Workspace Settings page
     click element   ${enter_workspace_menu}
-#    sleep  1s
     wait until element is visible      ${enter_Workspace_settings}
     click element    ${enter_Workspace_settings}
     wait until element is visible      ${enter_ws_settings_success}     20s
