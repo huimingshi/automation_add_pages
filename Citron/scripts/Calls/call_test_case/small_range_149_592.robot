@@ -139,7 +139,6 @@ Small_range_161
     enter_giver_mode    ${driver1}   none   none   2
     # Proceed with my camera Off
     proceed_with_camera_off    ${driver1}
-#    enter_FGD_mode   ${driver1}    Swap Camera
     # 返回Face to Face模式
     back_to_face_to_face_mode    ${driver1}
     # 结束call

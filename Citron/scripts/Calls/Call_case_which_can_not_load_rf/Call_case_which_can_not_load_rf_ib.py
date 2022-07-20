@@ -133,7 +133,7 @@ def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'
             print('再次点击登录按钮未进入首页')
             screen_shot_func(driver, '再次登陆失败')
             raise Exception
-    driver.implicitly_wait(int(IMPLICIT_WAIT))
+    driver.implicitly_wait(int(8))
     # close Disclaimer
     if accept == 'accept':
         count = get_xpath_elements(driver,accept_disclaimer)
