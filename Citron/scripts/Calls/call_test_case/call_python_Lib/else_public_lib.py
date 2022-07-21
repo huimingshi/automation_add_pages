@@ -1445,9 +1445,14 @@ def open_html_create_call(login_user,password,call_user):
     password_input =get_xpath_element(driver,'//input[@id="password"]',description = 'password')
     password_input.send_keys(password)
     public_click_element(driver, '//button[@id="login-btn"]',description = 'Login按钮')
-    public_check_element(driver, search_by_email, 'search_by_enail输入框未出现', if_click=None, if_show=1)
+    public_check_element(driver, search_by_email, 'search_by_enail输入框未出现')
     public_click_element(driver, search_by_email,description = '根据email查询框')
-    get_xpath_element(driver, search_by_email,description = '根据email查询框').send_keys(call_user)
+    email_input = get_xpath_element(driver, search_by_email,description = '根据email查询框')
+    email_input.send_keys(call_user)
+    call_button = get_xpath_element(driver, '//button[@id="call-btn"]',description = 'Call按钮')
+    for i in range(3):
+        driver.execute_script('arguments[0].removeAttribute("disabled")', call_button)
+        time.sleep(4)
     public_click_element(driver, '//button[@id="call-btn"]',description = 'Call按钮')
     return driver
 
