@@ -210,17 +210,17 @@ Small_range_1053
 #    [Teardown]    exit_driver
 ##    [Teardown]    exit_driver    ${driver1}   ${driver2}
 
-Small_range_1068_1071
-    [Documentation]     Open the HTML file[Helplightning Integration Test Tool.html]
-    [Tags]    small range 1068-1071 lines，有bug：https://vipaar.atlassian.net/browse/WEBJS-2833      call_case
-    # 被呼叫的用户先登录
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
-    # 打开html页面并登录
-    ${driver2}     open_html_create_call    ${normal_username_for_calls}       ${universal_password}    ${normal_username_for_calls_B}
-    sleep   10000
-    # user接受call
-    user_anwser_call    ${driver1}
-    # 退出call
-    exit_call    ${driver1}
-    [Teardown]    exit_driver
-#    [Teardown]    exit_driver     ${driver1}     ${driver2}
+#Small_range_1068_1071
+#    [Documentation]     Open the HTML file[Helplightning Integration Test Tool.html]
+#    [Tags]    small range 1068-1071 lines，有bug：https://vipaar.atlassian.net/browse/CITRON-3525     call_case
+#    # 被呼叫的用户先登录
+#    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
+#    # 打开html页面并登录
+#    ${driver2}     open_html_create_call    ${normal_username_for_calls}       ${universal_password}    ${normal_username_for_calls_B}
+#    sleep   10000
+#    # user接受call
+#    user_anwser_call    ${driver1}
+#    # 退出call
+#    exit_call    ${driver1}
+#    [Teardown]    exit_driver
+##    [Teardown]    exit_driver     ${driver1}     ${driver2}
