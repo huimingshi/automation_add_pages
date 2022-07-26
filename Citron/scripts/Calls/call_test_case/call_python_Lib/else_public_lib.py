@@ -98,17 +98,18 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         count = get_xpath_elements(driver,accept_disclaimer)
         if len(count) == 1:  # close Disclaimer
             public_click_element(driver,accept_disclaimer,description = '接受Disclaimer按钮')
-    driver.implicitly_wait(int(6))
     # close Tutorial
     if close_bounced == 'close_bounced':
-        # try:  # close Tutorial
+        # check Tutorial
         if check_toturial == 'check_toturial':
             ele_list = get_xpath_elements(driver,'//h1[text()="Welcome to Help Lightning!"]')
             public_assert(driver,len(ele_list),1,condition = '=',action='展示的不是Welcome to Help Lightning!')
             # assert len(ele_list) == 1
-        ele_list = get_xpath_elements(driver,close_tutorial_button)
-        if len(ele_list) == 1:
-            public_click_element(driver,close_tutorial_button,description = '关闭tutorial按钮')
+        # ele_list = get_xpath_elements(driver,close_tutorial_button)
+        # if len(ele_list) == 1:
+        #     public_click_element(driver,close_tutorial_button,description = '关闭tutorial按钮')
+        # close Tutorial
+        public_click_element(driver, close_tutorial_button, description='关闭tutorial按钮')
     if disturb == 'not_set_disturb':
         ele_list = get_xpath_elements(driver,not_disturb)
         if len(ele_list) == 0:
@@ -248,7 +249,8 @@ def hang_up_the_phone(driver):
     :param driver:
     :return:
     """
-    public_check_element(driver, end_call_button, '找不到挂断按钮')
+    # public_check_element(driver, end_call_button, '挂断按钮')
+    public_click_element(driver, end_call_button, description='挂断按钮')
 
 def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.helplightning+EU2',call_time=25):
     """

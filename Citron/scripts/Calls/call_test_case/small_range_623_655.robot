@@ -371,6 +371,7 @@ Small_range_636
     close_call_ending_page     ${driver1}
     close_call_ending_page     ${driver2}
     close_call_ending_page     ${driver3}
+    sleep    30s
     # 进入到Recents页面
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
