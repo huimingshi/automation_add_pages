@@ -552,6 +552,7 @@ confirm_my_password
     switch_window_to_second
     sleep  0.5s
     # enter password
+    wait until element is visible   ${confirm_password_input}   20s
     click element  ${confirm_password_input}
     sleep  0.5s
     input text  ${confirm_password_input}   ${universal_password}
