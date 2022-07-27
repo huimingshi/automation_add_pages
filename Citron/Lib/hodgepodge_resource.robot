@@ -1005,6 +1005,7 @@ switch_to_created_workspace
     sleep  3
     ${ele_count}     get element count    ${accept_disclaimer}
     Run Keyword If   '${ele_count}'=='1'    click element    ${accept_disclaimer}
+    sleep   1s
 
 switch_to_second_workspace
     # Expand workspace
