@@ -257,7 +257,7 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     :return:
     """
     # 维持通话25s
-    time.sleep(int(call_time))
+    # time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
     for i in range(5):
@@ -320,7 +320,7 @@ def exit_call(driver,check_user_count='check',call_time=10):
     :return:
     """
     # 维持通话10s
-    time.sleep(int(call_time))
+    # time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
     if check_user_count == 'check':
@@ -357,7 +357,7 @@ def end_call_for_all(driver,call_time=25):
     :return:
     """
     # 维持通话25s
-    time.sleep(int(call_time))
+    # time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
     for i in range(10):
