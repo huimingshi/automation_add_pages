@@ -9,13 +9,13 @@ Library           make_a_call_lib.py
 *** Test Cases ***
 logs_in_Citron_as_Group_admin
     [Documentation]    logs in Citron as Group admin
-    [Tags]    Citron 308-314     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3407
+    [Tags]    Citron 308-314     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3546
     [Setup]  delete_all_jpg_and_jpeg_picture
-#    # Start two drivers and logIn
-#    ${driver1}   driver_set_up_and_logIn    ${group_admin_username}
-#    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}
-#    # Make a call
-#    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${normal_username_for_calls_name}
+    # Start two drivers and logIn
+    ${driver1}   driver_set_up_and_logIn    ${group_admin_username}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls}
+    # Make a call
+    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${normal_username_for_calls_name}
     # logs in Citron as Site admin
     Login_group_admin
     # Administration ->Calls
@@ -31,14 +31,14 @@ logs_in_Citron_as_Group_admin
     enter_enterprises_audit_log
     # User who deleted an Screen Capture should be recorded.
     delete_record_in_crunch_is_correct    User citron_group_admin (56528) deletes incall attachment from Enterprise (auto_default_workspace).
-#    [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
-#    ...         AND           Close
-#    ...         AND           exit_drivers
-#    ...         AND           exit_drivers   ${driver1}  ${driver2}
+    [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
+    ...         AND           Close
+    ...         AND           exit_drivers
+    ...         AND           exit_drivers   ${driver1}  ${driver2}
 
 logs_in_Citron_as_Normal_User
     [Documentation]    logs in Citron as Normal admin
-    [Tags]    Citron 315        call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3407
+    [Tags]    Citron 315        call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3546
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
@@ -89,7 +89,7 @@ logs_in_Citron_as_Normal_User
 
 logs_in_Citron_as_Workspace_admin
     [Documentation]    logs in Citron as Workspace admin
-    [Tags]    Citron 301-307     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3407
+    [Tags]    Citron 301-307     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3546
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
     ${driver1}   driver_set_up_and_logIn    ${workspace_admin_username}

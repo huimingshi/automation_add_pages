@@ -228,6 +228,7 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     public_click_element(driver1, video_on_button, ec='ec', description='点击video按钮')
     # time.sleep(2)
     proceed_with_camera_off(driver1)
+    # 选择Photo
     public_click_element(driver1, '//div[@class="submenu-content"]//span[text()="Photo"]/..', ec='ec',description='选择Photo')
     get_xpath_element(driver1, upload_file, ec='ec', description='上传jpg文件').send_keys(get_picture_path())
     # 截图4次
