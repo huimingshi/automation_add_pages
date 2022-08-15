@@ -25,3 +25,6 @@ ${view_count}                               xpath=//button[contains(.,'View')]/.
 ${call_button_xpath}                        xpath=//button[contains(.,'Call')]                                                              # Call button
 ${ws_calls_first_data_show}                 xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[1]                       # 首行数据
 ${comment_content_xpath}                    xpath=//div[@class="calllog"]//div[@class="CallLogEntry"]                                       #  comment内容
+${call_detail_screenshot}                   xpath=//div[@class="attachment selectable "]                                                    # 通话详情页面的截图
+${delete_screenshot_button}                 xpath=//div[@class="delete"]/a[text()="Delete"]                                                 # 点击截图后出现的的删除按钮
+${attachment_selectable_selected}           xpath=//div[@class="attachment selectable selected"]                                            # 被点击后的截图xpath和其他截图不一样

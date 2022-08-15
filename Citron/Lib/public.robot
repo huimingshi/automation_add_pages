@@ -47,6 +47,7 @@ ${enter_primary_contacts}           xpath=//span[contains(.,'Primary Contact')] 
 ${enter_personal_page}              xpath=//span[contains(.,'Personal')]                                # Personal page
 ${enter_favorites_page}             xpath=//span[contains(.,'Favorites')]                               # Favorites page
 ${enter_directory_page}             xpath=//span[contains(.,'Directory')]                               # Directory page
+${enter_messages_page}              xpath=//span[contains(.,'Messages')]                                # Messgaes page
 
 
 *** Keywords ***

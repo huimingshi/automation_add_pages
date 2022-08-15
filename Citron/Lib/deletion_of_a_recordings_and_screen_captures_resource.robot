@@ -82,17 +82,24 @@ normal_user_select_one_call_has_screen_capture
     click element  ${first_data_Details}
     wait until element is visible  ${enter_details_tag}
 
-click_delete_button
-    # Click Delete button
-    wait until element is visible   ${click_on_ellipses}    20
-    click element   ${click_on_ellipses}
-    sleep  1s
-    click element    ${delete_screen_capture}
-    sleep  2s
+click_one_screenshot
+    # 在通话详情页面点击一个截图
+    wait until element is visible   ${call_detail_screenshot}
+    click element    ${call_detail_screenshot}
+    # 截图后出现的的删除按钮
+    wait until element is visible    ${delete_screenshot_button}
+
+click_delete_screenshot
+    # 点击截图后出现的的删除按钮
+    click element   ${delete_screenshot_button}
 
 check_delete_screen_capture
-    # Click Delete button
-    click_delete_button
+    # 滑动到底
+    swipe_browser_to_bottom
+    # 在通话详情页面点击一个截图
+    click_one_screenshot
+    # 点击截图后出现的的删除按钮
+    click_delete_screenshot
     # The confirm window should be shown up
     ${count}   get element count   xpath=//div[@class="modal-body" and text()="Are you sure you want to delete this screen capture?"]
     should be equal as strings   ${count}   1
@@ -100,16 +107,20 @@ check_delete_screen_capture
     click element   xpath=//button[@class="k-button" and text()="Cancel"]
     sleep  1s
     # the Screen Capture should not be deleted.
-    ${count}  get element count   ${view_screen_capture}
-    should be equal as integers   ${count}   4
-    # Click Delete button
-    click_delete_button
+    ${count}  get element count   ${call_detail_screenshot}
+    should be equal as integers   ${count}   3
+    ${count}  get element count   ${attachment_selectable_selected}
+    should be equal as integers   ${count}   1
+    # 点击截图后出现的的删除按钮
+    click_delete_screenshot
     # Click Yes button
     click element    ${latest_modified_window_ok_button}
     sleep  1s
     # this screen capture is removed from the list and server
-    ${count}  get element count   ${view_screen_capture}
+    ${count}  get element count   ${call_detail_screenshot}
     should be equal as integers   ${count}   3
+    ${count}  get element count   ${attachment_selectable_selected}
+    should be equal as integers   ${count}   0
 
 delete_record_in_crunch_is_correct
     [Arguments]   ${expect_delete_log}

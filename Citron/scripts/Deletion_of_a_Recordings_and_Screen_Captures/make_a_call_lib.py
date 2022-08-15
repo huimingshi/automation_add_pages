@@ -65,6 +65,7 @@ video_on_button = '//div[@class="InCall"]//div[@class="menus false"]/div[@class=
 upload_file = '//input[@name="upload-file"]'
 please_wait = '//div[@class="InvalidLinkView"]/h2[text()="Please wait."]'
 zhuanquanquan = '//div[@id="whiteboard_progress_bar_container"]'
+webglCameraOff = "//canvas[@id='webglCameraOff']"
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -148,6 +149,17 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
         if len(ele_list) == 1:
             public_click_element(driver, close_tutorial_button,description = 'close_tutorial按钮')   # 刷新页面后关闭教程
 
+def proceed_with_camera_off(driver):
+    """
+    Proceed with my camera Off
+    关闭摄像头阴暗时的提示信息
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,webglCameraOff)
+    if len(ele_list) == 1:
+        public_click_element(driver,webglCameraOff,description='proceed_with_camera_off按钮')
+
 def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call group 1',accept='accept'):
     """
     Contacts页面进行call操作
@@ -214,7 +226,8 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     public_click_element(driver1, '//span[text()="I will give help"]', description='选择I_will_give_help失败')
     # 上传photo
     public_click_element(driver1, video_on_button, ec='ec', description='点击video按钮')
-    time.sleep(2)
+    # time.sleep(2)
+    proceed_with_camera_off(driver1)
     public_click_element(driver1, '//div[@class="submenu-content"]//span[text()="Photo"]/..', ec='ec',description='选择Photo')
     get_xpath_element(driver1, upload_file, ec='ec', description='上传jpg文件').send_keys(get_picture_path())
     # 截图4次

@@ -72,6 +72,7 @@ ${team_first_data_show}                     xpath=//div[@id="user-tabs-pane-team
 ${favorites_first_data_show}                xpath=//div[@id="user-tabs-pane-favorites"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
 ${personal_first_data_show}                 xpath=//div[@id="user-tabs-pane-personal"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
 ${unreachable_class_content}                ag-cell ag-cell-not-inline-editing ag-cell-with-height unreachableText nameDetailsCell ag-cell-value
+${messages_page_tag}                        xpath=//h1[text()="Messages"]                                                                           # 切换到Messages页面成功的标志
 # menus count
 ${menus_count}                              xpath=//div[@role="group"]/div[@role="treeitem"]                                                        # count of menus
 
