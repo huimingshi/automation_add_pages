@@ -108,13 +108,13 @@ def get_xpath_elements(driver,xpath):
 
 def public_click_element(driver,locator,ec = None,select='xpath',description = '元素'):
     """
-        通过xpath点击元素
-        :param driver: 浏览器驱动
-        :param locator: 元素的locator
-        :param ec: 是否需要使用EC来进行显示等待，默认需要
-        :param select: 默认是xpath寻找，也可以进行切换成id
-        :return:
-        """
+    通过xpath点击元素
+    :param driver: 浏览器驱动
+    :param locator: 元素的locator
+    :param ec: 是否需要使用EC来进行显示等待，默认需要
+    :param select: 默认是xpath寻找，也可以进行切换成id
+    :return:
+    """
     try:
         get_xpath_element(driver, locator, ec, select, description).click()
     except Exception as e:
