@@ -360,12 +360,6 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
                 print('还需要再一次ACCCEPT_Disclaimer')
                 public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
             driver.implicitly_wait(int(IMPLICIT_WAIT))
-    # elif deal_with_disclaimer == 'decline':
-    #     ele_list = get_xpath_elements(driver,decline_disclaimer)
-    #     if len(ele_list) == 1:
-    #         public_click_element(driver, decline_disclaimer, description='DECLINE_Disclaimer')
-    #         ele_list = get_xpath_elements(driver,'//div[@id="whiteboard_message" and text()="Disclaimer must be accepted."]')
-    #         public_assert(driver,len(ele_list) , 1,action='未出现message_disclaimer_must_be_accepted')
     elif deal_with_disclaimer == 'decline':
         ele_list = get_xpath_elements(driver, decline_disclaimer)
         if len(ele_list) == 1:
