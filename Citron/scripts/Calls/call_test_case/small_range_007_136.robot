@@ -110,7 +110,7 @@ User_Directory_User_open_invite_3rd_participant_dialog
     # User check on Directory	VP: All users of WS1 shows up
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
     # end call
-    exit_call   ${driver2}   1
+    exit_call   ${driver2}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 #    ...             AND             exit_driver   ${driver1}   ${driver2}
@@ -132,7 +132,7 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     # VP: user has no Directory checkbox
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   0
     # end call
-    exit_call   ${driver2}   1
+    exit_call   ${driver2}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 #    ...             AND             exit_driver   ${driver1}   ${driver2}
@@ -255,7 +255,7 @@ Disable_External_Users_check_case_3
 #    # VP: should directly enter this call
 #    check_call_can_reach_to_or_not    ${driver1}   ${driver3}   ${invite_url}   1
 #    # 结束call
-#    exit_call   ${driver2}   2
+#    exit_call   ${driver2}
 #    [Teardown]      run keywords    Close
 #    ...             AND             exit_driver
 ##    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
@@ -321,7 +321,7 @@ During_Call_open_invite_the_3rd_participant_page
     display_name_avator_in_contact_list   ${driver2}    ${random}   original_default_avatar_url
     close_invite_3th_page   ${driver2}
     # 结束通话
-    exit_call     ${driver1}    1
+    exit_call     ${driver1}
     [Teardown]      run keywords     my_account_change_name_and_avator    ${driver3}   ${big_admin_another_first_WS_name}    change   ${modify_picture_path}
     ...             AND              exit_driver
 #    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
@@ -459,7 +459,7 @@ unable_to_reach_user_message_displays
     # 校验在通话中Contacts页面中未登录的user，点击后是否会弹出{username} is unreachable的提示信息
     click_user_in_contacts_call   ${driver1}   ${a_team_user_name}   can_not_reach
     # 结束call
-    exit_call      ${driver1}    1
+    exit_call      ${driver1}
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver   ${driver1}   ${driver2}   ${driver3}
 

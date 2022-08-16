@@ -505,7 +505,7 @@ Small_range_799_802
     user_anwser_call      ${driver1}
     # End call, User A, User B & User C enter the call tag & comment.
     leave_call    ${driver3}
-    exit_call    ${driver2}     5
+    exit_call    ${driver2}     check   5
 
     # 进入到workspace settings page
     enter_workspace_settings_page

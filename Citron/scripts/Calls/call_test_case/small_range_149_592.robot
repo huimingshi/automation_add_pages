@@ -64,60 +64,60 @@ Small_range_152
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver    ${driver1}   ${driver2}   ${driver3}
 
-Small_range_153_160
-    [Documentation]    Enterprise user call contact in F2F mode
-    [Tags]      small range 153-160 lines       call_case
-    # Enterprise user log in
-    ${driver1}  driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
-    # contact of Enterprise user log in
-    ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}    ${universal_password}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
-    # uncheck "Continue to show hints" checkbox
-    switch_to_other_tab     ${driver1}     //div[@class="checkbox"]//input[@type="checkbox"]
-    # End call, then make another call
-    exit_call    ${driver1}
-    close_call_ending_page    ${driver1}
-    close_call_ending_page    ${driver2}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
-    # VP: hint dialog does not shown
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-    # End call
-    exit_call    ${driver1}
-    close_call_ending_page    ${driver1}
-    close_call_ending_page    ${driver2}
-    # open "Show menu hints" setting from account
-    enter_my_account_settings_page    ${driver1}
-    # VP: "Show menu hints" is off
-    which_page_is_currently_on    ${driver1}    ${open_Menu_Items}
-    # Turn on "Show menu hints" setting
-    switch_to_other_tab    ${driver1}    ${open_Menu_Items}
-    # Kill/close app and relaunch
-    exit_one_driver    ${driver1}
-    ${driver1}   driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
-    # VP: hints setting is on status
-    enter_my_account_settings_page    ${driver1}
-    which_page_is_currently_on     ${driver1}    //h1[text()="Menu Items"]/..//div[@class="react-toggle react-toggle--checked"]
-    # call contact in F2F mode
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
-    # VP: hint dialog shows
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-    # click Close on hint dialog
-    switch_to_other_tab    ${driver1}     //span[@class="close-button"]
-    # VP: hints dialog is closed
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-    # Switch to giver or receiver
-    enter_giver_mode    ${driver1}     none    none     2     has_no_dialog
-    # Proceed with my camera Off
-    proceed_with_camera_off    ${driver1}
-    # 切换回Face to Face模式
-    enter_face_to_face_mode     ${driver1}
-    # VP: hint dialog is not shown
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-    # 结束call
-    exit_call   ${driver1}
-    [Teardown]      exit_driver
-#    [Teardown]      exit_driver    ${driver1}   ${driver2}
+#Small_range_153_160
+#    [Documentation]    Enterprise user call contact in F2F mode
+#    [Tags]      small range 153-160 lines       call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3547
+#    # Enterprise user log in
+#    ${driver1}  driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
+#    # contact of Enterprise user log in
+#    ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}    ${universal_password}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
+#    # uncheck "Continue to show hints" checkbox
+#    switch_to_other_tab     ${driver1}     //div[@class="checkbox"]//input[@type="checkbox"]
+#    # End call, then make another call
+#    exit_call    ${driver1}   no_check
+#    close_call_ending_page    ${driver1}
+#    close_call_ending_page    ${driver2}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
+#    # VP: hint dialog does not shown
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+#    # End call
+#    exit_call    ${driver1}   no_check
+#    close_call_ending_page    ${driver1}
+#    close_call_ending_page    ${driver2}
+#    # open "Show menu hints" setting from account
+#    enter_my_account_settings_page    ${driver1}
+#    # VP: "Show menu hints" is off
+#    which_page_is_currently_on    ${driver1}    ${open_Menu_Items}
+#    # Turn on "Show menu hints" setting
+#    switch_to_other_tab    ${driver1}    ${open_Menu_Items}
+#    # Kill/close app and relaunch
+#    exit_one_driver    ${driver1}
+#    ${driver1}   driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
+#    # VP: hints setting is on status
+#    enter_my_account_settings_page    ${driver1}
+#    which_page_is_currently_on     ${driver1}    //h1[text()="Menu Items"]/..//div[@class="react-toggle react-toggle--checked"]
+#    # call contact in F2F mode
+#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
+#    # VP: hint dialog shows
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    # click Close on hint dialog
+#    switch_to_other_tab    ${driver1}     //span[@class="close-button"]
+#    # VP: hints dialog is closed
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+#    # Switch to giver or receiver
+#    enter_giver_mode    ${driver1}     none    none     2     has_no_dialog
+#    # Proceed with my camera Off
+#    proceed_with_camera_off    ${driver1}
+#    # 切换回Face to Face模式
+#    enter_face_to_face_mode     ${driver1}
+#    # VP: hint dialog is not shown
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+#    # 结束call
+#    exit_call   ${driver1}    no_check
+#    [Teardown]      exit_driver
+##    [Teardown]      exit_driver    ${driver1}   ${driver2}
 
 Small_range_161
     [Documentation]    WebApp specific

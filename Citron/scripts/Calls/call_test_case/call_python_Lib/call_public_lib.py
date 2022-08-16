@@ -370,8 +370,8 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         ele_list = get_xpath_elements(driver, decline_disclaimer)
         if len(ele_list) == 1:
             public_click_element(driver, decline_disclaimer, description='DECLINE_Disclaimer')
-        ele_list = get_xpath_elements(driver,'//div[@id="whiteboard_message" and text()="Waiting for an incoming call..."]')
-        public_assert(driver, len(ele_list), 1, action='未出现Waiting for an incoming call...')
+        # ele_list = get_xpath_elements(driver,'//div[@id="whiteboard_message" and text()="Waiting for an incoming call..."]')
+        # public_assert(driver, len(ele_list), 1, action='未出现Waiting for an incoming call...')
     return driver
 
 def user_make_call_via_meeting_link(driver,meeting_link):

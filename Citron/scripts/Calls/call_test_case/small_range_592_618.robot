@@ -42,7 +42,7 @@ Force Tags        small_range
 #    # A's recent should have tag and comments just entered
 #    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}   good_experience_1
 #    # Then B leave call after A added tags
-#    exit_call   ${driver2}   1
+#    exit_call   ${driver2}
 #    # B and C add tags and comments
 #    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_2
 #    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_3
@@ -293,7 +293,7 @@ Call_survey_608_610
 
     ###### 609 line
     # After customer save successfully call & comment, Expert click End Call button
-    exit_call   ${driver2}   10
+    exit_call   ${driver2}   check    10
     # Expert enter call tag & comment, and then click Take Survey button
     ${second_tag_text}  add_tags_and_comment    ${driver2}     2   good_experience_14
     check_survey_switch_success   ${driver2}    1   click
@@ -425,7 +425,7 @@ Call_survey_616_618
     # Owner accept
     user_anwser_call  ${driver1}    no_direct
     # Owner End call
-    end_call_for_all   ${driver1}
+    end_call_for_all   ${driver1}    30
     # Owner clicks Survey button
     check_survey_switch_success    ${driver1}     1    click
     # Owner return to the Tags/Comments page

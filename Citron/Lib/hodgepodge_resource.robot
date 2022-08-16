@@ -1140,7 +1140,7 @@ enter_which_call_details
     # 进入哪一行call记录的detail
     wait until element is visible    xpath=//div[@row-index="${which_call}"]//button[contains(text(),"Details")]
     click element   xpath=//div[@row-index="${which_call}"]//button[contains(text(),"Details")]
-    wait until element is visible     ${participant_name}
+    wait until element is visible     ${participant_name}    20s
 
 close_call_details
     # 关闭call的details页面

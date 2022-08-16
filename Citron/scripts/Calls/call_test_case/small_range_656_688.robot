@@ -289,12 +289,8 @@ Small_range_665
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
+    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-    # User A call B enter call via normal way
-    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
     # User D 登录
@@ -303,15 +299,12 @@ Small_range_665
     ${occurred_time_list_D1}   get_recents_page_records_occurred_time   ${driver4}    3
     # User A call B enter call via normal way
     contacts_witch_page_make_call    ${driver3}   ${driver4}    ${py_team_page}  ${Expert_User4_name}
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
 
     # caller calls one participant who is in another call via normal call
-    click_audio_only    ${driver1}
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${Expert_User4_name}
-    click_user_in_contacts_call   ${driver1}     ${Expert_User4_name}
-    which_page_is_currently_on    ${driver1}    ${user_is_currently_on_another_call_in_call}
+    contacts_witch_page_make_call    ${driver1}   ${driver4}    ${py_team_page}  ${Expert_User4_name}   no_care
+    which_page_is_currently_on    ${driver1}    ${user_is_currently_on_another_call}
     # 结束Call
-    exit_call   ${driver1}
     exit_call   ${driver3}
     # Callee has a missing incoming call record.
     close_call_ending_page   ${driver4}
@@ -320,11 +313,10 @@ Small_range_665
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list_D1}    ${occurred_time_list_D2}
     verify_username_in_recents_page    ${driver4}   ${Expert_User3_name}    ${Expert_User1_name}
     # And Caller has a outgoing call record.
-    close_call_ending_page   ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A2}    get_recents_page_records_occurred_time    ${driver1}       3
+    ${occurred_time_list_A2}    get_recents_page_records_occurred_time    ${driver1}
     two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
-    verify_username_in_recents_page    ${driver1}    ${Expert_User4_name}   ${Expert_User2_name}
+    verify_username_in_recents_page    ${driver1}    ${Expert_User4_name}
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}  ${driver4}
 

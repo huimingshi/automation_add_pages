@@ -214,7 +214,7 @@ def my_account_change_name_and_avator(driver,change_name,change_avator,picture_p
         time.sleep(1)
     public_check_element(driver, '//button[@type="submit" and contains(.,"Update")]', '点击Update失败')
     for i in range(10):
-        element_list = get_xpath_elements(driver,notification_content)
+        element_list = get_xpath_elements(driver,updated_settings_successfully)
         if len(element_list) == 1:
             break
         elif i == 9:
@@ -247,7 +247,7 @@ def hang_up_the_phone(driver):
     # public_check_element(driver, end_call_button, '挂断按钮')
     public_click_element(driver, end_call_button, description='挂断按钮')
 
-def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.helplightning+EU2',call_time=25):
+def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.helplightning+EU2',call_time='0'):
     """
     # Leave call
     :param driver:
@@ -256,8 +256,8 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     :param username:需要设置为另一个共同主持的user name
     :return:
     """
-    # 维持通话25s
-    # time.sleep(int(call_time))
+    # 维持通话
+    time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
     for i in range(5):
@@ -275,6 +275,9 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
         ele_list = get_xpath_elements(driver,visibility_finishi_call)
         ele_list_leave_call = get_xpath_elements(driver,leave_call_button)
         if len(ele_list) == 1 and len(ele_list_leave_call) == 1:
+            for i in range(2):
+                hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
+                time.sleep(2)
             public_click_element(driver,leave_call_button,description='leave_call_button')
             break
         elif i == 4:
@@ -312,15 +315,15 @@ def make_sure_enter_call(driver):
             time.sleep(int(3))
     driver.implicitly_wait(IMPLICIT_WAIT)
 
-def exit_call(driver,check_user_count='check',call_time=10):
+def exit_call(driver,check_user_count='check',call_time='0'):
     """
     # 结束call
     :param driver:
     :param check_user_count:是否检查参会人数，默认检查，但有时候会议界面不展示参会人数
     :return:
     """
-    # 维持通话10s
-    # time.sleep(int(call_time))
+    # 维持通话
+    time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
     if check_user_count == 'check':
@@ -339,6 +342,9 @@ def exit_call(driver,check_user_count='check',call_time=10):
         ele_list = get_xpath_elements(driver,visibility_finishi_call)
         ele_list_yes = get_xpath_elements(driver,exit_call_yes)
         if len(ele_list_yes) == 1 and len(ele_list) == 1:
+            for i in range(2):
+                hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
+                time.sleep(2)
             public_click_element(driver,exit_call_yes,description='Yes按钮')
             break
         elif i == 4:
@@ -350,14 +356,14 @@ def exit_call(driver,check_user_count='check',call_time=10):
             hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
             time.sleep(5)
 
-def end_call_for_all(driver,call_time=25):
+def end_call_for_all(driver,call_time='0'):
     """
     End Call for All
     :param driver:
     :return:
     """
-    # 维持通话25s
-    # time.sleep(int(call_time))
+    # 维持通话
+    time.sleep(int(call_time))
     # 确保进入通话中
     make_sure_enter_call(driver)
     for i in range(10):
@@ -375,10 +381,14 @@ def end_call_for_all(driver,call_time=25):
         ele_list = get_xpath_elements(driver,visibility_finishi_call)
         ele_list_end_call = get_xpath_elements(driver,end_call_for_all_button)
         if len(ele_list) == 1 and len(ele_list_end_call) == 1:
+            for i in range(2):
+                hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
+                time.sleep(2)
             public_click_element(driver,end_call_for_all_button,description='End_call_for_all按钮')
             break
         elif i == 4:
             print('找不到End_Call_for_All按钮')
+            screen_shot_func(driver, '找不到End_Call_for_All按钮')
             raise Exception('找不到End_Call_for_All按钮')
         else:
             time.sleep(5)

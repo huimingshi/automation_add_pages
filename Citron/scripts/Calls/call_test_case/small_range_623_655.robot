@@ -366,7 +366,7 @@ Small_range_636
     # expert leaves call
     leave_call    ${driver2}
     # then user A leaves call
-    exit_call   ${driver1}    10
+    exit_call   ${driver1}    check    10
     # 关闭通话结束展示页面
     close_call_ending_page     ${driver1}
     close_call_ending_page     ${driver2}
@@ -404,7 +404,7 @@ Small_range_637_642
     # user B declines call
     user_decline_call    ${driver3}
     # user A leaves call
-    exit_call   ${driver1}    10
+    exit_call   ${driver1}    check   10
     # 关闭通话结束展示页面
     close_call_ending_page     ${driver1}
     close_call_ending_page     ${driver2}
@@ -449,7 +449,7 @@ Small_range_638_640
     # expert leaves call
     leave_call    ${driver2}
     # then user C leaves call
-    exit_call   ${driver3}    10
+    exit_call   ${driver3}    check    10
     # 关闭通话结束展示页面
     close_call_ending_page     ${driver1}
     close_call_ending_page     ${driver2}
@@ -492,7 +492,7 @@ Small_range_639
     click_user_in_contacts_call     ${driver1}    ${User_Cc_name}
     # user C doesn't answer call
     # user A leaves call
-    exit_call   ${driver1}    10
+    exit_call   ${driver1}    check   10
     # 关闭通话结束展示页面
     close_call_ending_page     ${driver1}
     close_call_ending_page     ${driver2}
