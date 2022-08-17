@@ -105,7 +105,9 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             ele_list = get_xpath_elements(driver,'//h1[text()="Welcome to Help Lightning!"]')
             public_assert(driver,len(ele_list),1,condition = '=',action='展示的不是Welcome to Help Lightning!')
         # close Tutorial
-        public_click_element(driver, close_tutorial_button, description='关闭tutorial按钮')
+        ele_list = get_xpath_elements(driver,close_tutorial_button)
+        if len(ele_list) == 1:
+            public_click_element(driver, close_tutorial_button, description='关闭tutorial按钮')
     if disturb == 'not_set_disturb':
         ele_list = get_xpath_elements(driver,not_disturb)
         if len(ele_list) == 0:

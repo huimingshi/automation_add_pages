@@ -1001,7 +1001,7 @@ Small_range_833
     ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}        ${switch_workspace_password}
     # call on-call group from contact list
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_Group_1}
-    sleep   20s
+    make_sure_enter_call    ${driver1}
     # VP: REC is on, only expert can change it
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     make_show_recording_settings    ${driver1}
