@@ -1,6 +1,4 @@
 #----------------------------------------------------------------------------------------------------#
-import time
-
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_settings_and_variable import *
@@ -191,7 +189,7 @@ def show_incoming_call_name_avator(driver1,driver2,expect_src,expect_name):
 def user_end_call_by_self(driver):
     """
     用户自己主动END Call
-    :param driver2:
+    :param driver:
     :return:
     """
     # End call
