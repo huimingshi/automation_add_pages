@@ -31,14 +31,18 @@
 6.pip install robotframework-selenium2library
 
 ...
+
 ---
 
 ### 多种浏览器驱动的下载路径
-1、Chrome驱动下载地址：http://chromedriver.storage.googleapis.com/index.html
+ - 1、Chrome驱动下载地址：http://chromedriver.storage.googleapis.com/index.html
 
-2、edge驱动下载地址：https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ 
-- 需注意，下载到本地的‘msedgedriver.exe’文件要改名为‘MicrosoftWebDriver.exe’，否则会报WebDriverException异常
+ - 2、edge驱动下载地址：https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ 
+ - - 需注意，下载到本地的‘msedgedriver.exe’文件要改名为‘MicrosoftWebDriver.exe’，否则会报WebDriverException异常
 
+### 如何下载英文版本的firefox
+ - 这个网址下载
+ - https://www.mozilla.org/en-US/firefox/all/#product-desktop-release
 ---
 
 ### 如何只执行citron的case？
