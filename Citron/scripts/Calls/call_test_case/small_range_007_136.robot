@@ -6,6 +6,11 @@ Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
+Library           call_python_Lib/login_lib.py
+Library           call_python_Lib/contacts_page.py
+Library           call_python_Lib/recents_page.py
+Library           call_python_Lib/my_account.py
+Library           call_python_Lib/finish_call.py
 Force Tags        small_range
 
 *** Test Cases ***

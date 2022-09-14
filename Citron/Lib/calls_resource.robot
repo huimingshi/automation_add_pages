@@ -24,6 +24,7 @@ ${py_groups_page}                               Groups                          
 ${py_recents_page}                              Calls                                                                                               # Calls page
 ${py_favorites_page}                            Favorites                                                                                           # Favorites page
 ${py_contacts_page}                             Contacts                                                                                            # Contacts page
+${py_messages_page}                             Messages                                                                                            # Messages page
 ${py_invite_page}                               invite_page                                                                                         # 通话过程中邀请user的页面
 ${py_team_search_result}                        //div[@id="user-tabs-pane-1"]//div[@class="ag-center-cols-container"]/div                           # team search result
 ${py_personal_search_result}                    //div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div                           # personal search result
@@ -35,6 +36,7 @@ ${py_directory_switch_success}                  //a[@id="user-tabs-tab-directory
 ${py_users_switch_success}                      //span[contains(.,"Active Users")]                                                                  # switch to Users page successfully
 ${py_groups_switch_success}                     //h1[text()="Groups"]                                                                               # switch to Groups page successfully
 ${py_contacts_switch_success}                   //h1[contains(.,"Contacts")]                                                                        # switch to Contacts page successfully
+${py_messages_switch_success}                   //h1[contains(.,"Messages")]                                                                        # switch to Messages page successfully
 ${py_personal_switch_success}                   //a[@id="user-tabs-tab-personal" and @aria-selected="true"]                                         # switch to Personal page successfully
 ${py_recents_switch_success}                    //h1[contains(.,"Calls")]                                                                           # switch to Calls page successfully
 ${py_favorites_switch_success}                  //a[@id="user-tabs-tab-favorites" and @aria-selected="true"]                                        # switch to Favorites page successfully

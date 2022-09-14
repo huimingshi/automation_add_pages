@@ -4,35 +4,35 @@ from selenium import webdriver
 from Citron.public_switch.public_switch_py import SMALL_RANGE_BROWSER_TYPE
 if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
     from selenium.webdriver.chrome.options import Options
-    option = Options()
-    option.add_argument("--disable-infobars")
-    option.add_argument("start-maximized")
-    option.add_argument("--disable-extensions")
+    optionc = Options()
+    optionc.add_argument("--disable-infobars")
+    optionc.add_argument("start-maximized")
+    optionc.add_argument("--disable-extensions")
 
     # Pass the argument 1 to allow and 2 to block
-    option.add_experimental_option("prefs", {
+    optionc.add_experimental_option("prefs", {
         "profile.default_content_setting_values.notifications": 1,   # chrome开启通知
         "profile.default_content_setting_values.media_stream_mic": 1 ,   # chrome开启麦克风
         "profile.default_content_setting_values.media_stream_camera": 1    # chrome开启摄像头
     })
     # 忽略证书错误，不需要手动点高级选项
-    option.add_argument('--ignore-certificate-errors')
+    optionc.add_argument('--ignore-certificate-errors')
 
 elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
     from selenium.webdriver.firefox.options import Options
 
-    option = Options()
-    option.add_argument("--disable-infobars")
-    option.add_argument("start-maximized")
-    option.add_argument("--disable-extensions")
+    optionf = Options()
+    optionf.add_argument("--disable-infobars")
+    optionf.add_argument("start-maximized")
+    optionf.add_argument("--disable-extensions")
 
     # Pass the argument 1 to allow and 2 to block
-    option.set_capability("prefs", {
+    optionf.set_capability("prefs", {
         "profile.default_content_setting_values.notifications": 1,
         "profile.default_content_setting_values.media_stream_mic": 1
     })
     # 忽略证书错误，不需要手动点高级选项
-    option.add_argument('--ignore-certificate-errors')
+    optionf.add_argument('--ignore-certificate-errors')
     profile = webdriver.FirefoxProfile()
     profile.set_preference('intl.accept_languages', 'en-US, en')
     profile.set_preference("permissions.default.microphone", 1)
@@ -122,3 +122,27 @@ share_button = '//div[@class="DocToolBar show"]/button[text()="Share"]'      # �
 enable_recording_call = '//div[@class="message" and contains(.,"{} has enabled recording for this call.")]'
 turn_off_recording_call = '//div[@class="message" and contains(.,"{} has turned off recording for this call.")]'
 Audio_Only_button = '//div[@class="message" and text()="Audio Only"]'
+# Messages页面
+message_textarea = '//div[@class="Chat"]//textarea'                         # 聊天输入框
+message_send_button = '//div[@class="Chat"]//button[@class="k-button k-flat k-button-icon k-button-send"]'      # 聊天内容发送按钮
+message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型
+chatSessionList_lastMessages_text = '//div[@class="ChatSessionList_lastMessages"]/p[text()="{}"]'    # 会话中最后一句文本
+chatSessionList_lastMessages_url = '//div[@class="ChatSessionList_lastMessages"]//a[@href="{}"]'    # 会话中最后一句url
+chatSessionList_lastMessages_alt = '//div[@class="ChatSessionList_lastMessages"]//img[@alt="{}"]'    # 会话中最后一张图片
+input_type_file = '//input[@type="file"]'                                                       # 上传文件的xpath
+send_message_button = '//button[@class="k-button k-flat k-button-icon k-button-send"]'          # message发送按钮
+unread_message_count = '//div[@class="ChatSessionList"]//div[@class="Badge"]/div'               # 未读消息数
+show_unread_message_count = '//span[@class="k-badge k-badge-md k-badge-solid k-badge-error k-badge-circle k-badge-border-cutout k-badge-edge k-top-end"]/span'
+button_message = '//div[@class="button message"]'                                               # contacts页面的message按钮发起新的message
+message_page_info = '//div[@class="user_chat_buttons"]//span[text()="Info"]'                    # 聊天中查看Info
+message_dialog_text = '//div[@class="k-bubble false"]//p'                                       # message会话框中的文本内容
+message_members = '//div[@class="ChatInfo_grid_name"]'                                          # 聊天成员
+message_page_back = '//div[@class="user_chat_buttons"]//span[text()="Back"]'                    # 点击Info后变成back按钮
+message_delete_button = '//button[@class="btn btn-danger" and text()="Delete"]'                 # 删除message
+message_delete_confirm_button = '//button[@class="btn btn-default" and text()="Delete"]'        # 确认删除message
+send_a_new_message_button = '//button[text()="SEND A NEW MESSAGE"]'                             # SEND A NEW MESSAGE按钮
+search_messages_box = '//input[@id="quick-search-text-box"]'                                    # 创建messages时查询user的查询框
+create_message_button = '//button[@class="create_button k-button k-primary"]'                   # 创建message的Create按钮
+back_message_button = '//div[@class="returns_button"]'                                          # 创建message的Back按钮
+attachmentName = '//div[@class="attachmentName"]'                                               # message会话框中的附件名称
+message_dialog_div = '//div[@class="k-message-group k-alt"]/div'                                # History loaded smoothly

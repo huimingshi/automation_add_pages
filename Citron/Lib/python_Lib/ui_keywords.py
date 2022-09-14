@@ -31,14 +31,15 @@ def all_file_name(file_path):
     for root, dirs, files in os.walk(DOWNLOAD_PATH):
         return files
 
-def check_zipFile_exists():
+def check_zipFile_exists(partial_file_name = 'call-report'):
     """
     # Check whether the ZIP file exists
+    :param partial_file_name: zip文件的部分名
     :return: if exists, return zip file name;
              else, return "There is no such zip file"
     """
     files_list = all_file_name(DOWNLOAD_PATH)
-    partial_file_name = 'call-report'
+    # partial_file_name = 'call-report'
     exists_tag = 0
     for file_name in files_list:
         if partial_file_name in file_name:
@@ -48,23 +49,24 @@ def check_zipFile_exists():
     if exists_tag == 0:
         return "There is no such zip file"
 
-def delete_zip_file():
+def delete_zip_file(partial_file_name = 'call-report'):
     """
     # Deleting all ZIP File
+    :param partial_file_name: zip文件的部分名
     :return: if exists zip file ,return "Zip file has been deleted";
              else, return "There is no zip file"
     """
     files_list = all_file_name(DOWNLOAD_PATH)
-    partial_file_name = 'call-report'
+    # partial_file_name = 'call-report'
     exists_tag = 0
     for file_name in files_list:
         if partial_file_name in file_name:
             exists_tag = 1
             system_type = get_system_type()
             if system_type == 'Windows':
-                zip_file_path = DOWNLOAD_PATH + f'\\{check_zipFile_exists()[0]}'
+                zip_file_path = DOWNLOAD_PATH + f'\\{check_zipFile_exists(partial_file_name)[0]}'
             else:
-                zip_file_path = DOWNLOAD_PATH + f'/{check_zipFile_exists()[0]}'
+                zip_file_path = DOWNLOAD_PATH + f'/{check_zipFile_exists(partial_file_name)[0]}'
             os.remove(zip_file_path)
     if exists_tag == 0:
         return "There is no zip file"
@@ -410,34 +412,12 @@ def get_modify_picture_path(picture_name = 'modify_picture.jpg'):
     :return: modify_picture.jpg绝对路径
     """
     return get_picture_path(picture_name)
-    # dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    # print('当前目录绝对路径:',dir_path)
-    # system_type = get_system_type()
-    # if system_type == 'Windows':
-    #     dir_list = dir_path.split('\\')
-    #     print(dir_list)
-    #     dir_list[-1] = 'publicData'
-    #     join_str = '\\\\'
-    #     final_path = join_str.join(dir_list)
-    #     # modify_picture_path = final_path + '\\\\modify_picture.jpg'
-    #     modify_picture_path = final_path + f'\\\\{picture_name}'
-    #     return  modify_picture_path
-    # else:
-    #     dir_list = dir_path.split('/')
-    #     print(dir_list)
-    #     dir_list[-1] = 'publicData'
-    #     join_str = '//'
-    #     final_path = join_str.join(dir_list)
-    #     print(final_path)
-    #     # modify_picture_path = final_path + '//modify_picture.jpg'
-    #     modify_picture_path = final_path + f'//{picture_name}'
-    #     print(modify_picture_path)
-    #     return modify_picture_path
-
 
 
 if __name__ == '__main__':
     # print(get_picture_path())
-    print(get_modify_picture_path())
+    print(get_modify_picture_path('_ 小炮 + Tristana_.jpg'))
     # get_system_type()
     # print(string_with_whitespace_removed('11 tag, 11t, 16 tag, ad tag2'))
+    print(check_zipFile_exists('original'))
+    delete_zip_file('original')

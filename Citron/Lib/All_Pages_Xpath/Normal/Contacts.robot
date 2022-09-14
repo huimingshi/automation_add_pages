@@ -1,6 +1,7 @@
 *** Variables ***
 # Contacts
-${favorite_button}                      xpath=//div[@class="favorite-div"]//i                                                   # favorite/unfavorite button
+${favorite_button}                      xpath=//div[@class="favorite-div"]//i                                                   # favorite button
+${unfavorite_button}                    xpath=//i[@class="fas fa-star favoriteIcon star-on"]                                    # unfavorite button
 ${personal_search_result}               xpath=//div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div         # personal search result
 ${first_team_username}                  xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div      # team page first username
 ${first_personal_username}              xpath=//div[@id="user-tabs-pane-personal"]//div[@row-index="0"]//div[@class="cardName"]        # personal page first username
@@ -17,6 +18,7 @@ ${team_search_input}                    xpath=//div[@id="user-tabs-pane-team"]//
 ${directory_search_input}               xpath=//div[@id="user-tabs-pane-directory"]//input[@id="filter-text-box"]               # Directory search
 ${ellipsis_menu_button}                 xpath=//div[@class="ellipsis-menu-div"]                                                 # 悬浮按钮
 ${invite_after_ellipsis}                xpath=//span[text()="Invite"]/..                                                        # 悬浮鼠标后出现的Invite按钮
+${message_button_xpath}                 //div[@class="button message"]/span[text()="Message"]/..                                # Message 按钮
 ${first_team_1}                         xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[1]//div[@class="cardName"]     # Team第一行数据的username
 ${first_team_2}                         xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[2]//div[@class="cardName"]     # Team第二行数据的username
 ${first_team_3}                         xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div[3]//div[@class="cardName"]     # Team第三行数据的username

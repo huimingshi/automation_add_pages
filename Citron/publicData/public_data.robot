@@ -164,6 +164,8 @@ ${other_site_user_3_password}           *IK<8ik,8ik,
 
 ${big_admin_on_call_group}              three_user_in_this_on_call_group                                                        # big_admin 第一个WS下的on-call group
 
+${on_call_group_1}                      on-call group 1                                                                         # on-call group 1
+
 # 下列账号都属于big_admin下的我自己创建的WS（Huiming.shi_Added_WS）中的User或者group
 ${Expert_A_username}                    Huiming.shi.helplightning+Expert_A@outlook.com                                          # Expert A username(Quantum Mechanics)
 ${Expert_A_name}                        Huiming.shi.helplightning+Expert_A
@@ -281,6 +283,40 @@ ${WS3_User_B_customer_avatar}           https://s3.cn-north-1.amazonaws.com.cn/h
 ${Malphite}                             Thank you for using 熔岩巨兽
 
 ${default_product_name}                 Thank you for using Help Lightning
+
+# message 用例专用账号
+${message_test0_user}                   Huiming.shi.helplightning+message_test0@outlook.com
+${message_test0_username}               Huiming.shi.helplightning+message_test0
+
+${message_test1_user}                   Huiming.shi.helplightning+message_test1@outlook.com
+${message_test1_username}               Huiming.shi.helplightning+message_test1
+
+${message_test2_user}                   Huiming.shi.helplightning+message_test2@outlook.com
+${message_test2_username}               Huiming.shi.helplightning+message_test2
+
+${message_test3_user}                   Huiming.shi.helplightning+message_test3@outlook.com
+${message_test3_username}               Huiming.shi.helplightning+message_test3
+
+${message_not_need_read_user}           Huiming.shi.helplightning+message_test_not_need_read@outlook.com
+${message_not_need_read_username}       Huiming.shi.helplightning+message_test_not_need_read
+
+${anyone_user}                          1648576793381491                                                                         # contacts中的随意一位联系人
+
+${anyone_favorite_user}                 1645080318643799                                                                         # contacts中的favorite联系人
+
+${directory_user}                       wqghwewj@123.com                                                                         # contacts中的directory联系人
+
+${used_by_message_user01}               Huiming.shi.helplightning+used_chat_01@outlook.com                                       # 用于message测试（used_by_message_group）
+${used_by_message_username01}           Huiming.shi.helplightning+used_chat_01
+
+${used_by_message_user02}               Huiming.shi.helplightning+used_chat_02@outlook.com                                       # 用于message测试（used_by_message_group）
+${used_by_message_username02}           Huiming.shi.helplightning+used_chat_02
+
+${used_by_message_user03}               Huiming.shi.helplightning+used_chat_03@outlook.com                                       # 用于message测试（used_by_message_group）
+${used_by_message_username03}           Huiming.shi.helplightning+used_chat_03
+
+${used_by_message_user04}               Huiming.shi.helplightning+used_chat_04@outlook.com                                       # 用于message测试（used_by_message_group）
+${used_by_message_username04}           Huiming.shi.helplightning+used_chat_04
 
 
 # Personal user to add as personal user

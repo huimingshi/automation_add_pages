@@ -6,11 +6,15 @@ Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
+Library           call_python_Lib/login_lib.py
+Library           call_python_Lib/finish_call.py
+Library           call_python_Lib/about_call.py
+Library           call_python_Lib/contacts_page.py
 
 *** Test Cases ***
 Favorite_tap_group_name_to_start_expert_call
     [Documentation]    tap group name to start expert call in Favorite
-    [Tags]    citron  35 line     call_case
+    [Tags]    citron 35 line     call_case
     [Setup]     run keywords    Login_new_added_user   ${call_oncall_user_username}    # 登录
     ...         AND             add_to_favorite        on-call group 1  # 保证on-call group已添加favorite
     ...         AND             Close                  # 关闭driver

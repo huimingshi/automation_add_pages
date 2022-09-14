@@ -6,6 +6,8 @@ Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
+Library           call_python_Lib/login_lib.py
+Library           call_python_Lib/finish_call.py
 
 *** Test Cases ***
 Make_a_business_call_duration_more_than_1_min

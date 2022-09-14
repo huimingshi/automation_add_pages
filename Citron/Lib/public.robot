@@ -14,6 +14,7 @@ ${register_account}                 xpath=//button[contains(.,'Create My Help Li
 # log in
 ${login_citron_success_1}           ${citron_website}admin/workspace/users
 ${login_citron_success_2}           ${citron_website}admin/workspaces
+${login_citron_messages}            ${citron_website}messages
 ${login_crunch_success}             ${crunch_website}users                                              # login crunch success
 ${loginname_input}                  xpath=//input[@autocomplete="username"]                             # 用户名输入框
 ${next_button}                      xpath=//button[text()="Next"]                                       # NEXT按钮

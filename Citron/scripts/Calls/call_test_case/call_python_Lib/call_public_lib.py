@@ -5,8 +5,8 @@ from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
 from else_public_lib import paste_on_a_non_windows_system, user_accept_disclaimer
-from else_public_lib import make_sure_enter_call as m_s_e_c
-from else_public_lib import end_call_for_all as user_end_call_for_all
+from about_call import make_sure_enter_call as m_s_e_c
+from finish_call import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -303,9 +303,9 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     # Anwser cross enterprise call request
     public_check_element(driver1, external_join_call_anwser_button, '接受cross_enterprise的call失败')
     if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
-        driver4 = webdriver.Chrome(options=option)
+        driver4 = webdriver.Chrome(options=optionc)
     elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
-        driver4 = webdriver.Firefox(options=option,firefox_profile=profile)
+        driver4 = webdriver.Firefox(options=optionf,firefox_profile=profile)
     driver4.implicitly_wait(int(6))
     driver4.get(invite_url)
     driver4.maximize_window()
@@ -340,9 +340,9 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         return '获取meeting link失败'
     # try: # 启动driver打开meeting link
     if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
-        driver = webdriver.Chrome(options=option)
+        driver = webdriver.Chrome(options=optionc)
     elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
-        driver = webdriver.Firefox(options=option,firefox_profile=profile)
+        driver = webdriver.Firefox(options=optionf,firefox_profile=profile)
     driver.implicitly_wait(int(6))
     driver.get(meeting_link)
     driver.maximize_window()

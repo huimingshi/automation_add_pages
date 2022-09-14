@@ -822,6 +822,7 @@ add_to_favorite
     input text   ${team_search_input}   ${user_or_group}
     sleep  2s
     sleep  2s
+    wait until element is visible    ${favorite_button}    20s
     ${get_attribute}  get element attribute   ${favorite_button}     class
     Run Keyword If   '${get_attribute}'=='fal fa-star favoriteIcon star-off'    click element   ${favorite_button}
 
@@ -839,8 +840,8 @@ search_favorite
 unfavorite_from_favorite_tab
     [Arguments]   ${user_or_group}
     # unfavorite
-    wait until element is visible   xpath=//i[@class="fas fa-star favoriteIcon star-on"]
-    click element   xpath=//i[@class="fas fa-star favoriteIcon star-on"]
+    wait until element is visible   ${unfavorite_button}
+    click element   ${unfavorite_button}
     sleep  2s
     # search favorite
     search_favorite   ${user_or_group}    0

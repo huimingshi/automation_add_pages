@@ -74,6 +74,10 @@ ${always_on_select}                             xpath=//input[@value="always_on"
 ${opt_in_select}                                xpath=//input[@value="opt_in"]                                                                                              # set to Default-OFF
 ${opt_out_select}                               xpath=//input[@value="opt_out"]                                                                                             # set to Default-ON
 
-
+# Workspace Messaging
+${Workspace_Messaging}                          //h1[text()="Workspace Messaging"]
+${Workspace_Messaging_description}              //p[text()="Choose to enable Messaging. Enabling this setting all users in this Workspace to send and receive Messages, both during Calls and outside of Calls."]
+${Workspace_Messaging_close_xpath}              //h1[contains(.,'Workspace Messaging')]/../..//div[@class="react-toggle react-toggle--checked"]                             # on status xpath
+${Workspace_Messaging_open_xpath}               //h1[contains(.,'Workspace Messaging')]/../..//div[@class="react-toggle"]                                                   # off status xpath
 # Primary Contact
 ${Updated_Business_settings}                    xpath=//span[contains(.,'Updated Business settings')]                                                                       # Updated Business settings提示信息

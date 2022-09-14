@@ -14,6 +14,8 @@ ${get_started_button}                       xpath=//button[@id="nextBtn" and con
 ${erase_my_account}                         xpath=//div[@role="dialog"]//button[text()='Erase My Account']                                          # Erase My Account
 ${cancel_erase_my_account}                  xpath=//div[@role="dialog"]//button[text()='Cancel']                                                    # Cancel Erase My Account
 # all
+${contacts_menu_xpath}                      //span[contains(.,'Contacts')]                                                                          # Contacts 菜单
+${message_menu_xpath}                       //span[contains(.,'Messages')]                                                                          # Message 菜单
 ${get_count_of_team}                        xpath=//div[@id="user-tabs-pane-team"]//div[@class="ag-center-cols-container"]/div                      # Get number of Team
 ${get_count_of_favorites}                   xpath=//div[@id="user-tabs-pane-favorites"]//div[@class="ag-center-cols-container"]/div                 # Get number of favorites
 ${get_count_of_personal}                    xpath=//div[@id="user-tabs-pane-personal"]//div[@class="ag-center-cols-container"]/div                  # Get number of personal
@@ -93,7 +95,7 @@ ${cognito_sign_up_username}             xpath=//div[@class="modal-dialog"]/div[1
 ${cognito_sign_up_password}             xpath=//div[@class="modal-dialog"]/div[1]//input[@placeholder="Password"]                                   # Cognito Sign up password input
 ${cognito_sign_up_sign_up}              xpath=//div[@class="modal-dialog"]/div[1]//button[contains(.,'Sign up')]                                    # Cognito Sign up Sign up button
 ${cognito_verification_code}            xpath=//input[@id="verification_code"]                                                                      # verification code input
-${cognito_confirm_account}              xpath=//button[contains(.,'Confirm Account')]                                                               # Confirm Account
+${cognito_confirm_account}              xpath=//button[contains(.,'Confirm account')]                                                               # Confirm Account
 
 # 修改的xpath
 ${latest_modified_window_ok_button}     xpath=//button[@class="k-button k-primary ml-4" and text()="Ok"]                                            # 最近修改成的弹框的OK按钮，之前是alert的，后面修改了
