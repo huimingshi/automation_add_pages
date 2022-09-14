@@ -140,9 +140,13 @@ message_members = '//div[@class="ChatInfo_grid_name"]'                          
 message_page_back = '//div[@class="user_chat_buttons"]//span[text()="Back"]'                    # 点击Info后变成back按钮
 message_delete_button = '//button[@class="btn btn-danger" and text()="Delete"]'                 # 删除message
 message_delete_confirm_button = '//button[@class="btn btn-default" and text()="Delete"]'        # 确认删除message
+message_delete_cancel_button = '//button[@class="btn btn-default" and text()="Cancel"]'         # 取消删除message
 send_a_new_message_button = '//button[text()="SEND A NEW MESSAGE"]'                             # SEND A NEW MESSAGE按钮
 search_messages_box = '//input[@id="quick-search-text-box"]'                                    # 创建messages时查询user的查询框
 create_message_button = '//button[@class="create_button k-button k-primary"]'                   # 创建message的Create按钮
 back_message_button = '//div[@class="returns_button"]'                                          # 创建message的Back按钮
 attachmentName = '//div[@class="attachmentName"]'                                               # message会话框中的附件名称
 message_dialog_div = '//div[@class="k-message-group k-alt"]/div'                                # History loaded smoothly
+delete_message_info = '//div[@class="modal-body" and text()="This permanently deletes this message thread for all participants. Are you Sure?"]'
+all_message_thread = '//div[@class="ChatSessionList_grid"]//div[@class="ag-center-cols-container"]/div'
+witch_message_thread = '//div[text()="{}"]'                                                     # 哪一个用户的message

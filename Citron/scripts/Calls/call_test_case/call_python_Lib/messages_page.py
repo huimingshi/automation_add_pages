@@ -4,6 +4,8 @@
 
 import random
 import string
+import time
+
 from Citron.Lib.python_Lib.ui_keywords import get_modify_picture_path as GMPP, check_zipFile_exists as CZE
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import suspension_of_the_mouse as SOTM,scroll_into_view as SIV
@@ -77,7 +79,7 @@ def send_message_by_keyboard(driver,keyboard = 'enter'):
             public_click_element(driver, message_send_button, description='聊天内容发送按钮')
     return random_str
 
-def send_message_by_different_data(driver,test_data,data_type='text'):
+def send_message_by_different_data(driver,test_data,data_type='text',send = 'send'):
     """
     测试用不同的数据类型发送message
     :param driver:
@@ -88,14 +90,15 @@ def send_message_by_different_data(driver,test_data,data_type='text'):
     message_input = get_xpath_element(driver, message_textarea, description='message输入框')
     message_input.click()
     message_input.send_keys(test_data)
-    public_click_element(driver,message_send_button,description='聊天内容发送按钮')
-    check_last_message_content(driver, test_data, data_type)
-    if data_type == 'text':
-        ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_text.format(test_data))
-        public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
-    elif data_type == 'url':
-        ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_url.format(test_data))
-        public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
+    if send == 'send':
+        public_click_element(driver,message_send_button,description='聊天内容发送按钮')
+        check_last_message_content(driver, test_data, data_type)
+        if data_type == 'text':
+            ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_text.format(test_data))
+            public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
+        elif data_type == 'url':
+            ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_url.format(test_data))
+            public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
 
 def send_message_by_different_file(driver,file_name,file_type = 'img'):
     """
@@ -143,7 +146,7 @@ def click_which_message(driver,username):
     :param username: 用户名
     :return:
     """
-    public_click_element(driver,f'//div[text()="{username}"]',description=f'点击{username}的message')
+    public_click_element(driver,witch_message_thread.format(username),description=f'点击{username}的message')
 
 def get_message_dialog_text(driver,has_text = '1'):
     """
@@ -226,6 +229,53 @@ def check_goto_baidu(driver):
     public_assert(driver, 1, len(ele_list), action='进入到百度页面')
     time.sleep(3)
 
+def click_message_info(driver):
+    """
+    点击Info按钮
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, message_page_info, description='点击Info按钮')
+    time.sleep(3)
+
+def click_delete_message(driver):
+    """
+    点击删除按钮
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, message_delete_button, description='点击Delete按钮')
+
+def click_message_back(driver):
+    """
+    # 点击Back按钮
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, message_page_back, description='点击Back按钮')
+
+def check_delete_message_confirmation_dialog(driver):
+    """
+    检验删除message时的提示信息和按钮展示
+    :param driver:
+    :return:
+    """
+    # 点击Info按钮
+    click_message_info(driver)
+    # 点击删除按钮
+    click_delete_message(driver)
+    # 检查删除的提示信息
+    ele_list = get_xpath_elements(driver,delete_message_info)
+    public_assert(driver,1,len(ele_list),action='判断提示信息')
+    ele_list = get_xpath_elements(driver, message_delete_confirm_button)
+    public_assert(driver, 1, len(ele_list), action='判断删除按钮')
+    ele_list = get_xpath_elements(driver, message_delete_cancel_button)
+    public_assert(driver, 1, len(ele_list), action='判断取消按钮')
+    # 取消删除
+    public_click_element(driver, message_delete_cancel_button, description='确认删除message')
+    # 点击Back按钮
+    click_message_back(driver)
+
 def click_message_info_check(driver,*args):
     """
     点击message的Info校验会话成员
@@ -233,24 +283,60 @@ def click_message_info_check(driver,*args):
     :param args:
     :return:
     """
-    public_click_element(driver,message_page_info,description='点击Info按钮')
-    time.sleep(3)
+    # 点击Info按钮
+    click_message_info(driver)
+    # 校验会话成员
     ele_list = get_xpath_elements(driver,message_members)
     for i in range(len(args)):
         print(ele_list[i].get_attribute("textContent"))
         public_assert(driver, args[i], ele_list[i].get_attribute("textContent"), action='校验message会话成员')
     # 点击Back按钮
-    public_click_element(driver, message_page_back, description='点击Back按钮')
+    click_message_back(driver)
 
-def delete_message_chat(driver):
+def delete_message_chat(driver,if_delete = '1'):
     """
     删除当前的message会话
     :param driver:
     :return:
     """
-    public_click_element(driver, message_page_info, description='点击Info按钮')
-    public_click_element(driver,message_delete_button,description='点击Delete按钮')
-    public_click_element(driver,message_delete_confirm_button,description='确认删除message')
+    # 点击Info按钮
+    click_message_info(driver)
+    # 点击删除按钮
+    click_delete_message(driver)
+    if if_delete == '1':
+        # 确认删除
+        public_click_element(driver, message_delete_confirm_button, description='确认删除message')
+    else:
+        # 取消删除
+        public_click_element(driver, message_delete_cancel_button, description='确认删除message')
+        # 点击Back按钮
+        click_message_back(driver)
+
+    # ele_list = get_xpath_elements(driver,all_message_thread)
+    # for i in range(len(ele_list)):
+    #     ele_list[i].click()
+    #     time.sleep(2)
+    #     # 点击Info按钮
+    #     click_message_info(driver)
+    #     # 点击删除按钮
+    #     click_delete_message(driver)
+    #     # 确认删除
+    #     public_click_element(driver,message_delete_confirm_button,description='确认删除message')
+    #     time.sleep(2)
+
+def check_message_delete_success(driver,username,is_deleted = '1'):
+    """
+    校验message是否删除成功
+    :param driver:
+    :param username:
+    :param is_deleted:是否删除，默认‘1’删除
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,witch_message_thread.format(username))
+    if is_deleted == '1':
+        public_assert(driver, 0, len(ele_list), action='message删除成功')
+    else:
+        public_assert(driver, 1, len(ele_list), action='message应未被删除')
 
 def send_a_new_message_action(driver):
     """

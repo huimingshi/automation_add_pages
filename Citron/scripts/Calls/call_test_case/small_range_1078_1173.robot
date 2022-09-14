@@ -489,3 +489,69 @@ Small_range_1164_1165
     two_option_is_equal     ${driver1}      ${all_text}[0]       ${random_str}
     [Teardown]      run keywords    delete_message_chat    ${driver1}
     ...             AND             exit_driver
+
+Small_range_1166_1169
+    [Documentation]     Delete Message thread    Delete 1v1 message
+    [Tags]    small range 1166-1169 lines
+    # user login
+    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
+    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
+    contacts_different_page_search_user     ${driver1}     ${py_team_page}       ${message_test1_username}
+    start_new_chat    ${driver1}     ${message_test1_username}
+    # Open message thread -> Info icon -> Delete message
+    # confirmation dialog 'This permanently deletes this message thread for all participants. Are you Sure?' Cancel or Delete.
+    check_delete_message_confirmation_dialog    ${driver1}
+    send_message_by_different_data     ${driver1}      ${plain_english_text}
+    # Other contact has this message thread open	I confirm delete	VP: message history is deleted for both sides
+    switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
+    click_which_message    ${driver2}     ${message_test0_username}
+    delete_message_chat     ${driver1}
+    check_message_delete_success     ${driver1}     ${message_test1_username}
+    check_message_delete_success     ${driver2}     ${message_test0_username}
+    # Other contact is on message thread list screen	I Confirm delete	VP: message thread is deleted for both sides
+    create_a_new_message     ${driver1}     search    ${message_test1_username}
+    send_message_by_different_data     ${driver1}      ${plain_english_text}
+    switch_to_diffrent_page     ${driver2}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    contacts_different_page_search_user     ${driver2}     ${py_team_page}       ${message_test3_username}
+    start_new_chat    ${driver2}     ${message_test3_username}
+    delete_message_chat     ${driver1}
+    check_message_delete_success     ${driver1}     ${message_test1_username}
+    check_message_delete_success     ${driver2}     ${message_test0_username}
+    # Other contact is sending chat content to me	I confirm delete	VP: message history is deleted for both sides
+    create_a_new_message     ${driver1}     search    ${message_test1_username}
+    send_message_by_different_data     ${driver1}      ${plain_english_text}
+    click_which_message    ${driver2}     ${message_test0_username}
+    send_message_by_different_data     ${driver2}      ${plain_english_text}    text     no_send
+    delete_message_chat     ${driver1}
+    check_message_delete_success     ${driver1}     ${message_test1_username}
+    check_message_delete_success     ${driver2}     ${message_test0_username}
+    [Teardown]      exit_driver
+
+Small_range_1170_1173
+    [Documentation]     Delete Message thread    Delete message group
+    [Tags]    small range 1170-1173 lines
+    # user login
+    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
+    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
+    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
+    switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
+    create_a_new_message     ${driver1}      search     ${message_test1_username}      ${message_test2_username}      ${message_test3_username}
+    # Open message thread -> Info icon -> Delete message	cancel on confirm dialog	VP: thead is not delete
+    delete_message_chat     ${driver1}     0
+    ${string1}    catenate     SEPARATOR=    ${message_test1_username}     ,
+    ${string1}    catenate     ${string1}    ${message_test2_username}
+    ${string2}    catenate     SEPARATOR=    ${message_test0_username}     ,
+    ${string2}    catenate     ${string2}    ${message_test2_username}
+    ${string3}    catenate     SEPARATOR=    ${message_test0_username}     ,
+    ${string3}    catenate     ${string3}    ${message_test1_username}
+    check_message_delete_success     ${driver1}     ${string1}       0
+    check_message_delete_success     ${driver2}     ${string2}       0
+    check_message_delete_success     ${driver3}     ${string3}       0
+    # confirm delete	Message history are deleted for all sides
+    delete_message_chat     ${driver1}
+    check_message_delete_success     ${driver1}     ${string1}
+    check_message_delete_success     ${driver2}     ${string2}
+    check_message_delete_success     ${driver3}     ${string3}
+    # Search contact name after delete message thread		     VP: result does not list deleted thead
+    #Search message content after delete message thread	         VP: result does not list deleted thead
+    [Teardown]      exit_driver
