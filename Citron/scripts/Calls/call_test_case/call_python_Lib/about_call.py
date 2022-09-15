@@ -1,6 +1,8 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :9/6/2022 2:31 PM
 # @Author   :Huiming Shi
+
+
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import first_line_details_button, \
@@ -25,6 +27,11 @@ def close_details_page(driver):
     public_check_element(driver, close_details_xpath, '关闭Details页面失败')
 
 def del_tags_in_call_details(driver):
+    """
+    删除第一个tag
+    :param driver:
+    :return:
+    """
     # 点击首行数据的Details按钮
     click_first_line_details(driver)
     # 删除第一个tag

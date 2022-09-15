@@ -297,6 +297,15 @@ ${message_test2_username}               Huiming.shi.helplightning+message_test2
 ${message_test3_user}                   Huiming.shi.helplightning+message_test3@outlook.com
 ${message_test3_username}               Huiming.shi.helplightning+message_test3
 
+${message_test4_user}                   Huiming.shi.helplightning+message_test4@outlook.com
+${message_test4_username}               Huiming.shi.helplightning+message_test4
+
+${message_test5_user}                   Huiming.shi.helplightning+message_test5@outlook.com
+${message_test5_username}               Huiming.shi.helplightning+message_test5
+
+${message_test6_user}                   Huiming.shi.helplightning+message_test6@outlook.com
+${message_test6_username}               Huiming.shi.helplightning+message_test6
+
 ${message_not_need_read_user}           Huiming.shi.helplightning+message_test_not_need_read@outlook.com
 ${message_not_need_read_username}       Huiming.shi.helplightning+message_test_not_need_read
 

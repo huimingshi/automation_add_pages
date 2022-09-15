@@ -57,7 +57,7 @@ accept_disclaimer = '//button[@class="pull-right btn btn-primary"]'     # ACCEPT
 close_tutorial_button = '//div[@class="modal-header"]//button[@class="close"]'
 count_of_list = '//div[@class="ag-center-cols-container"]/div'
 click_call_button = '//button[@class="k-button callButton"]'
-anwser_call_button = '//button[@class="k-button success-btn big-btn"]'
+anwser_call_button = '//button[@class="k-button success-btn big-btn" and text()="ANSWER"]'
 external_join_call_anwser_button = '//button[contains(.,"Answer")]'
 five_star_high_praise = '//span[@class="star"]/div[contains(.,"Excellent")]'
 end_call_button = "//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']"    # 结束Call的红色按钮
@@ -110,6 +110,7 @@ ghop_on_button = "//div[@class='InCall']//*[@*='#ghop_on']/../.."
 upload_file = '//input[@name="upload-file"]'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
 count_of_call_user = '//div[@class="F2FVideos ShowOpenTokVideos"]/div'
+inviteDialog_search_user_input = '//div[@id="inviteDialog"]//input[@id="quick-search-text-box"]'
 # count_of_call_user = '//*[@class="participantName"]'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'

@@ -146,10 +146,11 @@ def click_which_message(driver,*args):
     :param username: 用户名s
     :return:
     """
-    if len(args) != 1:
-        final_name_str = ''
-        for i in range(len(args)-1):
-            final_name_str = args[0] + ', ' + args[i+1]
+    if len(args) > 1:
+        user_list = []
+        for i in range(len(args)):
+            user_list.append(args[i])
+        final_name_str = ', '.join(user_list)
     else:
         final_name_str = args[0]
     public_click_element(driver,witch_message_thread.format(final_name_str),description=f'点击{final_name_str}的message')
@@ -372,12 +373,19 @@ def create_a_new_message(driver,search = 'search',*args):
     :return:
     """
     send_a_new_message_action(driver)
-    ele_list = get_xpath_elements(driver,'//div[@class="ContactsGrid"]//div[@ref="eCenterContainer"]/div[@row-id="0"]')
-    public_assert(driver,1,len(ele_list),action='判断创建message时用户数据是否加载出来')
+    for i in range(5):
+        ele_list = get_xpath_elements(driver,'//div[@class="ContactsGrid"]//div[@ref="eCenterContainer"]/div[@row-id="0"]')
+        if len(ele_list) == 1:
+            break
+        elif i == 4:
+            public_assert(driver,1,len(ele_list),action='判断创建message时用户数据是否加载出来')
     if search == 'search':
         search_ele = get_xpath_element(driver,search_messages_box,description='创建新的message的搜索框')
+        search_ele.click()
     # 所有user都逐个点击选中
-    for i in range (len(args)):
+    print(args)
+    print(len(args))
+    for i in range(len(args)):
         if search == 'search':
             search_ele.clear()
             search_ele.send_keys(args[i])
@@ -457,9 +465,10 @@ def check_outgoing_call_names(driver,*args):
     :return:
     """
     if len(args) != 1:
-        final_name_str = ''
-        for i in range(len(args)-1):
-            final_name_str = args[0] + ', ' + args[i+1]
+        user_list = []
+        for i in range(len(args)):
+            user_list.append(args[i])
+        final_name_str = ', '.join(user_list)
     else:
         final_name_str = args[0]
     actual_names = get_xpath_element(driver,'//div[@id="connecting_caller_name"]',description='获取outgoing_call_names').get_attribute("textContent")

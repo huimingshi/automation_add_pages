@@ -137,12 +137,12 @@ Small_range_1092_1099_1111_1113
     click_which_message     ${driver2}     ${message_test0_username}
     see_last_content_on_message_dialog     ${driver2}     ${need_send_hello}
     sleep  4s
-    get_unread_message_count    ${driver2}     message_count = '0'
+    get_unread_message_count    ${driver2}     0
     # 3. userB replay any words	      VP: userA see same text; timestamp is correct;	   VP: There is no increased red unread count for this thread, because dialog is open, all message is read
     send_message_by_different_data     ${driver2}     ${need_reply_world}
     see_last_content_on_message_dialog     ${driver1}     ${need_reply_world}
     sleep  4s
-    get_unread_message_count    ${driver1}     message_count = '0'
+    get_unread_message_count    ${driver1}     0
     # 5. userA and userB Touch link in message content	VP: direct to corresponding web addres
     send_message_by_different_data     ${driver2}     ${http_www_baidu_com}      ${message_type_url}
     click_url_on_message_dialog    ${driver2}
@@ -220,7 +220,7 @@ Small_range_1115_1117
     ${random_str}    send_message_by_keyboard        ${driver1}
     see_last_content_on_message_dialog     ${driver1}     ${random_str}
     # Shift+ Enter key	Webapp: multi-lines
-    ${random_str}    send_message_by_keyboard        ${driver1}     keyboard = 'shift_enter'
+    ${random_str}    send_message_by_keyboard        ${driver1}     shift_enter
     ${finalStr}   catenate   SEPARATOR=    ${random_str}    ANOTHERLINE
     see_last_content_on_message_dialog     ${driver1}     ${finalStr}
     [Teardown]      run keywords    delete_message_chat    ${driver1}
@@ -256,7 +256,7 @@ Small_range_1125_1143
     # Click create icon	    VP: has Send My Help Space Link option; has Start a Message Group option; able to cancel
     check_create_message_back     ${driver1}
     # Select one contact from list	VP: contact is marked as selected
-    create_a_new_message     ${driver1}      search = 'search'     ${message_test1_username}
+    create_a_new_message     ${driver1}      search     ${message_test1_username}
     confirm_create_message     ${driver1}
     # Click Create	VP: new message thread is created with correct person	VP: show this person's full name
     click_message_info_check          ${driver1}      ${message_test0_username}    ${message_test1_username}
@@ -321,12 +321,12 @@ Small_range_1144_1153
     check_create_message_back     ${driver1}
     # select from entire list	Steps:
     # 1. Select several contacts   VP: contacts are marked as selected
-    create_a_new_message     ${driver1}     search = 'not_search'     ${used_by_message_username02}      ${used_by_message_username03}      ${used_by_message_username04}
+    create_a_new_message     ${driver1}     not_search     ${used_by_message_username02}      ${used_by_message_username03}      ${used_by_message_username04}
     # 2. De-select one	VP: contact is marked as unselected
     de_select_one_user     ${driver1}      ${used_by_message_username04}
     # 3. Click Create	VP: Message thread is created with empty content
     confirm_create_message     ${driver1}
-    get_message_dialog_text     ${driver1}       has_text = '0'
+    get_message_dialog_text     ${driver1}       0
     # 4. Click Info icon	Click Memebers button
     click_message_info_check     ${driver1}      ${used_by_message_username01}      ${used_by_message_username02}      ${used_by_message_username03}
     # 5. members send message one by one
@@ -353,12 +353,12 @@ Small_range_1154_1160
     # Select from search result list	Steps:
     # 1. Search contacts    VP: search contact works with correct result
     # 2. select conact from search result    VP: search contact works with correct result
-    create_a_new_message     ${driver1}      search = 'search'     ${message_test1_username}      ${message_test2_username}      ${message_not_need_read_username}
+    create_a_new_message     ${driver1}      search     ${message_test1_username}      ${message_test2_username}      ${message_not_need_read_username}
     # 3. De-select one	VP: contact is marked as unselected
     de_select_one_user     ${driver1}      ${message_not_need_read_username}
     # 4. Click Create	VP: Message thread is created with empty content    VP: Show contacts' First Name on message dialog title
     confirm_create_message     ${driver1}
-    get_message_dialog_text     ${driver1}       has_text = '0'
+    get_message_dialog_text     ${driver1}       0
     # 5. Click Info icon	Click Memebers button      VP: member list is correct, all memeber is list, include myself
     click_message_info_check     ${driver1}      ${message_test0_username}      ${message_test1_username}      ${message_test2_username}
     # 6. members send message one by one    VP: Each message timestamp is correct
@@ -380,7 +380,7 @@ Small_range_1161
     contacts_different_page_search_user     ${driver1}     ${py_team_page}       ${message_test1_username}
     start_new_chat    ${driver1}     ${message_test1_username}
     # Create message group from Message Tab
-    create_a_new_message     ${driver1}     search = 'search'    ${message_test2_username}     ${message_test3_username}
+    create_a_new_message     ${driver1}     search    ${message_test2_username}     ${message_test3_username}
     confirm_create_message     ${driver1}
     # Say "Hello" to contact
     ${random_str}    get_random_str
@@ -419,7 +419,7 @@ Small_range_1162
     # Create message group from Message group
     ${random_str}    get_random_str
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-    create_a_new_message     ${driver1}     search = 'search'    ${message_test2_username}     ${message_test3_username}
+    create_a_new_message     ${driver1}     search    ${message_test2_username}     ${message_test3_username}
     confirm_create_message     ${driver1}
     send_message_by_different_data     ${driver1}      ${random_str}
     click_message_info_check     ${driver1}      ${message_test0_username}    ${message_test2_username}    ${message_test3_username}
@@ -464,7 +464,7 @@ Small_range_1164_1165
     ${random_str}    get_random_str
     send_message_by_different_data     ${driver1}      ${random_str}
     # Create a thread have same members
-    create_a_new_message     ${driver1}     search = 'search'    ${message_test1_username}
+    create_a_new_message     ${driver1}     search    ${message_test1_username}
     confirm_create_message     ${driver1}
     # VP: dialog shows thread message history
     ${all_text}      get_message_dialog_text       ${driver1}
@@ -491,7 +491,7 @@ Small_range_1166_1169
     check_message_delete_success     ${driver1}     ${message_test1_username}
     check_message_delete_success     ${driver2}     ${message_test0_username}
     # Other contact is on message thread list screen	I Confirm delete	VP: message thread is deleted for both sides
-    create_a_new_message     ${driver1}     search = 'search'    ${message_test1_username}
+    create_a_new_message     ${driver1}     search    ${message_test1_username}
     send_message_by_different_data     ${driver1}      ${plain_english_text}
     switch_to_diffrent_page     ${driver2}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     contacts_different_page_search_user     ${driver2}     ${py_team_page}       ${message_test3_username}
@@ -500,10 +500,10 @@ Small_range_1166_1169
     check_message_delete_success     ${driver1}     ${message_test1_username}
     check_message_delete_success     ${driver2}     ${message_test0_username}
     # Other contact is sending chat content to me	I confirm delete	VP: message history is deleted for both sides
-    create_a_new_message     ${driver1}     search = 'search'    ${message_test1_username}
+    create_a_new_message     ${driver1}     search    ${message_test1_username}
     send_message_by_different_data     ${driver1}      ${plain_english_text}
     click_which_message    ${driver2}     ${message_test0_username}
-    send_message_by_different_data     ${driver2}      ${plain_english_text}    data_type='text'     send = 'no_send'
+    send_message_by_different_data     ${driver2}      ${plain_english_text}    text     no_send
     delete_message_chat     ${driver1}
     check_message_delete_success     ${driver1}     ${message_test1_username}
     check_message_delete_success     ${driver2}     ${message_test0_username}
@@ -515,22 +515,22 @@ Small_range_1170_1173
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-    create_a_new_message     ${driver1}      search = 'search'     ${message_test1_username}      ${message_test2_username}      ${message_test3_username}
+    create_a_new_message     ${driver1}      search     ${message_test1_username}      ${message_test2_username}      ${message_test3_username}
     ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
     switch_to_diffrent_page     ${driver3}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     # Open message thread -> Info icon -> Delete message	cancel on confirm dialog	VP: thead is not delete
-    delete_message_chat     ${driver1}     if_delete = '0'
+    delete_message_chat     ${driver1}     0
     ${string1}    catenate     SEPARATOR=    ${message_test1_username}     ,
     ${string1}    catenate     ${string1}    ${message_test2_username}
     ${string2}    catenate     SEPARATOR=    ${message_test0_username}     ,
     ${string2}    catenate     ${string2}    ${message_test2_username}
     ${string3}    catenate     SEPARATOR=    ${message_test0_username}     ,
     ${string3}    catenate     ${string3}    ${message_test1_username}
-    check_message_delete_success     ${driver1}     ${string1}       is_deleted = '0'
-    check_message_delete_success     ${driver2}     ${string2}       is_deleted = '0'
-    check_message_delete_success     ${driver3}     ${string3}       is_deleted = '0'
+    check_message_delete_success     ${driver1}     ${string1}       0
+    check_message_delete_success     ${driver2}     ${string2}       0
+    check_message_delete_success     ${driver3}     ${string3}       0
     # confirm delete	Message history are deleted for all sides
     delete_message_chat     ${driver1}
     check_message_delete_success     ${driver1}     ${string1}

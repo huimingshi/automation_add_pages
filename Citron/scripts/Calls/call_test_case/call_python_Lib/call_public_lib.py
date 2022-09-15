@@ -1,4 +1,6 @@
 #----------------------------------------------------------------------------------------------------#
+import time
+
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_settings_and_variable import *
@@ -214,10 +216,10 @@ def enter_contacts_search_user(driver,search_name,if_click= 'no_click_show',sear
         tag = False
         time.sleep(2)
     # 通过name查询
-    search_element = get_xpath_element(driver,'//input[@id="quick-search-text-box"]',description = '查询框')
+    search_element = get_xpath_element(driver,inviteDialog_search_user_input,description = '查询框')
     search_element.clear()
     time.sleep(2)
-    public_click_element(driver,'//input[@id="quick-search-text-box"]',description = '查询框')
+    public_click_element(driver,inviteDialog_search_user_input,description = '查询框')
     search_element.send_keys(search_name)
     if not tag:
         time.sleep(2)
