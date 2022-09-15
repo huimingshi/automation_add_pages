@@ -75,6 +75,8 @@ ${favorites_first_data_show}                xpath=//div[@id="user-tabs-pane-favo
 ${personal_first_data_show}                 xpath=//div[@id="user-tabs-pane-personal"]//div[@class="ag-center-cols-container"]/div[@row-index="0"]
 ${unreachable_class_content}                ag-cell ag-cell-not-inline-editing ag-cell-with-height unreachableText nameDetailsCell ag-cell-value
 ${messages_page_tag}                        xpath=//h1[text()="Messages"]                                                                           # 切换到Messages页面成功的标志
+${anwser_call_button_xpath}                 //button[@class="k-button success-btn big-btn" and text()="ANSWER"]                                     # ANSWER通话按钮
+${end_call_button_xpath}                    //div[@id="connecting_progress_bar_container"]/button[text()="End"]                                     # END通话按钮
 # menus count
 ${menus_count}                              xpath=//div[@role="group"]/div[@role="treeitem"]                                                        # count of menus
 

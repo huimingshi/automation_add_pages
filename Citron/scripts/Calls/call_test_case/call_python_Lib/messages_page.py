@@ -139,14 +139,20 @@ def get_unread_message_count(driver,message_count = '1'):
         textContent = get_xpath_element(driver, show_unread_message_count, description='未读消息数').get_attribute("textContent")
         public_assert(driver, int(textContent), int(message_count), action='Messages获取未读消息数')
 
-def click_which_message(driver,username):
+def click_which_message(driver,*args):
     """
     打开对应的message会话
     :param driver:
-    :param username: 用户名
+    :param username: 用户名s
     :return:
     """
-    public_click_element(driver,witch_message_thread.format(username),description=f'点击{username}的message')
+    if len(args) != 1:
+        final_name_str = ''
+        for i in range(len(args)-1):
+            final_name_str = args[0] + ', ' + args[i+1]
+    else:
+        final_name_str = args[0]
+    public_click_element(driver,witch_message_thread.format(final_name_str),description=f'点击{final_name_str}的message')
 
 def get_message_dialog_text(driver,has_text = '1'):
     """
@@ -416,6 +422,48 @@ def download_attach_on_message_dialog(driver,attach_name):
     result = CZE('original')
     public_assert(driver,1,result[1],action='点击附件下载')
 
+def click_audio_video_button(driver,type = 'Audio',check = '1'):
+    """
+    启动Audio+或者Video
+    :param driver:
+    :param type: 启动类型：Audio+或者Video
+    :param check: 是否做检查，检查是否弹出提示信息
+    :return:
+    """
+    if type == 'Audio':
+        public_click_element(driver,message_page_start_audio,description='点击Audio+')
+    else:
+        public_click_element(driver, message_page_start_video, description='点击Video')
+    if check == 1:
+        ele_list_1 = get_xpath_elements(driver,'//div[@class="alert-1" and text()="The contact you selected"]')
+        public_assert(driver,1,len(ele_list_1),action='提示信息第一行')
+        ele_list_2 = get_xpath_elements(driver, '//div[@class="alert-2" and text()="is not currently signed in to the system."]')
+        public_assert(driver, 1, len(ele_list_2), action='提示信息第二行')
+        ele_list_3 = get_xpath_elements(driver, '//div[@class="alert-confirm" and text()="Would you like to invite them into a call via email?"]')
+        public_assert(driver, 1, len(ele_list_3), action='提示信息第三行')
+        ele_list_cancel = get_xpath_elements(driver,invitation_dialog_cancel)
+        public_assert(driver, 1, len(ele_list_cancel), action='Cancel按钮')
+        ele_list_send = get_xpath_elements(driver, '//button[@class="k-button k-primary" and text()="Send Invite"]')
+        public_assert(driver, 1, len(ele_list_send), action='Send_Invite按钮')
+    ele_list_cancel = get_xpath_elements(driver, invitation_dialog_cancel)
+    if len(ele_list_cancel) == 1:
+        public_click_element(driver,invitation_dialog_cancel,description='点击Cancel按钮')
+
+def check_outgoing_call_names(driver,*args):
+    """
+    校验outgoing_call_names
+    :param driver:
+    :param args:预期的用户names
+    :return:
+    """
+    if len(args) != 1:
+        final_name_str = ''
+        for i in range(len(args)-1):
+            final_name_str = args[0] + ', ' + args[i+1]
+    else:
+        final_name_str = args[0]
+    actual_names = get_xpath_element(driver,'//div[@id="connecting_caller_name"]',description='获取outgoing_call_names').get_attribute("textContent")
+    public_assert(driver,final_name_str,actual_names,action='校验outgoing_call_names')
 
 
 if __name__ == '__main__':
