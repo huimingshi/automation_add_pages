@@ -108,14 +108,62 @@ Small_range_1198_1210
     user_anwser_call      ${driver2}
     # second contact decline incoming call
     user_decline_call     ${driver3}
-    # Other contacts answer incoming
+    # Other contacts answer incoming   VP: all answered contact enter call with video mode
     user_anwser_call      ${driver4}
-    # Invite other conact by sending 3PI link
-    ${driver5}     driver_set_up_and_logIn     ${message_test4_user}
-    enter_contacts_search_user     ${driver1}    ${message_test4_username}
-    click_user_in_contacts_call     ${driver1}    ${message_test4_username}
-    user_anwser_call    ${driver5}
+    which_page_is_currently_on        ${driver1}      ${end_call_button}
+    which_page_is_currently_on        ${driver2}      ${end_call_button}
+    which_page_is_currently_on        ${driver4}      ${end_call_button}
+    # Invite other conact by sending 3PI link	VP: anonymous or loggin user is able to enter call via this 3PI link
+    ${invite_url}     send_invite_in_calling_page      ${driver1}
+    ${driver5}     anonymous_open_meeting_link      ${invite_url}
+    which_page_is_currently_on        ${driver5}      ${end_call_button}
     [Teardown]      run keywords    end_call_for_all           ${driver1}
     ...             AND             close_call_ending_page     ${driver1}
     ...             AND             delete_message_chat        ${driver1}
-#    ...             AND             exit_driver
+    ...             AND             exit_driver
+
+Small_range_1211_1214
+    [Documentation]     Calls from message dialog       Create message group has more than 6 memebers
+    [Tags]    small range 1198-1210 lines
+    # user login
+    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
+    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
+    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
+    ${driver4}     driver_set_up_and_logIn     ${message_test3_user}
+    ${driver5}     driver_set_up_and_logIn     ${message_test4_user}
+    ${driver6}     driver_set_up_and_logIn     ${message_test5_user}
+    ${driver7}     driver_set_up_and_logIn     ${message_test6_user}
+    switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
+    create_a_new_message     ${driver1}     search     ${message_test1_username}     ${message_test2_username}     ${message_test3_username}     ${message_test4_username}     ${message_test5_username}     ${message_test6_username}
+    confirm_create_message     ${driver1}
+    # Click Video icon
+    click_which_message     ${driver1}        ${message_test1_username}     ${message_test2_username}     ${message_test3_username}     ${message_test4_username}     ${message_test5_username}     ${message_test6_username}
+    click_audio_video_button   ${driver1}    Video    0
+    # VP:outgoing call view	VP: names, avatars on outgoing call view are correct
+    check_outgoing_call_names      ${driver1}     ${message_test1_username}     ${message_test2_username}     ${message_test3_username}     ${message_test4_username}     ${message_test5_username}     ${message_test6_username}
+    # VP: all other members receive incoming call
+    which_page_is_currently_on    ${driver2}    ${anwser_call_button_xpath}
+    which_page_is_currently_on    ${driver3}    ${anwser_call_button_xpath}
+    which_page_is_currently_on    ${driver4}    ${anwser_call_button_xpath}
+    which_page_is_currently_on    ${driver5}    ${anwser_call_button_xpath}
+    which_page_is_currently_on    ${driver6}    ${anwser_call_button_xpath}
+    which_page_is_currently_on    ${driver7}    ${anwser_call_button_xpath}
+    # First 5 contacts answer incoming call	VP: 6 participants in call with audio+ mode
+    user_anwser_call      ${driver2}
+    user_anwser_call      ${driver3}
+    user_anwser_call      ${driver4}
+    user_anwser_call      ${driver5}
+    user_anwser_call      ${driver6}
+    which_page_is_currently_on        ${driver1}      ${end_call_button}
+    which_page_is_currently_on        ${driver2}      ${end_call_button}
+    which_page_is_currently_on        ${driver3}      ${end_call_button}
+    which_page_is_currently_on        ${driver4}      ${end_call_button}
+    which_page_is_currently_on        ${driver5}      ${end_call_button}
+    which_page_is_currently_on        ${driver6}      ${end_call_button}
+    # 6th contact answer incoming call	VP: 6th contacts see message like "Too many users in call", Stage environment allow no more than 6 participants in a call
+    user_anwser_call      ${driver7}
+    which_page_is_currently_on        ${driver7}       ${too_many_users_in_a_call}
+    [Teardown]      run keywords    end_call_for_all           ${driver1}
+    ...             AND             close_call_ending_page     ${driver1}
+    ...             AND             delete_message_chat        ${driver1}
+    ...             AND             exit_driver

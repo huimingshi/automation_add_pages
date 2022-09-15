@@ -60,6 +60,7 @@ ${user_is_currently_on_another_call_in_call}    //div[@class="message" and text(
 ${user_is_currently_on_another_call}            //div[@id="end_call_message" and text()="User is currently on another call."]                       # User is currently on another call
 ${that_user_is_unreachable}                     //div[@class="EndCallPageContent"]//div[contains(.,"That user is unreachable.")]                    # That user is unreachable
 ${this_call_is_over}                            //div[@id="end_call_message" and text()="This call is over. Please contact the host to invite you to another call."]      # This call is over
+${too_many_users_in_a_call}                     //div[@id="end_call_message" and text()="Too many users in a call."]                                # Too many users in a call.
 ${pleas_do_not_disturb}                         //div[contains(.,"Please Do not disturb")]                                                          # User设置请勿打扰后，call这个user的话会出现这个提示信息：Please Do not disturb
 ${contact_title_xpath}                          //div[@class="contact-title" and @title="请勿动该账号，自动化测试专用账号"]                               # 显示title
 ${contact_location_xpath}                       //div[@class="contact-location" and @title="请勿动该账号，自动化测试专用账号"]                            # 显示location
