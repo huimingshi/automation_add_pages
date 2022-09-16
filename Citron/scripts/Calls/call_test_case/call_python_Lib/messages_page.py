@@ -300,6 +300,35 @@ def click_message_info_check(driver,*args):
     # 点击Back按钮
     click_message_back(driver)
 
+def delete_first_message_thread(driver):
+    """
+    删除首条message
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,'//div[@class="ChatSessionList_grid"]//div[@ref="eCenterContainer"]//div[@row-id="0"]',description='第一条message')
+    # ele_list = get_xpath_elements(driver, all_message_thread)
+    # ele_list[0].click()
+    time.sleep(2)
+    # 点击Info按钮
+    click_message_info(driver)
+    # 点击删除按钮
+    click_delete_message(driver)
+    # 确认删除
+    public_click_element(driver, message_delete_confirm_button, description='确认删除message')
+    time.sleep(2)
+
+def delete_all_message_thread(driver):
+    """
+    删除所有的message
+    :param driver:
+    :return:
+    """
+    # 获取message线程数
+    ele_list = get_xpath_elements(driver, all_message_thread)
+    for _ in range(len(ele_list)):
+        delete_first_message_thread(driver)
+
 def delete_message_chat(driver,if_delete = '1'):
     """
     删除当前的message会话
@@ -313,23 +342,12 @@ def delete_message_chat(driver,if_delete = '1'):
     if if_delete == '1':
         # 确认删除
         public_click_element(driver, message_delete_confirm_button, description='确认删除message')
+        time.sleep(3)
     else:
         # 取消删除
         public_click_element(driver, message_delete_cancel_button, description='确认删除message')
         # 点击Back按钮
         click_message_back(driver)
-
-    # ele_list = get_xpath_elements(driver,all_message_thread)
-    # for i in range(len(ele_list)):
-    #     ele_list[i].click()
-    #     time.sleep(2)
-    #     # 点击Info按钮
-    #     click_message_info(driver)
-    #     # 点击删除按钮
-    #     click_delete_message(driver)
-    #     # 确认删除
-    #     public_click_element(driver,message_delete_confirm_button,description='确认删除message')
-    #     time.sleep(2)
 
 def check_message_delete_success(driver,username,is_deleted = '1'):
     """
@@ -389,6 +407,9 @@ def create_a_new_message(driver,search = 'search',*args):
         if search == 'search':
             search_ele.clear()
             search_ele.send_keys(args[i])
+            time.sleep(1)
+        else:
+            time.sleep(2)
         # 点击user选中
         public_click_element(driver, f'//div[@class="contact-name" and contains(.,"{args[i]}")]', description=f'选择{args[i]}')
         # 检查是否选中
@@ -473,6 +494,18 @@ def check_outgoing_call_names(driver,*args):
         final_name_str = args[0]
     actual_names = get_xpath_element(driver,'//div[@id="connecting_caller_name"]',description='获取outgoing_call_names').get_attribute("textContent")
     public_assert(driver,final_name_str,actual_names,action='校验outgoing_call_names')
+
+def search_messages_by_keyword(driver,input_keyword):
+    """
+    根据关键字查询messages列表
+    :param driver:
+    :param input_keyword: 需要根据该关键字进行搜索
+    :return:
+    """
+    search_message_ele = get_xpath_element(driver,search_messages,description='Search_Messages查询框')
+    search_message_ele.clear()
+    search_message_ele.send_keys(input_keyword)
+    time.sleep(3)
 
 
 if __name__ == '__main__':

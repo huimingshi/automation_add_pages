@@ -154,3 +154,4 @@ witch_message_thread = '//div[text()="{}"]'                                     
 message_page_start_audio = '//div[@class="user_chat_buttons"]//span[text()="Audio+"]'           # 聊天中启动Audio+
 message_page_start_video = '//div[@class="user_chat_buttons"]//span[text()="Video"]'            # 聊天中启动Video
 invitation_dialog_cancel = '//button[@class="k-button" and text()="Cancel"]'                    # Cancel按钮
+search_messages = '//div[@class="SearchMessages"]//input[@id="quick-search-text-box"]'          # Search Messages查询框

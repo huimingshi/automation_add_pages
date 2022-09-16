@@ -109,7 +109,7 @@ Small_range_1083_1091
     send_message_by_different_file     ${driver}     ${message_pdf}
     # other format files	.zip, .dmg, .xlsx, .docx
     send_message_by_different_file     ${driver}     ${message_zip}
-    [Teardown]      run keywords    delete_message_chat    ${driver}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver}
     ...             AND             exit_driver
 
 Small_range_1092_1099_1111_1113
@@ -158,16 +158,16 @@ Small_range_1092_1099_1111_1113
     # 1111_1113 lines
     # favorite a contact userD	VP: message icon is visible in Team list and Favorite list
     refresh_browser_page     ${driver1}
-    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}      ${py_contacts_switch_success}    ${py_get_number_of_rows}
     # click message icon to this userD from team	VP: message thread is created	VP: message thread is with correct person
     contacts_different_page_search_user     ${driver1}     ${py_team_page}     ${anyone_favorite_user}
     start_new_chat    ${driver1}     ${anyone_favorite_user}
     # click message icon to userD from favorite	VP: message thread is created	VP: message thread is with correct person
+    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}      ${py_contacts_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page     ${driver1}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     contacts_different_page_search_user     ${driver1}     ${py_favorites_page}     ${anyone_favorite_user}
     start_new_chat    ${driver1}     ${anyone_favorite_user}
-    [Teardown]      run keywords    click_which_message     ${driver1}     ${message_test1_username}
-    ...             AND             delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1100_1109
@@ -206,7 +206,7 @@ Small_range_1100_1109
     send_message_by_different_data     ${driver1}         ${need_reply_world}
     get_unread_message_count    ${driver2}
     check_last_message_content    ${driver2}     ${need_reply_world}
-    [Teardown]      run keywords    delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1115_1117
@@ -223,7 +223,7 @@ Small_range_1115_1117
     ${random_str}    send_message_by_keyboard        ${driver1}     shift_enter
     ${finalStr}   catenate   SEPARATOR=    ${random_str}    ANOTHERLINE
     see_last_content_on_message_dialog     ${driver1}     ${finalStr}
-    [Teardown]      run keywords    delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1121_1122
@@ -304,7 +304,7 @@ Small_range_1125_1143
     two_option_is_equal     ${driver2}      ${all_text_2}       ${all_text_1}
     two_option_is_equal     ${driver2}      ${all_attach_2}     ${all_attach_1}
     [Teardown]      run keywords    delete_zip_file     original
-    ...             AND             delete_message_chat    ${driver1}
+    ...             AND             delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1144_1153
@@ -335,7 +335,7 @@ Small_range_1144_1153
     send_message_by_different_data     ${driver2}      ${plain_english_text}
     click_which_message     ${driver3}     ${used_by_message_username01}     ${used_by_message_username02}
     send_message_by_different_data     ${driver3}      ${plain_english_text}
-    [Teardown]      run keywords    delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1154_1160
@@ -367,7 +367,7 @@ Small_range_1154_1160
     send_message_by_different_data     ${driver2}      ${plain_english_text}
     click_which_message     ${driver3}     ${message_test0_username}     ${message_test1_username}
     send_message_by_different_data     ${driver3}      ${plain_english_text}
-    [Teardown]      run keywords    delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1161
@@ -406,9 +406,7 @@ Small_range_1161
     switch_to_diffrent_page     ${driver4}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver4}     ${message_test0_username}     ${message_test2_username}
     see_last_content_on_message_dialog    ${driver4}     ${random_str}
-    [Teardown]      run keywords    delete_message_chat    ${driver1}
-    ...             AND             click_which_message    ${driver1}     ${message_test2_username}     ${message_test3_username}
-    ...             AND             delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1162
@@ -447,9 +445,7 @@ Small_range_1162
     switch_to_diffrent_page     ${driver4}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver4}     ${message_test0_username}     ${message_test2_username}
     see_last_content_on_message_dialog    ${driver4}     ${random_str}
-    [Teardown]      run keywords    delete_message_chat    ${driver1}
-    ...             AND             click_which_message    ${driver1}     ${message_test1_username}
-    ...             AND             delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1164_1165
@@ -469,7 +465,7 @@ Small_range_1164_1165
     # VP: dialog shows thread message history
     ${all_text}      get_message_dialog_text       ${driver1}
     two_option_is_equal     ${driver1}      ${all_text}[0]       ${random_str}
-    [Teardown]      run keywords    delete_message_chat    ${driver1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
 
 Small_range_1166_1169
@@ -488,26 +484,35 @@ Small_range_1166_1169
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver2}     ${message_test0_username}
     delete_message_chat     ${driver1}
+    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     check_message_delete_success     ${driver1}     ${message_test1_username}
     check_message_delete_success     ${driver2}     ${message_test0_username}
     # Other contact is on message thread list screen	I Confirm delete	VP: message thread is deleted for both sides
     create_a_new_message     ${driver1}     search    ${message_test1_username}
+    confirm_create_message     ${driver1}
     send_message_by_different_data     ${driver1}      ${plain_english_text}
     switch_to_diffrent_page     ${driver2}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     contacts_different_page_search_user     ${driver2}     ${py_team_page}       ${message_test3_username}
     start_new_chat    ${driver2}     ${message_test3_username}
     delete_message_chat     ${driver1}
+    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     check_message_delete_success     ${driver1}     ${message_test1_username}
     check_message_delete_success     ${driver2}     ${message_test0_username}
     # Other contact is sending chat content to me	I confirm delete	VP: message history is deleted for both sides
     create_a_new_message     ${driver1}     search    ${message_test1_username}
+    confirm_create_message     ${driver1}
     send_message_by_different_data     ${driver1}      ${plain_english_text}
     click_which_message    ${driver2}     ${message_test0_username}
     send_message_by_different_data     ${driver2}      ${plain_english_text}    text     no_send
     delete_message_chat     ${driver1}
+    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     check_message_delete_success     ${driver1}     ${message_test1_username}
     check_message_delete_success     ${driver2}     ${message_test0_username}
-    [Teardown]      exit_driver
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
+    ...             AND             exit_driver
 
 Small_range_1170_1173
     [Documentation]     Delete Message thread    Delete message group
@@ -515,7 +520,9 @@ Small_range_1170_1173
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-    create_a_new_message     ${driver1}      search     ${message_test1_username}      ${message_test2_username}      ${message_test3_username}
+    create_a_new_message     ${driver1}      search     ${message_test1_username}      ${message_test2_username}
+    confirm_create_message     ${driver1}
+    send_message_by_different_data     ${driver1}      ${plain_english_text}
     ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
@@ -533,9 +540,16 @@ Small_range_1170_1173
     check_message_delete_success     ${driver3}     ${string3}       0
     # confirm delete	Message history are deleted for all sides
     delete_message_chat     ${driver1}
+    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     check_message_delete_success     ${driver1}     ${string1}
     check_message_delete_success     ${driver2}     ${string2}
     check_message_delete_success     ${driver3}     ${string3}
     # Search contact name after delete message thread		     VP: result does not list deleted thead
-    #Search message content after delete message thread	         VP: result does not list deleted thead
-    [Teardown]      exit_driver
+    search_messages_by_keyword      ${driver1}     ${string1}
+    check_message_delete_success     ${driver1}     ${string1}
+    # Search message content after delete message thread	         VP: result does not list deleted thead
+    search_messages_by_keyword      ${driver1}     ${plain_english_text}
+    check_message_delete_success     ${driver1}     ${string1}
+    [Teardown]      run keywords    delete_all_message_thread    ${driver1}
+    ...             AND             exit_driver

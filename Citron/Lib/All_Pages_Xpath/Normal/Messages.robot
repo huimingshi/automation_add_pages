@@ -27,6 +27,7 @@ ${need_reply_world}                               world!                        
 ${http_www_baidu_com}                             https://www.baidu.com                                                       # 百度网址
 ${plain_english_text}                             plainEnglishText                                                            # 纯英文文本
 ${plain_chinese_text}                             德玛西亚                                                                      # 纯中文文本
+${how_old_are_you}                                how old are you?                                                            # how old are you?文本
 ${My_help_space_urls_MHS}                         https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+message_test01
 ${My_help_space_urls_OTU}                         https://app-stage.helplightning.net.cn/meet/link/OHhTMnFsZFRJd0E9?sig=416C243A
 ${message_jpg}                                    _ 小炮 + Tristana_.jpg
