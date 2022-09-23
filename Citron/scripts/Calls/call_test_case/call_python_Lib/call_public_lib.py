@@ -69,7 +69,7 @@ def send_invite_in_calling_page(driver,if_send = 'not_send'):
     print('粘贴的link为:', attribute)
     # 验证复制后粘贴结果正确
     public_assert(driver,attribute , invite_url,action='复制和粘贴的内容不一致')
-    if if_send == 'send':
+    if if_send != 'not_send':
         # 输入email
         email_ele = get_xpath_element(driver,send_link_email_input,description = 'email输入框')
         public_click_element(driver,send_link_email_input,description = 'email输入框')
@@ -401,7 +401,7 @@ def user_anwser_call(driver,anwser_type = 'direct'):
     """
     if anwser_type == 'direct':
         public_check_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
-    elif anwser_type == 'no_direct':
+    elif anwser_type != 'direct':
         public_check_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
 
 def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,flag = '1'):
@@ -554,6 +554,64 @@ def obtain_meeting_link_from_email(check_otu = 'no_check_otu'):
         except AssertionError:
             raise AssertionError('当前邮件不是OTU邮件')
     return meeting_link
+
+def in_call_click_message_button(driver):
+    """
+    通话过程中点击message图标，打开Message会话
+    :param driver:
+    :return:
+    """
+    # 点击右上角三个横杠
+    public_check_element(driver, invite_user_div, '点击右上角三个横杠')
+    # 点击Message图标
+    public_check_element(driver, message_chat_icon, '点击Message图标')
+    # 校验是否打开message对话框至于通话界面左侧
+    ele_list = get_xpath_elements(driver,left_ChatDrawer)
+    public_assert(driver,1,len(ele_list),action='校验是否打开message对话框至于通话界面左侧')
+
+def in_call_send_message_data(driver,test_data,data_type='text',send = 'send'):
+    """
+    测试用不同的数据类型发送message
+    :param driver:
+    :param test_data:
+    :param data_type:是哪种数据类型，分为text和url
+    :return:
+    """
+    # 点击输入框
+    message_input = get_xpath_element(driver, message_textarea, 'in_call输入框message')
+    message_input.click()
+    message_input.send_keys(test_data)
+    if send == 'send':
+        public_click_element(driver,send_message_button,description='聊天内容发送按钮')
+        if data_type == 'text':
+            ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(test_data))
+            public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
+        elif data_type == 'url':
+            ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(test_data))
+            public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
+
+def in_call_show_count_of_message(driver,message_count = '1'):
+    """
+    校验未读消息数
+    :param driver:
+    :param message_count: 预期未读消息数
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,f'//div[@class="Badge"]/div[text()="{int(message_count)}"]')
+    public_assert(driver,1,len(ele_list),f'校验未读消息数为{int(message_count)}')
+
+def in_call_check_receive_message(driver,content):
+    """
+    通话过程中检查收到的message内容
+    :param driver:
+    :param content: 预期收到的消息内容
+    :return:
+    """
+    # 通话过程中点击message图标，打开Message会话
+    in_call_click_message_button(driver)
+    # 通话过程中检查收到的message内容
+    ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(content))
+    public_assert(driver, len(ele_list), 1, action=f'{content}未收到')
 
 def make_show_recording_settings(driver):
     """

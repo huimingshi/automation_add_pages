@@ -67,14 +67,14 @@ def send_message_by_keyboard(driver,keyboard = 'enter'):
         elif keyboard == 'shift_enter':
             ActionChains(driver).key_down(Keys.SHIFT).key_down(Keys.ENTER).perform()
             message_input.send_keys('anotherline')
-            public_click_element(driver, message_send_button, description='聊天内容发送按钮')
+            public_click_element(driver, send_message_button, description='聊天内容发送按钮')
     elif sys_type != 'Windows':
         if keyboard == 'enter':
             message_input.send_keys(Keys.ENTER)
         elif keyboard == 'shift_enter':
             ActionChains(driver).key_down(Keys.SHIFT).key_down(Keys.ENTER).perform()
             message_input.send_keys('anotherline')
-            public_click_element(driver, message_send_button, description='聊天内容发送按钮')
+            public_click_element(driver, send_message_button, description='聊天内容发送按钮')
     return random_str
 
 def send_message_by_different_data(driver,test_data,data_type='text',send = 'send'):
@@ -89,7 +89,7 @@ def send_message_by_different_data(driver,test_data,data_type='text',send = 'sen
     message_input.click()
     message_input.send_keys(test_data)
     if send == 'send':
-        public_click_element(driver,message_send_button,description='聊天内容发送按钮')
+        public_click_element(driver,send_message_button,description='聊天内容发送按钮')
         check_last_message_content(driver, test_data, data_type)
         if data_type == 'text':
             ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_text.format(test_data))

@@ -285,6 +285,7 @@ ${Malphite}                             Thank you for using 熔岩巨兽
 ${default_product_name}                 Thank you for using Help Lightning
 
 # message 用例专用账号
+# out of call message
 ${message_test0_user}                   Huiming.shi.helplightning+message_test0@outlook.com
 ${message_test0_username}               Huiming.shi.helplightning+message_test0
 
@@ -327,6 +328,23 @@ ${used_by_message_username03}           Huiming.shi.helplightning+used_chat_03
 ${used_by_message_user04}               Huiming.shi.helplightning+used_chat_04@outlook.com                                       # 用于message测试（used_by_message_group）
 ${used_by_message_username04}           Huiming.shi.helplightning+used_chat_04
 
+# in call message
+${in_call_message_userA}                Huiming.shi.helplightning+in_call_messageA@outlook.com                                   # 属于message_test_WS_A
+${in_call_message_usernameA}            Huiming.shi.helplightning+in_call_messageA
+
+${in_call_message_userB}                Huiming.shi.helplightning+in_call_messageB@outlook.com                                   # 属于message_test_WS_A
+${in_call_message_usernameB}            Huiming.shi.helplightning+in_call_messageB
+
+${in_call_message_userD}                Huiming.shi.helplightning+in_call_messageD@outlook.com                                   # 属于message_test_WS_A(expert group下的user)
+${in_call_message_usernameD}            Huiming.shi.helplightning+in_call_messageD
+
+${in_call_message_userC}                Huiming.shi.helplightning+in_call_messageC@outlook.com                                   # 属于message_test_WS_B
+${in_call_message_usernameC}            Huiming.shi.helplightning+in_call_messageC
+
+${in_call_message_userD1}               Huiming.shi.helplightning+in_call_messageD1@outlook.com                                  # 属于big_admin的message_test_WS
+${in_call_message_usernameD1}           Huiming.shi.helplightning+in_call_messageD1
+
+${in_call_message_expert_group}         message_expert_groupA                                                                    # expert group
 
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com

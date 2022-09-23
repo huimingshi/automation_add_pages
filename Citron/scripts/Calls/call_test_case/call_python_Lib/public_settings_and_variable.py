@@ -111,6 +111,9 @@ upload_file = '//input[@name="upload-file"]'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
 count_of_call_user = '//div[@class="F2FVideos ShowOpenTokVideos"]/div'
 inviteDialog_search_user_input = '//div[@id="inviteDialog"]//input[@id="quick-search-text-box"]'
+message_chat_icon = '//*[@*="#message_chat"]'                                                                                # 通话过程中的Message图标
+left_ChatDrawer = '//div[@class="ChatDrawer "]'                                                                              # message对话框至于通话界面左侧
+in_call_lastMessages_text = '//p[text()="{}"]'                                                                               # 会话中最后一句文本
 # count_of_call_user = '//*[@class="participantName"]'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
@@ -124,8 +127,7 @@ enable_recording_call = '//div[@class="message" and contains(.,"{} has enabled r
 turn_off_recording_call = '//div[@class="message" and contains(.,"{} has turned off recording for this call.")]'
 Audio_Only_button = '//div[@class="message" and text()="Audio Only"]'
 # Messages页面
-message_textarea = '//div[@class="Chat"]//textarea'                         # 聊天输入框
-message_send_button = '//div[@class="Chat"]//button[@class="k-button k-flat k-button-icon k-button-send"]'      # 聊天内容发送按钮
+message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型
 chatSessionList_lastMessages_text = '//div[@class="ChatSessionList_lastMessages"]/p[text()="{}"]'    # 会话中最后一句文本
 chatSessionList_lastMessages_url = '//div[@class="ChatSessionList_lastMessages"]//a[@href="{}"]'    # 会话中最后一句url
