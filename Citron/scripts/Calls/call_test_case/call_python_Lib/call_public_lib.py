@@ -1,6 +1,4 @@
 #----------------------------------------------------------------------------------------------------#
-import time
-
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_settings_and_variable import *
