@@ -16,9 +16,9 @@ Force Tags        small_range
 
 
 *** Test Cases ***
-Small_range_1227_1264
+Small_range_1220_1257
     [Documentation]     In call message
-    [Tags]    small range 1227-1264 lines
+    [Tags]    small range 1260-1257 lines
     [Setup]   delete_zip_file     ${message_audio}
     # userA login
     ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
