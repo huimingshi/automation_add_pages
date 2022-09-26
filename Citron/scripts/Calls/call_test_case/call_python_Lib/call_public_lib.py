@@ -13,6 +13,8 @@ from else_public_lib import refresh_browser_page as refresh_page
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 import warnings
+from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import scroll_into_view as SIV
+from Citron.Lib.python_Lib.ui_keywords import check_zipFile_exists as CZE
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
@@ -616,6 +618,42 @@ def in_call_check_receive_message(driver,content):
     # 通话过程中检查收到的message内容
     ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(content))
     public_assert(driver, len(ele_list), 1, action=f'{content}未收到')
+
+def in_call_download_file(driver,attach_name):
+    """
+    点击附件进行下载
+    :param driver:
+    :param attach_name: 附件名
+    :return:
+    """
+    # 滑动到可见
+    ele_xpath = attach_particial_xpath.format(attach_name)
+    SIV(driver, ele_xpath)
+    # 如果不加这个等待时间的话，下面的click会报错，目前不知道啥原因导致的
+    time.sleep(3)
+    # 点击进行下载
+    public_click_element(driver, f'//div[text()="{attach_name}"]/../div[@class="AttachmentOptionsMenu plus attachment_template"]', description='点击附件的三个点')
+    public_click_element(driver,'//div[@class="selecting_button"]/span[text()="Download"]',description='点击Download按钮')
+    time.sleep(10)
+    result = CZE(attach_name)
+    public_assert(driver, 1, result[1], action='点击附件下载')
+
+def shown_in_main_screen(driver,attach_name):
+    """
+    图片展示在主屏幕
+    :param driver:
+    :param attach_name:
+    :return:
+    """
+    # 滑动到可见
+    ele_xpath = in_call_lastMessages_attach.format(attach_name)
+    SIV(driver, ele_xpath)
+    # 点击附件全屏展示
+    public_click_element(driver, ele_xpath, description='点击图片全屏展示')
+    document_list = get_xpath_elements(driver,'//div[@class="fade PhotoVideoPreview in modal"]//div[@role="document"]')
+    public_assert(driver,1,len(document_list),action='图片全屏展示')
+    # 关闭全屏展示
+    public_click_element(driver,'//button/span[@aria-hidden="true" and text()="×"]',description='关闭全屏展示')
 
 def in_call_click_upload_attach(driver):
     """

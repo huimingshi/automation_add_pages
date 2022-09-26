@@ -19,6 +19,7 @@ Force Tags        small_range
 Small_range_1227_1264
     [Documentation]     In call message
     [Tags]    small range 1227-1264 lines
+    [Setup]   delete_zip_file     ${message_audio}
     # userA login
     ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
     ${mhs_link}    send_meeting_room_link    ${driverA}     which_meeting='MHS'
@@ -45,12 +46,15 @@ Small_range_1227_1264
     # User C enters this call via 3cpi
     user_make_call_via_meeting_link     ${driverC}    ${invite_link}
     user_anwser_call     ${driverA}    no_direct
+    make_sure_enter_call     ${driverC}
     # A1 enter this call via 3pci
     ${driverA1}     anonymous_open_meeting_link    ${invite_link}
     user_anwser_call     ${driverA}    no_direct
+    make_sure_enter_call     ${driverA1}
     # D1 enter this call via 3pci
     user_make_call_via_meeting_link     ${driverD1}    ${invite_link}
     user_anwser_call     ${driverA}    no_direct
+    make_sure_enter_call     ${driverD1}
     # User A clicks Message button
     # VP: 1) Messages has been accessed, the drawer can be collapsed into the left margin.
     # 2) Set transparency to 80% for the white message window background
@@ -74,7 +78,7 @@ Small_range_1227_1264
     # send attachment	VP: has options: Photo; camera;Document
     in_call_click_upload_attach     ${driverA}
     # send image files (prepared test data)	VP: files are correctly send out
-    send_message_by_different_file     ${driverA}     ${message_jpg}    in_call
+    send_message_by_different_file     ${driverA}     ${message_jpg}      in_call
     # send audio files  (prepared test data)	VP: files are correctly send out
     send_message_by_different_file     ${driverA}     ${message_audio}    in_call
     # send video files  (prepared test data)	VP: files are correctly send out
@@ -86,7 +90,27 @@ Small_range_1227_1264
     # send other file format	.zip, .dmg, .xlsx, .docx	VP: files are correctly send out
     send_message_by_different_file     ${driverA}     ${message_zip}    in_call
     # VP: files can be downloaded by receiver
-
-
-    sleep  10000
-    user_make_call_via_meeting_link     ${driverD1}    ${invite_link}
+    in_call_download_file     ${driverB}     ${message_audio}
+    delete_zip_file     ${message_audio}
+    # User C select 1 uploaded picture from chat list, click sub-menu 'Share' button.	VP: this file should be shown in main video screen.
+    shown_in_main_screen     ${driverC}        ${message_jpg}
+    # User A, User B, User C, User D, A1 & D1  do some sample operations	VP: These operations should be worked.
+    # User A clicks ScreenCapture button	VP: The screen capture is uploaded into Message List for User A, User B, User C, User D, A1 & D1.
+    # User A, User B, User C, User D, A1 & D1  select 1 uploaded file, click sub-menu Download button	VP: the file should be saved to local
+    in_call_download_file     ${driverA}     ${message_audio}
+    delete_zip_file     ${message_audio}
+    in_call_download_file     ${driverC}     ${message_audio}
+    delete_zip_file     ${message_audio}
+    in_call_download_file     ${driverD}     ${message_audio}
+    delete_zip_file     ${message_audio}
+    in_call_download_file     ${driverA1}     ${message_audio}
+    delete_zip_file     ${message_audio}
+    in_call_download_file     ${driverD1}     ${message_audio}
+    delete_zip_file     ${message_audio}
+    # User B select 1 uploaded PDF file, click sub-menu 'Share' button	VP: this file should be shown in main video screen.
+    shown_in_main_screen     ${driverB}        ${message_jpg}
+    # User B clicks Share button to enter Markup mode
+    # User A, User B, User C, User D, A1 & D1  do some telestrations
+    # User A and D1 clicks Screen Capture button	VP: The 2 screen captures are uploaded into Message List for User A, User B, User C, User D, A1 & D1.
+    [Teardown]      run keywords    delete_zip_file     ${message_audio}
+    ...             AND             exit_driver

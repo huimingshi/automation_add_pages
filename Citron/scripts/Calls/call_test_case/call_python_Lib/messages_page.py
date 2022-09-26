@@ -4,6 +4,8 @@
 
 import random
 import string
+import time
+
 from Citron.Lib.python_Lib.ui_keywords import get_modify_picture_path as GMPP, check_zipFile_exists as CZE
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import suspension_of_the_mouse as SOTM,scroll_into_view as SIV
@@ -110,12 +112,15 @@ def send_message_by_different_file(driver,file_name,in_call='not_in_call'):
     public_click_element(driver,message_toolbarButton,description='message_tool')
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(file_path)
     time.sleep(3)
-    public_click_element(driver,send_message_button,description='message发送按钮')
     if in_call == 'not_in_call':
+        public_click_element(driver, send_message_button, description='message发送按钮')
         ele_list = get_xpath_elements(driver, chatSessionList_lastMessages_attach.format(file_name))
+        print(len(ele_list))
         public_assert(driver, len(ele_list), 1, action=f'{file_name}未成功发送')
     elif in_call == 'in_call':
+        public_click_element(driver, send_message_button, description='message发送按钮')
         ele_list = get_xpath_elements(driver, in_call_lastMessages_attach.format(file_name))
+        print(len(ele_list))
         public_assert(driver, len(ele_list), 1, action=f'{file_name}未成功发送')
 
 def get_unread_message_count(driver,message_count = '1'):
@@ -435,21 +440,23 @@ def confirm_create_message(driver):
     # 点击Create按钮
     public_click_element(driver, create_message_button, description='Create按钮')
 
-def download_attach_on_message_dialog(driver,attach_name):
+def download_attach_on_message_dialog(driver,attach_name,extension='original'):
     """
     点击附件进行下载
     :param driver:
     :param attach_name: 附件名
+    :param extension: 下载的文件的扩展名
     :return:
     """
-    ele_xpath = f'//div[@class="attachmentName" and text()="{attach_name}"]/..//*[@*="#file"]'
+    # ele_xpath = f'//div[@class="attachmentName" and text()="{attach_name}"]/..//*[@*="#file"]'
+    ele_xpath = attach_particial_xpath.format(attach_name)
     SIV(driver,ele_xpath)
     # 如果不加这个等待时间的话，下面的click会报错，目前不知道啥原因导致的
     time.sleep(3)
     public_click_element(driver, message_textarea, description='message输入框')
     public_click_element(driver,ele_xpath,description='点击附件进行下载')
     time.sleep(10)
-    result = CZE('original')
+    result = CZE(extension)
     public_assert(driver,1,result[1],action='点击附件下载')
 
 def click_audio_video_button(driver,type = 'Audio',check = '1'):
