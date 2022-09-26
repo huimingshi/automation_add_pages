@@ -111,9 +111,10 @@ upload_file = '//input[@name="upload-file"]'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
 count_of_call_user = '//div[@class="F2FVideos ShowOpenTokVideos"]/div'
 inviteDialog_search_user_input = '//div[@id="inviteDialog"]//input[@id="quick-search-text-box"]'
-message_chat_icon = '//*[@*="#message_chat"]'                                                                                # 通话过程中的Message图标
+message_chat_icon = '//*[@*="#message_chat"]/../..'                                                                                # 通话过程中的Message图标
 left_ChatDrawer = '//div[@class="ChatDrawer "]'                                                                              # message对话框至于通话界面左侧
 in_call_lastMessages_text = '//p[text()="{}"]'                                                                               # 会话中最后一句文本
+in_call_lastMessages_attach = '//div[class="attachmentName" and text()="{}"]'                                                # 会话中最后一个附件
 # count_of_call_user = '//*[@class="participantName"]'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
@@ -131,7 +132,7 @@ message_textarea = '//textarea[@class="k-input"]'                         # 聊�
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型
 chatSessionList_lastMessages_text = '//div[@class="ChatSessionList_lastMessages"]/p[text()="{}"]'    # 会话中最后一句文本
 chatSessionList_lastMessages_url = '//div[@class="ChatSessionList_lastMessages"]//a[@href="{}"]'    # 会话中最后一句url
-chatSessionList_lastMessages_alt = '//div[@class="ChatSessionList_lastMessages"]//img[@alt="{}"]'    # 会话中最后一张图片
+chatSessionList_lastMessages_attach = '//div[@class="ChatSessionList_lastMessages"]//img[@alt="{}"]'    # 会话中最后一个附件
 input_type_file = '//input[@type="file"]'                                                       # 上传文件的xpath
 send_message_button = '//button[@class="k-button k-flat k-button-icon k-button-send"]'          # message发送按钮
 unread_message_count = '//div[@class="ChatSessionList"]//div[@class="Badge"]/div'               # 未读消息数

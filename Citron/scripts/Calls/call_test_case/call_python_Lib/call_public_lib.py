@@ -1,4 +1,6 @@
 #----------------------------------------------------------------------------------------------------#
+import time
+
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_settings_and_variable import *
@@ -21,6 +23,7 @@ def open_debug_dialog_check_resolution(driver):
     :return:
     """
     public_check_element(driver,invite_user_div,'点击右上角三个横杠失败')
+    time.sleep(3)
     public_check_element(driver, enter_debug_page, '进入debug_page失败')
     resolution_get = get_xpath_element(driver,'//span[@id="pubresolution"]',description = '进入debug查找resolution').get_attribute("textContent")
     print(resolution_get)
@@ -563,6 +566,7 @@ def in_call_click_message_button(driver):
     """
     # 点击右上角三个横杠
     public_check_element(driver, invite_user_div, '点击右上角三个横杠')
+    time.sleep(5)
     # 点击Message图标
     public_check_element(driver, message_chat_icon, '点击Message图标')
     # 校验是否打开message对话框至于通话界面左侧
@@ -612,6 +616,34 @@ def in_call_check_receive_message(driver,content):
     # 通话过程中检查收到的message内容
     ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(content))
     public_assert(driver, len(ele_list), 1, action=f'{content}未收到')
+
+def in_call_click_upload_attach(driver):
+    """
+    通话过程中点击上传附件按钮，has options: Photo; camera;Document
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,message_toolbarButton,description='点击上传附件按钮')
+    photo_list = get_xpath_elements(driver,'//input[@accept="video/*,image/*"]/..')
+    public_assert(driver,1,len(photo_list),action='Photo按钮出现')
+    camera_list = get_xpath_elements(driver,'//div[@class="CameraInput"]')
+    public_assert(driver, 1, len(camera_list), action='Camera按钮出现')
+    document_list = get_xpath_elements(driver,'//input[@accept="*"]')
+    public_assert(driver, 1, len(document_list), action='Document按钮出现')
+    public_click_element(driver, message_toolbarButton, description='再次点击上传附件按钮')
+
+def file_is_too_large(driver):
+    """
+    There is an alert message to pop. The big file isn't uploaded.
+    :param driver:
+    :return:
+    """
+    get_content = get_xpath_element(driver,'//div[@class="modal-body"]').get_attribute("textContent")
+    public_assert(driver,get_content,"The file you have selected is too large and cannot be uploaded. The limit is 5MB.",action='断言提示信息')
+    # 点击OK关闭弹窗
+    public_click_element(driver,'//button[@class="btn btn-default" and text()="OK"]')
+    # 再次点击上传附件按钮，关闭上传
+    public_click_element(driver, message_toolbarButton, description='再次点击上传附件按钮')
 
 def make_show_recording_settings(driver):
     """

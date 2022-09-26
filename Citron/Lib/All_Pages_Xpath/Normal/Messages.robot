@@ -35,4 +35,5 @@ ${message_audio}                                  _ 音乐 + music_.mp3
 ${message_video}                                  _ 视频 + video_.mp4
 ${message_zip}                                    _ 肉啊皮 + zip_.zip
 ${message_pdf}                                    _ 匹敌爱抚 + pdf_.pdf
+${big_size_file}                                  big_size_file.zip
 ${message_type_url}                               url                                                                         # 消息类型，url和text类型

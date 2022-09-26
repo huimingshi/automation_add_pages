@@ -98,12 +98,12 @@ def send_message_by_different_data(driver,test_data,data_type='text',send = 'sen
             ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_url.format(test_data))
             public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
 
-def send_message_by_different_file(driver,file_name,file_type = 'img'):
+def send_message_by_different_file(driver,file_name,in_call='not_in_call'):
     """
     测试用不同的文件类型发送message
     :param driver:
     :param file_name: 文件名
-    :param file_type: 文件类型
+    :param in_call: 是否在通话中上传文件;默认是不在通话中
     :return:
     """
     file_path = GMPP(picture_name = file_name)
@@ -111,8 +111,11 @@ def send_message_by_different_file(driver,file_name,file_type = 'img'):
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(file_path)
     time.sleep(3)
     public_click_element(driver,send_message_button,description='message发送按钮')
-    if file_type == 'img':
-        ele_list = get_xpath_elements(driver, chatSessionList_lastMessages_alt.format(file_name))
+    if in_call == 'not_in_call':
+        ele_list = get_xpath_elements(driver, chatSessionList_lastMessages_attach.format(file_name))
+        public_assert(driver, len(ele_list), 1, action=f'{file_name}未成功发送')
+    elif in_call == 'in_call':
+        ele_list = get_xpath_elements(driver, in_call_lastMessages_attach.format(file_name))
         public_assert(driver, len(ele_list), 1, action=f'{file_name}未成功发送')
 
 def get_unread_message_count(driver,message_count = '1'):
