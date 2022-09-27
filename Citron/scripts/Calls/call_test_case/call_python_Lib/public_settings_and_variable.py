@@ -103,21 +103,26 @@ recording_settings = '//button[@id="recording-settings"]'                   # RE
 record_this_session = '//a[text()="Record this session"]/../..'
 do_not_record = '//a[text()="Do not record"]/../..'
 webglCameraOff = "//canvas[@id='webglCameraOff']"
+webglCameraOn = "//canvas[@id='webglCameraOn']"
 video_on_button = '//div[@class="InCall"]//div[@class="menus false"]/div[@class="menu withsub  "]'
 return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
 pdf_on_button = "//div[@class='InCall']//*[@*='#pdf_on']"
 ghop_on_button = "//div[@class='InCall']//*[@*='#ghop_on']/../.."
 upload_file = '//input[@name="upload-file"]'
 f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
+which_mode_help = '//div[@class="user-base"]/strong[text()="{}"]'    # 选择GIVE HELP或者选择RECEIVE HELP
 count_of_call_user = '//div[@class="F2FVideos ShowOpenTokVideos"]/div'
 inviteDialog_search_user_input = '//div[@id="inviteDialog"]//input[@id="quick-search-text-box"]'
 message_chat_icon = '//*[@*="#message_chat"]/../..'                                                                                # 通话过程中的Message图标
 left_ChatDrawer = '//div[@class="ChatDrawer "]'                                                                              # message对话框至于通话界面左侧
 in_call_lastMessages_text = '//p[text()="{}"]'                                                                               # 会话中最后一句文本
 in_call_lastMessages_attach = '//div[@class="attachmentName" and text()="{}"]'                                                # 会话中最后一个附件
+AttachmentOptionsMenu = '//div[text()="{}"]/../div[@class="AttachmentOptionsMenu plus attachment_template"]'                # 附件的三个点
+AttachmentOptionsMenu_selecting_button = '//div[@class="selecting_button"]/span[text()="{}"]'                            # Share或者Download
 # count_of_call_user = '//*[@class="participantName"]'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
+capture_button = '//input[@class="capture_button"]'
 please_wait = '//div[@class="InvalidLinkView"]/h2[text()="Please wait."]'
 zhuanquanquan = '//div[@id="whiteboard_progress_bar_container"]'
 notification_content = '//div[@class="k-notification-content"]'      # 底下抛出的绿色的提示信息，比如修改成功，发送成功

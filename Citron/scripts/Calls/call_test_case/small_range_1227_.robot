@@ -16,9 +16,9 @@ Force Tags        small_range
 
 
 *** Test Cases ***
-Small_range_1220_1257
+Small_range_1220_1281
     [Documentation]     In call message
-    [Tags]    small range 1260-1257 lines
+    [Tags]    small range 1260-1281 lines
     [Setup]   delete_zip_file     ${message_audio}
     # userA login
     ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
@@ -79,6 +79,7 @@ Small_range_1220_1257
     in_call_click_upload_attach     ${driverA}
     # send image files (prepared test data)	VP: files are correctly send out
     send_message_by_different_file     ${driverA}     ${message_jpg}      in_call
+    send_message_by_different_file     ${driverA}     ${message_pdf}      in_call
     # send audio files  (prepared test data)	VP: files are correctly send out
     send_message_by_different_file     ${driverA}     ${message_audio}    in_call
     # send video files  (prepared test data)	VP: files are correctly send out
@@ -91,26 +92,71 @@ Small_range_1220_1257
     send_message_by_different_file     ${driverA}     ${message_zip}    in_call
     # VP: files can be downloaded by receiver
     in_call_download_file     ${driverB}     ${message_audio}
-    delete_zip_file     ${message_audio}
-    # User C select 1 uploaded picture from chat list, click sub-menu 'Share' button.	VP: this file should be shown in main video screen.
-    shown_in_main_screen     ${driverC}        ${message_jpg}
+    delete_zip_file     ${particial_message_audio}
+    # User C select 1 uploaded picture from chat list, click sub-menu 'Share' button.	VP: this file should be shown in main video screen.(前提条件：需要先进入到giving receiving help mode下)
+    enter_giver_mode     ${driverA}      ${in_call_message_usernameB}     ${in_call_message_usernameC}
+    proceed_with_camera_on     ${driverA}
+    share_in_main_screen     ${driverC}        ${message_jpg}
     # User A, User B, User C, User D, A1 & D1  do some sample operations	VP: These operations should be worked.
+
     # User A clicks ScreenCapture button	VP: The screen capture is uploaded into Message List for User A, User B, User C, User D, A1 & D1.
+    in_call_click_message_button     ${driverA}     operation='close'
+    click_screen_capture_button     ${driverA}
+    in_call_click_message_button     ${driverA}
+    in_call_check_receive_message       ${driverA}      ${screen_capture_name}     open_dialog='false'
+    in_call_check_receive_message       ${driverB}      ${screen_capture_name}     open_dialog='false'
+    in_call_check_receive_message       ${driverC}      ${screen_capture_name}     open_dialog='false'
+    in_call_check_receive_message       ${driverD}      ${screen_capture_name}     open_dialog='false'
+    in_call_check_receive_message       ${driverA1}      ${screen_capture_name}     open_dialog='false'
+    in_call_check_receive_message       ${driverD1}      ${screen_capture_name}     open_dialog='false'
     # User A, User B, User C, User D, A1 & D1  select 1 uploaded file, click sub-menu Download button	VP: the file should be saved to local
     in_call_download_file     ${driverA}     ${message_audio}
-    delete_zip_file     ${message_audio}
+    delete_zip_file     ${particial_message_audio}
     in_call_download_file     ${driverC}     ${message_audio}
-    delete_zip_file     ${message_audio}
+    delete_zip_file     ${particial_message_audio}
     in_call_download_file     ${driverD}     ${message_audio}
-    delete_zip_file     ${message_audio}
+    delete_zip_file     ${particial_message_audio}
     in_call_download_file     ${driverA1}     ${message_audio}
-    delete_zip_file     ${message_audio}
+    delete_zip_file     ${particial_message_audio}
     in_call_download_file     ${driverD1}     ${message_audio}
-    delete_zip_file     ${message_audio}
+    delete_zip_file     ${particial_message_audio}
     # User B select 1 uploaded PDF file, click sub-menu 'Share' button	VP: this file should be shown in main video screen.
-    shown_in_main_screen     ${driverB}        ${message_jpg}
     # User B clicks Share button to enter Markup mode
+    share_in_main_screen     ${driverB}        ${message_pdf}    file_type='pdf'
     # User A, User B, User C, User D, A1 & D1  do some telestrations
+
     # User A and D1 clicks Screen Capture button	VP: The 2 screen captures are uploaded into Message List for User A, User B, User C, User D, A1 & D1.
-    [Teardown]      run keywords    delete_zip_file     ${message_audio}
-    ...             AND             exit_driver
+    in_call_click_message_button     ${driverA}     operation='close'
+    click_screen_capture_button     ${driverA}
+    in_call_click_message_button     ${driverA}
+    in_call_check_receive_message       ${driverA}      ${screen_capture_name}     open_dialog='false'      content_count='2'
+    in_call_check_receive_message       ${driverB}      ${screen_capture_name}     open_dialog='false'      content_count='2'
+    in_call_check_receive_message       ${driverC}      ${screen_capture_name}     open_dialog='false'      content_count='2'
+    in_call_check_receive_message       ${driverD}      ${screen_capture_name}     open_dialog='false'      content_count='2'
+    in_call_check_receive_message       ${driverA1}      ${screen_capture_name}     open_dialog='false'      content_count='2'
+    in_call_check_receive_message       ${driverD1}      ${screen_capture_name}     open_dialog='false'      content_count='2'
+    in_call_click_message_button     ${driverD1}     operation='close'
+    click_screen_capture_button     ${driverD1}
+    in_call_click_message_button     ${driverD1}
+    in_call_check_receive_message       ${driverA}      ${screen_capture_name}     open_dialog='false'      content_count='3'
+    in_call_check_receive_message       ${driverB}      ${screen_capture_name}     open_dialog='false'      content_count='3'
+    in_call_check_receive_message       ${driverC}      ${screen_capture_name}     open_dialog='false'      content_count='3'
+    in_call_check_receive_message       ${driverD}      ${screen_capture_name}     open_dialog='false'      content_count='3'
+    in_call_check_receive_message       ${driverA1}      ${screen_capture_name}     open_dialog='false'      content_count='3'
+    in_call_check_receive_message       ${driverD1}      ${screen_capture_name}     open_dialog='false'      content_count='3'
+    # ------------------------ 1271-1281 ------------------------ #
+    # End call
+    end_call_for_all      ${driverA}
+    exit_driver
+    # Site Admin navigates to Site Administration -> Calls, WS Adminitration -> Calls
+    # Select this call, click Detail button.	VP: the uploaded file should be shown up in Call log
+    # 	VP: the thumbnail of uploaded picture file should be shown up in Call log.
+    # Clicks the thumbnail of uploaded picture file	VP: the picture should be shown up in Preview field
+    # Clicks the uploaded video file	VP: the Video file should be shown up in Preview field. What's more, it can be played.
+    # Clicks the other type file	VP: the file should be saved to local
+    # User C and D1 logs in Citron, navigates to My Help Lightning -> Calls
+    # Select this call, click Detail button.	VP: there isn't content in Call log since the Message feature = OFF.
+    # User A, User B & User D logs in Citron, navigates to My Help Lightning -> Calls
+    # Select this call, click Detail button.	VP: the Messages contents should be shown up in Call log.
+#    [Teardown]      run keywords    delete_zip_file     ${particial_message_audio}
+#    ...             AND             exit_driver

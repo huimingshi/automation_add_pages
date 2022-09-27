@@ -32,8 +32,10 @@ ${My_help_space_urls_MHS}                         https://app-stage.helplightnin
 ${My_help_space_urls_OTU}                         https://app-stage.helplightning.net.cn/meet/link/OHhTMnFsZFRJd0E9?sig=416C243A
 ${message_jpg}                                    _ 小炮 + Tristana_.jpg
 ${message_audio}                                  _ 音乐 + music_.mp3
+${particial_message_audio}                        _ 音乐 + music_
 ${message_video}                                  _ 视频 + video_.mp4
 ${message_zip}                                    _ 肉啊皮 + zip_.zip
 ${message_pdf}                                    _ 匹敌爱抚 + pdf_.pdf
 ${big_size_file}                                  big_size_file.zip
 ${message_type_url}                               url                                                                         # 消息类型，url和text类型
+${screen_capture_name}                            undefined                                                                   # 截屏图片的名称

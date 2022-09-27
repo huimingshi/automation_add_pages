@@ -18,15 +18,24 @@ from Citron.Lib.python_Lib.ui_keywords import check_zipFile_exists as CZE
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
+def click_invite_user_div(driver):
+    """
+    # 点击右上角三个横杠
+    :param driver:
+    :return:
+    """
+    public_check_element(driver, invite_user_div, '点击右上角三个横杠')
+
 def open_debug_dialog_check_resolution(driver):
     """
     通话过程中打开Debug，查找Resolution
     :param driver:
     :return:
     """
-    public_check_element(driver,invite_user_div,'点击右上角三个横杠失败')
+    # 点击右上角三个横杠
+    click_invite_user_div(driver)
     time.sleep(3)
-    public_check_element(driver, enter_debug_page, '进入debug_page失败')
+    public_check_element(driver, enter_debug_page, '进入debug_page')
     resolution_get = get_xpath_element(driver,'//span[@id="pubresolution"]',description = '进入debug查找resolution').get_attribute("textContent")
     print(resolution_get)
     public_assert(driver,resolution_get , '1280x720',action='resolution不是1280x720')
@@ -327,7 +336,7 @@ def make_call_between_four_role(driver1,driver2,driver3,who):
     public_check_element(driver2, '//div[@class="user-list"]/div[2]', '点击失败')
     public_check_element(driver2, '//button[@class="btn btn-primary" and contains(.,"Continue")]', '点击continue失败')
     for i in range(3):
-        public_check_element(driver2, '//input[@class="capture_button"]', 'screenshots失败')
+        public_check_element(driver2, capture_button, 'screenshots失败')
         time.sleep(3)
     # End Call for All
     user_end_call_for_all(driver2)
@@ -560,20 +569,35 @@ def obtain_meeting_link_from_email(check_otu = 'no_check_otu'):
             raise AssertionError('当前邮件不是OTU邮件')
     return meeting_link
 
-def in_call_click_message_button(driver):
+def click_screen_capture_button(driver):
     """
-    通话过程中点击message图标，打开Message会话
+    点击截图按钮
     :param driver:
     :return:
     """
+    public_click_element(driver,capture_button,description='点击截图按钮')
+
+def in_call_click_message_button(driver,operation='open'):
+    """
+    通话过程中点击message图标，打开Message会话
+    :param driver:
+    :param operation: 操作类型，打开还是关闭；默认打开
+    :return:
+    """
     # 点击右上角三个横杠
-    public_check_element(driver, invite_user_div, '点击右上角三个横杠')
-    time.sleep(5)
+    click_invite_user_div(driver)
+    time.sleep(3)
     # 点击Message图标
     public_check_element(driver, message_chat_icon, '点击Message图标')
-    # 校验是否打开message对话框至于通话界面左侧
-    ele_list = get_xpath_elements(driver,left_ChatDrawer)
-    public_assert(driver,1,len(ele_list),action='校验是否打开message对话框至于通话界面左侧')
+    time.sleep(2)
+    # 校验
+    ele_list = get_xpath_elements(driver, left_ChatDrawer)
+    if operation == 'open':
+        # 校验是否打开message对话框至于通话界面左侧
+        public_assert(driver, 1, len(ele_list), action='校验是否打开message对话框至于通话界面左侧')
+    elif operation == 'close':
+        # 校验message对话框关闭
+        public_assert(driver,0,len(ele_list),action='校验message对话框关闭')
 
 def in_call_send_message_data(driver,test_data,data_type='text',send = 'send'):
     """
@@ -606,18 +630,21 @@ def in_call_show_count_of_message(driver,message_count = '1'):
     ele_list = get_xpath_elements(driver,f'//div[@class="Badge"]/div[text()="{int(message_count)}"]')
     public_assert(driver,1,len(ele_list),f'校验未读消息数为{int(message_count)}')
 
-def in_call_check_receive_message(driver,content):
+def in_call_check_receive_message(driver,content,open_dialog='true',content_count='1'):
     """
     通话过程中检查收到的message内容
     :param driver:
     :param content: 预期收到的消息内容
+    :param open_dialog:是否需要打开message对话框，默认需要打开
+    :param content_count: 预期消息数量，默认为1
     :return:
     """
-    # 通话过程中点击message图标，打开Message会话
-    in_call_click_message_button(driver)
-    # 通话过程中检查收到的message内容
+    if open_dialog == 'true':
+        # 通话过程中点击message图标，打开Message会话
+        in_call_click_message_button(driver)
+    # 通话过程中检查收到的message内容和数量
     ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(content))
-    public_assert(driver, len(ele_list), 1, action=f'{content}未收到')
+    public_assert(driver, len(ele_list), int(content_count), action=f'{content}未收到')
 
 def in_call_download_file(driver,attach_name):
     """
@@ -631,14 +658,15 @@ def in_call_download_file(driver,attach_name):
     SIV(driver, ele_xpath)
     # 如果不加这个等待时间的话，下面的click会报错，目前不知道啥原因导致的
     time.sleep(3)
-    # 点击进行下载
-    public_click_element(driver, f'//div[text()="{attach_name}"]/../div[@class="AttachmentOptionsMenu plus attachment_template"]', description='点击附件的三个点')
-    public_click_element(driver,'//div[@class="selecting_button"]/span[text()="Download"]',description='点击Download按钮')
+    # 点击图片左下角三个点
+    public_click_element(driver, AttachmentOptionsMenu.format(attach_name), description='点击附件的三个点')
+    # 点击Download
+    public_click_element(driver,AttachmentOptionsMenu_selecting_button.format("Download"),description='点击Download按钮')
     time.sleep(10)
     result = CZE(attach_name)
     public_assert(driver, 1, result[1], action='点击附件下载')
 
-def shown_in_main_screen(driver,attach_name):
+def share_in_main_screen(driver,attach_name,file_type = 'jpg'):
     """
     图片展示在主屏幕
     :param driver:
@@ -648,12 +676,16 @@ def shown_in_main_screen(driver,attach_name):
     # 滑动到可见
     ele_xpath = in_call_lastMessages_attach.format(attach_name)
     SIV(driver, ele_xpath)
-    # 点击附件全屏展示
-    public_click_element(driver, ele_xpath, description='点击图片全屏展示')
-    document_list = get_xpath_elements(driver,'//div[@class="fade PhotoVideoPreview in modal"]//div[@role="document"]')
-    public_assert(driver,1,len(document_list),action='图片全屏展示')
-    # 关闭全屏展示
-    public_click_element(driver,'//button/span[@aria-hidden="true" and text()="×"]',description='关闭全屏展示')
+    # 点击图片左下角三个点
+    public_click_element(driver, AttachmentOptionsMenu.format(attach_name), description='点击附件的三个点')
+    # 点击Share按钮
+    public_click_element(driver, AttachmentOptionsMenu_selecting_button.format("Share"), description='点击Share按钮')
+    # 判断
+    ele_list = get_xpath_elements(driver, '//div[@class="PanZoomTools show"]')
+    if file_type == 'jpg':
+        public_assert(driver,1,len(ele_list),action='jpg展示在主屏幕')
+    elif file_type == 'pdf':
+        public_assert(driver, 0, len(ele_list), action='pdf展示在主屏幕')
 
 def in_call_click_upload_attach(driver):
     """
@@ -762,17 +794,17 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
     :return:
     """
     if roles == '3':
-        public_check_element(driver, f2f_on_mode, '点击失败')
-        public_check_element(driver, f'//div[@class="user-base"]/strong[text()="{who_give_help}"]', '第一步失败')
-        public_check_element(driver, f'//div[@class="user-base"]/strong[text()="{who_receive_help}"]', '第二步失败')
-        public_check_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', '第三步失败')
+        public_check_element(driver, f2f_on_mode, '点击切换模式')
+        public_check_element(driver, which_mode_help.format(who_give_help), '选择GIVE HELP')
+        public_check_element(driver, which_mode_help.format(who_receive_help), '选择RECEIVE HELP')
+        public_check_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', '点击Continue')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
         public_check_element(driver, '//span[text()="I will give help"]', '选择I_will_give_help失败')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
         public_check_element(driver, '//span[text()="I need help"]', '选择I_need_help失败')
     elif has_dialog == 'has_no_dialog' and roles == '2':
-        public_check_element(driver, f2f_on_mode, '点击第一步失败')
-        public_check_element(driver, '//*[@*="#rh_off"]/../..', '点击第二步失败')
+        public_check_element(driver, f2f_on_mode, '点击切换模式')
+        public_check_element(driver, '//*[@*="#rh_off"]/../..', '点击第二步')
 
 def enter_FGD_mode(driver,witch_mode):
     """
@@ -867,6 +899,16 @@ def proceed_with_camera_off(driver):
     ele_list = get_xpath_elements(driver,webglCameraOff)
     if len(ele_list) == 1:
         public_click_element(driver,webglCameraOff,description='proceed_with_camera_off按钮')
+
+def proceed_with_camera_on(driver):
+    """
+    Proceed with my camera On
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,webglCameraOn)
+    if len(ele_list) == 1:
+        public_click_element(driver,webglCameraOn,description='proceed_with_camera_on按钮')
 
 def click_audio_only(driver):
     ele_list = get_xpath_elements(driver,Audio_Only_button)
