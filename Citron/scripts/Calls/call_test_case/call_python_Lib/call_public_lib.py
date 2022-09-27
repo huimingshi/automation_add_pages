@@ -635,16 +635,26 @@ def in_call_check_receive_message(driver,content,open_dialog='true',content_coun
     通话过程中检查收到的message内容
     :param driver:
     :param content: 预期收到的消息内容
-    :param open_dialog:是否需要打开message对话框，默认需要打开
-    :param content_count: 预期消息数量，默认为1
     :return:
     """
-    if open_dialog == 'true':
-        # 通话过程中点击message图标，打开Message会话
-        in_call_click_message_button(driver)
+    # 通话过程中点击message图标，打开Message会话
+    in_call_click_message_button(driver)
     # 通话过程中检查收到的message内容和数量
     ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(content))
-    public_assert(driver, len(ele_list), int(content_count), action=f'{content}未收到')
+    public_assert(driver, len(ele_list), 1, action=f'{content}未收到')
+
+def in_call_check_receive_attach(driver,attach_name,attach_count='1'):
+    """
+    通话过程中检查收到的附件内容和数量
+    :param driver:
+    :param attach_name: 附件名
+    :param attach_count: 预期的附件个数，默认为1
+    :return:
+    """
+    ele_list = get_xpath_elements(driver, in_call_lastMessages_attach.format(attach_name))
+    print(len(ele_list))
+    print(int(attach_count))
+    public_assert(driver, len(ele_list), int(attach_count), action=f'{attach_name}未找到')
 
 def in_call_download_file(driver,attach_name):
     """

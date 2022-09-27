@@ -103,12 +103,13 @@ Small_range_1220_1281
     in_call_click_message_button     ${driverA}     operation='close'
     click_screen_capture_button     ${driverA}
     in_call_click_message_button     ${driverA}
-    in_call_check_receive_message       ${driverA}      ${screen_capture_name}     open_dialog='false'
-    in_call_check_receive_message       ${driverB}      ${screen_capture_name}     open_dialog='false'
-    in_call_check_receive_message       ${driverC}      ${screen_capture_name}     open_dialog='false'
-    in_call_check_receive_message       ${driverD}      ${screen_capture_name}     open_dialog='false'
-    in_call_check_receive_message       ${driverA1}      ${screen_capture_name}     open_dialog='false'
-    in_call_check_receive_message       ${driverD1}      ${screen_capture_name}     open_dialog='false'
+#    sleep   10000
+    in_call_check_receive_attach       ${driverA}      ${screen_capture_name}
+    in_call_check_receive_attach       ${driverB}      ${screen_capture_name}
+    in_call_check_receive_attach       ${driverC}      ${screen_capture_name}
+    in_call_check_receive_attach       ${driverD}      ${screen_capture_name}
+    in_call_check_receive_attach       ${driverA1}      ${screen_capture_name}
+    in_call_check_receive_attach       ${driverD1}      ${screen_capture_name}
     # User A, User B, User C, User D, A1 & D1  select 1 uploaded file, click sub-menu Download button	VP: the file should be saved to local
     in_call_download_file     ${driverA}     ${message_audio}
     delete_zip_file     ${particial_message_audio}
@@ -126,26 +127,27 @@ Small_range_1220_1281
     # User A, User B, User C, User D, A1 & D1  do some telestrations
 
     # User A and D1 clicks Screen Capture button	VP: The 2 screen captures are uploaded into Message List for User A, User B, User C, User D, A1 & D1.
-    in_call_click_message_button     ${driverA}     operation='close'
-    click_screen_capture_button     ${driverA}
-    in_call_click_message_button     ${driverA}
-    in_call_check_receive_message       ${driverA}      ${screen_capture_name}     open_dialog='false'      content_count='2'
-    in_call_check_receive_message       ${driverB}      ${screen_capture_name}     open_dialog='false'      content_count='2'
-    in_call_check_receive_message       ${driverC}      ${screen_capture_name}     open_dialog='false'      content_count='2'
-    in_call_check_receive_message       ${driverD}      ${screen_capture_name}     open_dialog='false'      content_count='2'
-    in_call_check_receive_message       ${driverA1}      ${screen_capture_name}     open_dialog='false'      content_count='2'
-    in_call_check_receive_message       ${driverD1}      ${screen_capture_name}     open_dialog='false'      content_count='2'
-    in_call_click_message_button     ${driverD1}     operation='close'
-    click_screen_capture_button     ${driverD1}
-    in_call_click_message_button     ${driverD1}
-    in_call_check_receive_message       ${driverA}      ${screen_capture_name}     open_dialog='false'      content_count='3'
-    in_call_check_receive_message       ${driverB}      ${screen_capture_name}     open_dialog='false'      content_count='3'
-    in_call_check_receive_message       ${driverC}      ${screen_capture_name}     open_dialog='false'      content_count='3'
-    in_call_check_receive_message       ${driverD}      ${screen_capture_name}     open_dialog='false'      content_count='3'
-    in_call_check_receive_message       ${driverA1}      ${screen_capture_name}     open_dialog='false'      content_count='3'
-    in_call_check_receive_message       ${driverD1}      ${screen_capture_name}     open_dialog='false'      content_count='3'
+    in_call_click_message_button       ${driverA}       operation='close'
+    click_screen_capture_button        ${driverA}
+    in_call_click_message_button       ${driverA}
+    in_call_check_receive_attach       ${driverA}       ${screen_capture_name}     attach_count=2
+    in_call_check_receive_attach       ${driverB}       ${screen_capture_name}     attach_count=2
+    in_call_check_receive_attach       ${driverC}       ${screen_capture_name}     attach_count=2
+    in_call_check_receive_attach       ${driverD}       ${screen_capture_name}     attach_count=2
+    in_call_check_receive_attach       ${driverA1}      ${screen_capture_name}     attach_count=2
+    in_call_check_receive_attach       ${driverD1}      ${screen_capture_name}     attach_count=2
+    in_call_click_message_button       ${driverD1}       operation='close'
+    click_screen_capture_button        ${driverD1}
+    in_call_click_message_button       ${driverD1}
+    in_call_check_receive_attach       ${driverA}       ${screen_capture_name}     attach_count=3
+    in_call_check_receive_attach       ${driverB}       ${screen_capture_name}     attach_count=3
+    in_call_check_receive_attach       ${driverC}       ${screen_capture_name}     attach_count=3
+    in_call_check_receive_attach       ${driverD}       ${screen_capture_name}     attach_count=3
+    in_call_check_receive_attach       ${driverA1}      ${screen_capture_name}     attach_count=3
+    in_call_check_receive_attach       ${driverD1}      ${screen_capture_name}     attach_count=3
     # ------------------------ 1271-1281 ------------------------ #
     # End call
+    back_to_face_to_face_mode      ${driverA}
     end_call_for_all      ${driverA}
     exit_driver
     # Site Admin navigates to Site Administration -> Calls, WS Adminitration -> Calls
@@ -158,5 +160,6 @@ Small_range_1220_1281
     # Select this call, click Detail button.	VP: there isn't content in Call log since the Message feature = OFF.
     # User A, User B & User D logs in Citron, navigates to My Help Lightning -> Calls
     # Select this call, click Detail button.	VP: the Messages contents should be shown up in Call log.
-#    [Teardown]      run keywords    delete_zip_file     ${particial_message_audio}
-#    ...             AND             exit_driver
+    [Teardown]      run keywords    delete_zip_file     ${particial_message_audio}
+    ...             AND             delete_zip_file     IMG_CAP
+    ...             AND             exit_driver
