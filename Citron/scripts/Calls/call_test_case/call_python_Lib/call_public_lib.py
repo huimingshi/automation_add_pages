@@ -674,6 +674,7 @@ def in_call_download_file(driver,attach_name):
     public_click_element(driver,AttachmentOptionsMenu_selecting_button.format("Download"),description='点击Download按钮')
     time.sleep(10)
     result = CZE(attach_name)
+    print(result)
     public_assert(driver, 1, result[1], action='点击附件下载')
 
 def share_in_main_screen(driver,attach_name,file_type = 'jpg'):
@@ -691,10 +692,13 @@ def share_in_main_screen(driver,attach_name,file_type = 'jpg'):
     # 点击Share按钮
     public_click_element(driver, AttachmentOptionsMenu_selecting_button.format("Share"), description='点击Share按钮')
     # 判断
-    ele_list = get_xpath_elements(driver, '//div[@class="PanZoomTools show"]')
     if file_type == 'jpg':
+        driver.implicitly_wait(60)
+        ele_list = get_xpath_elements(driver, PanZoomTools)
         public_assert(driver,1,len(ele_list),action='jpg展示在主屏幕')
     elif file_type == 'pdf':
+        driver.implicitly_wait(30)
+        ele_list = get_xpath_elements(driver, PanZoomTools)
         public_assert(driver, 0, len(ele_list), action='pdf展示在主屏幕')
 
 def in_call_click_upload_attach(driver):

@@ -119,7 +119,7 @@ in_call_lastMessages_text = '//p[text()="{}"]'                                  
 in_call_lastMessages_attach = '//div[@class="attachmentName" and text()="{}"]'                                                # 会话中最后一个附件
 AttachmentOptionsMenu = '//div[text()="{}"]/../div[@class="AttachmentOptionsMenu plus attachment_template"]'                # 附件的三个点
 AttachmentOptionsMenu_selecting_button = '//div[@class="selecting_button"]/span[text()="{}"]'                            # Share或者Download
-# count_of_call_user = '//*[@class="participantName"]'
+PanZoomTools = '//div[@class="PanZoomTools show"]'
 search_by_email = '//input[@id="user-search-email"]'
 select_your_role = '//div[@class="menu roleMenu"]/div[@class="menu withsub  "]'
 capture_button = '//input[@class="capture_button"]'

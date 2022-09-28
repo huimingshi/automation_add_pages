@@ -96,6 +96,7 @@ Small_range_1220_1281
     # User C select 1 uploaded picture from chat list, click sub-menu 'Share' button.	VP: this file should be shown in main video screen.(前提条件：需要先进入到giving receiving help mode下)
     enter_giver_mode     ${driverA}      ${in_call_message_usernameB}     ${in_call_message_usernameC}
     proceed_with_camera_on     ${driverA}
+    proceed_with_camera_on     ${driverB}
     share_in_main_screen     ${driverC}        ${message_jpg}
     # User A, User B, User C, User D, A1 & D1  do some sample operations	VP: These operations should be worked.
 
@@ -103,7 +104,6 @@ Small_range_1220_1281
     in_call_click_message_button     ${driverA}     operation='close'
     click_screen_capture_button     ${driverA}
     in_call_click_message_button     ${driverA}
-#    sleep   10000
     in_call_check_receive_attach       ${driverA}      ${screen_capture_name}
     in_call_check_receive_attach       ${driverB}      ${screen_capture_name}
     in_call_check_receive_attach       ${driverC}      ${screen_capture_name}
