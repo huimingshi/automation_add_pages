@@ -39,3 +39,5 @@ ${message_pdf}                                    _ 匹敌爱抚 + pdf_.pdf
 ${big_size_file}                                  big_size_file.zip
 ${message_type_url}                               url                                                                         # 消息类型，url和text类型
 ${screen_capture_name}                            undefined                                                                   # 截屏图片的名称
+${downloaded_file_name}                           multipart                                                                   # calls details页面点击附件下载到本地的附件部分名
+${screen_capture_file_name}                       IMG_CAP                                                                     # 通话页面点击截图按钮，下载到本地的附件部分名

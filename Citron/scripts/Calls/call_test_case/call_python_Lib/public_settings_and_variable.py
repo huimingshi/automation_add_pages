@@ -164,3 +164,7 @@ message_page_start_video = '//div[@class="user_chat_buttons"]//span[text()="Vide
 invitation_dialog_cancel = '//button[@class="k-button" and text()="Cancel"]'                    # Cancel按钮
 search_messages = '//div[@class="SearchMessages"]//input[@id="quick-search-text-box"]'          # Search Messages查询框
 attach_particial_xpath = '//div[@class="attachmentName" and text()="{}"]/..//*[@*="#file"]'     # 会话中的附件xpath
+# Calls页面
+preview_container = '//div[@class="preview-container"]//img'                                    # 预览图
+thumbnail_container = '//div[@class="attachment selectable "]/img'                              # 缩略图
+play_video_button = '//span[text()="Play Video"]/..'                                            # 播放Video按钮

@@ -925,6 +925,11 @@ def proceed_with_camera_on(driver):
         public_click_element(driver,webglCameraOn,description='proceed_with_camera_on按钮')
 
 def click_audio_only(driver):
+    """
+    点击Audio Only按钮
+    :param driver:
+    :return:
+    """
     ele_list = get_xpath_elements(driver,Audio_Only_button)
     if len(ele_list) == 1:
         public_click_element(driver,Audio_Only_button,description='Audio_Only按钮')

@@ -346,6 +346,8 @@ ${in_call_message_usernameD1}           Huiming.shi.helplightning+in_call_messag
 
 ${in_call_message_expert_group}         message_expert_groupA                                                                    # expert group
 
+${message_test_WS_A}                    message_test_WS_A                                                                        # message_test_WS_A这个WS
+
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
 # password:  Welcome1

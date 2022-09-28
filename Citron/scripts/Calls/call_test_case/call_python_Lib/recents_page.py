@@ -1,11 +1,95 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :9/6/2022 2:23 PM
 # @Author   :Huiming Shi
+import time
 
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import first_time_call_started, \
-    contacts_page, recents_page
+from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import scroll_into_view as SIV
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import *
+from Citron.Lib.python_Lib.ui_keywords import check_zipFile_exists as CZE
 
+def calls_click_details_button(driver,which_line = '1',participants = '6'):
+    """
+    Calls页面点击第几行的Details按钮
+    :param driver:
+    :param which_line: 第几行，默认为第一行
+    :return:
+    """
+    public_click_element(driver,f'//div[@row-index="{int(which_line) -1}"]//button[text()="Details"]',description=f'点击第{which_line}行的Details按钮')
+
+def uploaded_file_show_in_call_log(driver,attach_name,exists = 'true'):
+    """
+    # 上传的附件应该在log中展示
+    :param driver:
+    :param attach_name:附件名称
+    :param exists: 是否展示附件
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,f'//div[@class="filename" and text()="{attach_name}"]')
+    if exists == 'true':
+        public_assert(driver, len(ele_list), 1, action=f'断言{attach_name}展示')
+    else:
+        public_assert(driver, len(ele_list), 0, action=f'断言{attach_name}不展示')
+
+def show_thumbnail(driver,thumbnail_count = '4'):
+    """
+    log中展示的缩略图个数
+    :param driver:
+    :param thumbnail_count: 缩略图个数
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,thumbnail_container)
+    public_assert(driver,len(ele_list),int(thumbnail_count),action=f'断言是否是{thumbnail_count}个缩略图')
+
+def click_thumbnail_show_preview(driver):
+    """
+    点击缩略图，展示预览图
+    :param driver:
+    :return:
+    """
+    # 开始没有预览图
+    ele_list = get_xpath_elements(driver,preview_container)
+    public_assert(driver,len(ele_list),0,action='应该没有预览图')
+    # 点击缩略图
+    SIV(driver,thumbnail_container)
+    public_click_element(driver,thumbnail_container,description='点击缩略图')
+    # 展示预览图
+    ele_list = get_xpath_elements(driver, preview_container)
+    public_assert(driver, len(ele_list), 1, action='应该展示预览图')
+
+def click_uploaded_video_and_play(driver,attach_name):
+    """
+    点击上传的Video文件,并进行播放
+    :param driver:
+    :param attach_name:video附件名称
+    :return:
+    """
+    # 点击上传的video
+    uploaded_video = f'//div[@class="filename" and text()="{attach_name}"]/preceding-sibling::div[1]'
+    SIV(driver, uploaded_video)
+    public_click_element(driver,uploaded_video,description='点击上传的video')
+    # 点击播放按钮
+    SIV(driver, play_video_button)
+    public_click_element(driver, play_video_button, description='点击播放video')
+    ele_list = get_xpath_elements(driver,'//button[@class="video-react-play-control video-react-control video-react-button video-react-playing"]')
+    public_assert(driver,len(ele_list),1,action='有暂停按钮')
+
+def click_attach_then_download(driver,attach_name,downloaded_file_name):
+    """
+    点击附件后自动下载
+    :param driver:
+    :param attach_name: 附件名
+    :param downloaded_file_name: 下载到本地的文件部分名称
+    :return:
+    """
+    # 点击上传的附件
+    uploaded_video = f'//div[@class="filename" and text()="{attach_name}"]/preceding-sibling::div[1]'
+    SIV(driver, uploaded_video)
+    public_click_element(driver, uploaded_video, description='点击上传的附件')
+    time.sleep(10)
+    result = CZE(downloaded_file_name)
+    print(result)
+    public_assert(driver, 1, result[1], action='附件下载后名称不正确')
 
 def verify_username_in_recents_page(driver,*args):
     """
