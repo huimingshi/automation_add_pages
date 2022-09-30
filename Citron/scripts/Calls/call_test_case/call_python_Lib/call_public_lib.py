@@ -672,7 +672,7 @@ def in_call_download_file(driver,attach_name):
     public_click_element(driver, AttachmentOptionsMenu.format(attach_name), description='点击附件的三个点')
     # 点击Download
     public_click_element(driver,AttachmentOptionsMenu_selecting_button.format("Download"),description='点击Download按钮')
-    time.sleep(10)
+    time.sleep(20)
     result = CZE(attach_name)
     print(result)
     public_assert(driver, 1, result[1], action='点击附件下载')
