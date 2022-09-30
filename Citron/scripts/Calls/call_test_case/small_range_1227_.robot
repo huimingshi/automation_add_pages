@@ -223,7 +223,7 @@ Small_range_1220_1281
 #
 #small_range_1282_1332
 #    [Documentation]     Audio+ Mode
-#    [Tags]    small range 1282-1332 lines
+#    [Tags]    small range 1282-1332 lines       call_case
 #    # Enable Debug mode from User A starts Audio call with user B.User answers call.
 #    ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
 #    ${driverB}     driver_set_up_and_logIn     ${in_call_message_userB}
