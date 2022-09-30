@@ -132,6 +132,15 @@ share_button = '//div[@class="DocToolBar show"]/button[text()="Share"]'      # �
 enable_recording_call = '//div[@class="message" and contains(.,"{} has enabled recording for this call.")]'
 turn_off_recording_call = '//div[@class="message" and contains(.,"{} has turned off recording for this call.")]'
 Audio_Only_button = '//div[@class="message" and text()="Audio Only"]'
+which_mode_xpath = '//div[@class="top Alert"]/div[contains(.,"{} Mode")]'                                     # 会话顶部的模式
+which_mode_bottom_xpath = '//button[@id="audioPlusModeIndicator"]//h2[text()="{}"]'                            # 会话底部的模式
+show_which_mode_xpath = '//div[@class="menu withsub  "]//*[@*="#{}"]'                                          # 会话右侧展示的模式
+Share_a_photo = '//button[text()="Share a Photo"]'
+Share_a_document = '//button[text()="Share a Document"]'
+Take_a_photo = '//button[text()="Take a Photo"]'
+video_off_red = '//*[@*="#video_off_red"]'
+use_photo_button = '//button[text()="Use"]'
+clear_shared_content = '//div[@class="RetakeButton"]'
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型

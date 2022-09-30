@@ -798,7 +798,7 @@ def enter_face_to_face_mode(driver):
 
 def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialog = 'has_dialog',give_or_receive = 'give'):
     """
-    进入giver模式
+    进入giver/helper模式
     :param driver:
     :param who_give_help:  选择giver的name
     :param who_receive_help:  选择receiver的name

@@ -1,13 +1,11 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :9/6/2022 2:31 PM
 # @Author   :Huiming Shi
-
+import time
 
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import first_line_details_button, \
-    close_details_xpath, add_tag_input, please_wait, zhuanquanquan, five_star_high_praise, add_comment, \
-    take_survey_after_call, close_tutorial_button
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import *
 
 
 def click_first_line_details(driver):
@@ -191,3 +189,224 @@ def get_all_comments_in_call_end(driver,*args):
     for i in range(len(ele_list)):
         get_comment = ele_list[i].get_attribute("textContent")   # 获取comment
         public_assert(driver,get_comment,args[i],action='获取的comments和预期不符')
+
+def which_mode_shown_in_the_top(driver,which_mode = 'Audio+'):
+    """
+    顶部展示哪种模式
+    :param driver:
+    :param which_mode: 模式，默认为Audio+模式
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,which_mode_xpath.format(which_mode))
+    public_assert(driver,len(ele_list),1,action=f'{which_mode}_mode展示在顶部')
+
+def video_source_icon_is_red_and_off(*args):
+    """
+    video图标红色且关闭
+    :param driver:
+    :return:
+    """
+    sys_type = get_system_type()
+    if sys_type == 'Windows':
+        for i in range(len(args)):
+            ele_list = get_xpath_elements(args[i], video_off_red)
+            if len(ele_list) == 1:
+                break
+            elif i == len(args) - 1:
+                public_assert(args[i], len(ele_list), 1, action='video图标红色且关闭')
+    else:
+        for driver in args:
+            ele_list = get_xpath_elements(driver, video_off_red)
+            public_assert(driver, len(ele_list), 1, action='video图标红色且关闭')
+
+def which_mode_display_in_the_bottom(driver,which_mode = 'Audio+'):
+    """
+    底部展示哪种模式
+    :param driver:
+    :param which_mode: 模式，默认为Audio+模式
+    :return:
+    """
+    ele_list = get_xpath_elements(driver, which_mode_bottom_xpath.format(which_mode))
+    public_assert(driver, len(ele_list), 1, action=f'{which_mode}_mode展示在底部')
+
+def show_which_mode_in_right(driver,which_mode = 'f2f_on'):
+    """
+    右侧展示哪种模式
+    :param driver:
+    :param which_mode: 模式，默认为f2f_on模式，也可以为“rh_on”，也可以为“gh_on”，也可以为“#ghop_on”
+    :return:
+    """
+    ele_list = get_xpath_elements(driver, show_which_mode_xpath.format(which_mode))
+    public_assert(driver, len(ele_list), 1, action=f'{which_mode}_mode展示在右侧')
+
+def display_participants_avatar(driver):
+    """
+    展示通话参与者的avatar
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver, '//div[@class="Avatars"]')
+    public_assert(driver, len(ele_list), 1, condition='>=',action='展示通话参与者的avatar')
+
+def display_which_user_avatar(driver,username = 'Huiming.shi.helplightning+in_call_messageB'):
+    """
+    展示哪个user的avatar
+    :param driver:
+    :param username: 用户名
+    :return:
+    """
+    get_xpath_element(driver,f'//h6[text()="{username}"]/../div[@class="Avatars"]',description=f'应该展示{username}的avatar')
+
+def shown_a_special_dialog_prompting(driver,role = 'giver'):
+    """
+    下方显示三个按钮：Choose Existing Photo、Choose Document、Take New Photo
+    :param driver:
+    :param role:角色；分为giver、receiver和observer
+    :return:
+    """
+    ele_list_CEP = get_xpath_elements(driver, Share_a_photo)
+    ele_list_CD = get_xpath_elements(driver, Share_a_document)
+    ele_list_TNP = get_xpath_elements(driver, Take_a_photo)
+    if role == 'giver':
+        public_assert(driver, len(ele_list_CEP), 1, action='展示Share_a_photo按钮')
+        public_assert(driver, len(ele_list_CD), 1, action='展示Share_a_document按钮')
+        public_assert(driver, len(ele_list_TNP), 1, action='展示Take_a_photo按钮')
+    elif role == 'receiver':
+        public_assert(driver, len(ele_list_CEP), 1, action='展示Share_a_photo按钮')
+        public_assert(driver, len(ele_list_CD), 0, action='不展示Share_a_document按钮')
+        public_assert(driver, len(ele_list_TNP), 0, action='不展示Take_a_photo按钮')
+    elif role == 'observer':
+        public_assert(driver, len(ele_list_CEP), 0, action='不展示Share_a_photo按钮')
+        public_assert(driver, len(ele_list_CD), 0, action='不展示Share_a_document按钮')
+        public_assert(driver, len(ele_list_TNP), 0, action='不展示Take_a_photo按钮')
+
+def show_text_in_bottom(driver,which_role = 'receiver'):
+    """
+    下方展示的文本内容
+    :param driver:
+    :param which_role: 角色？receiver还是giver
+    :return:
+    """
+    get_xpath_element(driver,'//b[text()="Audio+ Mode:"]',description='展示Audio+Mode:字段')
+    if which_role == 'receiver':
+        get_xpath_element(driver,'//span[text()="Select content to share."]',description='显示字段正确')
+    elif which_role == 'giver':
+        get_xpath_element(driver, '//span[text()="Ask others to Take a Photo or share content"]',description='展示文本正确')
+
+def display_live_video_in_background(driver):
+    """
+    摄像展示
+    :param driver:
+    :return:
+    """
+    # sys_type = get_system_type()
+    # if sys_type != 'Windows':
+    get_xpath_element(driver,'//div[@class="VideoContainer"]//video[@id="camera_video"]',description='摄像展示')
+
+def telestration_icon_is_or_not_visible(driver,is_visible = 'yes'):
+    """
+    是否展示telestration
+    :param driver:
+    :param is_visible: 是否展示：默认yes展示
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,PanZoomTools)
+    if is_visible == 'yes':
+        public_assert(driver,len(ele_list),1,action='应该展示telestration')
+    else:
+        public_assert(driver,len(ele_list),0,action='应该不展示telestration')
+
+def Audio_SD_HD_should_be_shown(driver,useable = 'sure'):
+    """
+    判断(Audio+,SD,HD)是否可见可用
+    :param driver:
+    :param useable:是否可用？默认可用
+    :return:
+    """
+    sys_type = get_system_type()
+    if sys_type != 'Windows':
+        get_xpath_element(driver,'//button[@id="audioPlusModeIndicator"]',description='Audio_SD_HD可见可用')
+    elif sys_type == 'Windows' and useable != 'sure':
+        get_xpath_element(driver, '//button[@disabled and @id="audioPlusModeIndicator"]', description='Audio_SD_HD可见但不可用')
+
+def click_source_menu_in_action_bar(driver, *args):
+    """
+    点击VIEW SOURCE，查看有哪些操作图标，有photo、document等
+    :param driver:
+    :param args:
+    :return:
+    """
+    # 展开VIEW SOURCE
+    public_click_element(driver,video_off_red,description='点击红色的视频按钮')
+    for one in args:
+        get_xpath_element(driver,f'//span[text()="{one}"]',description=f'{one}图标展示')
+    time.sleep(2)
+    # 合上VIEW SOURCE
+    public_click_element(driver, video_off_red, description='点击红色的视频按钮')
+
+def take_new_photo(driver):
+    """
+    点击Take New Photo按钮
+    :param driver:
+    :return:
+    """
+    # 是否有Take New Photo按钮
+    ele_list = get_xpath_elements(driver,Take_a_photo)
+    if len(ele_list) == 1:
+        # 点击Take New Photo按钮
+        public_click_element(driver,Take_a_photo,description='点击Take_New_Photo按钮')
+        # 弹出Take_Photo对话框
+        get_xpath_element(driver,'//h4[text()="Take Photo"]',description='弹出Take_Photo对话框')
+        time.sleep(15)   # 等待能捕捉到摄像头
+        # 点击Capture按钮
+        public_click_element(driver,'//button[text()="Capture"]',description='点击Capture按钮')
+        # 出现Use和Retake按钮
+        get_xpath_element(driver,use_photo_button,description='出现Use按钮')
+        get_xpath_element(driver,'//button[text()="Retake"]',description='出现Retake按钮')
+        # 点击use按钮
+        public_click_element(driver,use_photo_button,description='点击Use按钮')
+        return 'can_Take_a_photo'
+    else:
+        return 'can_not_Take_a_photo'
+
+def show_sending_photo_progress(driver):
+    """
+    捕捉到的摄像图片上传时显示进度条
+    :param driver:
+    :return:
+    """
+    get_xpath_element(driver,'//div[@role="progressbar"]',description='进度条')
+
+def return_button_display(driver,display = 'yes'):
+    """
+    底部的Return按钮是否展示
+    :param driver:
+    :param display: 默认’yes‘展示
+    :return:
+    """
+    if display == 'yes':
+        get_xpath_element(driver,clear_shared_content,description='clear_shared_content按钮应该展示')
+    else:
+        ele_list = get_xpath_elements(driver,clear_shared_content)
+        public_assert(driver,len(ele_list),0,action='clear_shared_content按钮不应该展示')
+
+def screen_capture_button_is_visible(driver,visible = 'yes'):
+    """
+    Screen_Capture按钮是否展示
+    :param driver:
+    :param visible:
+    :return:
+    """
+    if visible == 'yes':
+        get_xpath_element(driver,capture_button,description='Screen_Capture按钮应该展示')
+    else:
+        ele_list = get_xpath_elements(driver,capture_button)
+        public_assert(driver,len(ele_list),0,action='Screen_Capture按钮不应该展示')
+
+def show_you_can_now_draw(driver):
+    """
+    提示信息：You can now draw on the shared photo
+    :param driver:
+    :return:
+    """
+    get_xpath_element(driver,'//div[text()="You can now draw on the shared photo"]',description='提示信息出现')

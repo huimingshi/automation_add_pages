@@ -220,10 +220,112 @@ Small_range_1220_1281
     ...             AND             delete_zip_file     ${screen_capture_file_name}
     ...             AND             delete_zip_file     ${downloaded_file_name}
     ...             AND             exit_driver
-
-small_range_1282_1332
-    [Documentation]     Audio+ Mode
-    [Tags]    small range 1282-1332 lines
-    # user login
-    ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
-    make calls with who
+#
+#small_range_1282_1332
+#    [Documentation]     Audio+ Mode
+#    [Tags]    small range 1282-1332 lines
+#    # Enable Debug mode from User A starts Audio call with user B.User answers call.
+#    ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
+#    ${driverB}     driver_set_up_and_logIn     ${in_call_message_userB}
+#    contacts_witch_page_make_call    ${driverA}     ${driverB}     ${py_team_page}    ${in_call_message_usernameB}
+#    make_sure_enter_call   ${driverB}
+#    # VP: 1. "Poor Network Quality: Audio Mode" is shown in the top.
+#    # 2. Not video but participant's avatar displays.
+#    # 3. video source icon is red and off status.(No video source on Android).
+#    # 4. Audio + displays in the bottom.
+#    # 5. Show face to face mode.
+#    # 6. Display participant's avatar
+##    which_mode_shown_in_the_top    ${driverA}
+#    display_participants_avatar    ${driverA}
+#    video_source_icon_is_red_and_off    ${driverA}     ${driverB}
+##    which_mode_display_in_the_bottom    ${driverA}
+#    show_which_mode_in_right    ${driverA}
+#    display_participants_avatar    ${driverA}
+#    # More participants join call
+#    ${driverD}     driver_set_up_and_logIn     ${in_call_message_userD}
+#    enter_contacts_search_user      ${driverA}     ${in_call_message_expert_group}
+#    click_user_in_contacts_call     ${driverA}     ${in_call_message_expert_group}
+#    user_anwser_call    ${driverD}
+#    which_page_is_currently_on    ${driverD}     ${end_call_button}
+#    # VP: 1. "Poor Network Quality: Audio Mode" is shown in the top.
+#    # 2. Not video but participant's avatar displays.
+#    # 3. video source icon is red and off status(No video source on Android).
+#    # 4. Audio + displays in the bottom.
+#    # 5. Enter face to face mode.
+#    # 6. Display participant's avatar
+##    which_mode_shown_in_the_top          ${driverA}
+#    display_participants_avatar          ${driverA}
+#    video_source_icon_is_red_and_off     ${driverA}     ${driverB}     ${driverD}
+##    which_mode_display_in_the_bottom     ${driverA}
+#    show_which_mode_in_right             ${driverA}
+#    display_participants_avatar          ${driverA}
+#    # Switch to giving/receiving help mode
+#    enter_giver_mode    ${driverA}    ${in_call_message_usernameA}    ${in_call_message_usernameB}
+#    # VP: 1. For receiver:
+#        # a. shown a special dialog prompting them to take one of three actions: Take New Photo, Choose Existing Photo, and Choose Document.
+#        # b. text is “Audio+ Mode. Share Content("Audio+ Mode. Select content to share" on android).” .
+#        # c. Display live video as vague in background.
+#    shown_a_special_dialog_prompting     ${driverB}     role='receiver'
+#    show_text_in_bottom                  ${driverB}
+#    display_live_video_in_background     ${driverB}
+#    # VP: 2. For giver:
+#        # a. shown a special dialog prompting them to take one of three actions: Take New Photo, Choose Existing Photo, and Choose Document.
+#        # b. text is “Audio+ Mode. Ask Receiver to Share Content.(+"Or you may share content" on android)
+#        # c. Display receiver's avatar in background
+#    shown_a_special_dialog_prompting     ${driverA}
+#    show_text_in_bottom                  ${driverA}     which_role='giver'
+#    display_which_user_avatar            ${driverA}
+#    # VP. 3. For Observer:
+#        # a. should not see the dialog "Take New Photo, Choose Existing Photo, and Choose Document."
+#        # b. Display receiver's avatar in background.
+#    shown_a_special_dialog_prompting     ${driverD}     role='observer'
+#    display_which_user_avatar            ${driverD}
+#    # VP: 4. 3D annotation will be disabled in Audio+ mode.
+#    # VP: 5. Telestration icon is not visible
+#    telestration_icon_is_or_not_visible   ${driverA}    is_visible='no'
+#    telestration_icon_is_or_not_visible   ${driverB}    is_visible='no'
+#    telestration_icon_is_or_not_visible   ${driverD}    is_visible='no'
+#    # VP: 6. The bottom-right drop down (Audio+, SD, HD) should be shown
+##    Audio_SD_HD_should_be_shown    ${driverA}
+##    Audio_SD_HD_should_be_shown    ${driverB}
+##    Audio_SD_HD_should_be_shown    ${driverD}    useable = 'not_sure'
+#    # Giver/Receiver clicks on Source menu in action bar VP: Only photo and document submenu display.
+#    click_source_menu_in_action_bar    ${driverA}     Photo    Document
+#    click_source_menu_in_action_bar    ${driverB}     Photo    Document
+#    # Click on Take New Photo     VP:  (web) display take photo dialog.
+#    # Capture a photo    VP: "Retake" and "Use Photo" options shows in bottom
+#    # Click on "Use Photo"
+#        # VP: 1. For the uploader:
+#            # a."Sending photo" progress bar shows in the top.
+#            # b. Progress bar tracks upload bytes, then it goes to spinner until downloader sets ghop final state.
+#            # c. Cancel button displays in the bottom.
+#        # VP: 2. For the downloader:
+#            # a. starts with a spinner until it starts downloading (should be immediate) and shows a progress bar for the bytes it has downloaded. Text is : receiving photo from uploader.
+#            # b. Once at 100% it sets ghop final state.
+#            # c. Cancel button should not display.
+#        # VP: 3.The spinner should be shown in the notification bar.
+#    ${if_has_button}    take_new_photo     ${driverA}
+#    show_sending_photo_progress     ${driverA}
+#    show_sending_photo_progress     ${driverB}
+#    show_sending_photo_progress     ${driverD}
+#    return_button_display     ${driverB}
+#    return_button_display     ${driverA}
+#    return_button_display     ${driverD}    display='no'
+#    # Wait until entering photo mode.
+#    # VP: 1. Telestration icon is visible.
+#    # 2. Screen Capture button is visible.
+#    # 3. Video source icon changes to Photo icon.
+#    # 4. Return button displays in the bottom only for receiver.
+#    # 5. Uploader sees message "You can now draw on the shared photo" in the notification bar. Other participants see message "You can now draw on uploader's photo." in the notification bar.
+#    # 6. Merged Reality (Camera On) button is hidden for the Giver.
+#    # 7. The bottom-right drop down (Audio+, SD, HD) should be hidden
+#    telestration_icon_is_or_not_visible         ${driverA}
+#    telestration_icon_is_or_not_visible         ${driverB}
+#    telestration_icon_is_or_not_visible         ${driverD}
+#    screen_capture_button_is_visible            ${driverA}
+#    screen_capture_button_is_visible            ${driverB}
+#    screen_capture_button_is_visible            ${driverD}
+#    show_which_mode_in_right                    ${driverA}     which_mode='ghop_on'
+#    show_which_mode_in_right                    ${driverB}     which_mode='ghop_on'
+#    show_which_mode_in_right                    ${driverD}     which_mode='ghop_on'
+#    show_you_can_now_draw                       ${driverA}
