@@ -19,7 +19,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_1220_1281
     [Documentation]     In call message
-    [Tags]    small range 1260-1281 lines       call_case
+    [Tags]    small range 1260-1281 lines       call_case        message_case
     [Setup]   run keywords    delete_zip_file     ${message_audio}
     ...       AND             delete_zip_file     ${particial_message_audio}
     ...       AND             delete_zip_file     ${screen_capture_file_name}

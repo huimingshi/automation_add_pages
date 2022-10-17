@@ -14,7 +14,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_1078_1082
     [Documentation]     Permission check
-    [Tags]    small range 1078-1082 lines
+    [Tags]    small range 1078-1082 lines     message_case
     [Setup]     run keywords    Login_workspaces_admin
     ...         AND             enter_workspace_settings_page           # 进入settings页面
     ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
@@ -85,7 +85,7 @@ Small_range_1078_1082
 
 Small_range_1083_1091
     [Documentation]     Prepare message test data
-    [Tags]    small range 1083-1091 lines
+    [Tags]    small range 1083-1091 lines     message_case
     # user login
     ${driver}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
@@ -114,7 +114,7 @@ Small_range_1083_1091
 
 Small_range_1092_1099_1111_1113
     [Documentation]     Start new chat    UserA click message icon from team     with online contact userB
-    [Tags]    small range 1078-1082 + 1111_1113 lines
+    [Tags]    small range 1078-1082 + 1111_1113 lines       message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
@@ -172,7 +172,7 @@ Small_range_1092_1099_1111_1113
 
 Small_range_1100_1109
     [Documentation]     Start new chat    UserA click message icon from team     with offline contact userC
-    [Tags]    small range 1100-1109 lines
+    [Tags]    small range 1100-1109 lines     message_case
     # user login     UserA click message icon from team     with offline contact userC  VP: new message thread is created	VP: name, avatar is correct
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     contacts_different_page_search_user     ${driver1}     ${py_team_page}       ${message_test2_username}
@@ -211,7 +211,7 @@ Small_range_1100_1109
 
 Small_range_1115_1117
     [Documentation]     Start new chat    click message icon from favorite     with online contact
-    [Tags]    small range 1115-1117 lines
+    [Tags]    small range 1115-1117 lines      message_case
     # user login     click message icon from favorite	  with online contact   VP: new message thread is created
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
@@ -228,7 +228,7 @@ Small_range_1115_1117
 
 Small_range_1121_1122
     [Documentation]     Start new chat    click message icon from directory
-    [Tags]    small range 1121-1122 lines
+    [Tags]    small range 1121-1122 lines       message_case
     [Setup]     run keywords    Login_workspaces_admin
     ...         AND             enter_workspace_settings_page           # 进入settings页面
     ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
@@ -247,7 +247,7 @@ Small_range_1121_1122
 
 Small_range_1125_1143
     [Documentation]     Start new chat    Create 1V1 chat from Message Tab
-    [Tags]    small range 1125-1143 lines
+    [Tags]    small range 1125-1143 lines      message_case
     [Setup]    delete_zip_file     original
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
@@ -309,7 +309,7 @@ Small_range_1125_1143
 
 Small_range_1144_1153
     [Documentation]     Start new chat    Create chat group from Message Tab     select from entire list
-    [Tags]    small range 1144-1153 lines
+    [Tags]    small range 1144-1153 lines      message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${used_by_message_user01}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
@@ -340,7 +340,7 @@ Small_range_1144_1153
 
 Small_range_1154_1160
     [Documentation]     Start new chat    Create chat group from Message Tab     Select from search result list
-    [Tags]    small range 1154-1160 lines
+    [Tags]    small range 1154-1160 lines       message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
@@ -372,7 +372,7 @@ Small_range_1154_1160
 
 Small_range_1161
     [Documentation]     Start new chat    Create multi message thread
-    [Tags]    small range 1161 lines
+    [Tags]    small range 1161 lines       message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     # Create 1V1 message thead from Team
@@ -411,7 +411,7 @@ Small_range_1161
 
 Small_range_1162
     [Documentation]     Start new chat    Create multi message thread
-    [Tags]    small range 1162 lines
+    [Tags]    small range 1162 lines      message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     # Create message group from Message group
@@ -450,7 +450,7 @@ Small_range_1162
 
 Small_range_1164_1165
     [Documentation]     Start new chat    Create a already exist thread
-    [Tags]    small range 1164-1165 lines
+    [Tags]    small range 1164-1165 lines       message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     # Create 1V1 message thead from Team
@@ -470,7 +470,7 @@ Small_range_1164_1165
 
 Small_range_1166_1169
     [Documentation]     Delete Message thread    Delete 1v1 message
-    [Tags]    small range 1166-1169 lines
+    [Tags]    small range 1166-1169 lines        message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
@@ -516,7 +516,7 @@ Small_range_1166_1169
 
 Small_range_1170_1173
     [Documentation]     Delete Message thread    Delete message group
-    [Tags]    small range 1170-1173 lines
+    [Tags]    small range 1170-1173 lines        message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}

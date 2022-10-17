@@ -17,7 +17,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_1195_1197
     [Documentation]     Calls from message dialog       Create 1v1 message thread with offline contact user1
-    [Tags]    small range 1195-1197 lines
+    [Tags]    small range 1195-1197 lines       message_case
     # user login
     ${driver}     driver_set_up_and_logIn     ${message_test0_user}
     # Create 1v1 message thread with offline contact user1
@@ -33,7 +33,7 @@ Small_range_1195_1197
 
 Small_range_1198_1210
     [Documentation]     Calls from message dialog       Create message group with no more than 6 members
-    [Tags]    small range 1198-1210 lines     call_case
+    [Tags]    small range 1198-1210 lines     call_case        message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
@@ -128,7 +128,7 @@ Small_range_1198_1210
 
 Small_range_1211_1214
     [Documentation]     Calls from message dialog       Create message group has more than 6 memebers
-    [Tags]    small range 1198-1210 lines      call_case
+    [Tags]    small range 1198-1210 lines      call_case      message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
@@ -174,7 +174,7 @@ Small_range_1211_1214
 
 Small_range_1215_1216
     [Documentation]     Search message
-    [Tags]    small range 1215-1216 lines
+    [Tags]    small range 1215-1216 lines           message_case
     # user login
     ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     # Create 1V1 message thead from Team
