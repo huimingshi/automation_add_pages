@@ -2,7 +2,7 @@
 
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action as CTA
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -552,7 +552,7 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     """
     driver.refresh()
     if close_tutorial == 'close_tutorial':
-        close_tutorial_action(driver)
+        CTA(driver)
 
 def disclaimer_should_be_shown_up_or_not(driver,appear = 'appear',wait_time = IMPLICIT_WAIT):
     """

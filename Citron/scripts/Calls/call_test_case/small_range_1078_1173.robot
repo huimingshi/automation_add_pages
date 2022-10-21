@@ -9,6 +9,7 @@ Library           call_python_Lib/call_public_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/messages_page.py
 Library           call_python_Lib/login_lib.py
+Library           call_python_Lib/public_lib.py
 Force Tags        small_range
 
 *** Test Cases ***

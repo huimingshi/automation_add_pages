@@ -1,7 +1,7 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :9/6/2022 2:47 PM
 # @Author   :Huiming Shi
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action as CTA
 from public_settings_and_variable import *
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import TEST_WEB
@@ -98,7 +98,7 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             ele_list = get_xpath_elements(driver,'//h1[text()="Welcome to Help Lightning!"]')
             public_assert(driver,len(ele_list),1,condition = '=',action='展示的不是Welcome to Help Lightning!')
         # close Tutorial
-        close_tutorial_action(driver)
+        CTA(driver)
         # ele_list = get_xpath_elements(driver,close_tutorial_button)
         # if len(ele_list) == 1:
         #     public_click_element(driver, close_tutorial_button, description='关闭tutorial按钮')

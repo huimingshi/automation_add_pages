@@ -2,7 +2,7 @@
 # @Time     :10/21/2022 11:15 AM
 # @Author   :Huiming Shi
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Deletion_of_a_Recordings_and_Screen_Captures.make_a_call_lib import *
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import close_tutorial_button
 
 
 def close_tutorial_action(driver):
