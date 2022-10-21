@@ -1,6 +1,8 @@
 #----------------------------------------------------------------------------------------------------#
+
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import *
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -541,16 +543,6 @@ def reset_disclaimer(driver):
     public_assert(driver,len(ele_list) , 1,action='Reset_All_Accepted_Disclaimers未生效')
     public_check_element(driver, "//button[text()='Reset All Accepted Disclaimers']", 'Disclaimer提示信息未散去', if_click=None,if_show=None)
 
-def close_tutorial_action(driver):
-    """
-    关闭导航页面
-    :param driver:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver, close_tutorial_button)
-    if len(ele_list) == 1:
-        public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')  # 刷新页面后关闭教程
-
 def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     """
     刷新浏览器的某个页面
@@ -559,7 +551,6 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     :return:
     """
     driver.refresh()
-    time.sleep(10)
     if close_tutorial == 'close_tutorial':
         close_tutorial_action(driver)
 

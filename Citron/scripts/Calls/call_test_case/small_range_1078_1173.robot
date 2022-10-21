@@ -109,8 +109,8 @@ Small_range_1083_1091
     send_message_by_different_file     ${driver}     ${message_pdf}
     # other format files	.zip, .dmg, .xlsx, .docx
     send_message_by_different_file     ${driver}     ${message_zip}
-    [Teardown]      run keywords    delete_all_message_thread    ${driver}
-    ...             AND             exit_driver
+#    [Teardown]      run keywords    delete_all_message_thread    ${driver}
+#    ...             AND             exit_driver
 
 Small_range_1092_1099_1111_1113
     [Documentation]     Start new chat    UserA click message icon from team     with online contact userB
