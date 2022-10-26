@@ -159,7 +159,15 @@ def click_which_message(driver,*args):
         final_name_str = ', '.join(user_list)
     else:
         final_name_str = args[0]
-    public_click_element(driver,witch_message_thread.format(final_name_str),description=f'点击{final_name_str}的message')
+    for i in range(3):
+        ele_list = get_xpath_elements(driver,witch_message_thread.format(final_name_str))
+        if len(ele_list) != 0:
+            public_click_element(driver,witch_message_thread.format(final_name_str),description=f'点击{final_name_str}的message')
+            break
+        elif i == 2:
+            public_click_element(driver, witch_message_thread.format(final_name_str),description=f'等待后点击{final_name_str}的message')
+        else:
+            time.sleep(1)
 
 def get_message_dialog_text(driver,has_text = '1'):
     """
