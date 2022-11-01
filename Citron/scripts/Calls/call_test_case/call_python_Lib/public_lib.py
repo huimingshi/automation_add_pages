@@ -21,12 +21,25 @@ def close_tutorial_action(driver):
         else:
             time.sleep(10)
 
-def if_has_tutorial_then_close(driver):
+def if_has_tutorial_then_close(func):
     """
     如果导航页面出现，那就关闭
     :param driver:
     :return:
     """
-    ele_list = get_xpath_elements(driver, close_tutorial_button)
-    if len(ele_list) == 1:
-        public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')
+    def inner(driver):
+        func()
+        ele_list = get_xpath_elements(driver, close_tutorial_button)
+        if len(ele_list) == 1:
+            public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')
+    return inner
+
+# def if_has_tutorial_then_close(driver):
+#     """
+#     如果导航页面出现，那就关闭
+#     :param driver:
+#     :return:
+#     """
+#     ele_list = get_xpath_elements(driver, close_tutorial_button)
+#     if len(ele_list) == 1:
+#         public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')

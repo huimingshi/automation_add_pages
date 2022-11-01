@@ -5,6 +5,7 @@ import time
 
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import if_has_tutorial_then_close
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import *
 
 
@@ -153,6 +154,7 @@ def check_survey_switch_success(driver,status = '0',click_button = 'no_click'):
             public_click_element(driver,take_survey_after_call,description = 'take_survery按钮')
             time.sleep(6)       # 等待Survey页面加载出来
 
+@if_has_tutorial_then_close
 def close_call_ending_page(driver):
     """
     # 关闭通话结束展示页面
