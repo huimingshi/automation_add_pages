@@ -141,6 +141,13 @@ Take_a_photo = '//button[text()="Take a Photo"]'
 video_off_red = '//*[@*="#video_off_red"]'
 use_photo_button = '//button[text()="Use"]'
 clear_shared_content = '//div[@class="RetakeButton"]'
+choose_document = '//div[@class="submenu-content"]//span[text()="Document"]/..'            # 选择document
+Clear_Shared_Content = '//button[text()="Clear Shared Content"]'              # Clear Shared Content按钮
+expect_text_1 = '//div[text()="Entering document sharing mode."]'
+expect_text_2 = '//div[text()="You can now draw on the shared document"]'
+expect_text_3 = '//div[text()="Exiting document sharing mode."]'
+expect_text_4 = '//div[text()="You can now draw on the shared photo"]'
+expect_text_5 = '//div[text()="Exiting Photo Mode"]'
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型

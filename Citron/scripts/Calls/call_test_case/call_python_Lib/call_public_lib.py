@@ -508,9 +508,6 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     if len(count) == 1:
         public_click_element(driver1, accept_disclaimer, '点击accept_disclaimer失败')
     driver1.implicitly_wait(IMPLICIT_WAIT)
-    # # 断言是否呼叫成功
-    # count = get_xpath_elements(driver1, end_call_before_connecting)
-    # public_assert(driver1, len(count), 1, action='发起call失败')
     # 另一端ACCEPT OR DECLINE
     if accept == 'accept':
         public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
@@ -807,18 +804,28 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
     :param give_or_receive: 想进入哪种模式；默认是give为giver模式，其他为receiver模式
     :return:
     """
+    # if roles == '3':
+    #     # ele_list = get_xpath_elements(driver,'//div[@class="InCall"]//*[@*="#gh_on"]')
+    #     # print(len(ele_list))
+    #     public_click_element(driver, '//div[@class="InCall"]//*[@*="#gh_on"]', description='点击右侧小手')
+    #     # btn_div = get_xpath_element(driver,'//div[@class="InCall"]//*[@*="#gh_on"]',description='右侧小手')
+    #     # driver.execute_script("arguments[0].click();", btn_div)
+    #     public_click_element(driver,'//span[text()="Switch Roles"]',description='点击Switch_Roles按钮')
+    #     public_check_element(driver, which_mode_help.format(who_give_help), description='选择GIVE HELP')
+    #     public_check_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
+    #     public_check_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
     if roles == '3':
-        public_check_element(driver, f2f_on_mode, '点击切换模式')
-        public_check_element(driver, which_mode_help.format(who_give_help), '选择GIVE HELP')
-        public_check_element(driver, which_mode_help.format(who_receive_help), '选择RECEIVE HELP')
-        public_check_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', '点击Continue')
+        public_click_element(driver, f2f_on_mode, description='点击切换模式')
+        public_click_element(driver, which_mode_help.format(who_give_help), description='选择GIVE HELP')
+        public_click_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
+        public_click_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
-        public_check_element(driver, '//span[text()="I will give help"]', '选择I_will_give_help失败')
+        public_click_element(driver, '//span[text()="I will give help"]', '选择I_will_give_help失败')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
-        public_check_element(driver, '//span[text()="I need help"]', '选择I_need_help失败')
+        public_click_element(driver, '//span[text()="I need help"]', '选择I_need_help失败')
     elif has_dialog == 'has_no_dialog' and roles == '2':
-        public_check_element(driver, f2f_on_mode, '点击切换模式')
-        public_check_element(driver, '//*[@*="#rh_off"]/../..', '点击第二步')
+        public_click_element(driver, f2f_on_mode, '点击切换模式')
+        public_click_element(driver, '//*[@*="#rh_off"]/../..', '点击第二步')
 
 def enter_FGD_mode(driver,witch_mode):
     """
@@ -830,7 +837,7 @@ def enter_FGD_mode(driver,witch_mode):
     if witch_mode == "Document":
         public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
         time.sleep(2)
-        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Document"]/..',ec='ec',description='选择Document')
+        public_click_element(driver,choose_document,ec='ec',description='选择Document')
         get_xpath_element(driver,upload_file,ec='ec',description='上传pdf文件').send_keys(get_picture_path('test_citron.pdf'))
         # 返回原始状态
         public_click_element(driver, pdf_on_button, ec='ec', description='pdf_on_button')
@@ -933,6 +940,88 @@ def click_audio_only(driver):
     ele_list = get_xpath_elements(driver,Audio_Only_button)
     if len(ele_list) == 1:
         public_click_element(driver,Audio_Only_button,description='Audio_Only按钮')
+
+def giver_share_a_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
+    """
+    Share a Document，只有giver才会看到Share a Document按钮
+    :param driver:
+    :param fileName: 文件名
+    :param click_share:
+    :param check_info:
+    :return:
+    """
+    public_click_element(driver,Share_a_document,description='点击Share_a_Document按钮')
+    picture_path = get_picture_path(fileName)
+    get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
+    if click_share == 'click_share':
+        public_click_element(driver,'//button[text()="Share"]',description='点击Share按钮')
+    if check_info == 'check_info':
+        ele_list1 = get_xpath_elements(driver, expect_text_1)
+        ele_list2 = get_xpath_elements(driver, expect_text_2)
+        public_assert(driver,len(ele_list1),1,action='出现提示1')
+        public_assert(driver, len(ele_list2), 1, action='出现提示2')
+
+def helper_load_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
+    """
+    Load document，非fiver需要点击右侧的video红色按钮才能上传document
+    :param driver:
+    :param fileName: 文件名
+    :param click_share:
+    :param check_info:
+    :return:
+    """
+    public_click_element(driver,video_off_red,description='点击右侧的Video红色按钮')
+    time.sleep(2)
+    public_click_element(driver,choose_document,description='选择document')
+    picture_path = get_picture_path(fileName)
+    get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
+    if click_share == 'click_share':
+        public_click_element(driver,'//button[text()="Share"]',description='点击Share按钮')
+    if check_info == 'check_info':
+        ele_list1 = get_xpath_elements(driver, expect_text_1)
+        ele_list2 = get_xpath_elements(driver, expect_text_2)
+        public_assert(driver,len(ele_list1),1,action='出现提示1')
+        public_assert(driver, len(ele_list2), 1, action='出现提示2')
+
+def click_share_a_photo(driver,fileName,check_info = 'check_info'):
+    """
+    点击Share a Photo按钮，不区分giver/hepler
+    :param driver:
+    :param fileName: 文件名
+    :param check_info:
+    :return:
+    """
+    public_click_element(driver, Share_a_photo, description='点击Share_a_photo按钮')
+    picture_path = get_picture_path(fileName)
+    get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
+    if check_info == 'check_info':
+        ele_list4 = get_xpath_elements(driver, expect_text_4)
+        public_assert(driver, len(ele_list4), 1, action='出现提示4')
+
+def click_clear_shared_content(driver,which_mode = 'document',check_info='check_info'):
+    """
+    点击Clear Shared Content按钮
+    :param driver:
+    :param which_mode: 退出哪种模式？默认document模式。photo模式
+    :param check_info:
+    :return:
+    """
+    public_click_element(driver,Clear_Shared_Content,description='点击Clear_Shared_Content按钮')
+    if check_info == 'check_info' and which_mode == 'document':
+        ele_list3 = get_xpath_elements(driver, expect_text_3)
+        public_assert(driver, len(ele_list3), 1, action='出现提示3')
+    elif check_info == 'check_info' and which_mode == 'photo':
+        ele_list5 = get_xpath_elements(driver, expect_text_5)
+        public_assert(driver, len(ele_list5), 1, action='出现提示5')
+
+def exiting_photo_mode_show(driver):
+    """
+    Exiting Photo Mode提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list5 = get_xpath_elements(driver, expect_text_5)
+    public_assert(driver, len(ele_list5), 1, action='出现提示5')
 
 if __name__ == '__main__':
     from else_public_lib import driver_set_up_and_logIn, logout_citron

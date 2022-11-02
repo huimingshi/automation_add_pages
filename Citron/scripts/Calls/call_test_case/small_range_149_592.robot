@@ -21,7 +21,7 @@ Force Tags        small_range
 #    # Contact of premium user log in
 #    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
 #    # premium user call contact in F2F mode
-#    make_calls_with_who   ${driver1}   ${driver2}   ${big_admin_first_WS_username}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${big_admin_first_WS_name}
 #    # VP: hint dialog shows;
 #    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
 #    # Mute,Camera and End Call icon are at 50% opacity;

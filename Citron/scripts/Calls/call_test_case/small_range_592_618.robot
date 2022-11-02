@@ -27,7 +27,7 @@ Force Tags        small_range
 #    # User C log in
 #    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
 #    # User C与User B进行Call
-#    make_calls_with_who    ${driver3}   ${driver2}    ${big_admin_third_WS_username}
+#    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
 #    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
 #   which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
@@ -93,7 +93,7 @@ Force Tags        small_range
 #    # User C log in
 #    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
 #    # User C与User B进行Call
-#    make_calls_with_who    ${driver3}   ${driver2}    ${big_admin_third_WS_username}
+#    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
 #    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
 #    which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
@@ -115,7 +115,7 @@ Force Tags        small_range
 #    # User A切换到Contacts页面
 #    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
 #    # A call B, invite C
-#    make_calls_with_who    ${driver1}   ${driver2}    ${big_admin_third_WS_username}
+#    contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
 #    which_page_is_currently_on    ${driver1}    ${end_call_button}
 #    enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
 #    # 点击查询到的User C
@@ -158,7 +158,7 @@ Force Tags        small_range
 #    # User C log in
 #    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
 #    # User C与User B进行Call
-#    make_calls_with_who    ${driver3}   ${driver2}    ${big_admin_third_WS_username}
+#    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${big_admin_third_WS_name}
 #    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
 #    which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
