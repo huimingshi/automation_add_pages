@@ -1006,11 +1006,15 @@ def giver_share_a_document(driver,fileName,click_share = 'click_share',check_inf
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
     if click_share == 'click_share':
         public_click_element(driver,'//button[text()="Share"]',description='点击Share按钮')
-    if check_info == 'check_info':
-        ele_list1 = get_xpath_elements(driver, expect_text_1)
-        ele_list2 = get_xpath_elements(driver, expect_text_2)
-        public_assert(driver,len(ele_list1),1,action='未出现提示1')
-        public_assert(driver, len(ele_list2), 1, action='未出现提示2')
+        if check_info == 'check_info':
+            ele_list1 = get_xpath_elements(driver, expect_text_1)
+            ele_list2 = get_xpath_elements(driver, expect_text_2)
+            public_assert(driver,len(ele_list1),1,action='未出现提示1')
+            public_assert(driver, len(ele_list2), 1, action='未出现提示2')
+    else:
+        if check_info == 'check_info':
+            ele_list22 = get_xpath_elements(driver, expect_text_22)
+            public_assert(driver, len(ele_list22), 1, action='未出现提示22')
 
 @change_driver_implicit_wait
 def helper_load_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
@@ -1029,11 +1033,15 @@ def helper_load_document(driver,fileName,click_share = 'click_share',check_info 
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
     if click_share == 'click_share':
         public_click_element(driver,'//button[text()="Share"]',description='点击Share按钮')
-    if check_info == 'check_info':
-        ele_list1 = get_xpath_elements(driver, expect_text_1)
-        ele_list2 = get_xpath_elements(driver, expect_text_2)
-        public_assert(driver,len(ele_list1),1,action='未出现提示1')
-        public_assert(driver, len(ele_list2), 1, action='未出现提示2')
+        if check_info == 'check_info':
+            ele_list1 = get_xpath_elements(driver, expect_text_1)
+            ele_list2 = get_xpath_elements(driver, expect_text_2)
+            public_assert(driver,len(ele_list1),1,action='未出现提示1')
+            public_assert(driver, len(ele_list2), 1, action='未出现提示2')
+    else:
+        if check_info == 'check_info':
+            ele_list22 = get_xpath_elements(driver, expect_text_22)
+            public_assert(driver, len(ele_list22), 1, action='未出现提示22')
 
 @change_driver_implicit_wait
 def click_share_a_photo(driver,fileName,check_info = 'check_info'):
@@ -1246,6 +1254,23 @@ def now_observing_mode(driver):
     """
     ele_list21 = get_xpath_elements(driver, expect_text_21)
     public_assert(driver, len(ele_list21), 1, action='未出现提示21')
+
+@change_driver_implicit_wait
+def pending_document_sharing(driver):
+    """
+    PDF file is loading...提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list22 = get_xpath_elements(driver, expect_text_22)
+    public_assert(driver, len(ele_list22), 1, action='未出现提示22')
+
+@change_driver_implicit_wait
+def tap_share_button_to_share(driver):
+    ele_list23 = get_xpath_elements(driver, expect_text_23)
+    public_assert(driver, len(ele_list23), 1, action='未出现提示23')
+
+
 
 
 if __name__ == '__main__':

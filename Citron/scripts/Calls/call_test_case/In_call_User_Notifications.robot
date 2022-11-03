@@ -16,9 +16,9 @@ Library           call_python_Lib/about_call.py
 Force Tags        In-call User Notifications
 
 *** Test Cases ***
-In_call_User_Notifications_3467
+In_call_User_Notifications_3467_28_29_29
     [Documentation]    It occurs when you are the Helper and are sharing a document
-    [Tags]      In-call User Notifications 3-7 lines       call_case
+    [Tags]      In-call User Notifications 3-29 lines       call_case
     # log in
     ${driver1}   driver_set_up_and_logIn    ${message_test0_user}
     ${driver2}   driver_set_up_and_logIn    ${message_test1_user}
@@ -28,7 +28,14 @@ In_call_User_Notifications_3467
     make_sure_enter_call      ${driver1}
     # 选择helper，进入giver/helper模式
     enter_giver_mode   ${driver1}    None   None   2   has_dialog   help
-    # 点击右侧红色按钮，选择document，上传pdf     验证It occurs when you are the Helper and are sharing a document
+    # helper点击右侧红色按钮，选择document，上传pdf，不share
+    helper_load_document    ${driver1}     ${load_test_pdf}    no_click_share
+    # 验证Initiating Document sharing - particpipant has selected document but not selected Share.	  Pending Document sharing.
+    pending_document_sharing    ${driver1}
+    # 验证Doc Sharing after 5 seconds without selecting Share.	  Tap the Share button to share the document.
+    tap_share_button_to_share      ${driver1}
+    click_clear_shared_content      ${driver1}
+    # helper点击右侧红色按钮，选择document，上传pdf     验证It occurs when you are the Helper and are sharing a document
     helper_load_document    ${driver1}     ${load_test_pdf}
     # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when the share document mode ends.
     click_clear_shared_content      ${driver1}
@@ -48,7 +55,7 @@ In_call_User_Notifications_3568
     make_sure_enter_call      ${driver1}
     # 选择giver，进入giver/helper模式
     enter_giver_mode   ${driver1}    None   None   2   has_dialog   give
-    # 进入Document模式，上传PDF      验证It occurs when you aren't the Helper and are sharing a document
+    # giver进入Document模式，上传PDF      验证It occurs when you aren't the Helper and are sharing a document
     giver_share_a_document     ${driver1}    ${load_test_pdf}
     # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when the share document mode ends.
     click_clear_shared_content      ${driver1}
@@ -172,9 +179,9 @@ In_call_User_Notifications_24_25_54_55
     now_which_help     ${driver3}    giving
     [Teardown]    exit_driver
 
-In_call_User_Notifications_12_13_14_15_16_21_22_23
+In_call_User_Notifications_12_13_14_15_16_21_22_23_45
     [Documentation]    When user switches its role to Help Giver
-    [Tags]      In-call User Notifications 12-23 lines       call_case
+    [Tags]      In-call User Notifications 12-45 lines       call_case
     ###### 这个case很大可能失败，1-进入giver/helper后摄像头不一定被谁获取；2-进入giver/helper后，freeze图标不一定出现
     # User B log in
     ${driver2}   driver_set_up_and_logIn   ${message_test0_user}
@@ -186,11 +193,12 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23
     make_sure_enter_call     ${driver3}
     # 进入Giver/Helper模式
     enter_giver_mode      ${driver3}     none    none     2
-    # 验证Now Receiving Help. Point at a task area
+    # 验证When user switches its role to Help Receiver	Now Receiving Help. Point at a task area
+    # 验证When user enters a call on Call Center Mode	Now Receiving Help. Point at a task area
     point_at_a_task_area     ${driver2}
     # Giver模式切换到receiver模式
     giver_switch_receiver      ${driver3}
-    # 验证Now Giving Help. Pont at a white backgroud
+    # 验证When user switches its role to Help Giver	 Now Giving Help. Pont at a white backgroud
     point_at_a_white_background     ${driver2}
     # 进入Freeze模式
     image_is_frozen    ${driver3}
