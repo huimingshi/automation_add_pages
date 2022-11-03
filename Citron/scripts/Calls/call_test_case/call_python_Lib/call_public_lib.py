@@ -807,6 +807,15 @@ def click_right_small_hand(driver):
     """
     public_click_element(driver, '//div[@class="InCall"]//*[@*="#gh_on"]/..', description='点击右侧小手')
 
+def giver_switch_receiver(driver):
+    """
+    Giver模式切换到Receiver模式
+    :param driver:
+    :return:
+    """
+    click_right_small_hand(driver)
+    public_click_element(driver,'//span[text()="Receive Help"]',description='点击Receiver_Help按钮')
+
 @change_driver_implicit_wait
 def now_which_help(driver,expect_mode = 'receiving'):
     """
@@ -861,12 +870,12 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
     #     public_click_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
     #     public_click_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
-        public_click_element(driver, '//span[text()="I will give help"]', '选择I_will_give_help失败')
+        public_click_element(driver, '//span[text()="I will give help"]', description='选择I_will_give_help失败')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
-        public_click_element(driver, '//span[text()="I need help"]', '选择I_need_help失败')
+        public_click_element(driver, '//span[text()="I need help"]', description='选择I_need_help失败')
     elif has_dialog == 'has_no_dialog' and roles == '2':
-        public_click_element(driver, f2f_on_mode, '点击切换模式')
-        public_click_element(driver, '//*[@*="#rh_off"]/../..', '点击第二步')
+        public_click_element(driver, f2f_on_mode, description='点击切换模式')
+        public_click_element(driver, '//*[@*="#rh_off"]/../..', description='点击第二步')
 
 def enter_FGD_mode(driver,witch_mode):
     """
@@ -1201,9 +1210,42 @@ def left_call_switch_f2f_mode(driver,who):
     """
     ele_list17 = get_xpath_elements(driver, expect_text_17.format(who))
     public_assert(driver, len(ele_list17), 1, action='未出现提示17')
-    ele_list18 = get_xpath_elements(driver, expect_text_18.format(who))
+    ele_list18 = get_xpath_elements(driver, expect_text_18)
     public_assert(driver, len(ele_list18), 1, action='未出现提示18')
 
+@change_driver_implicit_wait
+def point_at_a_task_area(driver):
+    """
+    Now Receiving Help. Point at a task area提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list12 = get_xpath_elements(driver, expect_text_12)
+    public_assert(driver, len(ele_list12), 1, action='未出现提示12')
+    ele_list19 = get_xpath_elements(driver, expect_text_19)
+    public_assert(driver, len(ele_list19), 1, action='未出现提示19')
+
+@change_driver_implicit_wait
+def point_at_a_white_background(driver):
+    """
+    Now Giving Help. Pont at a white background提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list13 = get_xpath_elements(driver, expect_text_13)
+    public_assert(driver, len(ele_list13), 1, action='未出现提示13')
+    ele_list20 = get_xpath_elements(driver, expect_text_20)
+    public_assert(driver, len(ele_list20), 1, action='未出现提示20')
+
+@change_driver_implicit_wait
+def now_observing_mode(driver):
+    """
+    Now Observing mode提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list21 = get_xpath_elements(driver, expect_text_21)
+    public_assert(driver, len(ele_list21), 1, action='未出现提示21')
 
 
 if __name__ == '__main__':

@@ -162,6 +162,9 @@ expect_text_15 = '//div[text()="The task field is unfrozen"]'
 expect_text_16 = '//div[text()="{} has joined the call."]'
 expect_text_17 = '//div[text()="{} (Receiver) left the call"]'
 expect_text_18 = '//div[@class="subMessage" and contains(.,"Switched back to Face to Face mode.")]'
+expect_text_19 = '//div[@class="subMessage" and contains(.,"Point at a task area")]'
+expect_text_20 = '//div[@class="subMessage" and contains(.,"Point at a white background")]'
+expect_text_21 = '//div[text()="Now Observing"]'
 
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框

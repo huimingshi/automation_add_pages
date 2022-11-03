@@ -20,10 +20,10 @@ In_call_User_Notifications_3467
     [Documentation]    It occurs when you are the Helper and are sharing a document
     [Tags]      In-call User Notifications 3-7 lines       call_case
     # log in
-    ${driver1}   driver_set_up_and_logIn    ${notifications_user01}
-    ${driver2}   driver_set_up_and_logIn    ${notifications_user02}
+    ${driver1}   driver_set_up_and_logIn    ${message_test0_user}
+    ${driver2}   driver_set_up_and_logIn    ${message_test1_user}
     # make call
-    contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${notifications_username01}
+    contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${message_test0_username}
     # 确保进入通话
     make_sure_enter_call      ${driver1}
     # 选择helper，进入giver/helper模式
@@ -95,56 +95,56 @@ In_call_User_Notifications_18_20
     [Documentation]    When a participant joins the call in cooperation mode
     [Tags]      In-call User Notifications 18-20 lines       call_case
     # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${notifications_user03}
+    ${driver2}   driver_set_up_and_logIn   ${message_test3_user}
     # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${notifications_user04}
+    ${driver3}   driver_set_up_and_logIn   ${message_test4_user}
     # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username03}
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test3_username}
     make_sure_enter_call    ${driver3}
     make_sure_enter_call    ${driver2}
     # 进入Giver/Helper模式
     enter_giver_mode      ${driver3}     none    none     2
     # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${notifications_user05}
+    ${driver1}   driver_set_up_and_logIn   ${message_test5_user}
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_invite_in_calling_page   ${driver3}
     close_invite_3th_page     ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
-    # 验证When a participant joins the call in cooperation mode	%1$s has joined as obeserver
-    has_joined_as_obeserver    ${driver3}    ${notifications_username05}
+    # 验证When a participant joins the call in cooperation mode	    %1$s has joined as obeserver
+    has_joined_as_obeserver    ${driver3}    ${message_test5_username}
     # User A 结束call
     exit_call   ${driver1}   no_check
     # 验证When a participant leaves the call.	%1$s has left the session
-    has_left_the_session    ${driver3}    ${notifications_username05}
+    has_left_the_session    ${driver3}    ${message_test5_username}
     [Teardown]    exit_driver
 
 In_call_User_Notifications_17_19
     [Documentation]    It shows the name of a new participant that is joined to a call and it is on Face to Face
     [Tags]      In-call User Notifications 17-19 lines       call_case
     # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${notifications_user01}
+    ${driver2}   driver_set_up_and_logIn   ${message_test0_user}
     # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${notifications_user02}
+    ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username01}
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}
     make_sure_enter_call    ${driver3}
     make_sure_enter_call    ${driver2}
     # User A log in
-    ${driver1}   driver_set_up_and_logIn    ${notifications_user03}
+    ${driver1}   driver_set_up_and_logIn    ${message_test2_user}
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_invite_in_calling_page   ${driver3}
     close_invite_3th_page     ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
     # 验证It shows the name of a new participant that is joined to a call and it is on Face to Face	    %1$s has joined the call
-    has_joined_the_call     ${driver3}    ${notifications_username03}
+    has_joined_the_call     ${driver3}    ${message_test2_username}
     # 进入进入giver/helper模式
-    enter_giver_mode     ${driver3}    ${notifications_username02}    ${notifications_username01}      3
+    enter_giver_mode     ${driver3}    ${message_test1_username}    ${message_test0_username}      3
     # Giver or Receiver leave call
     leave_call    ${driver2}   no_need_select  none   0   no_check
     # 验证When a participant leaves the call, and is the Giver or Receiver of help.	%1$s (%2$s) left the call. Switched back to Face to Face mode.
-    left_call_switch_f2f_mode     ${driver3}      ${notifications_username01}
+    left_call_switch_f2f_mode     ${driver3}      ${message_test0_username}
     [Teardown]    exit_driver
 
 In_call_User_Notifications_24_25_54_55
@@ -172,21 +172,26 @@ In_call_User_Notifications_24_25_54_55
     now_which_help     ${driver3}    giving
     [Teardown]    exit_driver
 
-In_call_User_Notifications_12_13_14_15_16
+In_call_User_Notifications_12_13_14_15_16_21_22_23
     [Documentation]    When user switches its role to Help Giver
-    [Tags]      In-call User Notifications 12-16 lines       call_case
+    [Tags]      In-call User Notifications 12-23 lines       call_case
+    ###### 这个case很大可能失败，1-进入giver/helper后摄像头不一定被谁获取；2-进入giver/helper后，freeze图标不一定出现
     # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${notifications_user01}
+    ${driver2}   driver_set_up_and_logIn   ${message_test0_user}
     # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${notifications_user02}
+    ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username01}     accept    video
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}     accept    video
     make_sure_enter_call     ${driver2}
     make_sure_enter_call     ${driver3}
-    # 等待摄像头加载成功
-    sleep   15
     # 进入Giver/Helper模式
     enter_giver_mode      ${driver3}     none    none     2
+    # 验证Now Receiving Help. Point at a task area
+    point_at_a_task_area     ${driver2}
+    # Giver模式切换到receiver模式
+    giver_switch_receiver      ${driver3}
+    # 验证Now Giving Help. Pont at a white backgroud
+    point_at_a_white_background     ${driver2}
     # 进入Freeze模式
     image_is_frozen    ${driver3}
     # 验证It occurs when the Image is frozen and the user is not a Helper	Task field frozen.
@@ -201,6 +206,16 @@ In_call_User_Notifications_12_13_14_15_16
     the_task_field_is_unfrozen    ${driver3}
     # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
     the_task_field_is_unfrozen    ${driver3}
+    # 第三位user登录
+    ${driver1}   driver_set_up_and_logIn   ${message_test2_user}
+    # 邀请第三位user进入call
+    enter_contacts_search_user   ${driver3}   ${message_test2_username}
+    # 点击查询到的User A
+    click_user_in_contacts_call   ${driver3}   ${message_test2_username}
+    # User A 接收打进来的Call
+    user_anwser_call    ${driver1}
+    # 验证Now Observing mode
+    now_observing_mode    ${driver1}
     [Teardown]    exit_driver
 
 
