@@ -57,7 +57,7 @@ def end_call_for_all(driver,call_time='0'):
             time.sleep(5)
     public_check_element(driver, '//button[@variant="secondary" and contains(.,"Yes")]', 'end_call_for_all时找不到Yes按钮')
 
-def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.helplightning+EU2',call_time='0'):
+def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.helplightning+EU2',call_time='0',check_user_count='check'):
     """
     # Leave call
     :param driver:
@@ -70,15 +70,16 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
     time.sleep(int(call_time))
     # 确保进入通话中
     MSEC(driver)
-    for i in range(5):
-        ele_list = get_xpath_elements(driver,count_of_call_user)
-        if len(ele_list) > 2:
-            break
-        elif i == 4:
-            screen_shot_func(driver, '当前参与通话的人数不到3人')
-            raise Exception
-        else:
-            time.sleep(int(IMPLICIT_WAIT))
+    if check_user_count == 'check':
+        for i in range(5):
+            ele_list = get_xpath_elements(driver,count_of_call_user)
+            if len(ele_list) > 2:
+                break
+            elif i == 4:
+                screen_shot_func(driver, '当前参与通话的人数不到3人')
+                raise Exception
+            else:
+                time.sleep(int(IMPLICIT_WAIT))
     # User Leave call
     for i in range(5):
         hang_up_the_phone(driver)     # 点击红色的挂断电话按钮

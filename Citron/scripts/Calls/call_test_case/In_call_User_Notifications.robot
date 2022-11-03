@@ -101,6 +101,7 @@ In_call_User_Notifications_18_20
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username03}
     make_sure_enter_call    ${driver3}
+    make_sure_enter_call    ${driver2}
     # 进入Giver/Helper模式
     enter_giver_mode      ${driver3}     none    none     2
     # User A log in
@@ -116,6 +117,34 @@ In_call_User_Notifications_18_20
     exit_call   ${driver1}   no_check
     # 验证When a participant leaves the call.	%1$s has left the session
     has_left_the_session    ${driver3}    ${notifications_username05}
+    [Teardown]    exit_driver
+
+In_call_User_Notifications_17_19
+    [Documentation]    It shows the name of a new participant that is joined to a call and it is on Face to Face
+    [Tags]      In-call User Notifications 17-19 lines       call_case
+    # User B log in
+    ${driver2}   driver_set_up_and_logIn   ${notifications_user01}
+    # User C log in
+    ${driver3}   driver_set_up_and_logIn   ${notifications_user02}
+    # User C与User B进行Call
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username01}
+    make_sure_enter_call    ${driver3}
+    make_sure_enter_call    ${driver2}
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn    ${notifications_user03}
+    # User C 进入到邀请第三位用户进入call，获取link
+    ${invite_url}    send_invite_in_calling_page   ${driver3}
+    close_invite_3th_page     ${driver3}
+    # User A点击link进入call
+    user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
+    # 验证It shows the name of a new participant that is joined to a call and it is on Face to Face	    %1$s has joined the call
+    has_joined_the_call     ${driver3}    ${notifications_username03}
+    # 进入进入giver/helper模式
+    enter_giver_mode     ${driver3}    ${notifications_username02}    ${notifications_username01}      3
+    # Giver or Receiver leave call
+    leave_call    ${driver2}   no_need_select  none   0   no_check
+    # 验证When a participant leaves the call, and is the Giver or Receiver of help.	%1$s (%2$s) left the call. Switched back to Face to Face mode.
+    left_call_switch_f2f_mode     ${driver3}      ${notifications_username01}
     [Teardown]    exit_driver
 
 In_call_User_Notifications_24_25_54_55
@@ -173,4 +202,5 @@ In_call_User_Notifications_12_13_14_15_16
     # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
     the_task_field_is_unfrozen    ${driver3}
     [Teardown]    exit_driver
+
 

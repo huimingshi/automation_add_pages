@@ -3,6 +3,7 @@ import time
 
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import change_driver_implicit_wait
 from public_settings_and_variable import *
 from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
@@ -806,6 +807,7 @@ def click_right_small_hand(driver):
     """
     public_click_element(driver, '//div[@class="InCall"]//*[@*="#gh_on"]/..', description='点击右侧小手')
 
+@change_driver_implicit_wait
 def now_which_help(driver,expect_mode = 'receiving'):
     """
     Now Giving Help.或者Now Receiving Help.提示信息出现
@@ -815,10 +817,10 @@ def now_which_help(driver,expect_mode = 'receiving'):
     """
     if expect_mode == 'receiving':
         ele_list12 = get_xpath_elements(driver, expect_text_12)
-        public_assert(driver, len(ele_list12), 1, action='出现提示Receiving')
+        public_assert(driver, len(ele_list12), 1, action='未出现提示Receiving')
     else:
         ele_list13 = get_xpath_elements(driver, expect_text_13)
-        public_assert(driver, len(ele_list13), 1, action='出现提示Giving')
+        public_assert(driver, len(ele_list13), 1, action='未出现提示Giving')
 
 def choose_giver_helper(driver,who_give_help,who_receive_help):
     """
@@ -844,6 +846,7 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
     :return:
     """
     if roles == '3':
+        # 这是为了区分可能会是Call Center mode，如果是该模式的话，进入call就是giver/helper模式
         ele_list = get_xpath_elements(driver,f2f_on_mode)
         if len(ele_list) != 1:
             click_right_small_hand(driver)
@@ -979,6 +982,7 @@ def click_audio_only(driver):
     if len(ele_list) == 1:
         public_click_element(driver,Audio_Only_button,description='Audio_Only按钮')
 
+@change_driver_implicit_wait
 def giver_share_a_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
     """
     Share a Document，只有giver才会看到Share a Document按钮
@@ -996,9 +1000,10 @@ def giver_share_a_document(driver,fileName,click_share = 'click_share',check_inf
     if check_info == 'check_info':
         ele_list1 = get_xpath_elements(driver, expect_text_1)
         ele_list2 = get_xpath_elements(driver, expect_text_2)
-        public_assert(driver,len(ele_list1),1,action='出现提示1')
-        public_assert(driver, len(ele_list2), 1, action='出现提示2')
+        public_assert(driver,len(ele_list1),1,action='未出现提示1')
+        public_assert(driver, len(ele_list2), 1, action='未出现提示2')
 
+@change_driver_implicit_wait
 def helper_load_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
     """
     Load document，非fiver需要点击右侧的video红色按钮才能上传document
@@ -1018,9 +1023,10 @@ def helper_load_document(driver,fileName,click_share = 'click_share',check_info 
     if check_info == 'check_info':
         ele_list1 = get_xpath_elements(driver, expect_text_1)
         ele_list2 = get_xpath_elements(driver, expect_text_2)
-        public_assert(driver,len(ele_list1),1,action='出现提示1')
-        public_assert(driver, len(ele_list2), 1, action='出现提示2')
+        public_assert(driver,len(ele_list1),1,action='未出现提示1')
+        public_assert(driver, len(ele_list2), 1, action='未出现提示2')
 
+@change_driver_implicit_wait
 def click_share_a_photo(driver,fileName,check_info = 'check_info'):
     """
     点击Share a Photo按钮，不区分giver/hepler
@@ -1034,8 +1040,9 @@ def click_share_a_photo(driver,fileName,check_info = 'check_info'):
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
     if check_info == 'check_info':
         ele_list4 = get_xpath_elements(driver, expect_text_4)
-        public_assert(driver, len(ele_list4), 1, action='出现提示4')
+        public_assert(driver, len(ele_list4), 1, action='未出现提示4')
 
+@change_driver_implicit_wait
 def click_clear_shared_content(driver,which_mode = 'document',check_info='check_info'):
     """
     点击Clear Shared Content按钮
@@ -1047,11 +1054,12 @@ def click_clear_shared_content(driver,which_mode = 'document',check_info='check_
     public_click_element(driver,Clear_Shared_Content,description='点击Clear_Shared_Content按钮')
     if check_info == 'check_info' and which_mode == 'document':
         ele_list3 = get_xpath_elements(driver, expect_text_3)
-        public_assert(driver, len(ele_list3), 1, action='出现提示3')
+        public_assert(driver, len(ele_list3), 1, action='未出现提示3')
     elif check_info == 'check_info' and which_mode == 'photo':
         ele_list5 = get_xpath_elements(driver, expect_text_5)
-        public_assert(driver, len(ele_list5), 1, action='出现提示5')
+        public_assert(driver, len(ele_list5), 1, action='未出现提示5')
 
+@change_driver_implicit_wait
 def exiting_photo_mode_show(driver):
     """
     Exiting Photo Mode提示信息出现
@@ -1059,8 +1067,9 @@ def exiting_photo_mode_show(driver):
     :return:
     """
     ele_list5 = get_xpath_elements(driver, expect_text_5)
-    public_assert(driver, len(ele_list5), 1, action='出现提示5')
+    public_assert(driver, len(ele_list5), 1, action='未出现提示5')
 
+@change_driver_implicit_wait
 def has_joined_as_obeserver(driver,who):
     """
     %1$s has joined as obeserver提示信息出现
@@ -1069,8 +1078,9 @@ def has_joined_as_obeserver(driver,who):
     :return:
     """
     ele_list6 = get_xpath_elements(driver, expect_text_6.format(who))
-    public_assert(driver, len(ele_list6), 1, action='出现提示6')
+    public_assert(driver, len(ele_list6), 1, action='未出现提示6')
 
+@change_driver_implicit_wait
 def has_left_the_session(driver,who):
     """
     %1$s has left the session提示信息出现
@@ -1079,8 +1089,9 @@ def has_left_the_session(driver,who):
     :return:
     """
     ele_list7 = get_xpath_elements(driver, expect_text_7.format(who))
-    public_assert(driver, len(ele_list7), 1, action='出现提示7')
+    public_assert(driver, len(ele_list7), 1, action='未出现提示7')
 
+@change_driver_implicit_wait
 def your_invite_to_was_sent_successfully(driver,who):
     """
     Your invite to %1$s was sent successfully提示信息出现
@@ -1089,8 +1100,9 @@ def your_invite_to_was_sent_successfully(driver,who):
     :return:
     """
     ele_list8 = get_xpath_elements(driver, expect_text_8.format(who))
-    public_assert(driver, len(ele_list8), 1, action='出现提示8')
+    public_assert(driver, len(ele_list8), 1, action='未出现提示8')
 
+@change_driver_implicit_wait
 def has_accepted_your_call(driver):
     """
     %1$s has accepted your call提示信息出现
@@ -1098,8 +1110,9 @@ def has_accepted_your_call(driver):
     :return:
     """
     ele_list9 = get_xpath_elements(driver, expect_text_9)
-    public_assert(driver, len(ele_list9), 1, action='出现提示9')
+    public_assert(driver, len(ele_list9), 1, action='未出现提示9')
 
+@change_driver_implicit_wait
 def click_do_not_record(driver,who,check='check'):
     """
     点击Do not record按钮
@@ -1112,8 +1125,9 @@ def click_do_not_record(driver,who,check='check'):
     public_click_element(driver,do_not_record,description = 'do_not_record')
     if check == 'check':
         ele_list10 = get_xpath_elements(driver, expect_text_10.format(who))
-        public_assert(driver, len(ele_list10), 1, action='出现提示10')
+        public_assert(driver, len(ele_list10), 1, action='未出现提示10')
 
+@change_driver_implicit_wait
 def click_record_this_session(driver,who,check='check'):
     """
     点击Record this session按钮
@@ -1126,7 +1140,7 @@ def click_record_this_session(driver,who,check='check'):
     public_click_element(driver, record_this_session,description = 'record_this_session')
     if check == 'check':
         ele_list11 = get_xpath_elements(driver, expect_text_11.format(who))
-        public_assert(driver, len(ele_list11), 1, action='出现提示11')
+        public_assert(driver, len(ele_list11), 1, action='未出现提示11')
 
 def image_is_frozen(driver):
     """
@@ -1146,6 +1160,7 @@ def image_is_unfrozen(driver):
     public_click_element(driver,'//*[@*="#freeze_on"]/..',description='右侧Freeze图标')
     public_click_element(driver,'//span[text()="Huiming.shi…’s camera"]',description='Freeze按钮')
 
+@change_driver_implicit_wait
 def the_task_field_is_frozen(driver):
     """
     The task field is frozen提示信息出现
@@ -1153,8 +1168,9 @@ def the_task_field_is_frozen(driver):
     :return:
     """
     ele_list14 = get_xpath_elements(driver, expect_text_14)
-    public_assert(driver, len(ele_list14), 1, action='出现提示14')
+    public_assert(driver, len(ele_list14), 1, action='未出现提示14')
 
+@change_driver_implicit_wait
 def the_task_field_is_unfrozen(driver):
     """
     The task field is unfrozen提示信息出现
@@ -1162,7 +1178,33 @@ def the_task_field_is_unfrozen(driver):
     :return:
     """
     ele_list15 = get_xpath_elements(driver, expect_text_15)
-    public_assert(driver, len(ele_list15), 1, action='出现提示15')
+    public_assert(driver, len(ele_list15), 1, action='未出现提示15')
+
+@change_driver_implicit_wait
+def has_joined_the_call(driver,who):
+    """
+    %1$s has joined the call提示信息出现
+    :param driver:
+    :param who:
+    :return:
+    """
+    ele_list16 = get_xpath_elements(driver, expect_text_16.format(who))
+    public_assert(driver, len(ele_list16), 1, action='未出现提示16')
+
+@change_driver_implicit_wait
+def left_call_switch_f2f_mode(driver,who):
+    """
+    %1$s (%2$s) left the call. Switched back to Face to Face mode.提示信息出现
+    :param driver:
+    :param who:
+    :return:
+    """
+    ele_list17 = get_xpath_elements(driver, expect_text_17.format(who))
+    public_assert(driver, len(ele_list17), 1, action='未出现提示17')
+    ele_list18 = get_xpath_elements(driver, expect_text_18.format(who))
+    public_assert(driver, len(ele_list18), 1, action='未出现提示18')
+
+
 
 if __name__ == '__main__':
     from else_public_lib import driver_set_up_and_logIn, logout_citron

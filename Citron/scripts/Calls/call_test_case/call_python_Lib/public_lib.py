@@ -4,6 +4,17 @@
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import close_tutorial_button
 
+def change_driver_implicit_wait(func):
+    """
+    短暂性修改隐式等待时间
+    :param func:
+    :return:
+    """
+    def inner(*args):
+        args[0].implicitly_wait(30)
+        func(*args)
+        args[0].implicitly_wait(IMPLICIT_WAIT)
+    return inner
 
 def close_tutorial_action(driver):
     """

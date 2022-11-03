@@ -159,6 +159,10 @@ expect_text_12 = '//div[text()="Now Receiving Help"]'
 expect_text_13 = '//div[text()="Now Giving Help"]'
 expect_text_14 = '//div[text()="The task field is frozen"]'
 expect_text_15 = '//div[text()="The task field is unfrozen"]'
+expect_text_16 = '//div[text()="{} has joined the call."]'
+expect_text_17 = '//div[text()="{} (Receiver) left the call"]'
+expect_text_18 = '//div[@class="subMessage" and contains(.,"Switched back to Face to Face mode.")]'
+
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型
