@@ -380,7 +380,7 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         # public_assert(driver, len(ele_list), 1, action='未出现Waiting for an incoming call...')
     return driver
 
-def user_make_call_via_meeting_link(driver,meeting_link):
+def user_make_call_via_meeting_link(driver,meeting_link,check_disclaimer = 'check'):
     """
     # user打开这个会议link，需要处理Discliaimer
     :param meeting_link: 会议link
@@ -390,9 +390,10 @@ def user_make_call_via_meeting_link(driver,meeting_link):
     driver.execute_script(js.format(meeting_link))
     driver.switch_to.window(driver.window_handles[-1])  # 切换到最新页面
     # 处理Discliaimer
-    ele_list = get_xpath_elements(driver,accept_disclaimer)
-    if len(ele_list) == 1:
-        public_click_element(driver,accept_disclaimer,description='处理Discliaimer')
+    if check_disclaimer == 'check':
+        ele_list = get_xpath_elements(driver,accept_disclaimer)
+        if len(ele_list) == 1:
+            public_click_element(driver,accept_disclaimer,description='处理Discliaimer')
 
 def user_decline_call(driver,type = 'direct'):
     """
@@ -467,7 +468,7 @@ def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,fla
     if int(flag) == 1:
         public_click_element(driver_support,end_call_before_connecting,description = '提前End_call按钮')
 
-def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call group 1',accept='accept'):
+def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call group 1',accept='accept',audio = 'audio'):
     """
     Contacts页面进行call操作
     :param driver1:
@@ -499,9 +500,13 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     ellipsis_xpath = f'//div[text()="{who}"]/../../../..//div[@class="ellipsis-menu-div"]'
     ellipsis = get_xpath_element(driver1,ellipsis_xpath,description='悬浮按钮')
     ActionChains(driver1).move_to_element(ellipsis).perform()
-    # 选择Audio
-    audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Audio+"]/..'
-    public_click_element(driver1,audio_xpath,description='启动Audio按钮')
+    # 选择Audio或者video
+    if audio == 'audio':
+        audio_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Audio+"]/..'
+        public_click_element(driver1,audio_xpath,description='启动Audio按钮')
+    else:
+        video_xpath = f'//div[text()="{who}"]/../../../..//span[text()="Video"]/..'
+        public_click_element(driver1, video_xpath, description='启动Video按钮')
     # 需要Accept Declaimer
     driver1.implicitly_wait(5)
     count = get_xpath_elements(driver1, accept_disclaimer)
@@ -793,6 +798,40 @@ def enter_face_to_face_mode(driver):
     public_check_element(driver, '//*[@*="#rh_on"]', '进入f2f模式第一步失败')
     public_check_element(driver, '//*[@*="#f2f_off"]/../..', '进入f2f模式第二步失败')
 
+def click_right_small_hand(driver):
+    """
+    点击右侧小手
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, '//div[@class="InCall"]//*[@*="#gh_on"]/..', description='点击右侧小手')
+
+def now_which_help(driver,expect_mode = 'receiving'):
+    """
+    Now Giving Help.或者Now Receiving Help.提示信息出现
+    :param driver:
+    :param expect_mode:预期出现的提示信息
+    :return:
+    """
+    if expect_mode == 'receiving':
+        ele_list12 = get_xpath_elements(driver, expect_text_12)
+        public_assert(driver, len(ele_list12), 1, action='出现提示Receiving')
+    else:
+        ele_list13 = get_xpath_elements(driver, expect_text_13)
+        public_assert(driver, len(ele_list13), 1, action='出现提示Giving')
+
+def choose_giver_helper(driver,who_give_help,who_receive_help):
+    """
+    多人call中选择Giver和Helper
+    :param driver:
+    :param who_give_help:
+    :param who_receive_help:
+    :return:
+    """
+    public_click_element(driver, which_mode_help.format(who_give_help), description='选择GIVE HELP')
+    public_click_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
+    public_click_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
+
 def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialog = 'has_dialog',give_or_receive = 'give'):
     """
     进入giver/helper模式
@@ -804,21 +843,20 @@ def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialo
     :param give_or_receive: 想进入哪种模式；默认是give为giver模式，其他为receiver模式
     :return:
     """
-    # if roles == '3':
-    #     # ele_list = get_xpath_elements(driver,'//div[@class="InCall"]//*[@*="#gh_on"]')
-    #     # print(len(ele_list))
-    #     public_click_element(driver, '//div[@class="InCall"]//*[@*="#gh_on"]', description='点击右侧小手')
-    #     # btn_div = get_xpath_element(driver,'//div[@class="InCall"]//*[@*="#gh_on"]',description='右侧小手')
-    #     # driver.execute_script("arguments[0].click();", btn_div)
-    #     public_click_element(driver,'//span[text()="Switch Roles"]',description='点击Switch_Roles按钮')
-    #     public_check_element(driver, which_mode_help.format(who_give_help), description='选择GIVE HELP')
-    #     public_check_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
-    #     public_check_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
     if roles == '3':
-        public_click_element(driver, f2f_on_mode, description='点击切换模式')
-        public_click_element(driver, which_mode_help.format(who_give_help), description='选择GIVE HELP')
-        public_click_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
-        public_click_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
+        ele_list = get_xpath_elements(driver,f2f_on_mode)
+        if len(ele_list) != 1:
+            click_right_small_hand(driver)
+            public_click_element(driver,'//span[text()="Switch Roles"]',description='点击Switch_Roles按钮')
+            choose_giver_helper(driver,who_give_help,who_receive_help)
+        elif len(ele_list) == 1:
+            public_click_element(driver, f2f_on_mode, description='点击切换模式')
+            choose_giver_helper(driver,who_give_help,who_receive_help)
+    # if roles == '3':
+    #     public_click_element(driver, f2f_on_mode, description='点击切换模式')
+    #     public_click_element(driver, which_mode_help.format(who_give_help), description='选择GIVE HELP')
+    #     public_click_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
+    #     public_click_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
         public_click_element(driver, '//span[text()="I will give help"]', '选择I_will_give_help失败')
     elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
@@ -1022,6 +1060,109 @@ def exiting_photo_mode_show(driver):
     """
     ele_list5 = get_xpath_elements(driver, expect_text_5)
     public_assert(driver, len(ele_list5), 1, action='出现提示5')
+
+def has_joined_as_obeserver(driver,who):
+    """
+    %1$s has joined as obeserver提示信息出现
+    :param driver:
+    :param who:
+    :return:
+    """
+    ele_list6 = get_xpath_elements(driver, expect_text_6.format(who))
+    public_assert(driver, len(ele_list6), 1, action='出现提示6')
+
+def has_left_the_session(driver,who):
+    """
+    %1$s has left the session提示信息出现
+    :param driver:
+    :param who:
+    :return:
+    """
+    ele_list7 = get_xpath_elements(driver, expect_text_7.format(who))
+    public_assert(driver, len(ele_list7), 1, action='出现提示7')
+
+def your_invite_to_was_sent_successfully(driver,who):
+    """
+    Your invite to %1$s was sent successfully提示信息出现
+    :param driver:
+    :param who:
+    :return:
+    """
+    ele_list8 = get_xpath_elements(driver, expect_text_8.format(who))
+    public_assert(driver, len(ele_list8), 1, action='出现提示8')
+
+def has_accepted_your_call(driver):
+    """
+    %1$s has accepted your call提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list9 = get_xpath_elements(driver, expect_text_9)
+    public_assert(driver, len(ele_list9), 1, action='出现提示9')
+
+def click_do_not_record(driver,who,check='check'):
+    """
+    点击Do not record按钮
+    :param driver:
+    :param who:
+    :param check:
+    :return:
+    """
+    public_click_element(driver, recording_settings, description='recording_setting')
+    public_click_element(driver,do_not_record,description = 'do_not_record')
+    if check == 'check':
+        ele_list10 = get_xpath_elements(driver, expect_text_10.format(who))
+        public_assert(driver, len(ele_list10), 1, action='出现提示10')
+
+def click_record_this_session(driver,who,check='check'):
+    """
+    点击Record this session按钮
+    :param driver:
+    :param who:
+    :param check:
+    :return:
+    """
+    public_click_element(driver, recording_settings, description='recording_setting')
+    public_click_element(driver, record_this_session,description = 'record_this_session')
+    if check == 'check':
+        ele_list11 = get_xpath_elements(driver, expect_text_11.format(who))
+        public_assert(driver, len(ele_list11), 1, action='出现提示11')
+
+def image_is_frozen(driver):
+    """
+    进入Freeze模式
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,'//*[@*="#video_on"]/..',description='右侧video图标')
+    public_click_element(driver,'//span[text()="Freeze"]',description='Freeze按钮')
+
+def image_is_unfrozen(driver):
+    """
+    进入video模式
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,'//*[@*="#freeze_on"]/..',description='右侧Freeze图标')
+    public_click_element(driver,'//span[text()="Huiming.shi…’s camera"]',description='Freeze按钮')
+
+def the_task_field_is_frozen(driver):
+    """
+    The task field is frozen提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list14 = get_xpath_elements(driver, expect_text_14)
+    public_assert(driver, len(ele_list14), 1, action='出现提示14')
+
+def the_task_field_is_unfrozen(driver):
+    """
+    The task field is unfrozen提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list15 = get_xpath_elements(driver, expect_text_15)
+    public_assert(driver, len(ele_list15), 1, action='出现提示15')
 
 if __name__ == '__main__':
     from else_public_lib import driver_set_up_and_logIn, logout_citron

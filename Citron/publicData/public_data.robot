@@ -285,6 +285,7 @@ ${Malphite}                             Thank you for using 熔岩巨兽
 ${default_product_name}                 Thank you for using Help Lightning
 
 # message 用例专用账号
+# 下列账号都属于Huiming.shi下的我自己创建的WS中的User或者group
 # out of call message
 ${message_test0_user}                   Huiming.shi.helplightning+message_test0@outlook.com
 ${message_test0_username}               Huiming.shi.helplightning+message_test0
@@ -328,6 +329,7 @@ ${used_by_message_username03}           Huiming.shi.helplightning+used_chat_03
 ${used_by_message_user04}               Huiming.shi.helplightning+used_chat_04@outlook.com                                       # 用于message测试（used_by_message_group）
 ${used_by_message_username04}           Huiming.shi.helplightning+used_chat_04
 
+# 下列账号都属于Huiming.shi下的我自己创建的WS中的User或者group
 # in call message
 ${in_call_message_userA}                Huiming.shi.helplightning+in_call_messageA@outlook.com                                   # 属于message_test_WS_A
 ${in_call_message_usernameA}            Huiming.shi.helplightning+in_call_messageA
@@ -347,6 +349,23 @@ ${in_call_message_usernameD1}           Huiming.shi.helplightning+in_call_messag
 ${in_call_message_expert_group}         message_expert_groupA                                                                    # expert group
 
 ${message_test_WS_A}                    message_test_WS_A                                                                        # message_test_WS_A这个WS
+
+# 下列账号都属于Huiming.shi下的我自己创建的WS中的User或者group
+# In-call User Notifications
+${notifications_user01}                 Huiming.shi.helplightning+notificat_01@outlook.com                                       # 用于Notificationse测试(In-call User Notifications)
+${notifications_username01}             Huiming.shi.helplightning+notificat_01
+
+${notifications_user02}                 Huiming.shi.helplightning+notificat_02@outlook.com                                       # 用于Notificationse测试(In-call User Notifications)
+${notifications_username02}             Huiming.shi.helplightning+notificat_02
+
+${notifications_user03}                 Huiming.shi.helplightning+notificat_03@outlook.com                                       # 用于Notificationse测试(In-call User Notifications)
+${notifications_username03}             Huiming.shi.helplightning+notificat_03
+
+${notifications_user04}                 Huiming.shi.helplightning+notificat_04@outlook.com                                       # 用于Notificationse测试(In-call User Notifications)
+${notifications_username04}             Huiming.shi.helplightning+notificat_04
+
+${notifications_user05}                 Huiming.shi.helplightning+notificat_05@outlook.com                                       # 用于Notificationse测试(In-call User Notifications)
+${notifications_username05}             Huiming.shi.helplightning+notificat_05
 
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com

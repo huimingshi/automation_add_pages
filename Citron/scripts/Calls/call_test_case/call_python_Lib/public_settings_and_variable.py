@@ -143,11 +143,22 @@ use_photo_button = '//button[text()="Use"]'
 clear_shared_content = '//div[@class="RetakeButton"]'
 choose_document = '//div[@class="submenu-content"]//span[text()="Document"]/..'            # 选择document
 Clear_Shared_Content = '//button[text()="Clear Shared Content"]'              # Clear Shared Content按钮
+# call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'
 expect_text_3 = '//div[text()="Exiting document sharing mode."]'
 expect_text_4 = '//div[text()="You can now draw on the shared photo"]'
 expect_text_5 = '//div[text()="Exiting Photo Mode"]'
+expect_text_6 = '//div[text()="{}  has joined the call as an observer."]'
+expect_text_7 = '//div[text()="{} left the call"]'
+expect_text_8 = '//div[text()="Your invite to {} was sent successfully."]'
+expect_text_9 = '//div[text()="Your call has been accepted."]'
+expect_text_10 = '//div[text()="{} has turned off recording for this call."]'
+expect_text_11 = '//div[text()="{} has enabled recording for this call."]'
+expect_text_12 = '//div[text()="Now Receiving Help"]'
+expect_text_13 = '//div[text()="Now Giving Help"]'
+expect_text_14 = '//div[text()="The task field is frozen"]'
+expect_text_15 = '//div[text()="The task field is unfrozen"]'
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型
