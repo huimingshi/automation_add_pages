@@ -143,6 +143,7 @@ use_photo_button = '//button[text()="Use"]'
 clear_shared_content = '//div[@class="RetakeButton"]'
 choose_document = '//div[@class="submenu-content"]//span[text()="Document"]/..'            # 选择document
 Clear_Shared_Content = '//button[text()="Clear Shared Content"]'              # Clear Shared Content按钮
+cancel_send_photo = '//div[@class="ProgressInfo"]/button[text()="Cancel"]'
 # call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'
@@ -167,8 +168,10 @@ expect_text_20 = '//div[@class="subMessage" and contains(.,"Point at a white bac
 expect_text_21 = '//div[text()="Now Observing"]'
 expect_text_22 = '//div[@class="subMessage" and contains(.,"PDF file is loading...")]'
 expect_text_23 = '//div[text()="Tap the Share button to share the document"]'
-
-
+expect_text_24 = '//div[text()="Receiving document from {}"]'
+expect_text_25 = '//div[text()="Receiving photo from {}"]'
+expect_text_26 = '//div[text()="Sending photo…"]'
+expect_text_27 = '//div[text()="The upload of resource has been cancelled"]'
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型

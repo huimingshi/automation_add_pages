@@ -1043,21 +1043,26 @@ def helper_load_document(driver,fileName,click_share = 'click_share',check_info 
             ele_list22 = get_xpath_elements(driver, expect_text_22)
             public_assert(driver, len(ele_list22), 1, action='未出现提示22')
 
-@change_driver_implicit_wait
-def click_share_a_photo(driver,fileName,check_info = 'check_info'):
+def click_share_a_photo(driver,fileName):
     """
     点击Share a Photo按钮，不区分giver/hepler
     :param driver:
     :param fileName: 文件名
-    :param check_info:
     :return:
     """
     public_click_element(driver, Share_a_photo, description='点击Share_a_photo按钮')
     picture_path = get_picture_path(fileName)
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
-    if check_info == 'check_info':
-        ele_list4 = get_xpath_elements(driver, expect_text_4)
-        public_assert(driver, len(ele_list4), 1, action='未出现提示4')
+
+@change_driver_implicit_wait
+def you_can_draw_shared_photo(driver):
+    """
+    You can now draw on the shared photo提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list4 = get_xpath_elements(driver, expect_text_4)
+    public_assert(driver, len(ele_list4), 1, action='未出现提示4')
 
 @change_driver_implicit_wait
 def click_clear_shared_content(driver,which_mode = 'document',check_info='check_info'):
@@ -1267,10 +1272,56 @@ def pending_document_sharing(driver):
 
 @change_driver_implicit_wait
 def tap_share_button_to_share(driver):
+    """
+    Tap the Share button to share the document提示信息出现
+    :param driver:
+    :return:
+    """
     ele_list23 = get_xpath_elements(driver, expect_text_23)
     public_assert(driver, len(ele_list23), 1, action='未出现提示23')
 
+@change_driver_implicit_wait
+def receiving_file_from_anybody(driver,who,file_type='document'):
+    """
+    Receiving document from %1$s (Receiver)或者Receiving photo from %1$s (Receiver)提示信息出现
+    :param driver:
+    :param who:
+    :return:
+    """
+    if file_type == 'document':
+        ele_list24 = get_xpath_elements(driver, expect_text_24.format(who))
+        public_assert(driver, len(ele_list24), 1, action='未出现提示24')
+    else:
+        ele_list25 = get_xpath_elements(driver, expect_text_25.format(who))
+        public_assert(driver, len(ele_list25), 1, action='未出现提示25')
 
+@change_driver_implicit_wait
+def sending_photo_info(driver):
+    """
+    Sending photo...提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list26 = get_xpath_elements(driver, expect_text_26)
+    public_assert(driver, len(ele_list26), 1, action='未出现提示26')
+
+def click_cancel_send_photo(driver):
+    """
+    点击Cancel按钮，取消上传图片
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,cancel_send_photo,description='Cancel上传图片按钮')
+
+@change_driver_implicit_wait
+def upload_resource_has_cancelled(driver):
+    """
+    The upload of resource has been cancelled提示信息出现
+    :param driver:
+    :return:
+    """
+    ele_list27 = get_xpath_elements(driver, expect_text_27)
+    public_assert(driver, len(ele_list27), 1, action='未出现提示27')
 
 
 if __name__ == '__main__':

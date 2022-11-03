@@ -16,9 +16,9 @@ Library           call_python_Lib/about_call.py
 Force Tags        In-call User Notifications
 
 *** Test Cases ***
-In_call_User_Notifications_3467_28_29_29
+In_call_User_Notifications_3467_28_29_30_46_49_50_51
     [Documentation]    It occurs when you are the Helper and are sharing a document
-    [Tags]      In-call User Notifications 3-29 lines       call_case
+    [Tags]      In-call User Notifications 3-51 lines       call_case
     # log in
     ${driver1}   driver_set_up_and_logIn    ${message_test0_user}
     ${driver2}   driver_set_up_and_logIn    ${message_test1_user}
@@ -32,6 +32,8 @@ In_call_User_Notifications_3467_28_29_29
     helper_load_document    ${driver1}     ${load_test_pdf}    no_click_share
     # 验证Initiating Document sharing - particpipant has selected document but not selected Share.	  Pending Document sharing.
     pending_document_sharing    ${driver1}
+    # 验证When downloader receive the document from presenter	Receiving photo from %1$s (Receiver)
+    receiving_file_from_anybody   ${driver2}     ${message_test0_username}
     # 验证Doc Sharing after 5 seconds without selecting Share.	  Tap the Share button to share the document.
     tap_share_button_to_share      ${driver1}
     click_clear_shared_content      ${driver1}
@@ -39,8 +41,20 @@ In_call_User_Notifications_3467_28_29_29
     helper_load_document    ${driver1}     ${load_test_pdf}
     # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when the share document mode ends.
     click_clear_shared_content      ${driver1}
-    # 点击Share a photo按钮        验证It occurs when you are the Helper and are sharing a picture
+    # 点击Share a photo按钮
+    click_share_a_photo     ${driver1}     ${load_tristana_jpg}
+    # 点击Cancel按钮，取消上传图片
+    click_cancel_send_photo        ${driver1}
+    # 验证When user cancel sending photo	The upload of resource has been cancelled
+    upload_resource_has_cancelled       ${driver1}
+    # 点击Share a photo按钮
     click_share_a_photo     ${driver1}     ${load_test_jpg}
+    # 验证Uploading a photo	  Sending photo...
+    sending_photo_info    ${driver1}
+    # 验证When downloader receive the photo from uploader	Receiving photo from %1$s (Receiver)
+    receiving_file_from_anybody   ${driver2}     ${message_test0_username}    photo
+    # 验证It occurs when you are the Helper and are sharing a picture
+    you_can_draw_shared_photo     ${driver1}
     [Teardown]   exit_driver
 
 In_call_User_Notifications_3568
@@ -59,8 +73,10 @@ In_call_User_Notifications_3568
     giver_share_a_document     ${driver1}    ${load_test_pdf}
     # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when the share document mode ends.
     click_clear_shared_content      ${driver1}
-    # 点击Share a photo按钮        验证It occurs when you aren't the Helper and are sharing a picture
+    # 点击Share a photo按钮
     click_share_a_photo     ${driver1}    ${load_test_jpg}
+    # 验证It occurs when you aren't the Helper and are sharing a picture
+    you_can_draw_shared_photo     ${driver1}
     [Teardown]   exit_driver
 
 In_call_User_Notifications_9_10_11_31_32
@@ -92,9 +108,9 @@ In_call_User_Notifications_9_10_11_31_32
     click_share_a_photo     ${driver3}    ${load_test_jpg}
     # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when you change from the image mode and it tells for the Helper, tha it return to Help Mode
     click_clear_shared_content      ${driver3}      photo
-    # It occurs when you change from the image mode and it tells for the Receiver, that it return to Receive help
+    # 验证It occurs when you change from the image mode and it tells for the Receiver, that it return to Receive help
     exiting_photo_mode_show       ${driver2}
-    # It occurs when you change from the image mode and it tells for Observers, that it return to be an Observer
+    # 验证It occurs when you change from the image mode and it tells for Observers, that it return to be an Observer
     exiting_photo_mode_show       ${driver1}
     [Teardown]    exit_driver
 
