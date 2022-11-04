@@ -13,6 +13,7 @@ Library           call_python_Lib/recents_page.py
 Library           call_python_Lib/my_account.py
 Library           call_python_Lib/finish_call.py
 Library           call_python_Lib/about_call.py
+Library           call_python_Lib/in_call_info.py
 Force Tags        In-call User Notifications
 
 *** Test Cases ***
@@ -142,17 +143,18 @@ In_call_User_Notifications_18_20
     has_left_the_session    ${driver3}    ${message_test5_username}
     [Teardown]    exit_driver
 
-In_call_User_Notifications_17_19
+In_call_User_Notifications_17_19_40
     [Documentation]    It shows the name of a new participant that is joined to a call and it is on Face to Face
-    [Tags]      In-call User Notifications 17-19 lines       call_case
+    [Tags]      In-call User Notifications 17-40 lines       call_case
     # User B log in
     ${driver2}   driver_set_up_and_logIn   ${message_test0_user}
     # User C log in
     ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}
-    make_sure_enter_call    ${driver3}
-    make_sure_enter_call    ${driver2}
+    # 验证When user joins an audio call	Audio Only
+    audio_only_alert    ${driver3}
+    audio_only_alert    ${driver2}
     # User A log in
     ${driver1}   driver_set_up_and_logIn    ${message_test2_user}
     # User C 进入到邀请第三位用户进入call，获取link
@@ -195,7 +197,7 @@ In_call_User_Notifications_24_25_54_55
     now_which_help     ${driver3}    giving
     [Teardown]    exit_driver
 
-In_call_User_Notifications_12_13_14_15_16_21_22_23_45
+In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     [Documentation]    When user switches its role to Help Giver
     [Tags]      In-call User Notifications 12-45 lines       call_case
     ###### 这个case很大可能失败，1-进入giver/helper后摄像头不一定被谁获取；2-进入giver/helper后，freeze图标不一定出现
@@ -205,8 +207,8 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_45
     ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}     accept    video
-    make_sure_enter_call     ${driver2}
-    make_sure_enter_call     ${driver3}
+    # 验证When user enters a call check network	Checking Network Quality
+    checking_network_quality    ${driver3}
     # 进入Giver/Helper模式
     enter_giver_mode      ${driver3}     none    none     2
     # 验证When user switches its role to Help Receiver	Now Receiving Help. Point at a task area
@@ -216,20 +218,26 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_45
     giver_switch_receiver      ${driver3}
     # 验证When user switches its role to Help Giver	 Now Giving Help. Pont at a white backgroud
     point_at_a_white_background     ${driver2}
-    # 进入Freeze模式
-    image_is_frozen    ${driver3}
-    # 验证It occurs when the Image is frozen and the user is not a Helper	Task field frozen.
-    the_task_field_is_frozen    ${driver3}
-    # 验证It occurs when the Image is frozen and the user is a Helper	Task field frozen.
-    the_task_field_is_frozen    ${driver2}
-    # 进入video模式
-    image_is_unfrozen    ${driver3}
-    # 验证It occurs when the image is unfrozen and the user is a Helper	Task field unfrozen.
-    the_task_field_is_unfrozen    ${driver2}
-    # 验证It occurs when the image is unfrozen and the user is not a Helper	Task field unfrozen.
-    the_task_field_is_unfrozen    ${driver3}
-    # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
-    the_task_field_is_unfrozen    ${driver3}
+    # 关闭camera
+    turn_off_camera    ${driver2}
+    # 验证When receiver in cooperation mode turn camara off	Your camera is off. Start Video or share content.
+    your_camera_is_off    ${driver3}
+    # 再打开camera
+    turn_on_camera    ${driver2}
+#    # 进入Freeze模式
+#    image_is_frozen    ${driver3}
+#    # 验证It occurs when the Image is frozen and the user is not a Helper	Task field frozen.
+#    the_task_field_is_frozen    ${driver3}
+#    # 验证It occurs when the Image is frozen and the user is a Helper	Task field frozen.
+#    the_task_field_is_frozen    ${driver2}
+#    # 进入video模式
+#    image_is_unfrozen    ${driver3}
+#    # 验证It occurs when the image is unfrozen and the user is a Helper	Task field unfrozen.
+#    the_task_field_is_unfrozen    ${driver2}
+#    # 验证It occurs when the image is unfrozen and the user is not a Helper	Task field unfrozen.
+#    the_task_field_is_unfrozen    ${driver3}
+#    # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
+#    the_task_field_is_unfrozen    ${driver3}
     # 第三位user登录
     ${driver1}   driver_set_up_and_logIn   ${message_test2_user}
     # 邀请第三位user进入call
@@ -241,5 +249,3 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_45
     # 验证Now Observing mode
     now_observing_mode    ${driver1}
     [Teardown]    exit_driver
-
-

@@ -104,7 +104,9 @@ record_this_session = '//a[text()="Record this session"]/../..'
 do_not_record = '//a[text()="Do not record"]/../..'
 webglCameraOff = "//canvas[@id='webglCameraOff']"
 webglCameraOn = "//canvas[@id='webglCameraOn']"
-video_on_button = '//div[@class="InCall"]//div[@class="menus false"]/div[@class="menu withsub  "]'
+video_on_button = '//*[@*="#video_on"]/..'
+stop_video_button = '//span[text()="Stop Video"]'
+start_video_button = '//span[text()="Start Video"]'
 return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
 pdf_on_button = "//div[@class='InCall']//*[@*='#pdf_on']"
 ghop_on_button = "//div[@class='InCall']//*[@*='#ghop_on']/../.."
@@ -172,6 +174,9 @@ expect_text_24 = '//div[text()="Receiving document from {}"]'
 expect_text_25 = '//div[text()="Receiving photo from {}"]'
 expect_text_26 = '//div[text()="Sending photo…"]'
 expect_text_27 = '//div[text()="The upload of resource has been cancelled"]'
+expect_text_28 = '//div[text()="Checking Connection"]'
+expect_text_29 = '//div[text()="Audio+ Mode"]'
+expect_text_30 = '//div[text()="Your camera is off. Start Video or share content."]'
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型
