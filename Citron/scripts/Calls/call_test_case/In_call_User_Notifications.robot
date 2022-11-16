@@ -43,7 +43,7 @@ In_call_User_Notifications_3467_28_29_30_46_49_50_51
     # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when the share document mode ends.
     click_clear_shared_content      ${driver1}
     # 点击Share a photo按钮
-    click_share_a_photo     ${driver1}     ${load_tristana_jpg}
+    click_share_a_photo     ${driver1}     ${load_picture_jpg}
     # 点击Cancel按钮，取消上传图片
     click_cancel_send_photo        ${driver1}
     # 验证When user cancel sending photo	The upload of resource has been cancelled
@@ -207,6 +207,8 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}     accept    video
+#    proceed_with_camera_on    ${driver3}
+#    proceed_with_camera_on    ${driver2}
     # 验证When user enters a call check network	Checking Network Quality
     checking_network_quality    ${driver3}
     # 进入Giver/Helper模式
