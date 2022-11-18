@@ -10,7 +10,7 @@ ${upload_a_photo}                       xpath=//input[@type="file"]             
 ${upload_avatar}                        xpath=//button[contains(.,'Upload a photo...')]                         # Upload a photo... button
 ${change_avatar}                        xpath=//button[contains(.,"Change avatar...")]                          # Change avatar... button
 ${remove_avatar}                        xpath=//button[contains(.,"Remove avatar")]                             # Remove avatar button
-${default_avatar_src}                   xpath=//img                                                             # default avatar src
+${default_avatar_src}                   xpath=//label[text()="Avatar"]/..//img                                  # default avatar src
 ${get_avatar_src}                       xpath=//img[@class="avatar-preview"]                                    # get avatar src
 ${change_password}                      xpath=//button[contains(.,'Change password...')]                        # Change password... button
 ${current_password}                     xpath=//input[@id="password"]                                           # Current Password
