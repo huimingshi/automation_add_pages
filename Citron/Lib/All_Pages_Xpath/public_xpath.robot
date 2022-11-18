@@ -104,4 +104,4 @@ ${latest_modified_window_ok_button}     xpath=//button[@class="k-button k-primar
 ${Citron_web_url}                       https://app-stage.helplightning.net.cn                                                                      # Citron的网址
 
 # 左上角显示的logo
-${left_top_big_logo}                    xpath=//div[@class="topbar"]/a                                                                              # 左上角显示的logo
+${left_top_big_logo}                    xpath=//div[@class="topbar"]//img                                                                           # 左上角显示的logo

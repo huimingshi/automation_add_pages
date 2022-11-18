@@ -918,7 +918,7 @@ Small_range_1018_1026
     ${get_default_avatar_src_after}    split_src_img    ${get_default_avatar_src_after}
     close_branding_setting                  # Close branding设置
     # VP: Top left corner logo is updated
-    ${get_class_value}    get element attribute    ${left_top_big_logo}   style
+    ${get_class_value}    get element attribute    ${left_top_big_logo}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not contain    ${get_big_logo_src_before}     ${get_class_value}
     should contain    ${get_class_value}   ${get_big_logo_src_after}
