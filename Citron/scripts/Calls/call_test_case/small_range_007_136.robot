@@ -480,10 +480,10 @@ unable_to_reach_user_message_displays
 #    # 结束通话
 #    exit_call     ${driver1}
 #    # 关闭通话结束展示页面并退出
-#    close_call_ending_page      ${driver2}
+#    close_call_ending_page_RF      ${driver2}
 #    logout_citron   ${driver2}
 #    # 关闭通话结束展示页面
-#    close_call_ending_page      ${driver1}
+#    close_call_ending_page_RF      ${driver1}
 #    # 进入Recents页面
 #    sleep  5s   # 等待最近一次通话记录加载
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -513,7 +513,7 @@ unable_to_reach_user_message_displays
 #    # User A exit call
 #    exit_call  ${driver1}
 #    # 关闭通话结束展示页面
-#    close_call_ending_page      ${driver1}
+#    close_call_ending_page_RF      ${driver1}
 #    # 进入Recents页面
 #    sleep  5s   # 等待最近一次通话记录加载
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     switch_tree    1
@@ -534,8 +534,8 @@ unable_to_reach_user_message_displays
 #    # 结束通话
 #    exit_call     ${driver1}
 #    # 关闭通话结束展示页面
-#    close_call_ending_page      ${driver1}
-#    close_call_ending_page      ${driver2}
+#    close_call_ending_page_RF      ${driver1}
+#    close_call_ending_page_RF      ${driver2}
 #    # User B logout
 #    logout_citron   ${driver2}
 #    # 进入Recents页面
@@ -579,8 +579,8 @@ unable_to_reach_user_message_displays
 #    # 结束通话
 #    exit_call     ${driver1}
 #    # 关闭通话结束展示页面
-#    close_call_ending_page      ${driver1}
-#    close_call_ending_page      ${driver2}
+#    close_call_ending_page_RF      ${driver1}
+#    close_call_ending_page_RF      ${driver2}
 #    # User B logout
 #    logout_citron   ${driver2}
 #    # 进入Recents页面

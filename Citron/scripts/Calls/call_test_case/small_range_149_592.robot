@@ -80,15 +80,15 @@ Small_range_152
 #    switch_to_other_tab     ${driver1}     //div[@class="checkbox"]//input[@type="checkbox"]
 #    # End call, then make another call
 #    exit_call    ${driver1}   no_check
-#    close_call_ending_page    ${driver1}
-#    close_call_ending_page    ${driver2}
+#    close_call_ending_page_RF    ${driver1}
+#    close_call_ending_page_RF    ${driver2}
 #    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
 #    # VP: hint dialog does not shown
 #    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
 #    # End call
 #    exit_call    ${driver1}   no_check
-#    close_call_ending_page    ${driver1}
-#    close_call_ending_page    ${driver2}
+#    close_call_ending_page_RF    ${driver1}
+#    close_call_ending_page_RF    ${driver2}
 #    # open "Show menu hints" setting from account
 #    enter_my_account_settings_page    ${driver1}
 #    # VP: "Show menu hints" is off

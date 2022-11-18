@@ -124,7 +124,7 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
     # No Take Survey button
     check_survey_switch_success   ${driver1}   1
     # close call_ending page
-    close_call_ending_page  ${driver2}
+    close_call_ending_page_RF  ${driver2}
     # After ending call,	VP: The tutorial screen shows up.
     check_tutorial_screen_shows_up  ${driver2}
     [Teardown]      run keywords     Close
