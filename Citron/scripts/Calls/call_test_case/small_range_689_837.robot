@@ -609,7 +609,7 @@ Disclaimer_805
     reset_disclaimer   ${driver2}
     # App stays on the background for 40s.	App is back to forefront.
     sleep   40s
-    refresh_browser_page   ${driver1}
+    refresh_browser_page   ${driver1}   not_close
     # App is reconnected to server. Disclaimer should be shown up.
     disclaimer_should_be_shown_up_or_not   ${driver1}
     [Teardown]      run keywords    Close

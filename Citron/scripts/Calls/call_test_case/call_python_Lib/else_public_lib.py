@@ -551,6 +551,8 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     :return:
     """
     driver.refresh()
+    if get_xpath_elements(driver,accept_disclaimer) != 0:
+        public_click_element(driver,accept_disclaimer)
     if close_tutorial == 'close_tutorial':
         CTA(driver)
 

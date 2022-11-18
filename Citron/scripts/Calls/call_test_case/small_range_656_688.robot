@@ -90,12 +90,12 @@ Small_range_658
     ###### Verify: In recent tab, Callee has a missing incoming call record. And Caller has a outgoing call record.
     exit_call   ${driver1}    # 结束Call
     # Expert User2 刷新Recents页面
-    close_call_ending_page      ${driver2}   # 关闭通话结束页面
+    close_call_ending_page_RF      ${driver2}   # 关闭通话结束页面
     refresh_browser_page        ${driver2}   # 刷新页面
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}       3     # 获取Recents页面前三行call记录的时间
     two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
     # Expert User1 刷新Recents页面
-    close_call_ending_page      ${driver1}   # 关闭通话结束页面
+    close_call_ending_page_RF      ${driver1}   # 关闭通话结束页面
     switch_to_diffrent_page     ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     refresh_browser_page        ${driver1}   # 刷新页面
     ${occurred_time_list_01}    get_recents_page_records_occurred_time    ${driver1}           # 获取Recents页面前两行call记录的时间
@@ -171,13 +171,13 @@ Small_range_662
     # 结束Call
     exit_call   ${driver1}    1
     # Verify: In recent tab, User A has 1 outgoing call to User B.
-    close_call_ending_page    ${driver1}
+    close_call_ending_page_RF    ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}
     two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
     verify_username_in_recents_page    ${driver1}   ${Expert_User2_name}
     # User B has 1 incoming call from User A, and 1 outgoing call to User C.
-    close_call_ending_page    ${driver2}
+    close_call_ending_page_RF    ${driver2}
     refresh_browser_page   ${driver2}
     ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}    3
     two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
@@ -217,13 +217,13 @@ Small_range_663
     # 结束Call
     exit_call   ${driver1}    1
     # Verify: In recent tab,User A has 1 outgoing call  to User C. and has 1 outgoing call to  User B.
-    close_call_ending_page    ${driver1}
+    close_call_ending_page_RF    ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
     two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
     verify_username_in_recents_page    ${driver1}    ${Expert_User3_name}   ${Expert_User2_name}
     # User B has 1 incoming call from User A.
-    close_call_ending_page    ${driver2}
+    close_call_ending_page_RF    ${driver2}
     refresh_browser_page   ${driver2}
     ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
     two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
@@ -269,13 +269,13 @@ Small_range_664
     # VP2: user C should not see rating dialog.
     which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    not_currently_on
     # Verify: In recent tab, User A has 1 outgoing call to User B, and 1 outgoing call to User C.
-    close_call_ending_page    ${driver1}
+    close_call_ending_page_RF    ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
     two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
     verify_username_in_recents_page    ${driver1}    ${Expert_User3_name}   ${Expert_User2_name}
     #User B has 1 incoming call from User A.
-    close_call_ending_page    ${driver2}
+    close_call_ending_page_RF    ${driver2}
     refresh_browser_page   ${driver2}
     ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
     two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
@@ -312,7 +312,7 @@ Small_range_665
     # 结束Call
     exit_call   ${driver3}
     # Callee has a missing incoming call record.
-    close_call_ending_page   ${driver4}
+    close_call_ending_page_RF   ${driver4}
     refresh_browser_page    ${driver4}
     ${occurred_time_list_D2}    get_recents_page_records_occurred_time    ${driver4}       3
     two_list_has_one_same_element    ${driver4}   ${occurred_time_list_D1}    ${occurred_time_list_D2}
@@ -421,13 +421,13 @@ Small_range_665
 #    two_list_has_one_same_element    ${driver3}   ${occurred_time_list_C1}    ${occurred_time_list_C2}
 #    verify_username_in_recents_page    ${driver3}    ${Expert_User1_name}
 #    #Guest 1 has a outgoing call record to Owner.
-#    close_call_ending_page   ${driver2}
+#    close_call_ending_page_RF   ${driver2}
 #    refresh_browser_page    ${driver2}
 #    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
 #    two_list_has_one_same_element    ${driver2}   ${occurred_time_list_B1}    ${occurred_time_list_B2}
 #    verify_username_in_recents_page    ${driver4}    ${Expert_User1_name}
 #    #Owner has 2 incoming call records, one is a missing incoming call from Guest 2. And the other is from Guest 1.
-#    close_call_ending_page   ${driver1}
+#    close_call_ending_page_RF   ${driver1}
 #    refresh_browser_page    ${driver1}
 #    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
 #    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
@@ -449,7 +449,7 @@ Small_range_669_670
     # Verify:call connected
     exit_call    ${driver1}
     # 关闭call结束页面
-    close_call_ending_page    ${driver1}
+    close_call_ending_page_RF    ${driver1}
     [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
     ...             AND             exit_driver
 #    ...             AND             exit_driver     ${driver1}    ${driver2}
@@ -470,7 +470,7 @@ Small_range_669_670
 #    contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}  ${Expert_User1_name}   no_care
 #    # Verify: UserB receives a UI indicator that User A is Not Available along with Not Available Message set by citron
 #    which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
-#    close_call_ending_page    ${driver2}
+#    close_call_ending_page_RF    ${driver2}
 #    # VP: in Recents tab, User B has a outgoing call record of User A
 #    switch_to_diffrent_page   ${driver2}    ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    ${occurred_time_list_B2}    get_recents_page_records_occurred_time    ${driver2}
@@ -490,7 +490,7 @@ Small_range_669_670
 #    user_anwser_call     ${driver2}
 #    exit_call    ${driver1}
 #    # 关闭call结束页面
-#    close_call_ending_page    ${driver1}
+#    close_call_ending_page_RF    ${driver1}
 #    [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
 #    ...             AND             exit_driver
 ##    ...             AND             exit_driver     ${driver1}    ${driver2}
@@ -570,7 +570,7 @@ Small_range_669_670
 #    make_sure_enter_call    ${driver2}
 #    # VP: B see DND message, with ougoing call fails
 #    which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
-#    [Teardown]      run keywords    close_call_ending_page     ${driver1}
+#    [Teardown]      run keywords    close_call_ending_page_RF     ${driver1}
 #    ...             AND             do_not_disturb_become_available     ${driver1}
 #    ...             AND             exit_driver
 ##    ...             AND             exit_driver     ${driver1}    ${driver2}
@@ -610,7 +610,7 @@ Small_range_669_670
 #    make_sure_enter_call    ${driver2}
 #    # VP: B see DND message, with ougoing call fails
 #    which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
-#    [Teardown]      run keywords    close_call_ending_page     ${driver1}
+#    [Teardown]      run keywords    close_call_ending_page_RF     ${driver1}
 #    ...             AND             user_switch_to_second_workspace    ${driver1}    ${Huiming_shi_Added_WS_another}
 #    ...             AND             do_not_disturb_become_available     ${driver1}
 #    ...             AND             exit_driver
