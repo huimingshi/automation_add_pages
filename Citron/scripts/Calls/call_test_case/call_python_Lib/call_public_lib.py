@@ -867,7 +867,10 @@ def enter_FGD_mode(driver,witch_mode):
     :return:
     """
     if witch_mode == "Document":
-        public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
+        if len(get_xpath_elements(driver,video_on_button)) == 1:
+            public_click_element(driver,video_on_button,ec='ec',description='点击右侧的video按钮')
+        else:
+            public_click_element(driver, video_off_red, description='点击右侧的Video红色按钮')
         time.sleep(2)
         public_click_element(driver,choose_document,ec='ec',description='选择Document')
         get_xpath_element(driver,upload_file,ec='ec',description='上传pdf文件').send_keys(get_picture_path('test_citron.pdf'))

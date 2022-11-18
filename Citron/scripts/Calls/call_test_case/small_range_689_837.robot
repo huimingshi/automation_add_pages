@@ -1037,13 +1037,13 @@ Small_range_833
 Small_range_834
     [Documentation]     Call enterprise contact
     [Tags]    small range 834 line      call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
-#    ...         AND             Close
+    [Setup]     run keywords    Login_site_admin
+    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+    ...         AND             enter_workspace_settings_page           # 进入settings页面
+    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
+    ...         AND             Close
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}        ${switch_workspace_password}
     # Expert 登录
@@ -1102,10 +1102,10 @@ Small_range_836
     which_page_is_currently_on    ${driver2}     ${py_contacts_switch_success}
     # Verify User 1-1 & User 1-2 should have this incoming call record in recent tab.
     exit_call       ${driver1}
-    close_call_ending_page    ${driver1}
+    close_call_ending_page_RF    ${driver1}
     switch_to_diffrent_page    ${driver1}   ${py_recents_page}    ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_1}   get_recents_page_records_occurred_time    ${driver1}
-    close_call_ending_page    ${driver2}
+    close_call_ending_page_RF    ${driver2}
     switch_to_diffrent_page    ${driver2}   ${py_recents_page}    ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_2}   get_recents_page_records_occurred_time    ${driver2}
     two_option_is_equal    ${driver2}    ${occurred_time_list_1}   ${occurred_time_list_2}

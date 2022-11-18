@@ -543,7 +543,7 @@ def reset_disclaimer(driver):
     public_assert(driver,len(ele_list) , 1,action='Reset_All_Accepted_Disclaimers未生效')
     public_check_element(driver, "//button[text()='Reset All Accepted Disclaimers']", 'Disclaimer提示信息未散去', if_click=None,if_show=None)
 
-def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
+def refresh_browser_page(driver,close_tutorial = 'close_tutorial',close_disclaimer = 'no_care'):
     """
     刷新浏览器的某个页面
     :param driver:
@@ -551,8 +551,9 @@ def refresh_browser_page(driver,close_tutorial = 'close_tutorial'):
     :return:
     """
     driver.refresh()
-    if get_xpath_elements(driver,accept_disclaimer) != 0:
-        public_click_element(driver,accept_disclaimer)
+    if close_disclaimer != 'no_care':
+        if len(get_xpath_elements(driver,accept_disclaimer)) != 0:
+            public_click_element(driver,accept_disclaimer)
     if close_tutorial == 'close_tutorial':
         CTA(driver)
 

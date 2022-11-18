@@ -64,7 +64,7 @@ ${too_many_users_in_a_call}                     //div[@id="end_call_message" and
 ${pleas_do_not_disturb}                         //div[contains(.,"Please Do not disturb")]                                                          # User设置请勿打扰后，call这个user的话会出现这个提示信息：Please Do not disturb
 ${contact_title_xpath}                          //div[@class="contact-title" and @title="请勿动该账号，自动化测试专用账号"]                               # 显示title
 ${contact_location_xpath}                       //div[@class="contact-location" and @title="请勿动该账号，自动化测试专用账号"]                            # 显示location
-${left_top_Logo}                                //a[@class="banner"]                                                                                # 左上角的Logo
+${left_top_Logo}                                //img[@class="banner defaul-logo"]                                                                  # 左上角的Logo
 ${first_data_img}                               //div[@class="ag-center-cols-container"]/div[@row-index="0"]//div[@class="AvatarImageRenderer"]//img                                   # 首行数据的头像
 ${second_data_img}                              //div[@class="ag-center-cols-container"]/div[@row-index="1"]//div[@class="AvatarImageRenderer"]//img                                   # 第二行数据的头像
 ${first_data_img_in_invite_page}                //div[@class="ag-center-cols-container"]/div[@row-index="0" ]/div[@col-id="avatar.url"]//img        # 通话过程中邀请第三位参与通话时的首行数据的头像
