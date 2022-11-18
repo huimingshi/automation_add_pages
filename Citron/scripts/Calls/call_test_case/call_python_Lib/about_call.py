@@ -169,6 +169,24 @@ def close_call_ending_page(driver):
     elif len(ele_list) == 0:
         print('没有通话结束页面')
 
+def close_call_ending_page_RF(driver):
+    """
+    # 关闭通话结束展示页面
+    :param driver:
+    :return:
+    """
+    STLW(driver)  # 切换到最新页面
+    ele_list = get_xpath_elements(driver,'//div[@class="EndCallPageContent"]//span[@role="presentation"]')
+    if len(ele_list) == 1:
+        print('可以关闭通话结束页面')
+        public_click_element(driver,'//div[@class="EndCallPageContent"]//span[@role="presentation"]',description='关闭通话结束页面')
+    elif len(ele_list) == 0:
+        print('没有通话结束页面')
+    # 关闭tutorial
+    ele_list = get_xpath_elements(driver, close_tutorial_button)
+    if len(ele_list) == 1:
+        public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')
+
 def check_tutorial_screen_shows_up(driver):
     """
     # After ending call,	VP: The tutorial screen shows up.

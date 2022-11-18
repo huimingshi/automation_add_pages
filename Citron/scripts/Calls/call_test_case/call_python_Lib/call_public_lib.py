@@ -402,7 +402,7 @@ def user_decline_call(driver,type = 'direct'):
     """
     if type == 'direct':
         public_check_element(driver, decline_disclaimer, 'user_decline_call失败')
-    elif type == 'in_calling':
+    elif type != 'direct':
         public_check_element(driver, decline_call, 'user_decline_call失败')
 
 def user_anwser_call(driver,anwser_type = 'direct'):
