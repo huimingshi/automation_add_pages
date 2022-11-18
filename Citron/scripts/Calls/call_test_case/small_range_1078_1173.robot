@@ -386,6 +386,7 @@ Small_range_1161
     # Say "Hello" to contact
     ${random_str}    get_random_str
     # VP: message thread is with correct person
+    click_which_message    ${driver1}     ${message_test2_username}     ${message_test3_username}
     send_message_by_different_data     ${driver1}      ${random_str}
     click_message_info_check     ${driver1}          ${message_test0_username}    ${message_test2_username}    ${message_test3_username}
     click_which_message    ${driver1}     ${message_test1_username}
