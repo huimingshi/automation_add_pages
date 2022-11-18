@@ -58,23 +58,23 @@ Group_Admin_calls_list_export
     click_export_button
     [Teardown]    Close
 
-Group_Admin_view_call_details
-    [Documentation]    View call details
-    [Tags]   View call details
-    [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
-    ...       AND            enter_workspace_workspace_settings     # enter workspace settings
-    ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
-    ...       AND            Close    # close browser
-    # log in with group admin
-    Login_group_admin
-    # enter group calls
-    enter_group_calls
-    # choose Last 365 Days
-    choose_last_365_days
-    # Add tag and comments
-    add_tag_and_comments
-    # update tags
-    update_tags
-    # delete tags
-    delete_tags
-    [Teardown]    Close
+#Group_Admin_view_call_details
+#    [Documentation]    View call details
+#    [Tags]   View call details      有bug：https://vipaar.atlassian.net/browse/CITRON-3626
+#    [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
+#    ...       AND            enter_workspace_workspace_settings     # enter workspace settings
+#    ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
+#    ...       AND            Close    # close browser
+#    # log in with group admin
+#    Login_group_admin
+#    # enter group calls
+#    enter_group_calls
+#    # choose Last 365 Days
+#    choose_last_365_days
+#    # Add tag and comments
+#    add_tag_and_comments
+#    # update tags
+#    update_tags
+#    # delete tags
+#    delete_tags
+#    [Teardown]    Close

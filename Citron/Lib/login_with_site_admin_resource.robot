@@ -1121,7 +1121,7 @@ select_one_workspace_from_drop_down_menu
     click element    ${second_workspace_xpath}
     sleep  2s
     # Gets the text of the workspace
-    ${header_get}    get text   xpath=//div[@role="tree"]/div[1]//span[@class="k-link k-header"]
+    ${header_get}    get text   xpath=//div[@id="k-panelbar-item-default-.1"]/span
     # Joining together
     ${workspace_text_after}  converts_string_to_uppercase   ${workspace_text}
     ${information}    Catenate    ${workspace_text_after}   ADMINISTRATION
