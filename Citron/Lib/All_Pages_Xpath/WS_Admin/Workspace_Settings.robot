@@ -24,6 +24,7 @@ ${tagging_and_comments}                         xpath=//h1[contains(.,'After Cal
 ${survey_expand}                                xpath=//h1[contains(.,'After Call: End of Call Survey')]/../..//button[contains(.,'Expand')]                                # After Call: End of Call Survey Expand button
 ${switch_survey_close}                          xpath=//h1[contains(.,'After Call: End of Call Survey')]/../..//div[@class="react-toggle"]                                  # After Call: End of Call Survey open
 ${switch_survey_open}                           xpath=//h1[contains(.,'After Call: End of Call Survey')]/../..//div[@class="react-toggle react-toggle--checked"]            # After Call: End of Call Survey close
+${call_center_mode}                             xpath=//h1[contains(.,'During Call: Call Center Mode')]/../..                                                               # Call Center Mode button
 ${survey_url_text}                              xpath=//div[@class="survey-options"]//button                                                                                # survey URL text
 ${survey_url_input}                             xpath=//input[@id="edit-input-field"]                                                                                       # survey URL input
 ${survey_url_save}                              xpath=//i[@class="fa fa-lg fa-save"]                                                                                        # survey URL save

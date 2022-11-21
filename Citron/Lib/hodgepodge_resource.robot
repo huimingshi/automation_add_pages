@@ -882,6 +882,16 @@ disclaimer_popped_up_automate
     # The disclaimer should be popped up automate
     wait until element is visible   ${accept_disclaimer}     20s
 
+open_call_center_mode
+    ${count}   get element count   ${call_center_mode}//div[@class="react-toggle"]
+    Run Keyword If   '${count}'=='1'    click element   ${call_center_mode}//div[@class="react-toggle"]
+    sleep  2s
+
+close_call_center_mode
+    ${count}   get element count   ${call_center_mode}//div[@class="react-toggle react-toggle--checked"]
+    Run Keyword If   '${count}'=='1'   click element    ${call_center_mode}//div[@class="react-toggle react-toggle--checked"]
+    sleep  2s
+
 open_disable_external_users
     ${count}   get element count   ${disable_external_users}//div[@class="react-toggle"]
     Run Keyword If   '${count}'=='1'    click element   ${disable_external_users}//div[@class="react-toggle"]
@@ -1026,6 +1036,21 @@ switch_to_first_workspace
     sleep  2s
     ${ele_count}     get element count    ${accept_disclaimer}
     Run Keyword If   '${ele_count}'=='1'    click element    ${accept_disclaimer}
+
+make_sure_workspaces_call_center_mode_feature
+    [Arguments]   ${setting_1}   ${setting_2}
+    # enter first workspace workspace setting
+    enter_workspace_workspace_settings
+    # workspace WS1 has "Disable External Feature"=ON or OFF
+    Run Keyword If   '${setting_1}'=='open_feature'    open_call_center_mode
+    ...  ELSE IF  '${setting_1}'=='close_feature'    close_call_center_mode
+    # switch to second workspace
+    switch_to_second_workspace
+    # enter second workspace workspace setting
+    enter_workspace_workspace_settings
+    # workspace WS2 has "Disable External Feature"=ON or OFF
+    Run Keyword If   '${setting_2}'=='open_feature'    open_call_center_mode
+    ...  ELSE IF  '${setting_2}'=='close_feature'    close_call_center_mode
 
 make_sure_workspaces_setting_external_feature
     [Arguments]   ${setting_1}   ${setting_2}

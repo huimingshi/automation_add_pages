@@ -127,7 +127,10 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
     [Tags]      small range 85 line      call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_workspace_directory      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
+    ...         AND               make_sure_workspaces_call_center_mode_feature      close_feature     close_feature          # workspace WS1 has "Disable External Feature"=OFF; workspace WS2 has "Disable External Feature"=OFF;
+    ...         AND               Close
+    ...         AND               Login_premium_user
+    ...         AND               make_sure_workspaces_setting_workspace_directory     open_feature     close_feature         # workspace WS1 has "Enable Directory feature "; workspace WS2 has "Disable Directory feature ";
     ...         AND               Close
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
