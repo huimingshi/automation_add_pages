@@ -970,9 +970,10 @@ Small_range_1018_1026
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}
     two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
     # Call team contact and answer  	team contact invite 3rd participant	   View Contact list 	VP: Test avatar is loaded
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    exit_one_driver    ${driver1}
+    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_B_user}    ${universal_password}
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${ws3_branding_A_username}
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    make_sure_enter_call      ${driver1}
     enter_contacts_search_user     ${driver1}     ${ws3_branding_A_username}
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img_in_invite_page}   src
     ${get_class_value}     split_src_img    ${get_class_value}
