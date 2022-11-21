@@ -45,17 +45,18 @@ All_active_users_in_the_entire_enterprise_should_show
 #Disable_External_Users_Pre_condition_In_a_site_meeting_link
 #    [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
 #    [Tags]    small range 103+104+105+107 line     有bug：https://vipaar.atlassian.net/browse/GAL-2749   MHS-link不应该打通    有bug：https://vipaar.atlassian.net/browse/GAL-2953   OTU-link应该打通     call_case
-##    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-##    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
-##    ...         AND               Close
-##    ...         AND               Login_workspaces_admin    # log in with workspace admin
-##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-##    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
+#    ...         AND               Close
+#    ...         AND               Login_workspaces_admin    # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
 #    # User S belong to WS1 and WS2 log in
 #    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
 #    # another site user E2 log in
 #    ${driver2}  driver_set_up_and_logIn   ${normal_username_for_calls}   ${normal_password_for_calls}
+#    sleep   1000
 #    # Send MHS link
 #    ${invite_url}   send_meeting_room_link    ${driver1}   MHS
 #    # switch to second workspace
