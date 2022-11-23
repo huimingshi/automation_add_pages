@@ -461,24 +461,24 @@ Small_range_746
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
-Small_range_751
-    [Documentation]      Resolution Check    Web on PC   VP: Resolution = 1280x720
-    [Tags]    small range 751 line      call_case
-    # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${big_admin_first_WS_username}     ${universal_password}
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${big_admin_third_WS_username}     ${universal_password}
-    # 在Settings打开Debug Tools配置
-    switch_to_settings_page    ${driver2}    Settings    1    no_click_tree
-    open_debug_tools_in_settings   ${driver2}
-    # 进行Call
-    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${big_admin_third_WS_name}
-    sleep  20s    # 等待通话稳定
-    # 检查Debug页面的Resolution是否为1280x720
-    open_debug_dialog_check_resolution   ${driver2}
-    exit_call    ${driver1}
-    [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver1}    ${driver2}
+#Small_range_751
+#    [Documentation]      Resolution Check    Web on PC   VP: Resolution = 1280x720
+#    [Tags]    small range 751 line      call_case
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${big_admin_first_WS_username}     ${universal_password}
+#    # User B 登录
+#    ${driver2}    driver_set_up_and_logIn    ${big_admin_third_WS_username}     ${universal_password}
+#    # 在Settings打开Debug Tools配置
+#    switch_to_settings_page    ${driver2}    Settings    1    no_click_tree
+#    open_debug_tools_in_settings   ${driver2}
+#    # 进行Call
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${big_admin_third_WS_name}
+#    sleep  20s    # 等待通话稳定
+#    # 检查Debug页面的Resolution是否为1280x720
+#    open_debug_dialog_check_resolution   ${driver2}
+#    exit_call    ${driver1}
+#    [Teardown]      exit_driver
+##    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
 Small_range_799_802
     [Documentation]      Set Declaimer ->'delete user' is selected    Normal call

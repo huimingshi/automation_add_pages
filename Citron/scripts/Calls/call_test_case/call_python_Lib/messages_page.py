@@ -139,11 +139,13 @@ def get_unread_message_count(driver,message_count = '1'):
         public_assert(driver, 0, len(ele_list), action='Messages应该没有未读消息')
     else:
         # message会话页面
-        textContent = get_xpath_element(driver,unread_message_count,description='未读消息数').get_attribute("textContent")
-        public_assert(driver,int(textContent),int(message_count),action='获取未读消息数')
+        textContent = get_xpath_element(driver,unread_message_count,description='message会话页面未读消息数').get_attribute("textContent")
+        print('textContent:',textContent)
+        public_assert(driver,int(textContent),int(message_count),action='message会话页面获取未读消息数')
         # Messages菜单
-        textContent = get_xpath_element(driver, show_unread_message_count, description='未读消息数').get_attribute("textContent")
-        public_assert(driver, int(textContent), int(message_count), action='Messages获取未读消息数')
+        textContent = get_xpath_element(driver, show_unread_message_count, description='Messages菜单页面未读消息数').get_attribute("textContent")
+        print('textContent:',textContent)
+        public_assert(driver, int(textContent), int(message_count), action='Messages菜单页面获取未读消息数')
 
 def click_which_message(driver,*args):
     """

@@ -203,7 +203,7 @@ attachmentName = '//div[@class="attachmentName"]'                               
 message_dialog_div = '//div[@class="k-message-group k-alt"]/div'                                # History loaded smoothly
 delete_message_info = '//div[@class="modal-body" and text()="This permanently deletes this message thread for all participants. Are you Sure?"]'
 all_message_thread = '//div[@class="ChatSessionList_grid"]//div[@class="ag-center-cols-container"]/div'
-witch_message_thread = '//div[text()="{}"]'                                                     # 哪一个用户的message
+witch_message_thread = '//div[text()="{}"]/..'                                                     # 哪一个用户的message
 message_page_start_audio = '//div[@class="user_chat_buttons"]//span[text()="Audio+"]'           # 聊天中启动Audio+
 message_page_start_video = '//div[@class="user_chat_buttons"]//span[text()="Video"]'            # 聊天中启动Video
 invitation_dialog_cancel = '//button[@class="k-button" and text()="Cancel"]'                    # Cancel按钮
