@@ -37,21 +37,21 @@ Calls_Create_new_call_report
     [Teardown]    Run Keywords   delete_zip_and_csv_file   # Check whether there are existing files in the path and delete them if there are
     ...           AND            Close
 
-Call_details
-    [Documentation]    Call details
-    [Tags]    Call details；    citron 270+271
-    [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
-    ...       AND            enter_workspace_settings_page     # enter workspace settings
-    ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
-    # enter Workspace ADMINISTRATION Calls page
-    enter_calls_menu
-    # Add tag and comments
-    add_tag_and_comments
-    # update tags
-    update_tags
-    # delete tags
-    delete_tags
-    [Teardown]   Close
+#Call_details
+#    [Documentation]    Call details
+#    [Tags]    Call details；    citron 270+271        有bug：https://vipaar.atlassian.net/browse/CITRON-3626
+#    [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
+#    ...       AND            enter_workspace_settings_page     # enter workspace settings
+#    ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
+#    # enter Workspace ADMINISTRATION Calls page
+#    enter_calls_menu
+#    # Add tag and comments
+#    add_tag_and_comments
+#    # update tags
+#    update_tags
+#    # delete tags
+#    delete_tags
+#    [Teardown]   Close
 
 #Call_search
 #    [Documentation]    Call search
