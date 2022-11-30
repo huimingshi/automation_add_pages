@@ -4,7 +4,8 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
-Library           call_python_Lib/call_public_lib.py
+Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
 Library           call_python_Lib/about_call.py

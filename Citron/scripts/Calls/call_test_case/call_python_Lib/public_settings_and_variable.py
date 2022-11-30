@@ -65,6 +65,8 @@ add_tag_input = '//input[@placeholder="Add tags to filter calls..."]'       # ca
 add_tag_input_after = '//span[@class="k-searchbar"]/input[@type="text"]'    # call结束后已经添加tag后，再添加tag
 end_call_before_connecting = '//button[@class="btn btn-lg btn-danger"]'
 invite_user_div = "//div[@class='InCall']//*[@*='#options_menu']/.."   # 通话中界面右上角的三个横岗
+show_participants_button = "//div[@class='InCall']//*[@*='#participants']/.."   # 通话中界面右下角的参与者图标
+every_participant_name = "//div[@class='ag-center-cols-container']//strong"     # 通话中界面右下角的每个参与者
 enter_invite_user_page = '//div[@class="submenu-icons"]//span[text()="Invite"]/..'
 enter_debug_page = '//span[text()="Debug"]/..'
 close_bounced_after_call_end = '//button[@class="k-button k-button-icon closeButton"]'
@@ -111,7 +113,7 @@ return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
 pdf_on_button = "//div[@class='InCall']//*[@*='#pdf_on']"
 ghop_on_button = "//div[@class='InCall']//*[@*='#ghop_on']/../.."
 upload_file = '//input[@name="upload-file"]'
-f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']"
+f2f_on_mode = "//div[@class='InCall']//*[@*='#f2f_on']/.."
 which_mode_help = '//div[@class="user-base"]/strong[text()="{}"]'    # 选择GIVE HELP或者选择RECEIVE HELP
 count_of_call_user = '//div[@class="F2FVideos ShowOpenTokVideos"]/div'
 inviteDialog_search_user_input = '//div[@id="inviteDialog"]//input[@id="quick-search-text-box"]'
@@ -213,3 +215,27 @@ attach_particial_xpath = '//div[@class="attachmentName" and text()="{}"]/..//*[@
 preview_container = '//div[@class="preview-container"]//img'                                    # 预览图
 thumbnail_container = '//div[@class="attachment selectable "]/img'                              # 缩略图
 play_video_button = '//span[text()="Play Video"]/..'                                            # 播放Video按钮
+nav_left = "//*[@*='#nav_left']/.."                                                             # 左移按钮
+nav_solid = "//*[@*='#nav_solid']/.."                                                           # 固定按钮
+nav_hollow = "//*[@*='#nav_hollow']/.."                                                         # 空心按钮
+nav_right = "//*[@*='#nav_right']/.."                                                           # 右移按钮
+current_participant_div = "//div[@class='videoViews_4_{} ']//h6[@class='participantName']"      # 通话页面上展示的每个入会者
+participants_title = "//div[@class='WebCall show']//span[@ref='eText']"                         # 通话页面上participants下的4个标题
+co_host_on = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle react-toggle--checked']"    # Co-Host状态为on
+co_host_off = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle']"   # Co-Host状态为off
+can_not_turn_off = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle react-toggle--checked react-toggle--disabled']"   #Co-Host状态不能改成off
+can_not_remove = "//strong[text()='{}']/../../../../..//span[@class='disableRemove']"   #入会者不能被移除
+remove_one_participant = "//strong[text()='{}']/../../../../..//span//*[@*='#phone_end_red']/.."    # 移除某个入会者按钮
+mute_which_participant = "//strong[text()='{}']/../../../../..//*[@*='#mic_on']/.."    # 静音某个入会者
+mic_is_off = "//*[@*='#mic_off']/.."   # 麦克风静音状态
+mic_is_on = "//*[@*='#mic_on']/.."   # 麦克风开启状态
+participant_mic_is_off = "//strong[text()='{}']/../../../../..//*[@*='#mic_off']/.."   # 入会者的麦克风状态是静音
+confirm_remove = "//button[@variant='secondary' and text()='OK']"   # OK按钮，确认remove
+cancel_remove = "//button[@variant='primary' and text()='Cancel']"   # Cancel按钮，取消remove
+every_role = "//div[@class='user-list']//strong"   # 点击切换role的图标后，展示的所有user
+specific_which_user = "//div[@class='user-list']//strong[text()='{}']"   # 点击切换role的图标后，展示的具体的某个user
+back_button_in_bottom = "//div[@class='user-footer']/span[text()='< Back']"   # MODE底部的Back按钮
+continue_button_in_bottom = "//div[@class='user-footer']/button[text()='Continue']"      # MODE底部的Continue按钮
+giver_help_mode = "//*[@*='#gh_on']"
+receiver_help_mode = "//*[@*='#rh_on']"
+observer_mode = "//*[@*='#ob_on']"
