@@ -8,7 +8,8 @@ import time
 
 from Citron.Lib.python_Lib.ui_keywords import get_modify_picture_path as GMPP, check_zipFile_exists as CZE
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import suspension_of_the_mouse as SOTM,scroll_into_view as SIV
+from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import suspension_of_the_mouse as SOTM, \
+    scroll_into_view as SIV, refresh_browser_page as RBP
 from public_settings_and_variable import *
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -154,10 +155,9 @@ def click_which_message(driver,*args):
     :param username: 用户名s
     :return:
     """
+    time.sleep(2)
     if len(args) > 1:
-        user_list = []
-        for i in range(len(args)):
-            user_list.append(args[i])
+        user_list = [args[i] for i in range(len(args))]
         final_name_str = ', '.join(user_list)
     else:
         final_name_str = args[0]
@@ -407,11 +407,14 @@ def create_a_new_message(driver,search = 'search',*args):
     :return:
     """
     send_a_new_message_action(driver)
-    for i in range(5):
+    for i in range(4):
         ele_list = get_xpath_elements(driver,'//div[@class="ContactsGrid"]//div[@ref="eCenterContainer"]/div[@row-id="0"]')
         if len(ele_list) == 1:
             break
-        elif i == 4:
+        elif i == 1:
+            RBP(driver)
+            send_a_new_message_action(driver)
+        elif i == 3:
             public_assert(driver,1,len(ele_list),action='判断创建message时用户数据是否加载出来')
     if search == 'search':
         search_ele = get_xpath_element(driver,search_messages_box,description='创建新的message的搜索框')

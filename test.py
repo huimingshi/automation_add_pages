@@ -12,14 +12,22 @@ def test_yiled():
 my_test = test_yiled()
 print(type(my_test))
 
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
-next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+# next(my_test)
+
+for one in my_test:
+    pass
+
+a_string = "123456"
+print(list(a_string))
+v1 = list([1,2,3,4,5,6])
+print(type(v1)) 
