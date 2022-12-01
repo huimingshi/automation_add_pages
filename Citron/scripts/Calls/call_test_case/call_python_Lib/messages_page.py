@@ -322,9 +322,8 @@ def delete_first_message_thread(driver):
     :param driver:
     :return:
     """
+    time.sleep(2)
     public_click_element(driver,'//div[@class="ChatSessionList_grid"]//div[@ref="eCenterContainer"]//div[@row-id="0"]',description='第一条message')
-    # ele_list = get_xpath_elements(driver, all_message_thread)
-    # ele_list[0].click()
     time.sleep(2)
     # 点击Info按钮
     click_message_info(driver)
