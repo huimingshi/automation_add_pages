@@ -76,23 +76,23 @@ Call_Tag_drop_down_only_list_tags_belong_to_this_company
     get_all_tags
     [Teardown]   Close
 
-#Modify_call_tag_from_client_case
-#    [Documentation]    Modify call tag from client
-#    [Tags]    Modify call tag from client；    citron 273    有bug：https://vipaar.atlassian.net/browse/CITRON-3626
-#    [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
-#    ...       AND            enter_workspace_settings_page     # enter workspace settings
-#    ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
-#    ...       AND            Close    # close browser
-#    # log in with normal user
-#    Login_normal_for_calls
-#    # enter Recents page
-#    enter_recents_page
-#    # modify call tag from client (normal user modify from web)
-#    ${call_started_time}   ${third_tag}    modify_call_tag_from_client
-#    # log in with Workspace admin
-#    Login_workspaces_admin
-#    # enter Workspace ADMINISTRATION Calls page
-#    enter_workspace_calls
-#    # check mormal user modify tag successfully
-#    check_mormal_user_modify_tag_successfully   ${call_started_time}   ${third_tag}
-#    [Teardown]   Close
+Modify_call_tag_from_client_case
+    [Documentation]    Modify call tag from client
+    [Tags]    Modify call tag from client；    citron 273    有bug：https://vipaar.atlassian.net/browse/CITRON-3626，已修复
+    [Setup]   run keywords   Login_workspaces_admin       # log in with Workspace admin
+    ...       AND            enter_workspace_settings_page     # enter workspace settings
+    ...       AND            make_sure_tagging_and_comments_setting_open    # make sure After Call: Tagging and Comments setting is open
+    ...       AND            Close    # close browser
+    # log in with normal user
+    Login_normal_for_calls
+    # enter Recents page
+    enter_recents_page
+    # modify call tag from client (normal user modify from web)
+    ${call_started_time}   ${third_tag}    modify_call_tag_from_client
+    # log in with Workspace admin
+    Login_workspaces_admin
+    # enter Workspace ADMINISTRATION Calls page
+    enter_workspace_calls
+    # check mormal user modify tag successfully
+    check_mormal_user_modify_tag_successfully   ${call_started_time}   ${third_tag}
+    [Teardown]   Close
