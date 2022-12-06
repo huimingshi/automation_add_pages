@@ -8,7 +8,7 @@ Resource          ../../Lib/public.robot
 *** Test Cases ***
 New_Site_admin_logs_in_Citron
     [Documentation]    New Site admin logs in Citron
-    [Tags]    有bug，https://vipaar.atlassian.net/browse/CITRON-3053     open outlook email    有bug：https://vipaar.atlassian.net/browse/CITRON-3627
+    [Tags]    有bug，https://vipaar.atlassian.net/browse/CITRON-3053     open outlook email    有bug：https://vipaar.atlassian.net/browse/CITRON-3627，已修复
     # log in with crunch site admin
     Login_crunch
     # enter enterprises menu
