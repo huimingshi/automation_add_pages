@@ -378,42 +378,42 @@ Small_range_708_709
 #    [Teardown]      exit_driver
 ##    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
 #
-#Small_range_743_744
-#    [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
-#    [Tags]    small range 743-744 lines     call_case       有bug：https://vipaar.atlassian.net/browse/CITRON-3506
-#    # EU1 登录
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    # EU2 登录
-#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-#    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
-#    ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
-#    ###### EU1 click EU2's OTU link         724行
-#    user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver1}
-#    # EU2 接受Call
-#    user_anwser_call   ${driver2}
-#    ###### EU1 send 3PI link 1 to eMail       728行
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
-#    close_invite_3th_page    ${driver1}
-#    ###### EU2 send 3PI link 2 to eMail       731行
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    ${invite_url_2}   send_invite_in_calling_page    ${driver2}
-#    close_invite_3th_page    ${driver2}
-#    # 结束Call
-#    exit_call    ${driver1}
-#    ###### Login user click previous 3PI link 1	VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."     743行
-#    # EU3 登录
-#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
-#    user_make_call_via_meeting_link   ${driver3}    ${invite_url_1}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver3}
-#    which_page_is_currently_on    ${driver3}    ${this_call_is_over}
-#    ###### Anonymous user click 3PI link 2	VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."       744行
-#    ${driver10}    anonymous_open_meeting_link    ${invite_url_2}
-#    which_page_is_currently_on    ${driver10}    ${this_call_is_over}
-#    [Teardown]      exit_driver
+Small_range_743_744
+    [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
+    [Tags]    small range 743-744 lines     call_case       有bug：https://vipaar.atlassian.net/browse/WEBJS-3188，已修复
+    # EU1 登录
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    # EU2 登录
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
+    ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
+    ###### EU1 click EU2's OTU link         724行
+    user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
+    # EU2 接受Call
+    user_anwser_call   ${driver2}
+    ###### EU1 send 3PI link 1 to eMail       728行
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    close_invite_3th_page    ${driver1}
+    ###### EU2 send 3PI link 2 to eMail       731行
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    ${invite_url_2}   send_invite_in_calling_page    ${driver2}
+    close_invite_3th_page    ${driver2}
+    # 结束Call
+    exit_call    ${driver1}
+    ###### Login user click previous 3PI link 1	VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."     743行
+    # EU3 登录
+    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
+    user_make_call_via_meeting_link   ${driver3}    ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
+    which_page_is_currently_on    ${driver3}    ${this_call_is_over}
+    ###### Anonymous user click 3PI link 2	VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."       744行
+    ${driver10}    anonymous_open_meeting_link    ${invite_url_2}
+    which_page_is_currently_on    ${driver10}    ${this_call_is_over}
+    [Teardown]      exit_driver
 ##    [Teardown]    exit_driver    ${driver1}   ${driver2}   ${driver3}   ${driver10}
 
 Small_range_745
