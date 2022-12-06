@@ -37,14 +37,14 @@ enter_workspace_workspace_settings
     # Wait until enter page
     wait until element is visible   ${workspace_settings_tag}    20
 
-enter_workspace_calls
-    # click workspace ADMINISTRATION menu
-    click element   ${enter_workspace_menu}
-    sleep  1s
-    # click Users page menu
-    click element   ${enter_calls}
-    wait until element is visible    ${occurred_within_choose}
-    wait until element is visible    ${ws_calls_first_data_show}
+#enter_workspace_calls
+#    # click workspace ADMINISTRATION menu
+#    click element   ${enter_workspace_menu}
+#    sleep  1s
+#    # click Users page menu
+#    click element   ${enter_calls}
+#    wait until element is visible    ${occurred_within_choose}
+#    wait until element is visible    ${ws_calls_first_data_show}
 
 #enter_group_calls
 #    # click workspace ADMINISTRATION menu

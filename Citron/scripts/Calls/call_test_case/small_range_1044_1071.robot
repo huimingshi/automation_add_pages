@@ -7,6 +7,7 @@ Resource          ../../../Lib/hodgepodge_resource.robot
 Library           call_python_Lib/call_action_lib.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
+Library           call_python_Lib/finish_call.py
 Library           call_python_Lib/login_lib.py
 Library           call_python_Lib/contacts_page.py
 Force Tags        small_range
@@ -220,7 +221,6 @@ Small_range_1053
 #    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
 #    # 打开html页面并登录
 #    ${driver2}     open_html_create_call    ${normal_username_for_calls}       ${universal_password}    ${normal_username_for_calls_B}
-#    sleep   10000
 #    # user接受call
 #    user_anwser_call    ${driver1}
 #    # 退出call
