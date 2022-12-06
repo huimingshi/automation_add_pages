@@ -1072,10 +1072,8 @@ Small_range_1031
 #    # 2）Use WS 1's Default Logo Grey 'H' for the company logo above “Thank You for Using Helplightning”.
 #    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_logo}   src
 #    two_option_is_equal    ${driver1}    ${get_class_value}    None
-##    should be equal as strings    ${get_class_value}    None
 #    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
 #    two_option_is_equal    ${driver2}    ${get_class_value}    None
-##    should be equal as strings    ${get_class_value}    None
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}
 
