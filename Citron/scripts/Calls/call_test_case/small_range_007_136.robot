@@ -8,6 +8,7 @@ Library           call_python_Lib/call_action_lib.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
+Library           call_python_Lib/about_call.py
 Library           call_python_Lib/contacts_page.py
 Library           call_python_Lib/recents_page.py
 Library           call_python_Lib/my_account.py
@@ -568,46 +569,47 @@ unable_to_reach_user_message_displays
 #    [Teardown]     exit_driver
 ##    [Teardown]     exit_driver   ${driver1}   ${driver3}  ${driver4}
 #
-#User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
-#    [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
-#    [Tags]     small range 122+126 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
-#    [Setup]     run keywords      Login_workspaces_admin          # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-#    ...         AND               Close    # close browser
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
-#    # User B is  another enterprise user log in
-#    ${driver2}   driver_set_up_and_logIn   ${for_other_site_call_username}    ${public_pass}
-#    # 进行一次call
-#    switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
-#    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_personal_page}      ${for_other_site_call_name}
-#    # 结束通话
-#    exit_call     ${driver1}
-#    # 关闭通话结束展示页面
-#    close_call_ending_page_RF      ${driver1}
-#    close_call_ending_page_RF      ${driver2}
-#    # User B logout
-#    logout_citron   ${driver2}
-#    # 进入Recents页面
-#    sleep  5s   # 等待最近一次通话记录加载
-#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    refresh_browser_page   ${driver1}
-#    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-#    recents_page_check_call    ${driver1}   ${for_other_site_call_name}
-#    # 从邮箱获取刚发送的OTU邮件
-#    sleep  20s
-#    ${meeting_link}    obtain_meeting_link_from_email    check_otu
-#    # User B is another enterprise user log in
-#    ${driver3}   driver_set_up_and_logIn   ${for_other_site_call_username}    ${other_site_user_2_password}
-#    # VP: call establish successfully
-#    check_call_can_reach_to_or_not   ${driver1}   ${driver3}   ${meeting_link}    1
-#    # 切换到首个句柄
-#    switch_first_window   ${driver3}
-#    # User B logout
-#    logout_citron   ${driver3}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
+    [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
+    [Tags]     small range 122+126 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
+    [Setup]     run keywords      Login_premium_user              # log in with Site admin
+    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+    ...         AND               Close    # close browser
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}    ${switch_workspace_password}
+    # User B is  another enterprise user log in
+    ${driver2}   driver_set_up_and_logIn   ${for_other_site_call_username}    ${public_pass}
+    # 进行一次call
+    switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
+    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_personal_page}      ${for_other_site_call_name}
+    make_sure_enter_call    ${driver2}
+    # 结束通话
+    exit_call     ${driver1}
+    # 关闭通话结束展示页面
+    close_call_ending_page_RF      ${driver1}
+    close_call_ending_page_RF      ${driver2}
+    # User B logout
+    logout_citron   ${driver2}
+    # 进入Recents页面
+    sleep  5s   # 等待最近一次通话记录加载
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    refresh_browser_page   ${driver1}
+    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
+    recents_page_check_call    ${driver1}   ${for_other_site_call_name}
+    # 从邮箱获取刚发送的OTU邮件
+    sleep  20s
+    ${meeting_link}    obtain_meeting_link_from_email    check_otu
+    # User B is another enterprise user log in
+    ${driver3}   driver_set_up_and_logIn   ${for_other_site_call_username}    ${other_site_user_2_password}
+    # VP: call establish successfully
+    check_call_can_reach_to_or_not   ${driver1}   ${driver3}   ${meeting_link}    1
+    # 切换到首个句柄
+    switch_first_window   ${driver3}
+    # User B logout
+    logout_citron   ${driver3}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 ##    ...             AND             exit_driver   ${driver1}   ${driver3}
 
 Team_user_A_signs_in_User_B_is_expert_user
