@@ -14,33 +14,34 @@ Library           call_python_Lib/finish_call.py
 Force Tags        small_range
 
 *** Test Cases ***
-#Small_range_149_151
-#    [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
-#    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show     有bug：https://vipaar.atlassian.net/browse/CITRON-3353     call_case
-#    # premium user log in
-#    ${driver1}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
-#    # Contact of premium user log in
-#    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
-#    # premium user call contact in F2F mode
-#    contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${big_admin_first_WS_name}
-#    # VP: hint dialog shows;
-#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-#    # Mute,Camera and End Call icon are at 50% opacity;
-#    which_page_is_currently_on    ${driver1}    //*[@*="#mic_off"]
-#    which_page_is_currently_on    ${driver1}    //*[@*="#phone_end_red"]
-#    # Yellow star on F2F icon
-#    which_page_is_currently_on    ${driver1}    //img[@class="starHint"]
-#    # Click Mute/Camera/Hamburger
-#    switch_to_other_tab    ${driver1}    //*[@*="#mic_off"]
-#    sleep  1s
-#    # VP: hint dialog still shows
-#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-#    # Click Give or receive help on dialog
-#    enter_giver_mode     ${driver1}      none    none     2
-#    # Back to F2F mode	VP: hint dialog disappear
-#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
-#    [Teardown]      run keywords    exit_call   ${driver2}   1
-#    ...             AND             exit_driver
+Small_range_149_151
+    [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
+    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show     有bug：https://vipaar.atlassian.net/browse/CITRON-3353     call_case
+    # premium user log in
+    ${driver1}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
+    # Contact of premium user log in
+    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
+    # premium user call contact in F2F mode
+    contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${big_admin_first_WS_name}
+    # VP: hint dialog shows;
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+    # Mute,Camera and End Call icon are at 50% opacity;
+    which_page_is_currently_on    ${driver1}    //*[@*="#mic_off"]
+    which_page_is_currently_on    ${driver1}    //*[@*="#phone_end_red"]
+    # Yellow star on F2F icon
+    which_page_is_currently_on    ${driver1}    //img[@class="starHint"]
+    sleep  10000
+    # Click Mute/Camera/Hamburger
+    switch_to_other_tab    ${driver1}    //*[@*="#mic_off"]
+    sleep  1s
+    # VP: hint dialog still shows
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+    # Click Give or receive help on dialog
+    enter_giver_mode     ${driver1}      none    none     2
+    # Back to F2F mode	VP: hint dialog disappear
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+    [Teardown]      run keywords    exit_call   ${driver2}   1
+    ...             AND             exit_driver
 ##    ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Small_range_152
