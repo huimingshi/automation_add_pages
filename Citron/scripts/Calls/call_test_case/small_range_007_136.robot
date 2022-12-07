@@ -267,7 +267,6 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     # This user clicks this link
     # VP: should directly enter this call
     user_make_call_via_meeting_link     ${driver3}    ${invite_url}
-    # 结束call
     exit_call   ${driver3}
     [Teardown]      exit_driver
 ##    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
