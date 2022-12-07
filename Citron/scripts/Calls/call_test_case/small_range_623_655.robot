@@ -569,29 +569,29 @@ Small_range_647_648_649_650
     [Teardown]     exit_driver
 #    [Teardown]      exit_driver         ${driver1}   ${driver2}   ${driver3}
 
-#Small_range_651_652_653
-#    [Documentation]     3PI - Expert call
-#    [Tags]    small range 651+652+653 lines     call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    # EU1 登录
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    # expertA 登录
-#    ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}    ${universal_password}
-#    # EU1 call on-call group from Team contacts
-#    contacts_different_page_search_user    ${driver1}   ${py_team_page}      ${AaA_on_call_group_name}   # search on-call-group in Team page
-#    contacts_witch_page_make_call     ${driver1}   ${driver2}  ${py_team_page}    ${AaA_on_call_group_name}
-#    # expertA send 3PI link to anonymous user
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    ${invite_url}   send_invite_in_calling_page    ${driver2}
-#    close_invite_3th_page    ${driver2}
-#    # Anonymous user click 3PI link
-#    ${driver3}   anonymous_open_meeting_link    ${invite_url}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver3}
-#    # VP:expertA receive Accept dialog
-#    user_anwser_call    ${driver2}    no_direct
-#    # VP: 3PC call established successfully
-#    end_call_for_all    ${driver2}
-#    [Teardown]     exit_driver
+Small_range_651_652_653
+    [Documentation]     3PI - Expert call
+    [Tags]    small range 651+652+653 lines     call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+    # EU1 登录
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    # expertA 登录
+    ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}    ${universal_password}
+    # EU1 call on-call group from Team contacts
+    contacts_different_page_search_user    ${driver1}   ${py_team_page}      ${AaA_on_call_group_name}   # search on-call-group in Team page
+    contacts_witch_page_make_call     ${driver1}   ${driver2}  ${py_team_page}    ${AaA_on_call_group_name}
+    # expertA send 3PI link to anonymous user
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    ${invite_url}   send_invite_in_calling_page    ${driver2}
+    close_invite_3th_page    ${driver2}
+    # Anonymous user click 3PI link
+    ${driver3}   anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
+    # VP:expertA receive Accept dialog
+    user_anwser_call    ${driver2}    no_direct
+    # VP: 3PC call established successfully
+    end_call_for_all    ${driver2}
+    [Teardown]     exit_driver
 ##    [Teardown]      exit_driver         ${driver1}   ${driver2}   ${driver3}
 
 Small_range_654_655
