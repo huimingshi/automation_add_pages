@@ -132,23 +132,23 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
     ...             AND              exit_driver
 #    ...             AND              exit_driver   ${driver1}   ${driver2}
 
-#Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_button
-#    [Documentation]    Set Survey on  Set URL=Null	Make a call via Citron & Client	After ending call	VP: No Take Survey button.
-#    [Tags]    citron 63 line   ，有bug：https://vipaar.atlassian.net/browse/CITRON-3344，MAC系统的Chrome浏览器不能设置Survey URL为空值        call_case
-#    [Setup]     run keywords    Login_workspaces_admin      # log in with workspaces admin
-#    ...         AND             enter_workspace_workspace_settings      # enter workspace users
-#    ...         AND             set_survey_open        # Set Survey open
-#    ...         AND             set_survey_null        # Set Survey URL=Null
-#    ...         AND             Close       # close browser
-#    # Start two drivers and logIn
-#    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
-#    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
-#    # make call
-#    make_calls_with_who  ${driver1}  ${driver2}   ${normal_username_for_calls_B}
-#    # call on-call User exit call
-#    exit_call  ${driver1}
-#    # No Take Survey button
-#    check_survey_switch_success   ${driver1}
-#    [Teardown]   run keywords    Close
-#    ...          AND             exit_driver
+Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_button
+    [Documentation]    Set Survey on  Set URL=Null	Make a call via Citron & Client	After ending call	VP: No Take Survey button.
+    [Tags]    citron 63 line   ，有bug：https://vipaar.atlassian.net/browse/CITRON-3344，MAC系统的Chrome浏览器不能设置Survey URL为空值        call_case
+    [Setup]     run keywords    Login_workspaces_admin      # log in with workspaces admin
+    ...         AND             enter_workspace_workspace_settings      # enter workspace users
+    ...         AND             set_survey_open        # Set Survey open
+    ...         AND             set_survey_null        # Set Survey URL=Null
+    ...         AND             Close       # close browser
+    # Start two drivers and logIn
+    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
+    # make call
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}     ${normal_name_for_calls_B}
+    # call on-call User exit call
+    exit_call  ${driver1}
+    # No Take Survey button
+    check_survey_switch_success   ${driver1}
+    [Teardown]   run keywords    Close
+    ...          AND             exit_driver
 #    ...          AND             exit_driver  ${driver1}   ${driver2}
