@@ -34,8 +34,8 @@ def del_tags_in_call_details(driver):
     # 点击首行数据的Details按钮
     click_first_line_details(driver)
     # 删除第一个tag
-    public_check_element(driver, '//ul[@role="listbox"]/li[1]/span[@aria-label="delete"]', '删除第一个tag失败')
-    public_check_element(driver, '//div[@class="CallInfo container-box"]//button[@class="k-button k-primary pull-right"]', '点击保存按钮失败')
+    public_click_element(driver, '//ul[@role="listbox"]/li[1]/span[@aria-label="delete"]', description='删除第一个tag失败')
+    public_click_element(driver, '//div[@class="Tags container-box"]//button[@class="k-button k-primary pull-right"]', description='点击保存tag按钮失败')
     close_details_page(driver)
 
 def give_star_rating(driver,star):

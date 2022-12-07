@@ -14,72 +14,71 @@ Library           call_python_Lib/finish_call.py
 Force Tags        small_range
 
 *** Test Cases ***
+Call_Tag_Comment_592_595
+    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
+    [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮      call_case
+    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
+    ...         AND               Close
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
+    # User B log in
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}    ${big_admin_third_WS_password}
+    # User C log in
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
+    # User C与User B进行Call
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    # 点击查询到的User A
+    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    # User A 接收打进来的Call
+    user_anwser_call   ${driver1}
+    # User A leave call
+    exit_call   ${driver1}
+    # User A have tags screen pop up	A choose and enter new tag name, fill comments
+    ${first_tag_text}   add_tags_and_comment    ${driver1}     1   good_experience_1
+    # User A 进入Recents页面
+    sleep  5s   # 等待最近一次通话记录加载
+    close_call_ending_page_RF   ${driver1}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # A's recent should have tag and comments just entered
+    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}   good_experience_1
+    # Then B leave call after A added tags
+    exit_call   ${driver2}
+    # B and C add tags and comments
+    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_2
+    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_3
+    # 先关闭call结束页面
+    close_call_ending_page_RF   ${driver2}
+    close_call_ending_page_RF   ${driver3}
+    # View recents of this call	A and B and C should have same tags and comments，进入到Recents页面
+    # User A切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
+    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # User B C切换到Recents页面
+    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    # Modify any tags for this call
+    del_tags_in_call_details   ${driver3}
+    # User A B C 切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
+    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver3}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # Other participants tags must be updated,too;
+    first_call_record_tag_and_comment   ${driver1}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver2}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver3}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 
-#Call_Tag_Comment_592_595
-#    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮      call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-#    ...         AND               Close
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}    ${big_admin_third_WS_password}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
-#    # User C与User B进行Call
-#    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
-#    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
-#   which_page_is_currently_on    ${driver3}    ${end_call_button}
-#    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
-#    # 点击查询到的User A
-#    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
-#    # User A 接收打进来的Call
-#    user_anwser_call   ${driver1}
-#    # User A leave call
-#    exit_call   ${driver1}
-#    # User A have tags screen pop up	A choose and enter new tag name, fill comments
-#    ${first_tag_text}   add_tags_and_comment    ${driver1}     1   good_experience_1
-#    # User A 进入Recents页面
-#    sleep  5s   # 等待最近一次通话记录加载
-#    close_call_ending_page_RF   ${driver1}
-#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    # A's recent should have tag and comments just entered
-#    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}   good_experience_1
-#    # Then B leave call after A added tags
-#    exit_call   ${driver2}
-#    # B and C add tags and comments
-#    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_2
-#    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_3
-#    # 先关闭call结束页面
-#    close_call_ending_page_RF   ${driver2}
-#    close_call_ending_page_RF   ${driver3}
-#    # View recents of this call	A and B and C should have same tags and comments，进入到Recents页面
-#    # User A切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
-#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    # User B C切换到Recents页面
-#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-#    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-#    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-##    # Modify any tags for this call
-##    del_tags_in_call_details   ${driver3}
-##    # User A B C 切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
-##    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-##    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-##    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-##    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-##    switch_to_diffrent_page   ${driver3}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-##    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-##    # Other participants tags must be updated,too;
-##    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}      good_experience_3    good_experience_2   good_experience_1
-##    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}      good_experience_3    good_experience_2   good_experience_1
-##    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}      good_experience_3    good_experience_2   good_experience_1
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
-##    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}
 #
 #Call_Tag_Comment_596_599
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
