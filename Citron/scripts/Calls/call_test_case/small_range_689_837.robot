@@ -282,100 +282,100 @@ Small_range_710_723
     [Teardown]      exit_driver
 ##    [Teardown]      exit_driver    ${driver1}  ${driver2}   ${driver6}   ${driver7}
 
-#Small_range_724_742
-#    [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
-#    [Tags]    small range 724-742 lines     有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
-#    # EU1 登录
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    # EU2 登录
-#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-#    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
-#    ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
-#    ###### EU1 click EU2's OTU link         724行
-#    user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver1}
-#    # EU2 接受Call
-#    user_anwser_call   ${driver2}
-#    # EU3 登录
-#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
-#    ###### EU1 invite EU3 from Team contact       724行
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
-#    click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
-#    # EU3 接受Call
-#    user_anwser_call    ${driver3}
-#    ###### VP: 3PC call established successfully    EU3 leave call       724+725行
-#    exit_call     ${driver3}
-#    exit_one_driver    ${driver3}
-#    ###### EU2 invite EU4 from Directory       726行
-#    # EU4 登录
-#    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
-#    click_user_in_contacts_call   ${driver2}    ${Expert_User4_name}
-#    ###### VP: 3PC call established successfully    EU4 leave call       726+727行
-#    user_anwser_call    ${driver4}
-#    exit_call    ${driver4}
-#    exit_one_driver    ${driver4}
-#    ###### EU1 send 3PI link 1 to eMail       728行
-#    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
-#    close_invite_3th_page    ${driver1}
-#    ###### EU5 click 3PI link 1       729行
-#    # EU5 登录
-#    ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
-#    user_make_call_via_meeting_link   ${driver5}   ${invite_url_1}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver5}
-#    ###### VP: directly join call, don't need anyone's accept    EU5 leave call       730+731行
-#    exit_call     ${driver5}
-#    exit_one_driver    ${driver5}
-#    ###### EU2 send 3PI link 2 to eMail       731行
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    ${invite_url_2}   send_invite_in_calling_page    ${driver2}
-#    close_invite_3th_page    ${driver2}
-#    ###### Expert user from another enterprise click 3PI link 1 to join       732行
-#    # Expert user from another enterprise 登录
-#    ${driver6}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
-#    user_make_call_via_meeting_link   ${driver6}    ${invite_url_1}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver6}
-#    ###### VP: EU2 get Accept dialog    EU2 accept       732+733行
-#    user_anwser_call    ${driver2}    no_direct
-#    ###### EU1's contact directly call EU1	VP: contact get message like "EU1 is in another call"       734行
-#    # EU1's contact TU1 登录
-#    ${driver7}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
-#    contacts_witch_page_make_call    ${driver7}   ${driver1}   ${py_team_page}   ${Expert_User1_name}   no_care
-#    which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
-#    ###### EU2's contact directly call EU2	VP: contact get message like "EU1 is in another call"       735行
-#    # EU1's contact TU2 登录
-#    ${driver8}    driver_set_up_and_logIn    ${Team_User2_username}     ${universal_password}
-#    contacts_witch_page_make_call    ${driver8}   ${driver2}   ${py_team_page}   ${Expert_User2_name}   no_care
-#    which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
-#    ###### Click EU2's MHS link	VP: Get message like "EU2 is in another call"       736行
-#    user_make_call_via_meeting_link   ${driver8}     ${invite_url_mhs}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver8}
-#    which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
-#    ##### EU2 leave call   VP: call is not end    737行
-#    leave_call   ${driver2}
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    ###### Anonymous user click link 2    VP: EU1 get Accept dialog    EU1 accept    738+739行
-#    ${driver9}    anonymous_open_meeting_link    ${invite_url_2}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver9}
-#    user_anwser_call      ${driver1}     no_direct
-#    ###### VP: 3PC call established successfully    Anonymous leave call    739+740行
-#    which_page_is_currently_on    ${driver9}    ${end_call_button}
-#    exit_call   ${driver9}
-#    exit_one_driver    ${driver9}
-#    ###### EU2 click 3PI link 2 to join       741行
-#    user_make_call_via_meeting_link   ${driver2}    ${invite_url_2}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver2}
-#    ###### VP: 3PC call established successfully    End 3PC call    741+742行
-#    end_call_for_all       ${driver1}
-#    [Teardown]      exit_driver
+Small_range_724_742
+    [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
+    [Tags]    small range 724-742 lines     有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
+    # EU1 登录
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    # EU2 登录
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
+    ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
+    ###### EU1 click EU2's OTU link         724行
+    user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
+    # EU2 接受Call
+    user_anwser_call   ${driver2}
+    # EU3 登录
+    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
+    ###### EU1 invite EU3 from Team contact       724行
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
+    click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
+    # EU3 接受Call
+    user_anwser_call    ${driver3}
+    ###### VP: 3PC call established successfully    EU3 leave call       724+725行
+    exit_call     ${driver3}
+    exit_one_driver    ${driver3}
+    ###### EU2 invite EU4 from Directory       726行
+    # EU4 登录
+    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
+    click_user_in_contacts_call   ${driver2}    ${Expert_User4_name}
+    ###### VP: 3PC call established successfully    EU4 leave call       726+727行
+    user_anwser_call    ${driver4}
+    exit_call    ${driver4}
+    exit_one_driver    ${driver4}
+    ###### EU1 send 3PI link 1 to eMail       728行
+    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    close_invite_3th_page    ${driver1}
+    ###### EU5 click 3PI link 1       729行
+    # EU5 登录
+    ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
+    user_make_call_via_meeting_link   ${driver5}   ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver5}
+    ###### VP: directly join call, don't need anyone's accept    EU5 leave call       730+731行
+    exit_call     ${driver5}
+    exit_one_driver    ${driver5}
+    ###### EU2 send 3PI link 2 to eMail       731行
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    ${invite_url_2}   send_invite_in_calling_page    ${driver2}
+    close_invite_3th_page    ${driver2}
+    ###### Expert user from another enterprise click 3PI link 1 to join       732行
+    # Expert user from another enterprise 登录
+    ${driver6}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
+    user_make_call_via_meeting_link   ${driver6}    ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver6}
+    ###### VP: EU2 get Accept dialog    EU2 accept       732+733行
+    user_anwser_call    ${driver2}    no_direct
+    ###### EU1's contact directly call EU1	VP: contact get message like "EU1 is in another call"       734行
+    # EU1's contact TU1 登录
+    ${driver7}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
+    contacts_witch_page_make_call    ${driver7}   ${driver1}   ${py_team_page}   ${Expert_User1_name}   no_care
+    which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
+    ###### EU2's contact directly call EU2	VP: contact get message like "EU1 is in another call"       735行
+    # EU1's contact TU2 登录
+    ${driver8}    driver_set_up_and_logIn    ${Team_User2_username}     ${universal_password}
+    contacts_witch_page_make_call    ${driver8}   ${driver2}   ${py_team_page}   ${Expert_User2_name}   no_care
+    which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
+    ###### Click EU2's MHS link	VP: Get message like "EU2 is in another call"       736行
+    user_make_call_via_meeting_link   ${driver8}     ${invite_url_mhs}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver8}
+    which_page_is_currently_on    ${driver8}    ${user_is_currently_on_another_call}
+    ##### EU2 leave call   VP: call is not end    737行
+    leave_call   ${driver2}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    ###### Anonymous user click link 2    VP: EU1 get Accept dialog    EU1 accept    738+739行
+    ${driver9}    anonymous_open_meeting_link    ${invite_url_2}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver9}
+    user_anwser_call      ${driver1}     no_direct
+    ###### VP: 3PC call established successfully    Anonymous leave call    739+740行
+    which_page_is_currently_on    ${driver9}    ${end_call_button}
+    exit_call   ${driver9}
+    exit_one_driver    ${driver9}
+    ###### EU2 click 3PI link 2 to join       741行
+    user_make_call_via_meeting_link   ${driver2}    ${invite_url_2}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
+    ###### VP: 3PC call established successfully    End 3PC call    741+742行
+    end_call_for_all       ${driver1}
+    [Teardown]      exit_driver
 ##    [Teardown]    exit_driver    ${driver1}   ${driver6}   ${driver7}   ${driver8}
 #
 Small_range_743_744
