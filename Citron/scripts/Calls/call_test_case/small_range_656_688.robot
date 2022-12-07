@@ -104,25 +104,25 @@ Small_range_658
     [Teardown]   exit_driver
 #    [Teardown]   exit_driver    ${driver1}    ${driver2}    ${driver3}
 
-#Small_range_660
-#    [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
-#    [Tags]    small range 660 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3502
-#    # Expert User1 登录（case中的caller），这个user属于big_admin
-#    ${driver1}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_1@outlook.com     ${universal_password}
-#    # Expert User2 登录（case中的Joiner），这个user属于big_admin
-#    ${driver2}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_2@outlook.com     ${universal_password}
-#    # 获取meeting link
-#    ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
-#    # Joiner's App is killed
-#    logout_citron    ${driver2}
-#    # caller calls via meeting link
-#    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver1}
-#    # Owner decline call
-#    which_page_is_currently_on   ${driver1}    ${that_user_is_unreachable}
-#    [Teardown]   exit_driver
-##    [Teardown]   exit_driver    ${driver1}
+Small_range_660
+    [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
+    [Tags]    small range 660 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3502，已修复
+    # Expert User1 登录（case中的caller），这个user属于big_admin
+    ${driver1}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_1@outlook.com     ${universal_password}
+    # Expert User2 登录（case中的Joiner），这个user属于big_admin
+    ${driver2}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_2@outlook.com     ${universal_password}
+    # 获取meeting link
+    ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
+    # Joiner's App is killed
+    logout_citron    ${driver2}
+    # caller calls via meeting link
+    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver1}
+    # Owner decline call
+    which_page_is_currently_on   ${driver1}    ${that_user_is_unreachable}
+    [Teardown]   exit_driver
+#    [Teardown]   exit_driver    ${driver1}
 
 Small_range_661
     [Documentation]     No answer message   caller calls via meeting link	  Meeting room link[Owner's App runs in backgroup]
@@ -337,12 +337,12 @@ Small_range_665
 #    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
 #    # Guest 1 登录
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
 #    # Guest 1 call meeting link Owner
 #    user_make_call_via_meeting_link    ${driver2}   ${invite_url}
 #    # 确保建立call，但未接听
 #    make_sure_enter_call    ${driver2}
-#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
 #    # meeting link Owner 接受Call
 #    user_anwser_call   ${driver1}
 #    # Guest 2] 登录
@@ -351,35 +351,37 @@ Small_range_665
 #    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
 #    # Guest 2] calls one participant via meeting link
 #    user_make_call_via_meeting_link    ${driver3}   ${invite_url}
-#     # 确保建立call，但未接听
-#     make_sure_enter_call    ${driver3}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver3}
 #    # Owner] kill app during incoming call
 #    exit_one_driver  ${driver1}
-#    sleep  58s
 #    # VP: "xxx didn't answer your call"
-#    which_page_is_currently_on    ${driver3}    ${did_not_answer_your_call}
+#    which_page_is_currently_on    ${driver3}    ${participant_rejected_by_reception_room}
 #    # Verify: In recent tab,Owner has 1 incoming call from Guest 1. And 1 missing incoming call from Guest 2.
-#    exit_call    ${driver2}
-#    # meeting link Owner 重新登录
-#    ${driver4}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver4}    3
-#    two_list_has_one_same_element    ${driver4}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
-#    verify_username_in_recents_page    ${driver4}    ${Expert_User1_name}   ${Expert_User2_name}
-#    #Guest 1 has 1 outgoing call to Owner.
-#    close_last_window    ${driver2}
-#    refresh_browser_page    ${driver2}
+##    # 此处bug导致
+##    # meeting link Owner 重新登录
+##    ${driver4}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+##    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+##    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver4}    3
+##    two_list_has_one_same_element    ${driver4}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
+##    verify_username_in_recents_page    ${driver4}    ${Expert_User1_name}   ${Expert_User2_name}
+#    # Guest 1 has 1 outgoing call to Owner.
+#    exit_one_driver   ${driver2}
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
 #    two_list_has_one_same_element    ${driver2}   ${occurred_time_list_B1}    ${occurred_time_list_B2}
 #    verify_username_in_recents_page    ${driver2}    ${Expert_User1_name}
-#    #Guest 2 has 1 outgoing call to Owner.
-#    close_last_window    ${driver3}
-#    refresh_browser_page    ${driver3}
-#    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
-#    two_list_has_one_same_element    ${driver3}   ${occurred_time_list_C1}    ${occurred_time_list_C2}
-#    verify_username_in_recents_page    ${driver3}    ${Expert_User1_name}
-#    [Teardown]   exit_driver
-##    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}   ${driver4}
+#    # Guest 2 has 1 outgoing call to Owner.
+##    # 此处bug导致
+##    exit_one_driver   ${driver3}
+##    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
+##    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+##    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
+##    two_list_has_one_same_element    ${driver3}   ${occurred_time_list_C1}    ${occurred_time_list_C2}
+##    verify_username_in_recents_page    ${driver3}    ${Expert_User1_name}
+##    [Teardown]   exit_driver
+###    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}   ${driver4}
 
 #Small_range_667
 #    [Documentation]     Guest 1 call meeting link Owner    Guest 2] calls one participant via meeting link    Meeting Owner] declines call
@@ -396,8 +398,8 @@ Small_range_665
 #    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
 #    # Guest 1 call meeting link Owner
 #    user_make_call_via_meeting_link    ${driver2}   ${invite_url}
-#     # 确保建立call，但未接听
-#     make_sure_enter_call    ${driver2}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver2}
 #    # meeting link Owner 接受Call
 #    user_anwser_call   ${driver1}
 #    # Guest 2] 登录
@@ -406,8 +408,8 @@ Small_range_665
 #    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
 #    # Guest 2] calls one participant via meeting link
 #    user_make_call_via_meeting_link    ${driver3}   ${invite_url}
-#     # 确保建立call，但未接听
-#     make_sure_enter_call    ${driver3}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver3}
 #    # Meeting Owner] declines call
 #    user_decline_call    ${driver1}    in_calling
 #    # VP1:"Your call was declined."
@@ -416,23 +418,28 @@ Small_range_665
 #    exit_call   ${driver1}
 #    which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    not_currently_on
 #    # Verify: In recent tab, Guest 2 has a outgoing call record to Owner.
-#    close_last_window   ${driver3}
-#    refresh_browser_page    ${driver3}
-#    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
-#    two_list_has_one_same_element    ${driver3}   ${occurred_time_list_C1}    ${occurred_time_list_C2}
-#    verify_username_in_recents_page    ${driver3}    ${Expert_User1_name}
+##    # 此处bug导致
+##    close_last_window   ${driver3}
+##    refresh_browser_page    ${driver3}
+##    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+##    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
+##    two_list_has_one_same_element    ${driver3}   ${occurred_time_list_C1}    ${occurred_time_list_C2}
+##    verify_username_in_recents_page    ${driver3}    ${Expert_User1_name}
 #    #Guest 1 has a outgoing call record to Owner.
 #    close_call_ending_page_RF   ${driver2}
 #    refresh_browser_page    ${driver2}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
 #    two_list_has_one_same_element    ${driver2}   ${occurred_time_list_B1}    ${occurred_time_list_B2}
-#    verify_username_in_recents_page    ${driver4}    ${Expert_User1_name}
+#    verify_username_in_recents_page    ${driver2}    ${Expert_User1_name}
 #    #Owner has 2 incoming call records, one is a missing incoming call from Guest 2. And the other is from Guest 1.
-#    close_call_ending_page_RF   ${driver1}
-#    refresh_browser_page    ${driver1}
-#    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
-#    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
-#    verify_username_in_recents_page    ${driver4}    ${Expert_User1_name}   ${Expert_User2_name}
+##    # 此处bug导致
+##    close_call_ending_page_RF   ${driver1}
+##    refresh_browser_page    ${driver1}
+##    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+##    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
+##    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
+##    verify_username_in_recents_page    ${driver1}    ${Expert_User1_name}   ${Expert_User2_name}
 #    [Teardown]   exit_driver
 ##    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}
 

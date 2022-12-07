@@ -53,6 +53,7 @@ ${no_experts_are_available_tips}                //div[@class="AlertContainer"]//
 ${contacts_page_send_email}                     //button[text()="Send My Help Space Invitation"]                                                    # Send My Help Space Invitation
 ${recents_page_tag}                             //div[@class="Recents"]                                                                             # Recents页面的标志
 ${did_not_answer_your_call}                     //div[contains(.,"didn't answer your call.")]                                                       # didn't answer your call.
+${participant_rejected_by_reception_room}       //div[@id="end_call_message" and text()="Participant rejected by reception room."]                  # Participant rejected by reception room
 ${your_call_was_not_anwsered_in_call}           //div[@class="message" and text()="Your call was not answered."]                                    # Your call was not answered.
 ${your_call_was_not_anwsered}                   //div[@id="end_call_message" and text()="Your call was not answered."]                              # Your call was not answered.
 ${declined_your_call}                           //div[@class="message" and text()="Your call was declined." ]                                       # declined your call
