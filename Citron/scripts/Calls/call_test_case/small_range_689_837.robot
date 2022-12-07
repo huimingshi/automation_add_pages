@@ -69,7 +69,7 @@ Small_range_693_694_695
 
 Small_range_696_697_698_699
     [Documentation]     3PI - Meeting call     UserA send one time use link to anonymous UserB.
-    [Tags]    small range 696+697+698+699 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+    [Tags]    small range 696+697+698+699 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
@@ -98,7 +98,7 @@ Small_range_696_697_698_699
 
 Small_range_700_701_702_703
     [Documentation]     3PI - Meeting call     UserA send MHS link to anonymous UserB.
-    [Tags]    small range 700+701+702+703 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+    [Tags]    small range 700+701+702+703 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
     ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
@@ -125,36 +125,36 @@ Small_range_700_701_702_703
     which_page_is_currently_on     ${driver3}   ${five_star_high_praise}
     [Teardown]      exit_driver
 ##    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
-#
-#Small_range_704_705_706_707
-#    [Documentation]     3PI - Meeting call     UserA send MHS link to expert UserB.
-#    [Tags]    small range 704+705+706_707 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    # UserA 登录
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
-#    # UserB 登录
-#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-#    # UserB clicks link and join the call.
-#    user_make_call_via_meeting_link   ${driver2}   ${invite_url}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver2}
-#    # UserA 接受Call
-#    user_anwser_call   ${driver1}
-#    # UserA sends a 3pi link to team license UserC.
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
-#    close_invite_3th_page    ${driver1}
-#    # UserC click the link join the call.
-#    ${driver3}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
-#    user_make_call_via_meeting_link   ${driver3}   ${invite_url_1}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver3}
-#    # UserA left session.
-#    end_call_for_all   ${driver1}
-#    # Expected : session end
-#    which_page_is_currently_on     ${driver2}   ${five_star_high_praise}
-#    which_page_is_currently_on     ${driver3}   ${five_star_high_praise}
-#    [Teardown]      exit_driver
+
+Small_range_704_705_706_707
+    [Documentation]     3PI - Meeting call     UserA send MHS link to expert UserB.
+    [Tags]    small range 704+705+706_707 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
+    # UserA 登录
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+    # UserB 登录
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    # UserB clicks link and join the call.
+    user_make_call_via_meeting_link   ${driver2}   ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
+    # UserA 接受Call
+    user_anwser_call   ${driver1}
+    # UserA sends a 3pi link to team license UserC.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    close_invite_3th_page    ${driver1}
+    # UserC click the link join the call.
+    ${driver3}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
+    user_make_call_via_meeting_link   ${driver3}   ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
+    # UserA left session.
+    end_call_for_all   ${driver1}
+    # Expected : session end
+    which_page_is_currently_on     ${driver2}   ${five_star_high_praise}
+    which_page_is_currently_on     ${driver3}   ${five_star_high_praise}
+    [Teardown]      exit_driver
 ##    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_708_709
@@ -186,7 +186,7 @@ Small_range_708_709
 
 #Small_range_710_723
 #    [Documentation]     3PI - Meeting call     EU1 click EU2's MHS link
-#    [Tags]    small range 710-723 lines    有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case          有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+#    [Tags]    small range 710-723 lines    有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case          有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
 #    # EU1 登录
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
 #    switch_to_diffrent_page   ${driver1}   ${py_directory_page}     ${py_directory_switch_success}    ${py_get_number_of_rows}    # 进入Directory页面
@@ -284,7 +284,7 @@ Small_range_708_709
 #
 #Small_range_724_742
 #    [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
-#    [Tags]    small range 724-742 lines     有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+#    [Tags]    small range 724-742 lines     有bug：https://vipaar.atlassian.net/browse/CITRON-3313        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
 #    # EU1 登录
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
 #    # EU2 登录
