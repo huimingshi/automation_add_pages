@@ -599,7 +599,7 @@ Small_range_1000_1001
 
 Small_range_1002_1004
     [Documentation]     User B send 3PI link    User C switch to WS2    User C click 3PI link to join call
-    [Tags]    small range 1002-1004 lines       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+    [Tags]    small range 1002-1004 lines       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
     # --------------------------------------------------------------------------------------------------------- #
     # 此处为case执行的前置条件
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
@@ -762,38 +762,38 @@ Small_range_1005_1007
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
-#Small_range_1009
-#    [Documentation]     Click inactive 3PI link(nobody in call) that call's owner is User B
-#    [Tags]    small range 1009 line     call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    # --------------------------------------------------------------------------------------------------------- #
-#    # 此处为case执行的前置条件
-#    # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
-#    # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
-#    # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
-#    # 进行call
-#    contacts_witch_page_make_call     ${driver2}    ${driver1}   ${py_team_page}   ${ws_branding_A_name}
-#    # 获取3PI link
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    ${invite_url}    send_invite_in_calling_page     ${driver2}
-#    # 结束Call
-#    exit_call    ${driver1}
-#    # User C登录
-#    ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
-#    # Click inactive 3PI link(nobody in call) that call's owner is User B
-#    user_make_call_via_meeting_link     ${driver3}    ${invite_url}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver3}
-#    # VP: text and color are branded orange
-#    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_whole_page}   style                     # 整个页面
-#    check_a_contains_b    ${driver3}     ${get_class_value}      ${organizer_brand_orange_color}
-#    # Avatar should be User B customer avatar.
-#    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
-#    check_a_contains_b    ${driver3}     ${get_class_value}        ${WS_1_Big_Logo}
-#    [Teardown]      exit_driver
+Small_range_1009
+    [Documentation]     Click inactive 3PI link(nobody in call) that call's owner is User B
+    [Tags]    small range 1009 line     call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
+    # --------------------------------------------------------------------------------------------------------- #
+    # 此处为case执行的前置条件
+    # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
+    # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
+    # --------------------------------------------------------------------------------------------------------- #
+    # User A登录
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    # User B登录
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
+    # 进行call
+    contacts_witch_page_make_call     ${driver2}    ${driver1}   ${py_team_page}   ${ws_branding_A_name}
+    # 获取3PI link
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    ${invite_url}    send_invite_in_calling_page     ${driver2}
+    # 结束Call
+    exit_call    ${driver1}
+    # User C登录
+    ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
+    # Click inactive 3PI link(nobody in call) that call's owner is User B
+    user_make_call_via_meeting_link     ${driver3}    ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
+    # VP: text and color are branded orange
+    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_whole_page}   style                     # 整个页面
+    check_a_contains_b    ${driver3}     ${get_class_value}      ${organizer_brand_orange_color}
+    # Avatar should be User B customer avatar.
+    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_logo}   src
+    check_a_contains_b    ${driver3}     ${get_class_value}        ${WS_1_Big_Logo}
+    [Teardown]      exit_driver
 ##    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
 Small_range_1010_1017
