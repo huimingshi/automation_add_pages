@@ -272,37 +272,39 @@ Disable_External_Users_check_case_3
 #    ...             AND             exit_driver
 ##    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
 
-#User_1_receives_an_incoming_call_from_user_2
-#    [Documentation]    User 1 receives an incoming call from user 2	VP: User 1 should show User 2's Display Name & Avatar	End call	User 2 changes Display name & Avatar	User 1 receives an incoming call from user 2 again	VP: User 1 should show the new Display Name & Avatar
-#    [Tags]     small range 31 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3497
-#    # User S belong to WS1 and WS2 log in
-#    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
-#    # Contact of WS1 log in
-#    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
-#    # make calls with who
-#    contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}    ${switch_workspace_name}
-#    exit call   ${driver1}
-#    close call ending page     ${driver1}
-#    close call ending page     ${driver2}
-#    # get modify picture absolute path
-#    ${modify_picture_path}  return_modify_pirture_path
-#    # Make sure the name and avator is in its original state
-#    my_account_change_name_and_avator   ${driver2}   ${big_admin_first_WS_name}   change   ${modify_picture_path}   back_to_contact
-#    # Contact of WS1 call the user directly
-#    contacts_witch_page_make_call   ${driver2}   ${driver1}     ${py_team_page}     ${switch_workspace_name}    no_anwser
-#    make_sure_enter_call    ${driver2}
-#    # VP: User 1 should show User 2's Display Name & Avatar   	End call
-#    show_incoming_call_name_avator   ${driver1}   ${driver2}   modify_picture    ${big_admin_first_WS_name}
-#    # User 2 changes Display name & Avatar
-#    ${random}   return_a_random
-#    my_account_change_name_and_avator   ${driver2}    ${random}   delete   ${modify_picture_path}   back_to_contact
-#    # User 1 receives an incoming call from user 2 again
-#    contacts_witch_page_make_call   ${driver2}   ${driver1}     ${py_team_page}     ${switch_workspace_name}    no_anwser
-#    make_sure_enter_call    ${driver2}
-#    # VP: User 1 should show the new Display Name & Avatar
-#    show_incoming_call_name_avator   ${driver1}   ${driver2}   original_default_avatar_url   ${random}
-#    [Teardown]      run keywords     my_account_change_name_and_avator   ${driver2}   ${big_admin_first_WS_name}   change   ${modify_picture_path}   # Make sure the name and avator is in its original state
-#    ...             AND              exit_driver
+User_1_receives_an_incoming_call_from_user_2
+    [Documentation]    User 1 receives an incoming call from user 2	VP: User 1 should show User 2's Display Name & Avatar	End call	User 2 changes Display name & Avatar	User 1 receives an incoming call from user 2 again	VP: User 1 should show the new Display Name & Avatar
+    [Tags]     small range 31 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3497，已修复
+    # User S belong to WS1 and WS2 log in
+    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}   ${switch_workspace_password}
+    # Contact of WS1 log in
+    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
+    # make calls with who
+    contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}    ${switch_workspace_name}
+    exit call   ${driver1}
+    close_call_ending_page_RF     ${driver1}
+    close_call_ending_page_RF     ${driver2}
+    # get modify picture absolute path
+    ${modify_picture_path}  return_modify_pirture_path
+    # Make sure the name and avator is in its original state
+    my_account_change_name_and_avator   ${driver2}   ${big_admin_first_WS_name}   change   ${modify_picture_path}   back_to_contact
+    refresh_browser_page     ${driver2}
+    # Contact of WS1 call the user directly
+    contacts_witch_page_make_call   ${driver2}   ${driver1}     ${py_team_page}     ${switch_workspace_name}    no_anwser
+    make_sure_enter_call    ${driver2}
+    # VP: User 1 should show User 2's Display Name & Avatar   	End call
+    show_incoming_call_name_avator   ${driver1}   ${driver2}   modify_picture    ${big_admin_first_WS_name}
+    # User 2 changes Display name & Avatar
+    ${random}   return_a_random
+    my_account_change_name_and_avator   ${driver2}    ${random}   delete   ${modify_picture_path}   back_to_contact
+    refresh_browser_page     ${driver2}
+    # User 1 receives an incoming call from user 2 again
+    contacts_witch_page_make_call   ${driver2}   ${driver1}     ${py_team_page}     ${switch_workspace_name}    no_anwser
+    make_sure_enter_call    ${driver2}
+    # VP: User 1 should show the new Display Name & Avatar
+    show_incoming_call_name_avator   ${driver1}   ${driver2}   original_default_avatar_url   ${random}
+    [Teardown]      run keywords     my_account_change_name_and_avator   ${driver2}   ${big_admin_first_WS_name}   change   ${modify_picture_path}   # Make sure the name and avator is in its original state
+    ...             AND              exit_driver
 ##    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 During_Call_open_invite_the_3rd_participant_page
@@ -412,19 +414,19 @@ User_B_displays_as_reachable
 #    # Expert user B logs in
 #    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
 #    # search user in Team page
-#    contacts_different_page_search_user    ${driver1}    ${py_team_page}    ${py_team_user_search}    ${py_team_search_result}    ${big_admin_first_WS_name}
+#    contacts_different_page_search_user    ${driver1}    ${py_team_page}     ${big_admin_first_WS_name}
 #    # judge reachable
-#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_search_result}    reachable
+#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}   ${big_admin_first_WS_name}    reachable
 #    # User B logouts from one device.
 #    logout_citron  ${driver2}
 #    sleep  45s
 #    # judge unreachable
-#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_search_result}
+#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}   ${big_admin_first_WS_name}
 #    # Expert user B re logs in
 #    ${driver3}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
 #    sleep  45s
 #    # judge reachable
-#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_search_result}    reachable
+#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}    ${big_admin_first_WS_name}    reachable
 #    [Teardown]      run keywords     Close
 #    ...             AND              exit_driver
 ##    ...             AND              exit_driver   ${driver1}   ${driver2}
