@@ -95,35 +95,35 @@ Small_range_696_697_698_699
     exit_call    ${driver3}
     [Teardown]      exit_driver
 ##    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
-#
-#Small_range_700_701_702_703
-#    [Documentation]     3PI - Meeting call     UserA send MHS link to anonymous UserB.
-#    [Tags]    small range 700+701+702+703 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    # UserA 登录
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
-#    # UserB clicks link and join the call.
-#    ${driver2}    anonymous_open_meeting_link    ${invite_url}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver2}
-#    # UserA 接受Call
-#    user_anwser_call   ${driver1}
-#    # UserA sends a 3pi link to anonymous UserC.
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
-#    close_invite_3th_page    ${driver1}
-#    # UserC click the link join the call.
-#    ${driver3}    anonymous_open_meeting_link    ${invite_url_1}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver3}
-#    # UserA 接受Call
-#    user_anwser_call   ${driver1}    no_direct
-#    # UserA left session.
-#    end_call_for_all   ${driver1}
-#    # Expected : session end
-#    which_page_is_currently_on     ${driver2}   ${five_star_high_praise}
-#    which_page_is_currently_on     ${driver3}   ${five_star_high_praise}
-#    [Teardown]      exit_driver
+
+Small_range_700_701_702_703
+    [Documentation]     3PI - Meeting call     UserA send MHS link to anonymous UserB.
+    [Tags]    small range 700+701+702+703 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+    # UserA 登录
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+    # UserB clicks link and join the call.
+    ${driver2}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
+    # UserA 接受Call
+    user_anwser_call   ${driver1}
+    # UserA sends a 3pi link to anonymous UserC.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    close_invite_3th_page    ${driver1}
+    # UserC click the link join the call.
+    ${driver3}    anonymous_open_meeting_link    ${invite_url_1}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
+    # UserA 接受Call
+    user_anwser_call   ${driver1}    no_direct
+    # UserA left session.
+    end_call_for_all   ${driver1}
+    # Expected : session end
+    which_page_is_currently_on     ${driver2}   ${five_star_high_praise}
+    which_page_is_currently_on     ${driver3}   ${five_star_high_praise}
+    [Teardown]      exit_driver
 ##    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 #
 #Small_range_704_705_706_707
