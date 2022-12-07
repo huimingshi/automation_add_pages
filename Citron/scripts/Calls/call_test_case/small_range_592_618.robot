@@ -16,7 +16,7 @@ Force Tags        small_range
 *** Test Cases ***
 Call_Tag_Comment_592_595
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-    [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮      call_case
+    [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复      call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
     ...         AND               Close
@@ -79,75 +79,73 @@ Call_Tag_Comment_592_595
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#
-#Call_Tag_Comment_596_599
-#    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 596-599 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮         call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-#    ...         AND               Close
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}    ${big_admin_third_WS_password}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
-#    # User C与User B进行Call
-#    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
-#    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
-#    which_page_is_currently_on    ${driver3}    ${end_call_button}
-#    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
-#    # 点击查询到的User A
-#    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
-#    # User A 接收打进来的Call
-#    user_anwser_call   ${driver1}
-#    # User C End Call for All
-#    end_call_for_all   ${driver3}
-#    # 获取所有的tags列表
-#    ${tags_list_C1}    get_all_tag_after_call    ${driver3}
-#
-#    # 先关闭call结束页面
-#    close_call_ending_page_RF   ${driver1}
-#    close_call_ending_page_RF   ${driver2}
-#    close_call_ending_page_RF   ${driver3}
-#    # User C switch to WS2
-#    user_switch_to_second_workspace     ${driver3}
-#    # User A切换到Contacts页面
-#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-#    # A call B, invite C
-#    contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
-#    # 点击查询到的User C
-#    click_user_in_contacts_call   ${driver1}   ${switch_workspace_name}
-#    user_anwser_call    ${driver3}
-#    # A end call for all
-#    end_call_for_all   ${driver1}
-#    # C click tag fields
-#    # 获取所有的tags列表
-#    ${tags_list_C2}    get_all_tag_after_call    ${driver3}
-#    # VP: Similar tag name of WS1 list out
-#     two_option_is_equal   ${driver3}   ${tags_list_C1}    ${tags_list_C2}
-##    lists should be equal     ${tags_list_C1}    ${tags_list_C2}
-#    # A, B , C fill in tags and comments
-#    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_4
-#    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_5
-#    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_6
-#    # 先关闭call结束页面
-#    close_call_ending_page_RF   ${driver3}
-#    # User C switch to WS1
-#    user_switch_to_first_workspace   ${driver3}
-#    # 切换到Recents页面
-#    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    # User C should see all tags and comments from call recents
-#    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_6    good_experience_5   good_experience_4
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
-##    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}
-#
+Call_Tag_Comment_596_599
+    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
+    [Tags]     small range 596-599 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复         call_case
+    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
+    ...         AND               Close
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
+    # User B log in
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}    ${big_admin_third_WS_password}
+    # User C log in
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
+    # User C与User B进行Call
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    # 点击查询到的User A
+    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    # User A 接收打进来的Call
+    user_anwser_call   ${driver1}
+    # User C End Call for All
+    end_call_for_all   ${driver3}
+    # 获取所有的tags列表
+    ${tags_list_C1}    get_all_tag_after_call    ${driver3}
+
+    # 先关闭call结束页面
+    close_call_ending_page_RF   ${driver1}
+    close_call_ending_page_RF   ${driver2}
+    close_call_ending_page_RF   ${driver3}
+    # User C switch to WS2
+    user_switch_to_second_workspace     ${driver3}
+    # User A切换到Contacts页面
+    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    # A call B, invite C
+    contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
+    # 点击查询到的User C
+    click_user_in_contacts_call   ${driver1}   ${switch_workspace_name}
+    user_anwser_call    ${driver3}
+    # A end call for all
+    end_call_for_all   ${driver1}
+    # C click tag fields
+    # 获取所有的tags列表
+    ${tags_list_C2}    get_all_tag_after_call    ${driver3}
+    # VP: Similar tag name of WS1 list out
+     two_option_is_equal   ${driver3}   ${tags_list_C1}    ${tags_list_C2}
+#    lists should be equal     ${tags_list_C1}    ${tags_list_C2}
+    # A, B , C fill in tags and comments
+    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_4
+    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_5
+    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_6
+    # 先关闭call结束页面
+    close_call_ending_page_RF   ${driver3}
+    # User C switch to WS1
+    user_switch_to_first_workspace   ${driver3}
+    # 切换到Recents页面
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # User C should see all tags and comments from call recents
+    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_6    good_experience_5   good_experience_4
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
 #Call_Tag_Comment_600_604
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 600-604 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮       call_case
+#    [Tags]     small range 600-604 lines           call_case
 #    [Setup]     run keywords      Login_premium_user   # log in with premium admin
 #    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
 #    ...         AND               Close
@@ -157,6 +155,7 @@ Call_Tag_Comment_592_595
 #    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}    ${big_admin_third_WS_password}
 #    # User C log in
 #    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
+#    sleep   10000
 #    # User C与User B进行Call
 #    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${big_admin_third_WS_name}
 #    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
@@ -196,8 +195,6 @@ Call_Tag_Comment_592_595
 #    ${tags_list_A2}    get_all_tag_after_call    ${driver1}
 #     two_option_is_equal   ${driver2}   ${tags_list_B1}   ${tags_list_B2}
 #     two_option_is_equal   ${driver1}   ${tags_list_A1}   ${tags_list_A2}
-##    lists should be equal   ${tags_list_B1}   ${tags_list_B2}
-##    lists should be equal   ${tags_list_A1}   ${tags_list_A2}
 #    # 添加tags和comment
 #    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_7
 #    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_8
@@ -225,11 +222,10 @@ Call_Tag_Comment_592_595
 #    check_tag_and_com_switch_success   ${driver4}
 #    [Teardown]      run keywords    Close
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver   ${driver1}   ${driver2}  ${driver3}   ${driver4}
-#
+
 Call_Tag_Comment_605_606
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-    [Tags]     small range 605-606 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮       call_case
+    [Tags]     small range 605-606 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复       call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
     ...         AND               Close
