@@ -67,33 +67,33 @@ Small_range_693_694_695
     [Teardown]      exit_driver
 #    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 
-#Small_range_696_697_698_699
-#    [Documentation]     3PI - Meeting call     UserA send one time use link to anonymous UserB.
-#    [Tags]    small range 696+697+698+699 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    # UserA 登录
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
-#    ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
-#    # UserB clicks link and join the call.
-#    ${driver2}    anonymous_open_meeting_link    ${invite_url}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver2}
-#    # EU1 接受Call
-#    user_anwser_call   ${driver1}
-#    # User C 登录
-#    ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-#    # UserA sends a 3pi link to logged in UserC.
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
-#    close_invite_3th_page    ${driver1}
-#    # UserC click the 3PI link join the call.
-#    user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver3}
-#    # UserA left session.
-#    leave_call   ${driver1}   need_select
-#    # Expected : session does not end and still active.
-#    exit_call    ${driver3}
-#    [Teardown]      exit_driver
+Small_range_696_697_698_699
+    [Documentation]     3PI - Meeting call     UserA send one time use link to anonymous UserB.
+    [Tags]    small range 696+697+698+699 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494
+    # UserA 登录
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
+    # UserB clicks link and join the call.
+    ${driver2}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
+    # EU1 接受Call
+    user_anwser_call   ${driver1}
+    # User C 登录
+    ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    # UserA sends a 3pi link to logged in UserC.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    close_invite_3th_page    ${driver1}
+    # UserC click the 3PI link join the call.
+    user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
+    # UserA left session.
+    leave_call   ${driver1}   need_select
+    # Expected : session does not end and still active.
+    exit_call    ${driver3}
+    [Teardown]      exit_driver
 ##    [Teardown]      exit_driver     ${driver1}    ${driver2}    ${driver3}
 #
 #Small_range_700_701_702_703
