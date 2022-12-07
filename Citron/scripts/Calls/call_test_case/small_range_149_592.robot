@@ -194,8 +194,8 @@ Join_call_162_167
     # EU1 gets accept/decline request from AU6.   EU1 accepts call	VP: AU6 joins call.
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver6}    ${end_call_button}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 ##    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 #
 #Join_call_168_178
