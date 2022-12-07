@@ -248,28 +248,28 @@ Disable_External_Users_check_case_3
     ...             AND              exit_driver
 #    ...             AND              exit_driver   ${driver1}   ${driver2}
 
-#In_calling_page_clicks_Invite_Send_Invitation_page
-#    [Documentation]    In calling page, clicks Invite -> Send Invitation page
-#    [Tags]      small range 51 line         call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    # User S belong to WS1 and WS2 log in
-#    ${driver1}  driver_set_up_and_logIn   ${normal_username_for_calls}   ${switch_workspace_password}
-#    # Contact of WS1 log in
-#    ${driver2}  driver_set_up_and_logIn     ${normal_username_for_calls_B}   ${big_admin_first_WS_password}
-#    # Contact of WS1 call the user directly
-#    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}     ${normal_name_for_calls_B}
-#    make_sure_enter_call      ${driver1}
-#    ${driver3}  driver_set_up_and_logIn    ${an_team_user_username}   ${public_pass}
-#    # In calling page, clicks Invite -> Send Invitation papge
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    # Send this link to another user who is belong to the same enterprise
-#    ${invite_url}  send_invite_in_calling_page   ${driver1}
-#    # This user clicks this link
-#    # VP: should directly enter this call
-#    check_call_can_reach_to_or_not    ${driver1}   ${driver3}   ${invite_url}   1
-#    # 结束call
-#    exit_call   ${driver2}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+In_calling_page_clicks_Invite_Send_Invitation_page
+    [Documentation]    In calling page, clicks Invite -> Send Invitation page
+    [Tags]      small range 51 line         call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
+    # User S belong to WS1 and WS2 log in
+    ${driver1}  driver_set_up_and_logIn   ${normal_username_for_calls}   ${switch_workspace_password}
+    # Contact of WS1 log in
+    ${driver2}  driver_set_up_and_logIn     ${normal_username_for_calls_B}   ${big_admin_first_WS_password}
+    # Contact of WS1 call the user directly
+    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}     ${normal_name_for_calls_B}
+    make_sure_enter_call      ${driver1}
+    ${driver3}  driver_set_up_and_logIn    ${an_team_user_username}   ${public_pass}
+    # In calling page, clicks Invite -> Send Invitation papge
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    # Send this link to another user who is belong to the same enterprise
+    ${invite_url}  send_invite_in_calling_page   ${driver1}
+    close_invite_3th_page   ${driver1}
+    # This user clicks this link
+    # VP: should directly enter this call
+    user_make_call_via_meeting_link     ${driver3}    ${invite_url}
+    # 结束call
+    exit_call   ${driver3}
+    [Teardown]      exit_driver
 ##    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 User_1_receives_an_incoming_call_from_user_2
