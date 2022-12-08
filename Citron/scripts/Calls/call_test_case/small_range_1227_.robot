@@ -206,12 +206,12 @@ Small_range_1220_1281
     uploaded_file_show_in_call_log      ${driverA}      ${message_pdf}
     uploaded_file_show_in_call_log      ${driverA}      ${message_audio}
     uploaded_file_show_in_call_log      ${driverA}      ${message_video}
-    calls_click_details_button      ${driverB}
-    uploaded_file_show_in_call_log      ${driverB}      ${message_pdf}        not_exists
-    uploaded_file_show_in_call_log      ${driverB}      ${message_audio}      not_exists
-    uploaded_file_show_in_call_log      ${driverB}      ${message_video}      not_exists
 #    User D[expert group member] 查看不到消息内容，此处已提bug：https://vipaar.atlassian.net/browse/CITRON-3577
 ##########################################################################################
+#    calls_click_details_button      ${driverB}
+#    uploaded_file_show_in_call_log      ${driverB}      ${message_pdf}
+#    uploaded_file_show_in_call_log      ${driverB}      ${message_audio}
+#    uploaded_file_show_in_call_log      ${driverB}      ${message_video}
 #    calls_click_details_button      ${driverD}
 #    uploaded_file_show_in_call_log      ${driverD}      ${message_pdf}
 #    uploaded_file_show_in_call_log      ${driverD}      ${message_audio}
