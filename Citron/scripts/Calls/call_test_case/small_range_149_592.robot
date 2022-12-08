@@ -198,64 +198,65 @@ Join_call_162_167
     ...             AND             exit_driver
 ##    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 
-#Join_call_168_178
-#    [Documentation]     Join call	MPC via on-call group.
-#    [Tags]     small range 168-178 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    [Setup]     run keywords      Login_site_admin                  # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace_branding_3}      # 进入WS_branding_setting_WS3这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
-#    # TU2 登录
-#    ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}        ${call_oncall_user_password}
-#    # EU1 登录
-#    ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}        ${call_oncall_user_password}
-#    # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
-#    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    ${invite_url}    send_invite_in_calling_page    ${driver2}
-#    close_invite_3th_page    ${driver2}
-#    # Anonymous user 3 clicks on 3pi link. EU1 answers call.
-#    ${driver3}    anonymous_open_meeting_link    ${invite_url}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver3}
-#    user_anwser_call    ${driver2}   no_direct
-#    # VP: AU3 joins call.
-#    which_page_is_currently_on    ${driver3}    ${end_call_button}
-#    # TU2 invites TU4.   TU4 declines call.
-#    ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}       ${call_oncall_user_password}
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
-#    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
-#    user_decline_call    ${driver4}
-#    # VP: Team user 4 doesn’t join call
-#    which_page_is_currently_on    ${driver4}    ${py_contacts_switch_success}
-#    # TU2 invites TU4.   TU4 accepts call.
-#    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
-#    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
-#    user_anwser_call    ${driver4}
-#    # VP: Team user 4 joins call.
-#    which_page_is_currently_on    ${driver4}    ${end_call_button}
-#    # TU2 invites on-call group 1   VP: experts in on-call group 1 receives rollover call.    EU5 answers call.
-#    ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}        ${call_oncall_user_password}
-#    enter_contacts_search_user     ${driver1}    ${On_call_group_001}
-#    click_user_in_contacts_call     ${driver1}    ${On_call_group_001}
-#    user_anwser_call    ${driver5}
-#    # TU2 invites on-call group 2   VP: other experts in on-call group 2 receives rollover call. Display message “No experts are available to take your call” if no experts login.
-#    ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}        ${call_oncall_user_password}
+Join_call_168_178
+    [Documentation]     Join call	MPC via on-call group.
+    [Tags]     small range 168-178 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3646
+    [Setup]     run keywords      Login_site_admin                  # log in with Site Admin
+    ...         AND               switch_to_created_workspace       ${created_workspace_branding_3}      # 进入WS_branding_setting_WS3这个WS
+    ...         AND               enter_workspace_settings_page     # 进入settings页面
+    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+    ...         AND               Close
+    # TU2 登录
+    ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}        ${call_oncall_user_password}
+    # EU1 登录
+    ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}        ${call_oncall_user_password}
+    # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
+    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    ${invite_url}    send_invite_in_calling_page    ${driver2}
+    close_invite_3th_page    ${driver2}
+    # Anonymous user 3 clicks on 3pi link. EU1 answers call.
+    ${driver3}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
+    user_anwser_call    ${driver2}   no_direct
+    # VP: AU3 joins call.
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    # TU2 invites TU4.   TU4 declines call.
+    ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}       ${call_oncall_user_password}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    user_decline_call    ${driver4}
+    # VP: Team user 4 doesn’t join call
+    which_page_is_currently_on    ${driver4}    ${py_contacts_switch_success}
+    # TU2 invites TU4.   TU4 accepts call.
+    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    user_anwser_call    ${driver4}
+    # VP: Team user 4 joins call.
+    which_page_is_currently_on    ${driver4}    ${end_call_button}
+    # TU2 invites on-call group 1   VP: experts in on-call group 1 receives rollover call.    EU5 answers call.
+    ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}        ${call_oncall_user_password}
+    enter_contacts_search_user     ${driver1}    ${On_call_group_001}
+    click_user_in_contacts_call     ${driver1}    ${On_call_group_001}
+    user_anwser_call    ${driver5}
+    # TU2 invites on-call group 2   VP: other experts in on-call group 2 receives rollover call. Display message “No experts are available to take your call” if no experts login.
+    ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}        ${call_oncall_user_password}
+#    # 此处受bug导致  https://vipaar.atlassian.net/browse/CITRON-3646
 #    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
 #    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
 #    # All experts in on-call group 2 declines call.   Display message “No experts are available to take your call”.
 #    user_decline_call    ${driver6}
 #    which_page_is_currently_on    ${driver1}    ${no_experts_are_available_tips}
-#    # TU2 invites on-call group 2
-#    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
-#    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
-#    # EU6 in on-call group2 answers call.	VP: expert user 6 joins call
-#    user_anwser_call    ${driver6}
-#    which_page_is_currently_on    ${driver6}    ${end_call_button}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+    # TU2 invites on-call group 2
+    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
+    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
+    # EU6 in on-call group2 answers call.	VP: expert user 6 joins call
+    user_anwser_call    ${driver6}
+    which_page_is_currently_on    ${driver6}    ${end_call_button}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 ##    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 
 Join_call_179_187
