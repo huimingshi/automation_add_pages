@@ -143,85 +143,87 @@ Call_Tag_Comment_596_599
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#Call_Tag_Comment_600_604
-#    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 600-604 lines           call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-#    ...         AND               Close
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}    ${big_admin_third_WS_password}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
-#    sleep   10000
-#    # User C与User B进行Call
-#    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${big_admin_third_WS_name}
-#    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
-#    which_page_is_currently_on    ${driver3}    ${end_call_button}
-#    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
-#    # 点击查询到的User A
-#    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
-#    # User A 接收打进来的Call
-#    user_anwser_call   ${driver1}
-#    # User C End Call for All
-#    end_call_for_all   ${driver3}
-#    # 获取所有的tags列表
-#    ${tags_list_B1}    get_all_tag_after_call    ${driver2}
-#    ${tags_list_A1}    get_all_tag_after_call    ${driver1}
-#
-#    # 先关闭call结束页面
-#    close_call_ending_page_RF   ${driver1}
-#    close_call_ending_page_RF   ${driver2}
-#    close_call_ending_page_RF   ${driver3}
-#    # User C switch to WS2
-#    user_switch_to_second_workspace     ${driver3}
-#    # C send meeing link [link2]
-#    ${invite_url}  send_meeting_room_link   ${driver3}  OTU
-#    # A and B click [link2] to enter call
-#    user_make_call_via_meeting_link   ${driver1}    ${invite_url}
-#     # 确保建立call，但未接听
-#     make_sure_enter_call    ${driver1}
-#    user_anwser_call  ${driver3}
-#    user_make_call_via_meeting_link   ${driver2}    ${invite_url}
-#     # 确保建立call，但未接听
-#     make_sure_enter_call    ${driver2}
-#    user_anwser_call  ${driver3}    no_direct
-#    # owner end call
-#    end_call_for_all   ${driver3}
-#    # B and A click tag，VP: Similar tag name of WS1 list out
-#    ${tags_list_B2}    get_all_tag_after_call    ${driver2}
-#    ${tags_list_A2}    get_all_tag_after_call    ${driver1}
-#     two_option_is_equal   ${driver2}   ${tags_list_B1}   ${tags_list_B2}
-#     two_option_is_equal   ${driver1}   ${tags_list_A1}   ${tags_list_A2}
-#    # 添加tags和comment
-#    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_7
-#    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_8
-#    # 先关闭call结束页面
-#    close_last_window   ${driver1}    # 通过link进入Call的页面，不会有call结束页面的关闭按钮
-#    close_last_window   ${driver2}    # 通过link进入Call的页面，不会有call结束页面的关闭按钮
-#    # VP: for A and B, tag comment is saved to WS1's recents
-#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}       good_experience_8   good_experience_7
-#    # 添加tag和comment
-#    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_9    # 添加tag和comment
-#    # VP: For C, tag comment is saved to recents of ws2
-#    close_call_ending_page_RF   ${driver3}    # 先关闭call结束页面
-#    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     # 切换到Recents页面
-#    first_call_record_tag_and_comment   ${driver3}     ${third_tag_text}     good_experience_9
-#    # Anonymous click link2 to enter call
-#    ${driver4}   anonymous_open_meeting_link   ${invite_url}
-#     # 确保call连接成功，但未接听
-#     make_sure_enter_call   ${driver4}
-#    user_anwser_call   ${driver3}
-#    # owner end call
-#    exit_call   ${driver4}
-#    # VP: Anonymous user does not have tag comment fields
-#    check_tag_and_com_switch_success   ${driver4}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+Call_Tag_Comment_600_604
+    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
+    [Tags]     small range 600-604 lines           call_case
+    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
+    ...         AND               Close
+    ...         AND               Login_premium_user   # log in with premium admin
+    ...         AND               make_sure_workspaces_setting_external_feature        close_feature     close_feature          # WS1 and WS2 both turn off Disable External Users
+    ...         AND               Close
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
+    # User B log in
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}    ${big_admin_third_WS_password}
+    # User C log in
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
+    # User C与User B进行Call
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${big_admin_third_WS_name}
+    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    # 点击查询到的User A
+    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    # User A 接收打进来的Call
+    user_anwser_call   ${driver1}
+    # User C End Call for All
+    end_call_for_all   ${driver3}
+    # 获取所有的tags列表
+    ${tags_list_B1}    get_all_tag_after_call    ${driver2}
+    ${tags_list_A1}    get_all_tag_after_call    ${driver1}
+
+    # 先关闭call结束页面
+    close_call_ending_page_RF   ${driver1}
+    close_call_ending_page_RF   ${driver2}
+    close_call_ending_page_RF   ${driver3}
+    # User C switch to WS2
+    user_switch_to_second_workspace     ${driver3}
+    # C send meeing link [link2]
+    ${invite_url}  send_meeting_room_link   ${driver3}  OTU
+    # A and B click [link2] to enter call
+    user_make_call_via_meeting_link   ${driver1}    ${invite_url}
+     # 确保建立call，但未接听
+     make_sure_enter_call    ${driver1}
+    user_anwser_call  ${driver3}
+    user_make_call_via_meeting_link   ${driver2}    ${invite_url}
+     # 确保建立call，但未接听
+     make_sure_enter_call    ${driver2}
+    user_anwser_call  ${driver3}    no_direct
+    # owner end call
+    end_call_for_all   ${driver3}
+    # B and A click tag，VP: Similar tag name of WS1 list out
+    ${tags_list_B2}    get_all_tag_after_call    ${driver2}
+    ${tags_list_A2}    get_all_tag_after_call    ${driver1}
+     two_option_is_equal   ${driver2}   ${tags_list_B1}   ${tags_list_B2}
+     two_option_is_equal   ${driver1}   ${tags_list_A1}   ${tags_list_A2}
+    # 添加tags和comment
+    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_7
+    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_8
+    # 先关闭call结束页面
+    close_last_window   ${driver1}    # 通过link进入Call的页面，不会有call结束页面的关闭按钮
+    close_last_window   ${driver2}    # 通过link进入Call的页面，不会有call结束页面的关闭按钮
+    # VP: for A and B, tag comment is saved to WS1's recents
+    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}       good_experience_8   good_experience_7
+    # 添加tag和comment
+    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_9    # 添加tag和comment
+    # VP: For C, tag comment is saved to recents of ws2
+    close_call_ending_page_RF   ${driver3}    # 先关闭call结束页面
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     # 切换到Recents页面
+    first_call_record_tag_and_comment   ${driver3}     ${third_tag_text}     good_experience_9
+    # Anonymous click link2 to enter call
+    ${driver4}   anonymous_open_meeting_link   ${invite_url}
+     # 确保call连接成功，但未接听
+     make_sure_enter_call   ${driver4}
+    user_anwser_call   ${driver3}
+    # owner end call
+    exit_call   ${driver4}
+    # VP: Anonymous user does not have tag comment fields
+    check_tag_and_com_switch_success   ${driver4}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 
 Call_Tag_Comment_605_606
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
