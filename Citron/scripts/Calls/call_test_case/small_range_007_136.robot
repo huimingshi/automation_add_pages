@@ -619,14 +619,14 @@ Team_user_A_signs_in_User_B_is_expert_user
     # Team user log in
     ${driver1}   driver_set_up_and_logIn   ${a_team_user_username}    ${a_team_user_password}
     # 在Contacts页面查询user
-    contacts_different_page_search_user   ${driver1}    ${py_team_page}    ${for_expert_call_name}
+    contacts_different_page_search_user   ${driver1}    ${py_team_page}    ${for_expert_call_another_name}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    contacts_page_send_email    ${driver1}    ${for_expert_call_name}
+    contacts_page_send_email    ${driver1}    ${for_expert_call_another_name}
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
     # User B is expert user log in
-    ${driver2}   driver_set_up_and_logIn   ${for_expert_call_username}    ${public_pass}
+    ${driver2}   driver_set_up_and_logIn   ${for_expert_call_another_user}    ${public_pass}
     check_call_can_reach_to_or_not    ${driver1}   ${driver2}   ${meeting_link}    1
     # 切换到首个句柄
     switch_first_window   ${driver2}

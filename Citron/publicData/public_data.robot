@@ -109,6 +109,9 @@ ${online_or_not_name}                   Huiming.shi.helplightning+online_or_not
 ${for_expert_call_username}             Huiming.shi.helplightning+998877665511111@outlook.com                                   # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
 ${for_expert_call_name}                 Huiming.shi.helplightning+998877665511111
 
+${for_expert_call_another_user}         Huiming.shi.helplightning+99887766551111@outlook.com                                    # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
+${for_expert_call_another_name}         Huiming.shi.helplightning+99887766551111
+
 ${big_admin_first_WS_username}          Huiming.shi.helplightning+99887766551@outlook.com                                       # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
 ${big_admin_first_WS_name}              Huiming.shi.helplightning+99887766551
 ${big_admin_first_WS_password}          *IK<8ik,8ik,
