@@ -31,7 +31,6 @@ Small_range_149_151
     which_page_is_currently_on    ${driver1}    //*[@*="#phone_end_red"]
     # Yellow star on F2F icon
     which_page_is_currently_on    ${driver1}    //img[@class="starHint"]
-    sleep  10000
     # Click Mute/Camera/Hamburger
     switch_to_other_tab    ${driver1}    //*[@*="#mic_off"]
     sleep  1s
