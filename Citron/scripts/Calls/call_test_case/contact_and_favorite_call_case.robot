@@ -20,9 +20,9 @@ Favorite_tap_group_name_to_start_expert_call
     ...         AND             add_to_favorite        on-call group 1  # 保证on-call group已添加favorite
     ...         AND             Close                  # 关闭driver
     # call on-call User log in
-    ${driver1}  driver_set_up_and_logIn  ${call_oncall_user_username}   ${call_oncall_user_password}
+    ${driver1}  driver_set_up_and_logIn  ${call_oncall_user_username}
     # on-call User log in
-    ${driver2}  driver_set_up_and_logIn  ${oncall_user_username}   ${oncall_user_password}
+    ${driver2}  driver_set_up_and_logIn  ${oncall_user_username}
     # 进入favorite页面
     switch_to_diffrent_page   ${driver1}   ${py_favorites_page}   ${py_favorites_switch_success}    ${py_get_number_of_rows}
     # make call with on-call
@@ -90,8 +90,8 @@ Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     ...         AND             set_survey_close        # Set Survey close
     ...         AND             Close       # close browser
     # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
+    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}
     # make call
     contacts_witch_page_make_call    ${driver1}    ${driver2}    ${py_team_page}    ${normal_name_for_calls_B}
     # call on-call User exit call
@@ -110,8 +110,8 @@ Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_N
     ...         AND             set_survey_in_white_list        # Set Survey URL Value is in White List
     ...         AND             Close       # close browser
     # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}    no_check_toturial   open_bounced    accept    no_care
+    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${public_pass}    no_check_toturial   open_bounced    accept    no_care
     # make call
     contacts_witch_page_make_call    ${driver1}    ${driver2}    ${py_team_page}    ${normal_name_for_calls_B}
     # call on-call User exit call
@@ -134,8 +134,8 @@ Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_b
     ...         AND             set_survey_null        # Set Survey URL=Null
     ...         AND             Close       # close browser
     # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
+    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
+    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}
     # make call
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}     ${normal_name_for_calls_B}
     # call on-call User exit call

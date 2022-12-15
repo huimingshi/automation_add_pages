@@ -14,45 +14,34 @@ ${cognito_login_email}                  emily.huang+cognito@helplightning.com   
 ${cognito_login_password}               Abc12345                                                                                # cognito login password
 
 ${site_admin_username}                  huiming.shi@helplightning.com                                                           # site admin username
-${site_admin_name}                      huiming.shi
-${site_admin_password}                  *IK<8ik,8ik,                                                                            # site admin password
+${site_admin_name}                      huiming.shi                                                                            # site admin password
 
 ${site_admin_username_auto}             hlnauto+basic                                                                           # site admin username
 ${site_admin_password_auto}             Abc12345                                                                                # site admin password
 
-${site_admin_name_one_workspace}        Huiming.shi.helplightning+11111111111@outlook.com                                       # Site Admin user which just has one workspace
-${site_admin_pass_one_workspace}        *IK<8ik,8ik,                                                                            # Site Admin pass which just has one workspace
+${site_admin_name_one_workspace}        Huiming.shi.helplightning+11111111111@outlook.com                                       # Site Admin user which just has one workspace                                                                           # Site Admin pass which just has one workspace
 
-${workspace_admin_username}             Huiming.shi.helplightning@outlook.com                                                   # workspace admin username(This is a workspace admin with many groups)
-${workspace_admin_password}             *IK<8ik,8ik,                                                                            # workspace admin password
+${workspace_admin_username}             Huiming.shi.helplightning@outlook.com                                                   # workspace admin username(This is a workspace admin with many groups)                                                                            # workspace admin password
 
 ${group_admin_username}                 Huiming.shi.helplightning+8888888888@outlook.com                                        # group admin username (belong to citron)
 ${group_admin_name}                     Huiming.shi.helplightning+8888888888
-${group_admin_real_name}                citron_group_admin
-${group_admin_password}                 *IK<8ik,8ik,                                                                            # group admin password
+${group_admin_real_name}                citron_group_admin                                                                            # group admin password
 
-${workspace_admin_username_one}         Huiming.shi.helplightning+99998888@outlook.com                                          # workspace admin username(This is a workspace admin with only one group)
-${workspace_admin_password_one}         *IK<8ik,8ik,                                                                            # workspace admin password
+${workspace_admin_username_one}         Huiming.shi.helplightning+99998888@outlook.com                                          # workspace admin username(This is a workspace admin with only one group)                                                                            # workspace admin password
 
-${group_admin_username_one}             Huiming.shi.helplightning+999988881@outlook.com                                         # group admin username(This is a group admin with only one group)
-${group_admin_password_one}             *IK<8ik,8ik,                                                                            # group admin password
+${group_admin_username_one}             Huiming.shi.helplightning+999988881@outlook.com                                         # group admin username(This is a group admin with only one group)                                                                            # group admin password
 
-${workspace_admin_username_two}         Huiming.shi.helplightning+66668888@outlook.com                                          # workspace admin username(This is a workspace admin with only two group)
-${workspace_admin_password_two}         *IK<8ik,8ik,                                                                            # workspace admin password
+${workspace_admin_username_two}         Huiming.shi.helplightning+66668888@outlook.com                                          # workspace admin username(This is a workspace admin with only two group)                                                                            # workspace admin password
 
-${group_admin_username_two}             Huiming.shi.helplightning+666688881@outlook.com                                         # group admin username(This is a group admin with only two group)
-${group_admin_password_two}             *IK<8ik,8ik,                                                                            # group admin password
+${group_admin_username_two}             Huiming.shi.helplightning+666688881@outlook.com                                         # group admin username(This is a group admin with only two group)                                                                      # group admin password
 
-${workspace_admin_username_auto}        Huiming.shi.helplightning+666888999@outlook.com                                         # workspace admin username(This is a workspace admin with a few groups and users)
-${workspace_admin_password_auto}        *IK<8ik,8ik,                                                                            # workspace admin password
+${workspace_admin_username_auto}        Huiming.shi.helplightning+666888999@outlook.com                                         # workspace admin username(This is a workspace admin with a few groups and users)                                                                          # workspace admin password
 
 ${workspace_admin_test_username}        Huiming.shi.helplightning+test_group@outlook.com                                        # workspace admin username(This is a workspace admin with a few groups and users)
 
-${group_admin_username_auto}            Huiming.shi.helplightning+6668889991@outlook.com                                        # group admin username(This is a workspace admin with a few groups and users)
-${group_admin_password_auto}            *IK<8ik,8ik,                                                                            # group admin password
+${group_admin_username_auto}            Huiming.shi.helplightning+6668889991@outlook.com                                        # group admin username(This is a workspace admin with a few groups and users)                                                                           # group admin password
 
-${a_normal_test_username}               Huiming.shi.helplightning+23748795579@outlook.com                                       # a normal test username
-${a_normal_test_password}               *IK<8ik,8ik,                                                                            # a normal test password
+${a_normal_test_username}               Huiming.shi.helplightning+23748795579@outlook.com                                       # a normal test username                                                                           # a normal test password
 
 ${group_admin_name}                     Huiming.shi.helplightning+45148523051                                                   # Administrator when adding a group
 ${On_Call_notifications_email}          468390125@qq.com                                                                        # On-Call Notifications
@@ -62,46 +51,34 @@ ${On_Call_notifications_email_modify}   843361731@qq.com                        
 
 ${first_user_username}                  Huiming.shi.helplightning+111222333@outlook.com                                         # A normal user(belong to citron) account for adding and editing the team's test scripts（Ensure that users have only one group）
 ${first_user_name}                      Huiming.shi.helplightning+111222333
-${first_user_password}                  *IK<8ik,8ik,
 
 ${second_user_username}                 Huiming.shi.helplightning+222333444@outlook.com                                         # A normal user(belong to citron) account for adding and editing the team's test scripts（Ensure that users have only one group）
 ${second_user_name}                     Huiming.shi.helplightning+222333444
-${second_user_password}                  *IK<8ik,8ik,
 
 ${third_user_username}                  Huiming.shi.helplightning+111222333444@outlook.com                                      # A normal user(belong to citron) account for adding and editing the team's test scripts（Ensure that users have only one group）
 ${third_user_name}                      Huiming.shi.helplightning+111222333444
-${third_user_password}                  *IK<8ik,8ik,
 
 ${another_site_admin_username}          Huiming.shi.helplightning+999999999999@outlook.com                                      # A site admin which for Test the Migrate Account(invitations tab)
-${another_site_admin_password}          *IK<8ik,8ik,
 
 ${another_workspace_admin_username}     Huiming.shi.helplightning+999999999@outlook.com                                         # A workspace admin which for Test the Migrate Account(invitations tab)
-${another_workspace_admin_password}     *IK<8ik,8ik,
 
 ${another_group_admin_username}         Huiming.shi.helplightning+99999999999@outlook.com                                       # A group admin which for Test the Migrate Account(invitations tab)
-${another_group_admin_password}         *IK<8ik,8ik,
 
 ${normal_username_for_calls}            Huiming.shi.helplightning+123456789@outlook.com                                         # A normal user for make calls(belong to huiming.shi)
 ${normal_username_for_calls_name}       Huiming.shi.helplightning+123456789
-${normal_password_for_calls}            *IK<8ik,8ik,
 
 ${normal_username_for_calls_B}          Huiming.shi.helplightning+0123456789@outlook.com                                        # B normal user for make calls(belong to huiming.shi)
 ${normal_name_for_calls_B}              Huiming.shi.helplightning+0123456789
-${normal_password_for_calls_B}          *IK<8ik,8ik,
 
 ${personal_user_username}               Huiming.shi.helplightning+personal@outlook.com                                          # personal user for make calls(belong to citron)
 ${personal_user_name}                   Huiming.shi.helplightning+personal
-${personal_user_password}               *IK<8ik,8ik,
 
 ${oncall_user_username}                 Huiming.shi.helplightning+oncall@outlook.com                                            # the normal user (belong to citron) is a oncall for group (on-call group 1)
-${oncall_user_password}                 *IK<8ik,8ik,
 
 ${call_oncall_user_username}            Huiming.shi.helplightning+for_oncall@outlook.com                                        # the normal user is for call oncall (belong to citron)
-${call_oncall_user_password}            *IK<8ik,8ik,
 
 ${switch_workspace_username}            Huiming.shi.helplightning+9988776655@outlook.com                                        # the user which is userd by switch workspace (belong to big_admin)(belong to WS1 and WS2)(on-call for two WS group)
 ${switch_workspace_name}                Huiming.shi.helplightning+9988776655
-${switch_workspace_password}            *IK<8ik,8ik,
 
 ${for_check_user_online_or_not}         Huiming.shi.helplightning+online_or_not@outlook.com                                     # 属于两个WS，用来验证WS切换和user是否在线(belong to big_admin)(belong to WS1 and WS2)
 ${online_or_not_name}                   Huiming.shi.helplightning+online_or_not
@@ -114,25 +91,19 @@ ${for_expert_call_another_name}         Huiming.shi.helplightning+99887766551111
 
 ${big_admin_first_WS_username}          Huiming.shi.helplightning+99887766551@outlook.com                                       # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
 ${big_admin_first_WS_name}              Huiming.shi.helplightning+99887766551
-${big_admin_first_WS_password}          *IK<8ik,8ik,
 
 ${big_admin_third_WS_username}          Huiming.shi.helplightning+99887766553@outlook.com                                       # this user is belong to first WS (belong to big_admin)(belong to WS1)(has no personal user)
 ${big_admin_third_WS_name}              Huiming.shi.helplightning+99887766553
-${big_admin_third_WS_password}          *IK<8ik,8ik,
 
 ${big_admin_second_WS_username}         Huiming.shi.helplightning+99887766552@outlook.com                                       # this user is belong to second WS (belong to big_admin)(belong to WS2)(has no personal user)
-${big_admin_second_WS_password}         *IK<8ik,8ik,
 
 ${big_admin_another_first_WS_username}      Huiming.shi.helplightning+1o1o1o1o1o1o@outlook.com                                  # this user is belong to first WS (belong to big_admin)(belong to WS1)
 ${big_admin_another_first_WS_name}          Huiming.shi.helplightning+1o1o1o1o1o1o
-${big_admin_another_first_WS_password}      *IK<8ik,8ik,
 
 ${an_expert_user_username}              Huiming.shi.helplightning+an_expert_user@outlook.com                                    # an expert user (belong to citron),is a oncall for group (on-call group 2)
 ${an_expert_user_name}                  Huiming.shi.helplightning+an_expert_user
-${an_expert_user_password}              *IK<8ik,8ik,
 
 ${an_team_user_username}                Huiming.shi.helplightning+an_team_user                                                  # an team user (belong to citron)
-${an_team_user_password}                *IK<8ik,8ik,
 
 ${never_log_in_username}                Huiming.shi.helplightning+never_log_in@outlook.com                                      # an Expert user which never log in (belong to big_admin)
 ${never_log_in_name}                    Huiming.shi.helplightning+never_log_in
@@ -142,7 +113,6 @@ ${check_team_offline_name}              Huiming.shi.helplightning+check_team_off
 
 ${a_team_user_username}                 Huiming.shi.helplightning+a_team_user@outlook.com                                       # a team user (belong to big_admin)(has no personal user)
 ${a_team_user_name}                     Huiming.shi.helplightning+a_team_user
-${a_team_user_password}                 *IK<8ik,8ik,
 
 ${for_team_call_username}               Huiming.shi.helplightning+team_user1@outlook.com                                        # a team user (belong to big_admin)(has no personal user)
 ${for_team_call_name}                   Huiming.shi.helplightning+team_user1
@@ -152,18 +122,15 @@ ${personal_user1_name}                  Huiming.shi.helplightning+personal_user_
 
 ${other_site_user_1_username}           Huiming.shi.helplightning+other_site_1@outlook.com                                      # an other site user whitch used to call personal user (belong to big_admin first workspace)(is normal user in Huiming.shi.helplightning+an_expert_user)
 ${other_site_user_1_name}               Huiming.shi.helplightning+other_site_1
-${other_site_user_1_password}           *IK<8ik,8ik,
 
 ${other_site_user_2_username}           Huiming.shi.helplightning+other_site_2@outlook.com                                      # an other site user whitch used to call personal user (belong to citron)(is normal user in Huiming.shi.helplightning+9988776655 first workspace)
 ${other_site_user_2_name}               Huiming.shi.helplightning+other_site_2
-${other_site_user_2_password}           *IK<8ik,8ik,
 
 ${for_other_site_call_username}         Huiming.shi.helplightning+other_site_21@outlook.com                                      # an other site user whitch used to call personal user (belong to citron)(is normal user in Huiming.shi.helplightning+9988776655 first workspace)
 ${for_other_site_call_name}             Huiming.shi.helplightning+other_site_21
 
 ${other_site_user_3_username}           Huiming.shi.helplightning+other_site_3@outlook.com                                      # an other site user whitch used to call personal user (belong to citron)(is normal user in Huiming.shi.helplightning+9988776655 second workspace)
 ${other_site_user_3_name}               Huiming.shi.helplightning+other_site_3
-${other_site_user_3_password}           *IK<8ik,8ik,
 
 ${big_admin_on_call_group}              three_user_in_this_on_call_group                                                        # big_admin 第一个WS下的on-call group
 

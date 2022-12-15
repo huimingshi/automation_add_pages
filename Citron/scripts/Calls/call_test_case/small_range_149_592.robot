@@ -21,7 +21,7 @@ Small_range_149_151
     # premium user log in
     ${driver1}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
     # Contact of premium user log in
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}   ${big_admin_first_WS_password}
+    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
     # premium user call contact in F2F mode
     contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${big_admin_first_WS_name}
     # VP: hint dialog shows;
@@ -47,11 +47,11 @@ Small_range_152
     [Documentation]    2 users in face to face mode
     [Tags]      small range 152 line     call_case
     # user1 log in
-    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}   ${universal_password}
+    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
     # user2 log in
-    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}   ${universal_password}
+    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}
     # user3 log in
-    ${driver3}  driver_set_up_and_logIn     ${Expert_User3_username}   ${universal_password}
+    ${driver3}  driver_set_up_and_logIn     ${Expert_User3_username}
     # 2 users in face to face mode
     contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: hint dialog shows;
@@ -74,7 +74,7 @@ Small_range_153_160
     # Enterprise user log in
     ${driver1}  driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
     # contact of Enterprise user log in
-    ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}    ${universal_password}
+    ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}
     contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
     # uncheck "Continue to show hints" checkbox
     switch_to_other_tab     ${driver1}     //div[@class="checkbox"]//input[@type="checkbox"]
@@ -126,9 +126,9 @@ Small_range_161
     [Documentation]    WebApp specific
     [Tags]      small range 161 line        call_case
     # user1 log in
-    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}   ${universal_password}
+    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
     # user2 log in
-    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}   ${universal_password}
+    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}
     # call contact in F2F mode
     contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: hint dialog shows;
@@ -157,17 +157,17 @@ Join_call_162_167
     ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
     ...         AND               Close
     # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}        ${call_oncall_user_password}
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # TU2 登录
-    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}           ${personal_user_password}
+    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}
     # EU1 calls TU2. TU2 answers call
     contacts_witch_page_make_call   ${driver1}   ${driver2}  ${py_team_page}   ${Team_User1_name}
     # EU3 登录
-    ${driver3}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
+    ${driver3}   driver_set_up_and_logIn    ${Expert_User4_username}
     # PU4 登录
-    ${driver4}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
+    ${driver4}   driver_set_up_and_logIn    ${ws_branding_A_user}
     # DU5 登录
-    ${driver5}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
+    ${driver5}   driver_set_up_and_logIn    ${ws_branding_B_user}
     # EU1 sends 3pi link.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver1}
@@ -201,9 +201,9 @@ Join_call_168_178
     ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
     ...         AND               Close
     # TU2 登录
-    ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}        ${call_oncall_user_password}
+    ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}
     # EU1 登录
-    ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}        ${call_oncall_user_password}
+    ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}
     # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
     contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -217,7 +217,7 @@ Join_call_168_178
     # VP: AU3 joins call.
     which_page_is_currently_on    ${driver3}    ${end_call_button}
     # TU2 invites TU4.   TU4 declines call.
-    ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}       ${call_oncall_user_password}
+    ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
     click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
@@ -231,12 +231,12 @@ Join_call_168_178
     # VP: Team user 4 joins call.
     which_page_is_currently_on    ${driver4}    ${end_call_button}
     # TU2 invites on-call group 1   VP: experts in on-call group 1 receives rollover call.    EU5 answers call.
-    ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}        ${call_oncall_user_password}
+    ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}
     enter_contacts_search_user     ${driver1}    ${On_call_group_001}
     click_user_in_contacts_call     ${driver1}    ${On_call_group_001}
     user_anwser_call    ${driver5}
     # TU2 invites on-call group 2   VP: other experts in on-call group 2 receives rollover call. Display message “No experts are available to take your call” if no experts login.
-    ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}        ${call_oncall_user_password}
+    ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}
 #    # 此处受bug导致  https://vipaar.atlassian.net/browse/CITRON-3646
 #    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
 #    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
@@ -261,9 +261,9 @@ Join_call_179_187
     ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
     ...         AND               Close
     # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}        ${call_oncall_user_password}
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # TU2 登录
-    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}           ${personal_user_password}
+    ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}
     # TU2 clicks on EU1’s MHS link. EU1 answers call.
     ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
     user_make_call_via_meeting_link    ${driver2}    ${invite_mhs_url}
@@ -274,11 +274,11 @@ Join_call_179_187
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver1}
     # TU3 登录
-    ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}        ${call_oncall_user_password}
+    ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}
     # EU4 登录
-    ${driver4}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
+    ${driver4}   driver_set_up_and_logIn    ${Expert_User4_username}
     # PU5 登录
-    ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
+    ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}
     # Following participants try to join call in rapid sequence: TU3 via MHS link. EU4 via MHS link.personal user 5 via MHS link.
     user_make_call_via_meeting_link    ${driver3}    ${invite_mhs_url}
     user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
@@ -296,7 +296,7 @@ Join_call_179_187
     which_page_is_currently_on    ${driver5}    ${end_call_button}
 
     # DU6 登录
-    ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
+    ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}
     # Following participants try to join call in rapid sequence: different enterprise user 6 via 3pi link. anonymous user 7 via 3pi link.anonymous user 8 via MHS link.
     user_make_call_via_meeting_link    ${driver6}    ${invite_url}
     # 确保建立call，但未接听
@@ -329,7 +329,7 @@ Join_call_188_195
     ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
     ...         AND               Close
     # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}        ${call_oncall_user_password}
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # Anonymous user 2 clicks on EU1’s OTU link. EU1 answers call.
     ${invite_otu_url}   send_meeting_room_link    ${driver1}   OTU
     ${driver2}    anonymous_open_meeting_link    ${invite_otu_url}
@@ -337,11 +337,11 @@ Join_call_188_195
     make_sure_enter_call   ${driver2}
     user_anwser_call    ${driver1}
     # TU3 登录
-    ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}        ${call_oncall_user_password}
+    ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}
     # EU4 登录
-    ${driver4}   driver_set_up_and_logIn    ${Expert_User4_username}        ${call_oncall_user_password}
+    ${driver4}   driver_set_up_and_logIn    ${Expert_User4_username}
     # PU5 登录
-    ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}        ${call_oncall_user_password}
+    ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}
     # EU1 sends 3pi link.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver1}
@@ -360,7 +360,7 @@ Join_call_188_195
     user_anwser_call    ${driver1}   no_direct
     which_page_is_currently_on    ${driver5}    ${end_call_button}
     # DU6 登录
-    ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}        ${call_oncall_user_password}
+    ${driver6}   driver_set_up_and_logIn    ${ws_branding_B_user}
     # Following participants try to join call in rapid sequence: different enterprise user 6 via 3pi link. anonymous user 7 via 3pi link.anonymous user 8 via MHS link.
     user_make_call_via_meeting_link    ${driver6}    ${invite_url}
     # 确保建立call，但未接听
@@ -382,9 +382,9 @@ Join_call_196_200
     [Documentation]     In call	  2PC
     [Tags]     small range 196-200 lines        call_case
     # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}        ${call_oncall_user_password}
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
-    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}        ${call_oncall_user_password}
+    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}
     # EU1 calls EU2. EU2 answers call,
     contacts_witch_page_make_call     ${driver1}     ${driver2}   ${py_team_page}    ${Expert_User2_name}
     # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
@@ -402,7 +402,7 @@ Join_call_196_200
     # Proceed with my camera Off
     proceed_with_camera_off    ${driver1}
     # EU1 invites TU3. TU3 answers call.
-    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}        ${call_oncall_user_password}
+    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Team_User1_name}
     click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
@@ -438,7 +438,7 @@ Join_call_201_205
     ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
     ...         AND               Close
     # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}        ${call_oncall_user_password}
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
     # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
     ${invite_url}    send_meeting_room_link    ${driver1}    OTU
     ${driver2}   anonymous_open_meeting_link     ${invite_url}
@@ -491,9 +491,9 @@ Small_range_560_580
     ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
     ...         AND               Close
     # EU1 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # EU1 call EU2 from contact list
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: Invite contact tab is default for EU1 and EU2;Send 3PI link is available;
@@ -506,7 +506,7 @@ Small_range_560_580
     open_invite_3rd_participant_dialog     ${driver2}
     close_invite_3th_page     ${driver2}
     # EU1 invite EU3 from Team contact
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
+    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Expert_User3_name}
     click_user_in_contacts_call     ${driver1}    ${Expert_User3_name}
@@ -515,7 +515,7 @@ Small_range_560_580
     leave_call    ${driver1}
     exit_one_driver    ${driver1}
     # EU2 invite EU4 from Directory
-    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
+    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
     enter_contacts_search_user     ${driver2}    ${Expert_User4_name}
     click_user_in_contacts_call     ${driver2}    ${Expert_User4_name}
     user_anwser_call    ${driver4}
@@ -523,7 +523,7 @@ Small_range_560_580
     exit_call    ${driver4}
     exit_one_driver    ${driver4}
     # EU3 invite TU1
-    ${driver5}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
+    ${driver5}    driver_set_up_and_logIn    ${Team_User1_username}
     enter_contacts_search_user     ${driver3}    ${Team_User1_name}
     click_user_in_contacts_call     ${driver3}    ${Team_User1_name}
     user_anwser_call    ${driver5}
@@ -540,7 +540,7 @@ Small_range_560_580
     ${invite_url}     send_invite_in_calling_page    ${driver3}
     close_invite_3th_page    ${driver3}
     # EU5 click 3PI link to join    VP: directly joint automatically, do not need anyone's accept
-    ${driver6}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
+    ${driver6}    driver_set_up_and_logIn    ${Expert_User5_username}
     user_make_call_via_meeting_link    ${driver6}    ${invite_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver6}
@@ -549,7 +549,7 @@ Small_range_560_580
     exit_call    ${driver6}
     exit_one_driver    ${driver6}
     # TU2 click 3PI link to join    VP: directly joint automatically, do not need anyone's accept
-    ${driver7}    driver_set_up_and_logIn    ${Team_User2_username}     ${universal_password}
+    ${driver7}    driver_set_up_and_logIn    ${Team_User2_username}
     user_make_call_via_meeting_link    ${driver7}    ${invite_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver7}
@@ -568,7 +568,7 @@ Small_range_560_580
     exit_one_driver    ${driver3}
     sleep   80s
     # Expert user from different enterprise click 3PI link
-    ${driver9}    driver_set_up_and_logIn    ${ws3_branding_C_user}     ${universal_password}
+    ${driver9}    driver_set_up_and_logIn    ${ws3_branding_C_user}
     user_make_call_via_meeting_link    ${driver9}    ${invite_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver9}
@@ -594,13 +594,13 @@ Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
     [Tags]    small range 581-582 lines     call_case
     # EU1 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # EU1 call EU2 from contact list
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # Expert 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_AaA_username}     ${universal_password}
+    ${driver3}    driver_set_up_and_logIn    ${Expert_AaA_username}
     # EU1 invte on-call group
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${AaA_on_call_group_name}
@@ -615,28 +615,28 @@ Small_range_583_585
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
     [Tags]    small range 583-585 lines         call_case
     # EU1 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # 获取OTU和MHS link
     ${invite_otu_url}   send_meeting_room_link    ${driver1}   OTU
     ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
     # EU1 call EU2 from contact list
     contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${Expert_User2_name}
     # Someone directly call EU1 or EU2	Someone get messgage about EU1 is on another call
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}     ${universal_password}
+    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     contacts_witch_page_make_call     ${driver3}    ${driver1}   ${py_team_page}   ${Expert_User1_name}    no_anwser
     which_page_is_currently_on    ${driver3}    ${user_is_currently_on_another_call}
     exit_one_driver    ${driver3}
     # Someone click EU1 or EU2's MHS link	Someone get messgage about EU1 is on another call
-    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}     ${universal_password}
+    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
     user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver4}
     which_page_is_currently_on    ${driver4}    ${user_is_currently_on_another_call}
     exit_one_driver    ${driver4}
     # someone click EU1 or EU2's OTU link	Someone get messgage about EU1 is on another call
-    ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
+    ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}
     user_make_call_via_meeting_link    ${driver5}    ${invite_otu_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver5}
@@ -649,9 +649,9 @@ Small_range_590
     [Documentation]     3PI - Direct call     TU1 call EU1 from contact list
     [Tags]    small range 590 line      call_case
     # TU1 登录
-    ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}
     # EU2 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
     # TU1 call EU1 from contact list
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User1_name}
     # VP: TU1 can only invite, can not send 3PI
@@ -665,9 +665,9 @@ Small_range_591
     [Documentation]     3PI - Direct call     TU1 call EU1 via EU1's MHS link
     [Tags]    small range 590 line      call_case
     # TU1 登录
-    ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}
     # EU2 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
     ${invite_mhs_url}   send_meeting_room_link    ${driver2}    MHS
     # TU1 call EU1 via EU1's MHS link
     user_make_call_via_meeting_link    ${driver1}    ${invite_mhs_url}
@@ -683,9 +683,9 @@ Small_range_592
     [Documentation]     3PI - Direct call     Pre-condition: userS has personal contact from another site
     [Tags]    small range 590 line      call_case
     # userS 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User5_username}
     # personal contact 登录
-    ${driver2}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # TU1 call EU1 from contact list
     switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_personal_page}   ${ws_branding_A_name}
