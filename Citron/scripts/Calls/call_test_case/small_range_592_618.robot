@@ -126,8 +126,7 @@ Call_Tag_Comment_596_599
     # 获取所有的tags列表
     ${tags_list_C2}    get_all_tag_after_call    ${driver3}
     # VP: Similar tag name of WS1 list out
-     two_option_is_equal   ${driver3}   ${tags_list_C1}    ${tags_list_C2}
-#    lists should be equal     ${tags_list_C1}    ${tags_list_C2}
+    two_option_is_equal   ${driver3}   ${tags_list_C1}    ${tags_list_C2}
     # A, B , C fill in tags and comments
     ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_4
     ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_5
@@ -257,7 +256,6 @@ Call_Tag_Comment_600_604
 #    first_call_record_tag_and_comment   ${driver3}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
 #    [Teardown]      run keywords    Close
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver   ${driver1}  ${driver3}
 
 Call_survey_608_610
     [Documentation]   Call survey(Tier of enterprise and above)   Customer call Experts group[all have survey & call tag permission]   Customer invite a enterprise user
@@ -326,7 +324,6 @@ Call_survey_608_610
     first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}     good_experience_15    good_experience_14   good_experience_13
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Call_survey_611_615
     [Documentation]   Call survey(Tier of enterprise and above)   Pre-condition:(A & B not in the same company)    3PC call
@@ -401,7 +398,6 @@ Call_survey_611_615
     which_page_is_currently_on   ${driver3}   ${py_contacts_switch_success}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
 
 Call_survey_616_618
     [Documentation]   Call survey(Tier of enterprise and above)   Anonymous call Meeting Owner
@@ -453,4 +449,3 @@ Call_survey_616_618
     which_page_is_currently_on    ${driver2}    ${five_star_high_praise}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}
