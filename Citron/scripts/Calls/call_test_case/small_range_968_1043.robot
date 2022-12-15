@@ -26,7 +26,7 @@ Small_range_970_974
     ...         AND             Close
     # User of WS1 login
     # VP: Toturial screen
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    check_toturial
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}    check_toturial
     # VP: Branding name everywhere use Help Lighning
     ${get_ele_text}    get_ele_text    ${driver1}    ${first_tree_text}
     two_option_is_equal    ${driver1}    ${get_ele_text}     MY HELP LIGHTNING
@@ -40,7 +40,7 @@ Small_range_970_974
     ${get_class_value}    get_ele_class_name    ${driver1}   //div[@id="user-tabs-pane-team"]${first_data_img}   src
     should start with    ${get_class_value}     ${default_avatar_src}
     # VP: Call ending screen
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}   ${Expert_User1_name}
     exit_call   ${driver2}
     ${get_ele_text}    get_ele_text    ${driver1}    ${end_call_message}
@@ -59,7 +59,7 @@ Small_range_977_993
     ${get_value}  ${product_name}   modify_workspace_branding_setting
     Close
     # Workspace admin login，VP: all helplightning blue will be changed to customerized  accent color
-    ${driver1}    driver_set_up_and_logIn    ${workspace_admin_username}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${workspace_admin_username}
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}   background-color
     Run Keyword If   '${get_value}'=='#ff9933'   two_option_is_equal   ${driver1}      rgba(255, 153, 51, 0.2)     ${css_value}
     ...  ELSE IF  '${get_value}'=='#00ff00'    two_option_is_equal   ${driver1}     rgba(0, 255, 0, 0.2)     ${css_value}
@@ -152,7 +152,7 @@ Small_range_977_993
 
     Comment    Site admin login
     # Site admin login and switch to WS1,VP: All context with "Help Lightning" is branded, accent color is orange, for following sceen
-    ${driver2}    driver_set_up_and_logIn    ${site_admin_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${site_admin_username}
     # Contacts screen
     ${css_value}   get_css_value   ${driver2}   ${Contacts_Send_link_email}   background-color                      # Send My Help Space Invitation按钮
     check_get_color_correct    ${get_value}   ${css_value}
@@ -210,7 +210,7 @@ Small_range_977_993
 
     Comment  Select mode hint in F2F mode
     # Select mode hint in F2F mode
-    ${driver3}    driver_set_up_and_logIn    ${personal_user_username}     ${universal_password}
+    ${driver3}    driver_set_up_and_logIn    ${personal_user_username}
     switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
     contacts_witch_page_make_call     ${driver2}    ${driver3}   ${py_team_page}   ${personal_user_name}       # 进行通话
     sleep   60s
@@ -267,9 +267,9 @@ Small_range_995_996
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     # User A call user B directly
     contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_team_page}   ${ws_branding_B_name}   no_anwser
     # VP: User A's outgoing call, it shoud show User B's customer  avatar.
@@ -335,9 +335,9 @@ Small_range_997
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User5_username}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User5_username}
     # User A call other site user[User B] from personal contact list
     switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
     contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_personal_page}   ${Expert_User5_name}   no_anwser
@@ -399,9 +399,9 @@ Small_range_998
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User C登录
-    ${driver2}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_C_user}
     user_switch_to_second_workspace    ${driver2}    ${WS_branding_setting_WS2}
     # Use A call user C from Team contact
     contacts_witch_page_make_call    ${driver1}   ${driver2}   ${py_team_page}   ${ws_branding_C_name}   no_anwser
@@ -462,9 +462,9 @@ Small_range_999
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     ${invite_url}     send_meeting_room_link    ${driver2}     OTU
     # User A click B's meeing link
     user_make_call_via_meeting_link      ${driver1}    ${invite_url}
@@ -523,9 +523,9 @@ Small_range_1000_1001
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     ${invite_url}     send_meeting_room_link    ${driver2}     OTU
     # Anonyoums click B's meeting link
     ${driver3}    anonymous_open_meeting_link     ${invite_url}
@@ -599,9 +599,9 @@ Small_range_1002_1004
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     ${invite_url}     send_meeting_room_link    ${driver2}     OTU
     # User A click B's meeing link
     user_make_call_via_meeting_link      ${driver1}    ${invite_url}
@@ -610,7 +610,7 @@ Small_range_1002_1004
     # 接听call
     user_anwser_call   ${driver2}
     # User C登录
-    ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
+    ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}
     user_switch_to_second_workspace    ${driver3}    ${WS_branding_setting_WS2}
     # User B send 3PI link
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -669,7 +669,7 @@ Small_range_1005_1007
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User C登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_C_user}
     # User C switch to WS1	User C send otu link [link1]
     ${invite_url_1}     send_meeting_room_link    ${driver1}     OTU
     # User C switch to WS2	User C send otu link [link2]
@@ -713,7 +713,7 @@ Small_range_1005_1007
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
 
     # User D登录
-    ${driver3}    driver_set_up_and_logIn    ${ws_branding_D_user}     ${universal_password}
+    ${driver3}    driver_set_up_and_logIn    ${ws_branding_D_user}
     # User D click link1 to enter call
     close_call_ending_page_RF    ${driver1}    #关闭通话结束页面
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
@@ -762,9 +762,9 @@ Small_range_1009
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     # 进行call
     contacts_witch_page_make_call     ${driver2}    ${driver1}   ${py_team_page}   ${ws_branding_A_name}
     # 获取3PI link
@@ -773,7 +773,7 @@ Small_range_1009
     # 结束Call
     exit_call    ${driver1}
     # User C登录
-    ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}     ${universal_password}
+    ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}
     # Click inactive 3PI link(nobody in call) that call's owner is User B
     user_make_call_via_meeting_link     ${driver3}    ${invite_url}
     # 确保建立call，但未接听
@@ -795,9 +795,9 @@ Small_range_1010_1017
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${EG_user_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${EG_user_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${EG_user_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${EG_user_B_user}
     # User A directly call EG 1
     contacts_witch_page_make_call    ${driver1}     ${driver2}   ${py_team_page}   ${Expert_Group_1}    no_care
     # VP: User A's outgoing call, it should WS 1's branding avatar calls EG 1[the background of expert logo should be WS 1 branding accent color]
@@ -914,10 +914,10 @@ Small_range_1018_1026
     should contain    ${get_class_value}   ${get_big_logo_src_after}
     ### 登录操作
     Close    # 退出rf启动的driver
-    ${driver1}    driver_set_up_and_logIn    ${site_admin_username}    ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${site_admin_username}
     user_switch_to_second_workspace    ${driver1}     ${WS_branding_setting_WS3}
-    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_A_user}    ${universal_password}
-    ${driver3}    driver_set_up_and_logIn    ${ws3_branding_C_user}    ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_A_user}
+    ${driver3}    driver_set_up_and_logIn    ${ws3_branding_C_user}
     # Team contacts using default avatar	VP: Test avatar is loaded
     ${get_class_value}    get_ele_class_name    ${driver1}   ${second_data_img}   src
     ${get_class_value}     split_src_img    ${get_class_value}
@@ -961,7 +961,7 @@ Small_range_1018_1026
     two_option_is_equal    ${driver1}    ${get_default_avatar_src_after}     ${get_class_value}
     # Call team contact and answer  	team contact invite 3rd participant	   View Contact list 	VP: Test avatar is loaded
     exit_one_driver    ${driver1}
-    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_B_user}    ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${ws3_branding_A_username}
     make_sure_enter_call      ${driver1}
     enter_contacts_search_user     ${driver1}     ${ws3_branding_A_username}
@@ -985,7 +985,7 @@ Small_range_1027_1030
     ...         AND             turn_off_workspace_branding_setting     # 关闭Workspace Branding设置
     ...         AND             Close
     # 登录
-    ${driver1}    driver_set_up_and_logIn    ${site_admin_username}    ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${site_admin_username}
     user_switch_to_second_workspace    ${driver1}     ${WS_branding_setting_WS3}
     # VP: Branding name everywhere use Help Lighning
     ${get_ele_text}    get_ele_text    ${driver1}    ${first_tree_text}
@@ -1010,9 +1010,9 @@ Small_range_1031
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     # User B call user A directly
     contacts_witch_page_make_call    ${driver2}   ${driver1}   ${py_team_page}   ${ws3_branding_A_username}   no_anwser
     # VP: User B's outgoing call, it should show WS 1 default Avatar Grey 'H'
@@ -1071,9 +1071,9 @@ Small_range_1032
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     ${invite_url}     send_meeting_room_link    ${driver1}     OTU
     # User B click A's meeing link
     user_make_call_via_meeting_link      ${driver2}    ${invite_url}
@@ -1135,7 +1135,7 @@ Small_range_1033_1035
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
     # --------------------------------------------------------------------------------------------------------- #
     # User B登录
-    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_B_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     ${invite_url}     send_meeting_room_link    ${driver1}     OTU
     # Anonyoums click B's meeting link
     ${driver2}    anonymous_open_meeting_link     ${invite_url}
@@ -1195,9 +1195,9 @@ Small_range_1036_1043
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
     # --------------------------------------------------------------------------------------------------------- #
     # User A登录
-    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}     ${universal_password}
+    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}
     # User B登录
-    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}     ${universal_password}
+    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     # User A directly call EG 1
     contacts_witch_page_make_call      ${driver1}     ${driver2}    ${py_team_page}    ${Expert_Group_1}     no_care
     # VP: User A's outgoing call, it should WS 1's default avatar [Grey 'H'] calls EG 1[the background of expert logo should be WS 1 default accent color of Blue]

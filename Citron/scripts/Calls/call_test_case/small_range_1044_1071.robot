@@ -21,7 +21,7 @@ Small_range_1045
     ...         AND             fill_invitation_message_content     You and I are dark horses     # 填写信息
     ...         AND             Close
     # user login
-    ${driver}     driver_set_up_and_logIn     ${personal_user_username}       ${universal_password}
+    ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
     send_meeting_room_link     ${driver}     MHS      send
     # Open email and SMS of phone number,VP:In email "You have been invited to join [USERNAME] on a [ENTERPRISE]'s support call using Help Lightning." has been replaced by text set.
@@ -36,7 +36,7 @@ Small_range_1048
     ...         AND             fill_invitation_message_content     德玛西亚皇子+[]()     # 填写信息
     ...         AND             Close
     # user login
-    ${driver}     driver_set_up_and_logIn     ${personal_user_username}       ${universal_password}
+    ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
     send_meeting_room_link     ${driver}     MHS      send
     # Open email and SMS of phone number,VP: email and SMS shows customer text
@@ -51,7 +51,7 @@ Small_range_1051
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
     ...         AND             Close
     # user login
-    ${driver}     driver_set_up_and_logIn     ${personal_user_username}       ${universal_password}
+    ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
     send_meeting_room_link     ${driver}     MHS      send
     # Open email and SMS of phone number,VP:Default message content
@@ -66,7 +66,7 @@ Small_range_1046
     ...         AND             fill_invitation_message_content      You And I Are Dark Horses     # 填写信息
     ...         AND             Close
     # user login
-    ${driver}     driver_set_up_and_logIn     ${personal_user_username}       ${universal_password}
+    ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
     send_meeting_room_link     ${driver}     OTU      send
     # Open email and SMS of phone number,VP: SMS content has customer text and follow by “Tap this link to join the call…”
@@ -81,7 +81,7 @@ Small_range_1049
     ...         AND             fill_invitation_message_content     德玛西亚皇子+[]-()      # 填写信息
     ...         AND             Close
     # user login
-    ${driver}     driver_set_up_and_logIn     ${personal_user_username}       ${universal_password}
+    ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
     send_meeting_room_link     ${driver}     OTU      send
     # Open email and SMS of phone number,VP: email and SMS shows customer text
@@ -96,7 +96,7 @@ Small_range_1052
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
     ...         AND             Close
     # user login
-    ${driver}     driver_set_up_and_logIn     ${personal_user_username}       ${universal_password}
+    ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
     send_meeting_room_link     ${driver}     OTU      send
     # Open email and SMS of phone number,VP:Default message content
@@ -111,8 +111,8 @@ Small_range_1047
     ...         AND             fill_invitation_message_content      I Am Dark Horse     # 填写信息
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}       ${universal_password}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
+    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
+    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -129,8 +129,8 @@ Small_range_1050
     ...         AND             fill_invitation_message_content      德玛西亚+[]-()     # 填写信息
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}       ${universal_password}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
+    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
+    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -147,8 +147,8 @@ Small_range_1053
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}       ${universal_password}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
+    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
+    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -207,9 +207,9 @@ Small_range_1053
 #    [Documentation]     Open the HTML file[Helplightning Integration Test Tool.html]
 #    [Tags]    small range 1068-1071 lines，有bug：https://vipaar.atlassian.net/browse/CITRON-3525     call_case
 #    # 被呼叫的用户先登录
-#    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls_B}       ${universal_password}
+#    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
 #    # 打开html页面并登录
-#    ${driver2}     open_html_create_call    ${normal_username_for_calls}       ${universal_password}    ${normal_username_for_calls_B}
+#    ${driver2}     open_html_create_call    ${normal_username_for_calls}       ${universal_password}    ${public_pass}
 #    # user接受call
 #    user_anwser_call    ${driver1}
 #    # 退出call
