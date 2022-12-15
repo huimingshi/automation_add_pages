@@ -39,7 +39,6 @@ Small_range_656
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}    ${driver2}
 
 Small_range_657
     [Documentation]     No answer message   caller calls via normal way	   callee clicks on decline button
@@ -64,7 +63,6 @@ Small_range_657
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}    ${driver2}
 
 Small_range_658
     [Documentation]     No answer message   caller calls via normal way	   caller calls one participant who is in another call
@@ -102,7 +100,6 @@ Small_range_658
     ${occurred_time_list_01}    get_recents_page_records_occurred_time    ${driver1}           # 获取Recents页面前两行call记录的时间
     two_list_has_one_same_element    ${driver1}   ${occurred_time_list_0}   ${occurred_time_list_01}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}    ${driver2}    ${driver3}
 
 Small_range_660
     [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
@@ -122,7 +119,6 @@ Small_range_660
     # Owner decline call
     which_page_is_currently_on   ${driver1}    ${that_user_is_unreachable}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}
 
 Small_range_661
     [Documentation]     No answer message   caller calls via meeting link	  Meeting room link[Owner's App runs in backgroup]
@@ -140,7 +136,6 @@ Small_range_661
     # Guest cancel call
     user_end_call_by_self    ${driver1}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}   ${driver2}
 
 Small_range_662
     [Documentation]     User A call B enter call via normal way    User B invites callee [User C]
@@ -189,7 +184,6 @@ Small_range_662
     two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
     verify_username_in_recents_page    ${driver3}   ${Expert_User2_name}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_663
     [Documentation]     User A call B enter call via normal way    User A invites User C] who doesn't login on any device
@@ -237,7 +231,6 @@ Small_range_663
     two_list_has_one_same_element    ${driver4}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
     verify_username_in_recents_page    ${driver4}   ${Expert_User1_name}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}  ${driver4}
 
 Small_range_664
     [Documentation]     User A call B enter call via normal way    User A] invites User C
@@ -287,7 +280,6 @@ Small_range_664
     two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
     verify_username_in_recents_page    ${driver3}   ${Expert_User1_name}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_665
     [Documentation]     User A call B enter call via normal way    caller calls one participant who is in another call via normal call
@@ -324,7 +316,6 @@ Small_range_665
     two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
     verify_username_in_recents_page    ${driver1}    ${Expert_User4_name}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}  ${driver4}
 
 #Small_range_666
 #    [Documentation]     Guest 1 call meeting link Owner    Guest 2] calls one participant via meeting link    Owner] kill app during incoming call
@@ -381,7 +372,6 @@ Small_range_665
 ##    two_list_has_one_same_element    ${driver3}   ${occurred_time_list_C1}    ${occurred_time_list_C2}
 ##    verify_username_in_recents_page    ${driver3}    ${Expert_User1_name}
 ##    [Teardown]   exit_driver
-###    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}   ${driver4}
 
 #Small_range_667
 #    [Documentation]     Guest 1 call meeting link Owner    Guest 2] calls one participant via meeting link    Meeting Owner] declines call
@@ -441,7 +431,6 @@ Small_range_665
 ##    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
 ##    verify_username_in_recents_page    ${driver1}    ${Expert_User1_name}   ${Expert_User2_name}
 #    [Teardown]   exit_driver
-##    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 #Small_range_669_670
 #    [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
@@ -460,7 +449,6 @@ Small_range_665
 #    close_call_ending_page_RF    ${driver1}
 #    [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 #Small_range_671_672_673
 #    [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
@@ -501,7 +489,6 @@ Small_range_665
 #    close_call_ending_page_RF    ${driver1}
 #    [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver     ${driver1}    ${driver2}
 #
 #Small_range_674
 #    [Documentation]     User set Do not Disturb(DND)   UserB call user A by meeting link
@@ -519,7 +506,6 @@ Small_range_665
 #    which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
 #    [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver     ${driver1}    ${driver2}
 #
 #Small_range_675
 #    [Documentation]     User set Do not Disturb(DND)    InCall user invite User A to 3PC call
@@ -541,7 +527,6 @@ Small_range_665
 #    [Teardown]      run keywords    do_not_disturb_become_available     ${driver1}
 #    ...             AND             exit_call       ${driver2}
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver     ${driver1}    ${driver2}   ${driver3}
 #
 #Small_range_677_678_679_680
 #    [Documentation]     User set Do not Disturb(DND)    Site Admin add user A to another workspace WS2
@@ -581,7 +566,6 @@ Small_range_665
 #    [Teardown]      run keywords    close_call_ending_page_RF     ${driver1}
 #    ...             AND             do_not_disturb_become_available     ${driver1}
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver     ${driver1}    ${driver2}
 #
 #Small_range_681_682_683
 #    [Documentation]     User set Do not Disturb(DND)    Site Admin add user A to another workspace WS2
@@ -622,7 +606,6 @@ Small_range_665
 #    ...             AND             user_switch_to_second_workspace    ${driver1}    ${Huiming_shi_Added_WS_another}
 #    ...             AND             do_not_disturb_become_available     ${driver1}
 #    ...             AND             exit_driver
-##    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 #Small_range_687
 #    [Documentation]     Join call via meeting call   Owner clicks on mhs link firstly
@@ -638,7 +621,6 @@ Small_range_665
 #    # Owner sees message “You are attempting to join your own My Help Space, but there is no one else in the call.”
 #    which_page_is_currently_on     ${driver1}      这块没法填写准确的xpath
 #    [Teardown]      exit_driver
-##    [Teardown]      exit_driver     ${driver1}
 
 Small_range_688
     [Documentation]     Join call via meeting call   Owner clicks on otu link firstly
@@ -660,4 +642,3 @@ Small_range_688
     # Owner and the first guest auto joins call.
     exit_call     ${driver2}
     [Teardown]   exit_driver
-#    [Teardown]   exit_driver    ${driver1}   ${driver2}
