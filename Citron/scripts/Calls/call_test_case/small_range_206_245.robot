@@ -18,14 +18,14 @@ Small_range_206
     [Documentation]    2 users in face to face mode
     [Tags]      small range 152 line     call_case
     # TU1 log in
-    ${driver_TU1}  driver_set_up_and_logIn     ${Team_User1_username}   ${universal_password}
+    ${driver_TU1}  driver_set_up_and_logIn     ${Team_User1_username}
     # EU2 log in
-    ${driver_EU2}  driver_set_up_and_logIn     ${Expert_User2_username}   ${universal_password}
+    ${driver_EU2}  driver_set_up_and_logIn     ${Expert_User2_username}
     # TU1 calls EU2. EU2 answers call.
     contacts_witch_page_make_call   ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${Expert_User2_name}
     make_sure_enter_call    ${driver_EU2}
     # U3 log in
-    ${driver_U3}  driver_set_up_and_logIn     ${Expert_User3_username}   ${universal_password}
+    ${driver_U3}  driver_set_up_and_logIn     ${Expert_User3_username}
     # TU1 invites U3 from contact list. U3 answers call.
     enter_contacts_search_user   ${driver_TU1}    ${Expert_User3_name}
     click_user_in_contacts_call    ${driver_TU1}     ${Expert_User3_name}
@@ -42,10 +42,10 @@ Small_range_206
     ${driver_U4}  anonymous_open_meeting_link    ${invite_url}
     user_anwser_call    ${driver_TU1}    no_direct
     # EU5 via 3pi link
-    ${driver_EU5}  driver_set_up_and_logIn     ${Expert_User5_username}   ${universal_password}
+    ${driver_EU5}  driver_set_up_and_logIn     ${Expert_User5_username}
     user_make_call_via_meeting_link   ${driver_EU5}   ${invite_url}
     # U6 via 3pi link
-    ${driver_U6}  driver_set_up_and_logIn     ${Team_User2_username}   ${universal_password}
+    ${driver_U6}  driver_set_up_and_logIn     ${Team_User2_username}
     user_make_call_via_meeting_link   ${driver_U6}   ${invite_url}
     # VP:
     # 1. participants icon is invisible for the three users.
@@ -75,7 +75,7 @@ Small_range_206
     click_nav_left   ${driver_EU2}
     check_current_participants   ${driver_EU2}    ${Expert_User2_name}    ${Team_User1_name}   ${Expert_User3_name}    ${anonymous_user_name}
     # User 7 clicks on 3pi link.	VP: user 7 sees message “Too many users in a call”
-    ${driver_U7}  driver_set_up_and_logIn     ${Expert_User4_username}   ${universal_password}
+    ${driver_U7}  driver_set_up_and_logIn     ${Expert_User4_username}
     user_make_call_via_meeting_link   ${driver_U7}   ${invite_url}
     which_page_is_currently_on        ${driver_U7}       ${too_many_users_in_a_call}
     exit_one_driver       ${driver_U7}
