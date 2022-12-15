@@ -92,10 +92,10 @@ My_Account_When_enterprise_admin_logins
     # Remove my avatar
     remove_my_avatar
     # Change password
-    my_account_change_password   ${site_admin_password}    ${public_password_change}
+    my_account_change_password   ${public_pass}    ${public_password_change}
     [Teardown]    run keywords    remove_avatar_teardown
     ...           AND             change_name_title_location   huiming.shi    huiming.shi    # Restore name, title and location to the initial value
-    ...           AND             my_account_change_password   ${public_password_change}    ${site_admin_password}     # Restore password to the initial value
+    ...           AND             my_account_change_password   ${public_password_change}    ${public_pass}     # Restore password to the initial value
     ...           AND             Close
 
 My_Account_When_GA_logins
