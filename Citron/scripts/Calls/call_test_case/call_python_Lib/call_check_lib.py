@@ -240,12 +240,13 @@ def check_current_participants(driver,*args):
     :param args: 入会者name
     :return:
     """
+    ele_list = get_xpath_elements(driver,current_participant_div.format(len(args)+1))
+    print(len(ele_list))
+    public_assert(driver, 0, len(ele_list), action=f"当前页面应该只有{len(args)}个入会者")
     for i in range(len(args)):
-        participant = get_xpath_element(driver,current_participant_div.format(i)).get_attribute("textContent")
+        participant = get_xpath_element(driver,current_participant_div.format(i),description=f"获取第{i+1}个入会者name").get_attribute("textContent")
         print(participant,args[i])
         public_assert(driver, participant, args[i], action=f"第{i+1}个入会者正确")
-    ele_list = get_xpath_elements(driver,current_participant_div.format(len(args)+1))
-    public_assert(driver, 0, len(ele_list), action=f"当前页面只有{len(args)}个入会者")
 
 def check_f2f_mode_show(driver,show = "show"):
     """
