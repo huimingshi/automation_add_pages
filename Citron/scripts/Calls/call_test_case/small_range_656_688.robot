@@ -447,7 +447,7 @@ Small_range_669_670
     [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
     [Tags]    small range 669+670 lines      call_case
     # User A login and set Do not disturb
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}    close_bounced     accept    set_disturb
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}   no_check_toturial    close_bounced     accept    set_disturb
     # User B 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
     # Become available from app
