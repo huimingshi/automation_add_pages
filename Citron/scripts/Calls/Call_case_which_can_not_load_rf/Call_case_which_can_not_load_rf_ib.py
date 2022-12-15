@@ -79,7 +79,7 @@ def test_filter_set_up():
     driver.maximize_window()
     return driver
 
-def log_in_lib(username,password,close_bounced='close_bounced',accept = 'accept'):
+def log_in_lib(username,password="*IK<8ik,8ik,",close_bounced='close_bounced',accept = 'accept'):
     """
     # driver set up And LogIn
     :param username: 用户名

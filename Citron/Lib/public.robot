@@ -165,7 +165,7 @@ check_tutorial_again
 
 Login_site_admin
     # 登录系统
-    Login    ${site_admin_username}    ${site_admin_password}
+    Login    ${site_admin_username}    ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
     # 关闭tutorial
@@ -181,7 +181,7 @@ Login_premium_user
 
 Login_workspaces_admin
     # 登录系统
-    Login    ${workspace_admin_username}     ${workspace_admin_password}
+    Login    ${workspace_admin_username}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
     # 关闭tutorial
@@ -189,7 +189,7 @@ Login_workspaces_admin
 
 Login_another_workspaces_admin
     # 登录系统
-    Login    ${another_workspace_admin_username}     ${another_workspace_admin_password}
+    Login    ${another_workspace_admin_username}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
     # 关闭tutorial
@@ -197,7 +197,7 @@ Login_another_workspaces_admin
 
 Login_another_group_admin
     # 登录系统
-    Login    ${another_group_admin_username}     ${another_group_admin_password}
+    Login    ${another_group_admin_username}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
     # 关闭tutorial
@@ -205,7 +205,7 @@ Login_another_group_admin
 
 Login_workspaces_admin_one
     # 登录系统
-    Login    ${workspace_admin_username_one}     ${workspace_admin_password_one}
+    Login    ${workspace_admin_username_one}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
     # 关闭tutorial
@@ -213,7 +213,7 @@ Login_workspaces_admin_one
 
 Login_group_admin
     # 登录系统
-    Login    ${group_admin_username}    ${group_admin_password}
+    Login    ${group_admin_username}    ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
     # 关闭tutorial
@@ -261,7 +261,7 @@ Login_new_added_user_whitout_workspaces
 
 Login_normal_for_calls
     # 登录系统
-    Login    ${normal_username_for_calls}     ${normal_password_for_calls}
+    Login    ${normal_username_for_calls}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
     # 关闭tutorial

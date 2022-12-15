@@ -9,7 +9,7 @@ Calls_filter_by_duration_greater_than_60_test
     [Documentation]    filter by duration (greater than 60)
     [Tags]    Citron 267
     # log in with workspace admin
-    ${driver}   log_in_lib   ${workspace_admin_username}    ${workspace_admin_password}
+    ${driver}   log_in_lib   ${workspace_admin_username}
     # 进入到Calls页面
     enter_calls_page   ${driver}
     # 切换到last_365_days
@@ -24,7 +24,7 @@ Site_Admin_Calls_Select_one_of_value_in_Occurred_Within_field
     [Documentation]    Select one of value in 'Occurred Within' field
     [Tags]    Citron 503
     # log in with workspace admin
-    ${driver}   log_in_lib    ${site_admin_username}    ${site_admin_password}
+    ${driver}   log_in_lib    ${site_admin_username}
     # 进入到Calls页面
     enter_calls_page   ${driver}    3
     # 切换到last_365_days
@@ -37,7 +37,7 @@ Calls_Click_call_tag_link_to_filter_call
     [Documentation]    Click call tag link to filter call
     [Tags]    Citron 270
     # log in with workspace admin
-    ${driver}   log_in_lib    ${workspace_admin_username}    ${workspace_admin_password}
+    ${driver}   log_in_lib    ${workspace_admin_username}
     # make sure After Call: Tagging and Comments status correct
     make_sure_TaC_status_correct   ${driver}   open_TaC
     # 进入到Calls页面
@@ -54,7 +54,7 @@ Calls_filter_by_dialer
     [Documentation]    filter by dialer
     [Tags]    Citron 264
     # log in with workspace admin
-    ${driver}   log_in_lib   ${workspace_admin_username}    ${workspace_admin_password}
+    ${driver}   log_in_lib   ${workspace_admin_username}
     # 进入到Calls页面
     enter_calls_page   ${driver}    2
     # 切换到last_365_days
@@ -67,7 +67,7 @@ Calls_filter_by_participant
     [Documentation]    filter by participant
     [Tags]    Citron 264
     # log in with workspace admin
-    ${driver}   log_in_lib     ${workspace_admin_username}    ${workspace_admin_password}
+    ${driver}   log_in_lib     ${workspace_admin_username}
     # 进入到Calls页面
     enter_calls_page   ${driver}    2
     # 切换到last_365_days
@@ -80,7 +80,7 @@ Calls_filter_owner_email
     [Documentation]    filter by dialer email
     [Tags]    Citron 265
     # log in with workspace admin
-    ${driver}     log_in_lib     ${workspace_admin_username}    ${workspace_admin_password}
+    ${driver}     log_in_lib     ${workspace_admin_username}
     # 进入到Calls页面
     enter_calls_page   ${driver}    2
     # 切换到last_365_days
@@ -93,7 +93,7 @@ Calls_filter_groups
     [Documentation]    filter by groups
     [Tags]    Citron 266
     # log in with workspace admin
-    ${driver}   log_in_lib     ${workspace_admin_username}    ${workspace_admin_password}
+    ${driver}   log_in_lib     ${workspace_admin_username}
     # 进入到Calls页面
     enter_calls_page   ${driver}    2
     # 切换到last_365_days
