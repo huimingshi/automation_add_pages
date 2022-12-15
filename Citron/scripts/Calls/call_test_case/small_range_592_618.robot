@@ -227,7 +227,7 @@ Call_Tag_Comment_600_604
 
 Call_Tag_Comment_605_606
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-    [Tags]     small range 605-606 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复       call_case
+    [Tags]     small range 605-606 lines     有bug: https://vipaar.atlassian.net/browse/CITRON-3654       call_case
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
     ...         AND               Close
