@@ -265,6 +265,7 @@ Call_survey_608_610
     [Setup]     run keywords      Login_workspaces_admin            # log in with WS admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
+    ...         AND               set_survey_in_white_list          # 设置After Call: End of Call Survey的url不为空
     ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
     ...         AND               Close
     # Customer 登录
@@ -333,11 +334,13 @@ Call_survey_611_615
     [Setup]     run keywords      Login_premium_user                # log in with SITE admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
+    ...         AND               set_survey_in_white_list          # 设置After Call: End of Call Survey的url不为空
     ...         AND               close_tagging_and_comments        # 设置After Call: Tagging and Comments为close状态
     ...         AND               Close
     ...         AND               Login_workspaces_admin            # log in with WS admin
     ...         AND               enter_workspace_settings_page     # 进入settings页面
     ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
+    ...         AND               set_survey_in_white_list          # 设置After Call: End of Call Survey的url不为空
     ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
     ...         AND               Close
     # User A 登录
