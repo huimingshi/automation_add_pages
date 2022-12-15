@@ -23,7 +23,6 @@ Make_a_business_call_duration_more_than_1_min
     exit_call   ${driver1}   ${more_than_1_min}
     [Teardown]  Run Keywords  delete_all_jpg_and_jpeg_picture
     ...         AND           exit_driver
-#    ...         AND           exit_driver   ${driver1}  ${driver2}
 
 #Select_randomly_one_call_to_click_Detail_button_that_call_has_anonymous_personal_enterpriseUser_crossEnterprise
 #    [Documentation]    Select randomly one call to click 'Detail' button that call has anonymous, personal, enterprise user, cross enterprise
@@ -59,4 +58,3 @@ Make_a_business_call_duration_more_than_1_min
 #    [Teardown]  run keywords   delete_all_jpg_and_jpeg_picture
 #    ...         AND            Close
 #    ...         AND           exit_driver
-##    ...         AND            exit_driver   ${driver1}  ${driver2}  ${driver3}  ${driver4}
