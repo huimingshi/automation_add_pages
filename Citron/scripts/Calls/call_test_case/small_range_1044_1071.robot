@@ -27,7 +27,6 @@ Small_range_1045
     # Open email and SMS of phone number,VP:In email "You have been invited to join [USERNAME] on a [ENTERPRISE]'s support call using Help Lightning." has been replaced by text set.
     check_invitation_message_correct_from_email     You and I are dark horses
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver}
 
 Small_range_1048
     [Documentation]     External invitation message     Set msg to Chinese character + special charator    Send MHS link to email and phone number
@@ -43,7 +42,6 @@ Small_range_1048
     # Open email and SMS of phone number,VP: email and SMS shows customer text
     check_invitation_message_correct_from_email     =E5=BE=B7=E7=8E=9B=E8=A5=BF=E4=BA=9A=E7=9A=87=E5=AD=90+[]()
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver}
 
 Small_range_1051
     [Documentation]     External invitation message     Turn off feature    Send MHS link to email and phone number
@@ -59,7 +57,6 @@ Small_range_1051
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email     You have been invited to join Huiming.shi.helplightning+personal on a auto_default_workspace's support call using Help Lightning.
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver}
 
 Small_range_1046
     [Documentation]     External invitation message     set msg to pure character    Send One time use link to email and phone number
@@ -75,7 +72,6 @@ Small_range_1046
     # Open email and SMS of phone number,VP: SMS content has customer text and follow by “Tap this link to join the call…”
     check_invitation_message_correct_from_email     You And I Are Dark Horses
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver}
 
 Small_range_1049
     [Documentation]     External invitation message     Set msg to Chinese character + special charator    Send One time use link to email and phone number
@@ -91,7 +87,6 @@ Small_range_1049
     # Open email and SMS of phone number,VP: email and SMS shows customer text
     check_invitation_message_correct_from_email     =E5=BE=B7=E7=8E=9B=E8=A5=BF=E4=BA=9A=E7=9A=87=E5=AD=90+[]-()
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver}
 
 Small_range_1052
     [Documentation]     External invitation message     Turn off feature    Send One time use link to email and phone number
@@ -107,7 +102,6 @@ Small_range_1052
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email     You have been invited to join Huiming.shi.helplightning+personal on a auto_default_workspace's support call using Help Lightning.
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver}
 
 Small_range_1047
     [Documentation]     External invitation message     set msg to pure character    Site user send 3PI link
@@ -126,7 +120,6 @@ Small_range_1047
     # Open email and SMS of phone number,VP: SMS and Email content has customer text.
     check_invitation_message_correct_from_email     I Am Dark Horse
      [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver1}     ${driver2}
 
 Small_range_1050
     [Documentation]     External invitation message     Set msg to Chinese character + special charator     Site user send 3PI link
@@ -145,7 +138,6 @@ Small_range_1050
     # Open email and SMS of phone number,VP: email and SMS shows customer text
     check_invitation_message_correct_from_email      =E5=BE=B7=E7=8E=9B=E8=A5=BF=E4=BA=9A+[]-()
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver1}     ${driver2}
 
 Small_range_1053
     [Documentation]     External invitation message     Turn off feature     Site user send 3PI link
@@ -164,7 +156,6 @@ Small_range_1053
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email      You have been invited to join Huiming.shi.helplightning+0123456789 on a auto_default_workspace's support call using Help Lightning.
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver     ${driver1}     ${driver2}
 
 #Small_range_1054_1060
 #    [Documentation]     Launch edge browser
@@ -188,7 +179,6 @@ Small_range_1053
 #    contacts_witch_page_make_call    ${driver2}    ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
 #    exit_call   ${driver2}
 #    [Teardown]    exit_driver
-##    [Teardown]    exit_driver    ${driver1}   ${driver2}
 
 #Small_range_1061_1067
 #    [Documentation]     Launch Firefox browser
@@ -212,7 +202,6 @@ Small_range_1053
 #    contacts_witch_page_make_call    ${driver2}    ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
 #    exit_call   ${driver2}
 #    [Teardown]    exit_driver
-##    [Teardown]    exit_driver    ${driver1}   ${driver2}
 
 #Small_range_1068_1071
 #    [Documentation]     Open the HTML file[Helplightning Integration Test Tool.html]
@@ -226,4 +215,3 @@ Small_range_1053
 #    # 退出call
 #    exit_call    ${driver1}
 #    [Teardown]    exit_driver
-##    [Teardown]    exit_driver     ${driver1}     ${driver2}
