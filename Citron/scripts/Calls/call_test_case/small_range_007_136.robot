@@ -42,7 +42,6 @@ All_active_users_in_the_entire_enterprise_should_show
     two_option_is_equal   ${driver}   ${directory_user_list}   ${active_user_list_final}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver    ${driver}
 
 Disable_External_Users_Pre_condition_In_a_site_meeting_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
@@ -72,7 +71,6 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
     check_call_can_reach_to_or_not   ${driver1}  ${driver2}   ${invite_url}    1
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 Disable_External_Users_Pre_condition_In_a_site_on_call_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
@@ -100,7 +98,6 @@ Disable_External_Users_Pre_condition_In_a_site_on_call_link
     check_call_can_reach_to_or_not   ${driver1}   ${driver2}    https://app-stage.helplightning.net.cn/help?enterprise_id=6106&group_id=10523&group_name=2o2o2o_on_call_group     1    # this is WS2 (2o2o2o_on_call_group) On-Call Group Url
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 User_Directory_User_open_invite_3rd_participant_dialog
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
@@ -122,7 +119,6 @@ User_Directory_User_open_invite_3rd_participant_dialog
     exit_call   ${driver2}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver   ${driver1}   ${driver2}
 
 User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
@@ -147,7 +143,6 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     exit_call   ${driver2}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Disable_External_Users_check_case_1
     [Documentation]    in Citron-Admin-Calls, name of personal user and user from another site workspace should display as "External User" in call list and call details page
@@ -180,7 +175,6 @@ Disable_External_Users_check_case_1
     display_as_external_user_in_call_list
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 Disable_External_Users_check_case_2
     [Documentation]    Personal user or user from another site workspace logs in,VP: they should not be able to call this site workspace user via meeting link
@@ -218,7 +212,6 @@ Disable_External_Users_check_case_2
     which_page_is_currently_on    ${driver1}    ${py_recents_switch_success}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver    ${driver1}
-#    ...             AND              exit_one_driver    ${driver1}
 
 Disable_External_Users_check_case_3
     [Documentation]    Anonymous user  VP: he should be able to call this site workspace user via meeting link   VP: he should be able to call this site workspace via on-call group link
@@ -246,7 +239,6 @@ Disable_External_Users_check_case_3
     should be equal as strings    ${time_started_2}   ${time_started}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 In_calling_page_clicks_Invite_Send_Invitation_page
     [Documentation]    In calling page, clicks Invite -> Send Invitation page
@@ -269,7 +261,6 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     user_make_call_via_meeting_link     ${driver3}    ${invite_url}
     exit_call   ${driver3}
     [Teardown]      exit_driver
-##    ...             AND             exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 User_1_receives_an_incoming_call_from_user_2
     [Documentation]    User 1 receives an incoming call from user 2	VP: User 1 should show User 2's Display Name & Avatar	End call	User 2 changes Display name & Avatar	User 1 receives an incoming call from user 2 again	VP: User 1 should show the new Display Name & Avatar
@@ -304,7 +295,6 @@ User_1_receives_an_incoming_call_from_user_2
     show_incoming_call_name_avator   ${driver1}   ${driver2}   original_default_avatar_url   ${random}
     [Teardown]      run keywords     my_account_change_name_and_avator   ${driver2}   ${big_admin_first_WS_name}   change   ${modify_picture_path}   # Make sure the name and avator is in its original state
     ...             AND              exit_driver
-##    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 During_Call_open_invite_the_3rd_participant_page
     [Documentation]    During Call, open invite the 3rd participant page	Scrolls  the contact list 	VP: show a 'loading...' , and once stop, contact name should be shown up.	In Citron update the display name & Avatar of one member of contact list	Pull-down in Team tab to refresh	VP: the updated contact list should be shown up.
@@ -337,7 +327,6 @@ During_Call_open_invite_the_3rd_participant_page
     exit_call     ${driver1}
     [Teardown]      run keywords     my_account_change_name_and_avator    ${driver3}   ${big_admin_another_first_WS_name}    change   ${modify_picture_path}
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 User_A_opens_Directory_tab
     [Documentation]    Team user C exists in Directory tab.     User C has signed out of every instance of mobile app and web.
@@ -360,7 +349,6 @@ User_A_opens_Directory_tab
     contacts_judge_reachable_or_not   ${driver1}    ${py_directory_page}   ${check_team_offline_name}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 User_A_opens_Personal_contact_tab
     [Documentation]    Personal users D and user E (from different site) exists in Personal contact tab.    User D and user E has signed out of every instance of mobile app and web.
@@ -383,7 +371,6 @@ User_A_opens_Personal_contact_tab
     contacts_judge_reachable_or_not  ${driver1}    ${py_personal_page}    ${personal_user1_name}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 User_B_displays_as_reachable
     [Documentation]    Expert user B exists in recent tab. contact list.    User B  signed out of every instance of mobile app and web.
@@ -399,7 +386,6 @@ User_B_displays_as_reachable
     # VP: User B displays as reachable.
     judge_reachable_in_recents   ${driver1}   ${big_admin_first_WS_name}
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver   ${driver1}   ${driver2}
 
 #User_B_stays_logged_in_on_one_device_User_B_is_user_A_contact
 #    [Documentation]    User A opens Team contact tab. User B stays logged in on one device. User B is user A’s contact. 	User B logouts.
@@ -428,7 +414,6 @@ User_B_displays_as_reachable
 #    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}    ${big_admin_first_WS_name}    reachable
 #    [Teardown]      run keywords     Close
 #    ...             AND              exit_driver
-##    ...             AND              exit_driver   ${driver1}   ${driver2}
 
 User_B_logouts_from_one_device
     [Documentation]    User A opens Team contact tab. User B stays logged in on two devices. User B is user A’s contact.
@@ -451,7 +436,6 @@ User_B_logouts_from_one_device
     contacts_judge_reachable_or_not  ${driver1}    ${py_team_page}     ${a_team_user_name}    reachable
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 unable_to_reach_user_message_displays
     [Documentation]    User A and user B are in 2PC.   Team user C exists in Directory tab.   User C has signed out of every instance of mobile app and web.	User A opens invite contact view.
@@ -474,7 +458,6 @@ unable_to_reach_user_message_displays
     # 结束call
     exit_call      ${driver1}
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 #User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
 #    [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.
@@ -528,7 +511,6 @@ unable_to_reach_user_message_displays
 #    # 判断在Recents页面，匿名用户的通话记录没有Call按钮
 #    anonymous_user_call_can_not_call_again   ${driver1}
 #    [Teardown]     exit_driver
-##    [Teardown]     exit_driver   ${driver1}  ${driver3}  ${driver4}
 #
 #User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
 #    [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
@@ -568,7 +550,6 @@ unable_to_reach_user_message_displays
 #    # VP: call establish successfully
 #    check_call_can_reach_to_or_not   ${driver1}  ${driver4}   ${meeting_link}    1
 #    [Teardown]     exit_driver
-##    [Teardown]     exit_driver   ${driver1}   ${driver3}  ${driver4}
 #
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
@@ -611,7 +592,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     logout_citron   ${driver3}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-##    ...             AND             exit_driver   ${driver1}   ${driver3}
 
 Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
@@ -637,7 +617,6 @@ Team_user_A_signs_in_User_B_is_expert_user
     # User B is anonymous user clicks on this OTU link.
     check_call_can_reach_to_or_not    ${driver1}   ${driver3}   ${meeting_link}    1
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver   ${driver1}   ${driver2}   ${driver3}
 
 check_personal_user_can_see_user_S_is_unreachable_status
     [Documentation]    Pre-condition: User S belong to workspace WS1 and WS2    User S switch to WS1   User S logout of all devices
@@ -683,4 +662,3 @@ check_personal_user_can_see_user_S_is_unreachable_status
     logout_citron    ${driver3}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
-#    ...             AND              exit_driver   ${driver1}   ${driver2}   ${driver3}   ${driver4}
