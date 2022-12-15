@@ -42,7 +42,6 @@ Small_range_149_151
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
     [Teardown]      run keywords    exit_call   ${driver2}   1
     ...             AND             exit_driver
-##    ...             AND             exit_driver   ${driver1}   ${driver2}
 
 Small_range_152
     [Documentation]    2 users in face to face mode
@@ -68,7 +67,6 @@ Small_range_152
     # 结束call
     end_call_for_all   ${driver1}
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver    ${driver1}   ${driver2}   ${driver3}
 
 Small_range_153_160
     [Documentation]    Enterprise user call contact in F2F mode
@@ -123,7 +121,6 @@ Small_range_153_160
     # 结束call
     exit_call   ${driver1}    no_check
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver    ${driver1}   ${driver2}
 
 Small_range_161
     [Documentation]    WebApp specific
@@ -150,7 +147,6 @@ Small_range_161
     # 结束call
     exit_call   ${driver1}
     [Teardown]      exit_driver
-#    [Teardown]      exit_driver    ${driver1}   ${driver2}
 
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly
@@ -195,7 +191,6 @@ Join_call_162_167
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-##    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 
 Join_call_168_178
     [Documentation]     Join call	MPC via on-call group.
@@ -256,7 +251,6 @@ Join_call_168_178
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-##    ...             AND             exit_driver    ${driver1}    ${driver2}  ${driver3}    ${driver4}    ${driver5}  ${driver6}
 
 Join_call_179_187
     [Documentation]     Join call	MPC via MHS link.
@@ -325,7 +319,6 @@ Join_call_179_187
     which_page_is_currently_on    ${driver8}    ${end_call_button}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-##    ...             AND             exit_driver    ${driver1}    ${driver2}    ${driver5}    ${driver6}      ${driver8}
 
 Join_call_188_195
     [Documentation]     Join call	MPC via OTU link.
@@ -384,7 +377,6 @@ Join_call_188_195
     exit_one_driver    ${driver7}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-##    ...             AND             exit_driver    ${driver1}    ${driver2}   ${driver3}   ${driver5}    ${driver6}
 
 Join_call_196_200
     [Documentation]     In call	  2PC
@@ -436,7 +428,6 @@ Join_call_196_200
     # End call.
     exit_call     ${driver1}
     [Teardown]    exit_driver
-#    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
 
 Join_call_201_205
     [Documentation]     In call	  2PC
@@ -490,7 +481,6 @@ Join_call_201_205
     which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
     hang_up_the_phone     ${driver2}
     [Teardown]    exit_driver
-#    [Teardown]    exit_driver     ${driver1}     ${driver2}     ${driver3}
 
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
@@ -598,8 +588,7 @@ Small_range_560_580
     make_sure_enter_call    ${driver8}
     which_page_is_currently_on    ${driver8}    ${this_call_is_over}
     [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
-##    ...             AND             exit_driver       ${driver5}     ${driver8}    ${driver9}
+    ...             AND             exit_driver
 
 Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
@@ -621,7 +610,6 @@ Small_range_581_582
     which_page_is_currently_on    ${driver3}    ${end_call_button}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver     ${driver1}    ${driver2}   ${driver3}
 
 Small_range_583_585
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
@@ -656,7 +644,6 @@ Small_range_583_585
     exit_one_driver    ${driver5}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_590
     [Documentation]     3PI - Direct call     TU1 call EU1 from contact list
@@ -673,7 +660,6 @@ Small_range_590
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_591
     [Documentation]     3PI - Direct call     TU1 call EU1 via EU1's MHS link
@@ -692,7 +678,6 @@ Small_range_591
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 Small_range_592
     [Documentation]     3PI - Direct call     Pre-condition: userS has personal contact from another site
@@ -708,4 +693,3 @@ Small_range_592
     which_page_is_currently_on     ${driver2}     ${invite_user_in_calling}     not_currently_on
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
