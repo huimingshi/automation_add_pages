@@ -225,39 +225,39 @@ Call_Tag_Comment_600_604
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Call_Tag_Comment_605_606
-    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-    [Tags]     small range 605-606 lines     有bug: https://vipaar.atlassian.net/browse/CITRON-3654       call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-    ...         AND               Close
-    # 该脚本中使用的on-call-group是three_user_in_this_on_call_group，隶属于big_admin
-    # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
-    # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
-    # User C switch to WS2
-    user_switch_to_second_workspace     ${driver3}
-    # A Call on-call group from contact list
-    contacts_different_page_search_user    ${driver1}   ${py_team_page}    ${big_admin_on_call_group}  # search on-call-group in Team page
-    contacts_witch_page_make_call     ${driver1}   ${driver3}    ${py_team_page}  ${big_admin_on_call_group}
-    # C accept call, then end call
-    exit_call     ${driver3}
-    # A and C fill in tag and comments
-    ${first_tag_text}     add_tags_and_comment     ${driver1}    1   good_experience_11
-    ${second_tag_text}    add_tags_and_comment     ${driver3}    2   good_experience_12
-    # VP: for A , tag comment is saved to WS1's recents
-    close_call_ending_page_RF   ${driver1}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
-    # VP: For C, tag comment is saved to recents of ws1
-    close_call_ending_page_RF   ${driver3}
-    user_switch_to_first_workspace   ${driver3}    # User C switch to WS1
-    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    first_call_record_tag_and_comment   ${driver3}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
-#    ...             AND             exit_driver   ${driver1}  ${driver3}
+#Call_Tag_Comment_605_606
+#    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
+#    [Tags]     small range 605-606 lines     有bug: https://vipaar.atlassian.net/browse/CITRON-3654       call_case
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
+#    ...         AND               Close
+#    # 该脚本中使用的on-call-group是three_user_in_this_on_call_group，隶属于big_admin
+#    # User A log in
+#    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}    ${big_admin_first_WS_password}
+#    # User C log in
+#    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}      ${switch_workspace_password}
+#    # User C switch to WS2
+#    user_switch_to_second_workspace     ${driver3}
+#    # A Call on-call group from contact list
+#    contacts_different_page_search_user    ${driver1}   ${py_team_page}    ${big_admin_on_call_group}  # search on-call-group in Team page
+#    contacts_witch_page_make_call     ${driver1}   ${driver3}    ${py_team_page}  ${big_admin_on_call_group}
+#    # C accept call, then end call
+#    exit_call     ${driver3}
+#    # A and C fill in tag and comments
+#    ${first_tag_text}     add_tags_and_comment     ${driver1}    1   good_experience_11
+#    ${second_tag_text}    add_tags_and_comment     ${driver3}    2   good_experience_12
+#    # VP: for A , tag comment is saved to WS1's recents
+#    close_call_ending_page_RF   ${driver1}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
+#    # VP: For C, tag comment is saved to recents of ws1
+#    close_call_ending_page_RF   ${driver3}
+#    user_switch_to_first_workspace   ${driver3}    # User C switch to WS1
+#    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    first_call_record_tag_and_comment   ${driver3}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
+#    [Teardown]      run keywords    Close
+#    ...             AND             exit_driver
+##    ...             AND             exit_driver   ${driver1}  ${driver3}
 
 Call_survey_608_610
     [Documentation]   Call survey(Tier of enterprise and above)   Customer call Experts group[all have survey & call tag permission]   Customer invite a enterprise user

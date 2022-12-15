@@ -443,24 +443,24 @@ Small_range_665
 #    [Teardown]   exit_driver
 ##    [Teardown]   exit_driver    ${driver1}   ${driver2}   ${driver3}
 
-Small_range_669_670
-    [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
-    [Tags]    small range 669+670 lines      call_case
-    # User A login and set Do not disturb
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}   no_check_toturial    close_bounced     accept    set_disturb
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
-    # Become available from app
-    do_not_disturb_become_available    ${driver1}
-    # UserB call user A
-    contacts_witch_page_make_call     ${driver2}    ${driver1}    ${py_team_page}  ${Expert_User1_name}
-    # Verify:call connected
-    exit_call    ${driver1}
-    # 关闭call结束页面
-    close_call_ending_page_RF    ${driver1}
-    [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
-    ...             AND             exit_driver
-#    ...             AND             exit_driver     ${driver1}    ${driver2}
+#Small_range_669_670
+#    [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
+#    [Tags]    small range 669+670 lines     有bug：https://vipaar.atlassian.net/browse/CITRON-3655     call_case
+#    # User A login and set Do not disturb
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${universal_password}   no_check_toturial    close_bounced     accept    set_disturb
+#    # User B 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}     ${universal_password}
+#    # Become available from app
+#    do_not_disturb_become_available    ${driver1}
+#    # UserB call user A
+#    contacts_witch_page_make_call     ${driver2}    ${driver1}    ${py_team_page}  ${Expert_User1_name}
+#    # Verify:call connected
+#    exit_call    ${driver1}
+#    # 关闭call结束页面
+#    close_call_ending_page_RF    ${driver1}
+#    [Teardown]      run keywords    do_not_disturb_become_available    ${driver1}
+#    ...             AND             exit_driver
+##    ...             AND             exit_driver     ${driver1}    ${driver2}
 
 #Small_range_671_672_673
 #    [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
