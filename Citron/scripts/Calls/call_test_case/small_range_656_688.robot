@@ -18,10 +18,15 @@ Force Tags        small_range
 Small_range_656
     [Documentation]     No answer message   caller calls via normal way	   callee do not answer, waiting to timeout
     [Tags]    small range 656 line      call_case
+#    # Expert User1 登录（case中的caller）
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    # Expert User2 登录（case中的callee）
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}
     # Expert User1 登录（case中的caller）
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Expert User2 登录（case中的callee）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
     # caller calls via normal way, callee do not answer
@@ -43,10 +48,15 @@ Small_range_656
 Small_range_657
     [Documentation]     No answer message   caller calls via normal way	   callee clicks on decline button
     [Tags]    small range 657 line      call_case
+#    # Expert User1 登录（case中的caller）
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    # Expert User2 登录（case中的callee）
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}
     # Expert User1 登录（case中的caller）
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Expert User2 登录（case中的callee）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
     # caller calls via normal way
@@ -67,19 +77,26 @@ Small_range_657
 Small_range_658
     [Documentation]     No answer message   caller calls via normal way	   caller calls one participant who is in another call
     [Tags]    small range 658 line      call_case
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}   ${Expert_User3_username}
     # Expert User1 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
+    # Expert User2 登录（case中的callee）
+    ${driver2}   Get From List   ${drivers_list}    1
+    # Expert User3 登录（case中的caller）
+    ${driver3}   Get From List   ${drivers_list}    2
+#    # Expert User1 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list_0}    get_recents_page_records_occurred_time    ${driver1}           # 获取Recents页面前两行call记录的时间
-    # Expert User2 登录（case中的callee）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    # Expert User2 登录（case中的callee）
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}     3        # 获取Recents页面前三行call记录的时间
     # caller calls via normal way
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
-    # Expert User3 登录（case中的caller）
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    # Expert User3 登录（case中的caller）
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     # caller calls one participant who is in another call
     contacts_witch_page_make_call   ${driver3}    ${driver2}    ${py_team_page}  ${Expert_User2_name}   no_care
     # VP1: "/Target user/ is currently on another call.
@@ -104,10 +121,15 @@ Small_range_658
 Small_range_660
     [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
     [Tags]    small range 660 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3502，已修复
+#    # Expert User1 登录（case中的caller），这个user属于big_admin
+#    ${driver1}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_1@outlook.com
+#    # Expert User2 登录（case中的Joiner），这个user属于big_admin
+#    ${driver2}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_2@outlook.com
+    ${drivers_list}   multi_login   Huiming.shi.helplightning+free_user_1@outlook.com   Huiming.shi.helplightning+free_user_2@outlook.com
     # Expert User1 登录（case中的caller），这个user属于big_admin
-    ${driver1}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_1@outlook.com
+    ${driver1}   Get From List   ${drivers_list}    0
     # Expert User2 登录（case中的Joiner），这个user属于big_admin
-    ${driver2}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_2@outlook.com
+    ${driver2}   Get From List   ${drivers_list}    1
     # 获取meeting link
     ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
     # Joiner's App is killed
@@ -123,10 +145,15 @@ Small_range_660
 Small_range_661
     [Documentation]     No answer message   caller calls via meeting link	  Meeting room link[Owner's App runs in backgroup]
     [Tags]    small range 661 line      call_case
+#    # Expert User1 登录（case中的caller）
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    # Expert User2 登录（case中的Joiner）
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}
     # Expert User1 登录（case中的caller）
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Expert User2 登录（case中的Joiner）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # 获取meeting link
     ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
     # caller calls via meeting link
@@ -140,19 +167,26 @@ Small_range_661
 Small_range_662
     [Documentation]     User A call B enter call via normal way    User B invites callee [User C]
     [Tags]    small range 662 line      call_case
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}   ${Expert_User3_username}
     # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B 登录
+    ${driver2}   Get From List   ${drivers_list}    1
+    # User C 登录
+    ${driver3}   Get From List   ${drivers_list}    2
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    # User B 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}     3
     # User A call B enter call via normal way
     contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
-    # User C 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    # User C 登录
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User B invites callee [User C]
@@ -188,19 +222,26 @@ Small_range_662
 Small_range_663
     [Documentation]     User A call B enter call via normal way    User A invites User C] who doesn't login on any device
     [Tags]    small range 663 line      call_case
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}   ${Expert_User3_username}
     # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B 登录
+    ${driver2}   Get From List   ${drivers_list}    1
+    # User C 登录
+    ${driver3}   Get From List   ${drivers_list}    2
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    # User B 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
     # User A call B enter call via normal way
     contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
-    # User C 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    # User C 登录
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User C 退出
@@ -235,19 +276,26 @@ Small_range_663
 Small_range_664
     [Documentation]     User A call B enter call via normal way    User A] invites User C
     [Tags]    small range 664 line      call_case
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}   ${Expert_User3_username}
     # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B 登录
+    ${driver2}   Get From List   ${drivers_list}    1
+    # User C 登录
+    ${driver3}   Get From List   ${drivers_list}    2
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    # User B 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
     # User A call B enter call via normal way
     contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
-    # User C 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    # User C 登录
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User A] invites User C
@@ -284,15 +332,22 @@ Small_range_664
 Small_range_665
     [Documentation]     User A call B enter call via normal way    caller calls one participant who is in another call via normal call
     [Tags]    small range 665 line      call_case
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User3_username}   ${Expert_User4_username}
     # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User C 登录
+    ${driver3}   Get From List   ${drivers_list}    1
+    # User D 登录
+    ${driver4}   Get From List   ${drivers_list}    2
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User C 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
-    # User D 登录
-    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
+#    # User C 登录
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    # User D 登录
+#    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
     switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_D1}   get_recents_page_records_occurred_time   ${driver4}    3
     # User A call B enter call via normal way
@@ -625,12 +680,17 @@ Small_range_665
 Small_range_688
     [Documentation]     Join call via meeting call   Owner clicks on otu link firstly
     [Tags]    small range 688 line      call_case
+    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_User2_username}
     # Owner 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    ${driver1}   Get From List   ${drivers_list}    0
+    # first guest 登录
+    ${driver2}   Get From List   ${drivers_list}    1
+#    # Owner 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # 获取otu link
     ${invite_url}    send_meeting_room_link   ${driver1}  OTU   no_send
-    # first guest 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    # first guest 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # Owner clicks on otu link firstly
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
     # 确保建立call，但未接听

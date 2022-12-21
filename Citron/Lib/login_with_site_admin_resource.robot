@@ -1152,7 +1152,7 @@ re_log_in_citron
     Click Button    ${next_button}
     # 输入密码
     wait until element is visible   ${loginpsd_input}
-    Input Password    ${loginpsd_input}    ${site_admin_password}
+    Input Password    ${loginpsd_input}    ${public_pass}
     Sleep    1s
     # 点击LOG IN
     wait until element is visible   ${login_button}

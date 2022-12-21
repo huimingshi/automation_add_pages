@@ -10,6 +10,8 @@ from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_var
 from Citron.scripts.Deletion_of_a_Recordings_and_Screen_Captures.make_a_call_lib import username_input, next_button, \
     password_input, login_button, accept_disclaimer, close_tutorial_button
 from selenium import webdriver
+from concurrent.futures import ProcessPoolExecutor,ThreadPoolExecutor
+import threading
 
 def start_an_empty_window():
     """
@@ -147,3 +149,34 @@ def set_do_not_disturb(driver):
     textContent = get_xpath_element(driver,'//div[@role="alert"]/div',description = '免受打扰文本').get_attribute('textContent')
     print(textContent)
     public_assert(driver,textContent,'Your status is currently set to Do Not Disturb.Make Available',condition='=',action='设置免打扰模式后文本信息不正确')
+
+def multi_login(*args):
+    """
+    利用线程池，并发启动多个driver
+    :param args: arg是多个需要登录的name，每个name启动一个driver
+    :return:
+    :TODO: 利用进程池报错，后续有时间待处理
+    """
+    usernameList = [username for username in args]
+    with ThreadPoolExecutor() as pool:
+        drivers_generator = pool.map(driver_set_up_and_logIn,usernameList)
+    return list(drivers_generator)
+
+if __name__ == '__main__':
+    a_tuple = (1,2,3,[1,2,3])
+    a_tuple[3][0] = 5
+    print(a_tuple)
+
+    a = [1,2,3,[4,5,6]]
+    import copy
+    b = copy.deepcopy(a)
+    b[0] = 0
+    print(b,a)
+    b[3][0] = 0
+    print(b, a)
+
+    c = copy.copy(a)
+    c[0] = 0
+    print(c, a)
+    c[3][0] = 0
+    print(c, a)

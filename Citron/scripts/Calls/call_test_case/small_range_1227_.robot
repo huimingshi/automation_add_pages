@@ -25,17 +25,28 @@ Small_range_1220_1281
     ...       AND             delete_zip_file     ${particial_message_audio}
     ...       AND             delete_zip_file     ${screen_capture_file_name}
     ...       AND             delete_zip_file     ${downloaded_file_name}
+    ${drivers_list}   multi_login   ${in_call_message_userA}   ${in_call_message_userB}   ${in_call_message_userD}    ${in_call_message_userC}    ${in_call_message_userD1}
     # userA login
-    ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
-    ${mhs_link}    send_meeting_room_link    ${driverA}     which_meeting='MHS'
+    ${driverA}    Get From List   ${drivers_list}    0
     # userB login
-    ${driverB}     driver_set_up_and_logIn     ${in_call_message_userB}
+    ${driverB}    Get From List   ${drivers_list}    1
+    # userD login
+    ${driverD}    Get From List   ${drivers_list}    2
+    # userC login
+    ${driverC}    Get From List   ${drivers_list}    3
+    # userD1 login
+    ${driverD1}   Get From List   ${drivers_list}    4
+#    # userA login
+#    ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
+    ${mhs_link}    send_meeting_room_link    ${driverA}     which_meeting='MHS'
+#    # userB login
+#    ${driverB}     driver_set_up_and_logIn     ${in_call_message_userB}
     # User B clicks User A's MHS link
     user_make_call_via_meeting_link     ${driverB}    ${mhs_link}
     user_anwser_call    ${driverA}
     make_sure_enter_call     ${driverB}
-    # userD login
-    ${driverD}     driver_set_up_and_logIn     ${in_call_message_userD}
+#    # userD login
+#    ${driverD}     driver_set_up_and_logIn     ${in_call_message_userD}
     # User A invites Expert Group
     enter_contacts_search_user      ${driverA}     ${in_call_message_expert_group}
     click_user_in_contacts_call     ${driverA}     ${in_call_message_expert_group}
@@ -45,9 +56,9 @@ Small_range_1220_1281
     # User A sends 3pci link
     ${invite_link}      send_invite_in_calling_page     ${driverA}
     close_invite_3th_page     ${driverA}
-    # userC    A1    D1   login
-    ${driverC}     driver_set_up_and_logIn     ${in_call_message_userC}
-    ${driverD1}     driver_set_up_and_logIn     ${in_call_message_userD1}
+#    # userC    A1    D1   login
+#    ${driverC}     driver_set_up_and_logIn     ${in_call_message_userC}
+#    ${driverD1}     driver_set_up_and_logIn     ${in_call_message_userD1}
     # User C enters this call via 3cpi
     user_make_call_via_meeting_link     ${driverC}    ${invite_link}
     user_anwser_call     ${driverA}    no_direct
@@ -180,10 +191,21 @@ Small_range_1220_1281
     click_attach_then_download      ${driverSA}     ${message_audio}       ${downloaded_file_name}
     delete_zip_file     ${downloaded_file_name}
     click_attach_then_download      ${driverSA}     ${message_pdf}         ${downloaded_file_name}
+    ${drivers_list}   multi_login   ${in_call_message_userC}   ${in_call_message_userD1}    ${in_call_message_userA}  ${in_call_message_userB}   ${in_call_message_userD}
+    # UserC login
+    ${driverC}    Get From List   ${drivers_list}      0
+    # UserD1 login
+    ${driverD1}   Get From List   ${drivers_list}      1
+    # UserA login
+    ${driverA}    Get From List   ${drivers_list}      2
+    # UserB login
+    ${driverB}    Get From List   ${drivers_list}      3
+    # UserD login
+    ${driverD}    Get From List   ${drivers_list}      4
     # User C and D1 logs in Citron, navigates to My Help Lightning -> Calls
-    ${driverC}     driver_set_up_and_logIn     ${in_call_message_userC}
+#    ${driverC}     driver_set_up_and_logIn     ${in_call_message_userC}
     switch_to_diffrent_page      ${driverC}     ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${driverD1}     driver_set_up_and_logIn     ${in_call_message_userD1}
+#    ${driverD1}     driver_set_up_and_logIn     ${in_call_message_userD1}
     switch_to_diffrent_page      ${driverD1}     ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     # Select this call, click Detail button.	VP: there isn't content in Call log since the Message feature = OFF.
     calls_click_details_button      ${driverC}
@@ -195,11 +217,11 @@ Small_range_1220_1281
     uploaded_file_show_in_call_log      ${driverD1}     ${message_audio}      not_exists
     uploaded_file_show_in_call_log      ${driverD1}     ${message_video}      not_exists
     # User A, User B & User D logs in Citron, navigates to My Help Lightning -> Calls
-    ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
+#    ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
     switch_to_diffrent_page      ${driverA}     ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${driverB}     driver_set_up_and_logIn     ${in_call_message_userB}
+#    ${driverB}     driver_set_up_and_logIn     ${in_call_message_userB}
     switch_to_diffrent_page      ${driverB}     ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${driverD}     driver_set_up_and_logIn     ${in_call_message_userD}
+#    ${driverD}     driver_set_up_and_logIn     ${in_call_message_userD}
     switch_to_diffrent_page      ${driverD}     ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     # Select this call, click Detail button.	VP: the Messages contents should be shown up in Call log.
     calls_click_details_button      ${driverA}
