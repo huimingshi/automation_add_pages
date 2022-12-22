@@ -19,10 +19,6 @@ Favorite_tap_group_name_to_start_expert_call
     [Setup]     run keywords    Login_new_added_user   ${call_oncall_user_username}    # 登录
     ...         AND             add_to_favorite        on-call group 1  # 保证on-call group已添加favorite
     ...         AND             Close                  # 关闭driver
-#    # call on-call User log in
-#    ${driver1}  driver_set_up_and_logIn  ${call_oncall_user_username}
-#    # on-call User log in
-#    ${driver2}  driver_set_up_and_logIn  ${oncall_user_username}
     ${drivers_list}   multi_login   ${call_oncall_user_username}   ${oncall_user_username}
     # call on-call User log in
     ${driver1}   Get From List   ${drivers_list}    0
@@ -94,8 +90,6 @@ Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     ...         AND             enter_workspace_workspace_settings      # enter workspace users
     ...         AND             set_survey_close        # Set Survey close
     ...         AND             Close       # close browser
-#    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
-#    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}
     ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
     ${driver1}   Get From List   ${drivers_list}    0
     ${driver2}   Get From List   ${drivers_list}    1
@@ -140,8 +134,6 @@ Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_b
     ...         AND             set_survey_open        # Set Survey open
     ...         AND             set_survey_null        # Set Survey URL=Null
     ...         AND             Close       # close browser
-#    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
-#    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}
     ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
     ${driver1}   Get From List   ${drivers_list}    0
     ${driver2}   Get From List   ${drivers_list}    1
