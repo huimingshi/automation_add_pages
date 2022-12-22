@@ -26,20 +26,20 @@ Site_Admin_Click_Share_this_filter_button_And_Select_Export_current_button
     [Teardown]    Run Keywords    check_file_if_exists_delete   # Check whether there are existing files in the path and delete them if there are
     ...           AND             Close
 
-Site_Admin_Click_Share_this_filter_button_And_Select_Generate_New_Call_Report
-    [Documentation]    Click ' Share this filter' button And Select Generate New Call Report
-    [Tags]    Click ' Share this filter' button And Select Generate New Call Report
-    [Setup]   delete_zip_and_csv_file     # Check whether there are existing files in the path and delete them if there are
-    # log in with site admin
-    Login_site_admin
-    # enter SITE ADMINISTRATION Calls page
-    enter_site_calls
-    # Click 'Generate New Call Report' button
-    create_new_call_report
-    # the values of Owner, Owner Email, Participants, workspace, Occurred, End Status, Duration & tags are correct.
-    check_zip_report_file_data
-    [Teardown]    Run Keywords   delete_zip_and_csv_file   # Check whether there are existing files in the path and delete them if there are
-    ...           AND            Close
+#Site_Admin_Click_Share_this_filter_button_And_Select_Generate_New_Call_Report
+#    [Documentation]    Click ' Share this filter' button And Select Generate New Call Report
+#    [Tags]    Click ' Share this filter' button And Select Generate New Call Report
+#    [Setup]   delete_zip_and_csv_file     # Check whether there are existing files in the path and delete them if there are
+#    # log in with site admin
+#    Login_site_admin
+#    # enter SITE ADMINISTRATION Calls page
+#    enter_site_calls
+#    # Click 'Generate New Call Report' button
+#    create_new_call_report
+#    # the values of Owner, Owner Email, Participants, workspace, Occurred, End Status, Duration & tags are correct.
+#    check_zip_report_file_data
+#    [Teardown]    Run Keywords   delete_zip_and_csv_file   # Check whether there are existing files in the path and delete them if there are
+#    ...           AND            Close
 
 Site_Admin_Calls_select_by_different_conditions
     [Documentation]     Site Admin Calls select by different conditions
