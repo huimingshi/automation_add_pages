@@ -90,23 +90,6 @@ def send_invite_in_calling_page(driver,if_send = 'not_send'):
         public_click_element(driver,send_link_send_invite,description = 'email发送按钮')
     return invite_url    # 返回会议link
 
-# def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no_click_show'):
-#     """
-#     check 'Show Directory' button show up or not when invite 3rd user
-#     :param driver:
-#     :param count_expect: 预期count of user
-#     :param if_click: 是否勾选‘Show Directory’；默认'no_click_show'不勾选；'click_show'为勾选
-#     :return:
-#     """
-#     # try:
-#     if int(count_expect) == 1:
-#         public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段未出现', if_click=None)
-#     elif int(count_expect) == 0:
-#         public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
-#     public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
-#     if if_click != 'no_click_show':
-#         click_show_directory_when_invite_3rd(driver)
-#
 def click_show_directory_when_invite_3rd(driver):
     """
     在邀请第三位用户进入Call的页面上，点击‘Show Directory’按钮
@@ -176,37 +159,6 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
                 screen_shot_func(driver1,'点击ANSWER按钮失败')
                 raise Exception('点击ANSWER按钮失败')
 
-# def show_incoming_call_name_avator(driver1,driver2,expect_src,expect_name):
-#     """
-#     断言进来的call，所展示的avator和name是否正确
-#     :param driver1:
-#     :param driver2:
-#     :param expect_src: 预期的avator，是src属性值中的字符串
-#     :param expect_name: 预期的name
-#     :return:
-#     """
-#     # 获取进来的call所显示的avator和name
-#     src_attribute = get_xpath_element(driver1,'//div[@id="incoming_avatarImage"]/img',description = 'avatar').get_attribute('src')
-#     print(src_attribute)
-#     print(expect_src)
-#     name_attribute = get_xpath_element(driver1,'//div[@id="incoming_caller_name"]',description = 'name').get_attribute("textContent")
-#     print(name_attribute)
-#     print(expect_name)
-#     # 进行avator和name的断言
-#     public_assert(driver1,expect_src , src_attribute,condition='in',action='预期的avator和实际上的avator不一致')
-#     public_assert(driver1, str(name_attribute) , str(expect_name), action='预期的name和实际上的name不一致')
-#     # End call
-#     user_end_call_by_self(driver2)
-#
-# def user_end_call_by_self(driver):
-#     """
-#     用户自己主动END Call
-#     :param driver:
-#     :return:
-#     """
-#     # End call
-#     public_check_element(driver, end_call_before_connecting, '主动End_call失败')
-
 def enter_contacts_search_user(driver,search_name,if_click= 'no_click_show',search_result = 'has_user_data'):
     """
     # 通话过程中进入Contacts列表页面，并根据name进行查询
@@ -260,25 +212,6 @@ def click_user_in_contacts_call(driver,username,can_reach = 'can_reach'):
     public_check_element(driver, f'//div[@class="contact-name" and (text()="{username}")]', f'点击{username}失败')
     if can_reach == 'can_not_reach':
         public_check_element(driver, f'//div[@class="message" and contains(.,"{username} is unreachable.")]', f'未出现{username}_is_unreachable_提示信息',if_click = None,if_show = 1)
-
-# def display_name_avator_in_contact_list(driver,search_name,expect_src):
-#     """
-#     # 通话过程中进入Contacts列表页面，所展示的avator和name是否正确
-#     :param driver:
-#     :param search_name: 要查询的name，同时也是预期的name
-#     :param expect_src:预期的avator，是src属性值中的字符串
-#     :return:
-#     """
-#     # 获取name和avator
-#     xpath_src = f'//div[@class="contact-name" and contains(.,"{search_name}")]/../../../../div[@col-id="avatar.url"]//img'
-#     src_attribute = get_xpath_element(driver,xpath_src,description = 'avatar').get_attribute('src')
-#     print(src_attribute)
-#     name_xpath = f'//div[@class="contact-name" and contains(.,"{search_name}")]'
-#     name_attribute = get_xpath_element(driver,name_xpath,description = 'name').get_attribute('textContent')
-#     print(name_attribute)
-#     # 进行avator和name的断言
-#     public_assert(driver,expect_src , src_attribute,condition='in',action='预期的avator和实际上的avator不一致')
-#     public_assert(driver, str(name_attribute) , str(search_name), action='预期的name和实际上的name不一致')
 
 def make_call_between_four_role(driver1,driver2,driver3,who):
     """
@@ -374,8 +307,6 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         ele_list = get_xpath_elements(driver, decline_disclaimer)
         if len(ele_list) == 1:
             public_click_element(driver, decline_disclaimer, description='DECLINE_Disclaimer')
-        # ele_list = get_xpath_elements(driver,'//div[@id="whiteboard_message" and text()="Waiting for an incoming call..."]')
-        # public_assert(driver, len(ele_list), 1, action='未出现Waiting for an incoming call...')
     return driver
 
 def user_make_call_via_meeting_link(driver,meeting_link,check_disclaimer = 'check'):
@@ -417,55 +348,6 @@ def user_anwser_call(driver,anwser_type = 'direct'):
         public_check_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
     elif anwser_type != 'direct':
         public_check_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
-
-# def check_call_can_reach_to_or_not(driver_master,driver_support,meeting_link,flag = '1'):
-#     """
-#     校验call是否可以建立，需要ACCEPT Disclaimer
-#     :param driver_master:
-#     :param driver_support:
-#     :param meeting_link:
-#     :param flag: 1代表call can reach；0代表call can not reach
-#     :return:
-#     """
-#     js = "window.open('{}','_blank');"
-#     driver_support.execute_script(js.format(meeting_link))
-#     driver_support.switch_to.window(driver_support.window_handles[-1])  # 切换到最新页面
-#     driver_support.implicitly_wait(3)
-#     for i in range(40):
-#         ele_list_2 = get_xpath_elements(driver_support,please_wait)
-#         ele_list_1 = get_xpath_elements(driver_support, zhuanquanquan)
-#         ele_list = get_xpath_elements(driver_support,'//div[@id="connecting_call_label" and text()="Waiting for an incoming call..."]')
-#         if len(ele_list) == 0 and len(ele_list_1) == 0 and len(ele_list_2) == 0:
-#             break
-#         elif i == 39:
-#             screen_shot_func(driver_support, '未处于可以判断是否可以拨通call的状态')
-#             raise Exception('未处于可以判断是否可以拨通call的状态')
-#         else:
-#             time.sleep(3)
-#     driver_support.implicitly_wait(IMPLICIT_WAIT)
-#     count = get_xpath_elements(driver_support,accept_disclaimer)
-#     if len(count) == 1:
-#         public_click_element(driver_support,accept_disclaimer,description = 'accept_disclaimer按钮')
-#     time.sleep(8)
-#     count_support = get_xpath_elements(driver_support,end_call_before_connecting)
-#     driver_master.implicitly_wait(int(8))
-#     count_master_1 = get_xpath_elements(driver_master,anwser_call_button)
-#     count_master_2 = get_xpath_elements(driver_master,external_join_call_anwser_button)
-#     driver_master.implicitly_wait(int(IMPLICIT_WAIT))
-#     print('如果下面assert断言出现AssertionError了，则表示电话不应该打通的却打通了，或者电话应该打通却没有打通')
-#     try:
-#         if flag == '1':
-#             assert len(count_support) == int(flag)
-#             assert len(count_master_1) == int(flag) or len(count_master_2) == int(flag)
-#         elif flag == '0':
-#             assert len(count_master_1) == int(flag) and len(count_master_2) == int(flag)
-#     except AssertionError:
-#         print('Assert断言失败')
-#         screen_shot_func(driver_support,'辅助browser断言失败')
-#         screen_shot_func(driver_master, 'browser断言失败')
-#         raise AssertionError
-#     if int(flag) == 1:
-#         public_click_element(driver_support,end_call_before_connecting,description = '提前End_call按钮')
 
 def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call group 1',accept='accept',audio = 'audio'):
     """
@@ -620,42 +502,6 @@ def in_call_send_message_data(driver,test_data,data_type='text',send = 'send'):
             ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(test_data))
             public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
 
-# def in_call_show_count_of_message(driver,message_count = '1'):
-#     """
-#     校验未读消息数
-#     :param driver:
-#     :param message_count: 预期未读消息数
-#     :return:
-#     """
-#     ele_list = get_xpath_elements(driver,f'//div[@class="Badge"]/div[text()="{int(message_count)}"]')
-#     public_assert(driver,1,len(ele_list),f'校验未读消息数为{int(message_count)}')
-
-# def in_call_check_receive_message(driver,content,open_dialog='true',content_count='1'):
-#     """
-#     通话过程中检查收到的message内容
-#     :param driver:
-#     :param content: 预期收到的消息内容
-#     :return:
-#     """
-#     # 通话过程中点击message图标，打开Message会话
-#     in_call_click_message_button(driver)
-#     # 通话过程中检查收到的message内容和数量
-#     ele_list = get_xpath_elements(driver,in_call_lastMessages_text.format(content))
-#     public_assert(driver, len(ele_list), 1, action=f'{content}未收到')
-
-# def in_call_check_receive_attach(driver,attach_name,attach_count='1'):
-#     """
-#     通话过程中检查收到的附件内容和数量
-#     :param driver:
-#     :param attach_name: 附件名
-#     :param attach_count: 预期的附件个数，默认为1
-#     :return:
-#     """
-#     ele_list = get_xpath_elements(driver, in_call_lastMessages_attach.format(attach_name))
-#     print(len(ele_list))
-#     print(int(attach_count))
-#     public_assert(driver, len(ele_list), int(attach_count), action=f'{attach_name}未找到')
-
 def in_call_download_file(driver,attach_name):
     """
     点击附件进行下载
@@ -715,19 +561,6 @@ def in_call_click_upload_attach(driver):
     document_list = get_xpath_elements(driver,'//input[@accept="*"]')
     public_assert(driver, 1, len(document_list), action='Document按钮出现')
     public_click_element(driver, message_toolbarButton, description='再次点击上传附件按钮')
-#
-# def file_is_too_large(driver):
-#     """
-#     There is an alert message to pop. The big file isn't uploaded.
-#     :param driver:
-#     :return:
-#     """
-#     get_content = get_xpath_element(driver,'//div[@class="modal-body"]').get_attribute("textContent")
-#     public_assert(driver,get_content,"The file you have selected is too large and cannot be uploaded. The limit is 5MB.",action='断言提示信息')
-#     # 点击OK关闭弹窗
-#     public_click_element(driver,'//button[@class="btn btn-default" and text()="OK"]')
-#     # 再次点击上传附件按钮，关闭上传
-#     public_click_element(driver, message_toolbarButton, description='再次点击上传附件按钮')
 
 def make_show_recording_settings(driver):
     """
@@ -1166,27 +999,7 @@ def click_mode_continue_button(driver):
 
 if __name__ == '__main__':
     from else_public_lib import driver_set_up_and_logIn, logout_citron
-    # driver1 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com','*IK<8ik,8ik,')
-    # driver2 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com', '*IK<8ik,8ik,')
-    # driver3 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766553@outlook.com', '*IK<8ik,8ik,')
-    # driver4 = driver_set_up_and_logIn('Huiming.shi.helplightning+for_oncall@outlook.com', '*IK<8ik,8ik,')
-    # driver5 = driver_set_up_and_logIn('Huiming.shi.helplightning+belong_two_WS@outlook.com', '*IK<8ik,8ik,')
     driver6 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com', '*IK<8ik,8ik,')
     driver7 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766553@outlook.com', '*IK<8ik,8ik,')
-    # driver8 = driver_set_up_and_logIn('Huiming.shi.helplightning+9988776655@outlook.com', '*IK<8ik,8ik,')
-    # driver9 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS3_branding_A@outlook.com ', '*IK<8ik,8ik,')
-    # driver10 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS3_branding_B@outlook.com ', '*IK<8ik,8ik,')
-    # driver11 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')
-    # driver12 = driver_set_up_and_logIn('Huiming.shi.helplightning+Expert_B@outlook.com', '*IK<8ik,8ik,')
-    # driver13 = driver_set_up_and_logIn('Huiming.shi.helplightning+TU1@outlook.com', '*IK<8ik,8ik,')
-    # driver14 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_A@outlook.com', '*IK<8ik,8ik,')
-    # driver15 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_B@outlook.com', '*IK<8ik,8ik,')
-    # driver16 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS_branding_C@outlook.com', '*IK<8ik,8ik,')
-    # driver17 = driver_set_up_and_logIn('Huiming.shi.helplightning+EU5@outlook.com', '*IK<8ik,8ik,')
-    # driver18 = driver_set_up_and_logIn('Huiming.shi.helplightning+enterprise_user@outlook.com', '*IK<8ik,8ik,')
-    # driver19 = driver_set_up_and_logIn('big_admin', 'asdQWE123')
-    # driverxyz = driver_set_up_and_logIn('emily.huang+bsb', 'abc123')
-    # driver20 = driver_set_up_and_logIn('huiming.shi@helplightning.com', '*IK<8ik,8ik,')
-    # driver21 = driver_set_up_and_logIn('Huiming.shi.helplightning+test_WS3_branding_B@outlook.com', '*IK<8ik,8ik,')
     time.sleep(10000)
     print()

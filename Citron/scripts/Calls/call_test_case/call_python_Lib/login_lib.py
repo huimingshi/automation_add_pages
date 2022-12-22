@@ -8,10 +8,9 @@ from Citron.public_switch.public_switch_py import TEST_WEB
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import not_disturb, \
     make_available_button
 from Citron.scripts.Deletion_of_a_Recordings_and_Screen_Captures.make_a_call_lib import username_input, next_button, \
-    password_input, login_button, accept_disclaimer, close_tutorial_button
+    password_input, login_button, accept_disclaimer
 from selenium import webdriver
 from concurrent.futures import ProcessPoolExecutor,ThreadPoolExecutor
-import threading
 
 def start_an_empty_window():
     """
@@ -101,9 +100,6 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
             public_assert(driver,len(ele_list),1,condition = '=',action='展示的不是Welcome to Help Lightning!')
         # close Tutorial
         CTA(driver)
-        # ele_list = get_xpath_elements(driver,close_tutorial_button)
-        # if len(ele_list) == 1:
-        #     public_click_element(driver, close_tutorial_button, description='关闭tutorial按钮')
     if disturb == 'not_set_disturb':
         ele_list = get_xpath_elements(driver,not_disturb)
         if len(ele_list) == 0:
