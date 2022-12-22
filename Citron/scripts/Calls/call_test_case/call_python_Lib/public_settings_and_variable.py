@@ -93,6 +93,7 @@ first_line_details_button = '//div[@class="ag-center-cols-container"]/div[@row-i
 close_details_xpath = '//div[@class="modal-content"]//span[contains(.,"×")]'   # Details页面的x按钮
 not_disturb = '//button[@class="dnd-btn available-btn"]'   # 不是免打扰模式
 make_available_button = '//button[text()="Make Available"]'    # 取消免打扰模式
+close_end_call_page_button = '//div[@class="EndCallPageContent"]//span[@role="presentation"]'       # 关闭通话结束的按钮
 decline_disclaimer = '//div[@class="modal-content"]//button[text()="DECLINE"]'    # DECLINE Disclaimer make call或者就只是DECLINE Disclaimer
 decline_call = '//div[@class="modal-content"]//button[text()="Decline"]'     # 在通话界面上Decline Call
 take_survey_after_call = '//button[contains(.,"Take Survey")]'   # call结束后的Take Survey按钮

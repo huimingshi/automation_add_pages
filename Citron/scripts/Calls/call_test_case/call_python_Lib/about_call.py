@@ -162,10 +162,10 @@ def close_call_ending_page(driver):
     :return:
     """
     STLW(driver)  # 切换到最新页面
-    ele_list = get_xpath_elements(driver,'//div[@class="EndCallPageContent"]//span[@role="presentation"]')
+    ele_list = get_xpath_elements(driver,close_end_call_page_button)
     if len(ele_list) == 1:
         print('可以关闭通话结束页面')
-        public_click_element(driver,'//div[@class="EndCallPageContent"]//span[@role="presentation"]',description='关闭通话结束页面')
+        public_click_element(driver,close_end_call_page_button,description='关闭通话结束页面')
     elif len(ele_list) == 0:
         print('没有通话结束页面')
 
@@ -176,10 +176,10 @@ def close_call_ending_page_RF(driver):
     :return:
     """
     STLW(driver)  # 切换到最新页面
-    ele_list = get_xpath_elements(driver,'//div[@class="EndCallPageContent"]//span[@role="presentation"]')
+    ele_list = get_xpath_elements(driver,close_end_call_page_button)
     if len(ele_list) == 1:
         print('可以关闭通话结束页面')
-        public_click_element(driver,'//div[@class="EndCallPageContent"]//span[@role="presentation"]',description='关闭通话结束页面')
+        public_click_element(driver,close_end_call_page_button,description='关闭通话结束页面')
     elif len(ele_list) == 0:
         print('没有通话结束页面')
     # 关闭tutorial
