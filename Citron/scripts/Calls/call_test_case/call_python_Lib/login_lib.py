@@ -159,8 +159,8 @@ def multi_login(*args):
     """
     usernameList = [username for username in args]
     with ThreadPoolExecutor() as pool:
-        drivers_generator = pool.map(driver_set_up_and_logIn,usernameList)
-    return list(drivers_generator)
+        driversList = pool.map(driver_set_up_and_logIn,usernameList)
+    return list(driversList)
 
 if __name__ == '__main__':
     a_tuple = (1,2,3,[1,2,3])
