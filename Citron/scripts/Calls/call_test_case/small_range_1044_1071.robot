@@ -111,8 +111,11 @@ Small_range_1047
     ...         AND             fill_invitation_message_content      I Am Dark Horse     # 填写信息
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
+    # User A登录
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B登录
+    ${driver2}   Get From List   ${drivers_list}    1
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -129,8 +132,11 @@ Small_range_1050
     ...         AND             fill_invitation_message_content      德玛西亚+[]-()     # 填写信息
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
+    # User A登录
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B登录
+    ${driver2}   Get From List   ${drivers_list}    1
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -147,8 +153,11 @@ Small_range_1053
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
+    # User A登录
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B登录
+    ${driver2}   Get From List   ${drivers_list}    1
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
