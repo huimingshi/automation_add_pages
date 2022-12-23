@@ -16,8 +16,6 @@ Make_a_business_call_duration_more_than_1_min
     [Tags]    Make a business call duration > 1 min     call_case    citron 261
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
-#    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
-#    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}
     ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
     # User1 login
     ${driver1}   Get From List   ${drivers_list}    0
