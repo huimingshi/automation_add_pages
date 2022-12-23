@@ -118,8 +118,6 @@ Small_range_1092_1099_1111_1113
     [Documentation]     Start new chat    UserA click message icon from team     with online contact userB
     [Tags]    small range 1078-1082 + 1111_1113 lines       message_case
     # user login
-#    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
-#    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     ${drivers_list}   multi_login   ${message_test0_user}   ${message_test1_user}
     ${driver1}   Get From List   ${drivers_list}    0
     ${driver2}   Get From List   ${drivers_list}    1
@@ -259,10 +257,7 @@ Small_range_1125_1143
     ${driver1}   Get From List   ${drivers_list}    0
     # user2 login
     ${driver2}   Get From List   ${drivers_list}    1
-#    # user login
-#    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-#    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     # Click create icon	    VP: has Send My Help Space Link option; has Start a Message Group option; able to cancel
     check_create_message_back     ${driver1}
     # Select one contact from list	VP: contact is marked as selected
@@ -327,12 +322,8 @@ Small_range_1144_1153
     ${driver2}   Get From List   ${drivers_list}    1
     # user3 login
     ${driver3}   Get From List   ${drivers_list}    2
-#    # user login
-#    ${driver1}     driver_set_up_and_logIn     ${used_by_message_user01}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-#    ${driver2}     driver_set_up_and_logIn     ${used_by_message_user02}
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-#    ${driver3}     driver_set_up_and_logIn     ${used_by_message_user03}
     switch_to_diffrent_page     ${driver3}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     # Click create icon	    VP: has Send My Help Space Link option; has Start a Message Group option; able to cancel
     check_create_message_back     ${driver1}
@@ -365,12 +356,8 @@ Small_range_1154_1160
     ${driver2}   Get From List   ${drivers_list}    1
     # user3 login
     ${driver3}   Get From List   ${drivers_list}    2
-#    # user login
-#    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-#    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-#    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
     switch_to_diffrent_page     ${driver3}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     # Click create icon	    VP: has Send My Help Space Link option; has Start a Message Group option; able to cancel
     check_create_message_back     ${driver1}
@@ -424,17 +411,14 @@ Small_range_1161
     # user3 login
     ${driver4}   Get From List   ${drivers_list}    2
     # VP: memebers receive message
-#    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver2}     ${message_test0_username}
     see_last_content_on_message_dialog    ${driver2}     ${random_str}
     # VP: memebers receive message
-#    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
     switch_to_diffrent_page     ${driver3}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver3}     ${message_test0_username}     ${message_test3_username}
     see_last_content_on_message_dialog    ${driver3}     ${random_str}
     # VP: memebers receive message
-#    ${driver4}     driver_set_up_and_logIn     ${message_test3_user}
     switch_to_diffrent_page     ${driver4}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver4}     ${message_test0_username}     ${message_test2_username}
     see_last_content_on_message_dialog    ${driver4}     ${random_str}
@@ -470,17 +454,14 @@ Small_range_1162
     # user3 login
     ${driver4}   Get From List   ${drivers_list}    2
     # VP: memebers receive message
-#    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver2}     ${message_test0_username}
     see_last_content_on_message_dialog    ${driver2}     ${random_str}
     # VP: memebers receive message
-#    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
     switch_to_diffrent_page     ${driver3}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver3}     ${message_test0_username}     ${message_test3_username}
     see_last_content_on_message_dialog    ${driver3}     ${random_str}
     # VP: memebers receive message
-#    ${driver4}     driver_set_up_and_logIn     ${message_test3_user}
     switch_to_diffrent_page     ${driver4}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     click_which_message    ${driver4}     ${message_test0_username}     ${message_test2_username}
     see_last_content_on_message_dialog    ${driver4}     ${random_str}
@@ -510,9 +491,6 @@ Small_range_1164_1165
 Small_range_1166_1169
     [Documentation]     Delete Message thread    Delete 1v1 message
     [Tags]    small range 1166-1169 lines        message_case
-#    # user login
-#    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
-#    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     ${drivers_list}   multi_login   ${message_test0_user}   ${message_test1_user}
     # user1 login
     ${driver1}   Get From List   ${drivers_list}    0
@@ -568,15 +546,11 @@ Small_range_1170_1173
     ${driver2}   Get From List   ${drivers_list}    1
     # user3 login
     ${driver3}   Get From List   ${drivers_list}    2
-#    # user login
-#    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     create_a_new_message     ${driver1}      search     ${message_test1_username}      ${message_test2_username}
     confirm_create_message     ${driver1}
     send_message_by_different_data     ${driver1}      ${plain_english_text}
-#    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
     switch_to_diffrent_page     ${driver2}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
-#    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
     switch_to_diffrent_page     ${driver3}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     # Open message thread -> Info icon -> Delete message	cancel on confirm dialog	VP: thead is not delete
     delete_message_chat     ${driver1}     0
