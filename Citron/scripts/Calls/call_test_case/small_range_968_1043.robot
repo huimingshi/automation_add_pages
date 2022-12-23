@@ -266,10 +266,6 @@ Small_range_995_996
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     ${drivers_list}   multi_login   ${ws_branding_A_user}   ${ws_branding_B_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -339,10 +335,6 @@ Small_range_997
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${Expert_User5_username}
     ${drivers_list}   multi_login   ${ws_branding_A_user}   ${Expert_User5_username}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -408,10 +400,6 @@ Small_range_998
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
-#    # User C登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws_branding_C_user}
     ${drivers_list}   multi_login   ${ws_branding_A_user}   ${ws_branding_C_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -476,10 +464,6 @@ Small_range_999
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     ${drivers_list}   multi_login   ${ws_branding_A_user}   ${ws_branding_B_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -542,10 +526,6 @@ Small_range_1000_1001
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     ${drivers_list}   multi_login   ${ws_branding_A_user}   ${ws_branding_B_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -623,10 +603,6 @@ Small_range_1002_1004
     # ${created_workspace_branding_1}的Product Name为“熔岩巨兽”，Accent Color为#ff9933，Big Logo为Logo1，Default Avatar为avatar1
     # ${created_workspace_branding_2}的Product Name为“扭曲树精”，Accent Color为#00ff00，Big Logo为Logo2，Default Avatar为avatar2
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     ${drivers_list}   multi_login   ${ws_branding_A_user}   ${ws_branding_B_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -798,10 +774,6 @@ Small_range_1009
     ${driver2}   Get From List   ${drivers_list}    1
     # User C登录
     ${driver3}   Get From List   ${drivers_list}    2
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
     # 进行call
     contacts_witch_page_make_call     ${driver2}    ${driver1}   ${py_team_page}   ${ws_branding_A_name}
     # 获取3PI link
@@ -809,8 +781,6 @@ Small_range_1009
     ${invite_url}    send_invite_in_calling_page     ${driver2}
     # 结束Call
     exit_call    ${driver1}
-#    # User C登录
-#    ${driver3}    driver_set_up_and_logIn    ${ws_branding_C_user}
     # Click inactive 3PI link(nobody in call) that call's owner is User B
     user_make_call_via_meeting_link     ${driver3}    ${invite_url}
     # 确保建立call，但未接听
@@ -1051,10 +1021,6 @@ Small_range_1031
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     ${drivers_list}   multi_login   ${ws3_branding_A_user}   ${ws3_branding_B_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -1117,10 +1083,6 @@ Small_range_1032
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     ${drivers_list}   multi_login   ${ws3_branding_A_user}   ${ws3_branding_B_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
@@ -1246,10 +1208,6 @@ Small_range_1036_1043
     # 此处为case执行的前置条件
     # ${created_workspace_branding_3}的Workspace Branding设置为关闭状态
     # --------------------------------------------------------------------------------------------------------- #
-#    # User A登录
-#    ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}
-#    # User B登录
-#    ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     ${drivers_list}   multi_login   ${ws3_branding_A_user}   ${ws3_branding_B_user}
     # User A登录
     ${driver1}   Get From List   ${drivers_list}    0
