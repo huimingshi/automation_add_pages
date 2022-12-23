@@ -21,8 +21,6 @@ Force Tags        In-call User Notifications
 In_call_User_Notifications_3467_28_29_30_46_49_50_51
     [Documentation]    It occurs when you are the Helper and are sharing a document
     [Tags]      In-call User Notifications 3-51 lines       call_case
-#    ${driver1}   driver_set_up_and_logIn    ${message_test0_user}
-#    ${driver2}   driver_set_up_and_logIn    ${message_test1_user}
     ${drivers_list}   multi_login   ${message_test0_user}   ${message_test1_user}
     ${driver1}   Get From List   ${drivers_list}    0
     ${driver2}   Get From List   ${drivers_list}    1
@@ -64,8 +62,6 @@ In_call_User_Notifications_3467_28_29_30_46_49_50_51
 In_call_User_Notifications_3568
     [Documentation]    It occurs when you aren't the Helper and are sharing a document
     [Tags]      In-call User Notifications 3-8 lines       call_case
-#    ${driver1}   driver_set_up_and_logIn    ${notifications_user01}
-#    ${driver2}   driver_set_up_and_logIn    ${notifications_user02}
     ${drivers_list}   multi_login   ${notifications_user01}   ${notifications_user02}
     ${driver1}   Get From List   ${drivers_list}    0
     ${driver2}   Get From List   ${drivers_list}    1
@@ -88,10 +84,6 @@ In_call_User_Notifications_3568
 In_call_User_Notifications_9_10_11_31_32
     [Documentation]    It occurs when you change from the image mode and it tells for the Helper, tha it return to Help Mode
     [Tags]      In-call User Notifications 9-32 lines       call_case
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${notifications_user03}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${notifications_user04}
     ${drivers_list}   multi_login   ${notifications_user03}   ${notifications_user04}   ${notifications_user05}
     # User B log in
     ${driver2}   Get From List   ${drivers_list}    0
@@ -102,8 +94,6 @@ In_call_User_Notifications_9_10_11_31_32
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username03}
     make_sure_enter_call    ${driver3}
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${notifications_user05}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
     enter_contacts_search_user   ${driver3}   ${notifications_username05}
     # 点击查询到的User A
@@ -130,10 +120,6 @@ In_call_User_Notifications_9_10_11_31_32
 In_call_User_Notifications_18_20
     [Documentation]    When a participant joins the call in cooperation mode
     [Tags]      In-call User Notifications 18-20 lines       call_case
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${message_test3_user}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${message_test4_user}
     ${drivers_list}   multi_login   ${message_test3_user}   ${message_test4_user}    ${message_test5_user}
     # User B log in
     ${driver2}   Get From List   ${drivers_list}    0
@@ -147,8 +133,6 @@ In_call_User_Notifications_18_20
     make_sure_enter_call    ${driver2}
     # 进入Giver/Helper模式
     enter_giver_mode      ${driver3}     none    none     2
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${message_test5_user}
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_invite_in_calling_page   ${driver3}
     close_invite_3th_page     ${driver3}
@@ -165,10 +149,6 @@ In_call_User_Notifications_18_20
 In_call_User_Notifications_17_19_40
     [Documentation]    It shows the name of a new participant that is joined to a call and it is on Face to Face
     [Tags]      In-call User Notifications 17-40 lines       call_case
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${message_test0_user}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     ${drivers_list}   multi_login   ${message_test0_user}   ${message_test1_user}   ${message_test2_user}
     # User B log in
     ${driver2}   Get From List   ${drivers_list}    0
@@ -181,8 +161,6 @@ In_call_User_Notifications_17_19_40
     # 验证When user joins an audio call	Audio Only
     audio_only_alert    ${driver3}
     audio_only_alert    ${driver2}
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn    ${message_test2_user}
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_invite_in_calling_page   ${driver3}
     close_invite_3th_page     ${driver3}
@@ -201,10 +179,6 @@ In_call_User_Notifications_17_19_40
 In_call_User_Notifications_24_25_54_55
     [Documentation]    When user switches its role to Help Giver
     [Tags]      In-call User Notifications 24-55 lines       call_case
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${notifications_user01}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${notifications_user02}
     ${drivers_list}   multi_login   ${notifications_user01}   ${notifications_user02}
     # User B log in
     ${driver2}   Get From List   ${drivers_list}    0
@@ -232,10 +206,6 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     [Documentation]    When user switches its role to Help Giver
     [Tags]      In-call User Notifications 12-45 lines       call_case
     ###### 这个case很大可能失败，1-进入giver/helper后摄像头不一定被谁获取；2-进入giver/helper后，freeze图标不一定出现
-#    # User B log in
-#    ${driver2}   driver_set_up_and_logIn   ${message_test0_user}
-#    # User C log in
-#    ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     ${drivers_list}   multi_login   ${message_test0_user}   ${message_test1_user}  ${message_test2_user}
     # User B log in
     ${driver2}   Get From List   ${drivers_list}    0
@@ -278,8 +248,6 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
 #    the_task_field_is_unfrozen    ${driver3}
 #    # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
 #    the_task_field_is_unfrozen    ${driver3}
-#    # 第三位user登录
-#    ${driver1}   driver_set_up_and_logIn   ${message_test2_user}
     # 邀请第三位user进入call
     enter_contacts_search_user   ${driver3}   ${message_test2_username}
     # 点击查询到的User A
