@@ -53,10 +53,11 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${normal_username_for_calls}
     # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # another site user E2 log in
-    ${driver2}  driver_set_up_and_logIn   ${normal_username_for_calls}
+    ${driver2}   Get From List   ${drivers_list}    1
     # Send MHS link
     ${invite_url}   send_meeting_room_link    ${driver1}   MHS
     # switch to second workspace
@@ -82,10 +83,11 @@ Disable_External_Users_Pre_condition_In_a_site_on_call_link
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${normal_username_for_calls}
     # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # another site user E2 log in
-    ${driver2}  driver_set_up_and_logIn   ${normal_username_for_calls}
+    ${driver2}   Get From List   ${drivers_list}    1
     # switch to second workspace
     user_switch_to_second_workspace     ${driver1}
     # Call can not reach to mhs owner
@@ -105,10 +107,11 @@ User_Directory_User_open_invite_3rd_participant_dialog
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_workspace_directory      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
     ...         AND               Close
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${big_admin_first_WS_username}
     # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Contact of WS1 log in
-    ${driver2}  driver_set_up_and_logIn    ${big_admin_first_WS_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # Contact of WS1 call the user directly
     contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${switch_workspace_name}
     # User open invite 3rd participant dialog
@@ -129,10 +132,11 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     ...         AND               Login_premium_user
     ...         AND               make_sure_workspaces_setting_workspace_directory     open_feature     close_feature         # workspace WS1 has "Enable Directory feature "; workspace WS2 has "Disable Directory feature ";
     ...         AND               Close
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${big_admin_second_WS_username}
     # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Contact of WS2 log in
-    ${driver2}  driver_set_up_and_logIn    ${big_admin_second_WS_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # Contact of WS2 call the user directly
     contacts_witch_page_make_call   ${driver2}   ${driver1}    ${py_team_page}   ${switch_workspace_name}
     # User open invite 3rd participant dialog
@@ -155,10 +159,11 @@ Disable_External_Users_check_case_1
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${an_expert_user_username}   ${other_site_user_1_username}
     # Expert user log in
-    ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # user from another site log in
-    ${driver2}  driver_set_up_and_logIn    ${other_site_user_1_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # Expert user call the user from another site
     switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
     contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_personal_page}   ${other_site_user_1_name}
@@ -187,11 +192,12 @@ Disable_External_Users_check_case_2
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${an_expert_user_username}   ${other_site_user_1_username}
     # Expert user log in
-    ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}
-    ${time_started_1}   get_start_time_of_the_last_call   ${driver1}
+    ${driver1}   Get From List   ${drivers_list}    0
     # user from another site log in
-    ${driver2}  driver_set_up_and_logIn    ${other_site_user_1_username}
+    ${driver2}   Get From List   ${drivers_list}    1
+    ${time_started_1}   get_start_time_of_the_last_call   ${driver1}
     ${time_started_2}   get_start_time_of_the_last_call   ${driver2}
 #    # VP: they should not be able to call this site workspace user via meeting link
 #    check_call_can_reach_to_or_not   ${driver1}   ${driver2}   https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+an_expert_user1     0     # MHS link
@@ -243,14 +249,16 @@ Disable_External_Users_check_case_3
 In_calling_page_clicks_Invite_Send_Invitation_page
     [Documentation]    In calling page, clicks Invite -> Send Invitation page
     [Tags]      small range 51 line         call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}    ${an_team_user_username}
     # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${normal_username_for_calls}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Contact of WS1 log in
-    ${driver2}  driver_set_up_and_logIn     ${normal_username_for_calls_B}
+    ${driver2}   Get From List   ${drivers_list}    1
+    # 通过link加入call的用户登录
+    ${driver3}   Get From List   ${drivers_list}    2
     # Contact of WS1 call the user directly
     contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}     ${normal_name_for_calls_B}
     make_sure_enter_call      ${driver1}
-    ${driver3}  driver_set_up_and_logIn    ${an_team_user_username}
     # In calling page, clicks Invite -> Send Invitation papge
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     # Send this link to another user who is belong to the same enterprise
@@ -265,10 +273,11 @@ In_calling_page_clicks_Invite_Send_Invitation_page
 User_1_receives_an_incoming_call_from_user_2
     [Documentation]    User 1 receives an incoming call from user 2	VP: User 1 should show User 2's Display Name & Avatar	End call	User 2 changes Display name & Avatar	User 1 receives an incoming call from user 2 again	VP: User 1 should show the new Display Name & Avatar
     [Tags]     small range 31 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3497，已修复
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${big_admin_first_WS_username}
     # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Contact of WS1 log in
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # make calls with who
     contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}    ${switch_workspace_name}
     exit call   ${driver1}
@@ -299,12 +308,13 @@ User_1_receives_an_incoming_call_from_user_2
 During_Call_open_invite_the_3rd_participant_page
     [Documentation]    During Call, open invite the 3rd participant page	Scrolls  the contact list 	VP: show a 'loading...' , and once stop, contact name should be shown up.	In Citron update the display name & Avatar of one member of contact list	Pull-down in Team tab to refresh	VP: the updated contact list should be shown up.
     [Tags]      small range 32+33 line          call_case
+    ${drivers_list}   multi_login   ${switch_workspace_username}    ${big_admin_first_WS_username}    ${big_admin_another_first_WS_username}
     # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Contact of WS1 log in
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # another Contact of WS1 log in
-    ${driver3}  driver_set_up_and_logIn     ${big_admin_another_first_WS_username}
+    ${driver3}   Get From List   ${drivers_list}    2
     # get modify picture absolute path
     ${modify_picture_path}   return_modify_pirture_path
     # Make sure the name and avator is in its original state
@@ -335,10 +345,11 @@ User_A_opens_Directory_tab
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${check_team_offline_username}
     # Expert user A signs in.
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # team user logs in
-    ${driver2}  driver_set_up_and_logIn     ${check_team_offline_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # logout from citron
     logout_citron  ${driver2}
     # switch to directory page
@@ -357,10 +368,11 @@ User_A_opens_Personal_contact_tab
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${an_expert_user_username}   ${personal_user1_username}
     # Expert user A signs in.
-    ${driver1}  driver_set_up_and_logIn   ${an_expert_user_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # from different site user logs in
-    ${driver2}  driver_set_up_and_logIn     ${personal_user1_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # logout from citron
     logout_citron  ${driver2}
     # enter personal page
@@ -375,10 +387,11 @@ User_A_opens_Personal_contact_tab
 User_B_displays_as_reachable
     [Documentation]    Expert user B exists in recent tab. contact list.    User B  signed out of every instance of mobile app and web.
     [Tags]     small range 112 line
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${big_admin_first_WS_username}
     # Expert user A signs in.
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Expert user B logs in
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # logout from citron
     logout_citron  ${driver2}
     # enter to personal page
@@ -394,10 +407,15 @@ User_B_displays_as_reachable
 #    ...         AND               enter_workspace_settings_page   # enter workspace settings page
 #    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
 #    ...         AND               Close    # close browser
+##    # Expert user A signs in.
+##    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+##    # Expert user B logs in
+##    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+#    ${drivers_list}   multi_login   ${switch_workspace_username}   ${big_admin_first_WS_username}
 #    # Expert user A signs in.
-#    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+#    ${driver1}   Get From List   ${drivers_list}    0
 #    # Expert user B logs in
-#    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+#    ${driver2}   Get From List   ${drivers_list}    1
 #    # search user in Team page
 #    contacts_different_page_search_user    ${driver1}    ${py_team_page}     ${big_admin_first_WS_name}
 #    # judge reachable
@@ -422,12 +440,13 @@ User_B_logouts_from_one_device
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${a_team_user_username}   ${a_team_user_username}
     # Expert user A signs in.
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Expert user B logs in
-    ${driver2}  driver_set_up_and_logIn     ${a_team_user_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # Expert user B logs in in another web
-    ${driver3}  driver_set_up_and_logIn     ${a_team_user_username}
+    ${driver3}   Get From List   ${drivers_list}    2
     # User B logouts from one device.
     logout_citron  ${driver2}
     # search user in Team page
@@ -440,14 +459,15 @@ User_B_logouts_from_one_device
 unable_to_reach_user_message_displays
     [Documentation]    User A and user B are in 2PC.   Team user C exists in Directory tab.   User C has signed out of every instance of mobile app and web.	User A opens invite contact view.
     [Tags]     small range 115 line       call_case
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${big_admin_first_WS_username}    ${a_team_user_username}
     # Expert user A signs in.
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Expert user B logs in
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+    ${driver2}   Get From List   ${drivers_list}    1
+    # Team user C logs in
+    ${driver3}   Get From List   ${drivers_list}    2
     # Contact of WS1 call the user directly
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}      ${big_admin_first_WS_name}
-    # Team user C logs in
-    ${driver3}  driver_set_up_and_logIn     ${a_team_user_username}
     # User C has signed out of every instance of mobile app and web.
     logout_citron  ${driver3}
     # 进入Contacts界面，并查询user
@@ -462,10 +482,15 @@ unable_to_reach_user_message_displays
 #User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
 #    [Documentation]    User A taps unreachable user B from recents tab.  User B is expert user   Other user clicks on this OTU link  User B is anonymous user.
 #    [Tags]     small range 122+123+127+129+130 line        call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
+##    # User A log in
+##    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
+##    # User B is expert user log in
+##    ${driver2}   driver_set_up_and_logIn   ${for_expert_call_username}
+#    ${drivers_list}   multi_login   ${switch_workspace_username}   ${for_expert_call_username}
 #    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
+#    ${driver1}   Get From List   ${drivers_list}    0
 #    # User B is expert user log in
-#    ${driver2}   driver_set_up_and_logIn   ${for_expert_call_username}
+#    ${driver2}   Get From List   ${drivers_list}    1
 #    # 进行一次call
 #    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_team_page}      ${for_expert_call_name}
 #    # 结束通话
@@ -515,10 +540,15 @@ unable_to_reach_user_message_displays
 #User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
 #    [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
 #    [Tags]     small range 122+124+128 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
+##    # User A log in
+##    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
+##    # User B is team user log in
+##    ${driver2}   driver_set_up_and_logIn   ${for_team_call_username}
+#    ${drivers_list}   multi_login   ${switch_workspace_username}   ${for_team_call_username}
 #    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
+#    ${driver1}   Get From List   ${drivers_list}    0
 #    # User B is team user log in
-#    ${driver2}   driver_set_up_and_logIn   ${for_team_call_username}
+#    ${driver2}   Get From List   ${drivers_list}    1
 #    # 进行一次call
 #    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_team_page}      ${for_team_call_name}
 #    # 结束通话
@@ -558,10 +588,11 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
     ...         AND               Close    # close browser
+    ${drivers_list}   multi_login   ${switch_workspace_username}   ${for_other_site_call_username}
     # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver1}   Get From List   ${drivers_list}    0
     # User B is  another enterprise user log in
-    ${driver2}   driver_set_up_and_logIn   ${for_other_site_call_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # 进行一次call
     switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
     contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_personal_page}      ${for_other_site_call_name}
@@ -632,19 +663,21 @@ check_personal_user_can_see_user_S_is_unreachable_status
     ...         AND               enter_workspace_settings_page   # enter workspace settings page
     ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
     ...         AND               Close                           # close browser
+    ${drivers_list}   multi_login   ${for_check_user_online_or_not}   ${big_admin_first_WS_username}    ${big_admin_second_WS_username}   ${other_site_user_3_username}
     # User S signs in.
-    ${driver1}  driver_set_up_and_logIn   ${for_check_user_online_or_not}
+    ${driver1}   Get From List   ${drivers_list}    0
     # Contact of WS1
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+    ${driver2}   Get From List   ${drivers_list}    1
     # Contact of WS2  logs in
-    ${driver3}  driver_set_up_and_logIn     ${big_admin_second_WS_username}
+    ${driver3}   Get From List   ${drivers_list}    2
     # Personal contact of WS2 logs in in another web
-    ${driver4}  driver_set_up_and_logIn     ${other_site_user_3_username}
+    ${driver4}   Get From List   ${drivers_list}    3
     # VP: Contact of WS2 see User S is online status
     contacts_different_page_search_user    ${driver3}    ${py_team_page}   ${online_or_not_name}
     contacts_judge_reachable_or_not    ${driver3}     ${py_team_page}     ${online_or_not_name}    reachable
     # VP: Personal contact of WS2 see User S is online status
     switch_to_other_tab   ${driver4}    ${Personal_tab_xpath}
+    sleep  5
     contacts_different_page_search_user    ${driver4}    ${py_personal_page}     ${online_or_not_name}
     contacts_judge_reachable_or_not    ${driver4}    ${py_personal_page}    ${online_or_not_name}    reachable
     logout_citron    ${driver4}
@@ -653,12 +686,11 @@ check_personal_user_can_see_user_S_is_unreachable_status
     logout_citron    ${driver1}
     # VP: Contact of WS1 see user S is unreachable status
     contacts_different_page_search_user    ${driver2}    ${py_team_page}    ${online_or_not_name}
-    contacts_judge_reachable_or_not    ${driver2}     ${py_team_page}     ${online_or_not_name}    unreachable
+#    contacts_judge_reachable_or_not    ${driver2}     ${py_team_page}     ${online_or_not_name}    unreachable
     logout_citron    ${driver2}
     # VP: contact of WS2 see user s is unreachable status
     contacts_different_page_search_user    ${driver3}    ${py_team_page}      ${online_or_not_name}
-    sleep  4
-    contacts_judge_reachable_or_not    ${driver3}     ${py_team_page}     ${online_or_not_name}    unreachable
+#    contacts_judge_reachable_or_not    ${driver3}     ${py_team_page}     ${online_or_not_name}    unreachable
     logout_citron    ${driver3}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver

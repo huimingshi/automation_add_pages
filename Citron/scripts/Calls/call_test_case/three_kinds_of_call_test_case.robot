@@ -16,8 +16,11 @@ Make_a_business_call_duration_more_than_1_min
     [Tags]    Make a business call duration > 1 min     call_case    citron 261
     [Setup]  delete_all_jpg_and_jpeg_picture
     # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${normal_password_for_calls_B}
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
+    # User1 login
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User2 login
+    ${driver2}   Get From List   ${drivers_list}    1
     # make a call
     contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${normal_name_for_calls_B}
     exit_call   ${driver1}   ${more_than_1_min}
@@ -34,8 +37,8 @@ Make_a_business_call_duration_more_than_1_min
 #    ...         AND             close_disable_external_users    # 关闭 Security: Disable External Users
 #    ...         AND             Close
 #    # Start driver and logIn
-#    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}   ${normal_password_for_calls}
-#    ${driver2}   driver_set_up_and_logIn    ${personal_user_username}    ${personal_user_password}
+#    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
+#    ${driver2}   driver_set_up_and_logIn    ${personal_user_username}
 #    ${driver3}   driver_set_up_and_logIn    ${site_admin_username_auto}   ${site_admin_password_auto}
 #    # The four roles call
 #    ${driver4}  make_call_between_four_role   ${driver1}  ${driver2}  ${driver3}  ${personal_user_username}

@@ -15,7 +15,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_1045
     [Documentation]     External invitation message     set msg to pure character    Send MHS link to email and phone number
-    [Tags]    small range 1045 line
+    [Tags]    small range 1045 line    call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             fill_invitation_message_content     You and I are dark horses     # 填写信息
@@ -30,7 +30,7 @@ Small_range_1045
 
 Small_range_1048
     [Documentation]     External invitation message     Set msg to Chinese character + special charator    Send MHS link to email and phone number
-    [Tags]    small range 1048 line
+    [Tags]    small range 1048 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             fill_invitation_message_content     德玛西亚皇子+[]()     # 填写信息
@@ -45,7 +45,7 @@ Small_range_1048
 
 Small_range_1051
     [Documentation]     External invitation message     Turn off feature    Send MHS link to email and phone number
-    [Tags]    small range 1048 line
+    [Tags]    small range 1048 line      call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
@@ -60,7 +60,7 @@ Small_range_1051
 
 Small_range_1046
     [Documentation]     External invitation message     set msg to pure character    Send One time use link to email and phone number
-    [Tags]    small range 1046 line
+    [Tags]    small range 1046 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             fill_invitation_message_content      You And I Are Dark Horses     # 填写信息
@@ -75,7 +75,7 @@ Small_range_1046
 
 Small_range_1049
     [Documentation]     External invitation message     Set msg to Chinese character + special charator    Send One time use link to email and phone number
-    [Tags]    small range 1049 line
+    [Tags]    small range 1049 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             fill_invitation_message_content     德玛西亚皇子+[]-()      # 填写信息
@@ -90,7 +90,7 @@ Small_range_1049
 
 Small_range_1052
     [Documentation]     External invitation message     Turn off feature    Send One time use link to email and phone number
-    [Tags]    small range 1052 line
+    [Tags]    small range 1052 line    call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
@@ -111,8 +111,11 @@ Small_range_1047
     ...         AND             fill_invitation_message_content      I Am Dark Horse     # 填写信息
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
+    # User A登录
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B登录
+    ${driver2}   Get From List   ${drivers_list}    1
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -129,8 +132,11 @@ Small_range_1050
     ...         AND             fill_invitation_message_content      德玛西亚+[]-()     # 填写信息
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
+    # User A登录
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B登录
+    ${driver2}   Get From List   ${drivers_list}    1
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
@@ -147,8 +153,11 @@ Small_range_1053
     ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
     ...         AND             Close
     # user login
-    ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
-    ${driver2}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
+    ${drivers_list}   multi_login   ${normal_username_for_calls}   ${normal_username_for_calls_B}
+    # User A登录
+    ${driver1}   Get From List   ${drivers_list}    0
+    # User B登录
+    ${driver2}   Get From List   ${drivers_list}    1
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
