@@ -35,15 +35,11 @@ Small_range_1195_1197
 Small_range_1198_1210
     [Documentation]     Calls from message dialog       Create message group with no more than 6 members
     [Tags]    small range 1198-1210 lines     call_case        message_case
-    ${drivers_list}   multi_login   ${message_test0_user}   ${message_test1_user}    ${message_test2_user}   ${message_test3_user}
-    # user1 login
-    ${driver1}   Get From List   ${drivers_list}    0
-    # user2 login
-    ${driver2}   Get From List   ${drivers_list}    1
-    # user3 login
-    ${driver3}   Get From List   ${drivers_list}    2
-    # user4 login
-    ${driver4}   Get From List   ${drivers_list}    3
+    # user login
+    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
+    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
+    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
+    ${driver4}     driver_set_up_and_logIn     ${message_test3_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     create_a_new_message     ${driver1}     search     ${message_test1_username}     ${message_test2_username}     ${message_test3_username}
     confirm_create_message     ${driver1}
@@ -135,21 +131,14 @@ Small_range_1198_1210
 Small_range_1211_1214
     [Documentation]     Calls from message dialog       Create message group has more than 6 memebers
     [Tags]    small range 1198-1210 lines      call_case      message_case
-    ${drivers_list}   multi_login   ${message_test0_user}   ${message_test1_user}    ${message_test2_user}   ${message_test3_user}    ${message_test4_user}   ${message_test5_user}    ${message_test6_user}
-    # user1 login
-    ${driver1}   Get From List   ${drivers_list}    0
-    # user2 login
-    ${driver2}   Get From List   ${drivers_list}    1
-    # user3 login
-    ${driver3}   Get From List   ${drivers_list}    2
-    # user4 login
-    ${driver4}   Get From List   ${drivers_list}    3
-    # user5 login
-    ${driver5}   Get From List   ${drivers_list}    4
-    # user6 login
-    ${driver6}   Get From List   ${drivers_list}    5
-    # user7 login
-    ${driver7}   Get From List   ${drivers_list}    6
+    # user login
+    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
+    ${driver2}     driver_set_up_and_logIn     ${message_test1_user}
+    ${driver3}     driver_set_up_and_logIn     ${message_test2_user}
+    ${driver4}     driver_set_up_and_logIn     ${message_test3_user}
+    ${driver5}     driver_set_up_and_logIn     ${message_test4_user}
+    ${driver6}     driver_set_up_and_logIn     ${message_test5_user}
+    ${driver7}     driver_set_up_and_logIn     ${message_test6_user}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     create_a_new_message     ${driver1}     search     ${message_test1_username}     ${message_test2_username}     ${message_test3_username}     ${message_test4_username}     ${message_test5_username}     ${message_test6_username}
     confirm_create_message     ${driver1}

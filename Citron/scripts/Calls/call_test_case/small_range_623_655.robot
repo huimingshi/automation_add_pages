@@ -18,16 +18,15 @@ Force Tags        small_range
 Small_range_623_two_users_login
     [Documentation]     check team list according to citron
     [Tags]    small range 623 line      call_case
-    ${drivers_list}   multi_login   ${User_A_username}   ${Feynman_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
-    # Feynman 登录
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver1}    driver_set_up_and_logIn    ${User_A_username}
     # team list for user A is:Quantum Mechanics (on-call group is marked with visual indication, email field is blank for web side)  Feynman  Gell-mann  User B  (the order to show from top to below: on-call groups  alphabetically, users in external and internal groups alphabetically
     check_contacts_list   ${driver1}    ${Quantum_Mechanics_group_name}   Huiming.shi.helplightning+Feynman    Huiming.shi.helplightning+Gell-mann    Huiming.shi.helplightning+User_B
     # on-call group is marked with visual indication
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}     background-color
     two_option_is_equal    ${driver1}    rgba(160, 220, 238, 1)    ${css_value}
+    # Feynman 登录
+    ${driver2}    driver_set_up_and_logIn    ${Feynman_username}
     # team list for Feynman is:null
     check_contacts_list   ${driver2}
     # user A searches on-call group with name
@@ -37,11 +36,10 @@ Small_range_623_two_users_login
 Small_range_625_627
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert A set on for on-Call option.
     [Tags]    small range 625-627 lines     call_case
-    ${drivers_list}   multi_login   ${Expert_A_username}   ${User_A_username}
     # Expert A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${Expert_A_username}
     # User A 登录
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}    driver_set_up_and_logIn    ${User_A_username}
     #-------------------------------------------------------------------------#
     # After logging in App, Reset the disclaimer in Citron.
     Login_premium_user                  # big_admin 登录
@@ -119,11 +117,10 @@ Small_range_630_631
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
-    ${drivers_list}   multi_login   ${User_B_username}   ${Expert_B_username}
     # User B 登录   case中的customer
-    ${driver11}   Get From List   ${drivers_list}    0
+    ${driver11}    driver_set_up_and_logIn    ${User_B_username}
     # Expert B 登录
-    ${driver22}   Get From List   ${drivers_list}    1
+    ${driver22}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver11}   ${py_team_page}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
@@ -133,22 +130,21 @@ Small_range_630_631
     # 退出driver
     exit_driver     ${driver11}    ${driver22}
     ###-----------------------------------------------------------------------------------###
-    ${drivers_list}   multi_login   ${User_A_username}   ${Expert_C_username}    ${User_B_username}    ${Expert_A_username}   ${Expert_B_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_A_username}
     # Expert C 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User B 登录   case中的customer
-    ${driver3}   Get From List   ${drivers_list}    2
-    # Expert A 登录
-    ${driver4}   Get From List   ${drivers_list}    3
-    # Expert B 登录
-    ${driver5}   Get From List   ${drivers_list}    4
+    ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}
     # Expert C is in call.
     contacts_different_page_search_user    ${driver1}   ${py_team_page}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
+    # User B 登录   case中的customer
+    ${driver3}    driver_set_up_and_logIn    ${User_B_username}
+    # Expert A 登录
+    ${driver4}    driver_set_up_and_logIn    ${Expert_A_username}
     switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
+    # Expert B 登录
+    ${driver5}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver3}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
@@ -175,11 +171,10 @@ Small_range_632
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
-    ${drivers_list}   multi_login   ${User_B_username}   ${Expert_B_username}
     # User B 登录   case中的customer
-    ${driver11}   Get From List   ${drivers_list}    0
+    ${driver11}    driver_set_up_and_logIn    ${User_B_username}
     # Expert B 登录
-    ${driver22}   Get From List   ${drivers_list}    1
+    ${driver22}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver11}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
@@ -189,22 +184,21 @@ Small_range_632
     # 退出driver
     exit_driver     ${driver11}    ${driver22}
     ###-----------------------------------------------------------------------------------###
-    ${drivers_list}   multi_login   ${User_A_username}   ${Expert_C_username}    ${User_B_username}    ${Expert_A_username}   ${Expert_B_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_A_username}
     # Expert C 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User B 登录   case中的customer
-    ${driver3}   Get From List   ${drivers_list}    2
-    # Expert A 登录
-    ${driver4}   Get From List   ${drivers_list}    3
-    # Expert B 登录
-    ${driver5}   Get From List   ${drivers_list}    4
+    ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}
     # Expert C is in call.
     contacts_different_page_search_user    ${driver1}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
+    # User B 登录   case中的customer
+    ${driver3}    driver_set_up_and_logIn    ${User_B_username}
+    # Expert A 登录
+    ${driver4}    driver_set_up_and_logIn    ${Expert_A_username}
     switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
+    # Expert B 登录
+    ${driver5}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver3}   ${py_team_page}      ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A no answer call
@@ -251,11 +245,10 @@ Small_range_633
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
-    ${drivers_list}   multi_login   ${User_B_username}   ${Expert_B_username}
     # User B 登录   case中的customer
-    ${driver11}   Get From List   ${drivers_list}    0
+    ${driver11}    driver_set_up_and_logIn    ${User_B_username}
     # Expert B 登录
-    ${driver22}   Get From List   ${drivers_list}    1
+    ${driver22}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver11}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
@@ -265,22 +258,21 @@ Small_range_633
     # 退出driver
     exit_driver     ${driver11}    ${driver22}
     ###-----------------------------------------------------------------------------------###
-    ${drivers_list}   multi_login   ${User_A_username}   ${Expert_C_username}    ${User_B_username}    ${Expert_A_username}   ${Expert_B_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_A_username}
     # Expert C 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User B 登录   case中的customer
-    ${driver3}   Get From List   ${drivers_list}    2
-    # Expert A 登录
-    ${driver4}   Get From List   ${drivers_list}    3
-    # Expert B 登录
-    ${driver5}   Get From List   ${drivers_list}    4
+    ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}
     # Expert C is in call.
     contacts_different_page_search_user    ${driver1}   ${py_team_page}      ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
+    # User B 登录   case中的customer
+    ${driver3}    driver_set_up_and_logIn    ${User_B_username}
+    # Expert A 登录
+    ${driver4}    driver_set_up_and_logIn    ${Expert_A_username}
     switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
+    # Expert B 登录
+    ${driver5}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver3}   ${py_team_page}      ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A answers call
@@ -307,11 +299,10 @@ Small_range_634
     ###-----------------------------------------------------------------------------------###
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
-    ${drivers_list}   multi_login   ${User_B_username}   ${Expert_B_username}
     # User B 登录   case中的customer
-    ${driver11}   Get From List   ${drivers_list}    0
+    ${driver11}    driver_set_up_and_logIn    ${User_B_username}
     # Expert B 登录
-    ${driver22}   Get From List   ${drivers_list}    1
+    ${driver22}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver11}   ${py_team_page}      ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A declines call
@@ -321,22 +312,21 @@ Small_range_634
     # 退出driver
     exit_driver     ${driver11}    ${driver22}
     ###-----------------------------------------------------------------------------------###
-    ${drivers_list}   multi_login   ${User_A_username}   ${Expert_C_username}    ${User_B_username}    ${Expert_A_username}   ${Expert_B_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_A_username}
     # Expert C 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User B 登录   case中的customer
-    ${driver3}   Get From List   ${drivers_list}    2
-    # Expert A 登录
-    ${driver4}   Get From List   ${drivers_list}    3
-    # Expert B 登录
-    ${driver5}   Get From List   ${drivers_list}    4
+    ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}
     # Expert C is in call.
     contacts_different_page_search_user    ${driver1}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
+    # User B 登录   case中的customer
+    ${driver3}    driver_set_up_and_logIn    ${User_B_username}
+    # Expert A 登录
+    ${driver4}    driver_set_up_and_logIn    ${Expert_A_username}
     switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
     ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
+    # Expert B 登录
+    ${driver5}    driver_set_up_and_logIn    ${Expert_B_username}
     # customer makes expert call via group name
     contacts_different_page_search_user    ${driver3}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
     # expert A not care call
@@ -358,16 +348,15 @@ Small_range_634
 Small_range_636
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
     [Tags]    small range 636 line      call_case
-    ${drivers_list}   multi_login   ${User_Aa_username}   ${Expert_Bb_username}   ${User_Bb_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}
     # Expert 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User B 登录
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}
     # expert and user A are in a call
     contacts_different_page_search_user    ${driver1}   ${py_team_page}     ${another_on_call_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
+    # User B 登录
+    ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}
     # expert invites user B
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user    ${driver2}     ${User_Bb_name}
@@ -398,16 +387,15 @@ Small_range_636
 Small_range_637_642
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
     [Tags]    small range 637+642 lines     call_case
-    ${drivers_list}   multi_login   ${User_Aa_username}   ${Expert_Bb_username}   ${User_Bb_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}
     # Expert 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User B 登录
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}
     # expert and user A are in a call
     contacts_different_page_search_user    ${driver1}   ${py_team_page}      ${another_on_call_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
+    # User B 登录
+    ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}
     # expert invites user B
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     enter_contacts_search_user    ${driver2}     ${User_Bb_name}
@@ -441,16 +429,15 @@ Small_range_637_642
 Small_range_638_640
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
     [Tags]    small range 638+640 lines     call_case
-    ${drivers_list}   multi_login   ${User_Aa_username}   ${Expert_Bb_username}   ${User_Cc_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}
     # Expert 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User C 登录
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}
     # expert and user A are in a call
     contacts_different_page_search_user    ${driver1}   ${py_team_page}     ${another_on_call_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
+    # User C 登录
+    ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}
     # user A invites user C
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${User_Cc_name}
@@ -487,16 +474,15 @@ Small_range_638_640
 Small_range_639
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      check recent call	   3pc
     [Tags]    small range 639 line      call_case
-    ${drivers_list}   multi_login   ${User_Aa_username}   ${Expert_Bb_username}   ${User_Cc_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}
     # Expert 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # User C 登录
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}
     # expert and user A are in a call
     contacts_different_page_search_user    ${driver1}   ${py_team_page}       ${another_on_call_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${another_on_call_group_name}
+    # User C 登录
+    ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}
     # user A invites user C
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${User_Cc_name}
@@ -526,18 +512,17 @@ Small_range_646
     #------------------------------------------------------------------------------------------------------#
     # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
     # 为确保流程会按照case所写的走下去，所以进行这一串操作
-    ${drivers_list}   multi_login   ${User_Aa_username}   ${Expert_Aa_username}   ${Expert_Bb_username}
     # User of WS1 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${User_Aa_username}
     # expert A 登录
-    ${driver3}   Get From List   ${drivers_list}    1
-    # other experts 登录
-    ${driver2}   Get From List   ${drivers_list}    2
+    ${driver3}    driver_set_up_and_logIn    ${Expert_Aa_username}
     contacts_witch_page_make_call     ${driver1}   ${driver3}   ${py_team_page}   ${another_on_call_group_name}
     exit_call    ${driver3}
     close_call_ending_page_RF  ${driver1}
     close_call_ending_page_RF  ${driver3}
     #------------------------------------------------------------------------------------------------------#
+    # other experts 登录
+    ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}
     # Expert A switch to WS2
     user_switch_to_second_workspace    ${driver3}    BigAdmin Premium
     # User of WS1 directly click on-call group name in contact list
@@ -553,16 +538,15 @@ Small_range_646
 Small_range_647_648_649_650
     [Documentation]     3PI - Expert call
     [Tags]    small range 647+648+649+650 lines     call_case
-    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_AaA_username}   ${Expert_BbB_username}
     # EU1 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # expertA 登录
-    ${driver3}   Get From List   ${drivers_list}    1
-    # expertB 登录
-    ${driver2}   Get From List   ${drivers_list}    2
+    ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}
     # EU1 call on-call group from Team contacts
     contacts_different_page_search_user    ${driver1}   ${py_team_page}      ${AaA_on_call_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}  ${py_team_page}    ${AaA_on_call_group_name}
+    # expertB 登录
+    ${driver3}    driver_set_up_and_logIn    ${Expert_BbB_username}
     # EU1 invite on-call group
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${AaA_on_call_group_name}
@@ -576,11 +560,10 @@ Small_range_647_648_649_650
 Small_range_651_652_653
     [Documentation]     3PI - Expert call
     [Tags]    small range 651+652+653 lines     call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-    ${drivers_list}   multi_login   ${Expert_User1_username}   ${Expert_AaA_username}
     # EU1 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # expertA 登录
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}
     # EU1 call on-call group from Team contacts
     contacts_different_page_search_user    ${driver1}   ${py_team_page}      ${AaA_on_call_group_name}   # search on-call-group in Team page
     contacts_witch_page_make_call     ${driver1}   ${driver2}  ${py_team_page}    ${AaA_on_call_group_name}
@@ -601,19 +584,18 @@ Small_range_651_652_653
 Small_range_654_655
     [Documentation]     3PI - Expert call
     [Tags]    small range 654+655 lines     call_case
-    ${drivers_list}   multi_login   ${Team_User1_username}   ${Expert_AaA_username}   ${Expert_User2_username}
     # TU1 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}
     # expertA 登录
-    ${driver2}   Get From List   ${drivers_list}    1
-    # EU2 登录
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver2}    driver_set_up_and_logIn    ${Expert_AaA_username}
     # TU1 call on-call group via expert link
     user_make_call_via_meeting_link    ${driver1}    https://app-stage.helplightning.net.cn/help?enterprise_id=6614&group_id=10705&group_name=Expert_AaA_on_call_group     # Expert_AaA_on_call_group这个group的On-Call Group Url
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver1}
     # expertA answer call
     user_anwser_call   ${driver2}
+    # EU2 登录
+    ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}
     # TU1 invite EU2
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}     ${Expert_User2_name}

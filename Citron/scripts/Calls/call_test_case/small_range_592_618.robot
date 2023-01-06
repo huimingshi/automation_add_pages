@@ -20,13 +20,12 @@ Call_Tag_Comment_592_595
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
     ...         AND               Close
-    ${drivers_list}   multi_login   ${big_admin_first_WS_username}   ${big_admin_third_WS_username}   ${switch_workspace_username}
     # User A log in
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
     # User B log in
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
     # User C log in
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
@@ -86,13 +85,12 @@ Call_Tag_Comment_596_599
     [Setup]     run keywords      Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
     ...         AND               Close
-    ${drivers_list}   multi_login   ${big_admin_first_WS_username}   ${big_admin_third_WS_username}   ${switch_workspace_username}
     # User A log in
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
     # User B log in
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
     # User C log in
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
@@ -153,13 +151,12 @@ Call_Tag_Comment_600_604
     ...         AND               Login_premium_user   # log in with premium admin
     ...         AND               make_sure_workspaces_setting_external_feature        close_feature     close_feature          # WS1 and WS2 both turn off Disable External Users
     ...         AND               Close
-    ${drivers_list}   multi_login   ${big_admin_first_WS_username}   ${big_admin_third_WS_username}   ${switch_workspace_username}
     # User A log in
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
     # User B log in
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
     # User C log in
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${big_admin_third_WS_name}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
@@ -269,13 +266,12 @@ Call_survey_608_610
     ...         AND               set_survey_in_white_list          # 设置After Call: End of Call Survey的url不为空
     ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
     ...         AND               Close
-    ${drivers_list}   multi_login   ${call_oncall_user_username}   ${oncall_user_username}   ${personal_user_username}
     # Customer 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}   driver_set_up_and_logIn    ${call_oncall_user_username}
     # Experts group user登录
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}   driver_set_up_and_logIn    ${oncall_user_username}
     # enterprise user登录
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver3}   driver_set_up_and_logIn    ${personal_user_username}
     # make call with on-call
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}
     # Customer invite a enterprise user
@@ -344,13 +340,12 @@ Call_survey_611_615
     ...         AND               set_survey_in_white_list          # 设置After Call: End of Call Survey的url不为空
     ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
     ...         AND               Close
-    ${drivers_list}   multi_login   ${switch_workspace_username}   ${call_oncall_user_username}   ${big_admin_first_WS_username}
     # User A 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}   driver_set_up_and_logIn    ${switch_workspace_username}
     # User B 登录
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}   driver_set_up_and_logIn    ${call_oncall_user_username}
     # User C 登录
-    ${driver3}   Get From List   ${drivers_list}    2
+    ${driver3}   driver_set_up_and_logIn    ${big_admin_first_WS_username}
     # User A, B and C are in a MHS call. User B is owner.
     ${invite_url}  send_meeting_room_link   ${driver2}   MHS
     user_make_call_via_meeting_link   ${driver1}    ${invite_url}
@@ -412,11 +407,10 @@ Call_survey_616_618
     ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
     ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
     ...         AND               Close
-    ${drivers_list}   multi_login   ${call_oncall_user_username}   ${personal_user_username}
     # Meeting Owner 登录
-    ${driver1}   Get From List   ${drivers_list}    0
+    ${driver1}   driver_set_up_and_logIn    ${call_oncall_user_username}
     # 3rd enterprise user 登录
-    ${driver2}   Get From List   ${drivers_list}    1
+    ${driver2}   driver_set_up_and_logIn    ${personal_user_username}
     # 获取meeting link
     ${invite_url}  send_meeting_room_link   ${driver1}   OTU
     # Anonymous call Meeting Owner
