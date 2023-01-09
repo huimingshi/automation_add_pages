@@ -27,19 +27,19 @@ Small_range_149_151
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Mute,Camera and End Call icon are at 50% opacity;
-    which_page_is_currently_on    ${driver1}    //*[@*="#mic_off"]
-    which_page_is_currently_on    ${driver1}    //*[@*="#phone_end_red"]
+    which_page_is_currently_on    ${driver1}    ${mic_off_xpath}
+    which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
     # Yellow star on F2F icon
-    which_page_is_currently_on    ${driver1}    //img[@class="starHint"]
+    which_page_is_currently_on    ${driver1}    ${starHint_xpath}
     # Click Mute/Camera/Hamburger
-    switch_to_other_tab    ${driver1}    //*[@*="#mic_off"]
+    switch_to_other_tab    ${driver1}    ${mic_off_xpath}
     sleep  1s
     # VP: hint dialog still shows
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Click Give or receive help on dialog
     enter_giver_mode     ${driver1}      none    none     2
     # Back to F2F mode	VP: hint dialog disappear
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     [Teardown]      run keywords    exit_call   ${driver2}   1
     ...             AND             exit_driver
 
@@ -63,7 +63,7 @@ Small_range_152
     user_anwser_call    ${driver3}
     sleep  20s
     # VP:hints dialog is closed on screen of 3pc call
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     # 结束call
     end_call_for_all   ${driver1}
     [Teardown]      exit_driver
@@ -77,14 +77,14 @@ Small_range_153_160
     ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}
     contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
     # uncheck "Continue to show hints" checkbox
-    switch_to_other_tab     ${driver1}     //div[@class="checkbox"]//input[@type="checkbox"]
+    switch_to_other_tab     ${driver1}     ${Continue_to_show_hints}
     # End call, then make another call
     exit_call    ${driver1}   no_check
     close_call_ending_page_RF    ${driver1}
     close_call_ending_page_RF    ${driver2}
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
     # VP: hint dialog does not shown
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     # End call
     exit_call    ${driver1}   no_check
     close_call_ending_page_RF    ${driver1}
@@ -100,16 +100,16 @@ Small_range_153_160
     ${driver1}   driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
     # VP: hints setting is on status
     enter_my_account_settings_page    ${driver1}
-    which_page_is_currently_on     ${driver1}    //h1[text()="Menu Items"]/..//div[@class="react-toggle react-toggle--checked"]
+    which_page_is_currently_on     ${driver1}    ${Menu_Items_switch}
     # call contact in F2F mode
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
     # VP: hint dialog shows
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # click Close on hint dialog
-    switch_to_other_tab    ${driver1}     //span[@class="close-button"]
+    switch_to_other_tab    ${driver1}     ${hint_dialog_close_button}
     # VP: hints dialog is closed
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     # Switch to giver or receiver
     enter_giver_mode    ${driver1}     none    none     2     has_no_dialog
     # Proceed with my camera Off
@@ -117,7 +117,7 @@ Small_range_153_160
     # 切换回Face to Face模式
     enter_face_to_face_mode     ${driver1}
     # VP: hint dialog is not shown
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     not_currently_on
+    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     # 结束call
     exit_call   ${driver1}    no_check
     [Teardown]      exit_driver
@@ -134,10 +134,10 @@ Small_range_161
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Mute,Camera and End Call icon are at 50% opacity;
-    which_page_is_currently_on    ${driver1}    //*[@*="#mic_on"]
-    which_page_is_currently_on    ${driver1}    //*[@*="#phone_end_red"]
+    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
+    which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
     # Yellow star on F2F icon
-    which_page_is_currently_on    ${driver1}    //img[@class="starHint"]
+    which_page_is_currently_on    ${driver1}    ${starHint_xpath}
     # VP: Have Switch Camera button
     enter_giver_mode    ${driver1}   none   none   2
     # Proceed with my camera Off
@@ -265,7 +265,7 @@ Join_call_179_187
     # TU2 登录
     ${driver2}   driver_set_up_and_logIn    ${Team_User1_username}
     # TU2 clicks on EU1’s MHS link. EU1 answers call.
-    ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
+    ${invite_mhs_url}   send_meeting_room_link    ${driver1}   ${MHS_link_email}
     user_make_call_via_meeting_link    ${driver2}    ${invite_mhs_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver2}
@@ -331,7 +331,7 @@ Join_call_188_195
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # Anonymous user 2 clicks on EU1’s OTU link. EU1 answers call.
-    ${invite_otu_url}   send_meeting_room_link    ${driver1}   OTU
+    ${invite_otu_url}   send_meeting_room_link    ${driver1}   ${OTU_link_email}
     ${driver2}    anonymous_open_meeting_link    ${invite_otu_url}
     # 确保call连接成功，但未接听
     make_sure_enter_call   ${driver2}
@@ -408,10 +408,10 @@ Join_call_196_200
     click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
     user_anwser_call     ${driver3}
     # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
-    which_page_is_currently_on     ${driver1}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#gh_on"]
-    which_page_is_currently_on     ${driver2}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]
-    which_page_is_currently_on     ${driver3}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#gh_on"]     not_currently_on
-    which_page_is_currently_on     ${driver3}     //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]     not_currently_on
+    which_page_is_currently_on     ${driver1}     ${gh_on_xpath}
+    which_page_is_currently_on     ${driver2}     ${rh_on_xpath}
+    which_page_is_currently_on     ${driver3}     ${gh_on_xpath}     ${not_currently_on}
+    which_page_is_currently_on     ${driver3}     ${rh_on_xpath}     ${not_currently_on}
     # 返回Face to Face模式
     back_to_face_to_face_mode    ${driver1}
     # TU3 leaves call.
@@ -440,7 +440,7 @@ Join_call_201_205
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
     # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
-    ${invite_url}    send_meeting_room_link    ${driver1}    OTU
+    ${invite_url}    send_meeting_room_link    ${driver1}    ${OTU_link_email}
     ${driver2}   anonymous_open_meeting_link     ${invite_url}
     # 确保call连接成功，但未接听
     make_sure_enter_call   ${driver2}
@@ -533,7 +533,7 @@ Small_range_560_580
     # VP: TU1 can invite
     enter_contacts_search_user     ${driver5}    ${Team_User2_name}
     # VP: TU1 can not send 3PI link
-    which_page_is_currently_on     ${driver5}    ${invite_send_invite_tab}    not_currently_on
+    which_page_is_currently_on     ${driver5}    ${invite_send_invite_tab}    ${not_currently_on}
     close_invite_3th_page     ${driver5}
     # EU3 send 3PI link to eMail
     which_page_is_currently_on    ${driver3}    ${end_call_button}
@@ -619,8 +619,8 @@ Small_range_583_585
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # 获取OTU和MHS link
-    ${invite_otu_url}   send_meeting_room_link    ${driver1}   OTU
-    ${invite_mhs_url}   send_meeting_room_link    ${driver1}   MHS
+    ${invite_otu_url}   send_meeting_room_link    ${driver1}   ${OTU_link_email}
+    ${invite_mhs_url}   send_meeting_room_link    ${driver1}   ${MHS_link_email}
     # EU1 call EU2 from contact list
     contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${Expert_User2_name}
     # Someone directly call EU1 or EU2	Someone get messgage about EU1 is on another call
@@ -657,7 +657,7 @@ Small_range_590
     # VP: TU1 can only invite, can not send 3PI
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
-    which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
+    which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    ${not_currently_on}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
@@ -668,14 +668,14 @@ Small_range_591
     ${driver1}    driver_set_up_and_logIn    ${Team_User1_username}
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_mhs_url}   send_meeting_room_link    ${driver2}    MHS
+    ${invite_mhs_url}   send_meeting_room_link    ${driver2}    ${MHS_link_email}
     # TU1 call EU1 via EU1's MHS link
     user_make_call_via_meeting_link    ${driver1}    ${invite_mhs_url}
     user_anwser_call    ${driver2}
     # VP: TU1 can only invite, can not send 3PI
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user     ${driver1}    ${Team_User2_name}
-    which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    not_currently_on
+    which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    ${not_currently_on}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
@@ -690,6 +690,6 @@ Small_range_592
     switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_personal_page}   ${ws_branding_A_name}
     # VP: The personal contact from different site does not have invite 3rd parcipant icon
-    which_page_is_currently_on     ${driver2}     ${invite_user_in_calling}     not_currently_on
+    which_page_is_currently_on     ${driver2}     ${invite_user_in_calling}     ${not_currently_on}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver

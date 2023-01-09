@@ -49,6 +49,20 @@ ${enter_personal_page}              xpath=//span[contains(.,'Personal')]        
 ${enter_favorites_page}             xpath=//span[contains(.,'Favorites')]                               # Favorites page
 ${enter_directory_page}             xpath=//span[contains(.,'Directory')]                               # Directory page
 ${enter_messages_page}              xpath=//span[contains(.,'Messages')]                                # Messgaes page
+# 填写在发送邀请邮件中的内容
+${small_horse}                      You and I are dark horses
+${big_horse}                        You And I Are Dark Horses
+${I_am_horse}                       I Am Dark Horse
+${jarvan_fourth}                    德玛西亚皇子+[]()
+${jarvan_fourth_1}                  德玛西亚皇子+[]-()
+${demacia}                          德玛西亚+[]-()
+# 发送邀请邮件的类型
+${MHS_link_email}                   MHS
+${OTU_link_email}                   OTU
+# 是否在当前页面
+${not_currently_on}                 not_currently_on
+# 特殊的user
+${user_13857584759}                 Huiming.shi.helplightning+13857584759
 
 
 *** Keywords ***

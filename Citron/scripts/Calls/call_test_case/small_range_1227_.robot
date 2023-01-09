@@ -27,7 +27,7 @@ Small_range_1220_1281
     ...       AND             delete_zip_file     ${downloaded_file_name}
     # userA login
     ${driverA}     driver_set_up_and_logIn     ${in_call_message_userA}
-    ${mhs_link}    send_meeting_room_link    ${driverA}     which_meeting='MHS'
+    ${mhs_link}    send_meeting_room_link    ${driverA}     ${MHS_link_email}
     # userB login
     ${driverB}     driver_set_up_and_logIn     ${in_call_message_userB}
     # User B clicks User A's MHS link

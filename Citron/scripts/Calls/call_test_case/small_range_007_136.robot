@@ -58,13 +58,13 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
     # another site user E2 log in
     ${driver2}  driver_set_up_and_logIn   ${normal_username_for_calls}
     # Send MHS link
-    ${invite_url}   send_meeting_room_link    ${driver1}   MHS
+    ${invite_url}   send_meeting_room_link    ${driver1}   ${OTU_link_email}
     # switch to second workspace
     user_switch_to_second_workspace     ${driver1}
 #    # Call can not reach to mhs owner
 #    check_call_can_reach_to_or_not   ${driver1}  ${driver2}   ${invite_url}   0
     # Send OTU link
-    ${invite_url}   send_meeting_room_link   ${driver1}   OTU
+    ${invite_url}   send_meeting_room_link   ${driver1}   ${OTU_link_email}
     # switch to first workspace
     user_switch_to_first_workspace     ${driver1}
     # VP: call establish successfully

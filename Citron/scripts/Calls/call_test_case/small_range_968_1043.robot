@@ -465,7 +465,7 @@ Small_range_999
     ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
-    ${invite_url}     send_meeting_room_link    ${driver2}     OTU
+    ${invite_url}     send_meeting_room_link    ${driver2}     ${OTU_link_email}
     # User A click B's meeing link
     user_make_call_via_meeting_link      ${driver1}    ${invite_url}
     # 确保建立call，但未接听
@@ -526,7 +526,7 @@ Small_range_1000_1001
     ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
-    ${invite_url}     send_meeting_room_link    ${driver2}     OTU
+    ${invite_url}     send_meeting_room_link    ${driver2}     ${OTU_link_email}
     # Anonyoums click B's meeting link
     ${driver3}    anonymous_open_meeting_link     ${invite_url}
     # 确保call连接成功，但未接听
@@ -602,7 +602,7 @@ Small_range_1002_1004
     ${driver1}    driver_set_up_and_logIn    ${ws_branding_A_user}
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws_branding_B_user}
-    ${invite_url}     send_meeting_room_link    ${driver2}     OTU
+    ${invite_url}     send_meeting_room_link    ${driver2}     ${OTU_link_email}
     # User A click B's meeing link
     user_make_call_via_meeting_link      ${driver1}    ${invite_url}
     # 确保建立call，但未接听
@@ -671,10 +671,10 @@ Small_range_1005_1007
     # User C登录
     ${driver1}    driver_set_up_and_logIn    ${ws_branding_C_user}
     # User C switch to WS1	User C send otu link [link1]
-    ${invite_url_1}     send_meeting_room_link    ${driver1}     OTU
+    ${invite_url_1}     send_meeting_room_link    ${driver1}     ${OTU_link_email}
     # User C switch to WS2	User C send otu link [link2]
     user_switch_to_second_workspace    ${driver1}    ${WS_branding_setting_WS2}
-    ${invite_url_2}     send_meeting_room_link    ${driver1}     OTU
+    ${invite_url_2}     send_meeting_room_link    ${driver1}     ${OTU_link_email}
     # Anonymous click link1 to enter call
     ${driver2}    anonymous_open_meeting_link     ${invite_url_1}
     # 确保call连接成功，但未接听
@@ -1074,7 +1074,7 @@ Small_range_1032
     ${driver1}    driver_set_up_and_logIn    ${ws3_branding_A_user}
     # User B登录
     ${driver2}    driver_set_up_and_logIn    ${ws3_branding_B_user}
-    ${invite_url}     send_meeting_room_link    ${driver1}     OTU
+    ${invite_url}     send_meeting_room_link    ${driver1}     ${OTU_link_email}
     # User B click A's meeing link
     user_make_call_via_meeting_link      ${driver2}    ${invite_url}
     # 确保建立call，但未接听
@@ -1136,7 +1136,7 @@ Small_range_1033_1035
     # --------------------------------------------------------------------------------------------------------- #
     # User B登录
     ${driver1}    driver_set_up_and_logIn    ${ws3_branding_B_user}
-    ${invite_url}     send_meeting_room_link    ${driver1}     OTU
+    ${invite_url}     send_meeting_room_link    ${driver1}     ${OTU_link_email}
     # Anonyoums click B's meeting link
     ${driver2}    anonymous_open_meeting_link     ${invite_url}
     # 确保call连接成功，但未接听

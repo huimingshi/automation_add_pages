@@ -179,7 +179,7 @@ Call_Tag_Comment_600_604
     # User C switch to WS2
     user_switch_to_second_workspace     ${driver3}
     # C send meeing link [link2]
-    ${invite_url}  send_meeting_room_link   ${driver3}  OTU
+    ${invite_url}  send_meeting_room_link   ${driver3}  ${OTU_link_email}
     # A and B click [link2] to enter call
     user_make_call_via_meeting_link   ${driver1}    ${invite_url}
      # 确保建立call，但未接听
@@ -347,7 +347,7 @@ Call_survey_611_615
     # User C 登录
     ${driver3}   driver_set_up_and_logIn    ${big_admin_first_WS_username}
     # User A, B and C are in a MHS call. User B is owner.
-    ${invite_url}  send_meeting_room_link   ${driver2}   MHS
+    ${invite_url}  send_meeting_room_link   ${driver2}   ${MHS_link_email}
     user_make_call_via_meeting_link   ${driver1}    ${invite_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver1}
@@ -412,7 +412,7 @@ Call_survey_616_618
     # 3rd enterprise user 登录
     ${driver2}   driver_set_up_and_logIn    ${personal_user_username}
     # 获取meeting link
-    ${invite_url}  send_meeting_room_link   ${driver1}   OTU
+    ${invite_url}  send_meeting_room_link   ${driver1}   ${OTU_link_email}
     # Anonymous call Meeting Owner
     ${driver3}   anonymous_open_meeting_link    ${invite_url}
     # 确保call连接成功，但未接听

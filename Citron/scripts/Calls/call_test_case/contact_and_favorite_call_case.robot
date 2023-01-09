@@ -36,7 +36,7 @@ Send_meeting_room_link_By_Premium_User
     # Premium User log in
     ${driver}  driver_set_up_and_logIn  ${crunch_site_username}   ${crunch_site_password}
     # Premium User Send meeting room link
-    ${invite_url}    send_meeting_room_link   ${driver}   MHS
+    ${invite_url}    send_meeting_room_link   ${driver}   ${MHS_link_email}
     # anonymous open meeting link with website
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser call
@@ -49,7 +49,7 @@ Send_meeting_room_link_By_Enterprise_User
     # Enterprise User log in
     ${driver}  driver_set_up_and_logIn  ${enterprise_username}   ${enterprise_password}
     # Enterprise User Send meeting room link
-    ${invite_url}     send_meeting_room_link   ${driver}    MHS
+    ${invite_url}     send_meeting_room_link   ${driver}    ${MHS_link_email}
     # anonymous open meeting link with website
     ${driver1}  anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser call
@@ -62,7 +62,7 @@ Send_one_time_meeting_room_link_By_Premium_User
     # Premium User log in
     ${driver}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
     # Premium User Send meeting room link
-    ${invite_url}    send_meeting_room_link   ${driver}   OTU
+    ${invite_url}    send_meeting_room_link   ${driver}   ${OTU_link_email}
     # anonymous open meeting link with website
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Premium User Aneser then exit call
@@ -75,7 +75,7 @@ Send_one_time_meeting_room_link_By_Enterprise_User
     # Enterprise User log in
     ${driver}  driver_set_up_and_logIn  ${enterprise_username}   ${enterprise_password}
     # Enterprise User Send meeting room link
-    ${invite_url}     send_meeting_room_link   ${driver}   OTU
+    ${invite_url}     send_meeting_room_link   ${driver}   ${OTU_link_email}
     # anonymous open meeting link with website
     ${driver1}   anonymous_open_meeting_link    ${invite_url}
     # Enterprise User Aneser then exit call

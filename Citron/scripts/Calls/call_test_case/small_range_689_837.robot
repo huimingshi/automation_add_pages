@@ -22,7 +22,7 @@ Small_range_689_690_691_692
     [Tags]    small range 689+690+691+692 lines         call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
+    ${invite_url}    send_meeting_room_link    ${driver1}    ${OTU_link_email}   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
     # 确保call连接成功，但未接听
@@ -46,7 +46,7 @@ Small_range_693_694_695
     [Tags]    small range 693+694+695 lines         call_case
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+    ${invite_url}    send_meeting_room_link    ${driver1}    ${MHS_link_email}   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
     # 确保call连接成功，但未接听
@@ -70,7 +70,7 @@ Small_range_696_697_698_699
     [Tags]    small range 696+697+698+699 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_url}    send_meeting_room_link    ${driver1}    OTU   no_send
+    ${invite_url}    send_meeting_room_link    ${driver1}    ${OTU_link_email}   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
     # 确保call连接成功，但未接听
@@ -98,7 +98,7 @@ Small_range_700_701_702_703
     [Tags]    small range 700+701+702+703 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+    ${invite_url}    send_meeting_room_link    ${driver1}    ${MHS_link_email}   no_send
     # UserB clicks link and join the call.
     ${driver2}    anonymous_open_meeting_link    ${invite_url}
     # 确保call连接成功，但未接听
@@ -127,7 +127,7 @@ Small_range_704_705_706_707
     [Tags]    small range 704+705+706_707 lines     call_case      有bug：https://vipaar.atlassian.net/browse/CITRON-3494，已修复
     # UserA 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+    ${invite_url}    send_meeting_room_link    ${driver1}    ${MHS_link_email}   no_send
     # UserB 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # UserB clicks link and join the call.
@@ -159,7 +159,7 @@ Small_range_708_709
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    ${invite_url}    send_meeting_room_link    ${driver2}    MHS   no_send
+    ${invite_url}    send_meeting_room_link    ${driver2}    ${MHS_link_email}   no_send
     # EU1 click EU2's MHS link
     user_make_call_via_meeting_link   ${driver1}   ${invite_url}
     # 确保建立call，但未接听
@@ -187,8 +187,8 @@ Small_range_710_723
     ${user_directory_list}   get_all_data_on_the_page   ${driver1}    ${py_directory_page}
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
-    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
+    ${invite_url_otu}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
+    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    ${MHS_link_email}   no_send
     ###### EU1 click EU2's MHS link       710行
     user_make_call_via_meeting_link   ${driver1}   ${invite_url_mhs}
     # 确保建立call，但未接听
@@ -282,8 +282,8 @@ Small_range_724_742
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
-    ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
+    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    ${MHS_link_email}   no_send
+    ${invite_url_otu}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
     ###### EU1 click EU2's OTU link         724行
     user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
     # 确保建立call，但未接听
@@ -377,8 +377,8 @@ Small_range_743_744
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    MHS   no_send
-    ${invite_url_otu}    send_meeting_room_link    ${driver2}    OTU   no_send
+    ${invite_url_mhs}    send_meeting_room_link    ${driver2}    ${MHS_link_email}   no_send
+    ${invite_url_otu}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
     ###### EU1 click EU2's OTU link         724行
     user_make_call_via_meeting_link   ${driver1}   ${invite_url_otu}
     # 确保建立call，但未接听
@@ -415,7 +415,7 @@ Small_range_745
     user_switch_to_second_workspace    ${driver1}    ${Huiming_shi_Added_WS_another}
     # another User beong to workspace WS-A登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_url}    send_meeting_room_link    ${driver2}    MHS   no_send
+    ${invite_url}    send_meeting_room_link    ${driver2}    ${MHS_link_email}   no_send
     # User1 click User2's MHS link
     user_make_call_via_meeting_link   ${driver1}   ${invite_url}
     # 确保建立call，但未接听
@@ -424,7 +424,7 @@ Small_range_745
     user_anwser_call   ${driver2}
     # VP: This User does not have invite 3rd participant icon on menu bar
     sleep  20s
-    which_page_is_currently_on    ${driver1}    ${invite_user_in_calling}   not_currently_on
+    which_page_is_currently_on    ${driver1}    ${invite_user_in_calling}   ${not_currently_on}
     exit_call     ${driver2}
     [Teardown]      exit_driver
 
@@ -436,7 +436,7 @@ Small_range_746
     ${user_list_1}    get_all_data_on_the_page    ${driver1}   ${py_team_page}
     # another User beong to workspace WS-A登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
-    ${invite_url}    send_meeting_room_link    ${driver2}    MHS   no_send
+    ${invite_url}    send_meeting_room_link    ${driver2}    ${MHS_link_email}   no_send
     # User1 click User2's MHS link
     user_make_call_via_meeting_link   ${driver1}   ${invite_url}
     # 确保建立call，但未接听
@@ -661,7 +661,7 @@ Disclaimer_808_809
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
     # 获取OTU meeting-link
-    ${invite_url}  send_meeting_room_link   ${driver1}   OTU
+    ${invite_url}  send_meeting_room_link   ${driver1}   ${OTU_link_email}
 
     ###### 809 line
     ${driver2}   anonymous_open_meeting_link   ${invite_url}   decline
@@ -691,7 +691,7 @@ Small_range_820_821
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # 获取meeting link
-    ${invite_url}    send_meeting_room_link     ${driver1}    OTU
+    ${invite_url}    send_meeting_room_link     ${driver1}    ${OTU_link_email}
     # Anonymous user call meeting owner
     ${driver2}   anonymous_open_meeting_link    ${invite_url}
     # 确保call连接成功，但未接听
@@ -817,7 +817,7 @@ Small_range_825_826
     choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
     Close
     # MHS owner get incoming call from another company user whose rec is on
-    ${invite_url}    send_meeting_room_link     ${driver1}    MHS
+    ${invite_url}    send_meeting_room_link     ${driver1}    ${MHS_link_email}
     user_make_call_via_meeting_link      ${driver2}     ${invite_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver2}
@@ -954,7 +954,7 @@ Small_range_831_832
     choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
     Close
     # MHS owner get incoming call from another company user whose rec is default-on
-    ${invite_url}    send_meeting_room_link     ${driver1}    MHS
+    ${invite_url}    send_meeting_room_link     ${driver1}    ${MHS_link_email}
     user_make_call_via_meeting_link      ${driver2}     ${invite_url}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver2}

@@ -129,8 +129,14 @@ ${choose_give_receive_help_mode}                //div[@class="FirstUserGuide"]  
 ${open_Menu_Items}                              //h1[text()="Menu Items"]/..//div[@class="react-toggle"]                                            # Settings的Menu Items打开按钮
 ${exit_call_yes_button}                         //button[text()="Yes"]                                                                              # 退出通话时的Yes按钮
 ${exit_call_no_button}                          //button[text()="No"]                                                                               # 退出通话时的No按钮
-
-
+${mic_off_xpath}                                //*[@*="#mic_off"]
+${mic_on_xpath}                                 //*[@*="#mic_on"]
+${phone_end_red_xpath}                          //*[@*="#phone_end_red"]
+${starHint_xpath}                               //img[@class="starHint"]
+${Continue_to_show_hints}                       //div[@class="checkbox"]//input[@type="checkbox"]
+${hint_dialog_close_button}                     //span[@class="close-button"]                                                                       # 提示框关闭按钮
+${gh_on_xpath}                                  //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#gh_on"]
+${rh_on_xpath}                                  //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]
 
 
 # 不是xpath的变量

@@ -18,14 +18,14 @@ Small_range_1045
     [Tags]    small range 1045 line    call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
-    ...         AND             fill_invitation_message_content     You and I are dark horses     # 填写信息
+    ...         AND             fill_invitation_message_content     ${small_horse}     # 填写信息
     ...         AND             Close
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
-    send_meeting_room_link     ${driver}     MHS      send
+    send_meeting_room_link     ${driver}     ${MHS_link_email}      send
     # Open email and SMS of phone number,VP:In email "You have been invited to join [USERNAME] on a [ENTERPRISE]'s support call using Help Lightning." has been replaced by text set.
-    check_invitation_message_correct_from_email     You and I are dark horses
+    check_invitation_message_correct_from_email     ${small_horse}
     [Teardown]      exit_driver
 
 Small_range_1048
@@ -33,12 +33,12 @@ Small_range_1048
     [Tags]    small range 1048 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
-    ...         AND             fill_invitation_message_content     德玛西亚皇子+[]()     # 填写信息
+    ...         AND             fill_invitation_message_content     ${jarvan_fourth}     # 填写信息
     ...         AND             Close
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
-    send_meeting_room_link     ${driver}     MHS      send
+    send_meeting_room_link     ${driver}     ${MHS_link_email}      send
     # Open email and SMS of phone number,VP: email and SMS shows customer text
     check_invitation_message_correct_from_email     =E5=BE=B7=E7=8E=9B=E8=A5=BF=E4=BA=9A=E7=9A=87=E5=AD=90+[]()
     [Teardown]      exit_driver
@@ -53,7 +53,7 @@ Small_range_1051
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
-    send_meeting_room_link     ${driver}     MHS      send
+    send_meeting_room_link     ${driver}     ${MHS_link_email}      send
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email     You have been invited to join Huiming.shi.helplightning+personal on a auto_default_workspace's support call using Help Lightning.
     [Teardown]      exit_driver
@@ -63,14 +63,14 @@ Small_range_1046
     [Tags]    small range 1046 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
-    ...         AND             fill_invitation_message_content      You And I Are Dark Horses     # 填写信息
+    ...         AND             fill_invitation_message_content      ${big_horse}     # 填写信息
     ...         AND             Close
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
-    send_meeting_room_link     ${driver}     OTU      send
+    send_meeting_room_link     ${driver}     ${OTU_link_email}      send
     # Open email and SMS of phone number,VP: SMS content has customer text and follow by “Tap this link to join the call…”
-    check_invitation_message_correct_from_email     You And I Are Dark Horses
+    check_invitation_message_correct_from_email     ${big_horse}
     [Teardown]      exit_driver
 
 Small_range_1049
@@ -78,12 +78,12 @@ Small_range_1049
     [Tags]    small range 1049 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
-    ...         AND             fill_invitation_message_content     德玛西亚皇子+[]-()      # 填写信息
+    ...         AND             fill_invitation_message_content     ${jarvan_fourth_1}      # 填写信息
     ...         AND             Close
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
-    send_meeting_room_link     ${driver}     OTU      send
+    send_meeting_room_link     ${driver}     ${OTU_link_email}      send
     # Open email and SMS of phone number,VP: email and SMS shows customer text
     check_invitation_message_correct_from_email     =E5=BE=B7=E7=8E=9B=E8=A5=BF=E4=BA=9A=E7=9A=87=E5=AD=90+[]-()
     [Teardown]      exit_driver
@@ -98,7 +98,7 @@ Small_range_1052
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
     # Send MHS link to email and phone number
-    send_meeting_room_link     ${driver}     OTU      send
+    send_meeting_room_link     ${driver}     ${OTU_link_email}      send
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email     You have been invited to join Huiming.shi.helplightning+personal on a auto_default_workspace's support call using Help Lightning.
     [Teardown]      exit_driver
@@ -108,7 +108,7 @@ Small_range_1047
     [Tags]    small range 1047 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
-    ...         AND             fill_invitation_message_content      I Am Dark Horse     # 填写信息
+    ...         AND             fill_invitation_message_content      ${I_am_horse}     # 填写信息
     ...         AND             Close
     # user login
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
@@ -118,7 +118,7 @@ Small_range_1047
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}     send_invite_in_calling_page    ${driver2}   send
     # Open email and SMS of phone number,VP: SMS and Email content has customer text.
-    check_invitation_message_correct_from_email     I Am Dark Horse
+    check_invitation_message_correct_from_email     ${I_am_horse}
      [Teardown]      exit_driver
 
 Small_range_1050
@@ -126,7 +126,7 @@ Small_range_1050
     [Tags]    small range 1050 line     call_case
     [Setup]     run keywords    Login_site_admin
     ...         AND             enter_workspace_settings_page       # 进入settings页面
-    ...         AND             fill_invitation_message_content      德玛西亚+[]-()     # 填写信息
+    ...         AND             fill_invitation_message_content      ${demacia}     # 填写信息
     ...         AND             Close
     # user login
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}

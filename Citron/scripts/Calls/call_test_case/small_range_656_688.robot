@@ -32,8 +32,8 @@ Small_range_656
     # Verify: "xxx didn't answer your call" In recent tab
     which_page_is_currently_on   ${driver1}    ${your_call_was_not_anwsered}
     # VP: The two users should not see rating dialog.
-    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    not_currently_on
-    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    not_currently_on
+    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    ${not_currently_on}
+    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    ${not_currently_on}
     # Expert User2 刷新Recents页面
     refresh_browser_page    ${driver2}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
@@ -56,8 +56,8 @@ Small_range_657
     # VP1: Your call was declined.2
     which_page_is_currently_on   ${driver1}    ${your_call_was_declined}
     # VP2: The two users should not see rating dialog.
-    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    not_currently_on
-    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    not_currently_on
+    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    ${not_currently_on}
+    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    ${not_currently_on}
     # Expert User2 刷新Recents页面
     refresh_browser_page    ${driver2}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
@@ -85,7 +85,7 @@ Small_range_658
     # VP1: "/Target user/ is currently on another call.
     which_page_is_currently_on   ${driver3}    ${user_is_currently_on_another_call}
     # VP2: rating dialog doesn’t display.
-    which_page_is_currently_on   ${driver3}    ${five_star_high_praise}    not_currently_on
+    which_page_is_currently_on   ${driver3}    ${five_star_high_praise}    ${not_currently_on}
     ###### Verify: In recent tab, Callee has a missing incoming call record. And Caller has a outgoing call record.
     exit_call   ${driver1}    # 结束Call
     # Expert User2 刷新Recents页面
@@ -109,7 +109,7 @@ Small_range_660
     # Expert User2 登录（case中的Joiner），这个user属于big_admin
     ${driver2}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_2@outlook.com
     # 获取meeting link
-    ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
+    ${invite_url}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
     # Joiner's App is killed
     logout_citron    ${driver2}
     # caller calls via meeting link
@@ -128,7 +128,7 @@ Small_range_661
     # Expert User2 登录（case中的Joiner）
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # 获取meeting link
-    ${invite_url}    send_meeting_room_link    ${driver2}    OTU   no_send
+    ${invite_url}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
     # caller calls via meeting link
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
     # 确保建立call，但未接听
@@ -261,7 +261,7 @@ Small_range_664
     # 结束Call
     exit_call   ${driver1}    1
     # VP2: user C should not see rating dialog.
-    which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    not_currently_on
+    which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    ${not_currently_on}
     # Verify: In recent tab, User A has 1 outgoing call to User B, and 1 outgoing call to User C.
     close_call_ending_page_RF    ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -325,7 +325,7 @@ Small_range_665
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
 #    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-#    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+#    ${invite_url}    send_meeting_room_link    ${driver1}    ${MHS_link_email}   no_send
 #    # Guest 1 登录
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
 #    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -381,7 +381,7 @@ Small_range_665
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}      ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
 #    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-#    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+#    ${invite_url}    send_meeting_room_link    ${driver1}    ${MHS_link_email}   no_send
 #    # Guest 1 登录
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
 #    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -406,7 +406,7 @@ Small_range_665
 #    which_page_is_currently_on    ${driver3}     ${your_call_was_declined}
 #    # VP2: guest 2 should not see rating dialog.
 #    exit_call   ${driver1}
-#    which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    not_currently_on
+#    which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    ${not_currently_on}
 #    # Verify: In recent tab, Guest 2 has a outgoing call record to Owner.
 ##    # 此处bug导致
 ##    close_last_window   ${driver3}
@@ -495,7 +495,7 @@ Small_range_665
 #    [Tags]    small range 674 line      call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3504
 #    # User A login and set Do not disturb
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}    no_check_toturial    close_bounced     accept    set_disturb
-#    ${invite_url}    send_meeting_room_link    ${driver1}    MHS   no_send
+#    ${invite_url}    send_meeting_room_link    ${driver1}    ${MHS_link_email}   no_send
 #    # User B 登录
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
 #    # UserB call user A by meeting link
@@ -534,7 +534,7 @@ Small_range_665
 #    #  user A 登录
 #    ${driver1}    driver_set_up_and_logIn    ${belong_two_WS_username}
 #    # User A send OTU link [link1]
-#    ${invite_url_otu}   send_meeting_room_link   ${driver1}   OTU   no_send
+#    ${invite_url_otu}   send_meeting_room_link   ${driver1}   ${OTU_link_email}   no_send
 #    #  user B 登录
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
 #    # User A switch to WS2
@@ -542,7 +542,7 @@ Small_range_665
 #    # User A turn on DND
 #    set_do_not_disturb   ${driver1}
 #    # User A send MHS link [link2]
-#    ${invite_url_mhs}   send_meeting_room_link   ${driver1}   MHS   no_send
+#    ${invite_url_mhs}   send_meeting_room_link   ${driver1}   ${MHS_link_email}   no_send
 #    ### 678
 #    # User B call A from contact list
 #    contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}  ${belong_two_WS_name}
@@ -573,7 +573,7 @@ Small_range_665
 #    #  user A 登录
 #    ${driver1}    driver_set_up_and_logIn    ${belong_two_WS_username}
 #    # User A send OTU link [link1]
-#    ${invite_url_otu}   send_meeting_room_link   ${driver1}   OTU   no_send
+#    ${invite_url_otu}   send_meeting_room_link   ${driver1}   ${OTU_link_email}   no_send
 #    #  WS2 contact  登录
 #    ${driver2}    driver_set_up_and_logIn    ${another_WS_username}
 #    # User A switch to WS2
@@ -581,7 +581,7 @@ Small_range_665
 #    # User A turn on DND
 #    set_do_not_disturb   ${driver1}
 #    # User A send MHS link [link2]
-#    ${invite_url_mhs}   send_meeting_room_link   ${driver1}   MHS   no_send
+#    ${invite_url_mhs}   send_meeting_room_link   ${driver1}   ${MHS_link_email}   no_send
 #    # User A switch back to WS1
 #    user_switch_to_second_workspace   ${driver1}    ${Huiming_shi_Added_WS}
 #    ### 681
@@ -613,7 +613,7 @@ Small_range_665
 #    # Owner 登录
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
 #    # 获取mhs link
-#    ${invite_url}    send_meeting_room_link   ${driver1}  MHS   no_send
+#    ${invite_url}    send_meeting_room_link   ${driver1}  ${MHS_link_email}   no_send
 #    # Owner clicks on mhs link firstly
 #    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
 #     # 确保建立call，但未接听
@@ -628,7 +628,7 @@ Small_range_688
     # Owner 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # 获取otu link
-    ${invite_url}    send_meeting_room_link   ${driver1}  OTU   no_send
+    ${invite_url}    send_meeting_room_link   ${driver1}   ${OTU_link_email}   no_send
     # first guest 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
     # Owner clicks on otu link firstly

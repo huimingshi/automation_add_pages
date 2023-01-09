@@ -31,8 +31,8 @@ Small_range_1078_1082
     # Only person in same worksapce can chat with each other
     # Go to Personal contacts，VP: only the person in same workspace with login user has Message icon
     switch_to_diffrent_page     ${driver}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}     switch_tree
-    contacts_different_page_search_user     ${driver}     ${py_team_page}     Huiming.shi.helplightning+13857584759
-    suspension_of_the_mouse     ${driver}     Huiming.shi.helplightning+13857584759
+    contacts_different_page_search_user     ${driver}     ${py_team_page}     ${user_13857584759}
+    suspension_of_the_mouse     ${driver}     ${user_13857584759}
     sleep  6
     ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
     should be equal as strings     ${return_value}     flex
@@ -51,11 +51,11 @@ Small_range_1078_1082
     # Message tab or nav bar is hiden
     switch_to_other_tab       ${driver}      //div[@role="tree"]/div[1]
     which_page_is_currently_on       ${driver}     ${contacts_menu_xpath}
-    which_page_is_currently_on       ${driver}     ${message_menu_xpath}     not_currently_on
+    which_page_is_currently_on       ${driver}     ${message_menu_xpath}     ${not_currently_on}
     # Go to Contacts	Message icon for each contact is not visible	VP: icon is not visible for favorites, team, personal, directory
     switch_to_diffrent_page     ${driver}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_team_page}     Huiming.shi.helplightning+13857584759
-    suspension_of_the_mouse     ${driver}     Huiming.shi.helplightning+13857584759
+    contacts_different_page_search_user     ${driver}     ${py_team_page}     ${user_13857584759}
+    suspension_of_the_mouse     ${driver}     ${user_13857584759}
     sleep  6
     ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
     should be equal as strings     ${return_value}     none
@@ -75,8 +75,8 @@ Small_range_1078_1082
     should be equal as strings     ${return_value}     none
     # VP: icon is not visible for favorites, team, personal, directory
     switch_to_diffrent_page     ${driver}     ${py_directory_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_directory_page}     Huiming.shi.helplightning+13857584759
-    suspension_of_the_mouse     ${driver}     Huiming.shi.helplightning+13857584759
+    contacts_different_page_search_user     ${driver}     ${py_directory_page}     ${user_13857584759}
+    suspension_of_the_mouse     ${driver}     ${user_13857584759}
     sleep  6
     ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
     should be equal as strings     ${return_value}     none
