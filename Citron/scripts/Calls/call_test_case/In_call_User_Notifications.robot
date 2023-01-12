@@ -139,7 +139,7 @@ In_call_User_Notifications_18_20
     # 验证When a participant joins the call in cooperation mode	    %1$s has joined as obeserver
     has_joined_as_obeserver    ${driver3}    ${message_test5_username}
     # User A 结束call
-    exit_call   ${driver1}   no_check
+    exit_call   ${driver1}
     # 验证When a participant leaves the call.	%1$s has left the session
     has_left_the_session    ${driver3}    ${message_test5_username}
     [Teardown]    exit_driver

@@ -506,7 +506,7 @@ add_group_user
     # Enter groups
     click element   ${groups_input}
     sleep  1s
-    input text    ${groups_input}   auto_default_group
+    input text    ${groups_input}   ${auto_default_group}
     sleep  1s
     click element   xpath=//div[@unselectable="on"]//li[1]
     sleep  0.5s
@@ -533,7 +533,7 @@ add_workspace_user
     # Enter groups
     click element   ${groups_input}
     sleep  1s
-    input text   ${groups_input}   auto_default_group
+    input text   ${groups_input}   ${auto_default_group}
     sleep  1s
     click element   xpath=//div[@unselectable="on"]//li[1]
     sleep  1s
@@ -678,7 +678,7 @@ search_special_group
     # search group：Group_only_for_test_groups_members
     click element  ${group_list_search}
     sleep  1s
-    input text   ${group_list_search}   auto_default_group
+    input text   ${group_list_search}   ${auto_default_group}
     sleep  3s
     click element   ${members_button}
     sleep  3s
@@ -694,6 +694,7 @@ add_mumbers_after_del
     input text  ${edit_members_search}    hlnauto+maomwu
     sleep  2s
     # add users
+    wait until element is visible    xpath=//div[@row-index="0"]//button[contains(.,'Add')]     20s
     click element  xpath=//div[@row-index="0"]//button[contains(.,'Add')]
     sleep  2s
     # close Add More Users... page
@@ -707,6 +708,7 @@ add_mumbers_after_del
     input text  ${edit_members_search}  hlnauto+maomwu
     sleep  2s
     # delete users
+    wait until element is visible    xpath=//div[@row-index="0"]//button[contains(.,'Delete')]    20s
     click element   xpath=//div[@row-index="0"]//button[contains(.,'Delete')]
     sleep  2s
     element should not be visible   xpath=//div[@row-index="0"]//button[contains(.,'Delete')]
@@ -801,8 +803,8 @@ lists_should_be_same
 only_display_calls_records_from_users
     # Only display records from users in the groups that group admin manages
     FOR   ${i}   IN RANGE    10
-        ${get_owner_name}   get text   xpath=//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="owner_name"]
-        should be equal as strings   ${get_owner_name}   Huiming.shi.helplightning+123456789
+        ${get_group_name}   get text   xpath=//div[@class="ag-center-cols-container"]/div[@row-index="${i}"]/div[@col-id="groupsString"]
+        should contain    ${get_group_name}   ${auto_default_group}
     END
 
 click_export_button
@@ -810,11 +812,11 @@ click_export_button
     click element   ${export_button}
     sleep  1s
     ${count}    get element count    xpath=//div[@id="exportToCsvPopover"]//div/button
-    should be equal as integers    ${count}   2
+    should be equal as integers    ${count}   1
     ${button_text}   get text   ${export_current_table}
     should be equal as strings   ${button_text}    EXPORT CURRENT TABLE
-    ${button_text}   get text   ${generate_table}
-    should contain  ${button_text}    GENERATED
+#    ${button_text}   get text   ${generate_table}
+#    should contain  ${button_text}    GENERATED
 
 add_tag_and_comments
     # click Details button for the first record

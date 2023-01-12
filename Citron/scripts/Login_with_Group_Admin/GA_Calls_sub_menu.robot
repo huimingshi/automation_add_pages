@@ -10,7 +10,7 @@ Only_display_records_from_users_in_the_groups_that_group_admin_manages
     [Documentation]    Only display records from users in the groups that group admin manages
     [Tags]    Only display records from users in the groups that group admin manages
     # log in with group admin
-    Login_another_group_admin
+    Login_group_admin
     # enter group calls
     enter_group_calls
     # choose last 365 days

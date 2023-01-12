@@ -1027,7 +1027,7 @@ cancel_then_update_user
     # Enter Group
     click element   ${details_pre_xpath}//span[@class="k-searchbar"]/input
     sleep  0.5s
-    input text     ${details_pre_xpath}//span[@class="k-searchbar"]/input   auto_default_group
+    input text     ${details_pre_xpath}//span[@class="k-searchbar"]/input    ${auto_default_group}
     sleep  2s
     click element   xpath=//div[@unselectable="on"]//ul[@role='listbox']/li[1]
     sleep  1s

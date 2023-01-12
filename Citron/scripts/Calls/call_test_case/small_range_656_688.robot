@@ -165,7 +165,7 @@ Small_range_662
     # VP: "xxx didn't answer your call"
     which_page_is_currently_on    ${driver2}   ${your_call_was_not_anwsered_in_call}
     # 结束Call
-    exit_call   ${driver1}    1
+    exit_call   ${driver1}
     # Verify: In recent tab, User A has 1 outgoing call to User B.
     close_call_ending_page_RF    ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -210,7 +210,7 @@ Small_range_663
     enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
     click_user_in_contacts_call   ${driver1}     ${Expert_User3_name}    can_not_reach
     # 结束Call
-    exit_call   ${driver1}    1
+    exit_call   ${driver1}
     # Verify: In recent tab,User A has 1 outgoing call  to User C. and has 1 outgoing call to  User B.
     close_call_ending_page_RF    ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -259,7 +259,7 @@ Small_range_664
     # VP1: "Your call was declined.
     which_page_is_currently_on    ${driver1}   ${declined_your_call}
     # 结束Call
-    exit_call   ${driver1}    1
+    exit_call   ${driver1}
     # VP2: user C should not see rating dialog.
     which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    ${not_currently_on}
     # Verify: In recent tab, User A has 1 outgoing call to User B, and 1 outgoing call to User C.

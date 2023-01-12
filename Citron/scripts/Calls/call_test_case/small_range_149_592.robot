@@ -47,7 +47,7 @@ Small_range_149_151
     enter_giver_mode     ${driver1}      none    none     2
     # Back to F2F mode	VP: hint dialog disappear
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
-    [Teardown]      run keywords    exit_call   ${driver2}   1
+    [Teardown]      run keywords    exit_call   ${driver2}
     ...             AND             exit_driver
 
 Small_range_152
@@ -88,14 +88,14 @@ Small_range_153_160
     # uncheck "Continue to show hints" checkbox
     switch_to_other_tab     ${driver1}     ${Continue_to_show_hints}
     # End call, then make another call
-    exit_call    ${driver1}   no_check
+    exit_call    ${driver1}
     close_call_ending_page_RF    ${driver1}
     close_call_ending_page_RF    ${driver2}
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
     # VP: hint dialog does not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     # End call
-    exit_call    ${driver1}   no_check
+    exit_call    ${driver1}
     close_call_ending_page_RF    ${driver1}
     close_call_ending_page_RF    ${driver2}
     # open "Show menu hints" setting from account
@@ -128,7 +128,7 @@ Small_range_153_160
     # VP: hint dialog is not shown
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     # 结束call
-    exit_call   ${driver1}    no_check
+    exit_call   ${driver1}
     [Teardown]      exit_driver
 
 Small_range_161

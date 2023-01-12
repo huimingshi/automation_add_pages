@@ -1642,7 +1642,7 @@ click_members_of_this_group
     should not be equal as numbers   ${count}  0
     FOR   ${i}   IN RANGE  ${count}
         ${get_group_name_text}   get text    xpath=//div[@class="ag-center-cols-container"]/div[@row-index="${i}"]/div[@col-id="pods_string"]
-        should contain    ${get_group_name_text}   auto_default_group
+        should contain    ${get_group_name_text}    ${auto_default_group}
     END
 
 

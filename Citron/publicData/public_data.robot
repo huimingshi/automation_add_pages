@@ -136,6 +136,7 @@ ${big_admin_on_call_group}              three_user_in_this_on_call_group        
 
 ${on_call_group_1}                      on-call group 1                                                                         # on-call group 1
 
+${auto_default_group}                   auto_default_group                                                                      # huiming.shi的第一个WS的auto_default_group
 # 下列账号都属于big_admin下的我自己创建的WS（Huiming.shi_Added_WS）中的User或者group
 ${Expert_A_username}                    Huiming.shi.helplightning+Expert_A@outlook.com                                          # Expert A username(Quantum Mechanics)
 ${Expert_A_name}                        Huiming.shi.helplightning+Expert_A

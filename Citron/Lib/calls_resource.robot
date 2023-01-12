@@ -263,13 +263,13 @@ filter_by_groups
     # search by participant
     click element   ${input_search}
     sleep  0.5s
-    input text  ${input_search}   auto_default_group
+    input text  ${input_search}   ${auto_default_group}
     sleep  15s
     ${count_after}   get text  ${calls_get_counts}
     should not be equal as integers    ${count_before}   ${count_after}
     FOR   ${i}   IN RANGE  10
         ${groups_name}   get text    xpath=//div[@class="ag-center-cols-container"]//div[@row-index="${i}"]//div[@col-id="groupsString"]
-        should contain   ${groups_name}   auto_default_group
+        should contain   ${groups_name}   ${auto_default_group}
     END
 
 check_file_if_exists_delete
