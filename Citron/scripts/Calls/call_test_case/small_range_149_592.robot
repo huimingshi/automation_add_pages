@@ -4,6 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
+Resource          call_case_set_up.robot
 Library           call_python_Lib/call_action_lib.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
@@ -18,21 +19,27 @@ Force Tags        small_range
 Small_range_149_151
     [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
     [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show     有bug：https://vipaar.atlassian.net/browse/CITRON-3353     call_case
+#    [Setup]     run keywords      Login_premium_user                        # log in with premium admin
+#    ...         AND               enter_workspace_workspace_settings        # enter first workspace workspace setting
+#    ...         AND               close_call_center_mode                    # workspace WS1 has "Disable External Feature"=OFF
+#    ...         AND               Close
+#    # 需要保证During Call: Call Center Mode为OFF状态
+#    [Setup]      set_call_center_mode_setUp    site_admin     close
     # premium user log in
-    ${driver1}  driver_set_up_and_logIn   ${crunch_site_username}   ${crunch_site_password}
+    ${driver1}  driver_set_up_and_logIn   ${site_admin_username}
     # Contact of premium user log in
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+    ${driver2}  driver_set_up_and_logIn     ${message_test0_user}
     # premium user call contact in F2F mode
-    contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${big_admin_first_WS_name}
+    contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${message_test0_username}
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Mute,Camera and End Call icon are at 50% opacity;
-    which_page_is_currently_on    ${driver1}    ${mic_off_xpath}
+    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
     which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
     # Yellow star on F2F icon
     which_page_is_currently_on    ${driver1}    ${starHint_xpath}
     # Click Mute/Camera/Hamburger
-    switch_to_other_tab    ${driver1}    ${mic_off_xpath}
+    switch_to_other_tab    ${driver1}    ${mic_on_xpath}
     sleep  1s
     # VP: hint dialog still shows
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
@@ -46,6 +53,8 @@ Small_range_149_151
 Small_range_152
     [Documentation]    2 users in face to face mode
     [Tags]      small range 152 line     call_case
+#    # 需要保证During Call: Call Center Mode为OFF状态
+#    [Setup]      set_call_center_mode_setUp    premium_user     close      switch_to_other      ${created_workspace}
     # user1 log in
     ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
     # user2 log in
@@ -125,6 +134,8 @@ Small_range_153_160
 Small_range_161
     [Documentation]    WebApp specific
     [Tags]      small range 161 line        call_case
+#    # 需要保证During Call: Call Center Mode为OFF状态
+#    [Setup]      set_call_center_mode_setUp    premium_user     close      switch_to_other      ${created_workspace}
     # user1 log in
     ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
     # user2 log in
@@ -151,11 +162,12 @@ Small_range_161
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly
     [Tags]     small range 162-167 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+#    ...         AND               Close
+    [Setup]   ws_open_directory    premium_user   switch_to_other   ${created_workspace}
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # TU2 登录
@@ -192,74 +204,16 @@ Join_call_162_167
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Join_call_168_178
-    [Documentation]     Join call	MPC via on-call group.
-    [Tags]     small range 168-178 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3646
-    [Setup]     run keywords      Login_site_admin                  # log in with Site Admin
-    ...         AND               switch_to_created_workspace       ${created_workspace_branding_3}      # 进入WS_branding_setting_WS3这个WS
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-    ...         AND               Close
-    # TU2 登录
-    ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}
-    # EU1 登录
-    ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}
-    # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
-    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}    send_invite_in_calling_page    ${driver2}
-    close_invite_3th_page    ${driver2}
-    # Anonymous user 3 clicks on 3pi link. EU1 answers call.
-    ${driver3}    anonymous_open_meeting_link    ${invite_url}
-    # 确保call连接成功，但未接听
-    make_sure_enter_call   ${driver3}
-    user_anwser_call    ${driver2}   no_direct
-    # VP: AU3 joins call.
-    which_page_is_currently_on    ${driver3}    ${end_call_button}
-    # TU2 invites TU4.   TU4 declines call.
-    ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
-    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
-    user_decline_call    ${driver4}
-    # VP: Team user 4 doesn’t join call
-    which_page_is_currently_on    ${driver4}    ${py_contacts_switch_success}
-    # TU2 invites TU4.   TU4 accepts call.
-    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
-    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
-    user_anwser_call    ${driver4}
-    # VP: Team user 4 joins call.
-    which_page_is_currently_on    ${driver4}    ${end_call_button}
-    # TU2 invites on-call group 1   VP: experts in on-call group 1 receives rollover call.    EU5 answers call.
-    ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}
-    enter_contacts_search_user     ${driver1}    ${On_call_group_001}
-    click_user_in_contacts_call     ${driver1}    ${On_call_group_001}
-    user_anwser_call    ${driver5}
-    # TU2 invites on-call group 2   VP: other experts in on-call group 2 receives rollover call. Display message “No experts are available to take your call” if no experts login.
-    ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}
-#    # 此处受bug导致  https://vipaar.atlassian.net/browse/CITRON-3646
-#    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
-#    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
-#    # All experts in on-call group 2 declines call.   Display message “No experts are available to take your call”.
-#    user_decline_call    ${driver6}
-#    which_page_is_currently_on    ${driver1}    ${no_experts_are_available_tips}
-    # TU2 invites on-call group 2
-    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
-    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
-    # EU6 in on-call group2 answers call.	VP: expert user 6 joins call
-    user_anwser_call    ${driver6}
-    which_page_is_currently_on    ${driver6}    ${end_call_button}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
-
 Join_call_179_187
     [Documentation]     Join call	MPC via MHS link.
     [Tags]     small range 179-187 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+#    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # TU2 登录
@@ -323,11 +277,13 @@ Join_call_179_187
 Join_call_188_195
     [Documentation]     Join call	MPC via OTU link.
     [Tags]     small range 188-195 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+#    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # Anonymous user 2 clicks on EU1’s OTU link. EU1 answers call.
@@ -378,65 +334,16 @@ Join_call_188_195
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Join_call_196_200
-    [Documentation]     In call	  2PC
-    [Tags]     small range 196-200 lines        call_case
-    # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
-    # EU2 登录
-    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}
-    # EU1 calls EU2. EU2 answers call,
-    contacts_witch_page_make_call     ${driver1}     ${driver2}   ${py_team_page}    ${Expert_User2_name}
-    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    sleep   10s
-    hang_up_the_phone     ${driver1}
-    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver1}
-    hang_up_the_phone     ${driver2}
-    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver2}
-    # EU1 switches to Giver.
-    enter_giver_mode     ${driver1}     no_one     no_one     2
-    # Proceed with my camera Off
-    proceed_with_camera_off    ${driver1}
-    # EU1 invites TU3. TU3 answers call.
-    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${Team_User1_name}
-    click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
-    user_anwser_call     ${driver3}
-    # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
-    which_page_is_currently_on     ${driver1}     ${gh_on_xpath}
-    which_page_is_currently_on     ${driver2}     ${rh_on_xpath}
-    which_page_is_currently_on     ${driver3}     ${gh_on_xpath}     ${not_currently_on}
-    which_page_is_currently_on     ${driver3}     ${rh_on_xpath}     ${not_currently_on}
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # TU3 leaves call.
-    exit_call     ${driver3}
-    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    hang_up_the_phone     ${driver1}
-    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver1}
-    hang_up_the_phone     ${driver2}
-    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver2}
-    # End call.
-    exit_call     ${driver1}
-    [Teardown]    exit_driver
-
 Join_call_201_205
     [Documentation]     In call	  2PC
     [Tags]     small range 201-205 lines        call_case
-    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+#    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
     # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
@@ -485,11 +392,13 @@ Join_call_201_205
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
     [Tags]    small range 560-580 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+#    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
     # EU1 登录
     ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
     # EU2 登录
@@ -589,6 +498,118 @@ Small_range_560_580
     which_page_is_currently_on    ${driver8}    ${this_call_is_over}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
+
+Join_call_168_178
+    [Documentation]     Join call	MPC via on-call group.
+    [Tags]     small range 168-178 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3646
+#    [Setup]     run keywords      Login_site_admin                  # log in with Site Admin
+#    ...         AND               switch_to_created_workspace       ${created_workspace_branding_3}      # 进入WS_branding_setting_WS3这个WS
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+#    ...         AND               Close
+    [Setup]   ws_open_directory    site_admin   switch_to_other    ${created_workspace_branding_3}
+    # TU2 登录
+    ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}
+    # EU1 登录
+    ${driver2}   driver_set_up_and_logIn    ${test_WS3_EU1_user}
+    # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
+    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    ${invite_url}    send_invite_in_calling_page    ${driver2}
+    close_invite_3th_page    ${driver2}
+    # Anonymous user 3 clicks on 3pi link. EU1 answers call.
+    ${driver3}    anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver3}
+    user_anwser_call    ${driver2}   no_direct
+    # VP: AU3 joins call.
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    # TU2 invites TU4.   TU4 declines call.
+    ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    user_decline_call    ${driver4}
+    # VP: Team user 4 doesn’t join call
+    which_page_is_currently_on    ${driver4}    ${py_contacts_switch_success}
+    # TU2 invites TU4.   TU4 accepts call.
+    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    user_anwser_call    ${driver4}
+    # VP: Team user 4 joins call.
+    which_page_is_currently_on    ${driver4}    ${end_call_button}
+    # TU2 invites on-call group 1   VP: experts in on-call group 1 receives rollover call.    EU5 answers call.
+    ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}
+    enter_contacts_search_user     ${driver1}    ${On_call_group_001}
+    click_user_in_contacts_call     ${driver1}    ${On_call_group_001}
+    user_anwser_call    ${driver5}
+    # TU2 invites on-call group 2   VP: other experts in on-call group 2 receives rollover call. Display message “No experts are available to take your call” if no experts login.
+    ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}
+#    # 此处受bug导致  https://vipaar.atlassian.net/browse/CITRON-3646
+#    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
+#    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
+#    # All experts in on-call group 2 declines call.   Display message “No experts are available to take your call”.
+#    user_decline_call    ${driver6}
+#    which_page_is_currently_on    ${driver1}    ${no_experts_are_available_tips}
+    # TU2 invites on-call group 2
+    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
+    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
+    # EU6 in on-call group2 answers call.	VP: expert user 6 joins call
+    user_anwser_call    ${driver6}
+    which_page_is_currently_on    ${driver6}    ${end_call_button}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
+Join_call_196_200
+    [Documentation]     In call	  2PC
+    [Tags]     small range 196-200 lines        call_case
+    # EU1 登录
+    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
+    # EU2 登录
+    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}
+    # EU1 calls EU2. EU2 answers call,
+    contacts_witch_page_make_call     ${driver1}     ${driver2}   ${py_team_page}    ${Expert_User2_name}
+    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+    sleep   10s
+    hang_up_the_phone     ${driver1}
+    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver1}
+    hang_up_the_phone     ${driver2}
+    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver2}
+    # EU1 switches to Giver.
+    enter_giver_mode     ${driver1}     no_one     no_one     2
+    # Proceed with my camera Off
+    proceed_with_camera_off    ${driver1}
+    # EU1 invites TU3. TU3 answers call.
+    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    enter_contacts_search_user     ${driver1}    ${Team_User1_name}
+    click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
+    user_anwser_call     ${driver3}
+    # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
+    which_page_is_currently_on     ${driver1}     ${gh_on_xpath}
+    which_page_is_currently_on     ${driver2}     ${rh_on_xpath}
+    which_page_is_currently_on     ${driver3}     ${gh_on_xpath}     ${not_currently_on}
+    which_page_is_currently_on     ${driver3}     ${rh_on_xpath}     ${not_currently_on}
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
+    # TU3 leaves call.
+    exit_call     ${driver3}
+    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+    hang_up_the_phone     ${driver1}
+    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver1}
+    hang_up_the_phone     ${driver2}
+    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+    hang_up_the_phone     ${driver2}
+    # End call.
+    exit_call     ${driver1}
+    [Teardown]    exit_driver
 
 Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list

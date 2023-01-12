@@ -4,6 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
+Resource          call_case_set_up.robot
 Library           call_python_Lib/call_action_lib.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
@@ -14,143 +15,17 @@ Library           call_python_Lib/finish_call.py
 Force Tags        small_range
 
 *** Test Cases ***
-Call_Tag_Comment_592_595
-    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-    [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复      call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-    ...         AND               Close
-    # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
-    # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
-    # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
-    # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
-    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
-    which_page_is_currently_on    ${driver3}    ${end_call_button}
-    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
-    # 点击查询到的User A
-    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
-    # User A 接收打进来的Call
-    user_anwser_call   ${driver1}
-    # User A leave call
-    exit_call   ${driver1}
-    # User A have tags screen pop up	A choose and enter new tag name, fill comments
-    ${first_tag_text}   add_tags_and_comment    ${driver1}     1   good_experience_1
-    # User A 进入Recents页面
-    sleep  5s   # 等待最近一次通话记录加载
-    close_call_ending_page_RF   ${driver1}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    # A's recent should have tag and comments just entered
-    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}   good_experience_1
-    # Then B leave call after A added tags
-    exit_call   ${driver2}
-    # B and C add tags and comments
-    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_2
-    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_3
-    # 先关闭call结束页面
-    close_call_ending_page_RF   ${driver2}
-    close_call_ending_page_RF   ${driver3}
-    # View recents of this call	A and B and C should have same tags and comments，进入到Recents页面
-    # User A切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    # User B C切换到Recents页面
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    # Modify any tags for this call
-    del_tags_in_call_details   ${driver3}
-    # User A B C 切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page   ${driver3}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    # Other participants tags must be updated,too;
-    first_call_record_tag_and_comment   ${driver1}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver2}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver3}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
-
-Call_Tag_Comment_596_599
-    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-    [Tags]     small range 596-599 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复         call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-    ...         AND               Close
-    # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
-    # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
-    # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
-    # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
-    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
-    which_page_is_currently_on    ${driver3}    ${end_call_button}
-    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
-    # 点击查询到的User A
-    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
-    # User A 接收打进来的Call
-    user_anwser_call   ${driver1}
-    # User C End Call for All
-    end_call_for_all   ${driver3}
-    # 获取所有的tags列表
-    ${tags_list_C1}    get_all_tag_after_call    ${driver3}
-
-    # 先关闭call结束页面
-    close_call_ending_page_RF   ${driver1}
-    close_call_ending_page_RF   ${driver2}
-    close_call_ending_page_RF   ${driver3}
-    # User C switch to WS2
-    user_switch_to_second_workspace     ${driver3}
-    # User A切换到Contacts页面
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # A call B, invite C
-    contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
-    # 点击查询到的User C
-    click_user_in_contacts_call   ${driver1}   ${switch_workspace_name}
-    user_anwser_call    ${driver3}
-    # A end call for all
-    end_call_for_all   ${driver1}
-    # C click tag fields
-    # 获取所有的tags列表
-    ${tags_list_C2}    get_all_tag_after_call    ${driver3}
-    # VP: Similar tag name of WS1 list out
-    two_option_is_equal   ${driver3}   ${tags_list_C1}    ${tags_list_C2}
-    # A, B , C fill in tags and comments
-    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_4
-    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_5
-    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_6
-    # 先关闭call结束页面
-    close_call_ending_page_RF   ${driver3}
-    # User C switch to WS1
-    user_switch_to_first_workspace   ${driver3}
-    # 切换到Recents页面
-    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    # User C should see all tags and comments from call recents
-    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_6    good_experience_5   good_experience_4
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
-
 Call_Tag_Comment_600_604
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
     [Tags]     small range 600-604 lines           call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-    ...         AND               Close
-    ...         AND               Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_external_feature        close_feature     close_feature          # WS1 and WS2 both turn off Disable External Users
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
+#    ...         AND               Close
+#    ...         AND               Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_external_feature        close_feature     close_feature          # WS1 and WS2 both turn off Disable External Users
+#    ...         AND               Close
+    [Setup]     run keywords      make_sure_two_ws_tagging_and_comments_feature        open_feature      open_feature
+    ...         AND               make_sure_two_ws_external_feature                    close_feature     close_feature
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
     # User B log in
@@ -224,12 +99,146 @@ Call_Tag_Comment_600_604
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#Call_Tag_Comment_605_606
-#    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
-#    [Tags]     small range 605-606 lines     有bug: https://vipaar.atlassian.net/browse/CITRON-3654       call_case
+Call_Tag_Comment_592_595
+    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
+    [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复      call_case
 #    [Setup]     run keywords      Login_premium_user   # log in with premium admin
 #    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
 #    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
+    # User B log in
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
+    # User C log in
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
+    # User C与User B进行Call
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    # 点击查询到的User A
+    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    # User A 接收打进来的Call
+    user_anwser_call   ${driver1}
+    # User A leave call
+    exit_call   ${driver1}
+    # User A have tags screen pop up	A choose and enter new tag name, fill comments
+    ${first_tag_text}   add_tags_and_comment    ${driver1}     1   good_experience_1
+    # User A 进入Recents页面
+    sleep  5s   # 等待最近一次通话记录加载
+    close_call_ending_page_RF   ${driver1}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # A's recent should have tag and comments just entered
+    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}   good_experience_1
+    # Then B leave call after A added tags
+    exit_call   ${driver2}
+    # B and C add tags and comments
+    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_2
+    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_3
+    # 先关闭call结束页面
+    close_call_ending_page_RF   ${driver2}
+    close_call_ending_page_RF   ${driver3}
+    # View recents of this call	A and B and C should have same tags and comments，进入到Recents页面
+    # User A切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
+    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # User B C切换到Recents页面
+    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    # Modify any tags for this call
+    del_tags_in_call_details   ${driver3}
+    # User A B C 切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
+    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver3}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # Other participants tags must be updated,too;
+    first_call_record_tag_and_comment   ${driver1}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver2}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver3}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
+Call_Tag_Comment_596_599
+    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
+    [Tags]     small range 596-599 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复         call_case
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
+#    ...         AND               Close
+#    #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
+    # User B log in
+    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
+    # User C log in
+    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
+    # User C与User B进行Call
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    # User C 进入到邀请第三位用户进入call 的页面，并查询User A
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    # 点击查询到的User A
+    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    # User A 接收打进来的Call
+    user_anwser_call   ${driver1}
+    # User C End Call for All
+    end_call_for_all   ${driver3}
+    # 获取所有的tags列表
+    ${tags_list_C1}    get_all_tag_after_call    ${driver3}
+
+    # 先关闭call结束页面
+    close_call_ending_page_RF   ${driver1}
+    close_call_ending_page_RF   ${driver2}
+    close_call_ending_page_RF   ${driver3}
+    # User C switch to WS2
+    user_switch_to_second_workspace     ${driver3}
+    # User A切换到Contacts页面
+    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    # A call B, invite C
+    contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
+    # 点击查询到的User C
+    click_user_in_contacts_call   ${driver1}   ${switch_workspace_name}
+    user_anwser_call    ${driver3}
+    # A end call for all
+    end_call_for_all   ${driver1}
+    # C click tag fields
+    # 获取所有的tags列表
+    ${tags_list_C2}    get_all_tag_after_call    ${driver3}
+    # VP: Similar tag name of WS1 list out
+    two_option_is_equal   ${driver3}   ${tags_list_C1}    ${tags_list_C2}
+    # A, B , C fill in tags and comments
+    ${first_tag_text}    add_tags_and_comment     ${driver1}    1   good_experience_4
+    ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_5
+    ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_6
+    # 先关闭call结束页面
+    close_call_ending_page_RF   ${driver3}
+    # User C switch to WS1
+    user_switch_to_first_workspace   ${driver3}
+    # 切换到Recents页面
+    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    # User C should see all tags and comments from call recents
+    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_6    good_experience_5   good_experience_4
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
+#Call_Tag_Comment_605_606
+#    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
+#    [Tags]     small range 605-606 lines     有bug: https://vipaar.atlassian.net/browse/CITRON-3654       call_case
+##    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+##    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
+##    ...         AND               Close
+##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+##    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
 #    # 该脚本中使用的on-call-group是three_user_in_this_on_call_group，隶属于big_admin
 #    # User A log in
 #    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
@@ -257,73 +266,6 @@ Call_Tag_Comment_600_604
 #    [Teardown]      run keywords    Close
 #    ...             AND             exit_driver
 
-Call_survey_608_610
-    [Documentation]   Call survey(Tier of enterprise and above)   Customer call Experts group[all have survey & call tag permission]   Customer invite a enterprise user
-    [Tags]     small range 608-610 lines        call_case
-    [Setup]     run keywords      Login_workspaces_admin            # log in with WS admin
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
-    ...         AND               set_survey_in_white_list          # 设置After Call: End of Call Survey的url不为空
-    ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
-    ...         AND               Close
-    # Customer 登录
-    ${driver1}   driver_set_up_and_logIn    ${call_oncall_user_username}
-    # Experts group user登录
-    ${driver2}   driver_set_up_and_logIn    ${oncall_user_username}
-    # enterprise user登录
-    ${driver3}   driver_set_up_and_logIn    ${personal_user_username}
-    # make call with on-call
-    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}
-    # Customer invite a enterprise user
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user   ${driver1}    ${personal_user_name}
-    click_user_in_contacts_call    ${driver1}    ${personal_user_name}
-    # enterprise user 接受call
-    user_anwser_call   ${driver3}
-    # Customer click End Call
-    leave_call  ${driver1}
-    # Customer enter call tag & comment
-    ${first_tag_text}  add_tags_and_comment    ${driver1}     1   good_experience_13
-    # And then click Take Survey button
-    check_survey_switch_success   ${driver1}    1   click
-    # return to the Tags/Comments page, but survey button disappear.
-    close_last_window   ${driver1}
-    check_survey_switch_success   ${driver1}    0
-    # The entered call tag and comment should not disappeared.
-    check_tag_and_com_switch_success   ${driver1}    1
-
-    ###### 609 line
-    # After customer save successfully call & comment, Expert click End Call button
-    exit_call   ${driver2}   check    10
-    # Expert enter call tag & comment, and then click Take Survey button
-    ${second_tag_text}  add_tags_and_comment    ${driver2}     2   good_experience_14
-    check_survey_switch_success   ${driver2}    1   click
-    # return to the Tags/Comments page, but survey button disappear.
-    close_last_window   ${driver2}
-    check_survey_switch_success   ${driver2}    0
-    # The entered call tag and comment should not disappeared.
-    check_tag_and_com_switch_success   ${driver2}    1
-    # The entered call tag and comment should not disappeared.
-    get_all_comments_in_call_end    ${driver2}    good_experience_14   good_experience_13
-
-    ###### 610 line
-    #  Enterprise user enter call tag & comment, and then click Take Survey button
-    ${third_tag_text}  add_tags_and_comment    ${driver3}     3   good_experience_15
-    check_survey_switch_success   ${driver3}    1   click
-    # return to the Tags/Comments page, but survey button disappear.
-    close_last_window   ${driver3}
-    check_survey_switch_success   ${driver3}    0
-    # The entered call tag and comment should not disappeared.
-    check_tag_and_com_switch_success   ${driver3}    1
-    # The entered call tag and comment should not disappeared.
-    get_all_comments_in_call_end    ${driver3}   good_experience_15    good_experience_14   good_experience_13
-
-    # Customer navigate to Recent ->Call, to make sure the tags & comments should be saved successfully
-    close_call_ending_page_RF   ${driver1}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     # 切换到Recents页面
-    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}     good_experience_15    good_experience_14   good_experience_13
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
 
 Call_survey_611_615
     [Documentation]   Call survey(Tier of enterprise and above)   Pre-condition:(A & B not in the same company)    3PC call
@@ -399,14 +341,84 @@ Call_survey_611_615
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
+Call_survey_608_610
+    [Documentation]   Call survey(Tier of enterprise and above)   Customer call Experts group[all have survey & call tag permission]   Customer invite a enterprise user
+    [Tags]     small range 608-610 lines        call_case
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]     run keywords      Login_workspaces_admin            # log in with WS admin
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
+#    ...         AND               set_survey_in_white_list          # 设置After Call: End of Call Survey的url不为空
+#    ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
+#    ...         AND               Close
+    # Customer 登录
+    ${driver1}   driver_set_up_and_logIn    ${call_oncall_user_username}
+    # Experts group user登录
+    ${driver2}   driver_set_up_and_logIn    ${oncall_user_username}
+    # enterprise user登录
+    ${driver3}   driver_set_up_and_logIn    ${personal_user_username}
+    # make call with on-call
+    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}
+    # Customer invite a enterprise user
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    enter_contacts_search_user   ${driver1}    ${personal_user_name}
+    click_user_in_contacts_call    ${driver1}    ${personal_user_name}
+    # enterprise user 接受call
+    user_anwser_call   ${driver3}
+    # Customer click End Call
+    leave_call  ${driver1}
+    # Customer enter call tag & comment
+    ${first_tag_text}  add_tags_and_comment    ${driver1}     1   good_experience_13
+    # And then click Take Survey button
+    check_survey_switch_success   ${driver1}    1   click
+    # return to the Tags/Comments page, but survey button disappear.
+    close_last_window   ${driver1}
+    check_survey_switch_success   ${driver1}    0
+    # The entered call tag and comment should not disappeared.
+    check_tag_and_com_switch_success   ${driver1}    1
+
+    ###### 609 line
+    # After customer save successfully call & comment, Expert click End Call button
+    exit_call   ${driver2}   check    10
+    # Expert enter call tag & comment, and then click Take Survey button
+    ${second_tag_text}  add_tags_and_comment    ${driver2}     2   good_experience_14
+    check_survey_switch_success   ${driver2}    1   click
+    # return to the Tags/Comments page, but survey button disappear.
+    close_last_window   ${driver2}
+    check_survey_switch_success   ${driver2}    0
+    # The entered call tag and comment should not disappeared.
+    check_tag_and_com_switch_success   ${driver2}    1
+    # The entered call tag and comment should not disappeared.
+    get_all_comments_in_call_end    ${driver2}    good_experience_14   good_experience_13
+
+    ###### 610 line
+    #  Enterprise user enter call tag & comment, and then click Take Survey button
+    ${third_tag_text}  add_tags_and_comment    ${driver3}     3   good_experience_15
+    check_survey_switch_success   ${driver3}    1   click
+    # return to the Tags/Comments page, but survey button disappear.
+    close_last_window   ${driver3}
+    check_survey_switch_success   ${driver3}    0
+    # The entered call tag and comment should not disappeared.
+    check_tag_and_com_switch_success   ${driver3}    1
+    # The entered call tag and comment should not disappeared.
+    get_all_comments_in_call_end    ${driver3}   good_experience_15    good_experience_14   good_experience_13
+
+    # Customer navigate to Recent ->Call, to make sure the tags & comments should be saved successfully
+    close_call_ending_page_RF   ${driver1}
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     # 切换到Recents页面
+    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}     good_experience_15    good_experience_14   good_experience_13
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
 Call_survey_616_618
     [Documentation]   Call survey(Tier of enterprise and above)   Anonymous call Meeting Owner
     [Tags]     small range 616-618 lines        call_case
-    [Setup]     run keywords      Login_workspaces_admin            # log in with WS admin
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
-    ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
-    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]     run keywords      Login_workspaces_admin            # log in with WS admin
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               set_survey_open                   # 设置After Call: End of Call Survey为open状态
+#    ...         AND               open_tagging_and_comments         # 设置After Call: Tagging and Comments为open状态
+#    ...         AND               Close
     # Meeting Owner 登录
     ${driver1}   driver_set_up_and_logIn    ${call_oncall_user_username}
     # 3rd enterprise user 登录

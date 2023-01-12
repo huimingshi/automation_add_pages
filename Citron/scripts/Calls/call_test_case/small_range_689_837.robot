@@ -4,6 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
+Resource          call_case_set_up.robot
 Library           call_python_Lib/call_action_lib.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
@@ -580,12 +581,13 @@ Small_range_799_802
 Disclaimer_805
     [Documentation]    Disclaimer   Set Declaimer ->'delete user' is NOT selected   Enterprise Admin Reset Disclaimer
     [Tags]     small range 805 line     call_case
-    [Setup]     run keywords      Login_workspaces_admin            # log in with workspace admin
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
-    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
-    ...         AND               set_delete_user_close             # 设置delete user为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_workspaces_admin            # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
+#    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
+#    ...         AND               set_delete_user_close             # 设置delete user为close状态
+#    ...         AND               Close
+    [Setup]     set_disclaimer_is_on_and_delete_user_close    workspaces_admin
     # User登录
     ${driver1}   driver_set_up_and_logIn   ${personal_user_username}
     # Enterprise Admin登录
@@ -606,12 +608,13 @@ Disclaimer_805
 Disclaimer_806_807
     [Documentation]    Set Declaimer ->'delete user' is NOT selected    2 enterprise users in call	 Invite User C who is in same enterprise who has accepted disclaimer when logs in App.
     [Tags]     small range 806-807 lines        call_case
-    [Setup]     run keywords      Login_premium_user                # log in with Site admin
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
-    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
-    ...         AND               set_delete_user_close             # 设置delete user为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user                # log in with Site admin
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
+#    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
+#    ...         AND               set_delete_user_close             # 设置delete user为close状态
+#    ...         AND               Close
+    [Setup]     set_disclaimer_is_on_and_delete_user_close    premium_user
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
     # User B 登录
@@ -652,12 +655,14 @@ Disclaimer_806_807
 Disclaimer_808_809
     [Documentation]   Set Declaimer ->'delete user' is NOT selected    logout app and click one-time meeting link
     [Tags]     small range 808-809 lines        call_case
-    [Setup]     run keywords      Login_premium_user                # log in with Site admin
-    ...         AND               enter_workspace_settings_page     # 进入settings页面
-    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
-    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
-    ...         AND               set_delete_user_close             # 设置delete user为close状态
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user                # log in with Site admin
+#    ...         AND               enter_workspace_settings_page     # 进入settings页面
+#    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
+#    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
+#    ...         AND               set_delete_user_close             # 设置delete user为close状态
+#    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]     set_disclaimer_is_on_and_delete_user_close    premium_user
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
     # 获取OTU meeting-link
@@ -681,13 +686,14 @@ Disclaimer_808_809
 Small_range_820_821
     [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
     [Tags]    small range 820-821 lines     call_case
-    [Setup]     run keywords    Login_site_admin
-    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-    ...         AND             Close
+#    [Setup]     run keywords    Login_site_admin
+#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
+#    ...         AND             Close
+    [Setup]   set_always_on_select    always_on
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # 获取meeting link
@@ -749,13 +755,15 @@ Small_range_820_821
 Small_range_823
     [Documentation]     Call on-call group from contact list
     [Tags]    small range 823 line      call_case
-    [Setup]     run keywords    Login_site_admin
-    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-    ...         AND             Close
+#    [Setup]     run keywords    Login_site_admin
+#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
+#    ...         AND             Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   set_always_on_select    always_on
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # On-call user登录
@@ -796,13 +804,15 @@ Small_range_823
 Small_range_825_826
     [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
     [Tags]    small range 825+826 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3507
-    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
-    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-    ...         AND             Close
+#    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
+#    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
+#    ...         AND             Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   set_always_on_select    always_on
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # another company user登录
@@ -853,13 +863,14 @@ Small_range_825_826
 Small_range_827
     [Documentation]     Expert  get incoming call
     [Tags]    small range 827 line      call_case
-    [Setup]     run keywords    Login_site_admin
-    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-    ...         AND             Close
+#    [Setup]     run keywords    Login_site_admin
+#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
+#    ...         AND             Close
+    [Setup]   set_always_on_select      opt_in
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # Expert 登录
@@ -894,13 +905,15 @@ Small_range_827
 Small_range_829
     [Documentation]     Call enterprise contact
     [Tags]    small range 829 line      call_case
-    [Setup]     run keywords    Login_site_admin
-    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-    ...         AND             Close
+#    [Setup]     run keywords    Login_site_admin
+#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
+#    ...         AND             Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   set_always_on_select    opt_in
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # Expert 登录
@@ -933,13 +946,14 @@ Small_range_829
 Small_range_831_832
     [Documentation]     Call recording feature     Pre-condition：set to Default-ON
     [Tags]    small range 831+832 lines     call_case
-    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
-    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
-    ...         AND             Close
+#    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
+#    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
+#    ...         AND             Close
+    [Setup]   set_always_on_select    opt_out
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # another company user登录
@@ -974,13 +988,15 @@ Small_range_831_832
 Small_range_833
     [Documentation]     call on-call group from contact list
     [Tags]    small range 827 line      call_case
-    [Setup]     run keywords    Login_site_admin
-    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-OFF
-    ...         AND             Close
+#    [Setup]     run keywords    Login_site_admin
+#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-OFF
+#    ...         AND             Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   set_always_on_select    opt_out
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # Expert 登录
@@ -1015,13 +1031,15 @@ Small_range_833
 Small_range_834
     [Documentation]     Call enterprise contact
     [Tags]    small range 834 line      call_case
-    [Setup]     run keywords    Login_site_admin
-    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
-    ...         AND             Close
+#    [Setup]     run keywords    Login_site_admin
+#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+#    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
+#    ...         AND             Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   set_always_on_select    opt_out
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # Expert 登录

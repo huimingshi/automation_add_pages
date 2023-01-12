@@ -875,6 +875,7 @@ def clicks_the_hollow_dot(driver):
     :return:
     """
     public_click_element(driver,nav_hollow,description="点击空心○")
+    time.sleep(2)
 
 def click_nav_right(driver):
     """

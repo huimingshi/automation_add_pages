@@ -4,6 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
+Resource          call_case_set_up.robot
 Library           call_python_Lib/call_action_lib.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
@@ -19,11 +20,12 @@ Force Tags        small_range
 All_active_users_in_the_entire_enterprise_should_show
     [Documentation]    Open Directory view, All active users in the entire enterprise should show.
     [Tags]      small range 66 line       small_range
-    [Setup]     run keywords      Login_premium_user   # log in with big_admin
-    ...         AND               switch_to_second_workspace    # 切换到Canada这个WS
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_premium_user   # log in with big_admin
+#    ...         AND               switch_to_second_workspace    # 切换到Canada这个WS
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
+#    ...         AND               Close    # close browser
+    [Setup]   ws_open_directory    premium_user   switch_to_2
     # log in with big_admin
     ${driver}   driver_set_up_and_logIn    ${crunch_site_username}    ${crunch_site_password}
     # 切换到Huiming.shi_Added_WS这个WS
@@ -46,13 +48,15 @@ All_active_users_in_the_entire_enterprise_should_show
 Disable_External_Users_Pre_condition_In_a_site_meeting_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
     [Tags]    small range 103+104+105+107 line     有bug：https://vipaar.atlassian.net/browse/GAL-2749   MHS-link不应该打通        call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
-    ...         AND               Close
-    ...         AND               Login_workspaces_admin    # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
+#    ...         AND               Close
+#    ...         AND               Login_workspaces_admin    # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+    [Setup]   run keywords        make_sure_two_ws_external_feature     open_feature        close_feature
+    ...         AND               disable_external_users_setUp          workspaces_admin    close
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
     # another site user E2 log in
@@ -75,13 +79,16 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
 Disable_External_Users_Pre_condition_In_a_site_on_call_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
     [Tags]     small range 103+104+106+108 line    call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
-    ...         AND               Close
-    ...         AND               Login_workspaces_admin    # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
+#    ...         AND               Close
+#    ...         AND               Login_workspaces_admin    # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   run keywords        make_sure_two_ws_external_feature    open_feature        close_feature
+#    ...         AND               disable_external_users_setUp         workspaces_admin    close
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
     # another site user E2 log in
@@ -99,36 +106,41 @@ Disable_External_Users_Pre_condition_In_a_site_on_call_link
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
 
-User_Directory_User_open_invite_3rd_participant_dialog
-    [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
-    [Tags]      small range 84 line     call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_setting_workspace_directory      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
-    ...         AND               Close
-    # User S belong to WS1 and WS2 log in
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
-    # Contact of WS1 log in
-    ${driver2}  driver_set_up_and_logIn    ${big_admin_first_WS_username}
-    # Contact of WS1 call the user directly
-    contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${switch_workspace_name}
-    # User open invite 3rd participant dialog
-    open_invite_3rd_participant_dialog    ${driver1}   no_enter
-    # User check on Directory	VP: All users of WS1 shows up
-    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
-    # end call
-    exit_call   ${driver2}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
+User_A_opens_Personal_contact_tab
+    [Documentation]    Personal users D and user E (from different site) exists in Personal contact tab.    User D and user E has signed out of every instance of mobile app and web.
+    [Tags]     small range 111 line             call_case
+#    [Setup]     run keywords      Login_workspaces_admin          # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]    disable_external_users_setUp    workspaces_admin     close
+    # Expert user A signs in.
+    ${driver1}  driver_set_up_and_logIn   ${an_expert_user_username}
+    # from different site user logs in
+    ${driver2}  driver_set_up_and_logIn     ${personal_user1_username}
+    # logout from citron
+    logout_citron  ${driver2}
+    # enter personal page
+    switch_to_diffrent_page   ${driver1}   ${py_personal_page}    ${py_personal_switch_success}    ${py_personal_search_result}
+    # search user in Personal page
+    contacts_different_page_search_user    ${driver1}    ${py_personal_page}    ${personal_user1_name}
+    # VP: User D and user E displays with greyed out pattern, including the icon, all text (name, title, location), but not including the favorite star.
+    contacts_judge_reachable_or_not  ${driver1}    ${py_personal_page}    ${personal_user1_name}
+    [Teardown]      run keywords     Close
+    ...             AND              exit_driver
 
 User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
     [Tags]      small range 85 line      call_case
-    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-    ...         AND               make_sure_workspaces_call_center_mode_feature      close_feature     close_feature          # workspace WS1 has "Disable External Feature"=OFF; workspace WS2 has "Disable External Feature"=OFF;
-    ...         AND               Close
-    ...         AND               Login_premium_user
-    ...         AND               make_sure_workspaces_setting_workspace_directory     open_feature     close_feature         # workspace WS1 has "Enable Directory feature "; workspace WS2 has "Disable Directory feature ";
-    ...         AND               Close
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_call_center_mode_feature      close_feature     close_feature          # workspace WS1 has "Call Center Mode"=OFF; workspace WS2 has "Call Center Mode"=OFF;
+#    ...         AND               Close
+#    ...         AND               Login_premium_user
+#    ...         AND               make_sure_workspaces_setting_workspace_directory     open_feature     close_feature         # workspace WS1 has "Workspace Directory"=ON; workspace WS2 has "Workspace Directory"=OFF;
+#    ...         AND               Close
+    [Setup]     run_keywords      make_sure_two_ws_call_center_mode_feature      close_feature     close_feature
+    ...         AND               make_sure_two_ws_directory_feature             open_feature      close_feature
     # User S belong to WS1 and WS2 log in
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
     # Contact of WS2 log in
@@ -144,17 +156,87 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
+User_Directory_User_open_invite_3rd_participant_dialog
+    [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
+    [Tags]      small range 84 line     call_case
+#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
+#    ...         AND               make_sure_workspaces_setting_workspace_directory      open_feature     close_feature          # workspace WS1 has "Workspace Directory"=ON; workspace WS2 has "Workspace Directory"=OFF;
+#    ...         AND               Close
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]    make_sure_two_ws_directory_feature     open_feature     close_feature
+    # User S belong to WS1 and WS2 log in
+    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    # Contact of WS1 log in
+    ${driver2}  driver_set_up_and_logIn    ${big_admin_first_WS_username}
+    # Contact of WS1 call the user directly
+    contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${switch_workspace_name}
+    # User open invite 3rd participant dialog
+    open_invite_3rd_participant_dialog    ${driver1}   no_enter
+    # User check on Directory	VP: All users of WS1 shows up
+    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
+    # end call
+    exit_call   ${driver2}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
+User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
+    [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
+    [Tags]     small range 122+126 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
+#    [Setup]     run keywords      Login_premium_user              # log in with Site admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+#    ...         AND               Close    # close browser
+    [Setup]      run keywords      disable_external_users_setUp    workspaces_admin    close
+     ...         AND               disable_external_users_setUp    premium_user        close
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
+    # User B is  another enterprise user log in
+    ${driver2}   driver_set_up_and_logIn   ${for_other_site_call_username}
+    # 进行一次call
+    switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
+    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_personal_page}      ${for_other_site_call_name}
+    make_sure_enter_call    ${driver2}
+    # 结束通话
+    exit_call     ${driver1}
+    # 关闭通话结束展示页面
+    close_call_ending_page_RF      ${driver1}
+    close_call_ending_page_RF      ${driver2}
+    # User B logout
+    logout_citron   ${driver2}
+    # 进入Recents页面
+    sleep  5s   # 等待最近一次通话记录加载
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    refresh_browser_page   ${driver1}
+    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
+    recents_page_check_call    ${driver1}   ${for_other_site_call_name}
+    # 从邮箱获取刚发送的OTU邮件
+    sleep  20s
+    ${meeting_link}    obtain_meeting_link_from_email    check_otu
+    # User B is another enterprise user log in
+    ${driver3}   driver_set_up_and_logIn   ${for_other_site_call_username}
+    # VP: call establish successfully
+    check_call_can_reach_to_or_not   ${driver1}   ${driver3}   ${meeting_link}    1
+    # 切换到首个句柄
+    switch_first_window   ${driver3}
+    # User B logout
+    logout_citron   ${driver3}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
 Disable_External_Users_check_case_1
     [Documentation]    in Citron-Admin-Calls, name of personal user and user from another site workspace should display as "External User" in call list and call details page
     [Tags]      small range 94 line      call_case
-    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
-    ...         AND               Login_premium_user    # log in with premium admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#    ...         AND               Login_premium_user    # log in with premium admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]     run keywords      disable_external_users_setUp    workspaces_admin    close
+#    ...         AND               disable_external_users_setUp    premium_user        close
     # Expert user log in
     ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}
     # user from another site log in
@@ -179,14 +261,16 @@ Disable_External_Users_check_case_1
 Disable_External_Users_check_case_2
     [Documentation]    Personal user or user from another site workspace logs in,VP: they should not be able to call this site workspace user via meeting link
     [Tags]         small range 96+97+98+99 line   有bug：https://vipaar.atlassian.net/browse/GAL-2749   MHS-link不应该打通       call_case
-    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
-    ...         AND               Close    # close browser
-    ...         AND               Login_premium_user    # log in with premium admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#    ...         AND               Login_premium_user    # log in with premium admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+    [Setup]     run keywords      disable_external_users_setUp    workspaces_admin    open
+    ...         AND               disable_external_users_setUp    premium_user        close
     # Expert user log in
     ${driver1}  driver_set_up_and_logIn    ${an_expert_user_username}
     ${time_started_1}   get_start_time_of_the_last_call   ${driver1}
@@ -216,10 +300,12 @@ Disable_External_Users_check_case_2
 Disable_External_Users_check_case_3
     [Documentation]    Anonymous user  VP: he should be able to call this site workspace user via meeting link   VP: he should be able to call this site workspace via on-call group link
     [Tags]    small range 99+100 line         call_case
-    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               open_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               open_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#   因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]    disable_external_users_setUp    workspaces_admin    open
     # Expert user log in
     ${driver1}    driver_set_up_and_logIn    ${an_expert_user_username}
     ${time_started}   get_start_time_of_the_last_call   ${driver1}
@@ -237,6 +323,60 @@ Disable_External_Users_check_case_3
     # this record should not appear in recent list for this site user
     ${time_started_2}   get_start_time_of_the_last_call   ${driver1}
     should be equal as strings    ${time_started_2}   ${time_started}
+    [Teardown]      run keywords     Close
+    ...             AND              exit_driver
+
+#User_B_stays_logged_in_on_one_device_User_B_is_user_A_contact
+#    [Documentation]    User A opens Team contact tab. User B stays logged in on one device. User B is user A’s contact. 	User B logouts.
+#    [Tags]     small range 113 line  ，有bug：https://vipaar.atlassian.net/browse/CITRON-3274         call_case
+##    [Setup]     run keywords      Login_premium_user              # log in with premium admin
+##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+##    ...         AND               Close    # close browser
+##   因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+##    [Setup]   disable_external_users_setUp      premium_user    close
+#    # Expert user A signs in.
+#    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+#    # Expert user B logs in
+#    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+#    # search user in Team page
+#    contacts_different_page_search_user    ${driver1}    ${py_team_page}     ${big_admin_first_WS_name}
+#    # judge reachable
+#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}   ${big_admin_first_WS_name}    reachable
+#    # User B logouts from one device.
+#    logout_citron  ${driver2}
+#    sleep  45s
+#    # judge unreachable
+#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}   ${big_admin_first_WS_name}
+#    # Expert user B re logs in
+#    ${driver3}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+#    sleep  45s
+#    # judge reachable
+#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}    ${big_admin_first_WS_name}    reachable
+#    [Teardown]      run keywords     Close
+#    ...             AND              exit_driver
+
+User_B_logouts_from_one_device
+    [Documentation]    User A opens Team contact tab. User B stays logged in on two devices. User B is user A’s contact.
+    [Tags]     small range 114 line     call_case
+#    [Setup]     run keywords      Login_premium_user              # log in with premium admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
+#    ...         AND               Close    # close browser
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   disable_external_users_setUp      premium_user     close
+    # Expert user A signs in.
+    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
+    # Expert user B logs in
+    ${driver2}  driver_set_up_and_logIn     ${a_team_user_username}
+    # Expert user B logs in in another web
+    ${driver3}  driver_set_up_and_logIn     ${a_team_user_username}
+    # User B logouts from one device.
+    logout_citron  ${driver2}
+    # search user in Team page
+    contacts_different_page_search_user    ${driver1}    ${py_team_page}     ${a_team_user_name}
+    # VP: User B should keep active.
+    contacts_judge_reachable_or_not  ${driver1}    ${py_team_page}     ${a_team_user_name}    reachable
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
 
@@ -331,10 +471,11 @@ During_Call_open_invite_the_3rd_participant_page
 User_A_opens_Directory_tab
     [Documentation]    Team user C exists in Directory tab.     User C has signed out of every instance of mobile app and web.
     [Tags]     small range 110 line        call_case
-    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
-    ...         AND               Close    # close browser
+#    [Setup]     run keywords      Login_premium_user              # log in with premium admin
+#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+#    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
+#    ...         AND               Close    # close browser
+    [Setup]     ws_open_directory     premium_user
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
     # team user logs in
@@ -347,28 +488,6 @@ User_A_opens_Directory_tab
     contacts_different_page_search_user   ${driver1}   ${py_directory_page}   ${check_team_offline_name}
     # VP: User C displays with greyed out pattern, including the icon, all text (name, title, location), but not including the favorite star.
     contacts_judge_reachable_or_not   ${driver1}    ${py_directory_page}   ${check_team_offline_name}
-    [Teardown]      run keywords     Close
-    ...             AND              exit_driver
-
-User_A_opens_Personal_contact_tab
-    [Documentation]    Personal users D and user E (from different site) exists in Personal contact tab.    User D and user E has signed out of every instance of mobile app and web.
-    [Tags]     small range 111 line             call_case
-    [Setup]     run keywords      Login_workspaces_admin          # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
-    # Expert user A signs in.
-    ${driver1}  driver_set_up_and_logIn   ${an_expert_user_username}
-    # from different site user logs in
-    ${driver2}  driver_set_up_and_logIn     ${personal_user1_username}
-    # logout from citron
-    logout_citron  ${driver2}
-    # enter personal page
-    switch_to_diffrent_page   ${driver1}   ${py_personal_page}    ${py_personal_switch_success}    ${py_personal_search_result}
-    # search user in Personal page
-    contacts_different_page_search_user    ${driver1}    ${py_personal_page}    ${personal_user1_name}
-    # VP: User D and user E displays with greyed out pattern, including the icon, all text (name, title, location), but not including the favorite star.
-    contacts_judge_reachable_or_not  ${driver1}    ${py_personal_page}    ${personal_user1_name}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
 
@@ -386,56 +505,6 @@ User_B_displays_as_reachable
     # VP: User B displays as reachable.
     judge_reachable_in_recents   ${driver1}   ${big_admin_first_WS_name}
     [Teardown]      exit_driver
-
-#User_B_stays_logged_in_on_one_device_User_B_is_user_A_contact
-#    [Documentation]    User A opens Team contact tab. User B stays logged in on one device. User B is user A’s contact. 	User B logouts.
-#    [Tags]     small range 113 line  ，有bug：https://vipaar.atlassian.net/browse/CITRON-3274         call_case
-#    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
-#    # Expert user A signs in.
-#    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
-#    # Expert user B logs in
-#    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
-#    # search user in Team page
-#    contacts_different_page_search_user    ${driver1}    ${py_team_page}     ${big_admin_first_WS_name}
-#    # judge reachable
-#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}   ${big_admin_first_WS_name}    reachable
-#    # User B logouts from one device.
-#    logout_citron  ${driver2}
-#    sleep  45s
-#    # judge unreachable
-#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}   ${big_admin_first_WS_name}
-#    # Expert user B re logs in
-#    ${driver3}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
-#    sleep  45s
-#    # judge reachable
-#    contacts_judge_reachable_or_not  ${driver1}   ${py_team_page}    ${big_admin_first_WS_name}    reachable
-#    [Teardown]      run keywords     Close
-#    ...             AND              exit_driver
-
-User_B_logouts_from_one_device
-    [Documentation]    User A opens Team contact tab. User B stays logged in on two devices. User B is user A’s contact.
-    [Tags]     small range 114 line     call_case
-    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-    ...         AND               Close    # close browser
-    # Expert user A signs in.
-    ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
-    # Expert user B logs in
-    ${driver2}  driver_set_up_and_logIn     ${a_team_user_username}
-    # Expert user B logs in in another web
-    ${driver3}  driver_set_up_and_logIn     ${a_team_user_username}
-    # User B logouts from one device.
-    logout_citron  ${driver2}
-    # search user in Team page
-    contacts_different_page_search_user    ${driver1}    ${py_team_page}     ${a_team_user_name}
-    # VP: User B should keep active.
-    contacts_judge_reachable_or_not  ${driver1}    ${py_team_page}     ${a_team_user_name}    reachable
-    [Teardown]      run keywords     Close
-    ...             AND              exit_driver
 
 unable_to_reach_user_message_displays
     [Documentation]    User A and user B are in 2PC.   Team user C exists in Directory tab.   User C has signed out of every instance of mobile app and web.	User A opens invite contact view.
@@ -550,48 +619,6 @@ unable_to_reach_user_message_displays
 #    # VP: call establish successfully
 #    check_call_can_reach_to_or_not   ${driver1}  ${driver4}   ${meeting_link}    1
 #    [Teardown]     exit_driver
-#
-User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
-    [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
-    [Tags]     small range 122+126 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
-    [Setup]     run keywords      Login_premium_user              # log in with Site admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-    ...         AND               Close    # close browser
-    # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
-    # User B is  another enterprise user log in
-    ${driver2}   driver_set_up_and_logIn   ${for_other_site_call_username}
-    # 进行一次call
-    switch_to_diffrent_page   ${driver1}   ${py_personal_page}   ${py_personal_switch_success}    ${py_get_number_of_rows}
-    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_personal_page}      ${for_other_site_call_name}
-    make_sure_enter_call    ${driver2}
-    # 结束通话
-    exit_call     ${driver1}
-    # 关闭通话结束展示页面
-    close_call_ending_page_RF      ${driver1}
-    close_call_ending_page_RF      ${driver2}
-    # User B logout
-    logout_citron   ${driver2}
-    # 进入Recents页面
-    sleep  5s   # 等待最近一次通话记录加载
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    refresh_browser_page   ${driver1}
-    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    recents_page_check_call    ${driver1}   ${for_other_site_call_name}
-    # 从邮箱获取刚发送的OTU邮件
-    sleep  20s
-    ${meeting_link}    obtain_meeting_link_from_email    check_otu
-    # User B is another enterprise user log in
-    ${driver3}   driver_set_up_and_logIn   ${for_other_site_call_username}
-    # VP: call establish successfully
-    check_call_can_reach_to_or_not   ${driver1}   ${driver3}   ${meeting_link}    1
-    # 切换到首个句柄
-    switch_first_window   ${driver3}
-    # User B logout
-    logout_citron   ${driver3}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
 
 Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
@@ -618,47 +645,50 @@ Team_user_A_signs_in_User_B_is_expert_user
     check_call_can_reach_to_or_not    ${driver1}   ${driver3}   ${meeting_link}    1
     [Teardown]      exit_driver
 
-check_personal_user_can_see_user_S_is_unreachable_status
-    [Documentation]    Pre-condition: User S belong to workspace WS1 and WS2    User S switch to WS1   User S logout of all devices
-    [Tags]     small range 135+136 line        call_case
-    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-    ...         AND               switch_to_second_workspace      # 切换到第二个WS
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-    ...         AND               Close                           # close browser
-    ...         AND               Login_workspaces_admin          # log in with workspace admin
-    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-    ...         AND               Close                           # close browser
-    # User S signs in.
-    ${driver1}  driver_set_up_and_logIn   ${for_check_user_online_or_not}
-    # Contact of WS1
-    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
-    # Contact of WS2  logs in
-    ${driver3}  driver_set_up_and_logIn     ${big_admin_second_WS_username}
-    # Personal contact of WS2 logs in in another web
-    ${driver4}  driver_set_up_and_logIn     ${other_site_user_3_username}
-    # VP: Contact of WS2 see User S is online status
-    contacts_different_page_search_user    ${driver3}    ${py_team_page}   ${online_or_not_name}
-    contacts_judge_reachable_or_not    ${driver3}     ${py_team_page}     ${online_or_not_name}    reachable
-    # VP: Personal contact of WS2 see User S is online status
-    switch_to_other_tab   ${driver4}    ${Personal_tab_xpath}
-    contacts_different_page_search_user    ${driver4}    ${py_personal_page}     ${online_or_not_name}
-    contacts_judge_reachable_or_not    ${driver4}    ${py_personal_page}    ${online_or_not_name}    reachable
-    logout_citron    ${driver4}
-    sleep  4
-    # User S logout of all devices
-    logout_citron    ${driver1}
-    # VP: Contact of WS1 see user S is unreachable status
-    contacts_different_page_search_user    ${driver2}    ${py_team_page}    ${online_or_not_name}
-    contacts_judge_reachable_or_not    ${driver2}     ${py_team_page}     ${online_or_not_name}    unreachable
-    logout_citron    ${driver2}
-    # VP: contact of WS2 see user s is unreachable status
-    contacts_different_page_search_user    ${driver3}    ${py_team_page}      ${online_or_not_name}
-    sleep  4
-    contacts_judge_reachable_or_not    ${driver3}     ${py_team_page}     ${online_or_not_name}    unreachable
-    logout_citron    ${driver3}
-    [Teardown]      run keywords     Close
-    ...             AND              exit_driver
+#check_personal_user_can_see_user_S_is_unreachable_status
+#    [Documentation]    Pre-condition: User S belong to workspace WS1 and WS2    User S switch to WS1   User S logout of all devices
+#    [Tags]     small range 135+136 line        call_case
+##    [Setup]     run keywords      Login_premium_user              # log in with premium admin
+##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+##    ...         AND               switch_to_second_workspace      # 切换到第二个WS
+##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+##    ...         AND               Close                           # close browser
+##    ...         AND               Login_workspaces_admin          # log in with workspace admin
+##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
+##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
+##    ...         AND               Close                           # close browser
+#    [Setup]     run keywords      make_sure_two_ws_external_feature         close_feature        close_feature
+#    ...         AND               disable_external_users_setUp              workspaces_admin     close
+#    # User S signs in.
+#    ${driver1}  driver_set_up_and_logIn   ${for_check_user_online_or_not}
+#    # Contact of WS1
+#    ${driver2}  driver_set_up_and_logIn     ${big_admin_first_WS_username}
+#    # Contact of WS2  logs in
+#    ${driver3}  driver_set_up_and_logIn     ${big_admin_second_WS_username}
+#    # Personal contact of WS2 logs in in another web
+#    ${driver4}  driver_set_up_and_logIn     ${other_site_user_3_username}
+#    # VP: Contact of WS2 see User S is online status
+#    contacts_different_page_search_user    ${driver3}    ${py_team_page}   ${online_or_not_name}
+#    contacts_judge_reachable_or_not    ${driver3}     ${py_team_page}     ${online_or_not_name}    reachable
+#    # VP: Personal contact of WS2 see User S is online status
+#    switch_to_other_tab   ${driver4}    ${Personal_tab_xpath}
+#    contacts_different_page_search_user    ${driver4}    ${py_personal_page}     ${online_or_not_name}
+#    contacts_judge_reachable_or_not    ${driver4}    ${py_personal_page}    ${online_or_not_name}    reachable
+#    logout_citron    ${driver4}
+#    sleep  10
+#    # User S logout of all devices
+#    logout_citron    ${driver1}
+#    sleep  10
+#    # VP: Contact of WS1 see user S is unreachable status
+#    contacts_different_page_search_user    ${driver2}    ${py_team_page}    ${online_or_not_name}
+#    contacts_judge_reachable_or_not    ${driver2}     ${py_team_page}     ${online_or_not_name}    unreachable
+#    logout_citron    ${driver2}
+#    sleep  10
+#    # VP: contact of WS2 see user s is unreachable status
+#    contacts_different_page_search_user    ${driver3}    ${py_team_page}      ${online_or_not_name}
+#    contacts_judge_reachable_or_not    ${driver3}     ${py_team_page}     ${online_or_not_name}    unreachable
+#    logout_citron    ${driver3}
+#    [Teardown]      run keywords     Close
+#    ...             AND              exit_driver

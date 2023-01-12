@@ -5,6 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/All_Pages_Xpath/Normal/Messages.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
+Resource          call_case_set_up.robot
 Library           call_python_Lib/call_action_lib.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
@@ -17,9 +18,10 @@ Force Tags        small_range
 Small_range_1078_1082
     [Documentation]     Permission check
     [Tags]    small range 1078-1082 lines     message_case
-    [Setup]     run keywords    Login_workspaces_admin
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
+#    [Setup]     run keywords    Login_workspaces_admin
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
+    [Setup]     turn_on_workspace_directory_setUp     workspaces_admin
     # user login
     ${driver}     driver_set_up_and_logIn     ${workspace_admin_username}
     # 进入到workspace settings页面
@@ -84,6 +86,27 @@ Small_range_1078_1082
     ...             AND              scroll_into_view     ${driver}      ${Workspace_Messaging}
     ...             AND              switch_to_other_tab       ${driver}      ${Workspace_Messaging_open_xpath}
     ...             AND              exit_driver
+
+Small_range_1121_1122
+    [Documentation]     Start new chat    click message icon from directory
+    [Tags]    small range 1121-1122 lines       message_case
+#    [Setup]     run keywords    Login_workspaces_admin
+#    ...         AND             enter_workspace_settings_page           # 进入settings页面
+#    ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]     turn_on_workspace_directory_setUp     workspaces_admin
+    # user login
+    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
+    # click message icon from directory	   with the contact not in Team     click message icon on this user  	VP: message thread is with correct person
+    switch_to_diffrent_page     ${driver1}     ${py_directory_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    contacts_different_page_search_user     ${driver1}     ${py_directory_page}     ${anyone_user}
+    start_new_chat    ${driver1}     ${anyone_user}
+    # press Enter key in text field	IOS: new line; webapp: send out content
+    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    switch_to_diffrent_page     ${driver1}     ${py_directory_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+    contacts_different_page_search_user     ${driver1}     ${py_directory_page}     ${directory_user}
+    start_new_chat    ${driver1}       ${directory_user}
+    [Teardown]      exit_driver
 
 Small_range_1083_1091
     [Documentation]     Prepare message test data
@@ -227,25 +250,6 @@ Small_range_1115_1117
     see_last_content_on_message_dialog     ${driver1}     ${finalStr}
     [Teardown]      run keywords    delete_all_message_thread    ${driver1}
     ...             AND             exit_driver
-
-Small_range_1121_1122
-    [Documentation]     Start new chat    click message icon from directory
-    [Tags]    small range 1121-1122 lines       message_case
-    [Setup]     run keywords    Login_workspaces_admin
-    ...         AND             enter_workspace_settings_page           # 进入settings页面
-    ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
-    # user login
-    ${driver1}     driver_set_up_and_logIn     ${message_test0_user}
-    # click message icon from directory	   with the contact not in Team     click message icon on this user  	VP: message thread is with correct person
-    switch_to_diffrent_page     ${driver1}     ${py_directory_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver1}     ${py_directory_page}     ${anyone_user}
-    start_new_chat    ${driver1}     ${anyone_user}
-    # press Enter key in text field	IOS: new line; webapp: send out content
-    switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    switch_to_diffrent_page     ${driver1}     ${py_directory_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver1}     ${py_directory_page}     ${directory_user}
-    start_new_chat    ${driver1}       ${directory_user}
-    [Teardown]      exit_driver
 
 Small_range_1125_1143
     [Documentation]     Start new chat    Create 1V1 chat from Message Tab

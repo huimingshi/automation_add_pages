@@ -14,7 +14,7 @@ ${cognito_login_email}                  emily.huang+cognito@helplightning.com   
 ${cognito_login_password}               Abc12345                                                                                # cognito login password
 
 ${site_admin_username}                  huiming.shi@helplightning.com                                                           # site admin username
-${site_admin_name}                      huiming.shi                                                                            # site admin password
+${site_admin_name}                      huiming.shi                                                                             # site admin password
 
 ${site_admin_username_auto}             hlnauto+basic                                                                           # site admin username
 ${site_admin_password_auto}             Abc12345                                                                                # site admin password

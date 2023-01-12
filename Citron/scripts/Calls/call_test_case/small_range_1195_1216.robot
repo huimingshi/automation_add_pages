@@ -57,6 +57,7 @@ Small_range_1198_1210
     which_page_is_currently_on    ${driver4}    ${anwser_call_button_xpath}
     # Cancel outgoing call        VP: all incoming call is cancelled
     user_end_call_by_self      ${driver1}
+    sleep   10s
     which_page_is_currently_on    ${driver2}    ${anwser_call_button_xpath}     ${not_currently_on}
     which_page_is_currently_on    ${driver3}    ${anwser_call_button_xpath}     ${not_currently_on}
     which_page_is_currently_on    ${driver4}    ${anwser_call_button_xpath}     ${not_currently_on}

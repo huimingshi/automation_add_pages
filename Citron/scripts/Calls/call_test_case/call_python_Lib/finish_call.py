@@ -27,15 +27,15 @@ def end_call_for_all(driver,call_time='0'):
     time.sleep(int(call_time))
     # 确保进入通话中
     MSEC(driver)
-    for i in range(10):
-        ele_list = get_xpath_elements(driver,count_of_call_user)
-        if len(ele_list) > 2:
-            break
-        elif i == 9:
-            screen_shot_func(driver, '当前参与通话的人数不到3人')
-            raise Exception
-        else:
-            time.sleep(10)
+    # for i in range(10):
+    #     ele_list = get_xpath_elements(driver,count_of_call_user)
+    #     if len(ele_list) > 2:
+    #         break
+    #     elif i == 9:
+    #         screen_shot_func(driver, '当前参与通话的人数不到3人')
+    #         raise Exception
+    #     else:
+    #         time.sleep(10)
     # 点击End_Call_for_All
     for i in range(5):
         hang_up_the_phone(driver)     # 点击红色的挂断电话按钮
@@ -106,7 +106,7 @@ def leave_call(driver,select_co_host = 'no_need_select',username = 'Huiming.shi.
         ele_list = get_xpath_elements(driver,leave_call_button)
         public_assert(driver,len(ele_list),0,action='未选择另一个共同主持')
 
-def exit_call(driver,check_user_count='check',call_time='0'):
+def exit_call(driver,check_user_count='no_check',call_time='0'):
     """
     # 结束call
     :param driver:

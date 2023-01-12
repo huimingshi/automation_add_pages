@@ -220,7 +220,7 @@ nav_left = "//*[@*='#nav_left']/.."                                             
 nav_solid = "//*[@*='#nav_solid']/.."                                                           # 固定按钮
 nav_hollow = "//*[@*='#nav_hollow']/.."                                                         # 空心按钮
 nav_right = "//*[@*='#nav_right']/.."                                                           # 右移按钮
-current_participant_div = "//div[@class='videoViews_4_{} ']//h2"                                # 通话页面上展示的每个入会者
+current_participant_div = "//div[@class='videoViews_4_{} ']//h6"                                # 通话页面上展示的每个入会者
 participants_title = "//div[@class='WebCall show']//span[@ref='eText']"                         # 通话页面上participants下的4个标题
 co_host_on = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle react-toggle--checked']"    # Co-Host状态为on
 co_host_off = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle']"   # Co-Host状态为off

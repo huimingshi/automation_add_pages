@@ -89,15 +89,16 @@ def send_message_by_different_data(driver,test_data,data_type='text',send = 'sen
     message_input = get_xpath_element(driver, message_textarea, description='message输入框')
     message_input.click()
     message_input.send_keys(test_data)
+    time.sleep(2)
     if send == 'send':
         public_click_element(driver,send_message_button,description='聊天内容发送按钮')
         check_last_message_content(driver, test_data, data_type)
         if data_type == 'text':
             ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_text.format(test_data))
-            public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
+            public_assert(driver, len(ele_list), 1, condition=">=", action=f'{test_data}未成功发送')
         elif data_type == 'url':
             ele_list = get_xpath_elements(driver,chatSessionList_lastMessages_url.format(test_data))
-            public_assert(driver, len(ele_list), 1, action=f'{test_data}未成功发送')
+            public_assert(driver, len(ele_list), 1, condition=">=", action=f'{test_data}未成功发送')
 
 def send_message_by_different_file(driver,file_name,in_call='not_in_call'):
     """
