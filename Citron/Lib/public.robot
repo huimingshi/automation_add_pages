@@ -63,6 +63,7 @@ ${OTU_link_email}                   OTU
 ${not_currently_on}                 not_currently_on
 # 特殊的user
 ${user_13857584759}                 Huiming.shi.helplightning+13857584759
+${hlnauto_p1}                       hlnauto+p1
 
 
 *** Keywords ***

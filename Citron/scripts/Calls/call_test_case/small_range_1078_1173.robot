@@ -40,8 +40,8 @@ Small_range_1078_1082
     should be equal as strings     ${return_value}     flex
     # Favite a personal contact	VP: only the person in same workspace with login user has Message icon
     switch_to_diffrent_page     ${driver}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     hlnauto+p1
-    suspension_of_the_mouse     ${driver}     hlnauto+p1
+    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     ${hlnauto_p1}
+    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
     sleep  6
     ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
     should be equal as strings     ${return_value}     none
@@ -63,15 +63,15 @@ Small_range_1078_1082
     should be equal as strings     ${return_value}     none
     # VP: icon is not visible for favorites, team, personal, directory
     switch_to_diffrent_page     ${driver}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     hlnauto+p1
-    suspension_of_the_mouse     ${driver}     hlnauto+p1
+    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     ${hlnauto_p1}
+    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
     sleep  6
     ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
     should be equal as strings     ${return_value}     none
     # VP: icon is not visible for favorites, team, personal, directory
     switch_to_diffrent_page     ${driver}     ${py_personal_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_personal_page}     hlnauto+p1
-    suspension_of_the_mouse     ${driver}     hlnauto+p1
+    contacts_different_page_search_user     ${driver}     ${py_personal_page}     ${hlnauto_p1}
+    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
     sleep  6
     ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
     should be equal as strings     ${return_value}     none

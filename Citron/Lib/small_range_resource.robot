@@ -743,7 +743,7 @@ personal_search_with_name_title_location
     click element  ${enter_personal_page}
     sleep  3s
     # Search with name
-    personal_page_search   Hlnauto+p1  1
+    personal_page_search   ${hlnauto_p1}  1
     # Search with title
     clear element text  ${personal_search_input}
     sleep  0.5s
@@ -755,7 +755,7 @@ personal_search_with_name_title_location
 
 favorite_search_with_name_title_location
     # Search with name
-    favorites_page_search   Hlnauto+p1  1
+    favorites_page_search   ${hlnauto_p1}  1
     # Search with title
     clear element text  ${favorites_search_input}
     sleep  0.5s

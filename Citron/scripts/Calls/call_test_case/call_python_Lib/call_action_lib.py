@@ -396,9 +396,9 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     driver1.implicitly_wait(IMPLICIT_WAIT)
     # 另一端ACCEPT OR DECLINE
     if accept == 'accept':
-        public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
+        public_click_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
     elif accept == 'no_accept':
-        public_check_element(driver2, decline_disclaimer, '点击DECLINE按钮失败')
+        public_click_element(driver2, decline_disclaimer, '点击DECLINE按钮失败')
 
 def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',accept='accept'):
     """

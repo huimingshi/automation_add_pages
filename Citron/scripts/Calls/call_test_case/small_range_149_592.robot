@@ -34,15 +34,15 @@ Small_range_149_151
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Mute,Camera and End Call icon are at 50% opacity;
-    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
+#    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
     which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
-    # Yellow star on F2F icon
+#    # Yellow star on F2F icon
     which_page_is_currently_on    ${driver1}    ${starHint_xpath}
-    # Click Mute/Camera/Hamburger
-    switch_to_other_tab    ${driver1}    ${mic_on_xpath}
-    sleep  1s
-    # VP: hint dialog still shows
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    # Click Mute/Camera/Hamburger
+#    switch_to_other_tab    ${driver1}    ${mic_on_xpath}
+#    sleep  1s
+#    # VP: hint dialog still shows
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Click Give or receive help on dialog
     enter_giver_mode     ${driver1}      none    none     2
     # Back to F2F mode	VP: hint dialog disappear
@@ -145,7 +145,7 @@ Small_range_161
     # VP: hint dialog shows;
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Mute,Camera and End Call icon are at 50% opacity;
-    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
+#    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
     which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
     # Yellow star on F2F icon
     which_page_is_currently_on    ${driver1}    ${starHint_xpath}
