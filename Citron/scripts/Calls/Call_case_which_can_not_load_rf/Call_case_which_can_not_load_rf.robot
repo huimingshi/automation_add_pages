@@ -50,18 +50,18 @@ Calls_Click_call_tag_link_to_filter_call
     ${result}  check_filter_by_tag   ${driver}
     [Teardown]   exit_this_driver   ${driver}
 
-Calls_filter_by_dialer
-    [Documentation]    filter by dialer
-    [Tags]    Citron 264
-    # log in with workspace admin
-    ${driver}   log_in_lib   ${workspace_admin_username}
-    # 进入到Calls页面
-    enter_calls_page   ${driver}    2
-    # 切换到last_365_days
-    switch_last_365_days   ${driver}
-    # filter by dialer/participant
-    filter_by_different_fields   ${driver}    1    Huiming.shi.helplightning+123456789    owner_name
-    [Teardown]   exit_this_driver   ${driver}
+#Calls_filter_by_dialer
+#    [Documentation]    filter by dialer
+#    [Tags]    Citron 264    有bug：https://vipaar.atlassian.net/browse/CITRON-3703
+#    # log in with workspace admin
+#    ${driver}   log_in_lib   ${workspace_admin_username}
+#    # 进入到Calls页面
+#    enter_calls_page   ${driver}    2
+#    # 切换到last_365_days
+#    switch_last_365_days   ${driver}
+#    # filter by dialer/participant
+#    filter_by_different_fields   ${driver}    1    Huiming.shi.helplightning+123456789    owner_name
+#    [Teardown]   exit_this_driver   ${driver}
 
 Calls_filter_by_participant
     [Documentation]    filter by participant

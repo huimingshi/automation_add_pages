@@ -26,6 +26,7 @@ ${accept_button}                    xpath=//button[contains(.,'ACCEPT')]        
 ${button_of_popup}                  xpath=//div[@class="modal-header"]//button[@class="close"]          # Popover close button
 ${public_pass}                      *IK<8ik,8ik,                                                        # public password
 ${log_in_success_tag}               Welcome to                                                          # Sign of successful landing
+${currentAccount_button}            xpath=//button[@id="currentAccount"]                                # 当前账号按钮
 # enter first menu tree
 ${enter_first_menu_tree}            xpath=//div[@role="tree"]/div[1]                                    # enter first menu tree
 # enter workspace administration page
@@ -183,56 +184,56 @@ Login_site_admin
     Login    ${site_admin_username}    ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_premium_user
     # 登录系统
     Login    ${crunch_site_username}    ${crunch_site_password}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_workspaces_admin
     # 登录系统
     Login    ${workspace_admin_username}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_another_workspaces_admin
     # 登录系统
     Login    ${another_workspace_admin_username}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_another_group_admin
     # 登录系统
     Login    ${another_group_admin_username}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_workspaces_admin_one
     # 登录系统
     Login    ${workspace_admin_username_one}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_group_admin
     # 登录系统
     Login    ${group_admin_username}    ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_new_added_user
     [Arguments]    ${user_username}
@@ -240,8 +241,8 @@ Login_new_added_user
     Login    ${user_username}    ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_new_added_user_whitout_workspaces
     [Arguments]    ${user_username}
@@ -270,7 +271,8 @@ Login_new_added_user_whitout_workspaces
     wait until element is visible   ${login_button}    10s
     Click Button    ${login_button}
     # 出现提示信息
-    wait until element is visible    xpath=//span[contains(.,'You have not been assigned to a Workspace in your Organization. Please contact your administrator.')]
+#    wait until element is visible    xpath=//span[contains(.,'You have not been assigned to a Workspace in your Organization. Please contact your administrator.')]
+    wait until element is visible    xpath=//span[contains(.,'Your account has been deactivated. Please contact your administrator.')]
     sleep  3s
     element should be visible    xpath=//a[contains(.,'Forgot Password?')]
 
@@ -279,8 +281,8 @@ Login_normal_for_calls
     Login    ${normal_username_for_calls}     ${public_pass}
     # 检查是否有Disclaimer
     check_disclaimer
-    # 关闭tutorial
-    check_tutorial_again
+#    # 关闭tutorial
+#    check_tutorial_again
 
 Login_new_added_register_personal
     [Arguments]    ${user_username}

@@ -30,6 +30,12 @@
 
 6.pip install robotframework-selenium2library
 
+7.pip install pyperclip
+
+8.pip install PyUserInput
+
+9.pip install pywinauto
+
 ...
 
 ---
@@ -51,7 +57,13 @@
   - 进入到Citron目录下，cmd中执行命令：robot  --include  small_range scripts
 ### 如何只执行需要进行call的case？
   - 进入到Citron目录下，cmd中执行命令：robot  --include  call_case scripts
+### 如何只执行需要进行非call的case？
+  - 进入到Citron目录下，cmd中执行命令：robot  --exclude  call_case scripts
 ### 如何只执行message相关的case？
   - 进入到Citron目录下，cmd中执行命令：robot  --include  message_case scripts
 ### 如何执行单个case
   - 进入到Citron目录下，cmd中执行命令：robot  --test  case名称  scripts
+
+### 对于那种一闪而过的元素，怎么去定位到？
+  - 采用冻结窗口的方式，其中2000是指2s后冻结窗口 
+    - Console中输入  setTimeout(function(){debugger},2000)

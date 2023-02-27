@@ -7,6 +7,7 @@ from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from Citron.scripts.Calls.call_test_case.call_python_Lib.call_action_lib import \
     click_show_directory_when_invite_3rd as CSDWI3, \
     in_call_click_message_button as ICCMB, click_invite_user_div as CIUD
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 from public_settings_and_variable import *
 
 #----------------------------------------------------------------------------------------------------#
@@ -179,16 +180,199 @@ def file_is_too_large(driver):
 
 def participants_icon_is_visible(driver,visible = "yes"):
     """
-    在call通话中，右侧的参与者图标是否展示
+    在call通话中，做侧的参与者图标是否展示
     :param driver:
     :param visible:参与者图标是否可见，默认yes可见
     :return:
     """
-    ele_list = get_xpath_elements(driver, f2f_on_mode)
+    ele_list = get_xpath_elements(driver, participants_div)
     if visible == "yes":
         public_assert(driver, 1, len(ele_list), action="参与者图标应该可见")
     else:
         public_assert(driver, 0, len(ele_list), action="参与者图标应该不可见")
+
+def check_in_photo_pdf_whiteboard_mode(*drivers):
+    """
+    校验处于photo、pdf或者whiteboard模式中
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,zoom_in_button)
+        public_assert(driver,len(ele_list),1,action="处于photo或者pdf或者whiteboard模式中")
+
+def check_in_live_video_mode(*drivers):
+    """
+    校验处于photo或者pdf模式中
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,zoom_in_button)
+        public_assert(driver,len(ele_list),0,action="处于live_video模式中")
+
+def check_only_can_share_themself(*drivers):
+    """
+    校验仅可以share自己
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,live_video_from_sb.format("My Camera"))
+        public_assert(driver,len(ele_list),1,action="仅可以share自己")
+
+def check_has_merged(*drivers):
+    """
+    检查已经merge了
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,merge_off_button)
+        public_assert(driver,len(ele_list),1,action="已经merge了")
+
+def check_has_no_merged(*drivers):
+    """
+    检查还没有merge
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,merge_on_button)
+        public_assert(driver,len(ele_list),1,action="还没有merge")
+
+def check_has_merge_menu(*drivers):
+    """
+    检查有Merge按钮
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver, merge_on_button)
+        public_assert(driver, len(ele_list), 1, action="merge按钮应该展示")
+
+def check_has_no_merge_menu(*drivers):
+    """
+    检查没有Merge按钮
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver, merge_on_button)
+        public_assert(driver, len(ele_list), 0, action="merge按钮应该不展示")
+
+def check_show_share_live_video_from(*drivers):
+    """
+    校验Share live video from按钮展示
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,share_live_video_button)
+        public_assert(driver,len(ele_list),1,action="share_live_video按钮应该展示")
+
+def check_not_show_share_live_video_from(*drivers):
+    """
+    校验Share live video from按钮展示
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,share_live_video_button)
+        public_assert(driver, len(ele_list), 0, action="share_live_video按钮应该不展示")
+
+def check_can_share_sb_live_video(driver,*users):
+    """
+    点击右侧的share按钮后，检查可以share哪些人的live video
+    :param driver:
+    :param users:
+    :return:
+    """
+    for user in users:
+        ele_list = get_xpath_elements(driver,live_video_from_sb.format(user))
+        public_assert(driver,len(ele_list),1,action=f"{user}可以被share")
+
+def check_has_freeze_button(*drivers):
+    """
+    校验有freeze按钮
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,freeze_on_action)
+        public_assert(driver,len(ele_list),1,action="有freeze按钮")
+
+def check_has_unFreeze_button(*drivers):
+    """
+    校验有unFreeze按钮
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,freeze_off_action)
+        public_assert(driver,len(ele_list),1,action="有unFreeze按钮")
+
+def check_has_capture_button(*drivers):
+    """
+    检查有截图按钮
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,capture_button)
+        public_assert(driver,len(ele_list),1,action="应该有截图按钮")
+
+def check_has_no_capture_button(*drivers):
+    """
+    检查没有截图按钮
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,capture_button)
+        public_assert(driver,len(ele_list),0,action="应该没有截图按钮")
+
+def check_has_photo_PDF_whiteboard(*drivers):
+    """
+    检验有Take_a_New_Photo、PDF Document、Whiteboard按钮
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver,TPPW_share.format("Photo from Library"))
+        public_assert(driver,len(ele_list),1,action="share_photo按钮")
+        ele_list = get_xpath_elements(driver, TPPW_share.format("PDF Document"))
+        public_assert(driver, len(ele_list), 1, action="share_PDF按钮")
+        ele_list = get_xpath_elements(driver, TPPW_share.format("Whiteboard"))
+        public_assert(driver, len(ele_list), 1, action="Whiteboard按钮")
+
+def check_if_is_highlight(driver,mode,is_highlight = "is_highlight"):
+    """
+    检查是否高亮显示
+    :param driver:
+    :param mode: “Take a New Photo”，“Photo from library“，”PDF Document“，”Whiteboard“
+    :param is_highlight: 是否高亮显示
+    :return:
+    """
+    # 检查是否高亮显示
+    if is_highlight == "is_highlight":
+        if mode == "Take a New Photo":
+            public_check_element(driver,'//*[@*="#share_camera_selected"]/..',description="camera应该高亮显示",if_click = 0)
+        elif mode == "Photo from library":
+            public_check_element(driver,'//*[@*="#share_photo_selected"]/..',description="Photo应该高亮显示",if_click = 0)
+        elif mode == "PDF Document":
+            public_check_element(driver,'//*[@*="#share_file_selected"]/..',description="PDF应该高亮显示",if_click = 0)
+        elif mode == "Whiteboard":
+            public_check_element(driver,'//*[@*="#white_board_selected"]/..',description="Whiteboard应该高亮显示",if_click = 0)
+    else:
+        if mode == "Take a New Photo":
+            public_check_element(driver,'//*[@*="#share_camera"]/..',description="camera不应该高亮显示",if_click = 0)
+        elif mode == "Photo from library":
+            public_check_element(driver,'//*[@*="#share_photo"]/..',description="Photo不应该高亮显示",if_click = 0)
+        elif mode == "PDF Document":
+            public_check_element(driver,'//*[@*="#share_file"]/..',description="PDF不应该高亮显示",if_click = 0)
+        elif mode == "Whiteboard":
+            public_check_element(driver,'//*[@*="#white_board"]/..',description="Whiteboard不应该高亮显示",if_click = 0)
 
 def invite_button_should_be_hidden(driver,hidden = "yes"):
     """

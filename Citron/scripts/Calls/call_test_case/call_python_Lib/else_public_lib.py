@@ -648,9 +648,10 @@ def get_ele_class_name(driver,ele_xpath,class_name):
     print(f'{class_name}的value是:',get_class_value)
     return get_class_value
 
-def open_html_create_call(login_user,password,call_user):
+def open_html_create_call(another_driver,login_user,password,call_user):
     """
     打开html页面进行call
+    :param another_driver: 对方driver
     :param login_user: 通过html登录的user
     :param password: 密码
     :param call_user: 需要给他进行call的user
@@ -667,15 +668,23 @@ def open_html_create_call(login_user,password,call_user):
     password_input =get_xpath_element(driver,'//input[@id="password"]',description = 'password')
     password_input.send_keys(password)
     public_click_element(driver, '//button[@id="login-btn"]',description = 'Login按钮')
-    public_check_element(driver, search_by_email, 'search_by_enail输入框未出现')
+    public_check_element(driver, search_by_email, 'search_by_email输入框未出现')
     public_click_element(driver, search_by_email,description = '根据email查询框')
     email_input = get_xpath_element(driver, search_by_email,description = '根据email查询框')
     email_input.send_keys(call_user)
-    call_button = get_xpath_element(driver, '//button[@id="call-btn"]',description = 'Call按钮')
-    for i in range(3):
-        driver.execute_script('arguments[0].removeAttribute("disabled")', call_button)
-        time.sleep(4)
-    public_click_element(driver, '//button[@id="call-btn"]',description = 'Call按钮')
+    # call_button = get_xpath_element(driver, '//button[@id="call-btn"]',description = 'Call按钮')
+    # for i in range(3):
+    #     driver.execute_script('arguments[0].removeAttribute("disabled")', call_button)
+    #     time.sleep(4)
+    time.sleep(5)
+    public_click_element(driver, '//button[@id="call-btn"]', description='Call按钮')
+    for i in range(2):
+        public_click_element(driver, '//button[@id="call-btn"]',description = 'Call按钮')
+        ele_count = get_xpath_elements(another_driver,anwser_call_button)
+        if len(ele_count) == 1:
+            break
+        else:
+            time.sleep(5)
     return driver
 
 def check_a_contains_b(driver,a,b):

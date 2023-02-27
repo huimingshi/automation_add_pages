@@ -4,7 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -27,8 +27,8 @@ Small_range_206
     # U3 log in
     ${driver_U3}  driver_set_up_and_logIn     ${Expert_User3_username}
     # TU1 invites U3 from contact list. U3 answers call.
-    enter_contacts_search_user   ${driver_TU1}    ${Expert_User3_name}
-    click_user_in_contacts_call    ${driver_TU1}     ${Expert_User3_name}
+    inCall_enter_contacts_search_user   ${driver_TU1}    ${Expert_User3_name}
+    click_user_in_contacts_list    ${driver_TU1}     ${Expert_User3_name}
     user_anwser_call    ${driver_U3}
     make_sure_enter_call    ${driver_U3}
     # VP: participants icon is visible for user 1 and user 2, but invisible for user 3.
@@ -36,7 +36,7 @@ Small_range_206
     participants_icon_is_visible   ${driver_EU2}
     participants_icon_is_visible   ${driver_U3}   no
     # 获取invite link
-    ${invite_url}    send_invite_in_calling_page    ${driver_EU2}
+    ${invite_url}    send_new_invite_in_calling    ${driver_EU2}
     close_invite_3th_page    ${driver_EU2}
     # Anonymous user 4 via 3pi link
     ${driver_U4}  anonymous_open_meeting_link    ${invite_url}

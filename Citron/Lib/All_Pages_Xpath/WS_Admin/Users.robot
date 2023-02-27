@@ -12,6 +12,7 @@ ${prompt_information}                   xpath=//div[@class="k-notification-conte
 ${confirm_text}                         xpath=//p[@class="confirm-text"]                                                        # warning dialog confirm-text
 ${message_text}                         xpath=//div[@class="k-notification-content"]/span                                       # Prompt information
 ${submit_and_add_another}               xpath=//button[contains(.,'Submit and Add Another')]                                    # Submit and Add Another button
+${select_first_thing}                   xpath=//div[@unselectable="on"]//li[1]                                                  # 选择第一个
 # Deactivated Users page
 ${deactivated_users_page}               xpath=//span[contains(.,'Deactivated Users')]                                           # Deactivated Users page
 ${activate_user_button}                 xpath=//button[contains(.,'Activate User')]                                             # Activate User button

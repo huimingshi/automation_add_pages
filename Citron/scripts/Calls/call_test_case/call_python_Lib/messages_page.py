@@ -430,7 +430,7 @@ def create_a_new_message(driver,search = 'search',*args):
         # 点击user选中
         public_click_element(driver, f'//div[@class="contact-name" and contains(.,"{args[i]}")]', description=f'选择{args[i]}')
         # 检查是否选中
-        ele_list = get_xpath_elements(driver,f'//span[@class="items-name" and contains(.,"{args[i]}")]')
+        ele_list = get_xpath_elements(driver,f'//span[@class="items-name " and contains(.,"{args[i]}")]')
         public_assert(driver,1,len(ele_list),action='user是否被点击选中')
 
 def de_select_one_user(driver,username):
@@ -440,7 +440,7 @@ def de_select_one_user(driver,username):
     :param username:
     :return:
     """
-    public_click_element(driver,f'//span[@class="items-name" and contains(.,"{username}")]/..//*[@*="#xmark"]/../..',description=f'去勾选{username}')
+    public_click_element(driver,f'//span[@class="items-name " and contains(.,"{username}")]/..//*[@*="#xmark"]/../..',description=f'去勾选{username}')
 
 def confirm_create_message(driver):
     """

@@ -149,7 +149,7 @@ add_normal_user
     # Enter groups
     click element  ${groups_input}
     sleep  1s
-    click element   xpath=//div[@unselectable="on"]//li[1]
+    click element   ${select_first_thing}
     sleep  0.5s
     click element   ${button_ADD}
     sleep  2s
@@ -205,7 +205,7 @@ add_existing_normal_user
     # Enter groups
     click element  ${groups_input}
     sleep  2s
-    click element   xpath=//div[@unselectable="on"]//li[1]
+    click element   ${select_first_thing}
     sleep  0.5s
     click element   ${button_ADD}
     sleep  2s
@@ -501,14 +501,15 @@ add_group_user
     # choose Group Admin for
     click element   ${group_admin_for_choose}
     sleep  1s
-    click element   xpath=//div[@unselectable="on"]//li[2]
+    input text   ${group_admin_for_choose}    ${auto_default_group}
+    click element   ${select_first_thing}
     sleep  0.5s
     # Enter groups
     click element   ${groups_input}
     sleep  1s
     input text    ${groups_input}   ${auto_default_group}
     sleep  1s
-    click element   xpath=//div[@unselectable="on"]//li[1]
+    click element   ${select_first_thing}
     sleep  0.5s
     click element   ${button_ADD}
     sleep  0.5s
@@ -535,7 +536,7 @@ add_workspace_user
     sleep  1s
     input text   ${groups_input}   ${auto_default_group}
     sleep  1s
-    click element   xpath=//div[@unselectable="on"]//li[1]
+    click element   ${select_first_thing}
     sleep  1s
     click element   ${button_ADD}
     sleep  0.5s

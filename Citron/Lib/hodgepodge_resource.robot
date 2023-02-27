@@ -489,10 +489,10 @@ Login_with_Cognito_account
     # click Sign In
     click element   ${cognito_sign_in}
     # close bounced
-    Wait Until Page Contains      ${log_in_success_tag}
-    wait until element is visible      ${button_of_popup}     20s
-    click element   ${button_of_popup}
+    ${count}    get element count      ${log_in_success_tag}
+    Run Keyword If   '${count}'=='1'   click element   ${button_of_popup}
     sleep  1s
+    wait until element is visible    ${currentAccount_button}    20s
 
 invite_personal_user
     [Arguments]  ${email_before}   ${email}
@@ -614,7 +614,7 @@ comfirm_account
     # click Confirm Account button
     click element   ${cognito_confirm_account}
     # check log in successfully
-    Wait Until Page Contains    ${log_in_success_tag}   20s
+    wait until element is visible    ${currentAccount_button}   20s
 
 set_disclaimer_is_on
     # Set Disclaimer =on
@@ -986,7 +986,7 @@ set_survey_wrong_text
 
 log_out_from_citron
     # log out
-    click element   xpath=//button[@id="currentAccount"]
+    click element   ${currentAccount_button}
     sleep  1s
     click element   xpath=//i[@class="fa fa-sign-out"]
     sleep  1s
@@ -999,9 +999,9 @@ re_log_in_citron_with_cognito
     Sleep    1s
     ${count}  get element count  ${accept_button}
     Run Keyword If   '${count}'=='1'    click element   ${accept_button}
-    sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}   20s
+#    sleep  1s
+#    Comment    弹框包含"Welcome to Help Lightning!"
+#    Wait Until Page Contains    ${log_in_success_tag}   20s
 
 expand_workspaces_switch
     # Expand workspace

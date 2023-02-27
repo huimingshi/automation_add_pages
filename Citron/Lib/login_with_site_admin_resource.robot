@@ -296,7 +296,8 @@ share_this_filter
     # Switch to the second Windows page
     switch_window_to_second
     sleep  0.5s
-    click element  ${button_of_popup}
+    ${count}     get element count   ${button_of_popup}
+    Run Keyword If   '${count}'=='1'    click element   ${button_of_popup}
     sleep  0.5s
 
 workspaces_share_this_filter
@@ -724,14 +725,14 @@ add_workspace_for_user
 
 listed_belong_to_workspaces
     # Display number of users
-    click element  xpath=//input[@role="listbox"]
-    ${count}   get element count   xpath=//ul[@role="listbox" and @class="k-list k-reset"]/li
+    ${count}   get element count   xpath=//div[@class="k-multiselect-wrap k-floatwrap"]//li
     should be equal as integers  ${count}  3
-    sleep  1s
 
 select_randomly_user
     # Select randomly users
-    click element   xpath=//ul[@role="listbox" and @class="k-list k-reset"]/li[3]
+    click element  xpath=//input[@role="listbox"]
+    sleep   1s
+    click element   xpath=//ul[@role="listbox" and @class="k-list k-reset"]/li[text()="hlnauto+1"]
     sleep  1s
     ${count}   get element count   xpath=//ul[@class="k-reset" and @role="listbox"]/li
     should be equal as integers   ${count}   2
@@ -1024,10 +1025,17 @@ cancel_then_update_user
     sleep  0.5s
     click element   ${details_pre_xpath}//select[@name="role"]/option[contains(.,'Group Admin')]
     sleep  0.5s
-    # Enter Group
+    # Enter Group Admins for
     click element   ${details_pre_xpath}//span[@class="k-searchbar"]/input
     sleep  0.5s
     input text     ${details_pre_xpath}//span[@class="k-searchbar"]/input    ${auto_default_group}
+    sleep  2s
+    click element   xpath=//div[@unselectable="on"]//ul[@role='listbox']/li[1]
+    sleep  1s
+    # enter Groups
+    click element   ${details_pre_xpath}//span[@class="k-searchbar"]//input[@placeholder="Groups"]
+    sleep  0.5s
+    input text     ${details_pre_xpath}//span[@class="k-searchbar"]//input[@placeholder="Groups"]    ${auto_default_group}
     sleep  2s
     click element   xpath=//div[@unselectable="on"]//ul[@role='listbox']/li[1]
     sleep  1s
@@ -1161,12 +1169,11 @@ re_log_in_citron
     ${count}  get element count  ${accept_button}
     Run Keyword If   '${count}'=='1'    click element   ${accept_button}
     sleep  1s
-    Comment    弹框包含"Welcome to Help Lightning!"
-    Wait Until Page Contains    ${log_in_success_tag}     20
+    # close bounced
+    ${count}    get element count      ${log_in_success_tag}
+    Run Keyword If   '${count}'=='1'   click element   ${button_of_popup}
     sleep  1s
-    # close popup
-    Click Button    ${button_of_popup}
-    sleep    1s
+    wait until element is visible    ${currentAccount_button}    20s
 
 the_workspace_field_should_be_the_selected_one_before_loging_out
     [Arguments]   ${workspace_text}

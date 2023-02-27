@@ -84,9 +84,7 @@ close_tutorial
 
 users_successfully_login
     # User should successfully log in App.
-    wait until element is visible   ${button_of_popup}
-    click element    ${button_of_popup}
-    sleep  1s
+    wait until element is visible   ${currentAccount_button}     20s
 
 user_login_without_disclaimer
     sleep  2s

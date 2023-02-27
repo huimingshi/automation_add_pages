@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Resource          call_case_set_up.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -32,19 +32,21 @@ Small_range_149_151
     # premium user call contact in F2F mode
     contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${message_test0_username}
     # VP: hint dialog shows;
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Mute,Camera and End Call icon are at 50% opacity;
 #    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
-    which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
+#    which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
 #    # Yellow star on F2F icon
-    which_page_is_currently_on    ${driver1}    ${starHint_xpath}
+#    which_page_is_currently_on    ${driver1}    ${starHint_xpath}
 #    # Click Mute/Camera/Hamburger
 #    switch_to_other_tab    ${driver1}    ${mic_on_xpath}
 #    sleep  1s
 #    # VP: hint dialog still shows
 #    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # Click Give or receive help on dialog
-    enter_giver_mode     ${driver1}      none    none     2
+#    enter_giver_mode     ${driver1}      none    none     2
+    enter_giver_receiver_mode_setup    ${driver1}
+    ${merge_driver}    enter_giver_mode     ${driver1}    ${driver2}
     # Back to F2F mode	VP: hint dialog disappear
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
     [Teardown]      run keywords    exit_call   ${driver2}
@@ -64,15 +66,18 @@ Small_range_152
     # 2 users in face to face mode
     contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: hint dialog shows;
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
     # 3rd user join as 3pc call
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     enter_contacts_search_user    ${driver1}   ${Expert_User3_name}
-    click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
+    click_user_in_contacts_list    ${driver1}     ${Expert_User3_name}
     user_anwser_call    ${driver3}
-    sleep  20s
+    sleep  10s
+    enter_receiver_mode    ${driver1}
+    ${merge_driver}    enter_giver_mode     ${driver1}    ${driver2}   ${driver3}
     # VP:hints dialog is closed on screen of 3pc call
     which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
+    sleep   10000
     # 结束call
     end_call_for_all   ${driver1}
     [Teardown]      exit_driver

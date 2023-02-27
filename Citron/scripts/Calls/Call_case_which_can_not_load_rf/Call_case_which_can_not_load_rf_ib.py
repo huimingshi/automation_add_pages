@@ -149,7 +149,9 @@ def log_in_lib(username,password="*IK<8ik,8ik,",close_bounced='close_bounced',ac
     # close Tutorial
     if close_bounced == 'close_bounced':
         # try:  # close Tutorial
-        public_click_element(driver,close_tutorial_button,description = 'close_tutorial')
+        ele_list = get_xpath_elements(driver,close_tutorial_button)
+        if len(ele_list) == 1:
+            public_click_element(driver,close_tutorial_button,description = 'close_tutorial')
     driver.implicitly_wait(int(IMPLICIT_WAIT))
     time.sleep(2)
     return driver
@@ -174,6 +176,7 @@ def filter_by_different_fields(driver,index,search_text,text_id):
     list_count = get_xpath_elements(driver,list_data_count)
     for i in range(len(list_count)):
         text = get_xpath_element(driver,f'//div[@class ="ag-center-cols-container"]/div[{i}+1]/div[@col-id="{text_id}"]',description = '文本值').get_attribute("textContent")
+        print(text)
         public_assert(driver,search_text , text,condition='not in',action='与预期不符')
 
 def filter_by_duration_greater_than_60_second(driver):

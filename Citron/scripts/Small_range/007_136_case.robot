@@ -7,30 +7,30 @@ Force Tags        small_range
 
 
 *** Test Cases ***
-Register_personal
-    [Documentation]    Tutorial
-    [Tags]    small range 12-18 lines
-    # User logs in App firstly
-    user_login_citron_without_close_tutorial   ${normal_username_for_calls}
-    # No click 'Let's go!' button, kill App, then reopen App	VP: Show tutorial screen
-    refresh_browser_tutorial
-    # click 'Let's go!' button	 Show next page of tutorial page	  Clicks 'Next' button	 Show next page of tutorial page   Clicks 'Next' button until the last page
-    click_next_until_last_page
-    # kill App, then reopen App	   VP: Show the first page of tutorial screen
-    refresh_browser_tutorial
-    # Last page	Clicks 'Get Started' button	  VP: Tutorial page disappeared
-    last_page_click_get_started
-    # Clear cache  Another user logs in App firstly	  VP: tutorial page should show up.
-    user_login_citron_without_close_tutorial   ${normal_username_for_calls_B}
-    # In last page of tutorial, clicks 'Close' button    Tutorial page disappeared
-    last_page_click_get_started
-    # User re-login App	VP: No Tutorial screen
-    log_out_from_citron
-    re_log_in_citron_no_tutorial   ${normal_username_for_calls_B}
-    # kill App, then reopen App	VP: No tutorial screen
-    log_out_from_citron
-    re_log_in_citron_no_tutorial   ${personal_user_username}
-    [Teardown]    Close
+#Register_personal
+#    [Documentation]    Tutorial
+#    [Tags]    small range 12-18 lines,新版本导致登录后没有tutorial，脚本不适用
+#    # User logs in App firstly
+#    user_login_citron_without_close_tutorial   ${normal_username_for_calls}
+#    # No click 'Let's go!' button, kill App, then reopen App	VP: Show tutorial screen
+#    refresh_browser_tutorial
+#    # click 'Let's go!' button	 Show next page of tutorial page	  Clicks 'Next' button	 Show next page of tutorial page   Clicks 'Next' button until the last page
+#    click_next_until_last_page
+#    # kill App, then reopen App	   VP: Show the first page of tutorial screen
+#    refresh_browser_tutorial
+#    # Last page	Clicks 'Get Started' button	  VP: Tutorial page disappeared
+#    last_page_click_get_started
+#    # Clear cache  Another user logs in App firstly	  VP: tutorial page should show up.
+#    user_login_citron_without_close_tutorial   ${normal_username_for_calls_B}
+#    # In last page of tutorial, clicks 'Close' button    Tutorial page disappeared
+#    last_page_click_get_started
+#    # User re-login App	VP: No Tutorial screen
+#    log_out_from_citron
+#    re_log_in_citron_no_tutorial   ${normal_username_for_calls_B}
+#    # kill App, then reopen App	VP: No tutorial screen
+#    log_out_from_citron
+#    re_log_in_citron_no_tutorial   ${personal_user_username}
+#    [Teardown]    Close
 
 Reset_Password
     [Documentation]    Reset Password

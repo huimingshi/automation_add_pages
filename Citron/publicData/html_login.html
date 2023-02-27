@@ -229,7 +229,7 @@
                   throw new Error(response.stateText);
               }
           }).then((success) => {
-              if (success.length == 1) {
+              if (success.length >= 1) {
                   // set the recipient
                   state.recipient = {
                       id: success[0].id,

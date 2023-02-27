@@ -281,8 +281,8 @@ Set_Declaimer_delete_user_is_not_selected_user_S_belong_to_Workspace_WS1_WS2_and
     # User S decline disclaimer of WS3
     check_appear_disclaimer
     click_accept_disclaimer
-    # 关闭导航页面
-    close_tutorial
+#    # 关闭导航页面
+#    close_tutorial
     # User S click workspace list	VP: WS1, WS2 and WS3 still show in the option list, even disclaimer is declined
     ${WSList}   all_WS_show_in_option_list    3
     string_in_list_object    BigAdmin Premium   ${WSList}
