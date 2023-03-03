@@ -5,7 +5,7 @@
 from selenium.webdriver.common.keys import Keys
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import paste_on_a_non_windows_system as POANWS
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import \
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import \
     send_my_help_space_invitation, checkbox_xpath, my_help_space_message, get_invite_link, send_link_email_input, \
     send_link_send_invite
 

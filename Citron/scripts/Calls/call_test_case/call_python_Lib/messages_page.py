@@ -8,7 +8,7 @@ from Citron.Lib.python_Lib.ui_keywords import get_modify_picture_path as GMPP, c
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import suspension_of_the_mouse as SOTM, \
     scroll_into_view as SIV, refresh_browser_page as RBP
-from public_settings_and_variable import *
+from public_settings_and_variable_copy import *
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 

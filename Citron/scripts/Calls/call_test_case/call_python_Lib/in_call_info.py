@@ -3,7 +3,7 @@
 # @Author   :Huiming Shi
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import change_driver_implicit_wait
-from public_settings_and_variable import *
+from public_settings_and_variable_copy import *
 
 @change_driver_implicit_wait
 def now_which_help(driver,expect_mode = 'receiving'):
@@ -123,7 +123,7 @@ def has_joined_as_obeserver(driver,who):
 @change_driver_implicit_wait
 def has_left_the_session(driver,who):
     """
-    %1$s has left the session提示信息出现
+    %1$s left the call提示信息出现
     :param driver:
     :param who:
     :return:
@@ -143,7 +143,7 @@ def your_invite_to_was_sent_successfully(driver,who):
     public_assert(driver, len(ele_list8), 1, action='未出现提示8')
 
 @change_driver_implicit_wait
-def has_accepted_your_call(driver):
+def has_accepted_your_call(driver,user):
     """
     %1$s has accepted your call提示信息出现
     :param driver:
@@ -151,6 +151,8 @@ def has_accepted_your_call(driver):
     """
     ele_list9 = get_xpath_elements(driver, expect_text_9)
     public_assert(driver, len(ele_list9), 1, action='未出现提示9')
+    ele_list31 = get_xpath_elements(driver,expect_text_31.format(user))
+    public_assert(driver,len(ele_list31),1,action="未出现提示31")
 
 @change_driver_implicit_wait
 def click_do_not_record(driver,who,check='check'):
@@ -344,3 +346,16 @@ def your_camera_is_off(driver):
     """
     ele_list30 = get_xpath_elements(driver, expect_text_30)
     public_assert(driver, len(ele_list30), 1, action='未出现提示30')
+
+@change_driver_implicit_wait
+def left_call_back_f2f_mode(driver,username):
+    """
+    UserName left the call. Switched back to Face to Face mode.
+    :param driver:
+    :param username:
+    :return:
+    """
+    ele_list32 = get_xpath_elements(driver, expect_text_32.format(username))
+    public_assert(driver, len(ele_list32), 1, action='未出现提示32')
+    ele_list33 = get_xpath_elements(driver, expect_text_33)
+    public_assert(driver, len(ele_list33), 1, action='未出现提示33')

@@ -1,10 +1,9 @@
 #----------------------------------------------------------------------------------------------------#
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
-from public_settings_and_variable import *
+from public_settings_and_variable_copy import *
 from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
-from else_public_lib import paste_on_a_non_windows_system, user_accept_disclaimer
 from about_call import make_sure_enter_call as m_s_e_c
 from finish_call import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page
@@ -13,91 +12,88 @@ from selenium.webdriver import ActionChains
 import warnings
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import scroll_into_view as SIV
 from Citron.Lib.python_Lib.ui_keywords import check_zipFile_exists as CZE
-
+from pykeyboard import PyKeyboard
+from pymouse import PyMouse
+import pyperclip
+import pywinauto
 #----------------------------------------------------------------------------------------------------#
 # define python Library
-def click_invite_user_div(driver):
+def click_participants_div(driver):
     """
-    # 点击右上角三个横杠
+    # 点击participants按钮
     :param driver:
     :return:
     """
-    public_check_element(driver, invite_user_div, '点击右上角三个横杠')
-    time.sleep(3)
+    public_click_element(driver, participants_div, '点击邀请user进入call的入口按钮')
+    time.sleep(2)
 
-def open_debug_dialog_check_resolution(driver):
+def open_participants_dialog(driver):
     """
-    通话过程中打开Debug，查找Resolution
+    打开call页面左侧的PARTICIPANTS标签页
     :param driver:
-    :return:
-    """
-    # 点击右上角三个横杠
-    click_invite_user_div(driver)
-    public_check_element(driver, enter_debug_page, '进入debug_page')
-    resolution_get = get_xpath_element(driver,'//span[@id="pubresolution"]',description = '进入debug查找resolution').get_attribute("textContent")
-    print(resolution_get)
-    public_assert(driver,resolution_get , '1280x720',action='resolution不是1280x720')
-
-def open_invite_3rd_participant_dialog(driver,enter_send_invite = 'yes'):
-    """
-    打开邀请第三位通话者的界面
-    :param driver:
-    :param enter_send_invite: 是否需要进入send invite页面，默认’yes‘进入，其他表示不进入
     :return:
     """
     # 确保进入call
     m_s_e_c(driver)
-    public_check_element(driver, invite_user_div, '右上角三个横杠按钮未展示',if_click = None,if_show = 1)
-    public_click_element(driver, invite_user_div, description='右上角三个横杠按钮')
-    public_check_element(driver, enter_invite_user_page, 'Invite图标未展示',if_click = None,if_show = 1)
-    public_click_element(driver, enter_invite_user_page, description='Invite图标')
-    if enter_send_invite == 'yes':
-        public_check_element(driver, send_invite_in_calling, '进入send_invite页面失败')
-    elif enter_send_invite != 'yes':
-        public_check_element(driver, contacts_list_in_calling, '进入contacts_list页面失败',if_click=None)
+    # 点击邀请user进入call的入口按钮
+    click_participants_div(driver)
 
-def send_invite_in_calling_page(driver,if_send = 'not_send'):
+def close_invite_3th_page(driver):
     """
-    通话过程中获取send invite的link
-    :param driver:
-    :param if_send:是否发送，默认不发送not_send，发送为send
-    :return:返回会议link
-    """
-    # 进入send invite页面
-    open_invite_3rd_participant_dialog(driver)
-    # 复制
-    public_check_element(driver, '//div[@class="image-container"]', '点击复制按钮失败')
-    # 粘贴
-    sys_type = get_system_type()   # 判断是哪种操作系统，Windows和非Windows的粘贴操作不一样
-    if sys_type == 'Windows':
-        public_click_element(driver, my_help_space_message, description='Windows操作系统message输入框')
-        get_xpath_element(driver,my_help_space_message,description = 'Windows操作系统message输入框').send_keys(Keys.CONTROL, 'v')
-    else:
-        paste_on_a_non_windows_system(driver, my_help_space_message)
-    # 验证复制后粘贴结果正确
-    invite_url = get_xpath_element(driver,get_invite_link,description = 'link链接').get_attribute("textContent")  # Get the invitation link
-    print('复制的link为:', invite_url)
-    attribute = get_xpath_element(driver,my_help_space_message,description = 'message输入框').get_attribute('value')
-    print('粘贴的link为:', attribute)
-    # 验证复制后粘贴结果正确
-    public_assert(driver,attribute , invite_url,action='复制和粘贴的内容不一致')
-    if if_send != 'not_send':
-        # 输入email
-        email_ele = get_xpath_element(driver,send_link_email_input,description = 'email输入框')
-        public_click_element(driver,send_link_email_input,description = 'email输入框')
-        email_ele.send_keys('Huiming.shi.helplightning+123456789@outlook.com')
-        # 点击Send Invite按钮
-        public_click_element(driver,send_link_send_invite,description = 'email发送按钮')
-    return invite_url    # 返回会议link
-
-def click_show_directory_when_invite_3rd(driver):
-    """
-    在邀请第三位用户进入Call的页面上，点击‘Show Directory’按钮
+    关闭邀请第三位用户进入call的页面
     :param driver:
     :return:
     """
-    public_check_element(driver, '//div[@id="inviteDialog-pane-1"]//input[@type="checkbox"]', '勾选Show_Directory失败')
-    time.sleep(3)
+    # 关闭
+    public_click_element(driver, close_participants_page_xpath, description='关闭invite_page')
+    time.sleep(2)
+
+def open_invite_3rd_participant_dialog(driver,which_dialog = "Contacts"):
+    """
+    打开邀请第三位通话者的界面，可选择是进入Contacts标签页还是New Invitation标签页
+    :param driver:
+    :param which_dialog: 进入到Contacts、directory、New Invitation
+    :return:
+    """
+    # 打开call页面左侧的PARTICIPANTS标签页
+    open_participants_dialog(driver)
+    # 点击Add People按钮
+    public_click_element(driver, enter_add_user_page, description='Add_People按钮')
+    if which_dialog == 'New Invitation':
+        # 点击New Invitation标签
+        SIV(driver,new_invite_in_calling)
+        public_click_element(driver, new_invite_in_calling, description='进入New_Invitation标签页')
+        # 校验New Invitation标签被选中
+        public_check_element(driver, invitation_list_in_calling, 'invitation标签页', if_click=None)
+    elif which_dialog == 'directory':
+        # 点击directory标签
+        SIV(driver, new_invite_in_calling)
+        public_click_element(driver, new_invite_in_calling, description='进入New_Invitation标签页')
+        # 校验directory标签被选中
+        public_check_element(driver, directory_list_in_calling, 'contacts列表标签页', if_click=None)
+    else:
+        # 校验Contacts标签被选中
+        SIV(driver, contacts_list_in_calling)
+        public_check_element(driver, contacts_list_in_calling, 'contacts列表标签页', if_click=None)
+
+def send_new_invite_in_calling(driver,participant_email = "Huiming.shi.helplightning+123456789@outlook.com"):
+    """
+    通话过程中获取New Invitation的link
+    :param driver:
+    :param participant_email:需要发送invitation的email
+    :return:返回会议link
+    """
+    # 进入New Invitation标签页
+    open_invite_3rd_participant_dialog(driver,which_dialog="New Invitation")
+    # 输入Participant email
+    email_ele = get_xpath_element(driver, send_link_email_input, description='email输入框')
+    email_ele.send_keys(participant_email)
+    # 点击Send按钮
+    public_click_element(driver, new_invitation_send, description='发送按钮')
+    # 获取刚发送的invitation邮件
+    time.sleep(20)
+    invite_url = obtain_meeting_link_from_email(check_otu='check_otu')
+    return invite_url    # 返回会议link
 
 def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_personal'):
     """
@@ -159,32 +155,22 @@ def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_
                 screen_shot_func(driver1,'点击ANSWER按钮失败')
                 raise Exception('点击ANSWER按钮失败')
 
-def enter_contacts_search_user(driver,search_name,if_click= 'no_click_show',search_result = 'has_user_data'):
+def inCall_enter_contacts_search_user(driver,search_name,search_result = 'has_user_data'):
     """
-    # 通话过程中进入Contacts列表页面，并根据name进行查询
+    在in call页面的Contacts列表中查询user
     :param driver:
-    :param search_name: 要查询的name，同时也是预期的name
-    :param if_click: 是否勾选‘Show Directory’；默认'no_click_show'不勾选；'click_show'为勾选
+    :param search_name: 需要查询的username
     :param search_result: 查询的结果；默认查询'has_user_data'有用户数据；'has_no_user_data'没有用户数据
     :return:
     """
-    # 进入到邀请第三位用户的Contacts页面
-    open_invite_3rd_participant_dialog(driver,'no_enter')
-    # 判断是否需要点击‘Show Directory’按钮的
-    tag = True
-    if if_click == 'click_show':
-        time.sleep(5)
-        click_show_directory_when_invite_3rd(driver)
-        tag = False
-        time.sleep(2)
+    # 进入到邀请第三位用户的PARTICIPANTS页面
+    open_invite_3rd_participant_dialog(driver)
     # 通过name查询
     search_element = get_xpath_element(driver,inviteDialog_search_user_input,description = '查询框')
     search_element.clear()
     time.sleep(2)
     public_click_element(driver,inviteDialog_search_user_input,description = '查询框')
     search_element.send_keys(search_name)
-    if not tag:
-        time.sleep(2)
     ele_list = get_xpath_elements(driver,f'//div[@class="contact-name" and contains(.,"{search_name}")]')
     # 断言
     if search_result == 'has_user_data':
@@ -192,16 +178,7 @@ def enter_contacts_search_user(driver,search_name,if_click= 'no_click_show',sear
     elif  search_result == 'has_no_user_data':
         public_assert(driver,len(ele_list) , 0,action='查询的user数据与预期不符')
 
-def close_invite_3th_page(driver):
-    """
-    关闭邀请第三位用户进入call的页面
-    :param driver:
-    :return:
-    """
-    # 关闭
-    public_check_element(driver, close_invite_3th_page_xpath, '关闭invite_page失败')
-
-def click_user_in_contacts_call(driver,username,can_reach = 'can_reach'):
+def click_user_in_contacts_list(driver,username,can_reach = 'can_reach'):
     """
     校验在通话中Contacts页面中的user，点击后是否可以邀请进入到call
     :param driver:
@@ -212,66 +189,6 @@ def click_user_in_contacts_call(driver,username,can_reach = 'can_reach'):
     public_check_element(driver, f'//div[@class="contact-name" and (text()="{username}")]', f'点击{username}失败')
     if can_reach == 'can_not_reach':
         public_check_element(driver, f'//div[@class="message" and contains(.,"{username} is unreachable.")]', f'未出现{username}_is_unreachable_提示信息',if_click = None,if_show = 1)
-
-def make_call_between_four_role(driver1,driver2,driver3,who):
-    """
-    # Make calls between four role
-    :param driver1:
-    :param driver2:
-    :param driver3:
-    :param who:
-    :return:
-    """
-    # make calls with who
-    element = get_xpath_element(driver1, search_input,description = '查询框')
-    public_click_element(driver1, search_input,description = '查询框')
-    element.send_keys(who)
-    time.sleep(3)
-    public_click_element(driver1,click_call_button,description = 'Call按钮')    # click Call button
-    # who anwser calls
-    public_check_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
-    time.sleep(10)
-    # 进入send invite 页面
-    open_invite_3rd_participant_dialog(driver1)
-    time.sleep(2)
-    # get call link
-    invite_url =get_xpath_element(driver1,get_invite_link,description = '邀请链接').get_attribute("textContent")  # Get the invitation link
-    print(invite_url)
-    public_click_element(driver1,close_invite_3th_page_xpath,description = '关闭invite_page按钮')
-    print("邀请链接为:",invite_url)
-    js = "window.open('{}','_blank');"
-    # cross enterprise join call
-    driver3.execute_script(js.format(invite_url))
-    driver3.switch_to.window(driver3.window_handles[-1])  # 切换到最新页面
-    # Accept Disclaimer
-    user_accept_disclaimer(driver3)
-    # Anwser cross enterprise call request
-    public_check_element(driver1, external_join_call_anwser_button, '接受cross_enterprise的call失败')
-    if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
-        driver4 = webdriver.Chrome(options=optionc)
-    elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
-        driver4 = webdriver.Firefox(options=optionf,firefox_profile=profile)
-    driver4.implicitly_wait(int(6))
-    driver4.get(invite_url)
-    driver4.maximize_window()
-    # Accept Disclaimer
-    user_accept_disclaimer(driver4)
-    # Anwser Anonymous User call request
-    public_check_element(driver1, external_join_call_anwser_button, '接受Anonymous的call失败')
-
-    # call on hold
-    time.sleep(int(10))
-    # screenshots
-    public_check_element(driver2, select_your_role, '点击失败')
-    public_check_element(driver2, '//div[@class="user-list"]/div[1]', '点击失败')
-    public_check_element(driver2, '//div[@class="user-list"]/div[2]', '点击失败')
-    public_check_element(driver2, '//button[@class="btn btn-primary" and contains(.,"Continue")]', '点击continue失败')
-    for i in range(3):
-        public_check_element(driver2, capture_button, 'screenshots失败')
-        time.sleep(3)
-    # End Call for All
-    user_end_call_for_all(driver2)
-    return driver4
 
 def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
     """
@@ -345,9 +262,9 @@ def user_anwser_call(driver,anwser_type = 'direct'):
     :return:
     """
     if anwser_type == 'direct':
-        public_click_element(driver, anwser_call_button, description='没找到直接接受Call的按钮')
+        public_check_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
     elif anwser_type != 'direct':
-        public_click_element(driver, external_join_call_anwser_button, description='没找到间接接受Call的按钮')
+        public_check_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
 
 def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call group 1',accept='accept',audio = 'audio'):
     """
@@ -392,13 +309,13 @@ def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call grou
     driver1.implicitly_wait(5)
     count = get_xpath_elements(driver1, accept_disclaimer)
     if len(count) == 1:
-        public_click_element(driver1, accept_disclaimer, '点击accept_disclaimer失败')
+        public_click_element(driver1, accept_disclaimer, 'accept_disclaimer按钮')
     driver1.implicitly_wait(IMPLICIT_WAIT)
     # 另一端ACCEPT OR DECLINE
     if accept == 'accept':
-        public_click_element(driver2, anwser_call_button, '点击ANWSER按钮失败')
+        public_click_element(driver2, anwser_call_button, 'ANWSER按钮')
     elif accept == 'no_accept':
-        public_click_element(driver2, decline_disclaimer, '点击DECLINE按钮失败')
+        public_click_element(driver2, decline_disclaimer, 'DECLINE按钮')
 
 def make_call_to_onCall(driver1,driver2,on_call_group_name = 'on-call group 1',accept='accept'):
     """
@@ -445,7 +362,7 @@ def obtain_meeting_link_from_email(check_otu = 'no_check_otu'):
     :return: meeting link
     """
     meeting_link = obtain_meeting_link()
-    if check_otu == 'check_otu':
+    if check_otu != 'no_check_otu':
         try:
             assert meeting_link.startswith(r'https://app-stage.helplightning.net.cn/meet/link')
         except AssertionError:
@@ -467,8 +384,6 @@ def in_call_click_message_button(driver,operation='open'):
     :param operation: 操作类型，打开还是关闭；默认打开
     :return:
     """
-    # 点击右上角三个横杠
-    click_invite_user_div(driver)
     # 点击Message图标
     public_check_element(driver, message_chat_icon, '点击Message图标')
     time.sleep(2)
@@ -547,9 +462,9 @@ def share_in_main_screen(driver,attach_name,file_type = 'jpg'):
         ele_list = get_xpath_elements(driver, PanZoomTools)
         public_assert(driver, 0, len(ele_list), action='pdf展示在主屏幕')
 
-def in_call_click_upload_attach(driver):
+def inCall_message_click_upload_attach(driver):
     """
-    通话过程中点击上传附件按钮，has options: Photo; camera;Document
+    通话过程中message标签页点击上传附件按钮，has options: Photo; camera;Document
     :param driver:
     :return:
     """
@@ -620,132 +535,170 @@ def rec_is_on_or_off(driver,witch_status = 'on',change_or_not = 'can_not_change'
         ele_list = get_xpath_elements(driver,'//div[@class="InCall"]/img[@class="Rec"]')
         public_assert(driver, len(ele_list), 0, action='实际REC不是预期状态')
 
-def enter_face_to_face_mode(driver):
+def enter_video_connection(driver):
     """
-    进入Face to Face模式
+    如果出现了“Retry Video Connection”按钮，就点击进入到Video 模式
+    share camera需要video模式
+    merge需要video模式
     :param driver:
     :return:
     """
-    public_check_element(driver, '//*[@*="#rh_on"]', '进入f2f模式第一步失败')
-    public_check_element(driver, '//*[@*="#f2f_off"]/../..', '进入f2f模式第二步失败')
+    # 点击Retry Video Connection按钮
+    ele_list = get_xpath_elements(driver, retry_video_connection)
+    if len(ele_list) == 1:
+        public_click_element(driver, retry_video_connection, description="RVC按钮")
 
-def click_right_small_hand(driver):
+def click_merge_button(driver):
     """
-    点击右侧小手
+    点击Merge按钮，进入到giver角色
     :param driver:
     :return:
     """
-    public_click_element(driver, '//div[@class="InCall"]//*[@*="#gh_on"]/..', description='点击右侧小手')
+    public_click_element(driver,merge_on_button,description="merge_on按钮")
+    public_click_element(driver,preview_merge_button,description="preview_merge按钮")
 
-def giver_switch_receiver(driver):
+def freeze_operation(driver,is_freeze = "freeze",check_notification = 'check'):
     """
-    Giver模式切换到Receiver模式
+    freeze或者unFreeze的操作
     :param driver:
+    :param is_freeze: freeze表示freeze，其他则表示unfreeze
+    :param check_notification: 是否检查提示信息，check表示检查，其他则表示不检查
     :return:
     """
-    click_right_small_hand(driver)
-    public_click_element(driver,'//span[text()="Receive Help"]',description='点击Receiver_Help按钮')
+    if is_freeze == 'freeze':
+        public_click_element(driver,freeze_on_action,description="freeze按钮")
+        if check_notification == 'check':
+            ele_list = get_xpath_elements(driver, task_field_is_frozen)
+            public_assert(driver, len(ele_list), 1, action="freeze的提示信息")
+    else:
+        public_click_element(driver,freeze_off_action,description="unFreeze按钮")
+        if check_notification == 'check':
+            ele_list = get_xpath_elements(driver, task_field_is_unfrozen)
+            public_assert(driver, len(ele_list), 1, action="unFreeze的提示信息")
 
-def choose_giver_helper(driver,who_give_help,who_receive_help):
+def click_right_share_button(*drivers):
     """
-    多人call中选择Giver和Helper
-    :param driver:
-    :param who_give_help:
-    :param who_receive_help:
+    # 点击右侧的share按钮
+    :param drivers:
     :return:
     """
-    public_click_element(driver, which_mode_help.format(who_give_help), description='选择GIVE HELP')
-    public_click_element(driver, which_mode_help.format(who_receive_help), description='选择RECEIVE HELP')
-    public_click_element(driver, '//div[@class="user-footer"]/button[text()="Continue"]', description='点击Continue')
+    # 点击右侧的share按钮
+    for driver in drivers:
+        public_click_element(driver, right_share_button, description="右侧SHARE按钮")
+        time.sleep(1)
 
-def enter_giver_mode(driver,who_give_help,who_receive_help,roles = '3',has_dialog = 'has_dialog',give_or_receive = 'give'):
+def inCall_upload_photo_PDF(driver,file_type = "Photo"):
     """
-    进入giver/helper模式
+    通话中点击右侧的Share按钮，上传photo或者PDF文件
     :param driver:
-    :param who_give_help:  选择giver的name
-    :param who_receive_help:  选择receiver的name
-    :param roles: 通话者数目
-    :param has_dialog: 是否有对话框出现
-    :param give_or_receive: 想进入哪种模式；默认是give为giver模式，其他为receiver模式
+    :param file_type: 文件类型
     :return:
     """
-    if roles == '3':
-        # 这是为了区分可能会是Call Center mode，如果是该模式的话，进入call就是giver/helper模式
-        ele_list = get_xpath_elements(driver,f2f_on_mode)
-        if len(ele_list) != 1:
-            click_right_small_hand(driver)
-            public_click_element(driver,'//span[text()="Switch Roles"]',description='点击Switch_Roles按钮')
-            choose_giver_helper(driver,who_give_help,who_receive_help)
-        elif len(ele_list) == 1:
-            public_click_element(driver, f2f_on_mode, description='点击切换模式')
-            choose_giver_helper(driver,who_give_help,who_receive_help)
-    elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive == 'give':
-        public_click_element(driver, '//span[text()="I will give help"]', description='选择I_will_give_help失败')
-    elif has_dialog == 'has_dialog' and roles == '2' and give_or_receive != 'give':
-        public_click_element(driver, '//span[text()="I need help"]', description='选择I_need_help失败')
-    elif has_dialog == 'has_no_dialog' and roles == '2':
-        public_click_element(driver, f2f_on_mode, description='点击切换模式')
-        public_click_element(driver, '//*[@*="#rh_off"]/../..', description='点击第二步')
-
-def enter_FGD_mode(driver,witch_mode):
-    """
-    切换Freeze/GHoP/Doc Share三种模式
-    :param driver:
-    :param witch_mode:
-    :return:
-    """
-    if witch_mode == "Document":
-        if len(get_xpath_elements(driver,video_on_button)) == 1:
-            public_click_element(driver,video_on_button,ec='ec',description='点击右侧的video按钮')
-        else:
-            public_click_element(driver, video_off_red, description='点击右侧的Video红色按钮')
+    # 确保文件类型输入正确
+    if file_type != "Photo" and file_type != "PDF":
+        print("请输入正确的文件名：Photo or PDF")
+        raise Exception("请输入正确的文件名：Photo or PDF")
+    # 点击右侧的share按钮
+    click_right_share_button(driver)
+    # 点击上传按钮，并先获取文件绝对路径
+    if file_type == "Photo":
+        public_click_element(driver, TPPW_share.format("Photo from Library"), description="share_photo按钮")
+        file = get_picture_path()
+    elif file_type == "PDF":
+        public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
+        file = get_picture_path('test_citron.pdf')
+    # 判断操作系统类型
+    system_type = get_system_type()
+    if system_type == 'Windows':
+        # 通过窗口打开
+        app = pywinauto.Desktop()
+        # 通过弹框名称进入控件中
+        win = app['打开']
         time.sleep(2)
-        public_click_element(driver,choose_document,ec='ec',description='选择Document')
-        get_xpath_element(driver,upload_file,ec='ec',description='上传pdf文件').send_keys(get_picture_path('test_citron.pdf'))
-        # 返回原始状态
-        public_click_element(driver, pdf_on_button, ec='ec', description='pdf_on_button')
-        ele_list = get_xpath_elements(driver,return_vidoe_on)
-        if len(ele_list) == 1:
-            time.sleep(5)
-            public_click_element(driver,return_vidoe_on, description='返回原始状态')
-        else:
-            public_click_element(driver, pdf_on_button, description='pdf_on_button')
-    elif witch_mode == "Photo":
-        ele_list = get_xpath_elements(driver, video_on_button)
-        if len(ele_list) == 1:
-            public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
-        else:
-            public_click_element(driver, pdf_on_button, ec='ec', description='点击video按钮')
+        # 输入上传图片的地址
+        win['Edit'].type_keys(file)
         time.sleep(2)
-        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Photo"]/..',ec='ec',description='选择Photo')
-        get_xpath_element(driver,upload_file,ec='ec',description='上传jpg文件').send_keys(get_picture_path())
-        # 返回原始状态
-        public_click_element(driver,ghop_on_button,ec='ec',description='ghop_on_button')
-        ele_list = get_xpath_elements(driver,return_vidoe_on)
-        if len(ele_list) == 1:
-            time.sleep(5)
-            public_click_element(driver,return_vidoe_on, description='返回原始状态')
-        else:
-            public_click_element(driver, ghop_on_button,description='ghop_on_button')
-    elif witch_mode == "Swap Camera":
-        public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
+        # 点击打开按钮
+        win['Button'].click()
         time.sleep(2)
-        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Swap Camera"]/..',ec='ec')
-        screen_shot_func(driver, 'MAC电脑上查看下点击Swap_Camera后页面状态')
-    elif witch_mode == "Freeze":
-        public_click_element(driver,video_on_button,ec='ec',description='点击video按钮')
+    else:
+        k = PyKeyboard()
+        m = PyMouse()
+        filepath = '/'
+        # 模拟键盘点击 Command + Shift + G
+        k.press_keys(['Command', 'Shift', 'G'])
+        # 获取当前屏幕尺寸
+        x_dim, y_dim = m.screen_size()
+        m.click(x_dim // 2, y_dim // 2, 1)
+        # 复制文件路径开头的斜杠/，如果不加斜杠的话，脚本会缺少头部的斜杠
+        pyperclip.copy(filepath)
+        # 粘贴斜杠/
+        k.press_keys(['Command', 'V'])
+        # 输入文件全路径进
+        k.type_string(file)
         time.sleep(2)
-        public_click_element(driver,'//div[@class="submenu-content"]//span[text()="Freeze"]/..',ec='ec')
-        screen_shot_func(driver, 'MAC电脑上查看下点击Freeze后页面状态')
+        k.press_key('Return')
+        time.sleep(2)
+        k.press_key('Return')
+        time.sleep(2)
 
-def back_to_face_to_face_mode(driver):
+def take_a_new_photo(driver):
     """
-    回到Face to Face模式
+    在通话界面中点击右侧的share按钮，并Take a New Photo
     :param driver:
     :return:
     """
-    public_click_element(driver, select_your_role, description='点击右上角的小手失败')
-    public_click_element(driver, '//*[@*="#f2f_off"]/../..', description='进入f2f模式失败')
+    # 点击右侧的share按钮
+    click_right_share_button(driver)
+    # 点击Take a New Photo按钮
+    public_click_element(driver, TPPW_share.format("Take a New Photo"), description="Take_a_New_Photo按钮")
+    # 点击Capture and Share按钮
+    public_click_element(driver,'//button[text()="Capture and Share"]',description="Capture_and_Share按钮")
+
+def share_me(driver):
+    """
+    在通话界面中点击右侧的share按钮，并share My Camera
+    :param driver:
+    :return:
+    """
+    # 点击右侧的share按钮
+    click_right_share_button(driver)
+    # 点击My camera按钮
+    public_click_element(driver, my_camera_button, description="My_camera按钮")
+
+def share_whiteboard(driver):
+    """
+    在通话界面中点击右侧的share按钮，并share Whiteboard
+    :param driver:
+    :return:
+    """
+    # 点击右侧的share按钮
+    click_right_share_button(driver)
+    # 点击Whiteboard按钮
+    public_click_element(driver, TPPW_share.format("Whiteboard"), description="Whiteboard按钮")
+
+def stop_sharing_to_f2f(driver):
+    """
+    Stop Sharing后进入f2f模式
+    :param driver:
+    :return:
+    """
+    # 点击右侧的share按钮
+    public_click_element(driver, right_share_button, description="右侧SHARE按钮")
+    # 点击Stop Sharing按钮
+    public_click_element(driver,stop_sharing_button,description="Stop_Sharing按钮")
+
+def share_live_video_from_sb(driver,user):
+    """
+    右侧的Share按钮点击后，选择Live Video From谁
+    :param driver:
+    :param user:  选择哪个user来share
+    :return:
+    """
+    # 点击右侧的share按钮
+    click_right_share_button(driver)
+    # 点击Share live video from somebody：
+    public_click_element(driver,live_video_from_sb.format(user),description=f"右侧的share_live_video_from_{user}")
 
 def record_or_do_not_record(if_record,who_do_it,*args):
     """
@@ -815,24 +768,6 @@ def click_share_a_photo(driver,fileName):
     picture_path = get_picture_path(fileName)
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
 
-def image_is_frozen(driver):
-    """
-    进入Freeze模式
-    :param driver:
-    :return:
-    """
-    public_click_element(driver,video_on_button,description='右侧video图标')
-    public_click_element(driver,'//span[text()="Freeze"]',description='Freeze按钮')
-
-def image_is_unfrozen(driver):
-    """
-    进入video模式
-    :param driver:
-    :return:
-    """
-    public_click_element(driver,'//*[@*="#freeze_on"]/..',description='右侧Freeze图标')
-    public_click_element(driver,'//span[text()="Huiming.shi…’s camera"]',description='Freeze按钮')
-
 def click_cancel_send_photo(driver):
     """
     点击Cancel按钮，取消上传图片
@@ -840,33 +775,6 @@ def click_cancel_send_photo(driver):
     :return:
     """
     public_click_element(driver,cancel_send_photo,description='Cancel上传图片按钮')
-
-def turn_off_camera(driver):
-    """
-    通话过程中关闭摄像头
-    :param driver:
-    :return:
-    """
-    public_click_element(driver,video_on_button,description='右侧video图标')
-    public_click_element(driver,stop_video_button,description="Stop_Video图标")
-
-def turn_on_camera(driver):
-    """
-    通话过程中重新打开摄像头
-    :param driver:
-    :return:
-    """
-    public_click_element(driver,video_on_button,description='右侧video图标')
-    public_click_element(driver,start_video_button,description="Start_Video图标")
-
-def click_participants_icon(driver):
-    """
-    通话过程中点击右下角的入会者图标
-    :param driver:
-    :return:
-    """
-    public_click_element(driver, show_participants_button, description="右下角入会者图标")
-    time.sleep(1)
 
 def clicks_the_hollow_dot(driver):
     """
@@ -893,114 +801,155 @@ def click_nav_left(driver):
     """
     public_click_element(driver, nav_left, description="点击左移按钮")
 
-def turn_on_co_host(driver,username):
+def turn_on_co_host_for_sb(driver,username,can_turn_on = 'can'):
     """
-    把co-host状态为off的角色给turn_on
+    打开某个人的Co-host
     :param driver:
     :param username:
+    :param can_turn_on: 是否可以开启，默认可以
     :return:
     """
-    public_click_element(driver,co_host_off.format(username),description=f"turn_on{username}成为Co-Host")
+    # 点击左侧的Participants按钮进行展开
+    click_participants_div(driver)
+    # 点击>
+    public_click_element(driver,co_host_right_button.format(username),description=f"{username}旁的>按钮")
+    if can_turn_on == 'can':
+        # 进行开启co-host操作
+        public_click_element(driver, turn_on_co_host_button, description="Co-host打开按钮")
+    else:
+        ele_list = get_xpath_elements(driver,co_host_button_unusable)
+        public_assert(driver, len(ele_list), 1, action="Co-host无法开启")
+    # 点击"x"按钮进行收起
+    close_invite_3th_page(driver)
 
-def co_host_mute_other_participant(driver,username):
+def turn_off_co_host_for_sb(driver,username,can_turn_off = 'can'):
     """
-    Co-Host静音其他的入会者
+    关闭某个人的Co-host
     :param driver:
     :param username:
+    :param can_turn_off: 是否可以关闭，默认可以
     :return:
     """
-    public_click_element(driver,mute_which_participant.format(username),description="静音某个入会者")
+    # 点击左侧的Participants按钮进行展开
+    click_participants_div(driver)
+    # 点击>
+    public_click_element(driver,co_host_right_button.format(username),description=f"{username}旁的>按钮")
+    # public_click_element(driver,'//span[text()="Co-host"]/../../following-sibling::div[1]//*[@*="#angle_right"]/..',description="Co-host旁的>按钮")
+    if can_turn_off == "can":
+        # 进行关闭co-host操作
+        public_click_element(driver,turn_off_co_host_button,description="Co-host关闭按钮")
+    else:
+        ele_list = get_xpath_elements(driver,co_host_button_unusable)
+        public_assert(driver,len(ele_list),1,action="Co-host无法关闭")
+    # 点击"x"按钮进行收起
+    close_invite_3th_page(driver)
 
-def try_unmute_other_participant(driver,username):
+def turns_off_on_camera(driver,action = 'off'):
     """
-    Co-Host尝试解除其他入会者的静音
+    打开或者关闭左侧的camera
+    :param driver:
+    :param action: off表示关闭Camera，on为打开
+    :return:
+    """
+    if action == 'off':
+        public_click_element(driver,off_on_camera.format('on'),description="turn_off——Camera")
+    else:
+        public_click_element(driver,off_on_camera.format('off'),description='turn_on——Camera')
+
+def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes'):
+    """
+    remove某个人的Co-host
     :param driver:
     :param username:
+    :param can_remove: 是否可以remove
+    :param if_remove: 是否remove
     :return:
     """
-    public_click_element(driver,participant_mic_is_off.format(username),description=f"解除{username}静音")
+    # 点击左侧的Participants按钮进行展开
+    click_participants_div(driver)
+    # 点击>
+    public_click_element(driver,co_host_right_button.format(username),description=f"{username}旁的>按钮")
+    if can_remove == 'can':
+        public_click_element(driver,'//div[@class="remove-button " and text()="remove"]',description=f'remove{username}')
+        ele_list = get_xpath_elements(driver,f'//div[text()="Are you sure you want to remove {username}?"]')
+        public_assert(driver,len(ele_list),1,action="remove时的message正确")
+        if if_remove == 'yes':
+            public_click_element(driver,'//button[text()="OK"]',description="OK按钮")
+        else:
+            public_click_element(driver, '//button[@class="btn btn-default" and text()="Cancel"]', description="Cancel按钮")
+    else:
+        ele_list = get_xpath_elements(driver,'//div[@class="remove-button disableRemove" and text()="remove"]')
+        public_assert(driver,len(ele_list),1,action=f"{username}不可remove")
+    # 点击"x"按钮进行收起
+    close_invite_3th_page(driver)
 
-def turns_on_mic_by_himself(driver):
+def co_host_mute_sb(driver,*usernames):
     """
-    自己解除静音
+    co-host给user进行静音
     :param driver:
+    :param usernames:
     :return:
     """
-    public_click_element(driver,mic_is_off,description="自己解除静音")
+    # 点击左侧的Participants按钮进行展开
+    click_participants_div(driver)
+    # 给user进行静音
+    for user in usernames:
+        if len(get_xpath_elements(driver,mute_which_participant.format(user))) == 1:
+            public_click_element(driver,mute_which_participant.format(user),description=f"给{user}静音")
+            ele_list = get_xpath_elements(driver,unmute_which_participant.format(user))
+            public_assert(driver,len(ele_list),1,action=f"给{user}静音成功")
+        else:
+            public_click_element(driver, unmute_which_participant.format(user), description=f"给{user}取消静音")
+            ele_list = get_xpath_elements(driver, mute_which_participant.format(user))
+            public_assert(driver, len(ele_list), 0, action=f"不应无法给{user}取消静音")
+    # 点击左侧的Participants按钮进行收起
+    close_invite_3th_page(driver)
 
-def click_remove_which_participant(driver,username):
+def turns_on_mic_by_himself(*drivers):
     """
-    移除某个入会者
+    入会者自己解除静音成功
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        public_click_element(driver, turns_on_mic, description="自己解除静音")
+        ele_list = get_xpath_elements(driver,mic_is_on)
+        public_assert(driver,len(ele_list),1,action="自己解除静音成功")
+
+def select_co_host_back(driver,username = 'Huiming.shi.helplightning+EU2',can_turn_on = 'can',action = 'turn_on'):
+    """
+    # 选择co-host后返回
     :param driver:
-    :param username:
+    :param username:需要设置为另一个共同主持的user name
+    :param can_turn_on: 这个user是否可以开启co-host
+    :param action: 打开还是关闭；默认是打开:turn_on
     :return:
     """
-    public_click_element(driver,remove_one_participant.format(username),description=f"移除{username}入会者")
-
-def click_cancel_after_remove(driver):
-    """
-    点击移除入会者后，点击Cancel，取消移除
-    :param driver:
-    :return:
-    """
-    public_click_element(driver,cancel_remove,description="Cancel按钮")
-
-def click_confirm_after_remove(driver):
-    """
-    点击移除入会者后，点击OK，确定移除
-    :param driver:
-    :return:
-    """
-    public_click_element(driver, confirm_remove, description="OK按钮")
-
-def click_switch_role_icon(driver):
-    """
-    点击右侧的切换role的图标（人头像）
-    :param driver:
-    :return:
-    """
-    public_click_element(driver, f2f_on_mode, description='点击切换role图标')
-
-def Co_host_selects_user_1_as_giver(driver,username):
-    """
-    Co-Host选择一个user成为giver
-    :param driver:
-    :param username:
-    :return:
-    """
-    public_click_element(driver,specific_which_user.format(username),description=f"选择{username}成为giver")
-
-def Co_host_selects_user_2_as_receiver(driver,username):
-    """
-    Co-Host选择一个user成为receiver
-    :param driver:
-    :param username:
-    :return:
-    """
-    public_click_element(driver,specific_which_user.format(username),description=f"选择{username}成为receiver")
-
-def click_mode_back_button(driver):
-    """
-    点击MODE底部的back按钮
-    :param driver:
-    :return:
-    """
-    public_click_element(driver,back_button_in_bottom,description="mode底部的back按钮")
-
-def click_mode_continue_button(driver):
-    """
-    点击MODE底部的continue按钮
-    :param driver:
-    :return:
-    """
-    public_click_element(driver,continue_button_in_bottom,description="mode底部的back按钮")
-
-
+    # 点击>
+    public_click_element(driver, co_host_right_button.format(username), description=f"{username}旁的>按钮")
+    if can_turn_on == 'can':
+        # 进行开启co-host操作
+        if action == 'turn_on':
+            public_click_element(driver, turn_on_co_host_button, description="Co-host打开按钮")
+        else:
+            public_click_element(driver, turn_off_co_host_button, description="Co-host关闭按钮")
+    else:
+        # 校验co-host开关不可用
+        ele_list = get_xpath_elements(driver, co_host_button_unusable)
+        public_assert(driver, len(ele_list), 1, action="Co-host无法开启")
+    # 点击Participants的Back按钮
+    public_click_element(driver,'//div[@class="return-button"]',description="Participants的Back按钮")
 
 
 if __name__ == '__main__':
-    from else_public_lib import driver_set_up_and_logIn, logout_citron
-    driver6 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com', '*IK<8ik,8ik,')
-    driver7 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766553@outlook.com', '*IK<8ik,8ik,')
-    time.sleep(10000)
-    print()
+    import tkinter as tk
+    root = tk.Tk()
+    print(root.winfo_screenwidth())
+    print(root.winfo_screenheight())
+    root.destroy()
+
+    # from else_public_lib import driver_set_up_and_logIn, logout_citron
+    # driver6 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766551@outlook.com', '*IK<8ik,8ik,')
+    # driver7 = driver_set_up_and_logIn('Huiming.shi.helplightning+99887766553@outlook.com', '*IK<8ik,8ik,')
+    # time.sleep(10000)
+    # print()

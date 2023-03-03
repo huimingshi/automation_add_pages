@@ -3,7 +3,7 @@
 # @Author   :Huiming Shi
 
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import debug_tools_close_xpath
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import debug_tools_close_xpath
 
 
 def open_debug_tools_in_settings(driver):

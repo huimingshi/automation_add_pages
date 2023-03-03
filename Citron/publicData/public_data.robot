@@ -338,6 +338,20 @@ ${notifications_username04}             Huiming.shi.helplightning+notificat_04
 ${notifications_user05}                 Huiming.shi.helplightning+notificat_05@outlook.com                                       # 用于Notificationse测试(In-call User Notifications)
 ${notifications_username05}             Huiming.shi.helplightning+notificat_05
 
+
+# 下列账号都属于Huiming.shi下的我自己创建的open_call_center_mode_WS中的user，默认开启了call center mode
+# Call center
+${center_mode_user1}                    Huiming.shi.helplightning+center_mode_user1@outlook.com                                  # 用于Call center的case
+${center_mode_username1}                Huiming.shi.helplightning+center_mode_user1
+
+${center_mode_user2}                    Huiming.shi.helplightning+center_mode_user2@outlook.com                                  # 用于Call center的case
+${center_mode_username2}                Huiming.shi.helplightning+center_mode_user2
+
+${center_mode_user3}                    Huiming.shi.helplightning+center_mode_user3@outlook.com                                  # 用于Call center的case
+${center_mode_username2}                Huiming.shi.helplightning+center_mode_user3
+
+
+
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
 # password:  Welcome1

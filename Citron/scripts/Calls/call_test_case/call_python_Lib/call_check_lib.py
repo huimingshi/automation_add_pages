@@ -4,31 +4,31 @@
 #----------------------------------------------------------------------------------------------------#
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
-from Citron.scripts.Calls.call_test_case.call_python_Lib.call_action_lib import \
-    click_show_directory_when_invite_3rd as CSDWI3, \
-    in_call_click_message_button as ICCMB, click_invite_user_div as CIUD
+from Citron.scripts.Calls.call_test_case.call_python_Lib.call_action_lib_copy import click_participants_div as CPD, \
+    in_call_click_message_button as ICCMB, click_right_share_button as CRSB, close_invite_3th_page as CI3P
+from Citron.scripts.Calls.call_test_case.call_python_Lib.finish_call import hang_up_the_phone as HUTP
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
-from public_settings_and_variable import *
+from public_settings_and_variable_copy import *
 
 #----------------------------------------------------------------------------------------------------#
 
 
-def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no_click_show'):
-    """
-    check 'Show Directory' button show up or not when invite 3rd user
-    :param driver:
-    :param count_expect: 预期count of user
-    :param if_click: 是否勾选‘Show Directory’；默认'no_click_show'不勾选；'click_show'为勾选
-    :return:
-    """
-    # try:
-    if int(count_expect) == 1:
-        public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段未出现', if_click=None)
-    elif int(count_expect) == 0:
-        public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
-    public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
-    if if_click != 'no_click_show':
-        CSDWI3(driver)
+# def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no_click_show'):
+#     """
+#     check 'Show Directory' button show up or not when invite 3rd user
+#     :param driver:
+#     :param count_expect: 预期count of user
+#     :param if_click: 是否勾选‘Show Directory’；默认'no_click_show'不勾选；'click_show'为勾选
+#     :return:
+#     """
+#     # try:
+#     if int(count_expect) == 1:
+#         public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段未出现', if_click=None)
+#     elif int(count_expect) == 0:
+#         public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
+#     public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
+#     if if_click != 'no_click_show':
+#         CSDWI3(driver)
 
 def user_end_call_by_self(driver):
     """
@@ -178,18 +178,34 @@ def file_is_too_large(driver):
     # 再次点击上传附件按钮，关闭上传
     public_click_element(driver, message_toolbarButton, description='再次点击上传附件按钮')
 
-def participants_icon_is_visible(driver,visible = "yes"):
+def participants_icon_is_visible(visible = "yes",*drivers):
     """
     在call通话中，做侧的参与者图标是否展示
     :param driver:
     :param visible:参与者图标是否可见，默认yes可见
     :return:
     """
-    ele_list = get_xpath_elements(driver, participants_div)
-    if visible == "yes":
-        public_assert(driver, 1, len(ele_list), action="参与者图标应该可见")
-    else:
-        public_assert(driver, 0, len(ele_list), action="参与者图标应该不可见")
+    for driver in drivers:
+        ele_list = get_xpath_elements(driver, participants_div)
+        if visible == "yes":
+            public_assert(driver, 1, len(ele_list), action="参与者图标应该可见")
+        else:
+            public_assert(driver, 0, len(ele_list), action="参与者图标应该不可见")
+
+def invite_button_is_hidden(*drivers):
+    """
+    校验Invite button is hidden for all participants
+    :param drivers: driver
+    :return:
+    """
+    for driver in drivers:
+        # 点击Participants按钮，展开
+        CPD(driver)
+        # 断言没有add user按钮
+        ele_list = get_xpath_elements(driver,enter_add_user_page)
+        public_assert(driver,len(ele_list),0,action="已达6人不可再邀请")
+        # 点击"x"按钮，收起
+        CI3P(driver)
 
 def check_in_photo_pdf_whiteboard_mode(*drivers):
     """
@@ -218,8 +234,13 @@ def check_only_can_share_themself(*drivers):
     :return:
     """
     for driver in drivers:
+        # 将右侧的Share按钮展开
+        CRSB(driver)
+        # 检查尽可以share自己
         ele_list = get_xpath_elements(driver,live_video_from_sb.format("My Camera"))
         public_assert(driver,len(ele_list),1,action="仅可以share自己")
+        # 将右侧的Share按钮收起
+        CRSB(driver)
 
 def check_has_merged(*drivers):
     """
@@ -261,6 +282,15 @@ def check_has_no_merge_menu(*drivers):
         ele_list = get_xpath_elements(driver, merge_on_button)
         public_assert(driver, len(ele_list), 0, action="merge按钮应该不展示")
 
+def check_in_f2f_mode(driver):
+    """
+    检查当前处于f2f模式
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver, '//button[@class="AudioPlusModeIndicator"]')
+    public_assert(driver,len(ele_list),1,action="处于f2f模式")
+
 def check_show_share_live_video_from(*drivers):
     """
     校验Share live video from按钮展示
@@ -289,8 +319,13 @@ def check_can_share_sb_live_video(driver,*users):
     :return:
     """
     for user in users:
+        # 将右侧的Share按钮展开
+        CRSB(driver)
+        # 校验可以share哪些人的live video
         ele_list = get_xpath_elements(driver,live_video_from_sb.format(user))
         public_assert(driver,len(ele_list),1,action=f"{user}可以被share")
+        # 将右侧的Share按收起
+        CRSB(driver)
 
 def check_has_freeze_button(*drivers):
     """
@@ -354,6 +389,8 @@ def check_if_is_highlight(driver,mode,is_highlight = "is_highlight"):
     :param is_highlight: 是否高亮显示
     :return:
     """
+    # 将右侧的Share按钮展开
+    CRSB(driver)
     # 检查是否高亮显示
     if is_highlight == "is_highlight":
         if mode == "Take a New Photo":
@@ -373,21 +410,25 @@ def check_if_is_highlight(driver,mode,is_highlight = "is_highlight"):
             public_check_element(driver,'//*[@*="#share_file"]/..',description="PDF不应该高亮显示",if_click = 0)
         elif mode == "Whiteboard":
             public_check_element(driver,'//*[@*="#white_board"]/..',description="Whiteboard不应该高亮显示",if_click = 0)
+    # 将右侧的Share按钮收起
+    CRSB(driver)
 
 def invite_button_should_be_hidden(driver,hidden = "yes"):
     """
-    通话过程中的invite按钮不可见
+    通话过程中的Add user按钮不可见
     :param driver:
     :param hidden: 是否隐藏？默认yes隐藏
     :return:
     """
-    CIUD(driver)
-    ele_list = get_xpath_elements(driver,enter_invite_user_page)
+    # 点击Participants按钮，展开
+    CPD(driver)
+    ele_list = get_xpath_elements(driver,enter_add_user_page)
     if hidden == "yes":
         public_assert(driver, 0, len(ele_list), action="invite按钮应该被隐藏")
     else:
         public_assert(driver, 1, len(ele_list), action="invite按钮不应该被隐藏")
-    CIUD(driver)
+    # 点击"x"按钮，收起
+    CI3P(driver)
 
 def check_participants_correct(driver,*args):
     """
@@ -428,22 +469,10 @@ def check_current_participants(driver,*args):
     print(len(ele_list))
     public_assert(driver, 0, len(ele_list), action=f"当前页面应该只有{len(args)}个入会者")
     for i in range(len(args)):
+        print(current_participant_div.format(i))
         participant = get_xpath_element(driver,current_participant_div.format(i),description=f"获取第{i+1}个入会者name").get_attribute("textContent")
         print(participant,args[i])
-        public_assert(driver, participant, args[i], action=f"第{i+1}个入会者正确")
-
-def check_f2f_mode_show(driver,show = "show"):
-    """
-    是否展示切换role的图标
-    :param driver:
-    :param show:  是否展示切换role图标，默认展示
-    :return:
-    """
-    ele_list = get_xpath_elements(driver,f2f_on_mode)
-    if show == "show":
-        public_assert(driver, 1, len(ele_list), action="应该展示切换role的图标")
-    else:
-        public_assert(driver, 0, len(ele_list), action="不应该展示切换role的图标")
+        public_assert(driver, args[i], participant, condition='in',action=f"第{i+1}个入会者正确")
 
 def participants_display_4_columns(driver):
     """
@@ -451,6 +480,8 @@ def participants_display_4_columns(driver):
     :param driver:
     :return:
     """
+    # 点击Participants按钮，展开
+    CPD(driver)
     title_list = [None,"Participant","Mute","Co-Host","Remove"]
     ele_list = get_xpath_elements(driver,participants_title)
     public_assert(driver,5,len(ele_list),action="展示Participants,Mute,Co-Host,Remove")
@@ -458,6 +489,8 @@ def participants_display_4_columns(driver):
         title = ele_list[i].get_attribute("textContent")
         print(title)
         public_assert(driver,title,title_list[i],action=f"title{title_list[i]}正确")
+    # 点击"x"按钮，收起
+    CI3P(driver)
 
 def Co_Host_is_turned_on(driver,username,status = "on"):
     """
@@ -473,63 +506,6 @@ def Co_Host_is_turned_on(driver,username,status = "on"):
     else:
         ele_list = get_xpath_elements(driver, co_host_off.format(username))
         public_assert(driver, 1, len(ele_list), action=f"{username}的Co-Host状态应该是off")
-
-def co_host_can_not_turn_off(driver,username):
-    """
-    断言这个角色的co-host不能被turn-off
-    :param driver:
-    :param username:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver,can_not_turn_off.format(username))
-    public_assert(driver, 1, len(ele_list), action=f"{username}的Co-Host状态不能被关闭")
-
-def can_not_remove_participant(driver,username):
-    """
-    断言这个角色不能从入会者中被remove
-    :param driver:
-    :param username:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver, can_not_remove.format(username))
-    public_assert(driver, 1, len(ele_list), action=f"{username}不能被移除")
-
-def check_mic_is_off(driver,status = "off"):
-    """
-    断言麦克风被静音
-    :param driver:
-    :param status: 是否被静音，默认off被静音
-    :return:
-    """
-    if status == "off":
-        ele_list = get_xpath_elements(driver, mic_is_off)
-        public_assert(driver,1,len(ele_list),action="麦克风应该关闭")
-    else:
-        ele_list = get_xpath_elements(driver, mic_is_on)
-        public_assert(driver, 1, len(ele_list), action="麦克风应该开启")
-
-def check_after_click_remove(driver,username):
-    """
-    检查点击移除co-host后出现的提示信息
-    :param driver:
-    :param username:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver, f"//div[text()='Are you sure you want to remove {username}?']")
-    public_assert(driver, 1, len(ele_list), action="移除co-host出现提示信息")
-    ele_list = get_xpath_elements(driver,confirm_remove)
-    public_assert(driver, 1, len(ele_list), action="移除co-host出现OK按钮")
-    ele_list = get_xpath_elements(driver, cancel_remove)
-    public_assert(driver, 1, len(ele_list), action="移除co-host出现Cancel按钮")
-
-def check_removed_end_call_message(driver):
-    """
-    断言移除之后通话结束页面的提示信息正确
-    :param driver:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver,"//div[@id='end_call_message' and text()='A Host has removed you from the call.']")
-    public_assert(driver,1,len(ele_list),action="移除之后通话结束页面的提示信息正确")
 
 def show_title_text_under_mode(driver):
     """
@@ -547,101 +523,89 @@ def show_title_text_under_mode(driver):
     ele_list = get_xpath_elements(driver, "//span[@class='steps' and text()='Step 1 of 2']")
     public_assert(driver, 1, len(ele_list), action="MODE最下面的Step描述正确")
 
-def check_every_role(driver,*args):
+def check_has_end_call_button(driver,*buttons):
     """
-    点击切换role的图标后，展示的user按顺序排序
+    检查有哪些结束call的操作
     :param driver:
-    :param args:
+    :param buttons: 1表示：end_call_for_all_button，2表示：leave_call_button
     :return:
     """
-    ele_list = get_xpath_elements(driver,every_role)
-    public_assert(driver,len(args),len(ele_list),action=f"应该展示{len(ele_list)}个user")
-    for i in range(len(ele_list)):
-        username = ele_list[i].get_attribute("textContent")
-        print(username)
-        public_assert(driver,args[i],username,action=f"{username}按顺序排序")
+    # 点击红色的挂断电话按钮展开
+    HUTP(driver)
+    time.sleep(2)
+    for button in buttons:
+        if button == '1':
+            ele_list = get_xpath_elements(driver, end_call_for_all_button)
+            public_assert(driver, len(ele_list), 1, action="有End_call_for_all按钮")
+        elif button == '2':
+            ele_list = get_xpath_elements(driver, leave_call_button)
+            public_assert(driver, len(ele_list), 1, action="有Leave_call按钮")
+    # 点击红色的挂断电话按钮收起
+    HUTP(driver)
+    time.sleep(2)
 
-def mode_submenu_should_not_display(driver):
+def display_users_as_joined_order(driver,*username):
     """
-    Non co-host clicks on mode icon.	VP: mode submenu should not display.
-    :param driver:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver, f2f_on_mode)
-    public_assert(driver, 0, len(ele_list), action=f"不应该展示切换role的图标")
-
-def show_title_text_under_mode_after_choose_giver(driver):
-    """
-    VP: Text changes to "Select who will Receive Help". Step 2 of 2 displays in the bottom.
-    :param driver:
-    :return:
-    """
-    # Text changes to "Select who will Receive Help"
-    ele_list = get_xpath_elements(driver,"//h3[text()='Select who will Receive Help.']")
-    public_assert(driver,1,len(ele_list),action="MODE下的text正确")
-    # Step 2 of 2 displays in the bottom.
-    ele_list = get_xpath_elements(driver,"//span[@class='steps' and text()='Step 2 of 2']")
-    public_assert(driver,1,len(ele_list),action="MODE最下面的Step描述正确")
-
-def user_is_selected_status(driver,username,selected = 'yes'):
-    """
-    MODE下的user被选中
+    检查按顺序加入通话的
     :param driver:
     :param username:
-    :param selected:
     :return:
     """
-    # User 1 is selected status.
-    ele_list = get_xpath_elements(driver, f"//div[@class='user width30 selected']//strong[text()='{username}']")
-    if selected == "yes":
-        public_assert(driver,1,len(ele_list),action=f"f{username}应该被选中为giver")
+    # 点击Participants按钮，展开
+    CPD(driver)
+    ele_list = get_xpath_elements(driver,'//span[@class="submenu noarrow"]//div[@ref="eBodyViewport"]//div[@col-id="name"]')
+    for i in range(len(ele_list)):
+        name = ele_list[i].get_attribute("textContent")
+        public_assert(driver,name,username[i],action="joiner按顺序加入")
+    # 点击"x"按钮，收起
+    CI3P(driver)
+
+def who_is_co_host(driver,*whos):
+    """
+    判断谁是co-host
+    :param driver:
+    :param who:
+    :return:
+    """
+    # 点击Participants按钮，展开
+    CPD(driver)
+    for who in whos:
+        ele_list = get_xpath_elements(driver,f'//span[text()="Co-host"]/../../..//span[text()="{who}"]')
+        public_assert(driver,len(ele_list),1,action=f'{who}是co-host')
+    # 点击"x"按钮，收起
+    CI3P(driver)
+
+def you_must_select_another_co_host(driver):
+    """
+    # 出现文本"You must select another co-host before you can Leave Call."
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver, '//p[text()="You must select another co-host before you can Leave Call."]')
+    public_assert(driver, len(ele_list), 1, action="断言有提示信息出现")
+
+def participants_page_end_call_for_all(driver):
+    """
+    Participants页面的 "End Call for All" 按钮可用
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver, PPECFA_button)
+    public_assert(driver,len(ele_list),1,action="end_call_for_all按钮可用")
+
+def participants_page_leave_call_disable(driver,usable = 'disable'):
+    """
+    Participants页面的 "Leave Call" 按钮是否可用
+    :param driver:
+    :param usable:  是否可用，默认disable不可用
+    :return:
+    """
+    #  "Leave Call" 按钮是否可用
+    result = get_xpath_element(driver, '//div[@class="submenu-content"]//button[text()="Leave Call"]').is_enabled()
+    print(result)
+    # 如果不可用
+    if usable == 'disable':
+        public_assert(driver, result, False, action="Leave_call按钮应该不可用")
+    # 如果可用
     else:
-        public_assert(driver, 0, len(ele_list), action=f"f{username}应该未被选中")
-
-def back_button_displays_in_the_bottom(driver):
-    """
-    选择giver后，Back按钮展示在底部
-    :param driver:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver,back_button_in_bottom)
-    public_assert(driver,1,len(ele_list),action="Back按钮展示在底部")
-
-def continue_button_appears_in_the_bottom(driver):
-    """
-    选择giver和receiver后，continue按钮展示在底部
-    :param driver:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver, continue_button_in_bottom)
-    public_assert(driver, 1, len(ele_list), action="Continue按钮展示在底部")
-
-def mode_icon_displays_as(driver,mode = "giver"):
-    """
-    检查user当前在什么模式下
-    :param driver:
-    :param mode:
-    :return:
-    """
-    if mode == "giver":
-        ele_list = get_xpath_elements(driver,giver_help_mode)
-        public_assert(driver,1,len(ele_list),action="当前应该在giver模式下")
-    elif mode == "receiver":
-        ele_list = get_xpath_elements(driver, receiver_help_mode)
-        public_assert(driver, 1, len(ele_list), action="当前应该在receiver模式下")
-    elif mode == "observer":
-        ele_list = get_xpath_elements(driver, observer_mode)
-        public_assert(driver, 1, len(ele_list), action="当前应该在observer模式下")
-    else:
-        raise Exception("请输入正确的模式")
-
-def check_observer_permission(driver):
-    """
-    检查observer模式下的user的权限
-    :param driver:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver,Share_a_document)
-    public_assert(driver,0,len(ele_list),action="应该没有Share_a_document按钮")
-    ele_list = get_xpath_elements(driver, Share_a_photo)
-    public_assert(driver, 0, len(ele_list), action="应该没有Share_a_photo按钮")
+        public_assert(driver, result, True, action="Leave_call按钮应该可用")

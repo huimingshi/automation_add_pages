@@ -6,7 +6,7 @@ import time
 from Citron.public_switch.pubLib import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import if_has_tutorial_then_close
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import *
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 
 
 def click_first_line_details(driver):

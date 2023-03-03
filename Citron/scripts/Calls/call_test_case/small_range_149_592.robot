@@ -16,162 +16,157 @@ Library           call_python_Lib/finish_call.py
 Force Tags        small_range
 
 *** Test Cases ***
-Small_range_149_151
-    [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
-    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show     有bug：https://vipaar.atlassian.net/browse/CITRON-3353     call_case
-#    [Setup]     run keywords      Login_premium_user                        # log in with premium admin
-#    ...         AND               enter_workspace_workspace_settings        # enter first workspace workspace setting
-#    ...         AND               close_call_center_mode                    # workspace WS1 has "Disable External Feature"=OFF
-#    ...         AND               Close
-#    # 需要保证During Call: Call Center Mode为OFF状态
-#    [Setup]      set_call_center_mode_setUp    site_admin     close
-    # premium user log in
-    ${driver1}  driver_set_up_and_logIn   ${site_admin_username}
-    # Contact of premium user log in
-    ${driver2}  driver_set_up_and_logIn     ${message_test0_user}
-    # premium user call contact in F2F mode
-    contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${message_test0_username}
-    # VP: hint dialog shows;
+#Small_range_149_151
+#    [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
+#    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show     有bug：https://vipaar.atlassian.net/browse/CITRON-3353     call_case
+##    [Setup]     run keywords      Login_premium_user                        # log in with premium admin
+##    ...         AND               enter_workspace_workspace_settings        # enter first workspace workspace setting
+##    ...         AND               close_call_center_mode                    # workspace WS1 has "Disable External Feature"=OFF
+##    ...         AND               Close
+##    # 需要保证During Call: Call Center Mode为OFF状态
+##    [Setup]      set_call_center_mode_setUp    site_admin     close
+#    # premium user log in
+#    ${driver1}  driver_set_up_and_logIn   ${site_admin_username}
+#    # Contact of premium user log in
+#    ${driver2}  driver_set_up_and_logIn     ${message_test0_user}
+#    # premium user call contact in F2F mode
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}      ${py_team_page}     ${message_test0_username}
+#    # VP: hint dialog shows;
+##    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    # Mute,Camera and End Call icon are at 50% opacity;
+##    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
+##    which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
+##    # Yellow star on F2F icon
+##    which_page_is_currently_on    ${driver1}    ${starHint_xpath}
+##    # Click Mute/Camera/Hamburger
+##    switch_to_other_tab    ${driver1}    ${mic_on_xpath}
+##    sleep  1s
+##    # VP: hint dialog still shows
+##    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    # Click Give or receive help on dialog
+##    enter_giver_mode     ${driver1}      none    none     2
+#    enter_giver_receiver_mode_setup    ${driver1}
+#    ${merge_driver}    enter_giver_mode     ${driver1}    ${driver2}
+#    # Back to F2F mode	VP: hint dialog disappear
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
+#    [Teardown]      run keywords    exit_call   ${driver2}
+#    ...             AND             exit_driver
+
+#Small_range_152
+#    [Documentation]    2 users in face to face mode
+#    [Tags]      small range 152 line     call_case
+##    # 需要保证During Call: Call Center Mode为OFF状态
+##    [Setup]      set_call_center_mode_setUp    premium_user     close      switch_to_other      ${created_workspace}
+#    # user1 log in
+#    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
+#    # user2 log in
+#    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}
+#    # user3 log in
+#    ${driver3}  driver_set_up_and_logIn     ${Expert_User3_username}
+#    # 2 users in face to face mode
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
+#    # VP: hint dialog shows;
+##    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    # 3rd user join as 3pc call
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+#    enter_contacts_search_user    ${driver1}   ${Expert_User3_name}
+#    click_user_in_contacts_list    ${driver1}     ${Expert_User3_name}
+#    user_anwser_call    ${driver3}
+#    sleep  10s
+#    enter_receiver_mode    ${driver1}
+#    ${merge_driver}    enter_giver_mode     ${driver1}    ${driver2}   ${driver3}
+#    # VP:hints dialog is closed on screen of 3pc call
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
+#    sleep   10000
+#    # 结束call
+#    end_call_for_all   ${driver1}
+#    [Teardown]      exit_driver
+
+#Small_range_153_160
+#    [Documentation]    Enterprise user call contact in F2F mode
+#    [Tags]      small range 153-160 lines       call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3547，已修复
+#    # Enterprise user log in
+#    ${driver1}  driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
+#    # contact of Enterprise user log in
+#    ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
+#    # uncheck "Continue to show hints" checkbox
+#    switch_to_other_tab     ${driver1}     ${Continue_to_show_hints}
+#    # End call, then make another call
+#    exit_call    ${driver1}
+#    close_call_ending_page_RF    ${driver1}
+#    close_call_ending_page_RF    ${driver2}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
+#    # VP: hint dialog does not shown
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
+#    # End call
+#    exit_call    ${driver1}
+#    close_call_ending_page_RF    ${driver1}
+#    close_call_ending_page_RF    ${driver2}
+#    # open "Show menu hints" setting from account
+#    enter_my_account_settings_page    ${driver1}
+#    # VP: "Show menu hints" is off
+#    which_page_is_currently_on    ${driver1}    ${open_Menu_Items}
+#    # Turn on "Show menu hints" setting
+#    switch_to_other_tab    ${driver1}    ${open_Menu_Items}
+#    # Kill/close app and relaunch
+#    exit_one_driver    ${driver1}
+#    ${driver1}   driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
+#    # VP: hints setting is on status
+#    enter_my_account_settings_page    ${driver1}
+#    which_page_is_currently_on     ${driver1}    ${Menu_Items_switch}
+#    # call contact in F2F mode
+#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
+#    # VP: hint dialog shows
 #    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-    # Mute,Camera and End Call icon are at 50% opacity;
-#    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
+#    # click Close on hint dialog
+#    switch_to_other_tab    ${driver1}     ${hint_dialog_close_button}
+#    # VP: hints dialog is closed
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
+#    # Switch to giver or receiver
+#    enter_giver_mode    ${driver1}     none    none     2     has_no_dialog
+#    # Proceed with my camera Off
+#    proceed_with_camera_off    ${driver1}
+#    # 切换回Face to Face模式
+#    enter_face_to_face_mode     ${driver1}
+#    # VP: hint dialog is not shown
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
+#    # 结束call
+#    exit_call   ${driver1}
+#    [Teardown]      exit_driver
+
+#Small_range_161
+#    [Documentation]    WebApp specific
+#    [Tags]      small range 161 line        call_case
+##    # 需要保证During Call: Call Center Mode为OFF状态
+##    [Setup]      set_call_center_mode_setUp    premium_user     close      switch_to_other      ${created_workspace}
+#    # user1 log in
+#    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
+#    # user2 log in
+#    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}
+#    # call contact in F2F mode
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
+#    # VP: hint dialog shows;
+#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
+#    # Mute,Camera and End Call icon are at 50% opacity;
+##    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
 #    which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
 #    # Yellow star on F2F icon
 #    which_page_is_currently_on    ${driver1}    ${starHint_xpath}
-#    # Click Mute/Camera/Hamburger
-#    switch_to_other_tab    ${driver1}    ${mic_on_xpath}
-#    sleep  1s
-#    # VP: hint dialog still shows
-#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-    # Click Give or receive help on dialog
-#    enter_giver_mode     ${driver1}      none    none     2
-    enter_giver_receiver_mode_setup    ${driver1}
-    ${merge_driver}    enter_giver_mode     ${driver1}    ${driver2}
-    # Back to F2F mode	VP: hint dialog disappear
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
-    [Teardown]      run keywords    exit_call   ${driver2}
-    ...             AND             exit_driver
-
-Small_range_152
-    [Documentation]    2 users in face to face mode
-    [Tags]      small range 152 line     call_case
-#    # 需要保证During Call: Call Center Mode为OFF状态
-#    [Setup]      set_call_center_mode_setUp    premium_user     close      switch_to_other      ${created_workspace}
-    # user1 log in
-    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
-    # user2 log in
-    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}
-    # user3 log in
-    ${driver3}  driver_set_up_and_logIn     ${Expert_User3_username}
-    # 2 users in face to face mode
-    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
-    # VP: hint dialog shows;
-#    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-    # 3rd user join as 3pc call
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}   ${Expert_User3_name}
-    click_user_in_contacts_list    ${driver1}     ${Expert_User3_name}
-    user_anwser_call    ${driver3}
-    sleep  10s
-    enter_receiver_mode    ${driver1}
-    ${merge_driver}    enter_giver_mode     ${driver1}    ${driver2}   ${driver3}
-    # VP:hints dialog is closed on screen of 3pc call
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
-    sleep   10000
-    # 结束call
-    end_call_for_all   ${driver1}
-    [Teardown]      exit_driver
-
-Small_range_153_160
-    [Documentation]    Enterprise user call contact in F2F mode
-    [Tags]      small range 153-160 lines       call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3547，已修复
-    # Enterprise user log in
-    ${driver1}  driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
-    # contact of Enterprise user log in
-    ${driver2}  driver_set_up_and_logIn     ${belong_enterprise_username}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
-    # uncheck "Continue to show hints" checkbox
-    switch_to_other_tab     ${driver1}     ${Continue_to_show_hints}
-    # End call, then make another call
-    exit_call    ${driver1}
-    close_call_ending_page_RF    ${driver1}
-    close_call_ending_page_RF    ${driver2}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}     ${belong_enterprise_name}
-    # VP: hint dialog does not shown
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
-    # End call
-    exit_call    ${driver1}
-    close_call_ending_page_RF    ${driver1}
-    close_call_ending_page_RF    ${driver2}
-    # open "Show menu hints" setting from account
-    enter_my_account_settings_page    ${driver1}
-    # VP: "Show menu hints" is off
-    which_page_is_currently_on    ${driver1}    ${open_Menu_Items}
-    # Turn on "Show menu hints" setting
-    switch_to_other_tab    ${driver1}    ${open_Menu_Items}
-    # Kill/close app and relaunch
-    exit_one_driver    ${driver1}
-    ${driver1}   driver_set_up_and_logIn     ${enterprise_username}   ${enterprise_password}
-    # VP: hints setting is on status
-    enter_my_account_settings_page    ${driver1}
-    which_page_is_currently_on     ${driver1}    ${Menu_Items_switch}
-    # call contact in F2F mode
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}     ${py_team_page}    ${belong_enterprise_name}
-    # VP: hint dialog shows
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-    # click Close on hint dialog
-    switch_to_other_tab    ${driver1}     ${hint_dialog_close_button}
-    # VP: hints dialog is closed
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
-    # Switch to giver or receiver
-    enter_giver_mode    ${driver1}     none    none     2     has_no_dialog
-    # Proceed with my camera Off
-    proceed_with_camera_off    ${driver1}
-    # 切换回Face to Face模式
-    enter_face_to_face_mode     ${driver1}
-    # VP: hint dialog is not shown
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}     ${not_currently_on}
-    # 结束call
-    exit_call   ${driver1}
-    [Teardown]      exit_driver
-
-Small_range_161
-    [Documentation]    WebApp specific
-    [Tags]      small range 161 line        call_case
-#    # 需要保证During Call: Call Center Mode为OFF状态
-#    [Setup]      set_call_center_mode_setUp    premium_user     close      switch_to_other      ${created_workspace}
-    # user1 log in
-    ${driver1}  driver_set_up_and_logIn     ${Expert_User1_username}
-    # user2 log in
-    ${driver2}  driver_set_up_and_logIn     ${Expert_User2_username}
-    # call contact in F2F mode
-    contacts_witch_page_make_call   ${driver1}   ${driver2}   ${py_team_page}   ${Expert_User2_name}
-    # VP: hint dialog shows;
-    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
-    # Mute,Camera and End Call icon are at 50% opacity;
-#    which_page_is_currently_on    ${driver1}    ${mic_on_xpath}
-    which_page_is_currently_on    ${driver1}    ${phone_end_red_xpath}
-    # Yellow star on F2F icon
-    which_page_is_currently_on    ${driver1}    ${starHint_xpath}
-    # VP: Have Switch Camera button
-    enter_giver_mode    ${driver1}   none   none   2
-    # Proceed with my camera Off
-    proceed_with_camera_off    ${driver1}
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # 结束call
-    exit_call   ${driver1}
-    [Teardown]      exit_driver
+#    # VP: Have Switch Camera button
+#    enter_giver_mode    ${driver1}   none   none   2
+#    # Proceed with my camera Off
+#    proceed_with_camera_off    ${driver1}
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # 结束call
+#    exit_call   ${driver1}
+#    [Teardown]      exit_driver
 
 Join_call_162_167
     [Documentation]     Join call	MPC via dialer directly
     [Tags]     small range 162-167 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
     [Setup]   ws_open_directory    premium_user   switch_to_other   ${created_workspace}
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
@@ -212,13 +207,7 @@ Join_call_162_167
 Join_call_179_187
     [Documentation]     Join call	MPC via MHS link.
     [Tags]     small range 179-187 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-#    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
+    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
     # EU1 登录
     ${driver1}   driver_set_up_and_logIn    ${Expert_User5_username}
     # TU2 登录
@@ -282,11 +271,6 @@ Join_call_179_187
 Join_call_188_195
     [Documentation]     Join call	MPC via OTU link.
     [Tags]     small range 188-195 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
     # EU1 登录
@@ -339,69 +323,64 @@ Join_call_188_195
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Join_call_201_205
-    [Documentation]     In call	  2PC
-    [Tags]     small range 201-205 lines        call_case
-#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-#    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
-    # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
-    # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
-    ${invite_url}    send_meeting_room_link    ${driver1}    ${OTU_link_email}
-    ${driver2}   anonymous_open_meeting_link     ${invite_url}
-    # 确保call连接成功，但未接听
-    make_sure_enter_call   ${driver2}
-    user_anwser_call     ${driver1}
-    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    sleep   20s
-    hang_up_the_phone     ${driver1}
-    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver1}
-    hang_up_the_phone     ${driver2}
-    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver2}
-    # EU1 switches to receiver, enters freezing, photo or pdf mode.
-    enter_giver_mode    ${driver1}   no_one    no_one    2    has_dialog    receive
-    # Proceed with my camera Off
-    proceed_with_camera_off    ${driver1}
-    # 切换回FGD模式
-    enter_FGD_mode    ${driver1}      Document
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # Anonymous user 2 clicks on the same link. EU1 answers call.
-    ${driver3}   anonymous_open_meeting_link     ${invite_url}
-    # 确保call连接成功，但未接听
-    make_sure_enter_call   ${driver3}
-    user_anwser_call     ${driver1}    no_direct
-    # Anonymous user 1 leaves call.
-    exit_call     ${driver3}
-    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    sleep   10s
-    hang_up_the_phone     ${driver1}
-    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver1}
-    hang_up_the_phone     ${driver2}
-    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver2}
-    [Teardown]    exit_driver
+#Join_call_201_205
+#    [Documentation]     In call	  2PC
+#    [Tags]     small range 201-205 lines        call_case
+##    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
+##    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
+##    ...         AND               enter_workspace_settings_page     # 进入settings页面
+##    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
+##    ...         AND               Close
+##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+##    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
+#    # EU1 登录
+#    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
+#    # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
+#    ${invite_url}    send_meeting_room_link    ${driver1}    ${OTU_link_email}
+#    ${driver2}   anonymous_open_meeting_link     ${invite_url}
+#    # 确保call连接成功，但未接听
+#    make_sure_enter_call   ${driver2}
+#    user_anwser_call     ${driver1}
+#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+#    sleep   20s
+#    hang_up_the_phone     ${driver1}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver1}
+#    hang_up_the_phone     ${driver2}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver2}
+#    # EU1 switches to receiver, enters freezing, photo or pdf mode.
+#    enter_giver_mode    ${driver1}   no_one    no_one    2    has_dialog    receive
+#    # Proceed with my camera Off
+#    proceed_with_camera_off    ${driver1}
+#    # 切换回FGD模式
+#    enter_FGD_mode    ${driver1}      Document
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # Anonymous user 2 clicks on the same link. EU1 answers call.
+#    ${driver3}   anonymous_open_meeting_link     ${invite_url}
+#    # 确保call连接成功，但未接听
+#    make_sure_enter_call   ${driver3}
+#    user_anwser_call     ${driver1}    no_direct
+#    # Anonymous user 1 leaves call.
+#    exit_call     ${driver3}
+#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+#    sleep   10s
+#    hang_up_the_phone     ${driver1}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver1}
+#    hang_up_the_phone     ${driver2}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver2}
+#    [Teardown]    exit_driver
 
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
     [Tags]    small range 560-580 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
-#    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
     # EU1 登录
@@ -507,11 +486,6 @@ Small_range_560_580
 Join_call_168_178
     [Documentation]     Join call	MPC via on-call group.
     [Tags]     small range 168-178 lines        call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3646
-#    [Setup]     run keywords      Login_site_admin                  # log in with Site Admin
-#    ...         AND               switch_to_created_workspace       ${created_workspace_branding_3}      # 进入WS_branding_setting_WS3这个WS
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-#    ...         AND               Close
     [Setup]   ws_open_directory    site_admin   switch_to_other    ${created_workspace_branding_3}
     # TU2 登录
     ${driver1}   driver_set_up_and_logIn    ${test_WS3_TU1_user}
@@ -565,56 +539,56 @@ Join_call_168_178
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Join_call_196_200
-    [Documentation]     In call	  2PC
-    [Tags]     small range 196-200 lines        call_case
-    # EU1 登录
-    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
-    # EU2 登录
-    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}
-    # EU1 calls EU2. EU2 answers call,
-    contacts_witch_page_make_call     ${driver1}     ${driver2}   ${py_team_page}    ${Expert_User2_name}
-    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    sleep   10s
-    hang_up_the_phone     ${driver1}
-    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver1}
-    hang_up_the_phone     ${driver2}
-    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver2}
-    # EU1 switches to Giver.
-    enter_giver_mode     ${driver1}     no_one     no_one     2
-    # Proceed with my camera Off
-    proceed_with_camera_off    ${driver1}
-    # EU1 invites TU3. TU3 answers call.
-    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${Team_User1_name}
-    click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
-    user_anwser_call     ${driver3}
-    # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
-    which_page_is_currently_on     ${driver1}     ${gh_on_xpath}
-    which_page_is_currently_on     ${driver2}     ${rh_on_xpath}
-    which_page_is_currently_on     ${driver3}     ${gh_on_xpath}     ${not_currently_on}
-    which_page_is_currently_on     ${driver3}     ${rh_on_xpath}     ${not_currently_on}
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # TU3 leaves call.
-    exit_call     ${driver3}
-    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-    hang_up_the_phone     ${driver1}
-    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver1}
-    hang_up_the_phone     ${driver2}
-    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-    hang_up_the_phone     ${driver2}
-    # End call.
-    exit_call     ${driver1}
-    [Teardown]    exit_driver
+#Join_call_196_200
+#    [Documentation]     In call	  2PC
+#    [Tags]     small range 196-200 lines        call_case
+#    # EU1 登录
+#    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
+#    # EU2 登录
+#    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}
+#    # EU1 calls EU2. EU2 answers call,
+#    contacts_witch_page_make_call     ${driver1}     ${driver2}   ${py_team_page}    ${Expert_User2_name}
+#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+#    sleep   10s
+#    hang_up_the_phone     ${driver1}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver1}
+#    hang_up_the_phone     ${driver2}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver2}
+#    # EU1 switches to Giver.
+#    enter_giver_mode     ${driver1}     no_one     no_one     2
+#    # Proceed with my camera Off
+#    proceed_with_camera_off    ${driver1}
+#    # EU1 invites TU3. TU3 answers call.
+#    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+#    enter_contacts_search_user     ${driver1}    ${Team_User1_name}
+#    click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
+#    user_anwser_call     ${driver3}
+#    # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
+#    which_page_is_currently_on     ${driver1}     ${gh_on_xpath}
+#    which_page_is_currently_on     ${driver2}     ${rh_on_xpath}
+#    which_page_is_currently_on     ${driver3}     ${gh_on_xpath}     ${not_currently_on}
+#    which_page_is_currently_on     ${driver3}     ${rh_on_xpath}     ${not_currently_on}
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # TU3 leaves call.
+#    exit_call     ${driver3}
+#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
+#    hang_up_the_phone     ${driver1}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver1}
+#    hang_up_the_phone     ${driver2}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
+#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
+#    hang_up_the_phone     ${driver2}
+#    # End call.
+#    exit_call     ${driver1}
+#    [Teardown]    exit_driver
 
 Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list

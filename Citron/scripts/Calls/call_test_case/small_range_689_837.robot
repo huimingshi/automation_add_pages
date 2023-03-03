@@ -683,182 +683,174 @@ Disclaimer_808_809
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Small_range_820_821
-    [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
-    [Tags]    small range 820-821 lines     call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-#    ...         AND             Close
-    [Setup]   set_always_on_select    always_on
-    # User A 登录
-    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-    # 获取meeting link
-    ${invite_url}    send_meeting_room_link     ${driver1}    ${OTU_link_email}
-    # Anonymous user call meeting owner
-    ${driver2}   anonymous_open_meeting_link    ${invite_url}
-    # 确保call连接成功，但未接听
-    make_sure_enter_call   ${driver2}
-    # 接受Call
-    user_anwser_call      ${driver1}
-    # Another enterprise user join call
-    ${driver3}   driver_set_up_and_logIn   ${Expert_User5_username}
-    user_make_call_via_meeting_link      ${driver3}     ${invite_url}
-    # 确保建立call，但未接听
-    make_sure_enter_call    ${driver3}
-    # 接受Call
-    user_anwser_call      ${driver1}     no_direct
-    # VP: REC is on, can not changed
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    rec_is_on_or_off     ${driver1}
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    rec_is_on_or_off     ${driver2}
-    which_page_is_currently_on    ${driver3}    ${end_call_button}
-    rec_is_on_or_off     ${driver3}
-    # Change mode of giver/receiver/Observer;In mode of Freeze/GHoP/Doc Share
-    # In each mode, Say some words while do telestrations.	VP: REC is still on
-    enter_giver_mode     ${driver1}      ${ws3_branding_A_username}    ${Expert_User5_name}
-    proceed_with_camera_off    ${driver1}
-    rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
-    rec_is_on_or_off     ${driver2}
-    proceed_with_camera_off    ${driver3}
-    rec_is_on_or_off     ${driver3}
-    enter_FGD_mode     ${driver1}      Document
-    proceed_with_camera_off    ${driver1}
-    rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
-    rec_is_on_or_off     ${driver2}
-    proceed_with_camera_off    ${driver3}
-    rec_is_on_or_off     ${driver3}
-    enter_FGD_mode     ${driver1}      Photo
-    proceed_with_camera_off    ${driver1}
-    rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
-    rec_is_on_or_off     ${driver2}
-    proceed_with_camera_off    ${driver3}
-    rec_is_on_or_off     ${driver3}
-#    enter_FGD_mode     ${driver3}      Freeze
+#Small_range_820_821
+#    [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
+#    [Tags]    small range 820-821 lines     call_case
+##    [Setup]     run keywords    Login_site_admin
+##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+##    ...         AND             enter_workspace_settings_page           # 进入settings页面
+##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+##    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
+##    ...         AND             Close
+#    [Setup]   set_always_on_select    always_on
+#    # User A 登录
+#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+#    # 获取meeting link
+#    ${invite_url}    send_meeting_room_link     ${driver1}    ${OTU_link_email}
+#    # Anonymous user call meeting owner
+#    ${driver2}   anonymous_open_meeting_link    ${invite_url}
+#    # 确保call连接成功，但未接听
+#    make_sure_enter_call   ${driver2}
+#    # 接受Call
+#    user_anwser_call      ${driver1}
+#    # Another enterprise user join call
+#    ${driver3}   driver_set_up_and_logIn   ${Expert_User5_username}
+#    user_make_call_via_meeting_link      ${driver3}     ${invite_url}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver3}
+#    # 接受Call
+#    user_anwser_call      ${driver1}     no_direct
+#    # VP: REC is on, can not changed
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
 #    rec_is_on_or_off     ${driver1}
+#    which_page_is_currently_on    ${driver2}    ${end_call_button}
 #    rec_is_on_or_off     ${driver2}
+#    which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    rec_is_on_or_off     ${driver3}
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # end call
-    end_call_for_all     ${driver1}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
-
-Small_range_823
-    [Documentation]     Call on-call group from contact list
-    [Tags]    small range 823 line      call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-#    ...         AND             Close
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-#    [Setup]   set_always_on_select    always_on
-    # User A 登录
-    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-    # On-call user登录
-    ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}
-    # Call on-call group from contact list
-    contacts_witch_page_make_call    ${driver1}    ${driver2}   ${py_team_page}   ${Expert_Group_1}
-    # VP: REC is on, can not changed. What's more, on both sides, REC logo should be shown up.
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    rec_is_on_or_off     ${driver1}
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    rec_is_on_or_off     ${driver2}
-    # In mode of Freeze/GHoP/Doc Share，VP: REC is still on
-    enter_giver_mode     ${driver1}      none    none     2
-    proceed_with_camera_off    ${driver1}
-    rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
-    rec_is_on_or_off     ${driver2}
-    enter_FGD_mode     ${driver1}      Document
-    proceed_with_camera_off    ${driver1}
-    rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
-    rec_is_on_or_off     ${driver2}
-    enter_FGD_mode     ${driver1}      Photo
-    proceed_with_camera_off    ${driver1}
-    rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
-    rec_is_on_or_off     ${driver2}
-#    enter_FGD_mode     ${driver2}      Freeze
+#    # Change mode of giver/receiver/Observer;In mode of Freeze/GHoP/Doc Share
+#    # In each mode, Say some words while do telestrations.	VP: REC is still on
+#    enter_giver_mode     ${driver1}      ${ws3_branding_A_username}    ${Expert_User5_name}
+#    proceed_with_camera_off    ${driver1}
 #    rec_is_on_or_off     ${driver1}
+#    proceed_with_camera_off    ${driver2}
 #    rec_is_on_or_off     ${driver2}
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # end call
-    exit_call    ${driver1}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
+#    proceed_with_camera_off    ${driver3}
+#    rec_is_on_or_off     ${driver3}
+#    enter_FGD_mode     ${driver1}      Document
+#    proceed_with_camera_off    ${driver1}
+#    rec_is_on_or_off     ${driver1}
+#    proceed_with_camera_off    ${driver2}
+#    rec_is_on_or_off     ${driver2}
+#    proceed_with_camera_off    ${driver3}
+#    rec_is_on_or_off     ${driver3}
+#    enter_FGD_mode     ${driver1}      Photo
+#    proceed_with_camera_off    ${driver1}
+#    rec_is_on_or_off     ${driver1}
+#    proceed_with_camera_off    ${driver2}
+#    rec_is_on_or_off     ${driver2}
+#    proceed_with_camera_off    ${driver3}
+#    rec_is_on_or_off     ${driver3}
+##    enter_FGD_mode     ${driver3}      Freeze
+##    rec_is_on_or_off     ${driver1}
+##    rec_is_on_or_off     ${driver2}
+##    rec_is_on_or_off     ${driver3}
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # end call
+#    end_call_for_all     ${driver1}
+#    [Teardown]      run keywords    Close
+#    ...             AND             exit_driver
 
-Small_range_825_826
-    [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
-    [Tags]    small range 825+826 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3507
-#    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
-#    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-#    ...         AND             Close
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#Small_range_823
+#    [Documentation]     Call on-call group from contact list
+#    [Tags]    small range 823 line      call_case
+##    [Setup]     run keywords    Login_site_admin
+##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+##    ...         AND             enter_workspace_settings_page           # 进入settings页面
+##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+##    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
+##    ...         AND             Close
+##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+##    [Setup]   set_always_on_select    always_on
+#    # User A 登录
+#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+#    # On-call user登录
+#    ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}
+#    # Call on-call group from contact list
+#    contacts_witch_page_make_call    ${driver1}    ${driver2}   ${py_team_page}   ${Expert_Group_1}
+#    # VP: REC is on, can not changed. What's more, on both sides, REC logo should be shown up.
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+#    rec_is_on_or_off     ${driver1}
+#    which_page_is_currently_on    ${driver2}    ${end_call_button}
+#    rec_is_on_or_off     ${driver2}
+#    # In mode of Freeze/GHoP/Doc Share，VP: REC is still on
+#    enter_giver_mode     ${driver1}      none    none     2
+#    proceed_with_camera_off    ${driver1}
+#    rec_is_on_or_off     ${driver1}
+#    proceed_with_camera_off    ${driver2}
+#    rec_is_on_or_off     ${driver2}
+#    enter_FGD_mode     ${driver1}      Document
+#    proceed_with_camera_off    ${driver1}
+#    rec_is_on_or_off     ${driver1}
+#    proceed_with_camera_off    ${driver2}
+#    rec_is_on_or_off     ${driver2}
+#    enter_FGD_mode     ${driver1}      Photo
+#    proceed_with_camera_off    ${driver1}
+#    rec_is_on_or_off     ${driver1}
+#    proceed_with_camera_off    ${driver2}
+#    rec_is_on_or_off     ${driver2}
+##    enter_FGD_mode     ${driver2}      Freeze
+##    rec_is_on_or_off     ${driver1}
+##    rec_is_on_or_off     ${driver2}
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # end call
+#    exit_call    ${driver1}
+#    [Teardown]      run keywords    Close
+#    ...             AND             exit_driver
+
+#Small_range_825_826
+#    [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
+#    [Tags]    small range 825+826 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3507
 #    [Setup]   set_always_on_select    always_on
-    # User A 登录
-    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-    # another company user登录
-    ${driver2}   driver_set_up_and_logIn   ${Expert_User5_username}
-    # Pre-condition：set to Default-OFF
-    # VP: After setting changing,new call  should be OFF immediately . Do not need to logout.
-    Login_site_admin              # another company user whose rec is on
-    switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-    enter_workspace_settings_page           # 进入settings页面
-    expand_during_call_recording            # 展开During Call: Recording设置
-    turn_on_during_call_recording           # 打开During Call: Recording设置
-    choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-    Close
-    # MHS owner get incoming call from another company user whose rec is on
-    ${invite_url}    send_meeting_room_link     ${driver1}    ${MHS_link_email}
-    user_make_call_via_meeting_link      ${driver2}     ${invite_url}
-    # 确保建立call，但未接听
-    make_sure_enter_call    ${driver2}
-    user_anwser_call     ${driver1}
-    # VP: REC is off, only owner can change it
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    make_show_recording_settings    ${driver1}
-    rec_is_on_or_off     ${driver1}     off   can_change
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    make_show_recording_settings    ${driver2}
-    rec_is_on_or_off     ${driver2}     off   none
-    # Change role of giver/receiver
-    enter_giver_mode     ${driver1}      none    none     2
-    # VP: only owner can change rec
-    proceed_with_camera_off    ${driver1}
-    make_show_recording_settings    ${driver1}
-    rec_is_on_or_off     ${driver1}     off   can_change
-    proceed_with_camera_off    ${driver2}
-    make_show_recording_settings    ${driver2}
-    rec_is_on_or_off     ${driver2}     off   none
-    # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
-    make_show_recording_settings    ${driver1}
-    record_or_do_not_record    record          ${ws3_branding_A_username}    ${driver1}    ${driver2}
-    make_show_recording_settings    ${driver1}
-    record_or_do_not_record    do_not_record        ${ws3_branding_A_username}    ${driver1}    ${driver2}
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # end call
-    exit_call    ${driver1}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
+#    # User A 登录
+#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+#    # another company user登录
+#    ${driver2}   driver_set_up_and_logIn   ${Expert_User5_username}
+#    # Pre-condition：set to Default-OFF
+#    # VP: After setting changing,new call  should be OFF immediately . Do not need to logout.
+#    Login_site_admin              # another company user whose rec is on
+#    switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+#    enter_workspace_settings_page           # 进入settings页面
+#    expand_during_call_recording            # 展开During Call: Recording设置
+#    turn_on_during_call_recording           # 打开During Call: Recording设置
+#    choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
+#    Close
+#    # MHS owner get incoming call from another company user whose rec is on
+#    ${invite_url}    send_meeting_room_link     ${driver1}    ${MHS_link_email}
+#    user_make_call_via_meeting_link      ${driver2}     ${invite_url}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver2}
+#    user_anwser_call     ${driver1}
+#    # VP: REC is off, only owner can change it
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+#    make_show_recording_settings    ${driver1}
+#    rec_is_on_or_off     ${driver1}     off   can_change
+#    which_page_is_currently_on    ${driver2}    ${end_call_button}
+#    make_show_recording_settings    ${driver2}
+#    rec_is_on_or_off     ${driver2}     off   none
+#    # Change role of giver/receiver
+#    enter_giver_mode     ${driver1}      none    none     2
+#    # VP: only owner can change rec
+#    proceed_with_camera_off    ${driver1}
+#    make_show_recording_settings    ${driver1}
+#    rec_is_on_or_off     ${driver1}     off   can_change
+#    proceed_with_camera_off    ${driver2}
+#    make_show_recording_settings    ${driver2}
+#    rec_is_on_or_off     ${driver2}     off   none
+#    # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
+#    make_show_recording_settings    ${driver1}
+#    record_or_do_not_record    record          ${ws3_branding_A_username}    ${driver1}    ${driver2}
+#    make_show_recording_settings    ${driver1}
+#    record_or_do_not_record    do_not_record        ${ws3_branding_A_username}    ${driver1}    ${driver2}
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # end call
+#    exit_call    ${driver1}
+#    [Teardown]      run keywords    Close
+#    ...             AND             exit_driver
 
 Small_range_827
     [Documentation]     Expert  get incoming call
@@ -902,46 +894,46 @@ Small_range_827
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Small_range_829
-    [Documentation]     Call enterprise contact
-    [Tags]    small range 829 line      call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-#    ...         AND             Close
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-#    [Setup]   set_always_on_select    opt_in
-    # User A 登录
-    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-    # Expert 登录
-    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
-    # Call enterprise contact
-    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
-    # VP: REC is off, only caller can change it
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    make_show_recording_settings    ${driver1}
-    rec_is_on_or_off     ${driver1}     off   can_change
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    make_show_recording_settings    ${driver2}
-    rec_is_on_or_off     ${driver2}     off   none
-    # Change role of giver/receiver
-    enter_giver_mode     ${driver1}      none    none     2
-    # VP: only owner can change rec
-    proceed_with_camera_off    ${driver1}
-    make_show_recording_settings    ${driver1}
-    rec_is_on_or_off     ${driver1}     off   can_change
-    proceed_with_camera_off    ${driver2}
-    make_show_recording_settings    ${driver2}
-    rec_is_on_or_off     ${driver2}     off   none
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # end call
-    exit_call    ${driver1}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
+#Small_range_829
+#    [Documentation]     Call enterprise contact
+#    [Tags]    small range 829 line      call_case
+##    [Setup]     run keywords    Login_site_admin
+##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+##    ...         AND             enter_workspace_settings_page           # 进入settings页面
+##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+##    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
+##    ...         AND             Close
+##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+##    [Setup]   set_always_on_select    opt_in
+#    # User A 登录
+#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+#    # Expert 登录
+#    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
+#    # Call enterprise contact
+#    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
+#    # VP: REC is off, only caller can change it
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+#    make_show_recording_settings    ${driver1}
+#    rec_is_on_or_off     ${driver1}     off   can_change
+#    which_page_is_currently_on    ${driver2}    ${end_call_button}
+#    make_show_recording_settings    ${driver2}
+#    rec_is_on_or_off     ${driver2}     off   none
+#    # Change role of giver/receiver
+#    enter_giver_mode     ${driver1}      none    none     2
+#    # VP: only owner can change rec
+#    proceed_with_camera_off    ${driver1}
+#    make_show_recording_settings    ${driver1}
+#    rec_is_on_or_off     ${driver1}     off   can_change
+#    proceed_with_camera_off    ${driver2}
+#    make_show_recording_settings    ${driver2}
+#    rec_is_on_or_off     ${driver2}     off   none
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # end call
+#    exit_call    ${driver1}
+#    [Teardown]      run keywords    Close
+#    ...             AND             exit_driver
 
 Small_range_831_832
     [Documentation]     Call recording feature     Pre-condition：set to Default-ON
@@ -1028,54 +1020,54 @@ Small_range_833
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Small_range_834
-    [Documentation]     Call enterprise contact
-    [Tags]    small range 834 line      call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
-#    ...         AND             Close
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-#    [Setup]   set_always_on_select    opt_out
-    # User A 登录
-    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-    # Expert 登录
-    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
-    # Call enterprise contact
-    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
-    # VP: REC is off, only caller can change it
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    make_show_recording_settings    ${driver1}
-    rec_is_on_or_off     ${driver1}     on   can_change
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    make_show_recording_settings    ${driver2}
-    rec_is_on_or_off     ${driver2}     on   none
-    # Change role of giver/receiver
-    enter_giver_mode     ${driver1}      none    none     2
-    # Proceed with my camera Off
-    proceed_with_camera_off    ${driver1}
-    # In mode of Freeze/GHoP/Doc Share
-    # VP: only caller can change rec
-    enter_FGD_mode     ${driver1}      Document
-    make_show_recording_settings    ${driver1}
-    rec_is_on_or_off     ${driver1}    on    can_change    click_share
-    rec_is_on_or_off     ${driver2}    on    can_not_change
-    enter_FGD_mode     ${driver1}      Photo
-    make_show_recording_settings    ${driver1}
-    rec_is_on_or_off     ${driver1}    on    can_change
-    rec_is_on_or_off     ${driver2}    on    can_not_change
-#    enter_FGD_mode     ${driver2}      Freeze
+#Small_range_834
+#    [Documentation]     Call enterprise contact
+#    [Tags]    small range 834 line      call_case
+##    [Setup]     run keywords    Login_site_admin
+##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+##    ...         AND             enter_workspace_settings_page           # 进入settings页面
+##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
+##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
+##    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
+##    ...         AND             Close
+##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+##    [Setup]   set_always_on_select    opt_out
+#    # User A 登录
+#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+#    # Expert 登录
+#    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
+#    # Call enterprise contact
+#    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
+#    # VP: REC is off, only caller can change it
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+#    make_show_recording_settings    ${driver1}
+#    rec_is_on_or_off     ${driver1}     on   can_change
+#    which_page_is_currently_on    ${driver2}    ${end_call_button}
+#    make_show_recording_settings    ${driver2}
+#    rec_is_on_or_off     ${driver2}     on   none
+#    # Change role of giver/receiver
+#    enter_giver_mode     ${driver1}      none    none     2
+#    # Proceed with my camera Off
+#    proceed_with_camera_off    ${driver1}
+#    # In mode of Freeze/GHoP/Doc Share
+#    # VP: only caller can change rec
+#    enter_FGD_mode     ${driver1}      Document
+#    make_show_recording_settings    ${driver1}
+#    rec_is_on_or_off     ${driver1}    on    can_change    click_share
+#    rec_is_on_or_off     ${driver2}    on    can_not_change
+#    enter_FGD_mode     ${driver1}      Photo
+#    make_show_recording_settings    ${driver1}
 #    rec_is_on_or_off     ${driver1}    on    can_change
 #    rec_is_on_or_off     ${driver2}    on    can_not_change
-    # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
-    # end call
-    exit_call    ${driver1}
-    [Teardown]      run keywords    Close
-    ...             AND             exit_driver
+##    enter_FGD_mode     ${driver2}      Freeze
+##    rec_is_on_or_off     ${driver1}    on    can_change
+##    rec_is_on_or_off     ${driver2}    on    can_not_change
+#    # 返回Face to Face模式
+#    back_to_face_to_face_mode    ${driver1}
+#    # end call
+#    exit_call    ${driver1}
+#    [Teardown]      run keywords    Close
+#    ...             AND             exit_driver
 
 Small_range_836
     [Documentation]     Special Recent call	    One user logins on two devices

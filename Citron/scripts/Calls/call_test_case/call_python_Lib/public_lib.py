@@ -2,7 +2,7 @@
 # @Time     :10/21/2022 11:15 AM
 # @Author   :Huiming Shi
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import close_tutorial_button
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 
 def change_driver_implicit_wait(func):
     """

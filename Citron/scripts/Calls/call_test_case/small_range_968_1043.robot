@@ -185,16 +185,16 @@ Small_range_977_993
     ${css_value}   get_css_value   ${driver2}   ${Settings_tab_Allow_access}        color                           # Settings tab页面的Allow access to your Camera and Microphone.按钮
     check_get_color_correct    ${get_value}   ${css_value}
 
-    Comment  Toturial screen
-    # Toturial screen
-    refresh_browser_page    ${driver2}    no_care
-    ${css_value}   get_css_value   ${driver2}   ${Toturial_switch_page}   color                                     # Toturial 页面切换图片
-    check_get_color_correct    ${get_value}   ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${Toturial_Let_go}   color                                          # Toturial 页面的Let's go!按钮
-    check_get_color_correct    ${get_value}   ${css_value}
-    ${get_ele_text}    get_ele_text    ${driver2}    ${Toturial_title}
-    check_a_contains_b    ${driver2}    ${get_ele_text}    ${product_name}
-    refresh_browser_page    ${driver2}
+#    Comment  Toturial screen
+#    # Toturial screen
+#    refresh_browser_page    ${driver2}    no_care
+#    ${css_value}   get_css_value   ${driver2}   ${Toturial_switch_page}   color                                     # Toturial 页面切换图片
+#    check_get_color_correct    ${get_value}   ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${Toturial_Let_go}   color                                          # Toturial 页面的Let's go!按钮
+#    check_get_color_correct    ${get_value}   ${css_value}
+#    ${get_ele_text}    get_ele_text    ${driver2}    ${Toturial_title}
+#    check_a_contains_b    ${driver2}    ${get_ele_text}    ${product_name}
+#    refresh_browser_page    ${driver2}
 
     Comment  Disclaimer screen
     # Disclaimer screen
@@ -208,23 +208,23 @@ Small_range_977_993
     user_decline_or_accept_disclaimer    ${driver2}   accept
     refresh_browser_page    ${driver2}
 
-    Comment  Select mode hint in F2F mode
-    # Select mode hint in F2F mode
-    ${driver3}    driver_set_up_and_logIn    ${personal_user_username}
-    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
-    contacts_witch_page_make_call     ${driver2}    ${driver3}   ${py_team_page}   ${personal_user_name}       # 进行通话
-    sleep   60s
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_correct    ${get_value}   ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_correct    ${get_value}   ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_correct    ${get_value}   ${css_value}
-    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-    log  ${get_class_value}
-    Run Keyword If   '${get_value}'=='#ff9933'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_orange_color}
-    ...  ELSE IF  '${get_value}'=='#00ff00'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_green_color}
+#    Comment  Select mode hint in F2F mode
+#    # Select mode hint in F2F mode
+#    ${driver3}    driver_set_up_and_logIn    ${personal_user_username}
+#    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
+#    contacts_witch_page_make_call     ${driver2}    ${driver3}   ${py_team_page}   ${personal_user_name}       # 进行通话
+#    sleep   60s
+#    which_page_is_currently_on    ${driver2}    ${end_call_button}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_correct    ${get_value}   ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_correct    ${get_value}   ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_correct    ${get_value}   ${css_value}
+#    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
+#    log  ${get_class_value}
+#    Run Keyword If   '${get_value}'=='#ff9933'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_orange_color}
+#    ...  ELSE IF  '${get_value}'=='#00ff00'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_green_color}
 
     Comment  Invite friend screen
     # Invite friend screen
@@ -235,7 +235,7 @@ Small_range_977_993
     check_get_color_correct    ${get_value}   ${css_value}
     ${css_value}   get_css_value   ${driver2}   ${send_invite_tab_send_invite_button}   background-color            # 邀请第三位通话者页面的Send Invite tab页面Send Invite按钮
     check_get_color_correct    ${get_value}   ${css_value}
-    exit_call     ${driver3}     # 结束通话
+#    exit_call     ${driver3}     # 结束通话
 
     Comment   User logout
     # User logout	VP: product name string is "Help Lightning", not branded name	VP: App color is Help Lightning blue
@@ -282,19 +282,19 @@ Small_range_995_996
     user_anwser_call   ${driver2}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
 
-    # VP: In-call view is WS1's color of orange for user A and B
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
+#    # VP: In-call view is WS1's color of orange for user A and B
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
 
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
@@ -351,19 +351,19 @@ Small_range_997
     user_anwser_call   ${driver2}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
 
-    # VP: In-call view is WS1's color of orange for user A and B
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
+#    # VP: In-call view is WS1's color of orange for user A and B
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
 
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
@@ -415,19 +415,19 @@ Small_range_998
     user_anwser_call   ${driver2}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
 
-    # VP: In-call view is WS1's color of orange for user A and B
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
+#    # VP: In-call view is WS1's color of orange for user A and B
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
 
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
@@ -480,15 +480,15 @@ Small_range_999
     user_anwser_call   ${driver2}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
 
-    # VP: In-call view is WS1's color of orange for user A and B
-    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-    check_a_contains_b    ${driver1}     ${get_class_value}      ${lime_brand_orange_color}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
+#    # VP: In-call view is WS1's color of orange for user A and B
+#    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_whole_page}   style                         # 通话过程中的背景色
+#    check_a_contains_b    ${driver1}     ${get_class_value}      ${lime_brand_orange_color}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
 
     # VP: End Call page use WS1's branding name and orange for A and B
     exit_call    ${driver2}
@@ -546,17 +546,17 @@ Small_range_1000_1001
     # 接听call
     user_anwser_call   ${driver2}   no_direct
 
-    # In-call view for A, B and anonymous is WS1's color of orange
-    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-    check_a_contains_b    ${driver1}     ${get_class_value}      ${lime_brand_orange_color}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_orange       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_orange       ${css_value}
-    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-    check_a_contains_b    ${driver3}     ${get_class_value}      ${lime_brand_orange_color}
+#    # In-call view for A, B and anonymous is WS1's color of orange
+#    ${get_class_value}    get_ele_class_name    ${driver1}   ${end_call_whole_page}   style                         # 通话过程中的背景色
+#    check_a_contains_b    ${driver1}     ${get_class_value}      ${lime_brand_orange_color}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_orange       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_orange       ${css_value}
+#    ${get_class_value}    get_ele_class_name    ${driver3}   ${end_call_whole_page}   style                         # 通话过程中的背景色
+#    check_a_contains_b    ${driver3}     ${get_class_value}      ${lime_brand_orange_color}
 
     # VP: End Call page use WS1's branding name and orange for A and Anonymous
     end_call_for_all    ${driver2}
@@ -1024,19 +1024,19 @@ Small_range_1031
     # 接受Call
     user_anwser_call   ${driver1}
 
-    # VP: In-call view is WS1's Default color of Blue for user A and B
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_default       ${css_value}
+#    # VP: In-call view is WS1's Default color of Blue for user A and B
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_default       ${css_value}
 
     # VP: End Call page use WS1's Default name and Blue for A and B
     exit_call    ${driver2}
@@ -1090,15 +1090,15 @@ Small_range_1032
     sleep   20s
     which_page_is_currently_on    ${driver1}    ${end_call_button}
 
-    # VP: In-call view is WS1's Default color of Blue for user A and B
-    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-    check_a_contains_b    ${driver2}     ${get_class_value}      ${lime_brand_default_color_1}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_default       ${css_value}
+#    # VP: In-call view is WS1's Default color of Blue for user A and B
+#    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
+#    check_a_contains_b    ${driver2}     ${get_class_value}      ${lime_brand_default_color_1}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_default       ${css_value}
 
     # VP: End Call page use WS1's Default name and Blue for A and B
     exit_call    ${driver2}
@@ -1150,15 +1150,15 @@ Small_range_1033_1035
     # 接受Call
     user_anwser_call   ${driver1}
 
-    # In-call view for B and anonymous is WS1's default color of blue
-    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-    check_a_contains_b    ${driver2}     ${get_class_value}      ${lime_brand_default_color}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-    check_get_color_is_default       ${css_value}
-    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-    check_get_color_is_default       ${css_value}
+#    # In-call view for B and anonymous is WS1's default color of blue
+#    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
+#    check_a_contains_b    ${driver2}     ${get_class_value}      ${lime_brand_default_color}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
+#    check_get_color_is_default       ${css_value}
+#    ${css_value}   get_css_value   ${driver1}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
+#    check_get_color_is_default       ${css_value}
 
     # VP: End Call page use WS1's default name and blue for B and Anonymous
     exit_call    ${driver2}

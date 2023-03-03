@@ -3,7 +3,7 @@
 # @Author   :Huiming Shi
 
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable import current_account, \
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import current_account, \
     my_account_name, input_type_file, updated_settings_successfully
 
 def click_my_account(driver):
