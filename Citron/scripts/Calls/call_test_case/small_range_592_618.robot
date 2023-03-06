@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Resource          call_case_set_up.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -36,9 +36,9 @@ Call_Tag_Comment_600_604
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${big_admin_third_WS_name}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    inCall_enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
     # 点击查询到的User A
-    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    click_user_in_contacts_list   ${driver3}   ${big_admin_first_WS_name}
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
     # User C End Call for All
@@ -117,9 +117,9 @@ Call_Tag_Comment_592_595
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    inCall_enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
     # 点击查询到的User A
-    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    click_user_in_contacts_list   ${driver3}   ${big_admin_first_WS_name}
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
     # User A leave call
@@ -184,9 +184,9 @@ Call_Tag_Comment_596_599
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    inCall_enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
     # 点击查询到的User A
-    click_user_in_contacts_call   ${driver3}   ${big_admin_first_WS_name}
+    click_user_in_contacts_list   ${driver3}   ${big_admin_first_WS_name}
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
     # User C End Call for All
@@ -205,9 +205,9 @@ Call_Tag_Comment_596_599
     # A call B, invite C
     contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
+    inCall_enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
     # 点击查询到的User C
-    click_user_in_contacts_call   ${driver1}   ${switch_workspace_name}
+    click_user_in_contacts_list   ${driver1}   ${switch_workspace_name}
     user_anwser_call    ${driver3}
     # A end call for all
     end_call_for_all   ${driver1}
@@ -361,8 +361,8 @@ Call_survey_608_610
     contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}
     # Customer invite a enterprise user
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user   ${driver1}    ${personal_user_name}
-    click_user_in_contacts_call    ${driver1}    ${personal_user_name}
+    inCall_enter_contacts_search_user   ${driver1}    ${personal_user_name}
+    click_user_in_contacts_list    ${driver1}    ${personal_user_name}
     # enterprise user 接受call
     user_anwser_call   ${driver3}
     # Customer click End Call

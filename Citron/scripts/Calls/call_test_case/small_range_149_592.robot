@@ -69,7 +69,7 @@ Force Tags        small_range
 ##    which_page_is_currently_on    ${driver1}    ${choose_give_receive_help_mode}
 #    # 3rd user join as 3pc call
 #    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    enter_contacts_search_user    ${driver1}   ${Expert_User3_name}
+#    inCall_enter_contacts_search_user    ${driver1}   ${Expert_User3_name}
 #    click_user_in_contacts_list    ${driver1}     ${Expert_User3_name}
 #    user_anwser_call    ${driver3}
 #    sleep  10s
@@ -182,7 +182,7 @@ Join_call_162_167
     ${driver5}   driver_set_up_and_logIn    ${ws_branding_B_user}
     # EU1 sends 3pi link.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url}     send_invite_in_calling_page    ${driver1}
+    ${invite_url}     send_new_invite_in_calling    ${driver1}
     # EU3, PU (personal user 4, DU (different enterprise user) 5, AU (anonymous user) 6 clicks on 3pi link in rapid sequence.
     user_make_call_via_meeting_link    ${driver3}    ${invite_url}
     user_make_call_via_meeting_link    ${driver4}    ${invite_url}
@@ -220,7 +220,7 @@ Join_call_179_187
     user_anwser_call    ${driver1}
     # EU1 sends 3pi link.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url}     send_invite_in_calling_page    ${driver1}
+    ${invite_url}     send_new_invite_in_calling    ${driver1}
     # TU3 登录
     ${driver3}   driver_set_up_and_logIn    ${Team_User2_username}
     # EU4 登录
@@ -289,7 +289,7 @@ Join_call_188_195
     ${driver5}   driver_set_up_and_logIn    ${ws_branding_A_user}
     # EU1 sends 3pi link.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url}     send_invite_in_calling_page    ${driver1}
+    ${invite_url}     send_new_invite_in_calling    ${driver1}
     # Following participants try to join call in rapid sequence: TU3 via MHS link. EU4 via MHS link.personal user 5 via MHS link.
     user_make_call_via_meeting_link    ${driver3}    ${invite_otu_url}
     user_make_call_via_meeting_link    ${driver4}    ${invite_otu_url}
@@ -401,36 +401,36 @@ Small_range_560_580
     # EU1 invite EU3 from Team contact
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${Expert_User3_name}
-    click_user_in_contacts_call     ${driver1}    ${Expert_User3_name}
+    inCall_enter_contacts_search_user     ${driver1}    ${Expert_User3_name}
+    click_user_in_contacts_list     ${driver1}    ${Expert_User3_name}
     user_anwser_call    ${driver3}
     # EU1 leave call
     leave_call    ${driver1}
     exit_one_driver    ${driver1}
     # EU2 invite EU4 from Directory
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
-    enter_contacts_search_user     ${driver2}    ${Expert_User4_name}
-    click_user_in_contacts_call     ${driver2}    ${Expert_User4_name}
+    inCall_enter_contacts_search_user     ${driver2}    ${Expert_User4_name}
+    click_user_in_contacts_list     ${driver2}    ${Expert_User4_name}
     user_anwser_call    ${driver4}
     # EU4 leave call
     exit_call    ${driver4}
     exit_one_driver    ${driver4}
     # EU3 invite TU1
     ${driver5}    driver_set_up_and_logIn    ${Team_User1_username}
-    enter_contacts_search_user     ${driver3}    ${Team_User1_name}
-    click_user_in_contacts_call     ${driver3}    ${Team_User1_name}
+    inCall_enter_contacts_search_user     ${driver3}    ${Team_User1_name}
+    click_user_in_contacts_list     ${driver3}    ${Team_User1_name}
     user_anwser_call    ${driver5}
     # EU2 leave call
     leave_call    ${driver2}
     exit_one_driver    ${driver2}
     # VP: TU1 can invite
-    enter_contacts_search_user     ${driver5}    ${Team_User2_name}
+    inCall_enter_contacts_search_user     ${driver5}    ${Team_User2_name}
     # VP: TU1 can not send 3PI link
     which_page_is_currently_on     ${driver5}    ${invite_send_invite_tab}    ${not_currently_on}
     close_invite_3th_page     ${driver5}
     # EU3 send 3PI link to eMail
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    ${invite_url}     send_invite_in_calling_page    ${driver3}
+    ${invite_url}     send_new_invite_in_calling    ${driver3}
     close_invite_3th_page    ${driver3}
     # EU5 click 3PI link to join    VP: directly joint automatically, do not need anyone's accept
     ${driver6}    driver_set_up_and_logIn    ${Expert_User5_username}
@@ -494,7 +494,7 @@ Join_call_168_178
     # TU2 clicks on on-call group 1 call. EU1 in on-call group 1 answers call.
     contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}    send_invite_in_calling_page    ${driver2}
+    ${invite_url}    send_new_invite_in_calling    ${driver2}
     close_invite_3th_page    ${driver2}
     # Anonymous user 3 clicks on 3pi link. EU1 answers call.
     ${driver3}    anonymous_open_meeting_link    ${invite_url}
@@ -506,33 +506,33 @@ Join_call_168_178
     # TU2 invites TU4.   TU4 declines call.
     ${driver4}   driver_set_up_and_logIn    ${test_WS3_TU2_user}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
-    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    inCall_enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_list     ${driver1}    ${test_WS3_TU2_user_name}
     user_decline_call    ${driver4}
     # VP: Team user 4 doesn’t join call
     which_page_is_currently_on    ${driver4}    ${py_contacts_switch_success}
     # TU2 invites TU4.   TU4 accepts call.
-    enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
-    click_user_in_contacts_call     ${driver1}    ${test_WS3_TU2_user_name}
+    inCall_enter_contacts_search_user     ${driver1}    ${test_WS3_TU2_user_name}
+    click_user_in_contacts_list     ${driver1}    ${test_WS3_TU2_user_name}
     user_anwser_call    ${driver4}
     # VP: Team user 4 joins call.
     which_page_is_currently_on    ${driver4}    ${end_call_button}
     # TU2 invites on-call group 1   VP: experts in on-call group 1 receives rollover call.    EU5 answers call.
     ${driver5}   driver_set_up_and_logIn    ${test_WS3_EU3_user}
-    enter_contacts_search_user     ${driver1}    ${On_call_group_001}
-    click_user_in_contacts_call     ${driver1}    ${On_call_group_001}
+    inCall_enter_contacts_search_user     ${driver1}    ${On_call_group_001}
+    click_user_in_contacts_list     ${driver1}    ${On_call_group_001}
     user_anwser_call    ${driver5}
     # TU2 invites on-call group 2   VP: other experts in on-call group 2 receives rollover call. Display message “No experts are available to take your call” if no experts login.
     ${driver6}   driver_set_up_and_logIn    ${test_WS3_EU2_user}
 #    # 此处受bug导致  https://vipaar.atlassian.net/browse/CITRON-3646
-#    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
-#    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
+#    inCall_enter_contacts_search_user     ${driver1}    ${On_call_group_002}
+#    click_user_in_contacts_list     ${driver1}    ${On_call_group_002}
 #    # All experts in on-call group 2 declines call.   Display message “No experts are available to take your call”.
 #    user_decline_call    ${driver6}
 #    which_page_is_currently_on    ${driver1}    ${no_experts_are_available_tips}
     # TU2 invites on-call group 2
-    enter_contacts_search_user     ${driver1}    ${On_call_group_002}
-    click_user_in_contacts_call     ${driver1}    ${On_call_group_002}
+    inCall_enter_contacts_search_user     ${driver1}    ${On_call_group_002}
+    click_user_in_contacts_list     ${driver1}    ${On_call_group_002}
     # EU6 in on-call group2 answers call.	VP: expert user 6 joins call
     user_anwser_call    ${driver6}
     which_page_is_currently_on    ${driver6}    ${end_call_button}
@@ -565,8 +565,8 @@ Join_call_168_178
 #    # EU1 invites TU3. TU3 answers call.
 #    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}
 #    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    enter_contacts_search_user     ${driver1}    ${Team_User1_name}
-#    click_user_in_contacts_call     ${driver1}    ${Team_User1_name}
+#    inCall_enter_contacts_search_user     ${driver1}    ${Team_User1_name}
+#    click_user_in_contacts_list     ${driver1}    ${Team_User1_name}
 #    user_anwser_call     ${driver3}
 #    # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
 #    which_page_is_currently_on     ${driver1}     ${gh_on_xpath}
@@ -603,8 +603,8 @@ Small_range_581_582
     ${driver3}    driver_set_up_and_logIn    ${Expert_AaA_username}
     # EU1 invte on-call group
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${AaA_on_call_group_name}
-    click_user_in_contacts_call     ${driver1}    ${AaA_on_call_group_name}
+    inCall_enter_contacts_search_user     ${driver1}    ${AaA_on_call_group_name}
+    click_user_in_contacts_list     ${driver1}    ${AaA_on_call_group_name}
     # VP: on-call group members can get rollover call    ExpetA answer rollover call	VP: rollover call stops
     user_anwser_call    ${driver3}
     which_page_is_currently_on    ${driver3}    ${end_call_button}
@@ -656,7 +656,7 @@ Small_range_590
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User1_name}
     # VP: TU1 can only invite, can not send 3PI
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${Team_User2_name}
+    inCall_enter_contacts_search_user     ${driver1}    ${Team_User2_name}
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    ${not_currently_on}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
@@ -674,7 +674,7 @@ Small_range_591
     user_anwser_call    ${driver2}
     # VP: TU1 can only invite, can not send 3PI
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}    ${Team_User2_name}
+    inCall_enter_contacts_search_user     ${driver1}    ${Team_User2_name}
     which_page_is_currently_on     ${driver1}    ${invite_send_invite_tab}    ${not_currently_on}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver

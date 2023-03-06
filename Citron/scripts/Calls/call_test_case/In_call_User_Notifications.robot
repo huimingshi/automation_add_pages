@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Resource          ../../../Lib/All_Pages_Xpath/Normal/load_file.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -94,9 +94,9 @@ In_call_User_Notifications_9_10_11_31_32
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${notifications_user05}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
-    enter_contacts_search_user   ${driver3}   ${notifications_username05}
+    inCall_enter_contacts_search_user   ${driver3}   ${notifications_username05}
     # 点击查询到的User A
-    click_user_in_contacts_call   ${driver3}   ${notifications_username05}
+    click_user_in_contacts_list   ${driver3}   ${notifications_username05}
     # 验证It occurs when invite participant to join a call	Your invite to %1$s was sent successfully
     your_invite_to_was_sent_successfully    ${driver3}    ${notifications_username05}
     # User A 接收打进来的Call
@@ -132,7 +132,7 @@ In_call_User_Notifications_18_20
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${message_test5_user}
     # User C 进入到邀请第三位用户进入call，获取link
-    ${invite_url}    send_invite_in_calling_page   ${driver3}
+    ${invite_url}    send_new_invite_in_calling   ${driver3}
     close_invite_3th_page     ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
@@ -159,7 +159,7 @@ In_call_User_Notifications_17_19_40
     # User A log in
     ${driver1}   driver_set_up_and_logIn    ${message_test2_user}
     # User C 进入到邀请第三位用户进入call，获取link
-    ${invite_url}    send_invite_in_calling_page   ${driver3}
+    ${invite_url}    send_new_invite_in_calling   ${driver3}
     close_invite_3th_page     ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
@@ -244,9 +244,9 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     # 第三位user登录
     ${driver1}   driver_set_up_and_logIn   ${message_test2_user}
     # 邀请第三位user进入call
-    enter_contacts_search_user   ${driver3}   ${message_test2_username}
+    inCall_enter_contacts_search_user   ${driver3}   ${message_test2_username}
     # 点击查询到的User A
-    click_user_in_contacts_call   ${driver3}   ${message_test2_username}
+    click_user_in_contacts_list   ${driver3}   ${message_test2_username}
     # User A 接收打进来的Call
     user_anwser_call    ${driver1}
     # 验证Now Observing mode

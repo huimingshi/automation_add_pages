@@ -157,8 +157,8 @@ Small_range_662
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User B invites callee [User C]
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    enter_contacts_search_user    ${driver2}     ${Expert_User3_name}
-    click_user_in_contacts_call   ${driver2}     ${Expert_User3_name}
+    inCall_enter_contacts_search_user    ${driver2}     ${Expert_User3_name}
+    click_user_in_contacts_list   ${driver2}     ${Expert_User3_name}
     # User C] doesn't answer call until time out
     which_page_is_currently_on    ${driver3}   ${anwser_call_button}
     sleep  30s
@@ -207,8 +207,8 @@ Small_range_663
     exit_one_driver    ${driver3}
     # User A invites User C] who doesn't login on any device
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
-    click_user_in_contacts_call   ${driver1}     ${Expert_User3_name}    can_not_reach
+    inCall_enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
+    click_user_in_contacts_list   ${driver1}     ${Expert_User3_name}    can_not_reach
     # 结束Call
     exit_call   ${driver1}
     # Verify: In recent tab,User A has 1 outgoing call  to User C. and has 1 outgoing call to  User B.
@@ -252,8 +252,8 @@ Small_range_664
     ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
     # User A] invites User C
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
-    click_user_in_contacts_call   ${driver1}     ${Expert_User3_name}
+    inCall_enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
+    click_user_in_contacts_list   ${driver1}     ${Expert_User3_name}
     # User C] clicks on decline button
     user_decline_call    ${driver3}
     # VP1: "Your call was declined.
@@ -520,8 +520,8 @@ Small_range_665
 #    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}    no_check_toturial    close_bounced     accept    set_disturb
 #    # InCall user invite User A to 3PC call
 #    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    enter_contacts_search_user   ${driver2}    ${Expert_User1_name}
-#    click_user_in_contacts_call   ${driver2}   ${Expert_User1_name}
+#    inCall_enter_contacts_search_user   ${driver2}    ${Expert_User1_name}
+#    click_user_in_contacts_list   ${driver2}   ${Expert_User1_name}
 #    # Inviter receives User A is Not Available along with Not Available Message
 #    which_page_is_currently_on     ${driver2}   ${pleas_do_not_disturb}
 #    [Teardown]      run keywords    do_not_disturb_become_available     ${driver1}

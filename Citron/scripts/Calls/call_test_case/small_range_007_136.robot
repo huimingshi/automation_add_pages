@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Resource          call_case_set_up.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -394,7 +394,7 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     # In calling page, clicks Invite -> Send Invitation papge
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     # Send this link to another user who is belong to the same enterprise
-    ${invite_url}  send_invite_in_calling_page   ${driver1}
+    ${invite_url}  send_new_invite_in_calling   ${driver1}
     close_invite_3th_page   ${driver1}
     # This user clicks this link
     # VP: should directly enter this call
@@ -453,14 +453,14 @@ During_Call_open_invite_the_3rd_participant_page
     contacts_witch_page_make_call   ${driver2}   ${driver1}     ${py_team_page}     ${switch_workspace_name}
     # VP: show a 'loading...' , and once stop, contact name should be shown up.
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    enter_contacts_search_user   ${driver2}    ${big_admin_another_first_WS_name}
+    inCall_enter_contacts_search_user   ${driver2}    ${big_admin_another_first_WS_name}
     display_name_avator_in_contact_list   ${driver2}    ${big_admin_another_first_WS_name}   modify_picture
     close_invite_3th_page   ${driver2}
     # another User changes Display name & Avatar
     ${random}   return_a_random
     my_account_change_name_and_avator   ${driver3}    ${random}   delete   ${modify_picture_path}
     # VP: the updated contact list should be shown up.
-    enter_contacts_search_user   ${driver2}    ${random}
+    inCall_enter_contacts_search_user   ${driver2}    ${random}
     display_name_avator_in_contact_list   ${driver2}    ${random}   original_default_avatar_url
     close_invite_3th_page   ${driver2}
     # 结束通话
@@ -521,9 +521,9 @@ unable_to_reach_user_message_displays
     logout_citron  ${driver3}
     # 进入Contacts界面，并查询user
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}   ${a_team_user_name}
+    inCall_enter_contacts_search_user    ${driver1}   ${a_team_user_name}
     # 校验在通话中Contacts页面中未登录的user，点击后是否会弹出{username} is unreachable的提示信息
-    click_user_in_contacts_call   ${driver1}   ${a_team_user_name}   can_not_reach
+    click_user_in_contacts_list   ${driver1}   ${a_team_user_name}   can_not_reach
     # 结束call
     exit_call      ${driver1}
     [Teardown]      exit_driver

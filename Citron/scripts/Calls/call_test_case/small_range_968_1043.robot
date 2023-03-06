@@ -4,7 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -614,7 +614,7 @@ Small_range_1002_1004
     user_switch_to_second_workspace    ${driver3}    ${WS_branding_setting_WS2}
     # User B send 3PI link
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}    send_invite_in_calling_page    ${driver2}
+    ${invite_url}    send_new_invite_in_calling    ${driver2}
     close_invite_3th_page    ${driver2}
     # User C click 3PI link to join call
     user_make_call_via_meeting_link    ${driver3}     ${invite_url}
@@ -769,7 +769,7 @@ Small_range_1009
     contacts_witch_page_make_call     ${driver2}    ${driver1}   ${py_team_page}   ${ws_branding_A_name}
     # 获取3PI link
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}    send_invite_in_calling_page     ${driver2}
+    ${invite_url}    send_new_invite_in_calling     ${driver2}
     # 结束Call
     exit_call    ${driver1}
     # User C登录
@@ -964,7 +964,7 @@ Small_range_1018_1026
     ${driver1}    driver_set_up_and_logIn    ${ws3_branding_B_user}
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${ws3_branding_A_username}
     make_sure_enter_call      ${driver1}
-    enter_contacts_search_user     ${driver1}     ${ws3_branding_A_username}
+    inCall_enter_contacts_search_user     ${driver1}     ${ws3_branding_A_username}
     ${get_class_value}    get_ele_class_name    ${driver1}   ${first_data_img_in_invite_page}   src
     ${get_class_value}     split_src_img    ${get_class_value}
     should not be equal as strings    ${get_default_avatar_src_before}     ${get_class_value}

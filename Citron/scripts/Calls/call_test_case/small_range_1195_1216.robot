@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/All_Pages_Xpath/Normal/Messages.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/messages_page.py
@@ -86,8 +86,8 @@ Small_range_1198_1210
     which_page_is_currently_on        ${driver3}      ${end_call_button}
     which_page_is_currently_on        ${driver4}      ${end_call_button}
     # Invite first contact userF from In call	VP: userF receive incoming call
-    enter_contacts_search_user     ${driver1}    ${message_test1_username}
-    click_user_in_contacts_call     ${driver1}    ${message_test1_username}
+    inCall_enter_contacts_search_user     ${driver1}    ${message_test1_username}
+    click_user_in_contacts_list     ${driver1}    ${message_test1_username}
     user_anwser_call    ${driver2}
     # UserF answer incoming call	VP: userF enter in call view video mode
     which_page_is_currently_on        ${driver2}      ${end_call_button}
@@ -119,7 +119,7 @@ Small_range_1198_1210
     which_page_is_currently_on        ${driver2}      ${end_call_button}
     which_page_is_currently_on        ${driver4}      ${end_call_button}
     # Invite other conact by sending 3PI link	VP: anonymous or loggin user is able to enter call via this 3PI link
-    ${invite_url}     send_invite_in_calling_page      ${driver1}
+    ${invite_url}     send_new_invite_in_calling      ${driver1}
     close_invite_3th_page      ${driver1}
     ${driver5}     anonymous_open_meeting_link      ${invite_url}
     which_page_is_currently_on        ${driver5}      ${end_call_before_anwser}

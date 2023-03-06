@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Resource          call_case_set_up.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -103,30 +103,30 @@ Set_Survey_off_Make_a_call_After_ending_call_No_Take_Survey_button
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
 
-Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_No_Take_Survey_button
-    [Documentation]    Set Survey on  Value is in White List	Make a call via Citron & Client	After ending call	VP: Take Survey button.  After ending call,	VP: The tutorial screen shows up.
-    [Tags]    citron 62 line     call_case
-#    [Setup]     run keywords    Login_workspaces_admin      # log in with workspaces admin
-#    ...         AND             enter_workspace_workspace_settings      # enter workspace users
-#    ...         AND             set_survey_open        # Set Survey open
-#    ...         AND             set_survey_in_white_list        # Set Survey URL Value is in White List
-#    ...         AND             Close       # close browser
-    [Setup]  set_survey_open_and_in_white_list
-    # Start two drivers and logIn
-    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
-    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${public_pass}    no_check_toturial   open_bounced    accept    no_care
-    # make call
-    contacts_witch_page_make_call    ${driver1}    ${driver2}    ${py_team_page}    ${normal_name_for_calls_B}
-    # call on-call User exit call
-    exit_call  ${driver1}
-    # No Take Survey button
-    check_survey_switch_success   ${driver1}   1
-    # close call_ending page
-    close_call_ending_page_RF  ${driver2}
-    # After ending call,	VP: The tutorial screen shows up.
-    check_tutorial_screen_shows_up  ${driver2}
-    [Teardown]      run keywords     Close
-    ...             AND              exit_driver
+#Set_Survey_ON_and_set_URL_Value_is_in_White_List_Make_a_call_After_ending_call_No_Take_Survey_button
+#    [Documentation]    Set Survey on  Value is in White List	Make a call via Citron & Client	After ending call	VP: Take Survey button.  After ending call,	VP: The tutorial screen shows up.
+#    [Tags]    citron 62 line     call_case     新版本不适配
+##    [Setup]     run keywords    Login_workspaces_admin      # log in with workspaces admin
+##    ...         AND             enter_workspace_workspace_settings      # enter workspace users
+##    ...         AND             set_survey_open        # Set Survey open
+##    ...         AND             set_survey_in_white_list        # Set Survey URL Value is in White List
+##    ...         AND             Close       # close browser
+#    [Setup]  set_survey_open_and_in_white_list
+#    # Start two drivers and logIn
+#    ${driver1}   driver_set_up_and_logIn    ${normal_username_for_calls}
+#    ${driver2}   driver_set_up_and_logIn    ${normal_username_for_calls_B}   ${public_pass}    no_check_toturial   open_bounced    accept    no_care
+#    # make call
+#    contacts_witch_page_make_call    ${driver1}    ${driver2}    ${py_team_page}    ${normal_name_for_calls_B}
+#    # call on-call User exit call
+#    exit_call  ${driver1}
+#    # No Take Survey button
+#    check_survey_switch_success   ${driver1}   1
+#    # close call_ending page
+#    close_call_ending_page_RF  ${driver2}
+#    # After ending call,	VP: The tutorial screen shows up.
+#    check_tutorial_screen_shows_up  ${driver2}
+#    [Teardown]      run keywords     Close
+#    ...             AND              exit_driver
 
 Set_Survey_ON_and_set_URL_is_Null_Make_a_call_After_ending_call_No_Take_Survey_button
     [Documentation]    Set Survey on  Set URL=Null	Make a call via Citron & Client	After ending call	VP: No Take Survey button.

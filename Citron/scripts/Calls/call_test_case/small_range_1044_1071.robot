@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Resource          call_case_set_up.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/finish_call.py
@@ -124,7 +124,7 @@ Small_range_1047
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}     send_invite_in_calling_page    ${driver2}   send
+    ${invite_url}     send_new_invite_in_calling    ${driver2}   send
     # Open email and SMS of phone number,VP: SMS and Email content has customer text.
     check_invitation_message_correct_from_email     ${I_am_horse}
      [Teardown]      exit_driver
@@ -143,7 +143,7 @@ Small_range_1050
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}     send_invite_in_calling_page    ${driver2}   send
+    ${invite_url}     send_new_invite_in_calling    ${driver2}   send
     # Open email and SMS of phone number,VP: email and SMS shows customer text
     check_invitation_message_correct_from_email      =E5=BE=B7=E7=8E=9B=E8=A5=BF=E4=BA=9A+[]-()
     [Teardown]      exit_driver
@@ -162,7 +162,7 @@ Small_range_1053
     # Site user send 3PI link
     contacts_witch_page_make_call      ${driver2}     ${driver1}   ${py_team_page}   ${normal_username_for_calls_name}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}     send_invite_in_calling_page    ${driver2}   send
+    ${invite_url}     send_new_invite_in_calling    ${driver2}   send
     # Open email and SMS of phone number,VP:Default message content
     check_invitation_message_correct_from_email      You have been invited to join Huiming.shi.helplightning+0123456789 on a auto_default_workspace's support call using Help Lightning.
     [Teardown]      exit_driver

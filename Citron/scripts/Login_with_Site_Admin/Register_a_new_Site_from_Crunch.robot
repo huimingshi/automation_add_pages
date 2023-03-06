@@ -39,4 +39,4 @@ New_Site_admin_logs_in_Citron
     enter_site_site_settings
     #  the value is updated value.
     check_primary_contact_updated  ${email_before}  ${email_update}
-    [Teardown]    Close
+#    [Teardown]    Close

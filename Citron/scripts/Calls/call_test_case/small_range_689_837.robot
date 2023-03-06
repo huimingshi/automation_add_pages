@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
 Resource          call_case_set_up.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -82,7 +82,7 @@ Small_range_696_697_698_699
     ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}
     # UserA sends a 3pi link to logged in UserC.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    ${invite_url_1}   send_new_invite_in_calling    ${driver1}
     close_invite_3th_page    ${driver1}
     # UserC click the 3PI link join the call.
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
@@ -108,7 +108,7 @@ Small_range_700_701_702_703
     user_anwser_call   ${driver1}
     # UserA sends a 3pi link to anonymous UserC.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    ${invite_url_1}   send_new_invite_in_calling    ${driver1}
     close_invite_3th_page    ${driver1}
     # UserC click the link join the call.
     ${driver3}    anonymous_open_meeting_link    ${invite_url_1}
@@ -139,7 +139,7 @@ Small_range_704_705_706_707
     user_anwser_call   ${driver1}
     # UserA sends a 3pi link to team license UserC.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    ${invite_url_1}   send_new_invite_in_calling    ${driver1}
     close_invite_3th_page    ${driver1}
     # UserC click the link join the call.
     ${driver3}    driver_set_up_and_logIn    ${Team_User1_username}
@@ -171,8 +171,8 @@ Small_range_708_709
     ${driver3}    driver_set_up_and_logIn    ${Expert_AaA_username}
     # EU1 invte on-call group
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}     ${AaA_on_call_group_name}
-    click_user_in_contacts_call    ${driver1}     ${AaA_on_call_group_name}
+    inCall_enter_contacts_search_user     ${driver1}     ${AaA_on_call_group_name}
+    click_user_in_contacts_list    ${driver1}     ${AaA_on_call_group_name}
     # ExpetA 接受Call
     user_anwser_call    ${driver3}
     # VP: 3PC call established successfully
@@ -200,8 +200,8 @@ Small_range_710_723
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     ###### EU1 invite EU3 from Team contact    710行
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
-    click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
+    inCall_enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
+    click_user_in_contacts_list    ${driver1}     ${Expert_User3_name}
     # EU3 接受Call
     user_anwser_call    ${driver3}
     ###### VP: 3PC call established successfully    EU3 leave call     710+711行
@@ -214,7 +214,7 @@ Small_range_710_723
     which_page_is_currently_on    ${driver1}    ${contact_location_xpath}
     close_invite_3th_page    ${driver1}
     ###### VP: On-call groups are not shown in the Directory view     712行
-    enter_contacts_search_user    ${driver1}    ${AaA_on_call_group_name}   click_show   has_no_user_data
+    inCall_enter_contacts_search_user    ${driver1}    ${AaA_on_call_group_name}   click_show   has_no_user_data
     close_invite_3th_page    ${driver1}
     ###### VP: user list is same with User directory ones     712行
     open_invite_3rd_participant_dialog     ${driver1}    no_enter
@@ -233,21 +233,21 @@ Small_range_710_723
     open_invite_3rd_participant_dialog     ${driver1}    no_enter
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
     close_invite_3th_page    ${driver1}
-    enter_contacts_search_user    ${driver1}    ${Expert_User4_name}
+    inCall_enter_contacts_search_user    ${driver1}    ${Expert_User4_name}
     close_invite_3th_page    ${driver1}
     ###### EU2 invite EU4 from Directory        714行
     # EU4 登录
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
-    click_user_in_contacts_call   ${driver2}    ${Expert_User4_name}
+    inCall_enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
+    click_user_in_contacts_list   ${driver2}    ${Expert_User4_name}
     ###### VP: 3PC call established successfully    EU4 leave call         712+715行
     user_anwser_call    ${driver4}
     exit_call    ${driver4}
     exit_one_driver     ${driver4}
     ###### EU1 send 3PI link to eMail      716行
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url}   send_invite_in_calling_page    ${driver1}
+    ${invite_url}   send_new_invite_in_calling    ${driver1}
     close_invite_3th_page    ${driver1}
     ###### EU5 click 3PI link        717行
     # EU5 登录
@@ -295,8 +295,8 @@ Small_range_724_742
     ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
     ###### EU1 invite EU3 from Team contact       724行
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
-    click_user_in_contacts_call    ${driver1}     ${Expert_User3_name}
+    inCall_enter_contacts_search_user     ${driver1}     ${Expert_User3_name}
+    click_user_in_contacts_list    ${driver1}     ${Expert_User3_name}
     # EU3 接受Call
     user_anwser_call    ${driver3}
     ###### VP: 3PC call established successfully    EU3 leave call       724+725行
@@ -306,14 +306,14 @@ Small_range_724_742
     # EU4 登录
     ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
-    click_user_in_contacts_call   ${driver2}    ${Expert_User4_name}
+    inCall_enter_contacts_search_user    ${driver2}    ${Expert_User4_name}
+    click_user_in_contacts_list   ${driver2}    ${Expert_User4_name}
     ###### VP: 3PC call established successfully    EU4 leave call       726+727行
     user_anwser_call    ${driver4}
     exit_call    ${driver4}
     exit_one_driver    ${driver4}
     ###### EU1 send 3PI link 1 to eMail       728行
-    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    ${invite_url_1}   send_new_invite_in_calling    ${driver1}
     close_invite_3th_page    ${driver1}
     ###### EU5 click 3PI link 1       729行
     # EU5 登录
@@ -326,7 +326,7 @@ Small_range_724_742
     exit_one_driver    ${driver5}
     ###### EU2 send 3PI link 2 to eMail       731行
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url_2}   send_invite_in_calling_page    ${driver2}
+    ${invite_url_2}   send_new_invite_in_calling    ${driver2}
     close_invite_3th_page    ${driver2}
     ###### Expert user from another enterprise click 3PI link 1 to join       732行
     # Expert user from another enterprise 登录
@@ -388,11 +388,11 @@ Small_range_743_744
     user_anwser_call   ${driver2}
     ###### EU1 send 3PI link 1 to eMail       728行
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    ${invite_url_1}   send_invite_in_calling_page    ${driver1}
+    ${invite_url_1}   send_new_invite_in_calling    ${driver1}
     close_invite_3th_page    ${driver1}
     ###### EU2 send 3PI link 2 to eMail       731行
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url_2}   send_invite_in_calling_page    ${driver2}
+    ${invite_url_2}   send_new_invite_in_calling    ${driver2}
     close_invite_3th_page    ${driver2}
     # 结束Call
     exit_call    ${driver1}
@@ -497,8 +497,8 @@ Small_range_799_802
     # Normal call    User A, User B & User C are in a call
     contacts_witch_page_make_call    ${driver3}   ${driver2}   ${py_team_page}   ${normal_name_for_calls_B}
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    enter_contacts_search_user     ${driver3}     ${normal_username_for_calls_name}
-    click_user_in_contacts_call    ${driver3}     ${normal_username_for_calls_name}
+    inCall_enter_contacts_search_user     ${driver3}     ${normal_username_for_calls_name}
+    click_user_in_contacts_list    ${driver3}     ${normal_username_for_calls_name}
     user_anwser_call      ${driver1}
     # End call, User A, User B & User C enter the call tag & comment.
     leave_call    ${driver3}
@@ -627,9 +627,9 @@ Disclaimer_806_807
     #######  806 line
     # User A 进入到邀请第三位用户进入call 的页面，并查询User C
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user   ${driver1}   ${big_admin_third_WS_name}
+    inCall_enter_contacts_search_user   ${driver1}   ${big_admin_third_WS_name}
     # 点击查询到的User C
-    click_user_in_contacts_call   ${driver1}   ${big_admin_third_WS_name}
+    click_user_in_contacts_list   ${driver1}   ${big_admin_third_WS_name}
     # User A 接收打进来的Call
     user_anwser_call   ${driver3}
     # User C leave call
@@ -639,9 +639,9 @@ Disclaimer_806_807
 
     #######  807 line
     # User A 进入到邀请第三位用户进入call 的页面，并查询User C
-    enter_contacts_search_user   ${driver1}   ${big_admin_third_WS_name}
+    inCall_enter_contacts_search_user   ${driver1}   ${big_admin_third_WS_name}
     # 点击查询到的User C
-    click_user_in_contacts_call   ${driver1}   ${big_admin_third_WS_name}
+    click_user_in_contacts_list   ${driver1}   ${big_admin_third_WS_name}
     # User C Decline打进来的Call
     user_decline_call   ${driver3}
     # User C hasn't disclaimer window.
@@ -879,8 +879,8 @@ Small_range_827
     # invite another expert to join as 3PC
     ${driver3}   driver_set_up_and_logIn   ${ws3_branding_C_user}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${ws3_branding_C_username}
-    click_user_in_contacts_call   ${driver1}     ${ws3_branding_C_username}
+    inCall_enter_contacts_search_user    ${driver1}     ${ws3_branding_C_username}
+    click_user_in_contacts_list   ${driver1}     ${ws3_branding_C_username}
     user_anwser_call    ${driver3}
     # VP: only first expert can change rec
     make_show_recording_settings    ${driver1}
@@ -1006,8 +1006,8 @@ Small_range_833
     # invite another expert to join as 3PC
     ${driver3}   driver_set_up_and_logIn   ${ws3_branding_C_user}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${ws3_branding_C_username}
-    click_user_in_contacts_call   ${driver1}     ${ws3_branding_C_username}
+    inCall_enter_contacts_search_user    ${driver1}     ${ws3_branding_C_username}
+    click_user_in_contacts_list   ${driver1}     ${ws3_branding_C_username}
     user_anwser_call    ${driver3}
     # first expert leave call
     leave_call     ${driver2}

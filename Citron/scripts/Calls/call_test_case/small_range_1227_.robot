@@ -5,7 +5,7 @@ Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/All_Pages_Xpath/Normal/Messages.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/messages_page.py
@@ -37,13 +37,13 @@ Small_range_1220_1281
     # userD login
     ${driverD}     driver_set_up_and_logIn     ${in_call_message_userD}
     # User A invites Expert Group
-    enter_contacts_search_user      ${driverA}     ${in_call_message_expert_group}
-    click_user_in_contacts_call     ${driverA}     ${in_call_message_expert_group}
+    inCall_enter_contacts_search_user      ${driverA}     ${in_call_message_expert_group}
+    click_user_in_contacts_list     ${driverA}     ${in_call_message_expert_group}
     # Expert User[User D] enter this call
     user_anwser_call    ${driverD}
     which_page_is_currently_on    ${driverD}     ${end_call_button}
     # User A sends 3pci link
-    ${invite_link}      send_invite_in_calling_page     ${driverA}
+    ${invite_link}      send_new_invite_in_calling     ${driverA}
     close_invite_3th_page     ${driverA}
     # userC    A1    D1   login
     ${driverC}     driver_set_up_and_logIn     ${in_call_message_userC}

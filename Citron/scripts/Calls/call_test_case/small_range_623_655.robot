@@ -4,7 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -359,8 +359,8 @@ Small_range_636
     ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}
     # expert invites user B
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    enter_contacts_search_user    ${driver2}     ${User_Bb_name}
-    click_user_in_contacts_call     ${driver2}    ${User_Bb_name}
+    inCall_enter_contacts_search_user    ${driver2}     ${User_Bb_name}
+    click_user_in_contacts_list     ${driver2}    ${User_Bb_name}
     # user B answers call
     user_anwser_call    ${driver3}
     # expert leaves call
@@ -398,8 +398,8 @@ Small_range_637_642
     ${driver3}    driver_set_up_and_logIn    ${User_Bb_username}
     # expert invites user B
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    enter_contacts_search_user    ${driver2}     ${User_Bb_name}
-    click_user_in_contacts_call     ${driver2}    ${User_Bb_name}
+    inCall_enter_contacts_search_user    ${driver2}     ${User_Bb_name}
+    click_user_in_contacts_list     ${driver2}    ${User_Bb_name}
     # user B declines call
     user_decline_call    ${driver3}
     # user A leaves call
@@ -440,8 +440,8 @@ Small_range_638_640
     ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}
     # user A invites user C
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${User_Cc_name}
-    click_user_in_contacts_call     ${driver1}    ${User_Cc_name}
+    inCall_enter_contacts_search_user    ${driver1}     ${User_Cc_name}
+    click_user_in_contacts_list     ${driver1}    ${User_Cc_name}
     # user B answers call
     user_anwser_call    ${driver3}
     # expert leaves call
@@ -485,8 +485,8 @@ Small_range_639
     ${driver3}    driver_set_up_and_logIn    ${User_Cc_username}
     # user A invites user C
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${User_Cc_name}
-    click_user_in_contacts_call     ${driver1}    ${User_Cc_name}
+    inCall_enter_contacts_search_user    ${driver1}     ${User_Cc_name}
+    click_user_in_contacts_list     ${driver1}    ${User_Cc_name}
     # user C doesn't answer call
     # user A leaves call
     exit_call   ${driver1}    check   10
@@ -549,8 +549,8 @@ Small_range_647_648_649_650
     ${driver3}    driver_set_up_and_logIn    ${Expert_BbB_username}
     # EU1 invite on-call group
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${AaA_on_call_group_name}
-    click_user_in_contacts_call     ${driver1}    ${AaA_on_call_group_name}
+    inCall_enter_contacts_search_user    ${driver1}     ${AaA_on_call_group_name}
+    click_user_in_contacts_list     ${driver1}    ${AaA_on_call_group_name}
     # expertB answer rollover call
     user_anwser_call    ${driver3}
     # # VP: 3PC call established successfully
@@ -569,7 +569,7 @@ Small_range_651_652_653
     contacts_witch_page_make_call     ${driver1}   ${driver2}  ${py_team_page}    ${AaA_on_call_group_name}
     # expertA send 3PI link to anonymous user
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    ${invite_url}   send_invite_in_calling_page    ${driver2}
+    ${invite_url}   send_new_invite_in_calling    ${driver2}
     close_invite_3th_page    ${driver2}
     # Anonymous user click 3PI link
     ${driver3}   anonymous_open_meeting_link    ${invite_url}
@@ -598,8 +598,8 @@ Small_range_654_655
     ${driver3}    driver_set_up_and_logIn    ${Expert_User2_username}
     # TU1 invite EU2
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    enter_contacts_search_user    ${driver1}     ${Expert_User2_name}
-    click_user_in_contacts_call     ${driver1}    ${Expert_User2_name}
+    inCall_enter_contacts_search_user    ${driver1}     ${Expert_User2_name}
+    click_user_in_contacts_list     ${driver1}    ${Expert_User2_name}
     # EU2 clicks answer button to join call
     user_anwser_call   ${driver3}
     # VP: Expert A and TU1 should not show accept/decline dialog window
