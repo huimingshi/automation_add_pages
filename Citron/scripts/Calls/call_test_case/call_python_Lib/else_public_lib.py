@@ -359,9 +359,11 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
     i = 0
     user_list = []
     quarter_of_the_height_n = 0
+    quarter_of_the_height_s = 0
     size = driver.get_window_size()  # 获取当前浏览器的像素
     height_size = int(size['height'])  # 获取当前浏览器的高度像素
     quarter_of_the_height = int(height_size/4)  # 获取当前浏览器的高度像素的四分之一，作为每次滑动的增加值
+    sixteen_of_the_height = int(height_size / 8)  # 获取当前浏览器的高度像素的八分之一，作为每次滑动的增加值
     print(size)
     print(height_size)
     print(quarter_of_the_height)
@@ -385,16 +387,18 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
                     get_name = get_xpath_element(driver,f'//div[@class="ag-center-cols-container"]/div[@row-index="{j}"]//div[@class="{search_key}"]').get_attribute("textContent")
                     get_name = get_name.split(' ')[0]
                     user_list.append(get_name)
-            # user_list.append(get_name)
             i = i + 4   # 设置每4次一个循环
             print(i)
         else:
             # 如果当前循环下，尾条数据不存在，就进行向下滑动(每次向下滑动 当前浏览器的高度像素的四分之一)
             quarter_of_the_height_n = quarter_of_the_height_n + quarter_of_the_height
+            quarter_of_the_height_s = quarter_of_the_height_s + sixteen_of_the_height
             if witch_page == 'Directory' or witch_page == 'Team':
                 js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[2].scrollTop={quarter_of_the_height_n}'
+                # driver.execute_script(js)
             else:
-                js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'
+                js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_s}'
+                # scroll_into_view(driver,f'//div[@id="user-tabs-pane-{witch_page.lower()}"]//div[@class="ag-center-cols-container"]/div[@row-index="{i + 3}"]//div[@class="{search_key}"]')
             driver.execute_script(js)
             # 判断滑动后，尾条数据是否还能展示
             print(i+3)

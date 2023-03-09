@@ -445,7 +445,7 @@ Small_range_746
     # another User 接受Call
     user_anwser_call   ${driver2}
     # VP: This User has invite 3rd participant icon on menu bar
-    open_invite_3rd_participant_dialog      ${driver1}    no_enter
+    open_invite_3rd_participant_dialog      ${driver1}
     # VP: contact list is same as team list from ws-A
     ${user_list_2}    get_all_data_on_the_page    ${driver1}   ${py_invite_page}   contact-name
     two_option_is_equal   ${driver1}    ${user_list_1}   ${user_list_2}
