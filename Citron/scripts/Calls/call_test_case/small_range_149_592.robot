@@ -390,11 +390,11 @@ Small_range_560_580
     # EU1 call EU2 from contact list
     contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${Expert_User2_name}
     # VP: Invite contact tab is default for EU1 and EU2;Send 3PI link is available;
-    open_invite_3rd_participant_dialog     ${driver1}    no_enter
+    open_invite_3rd_participant_dialog     ${driver1}
     close_invite_3th_page     ${driver1}
     open_invite_3rd_participant_dialog     ${driver1}
     close_invite_3th_page     ${driver1}
-    open_invite_3rd_participant_dialog     ${driver2}    no_enter
+    open_invite_3rd_participant_dialog     ${driver2}
     close_invite_3th_page     ${driver2}
     open_invite_3rd_participant_dialog     ${driver2}
     close_invite_3th_page     ${driver2}

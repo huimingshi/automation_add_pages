@@ -207,7 +207,7 @@ Small_range_710_723
     ###### VP: 3PC call established successfully    EU3 leave call     710+711行
     exit_call     ${driver3}
     ###### EU1 check on "Show directory" on invite screen     712行
-    open_invite_3rd_participant_dialog     ${driver1}    no_enter
+    open_invite_3rd_participant_dialog     ${driver1}
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
     ###### VP: Title and location are shown in Directory list     712行
     which_page_is_currently_on    ${driver1}    ${contact_title_xpath}
@@ -217,20 +217,20 @@ Small_range_710_723
     inCall_enter_contacts_search_user    ${driver1}    ${AaA_on_call_group_name}   click_show   has_no_user_data
     close_invite_3th_page    ${driver1}
     ###### VP: user list is same with User directory ones     712行
-    open_invite_3rd_participant_dialog     ${driver1}    no_enter
+    open_invite_3rd_participant_dialog     ${driver1}
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
     ${user_directory_list_1}   get_all_data_on_the_page   ${driver1}   ${py_invite_page}   contact-name
     close_invite_3th_page     ${driver1}
     two_option_is_equal    ${driver1}    ${user_directory_list}    ${user_directory_list_1}
     exit_one_driver     ${driver3}
     ###### VP:Title and location are shown in Contact list         712行
-    open_invite_3rd_participant_dialog     ${driver1}    no_enter
+    open_invite_3rd_participant_dialog     ${driver1}
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
     which_page_is_currently_on    ${driver1}    ${contact_title_xpath}
     which_page_is_currently_on    ${driver1}    ${contact_location_xpath}
     close_invite_3th_page    ${driver1}
     ###### EU1 search specific contact	VP: result is correct       713行
-    open_invite_3rd_participant_dialog     ${driver1}    no_enter
+    open_invite_3rd_participant_dialog     ${driver1}
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
     close_invite_3th_page    ${driver1}
     inCall_enter_contacts_search_user    ${driver1}    ${Expert_User4_name}

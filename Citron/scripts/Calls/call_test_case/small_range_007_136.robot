@@ -148,7 +148,7 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     # Contact of WS2 call the user directly
     contacts_witch_page_make_call   ${driver2}   ${driver1}    ${py_team_page}   ${switch_workspace_name}
     # User open invite 3rd participant dialog
-    open_invite_3rd_participant_dialog    ${driver1}   no_enter
+    open_invite_3rd_participant_dialog    ${driver1}   directory
     # VP: user has no Directory checkbox
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   0
     # end call
@@ -171,7 +171,7 @@ User_Directory_User_open_invite_3rd_participant_dialog
     # Contact of WS1 call the user directly
     contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${switch_workspace_name}
     # User open invite 3rd participant dialog
-    open_invite_3rd_participant_dialog    ${driver1}   no_enter
+    open_invite_3rd_participant_dialog    ${driver1}   directory
     # User check on Directory	VP: All users of WS1 shows up
     check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
     # end call
