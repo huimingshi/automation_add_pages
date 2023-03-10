@@ -220,6 +220,7 @@ Small_range_1068_1071
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls_B}
     # 打开html页面并登录
     ${driver2}     open_html_create_call   ${driver1}    ${normal_username_for_calls}       ${universal_password}    ${normal_username_for_calls_B}
+    ###### 失败了的话，可能需要在html上重新输入一次email
     # user接受call
     user_anwser_call    ${driver1}
     # 退出call

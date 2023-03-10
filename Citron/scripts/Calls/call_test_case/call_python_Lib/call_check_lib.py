@@ -7,10 +7,21 @@ from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from Citron.scripts.Calls.call_test_case.call_python_Lib.call_action_lib_copy import click_participants_div as CPD, \
     in_call_click_message_button as ICCMB, click_right_share_button as CRSB, close_invite_3th_page as CI3P
 from Citron.scripts.Calls.call_test_case.call_python_Lib.finish_call import hang_up_the_phone as HUTP
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 from public_settings_and_variable_copy import *
 
 #----------------------------------------------------------------------------------------------------#
+def has_no_directory_checkbox(driver,if_has = 'has'):
+    """
+    邀请user进入call时，校验Directory展不展示
+    :param driver:
+    :param if_has: has为展示，否则为不展示
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,directory_checkbox)
+    if if_has == 'has':
+        public_assert(driver,len(ele_list),1,action="应该展示Directory框")
+    else:
+        public_assert(driver, len(ele_list), 0, action="不应该展示Directory框")
 
 
 # def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no_click_show'):

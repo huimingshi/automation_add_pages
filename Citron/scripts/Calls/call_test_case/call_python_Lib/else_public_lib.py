@@ -29,6 +29,7 @@ def suspension_of_the_mouse(driver,username):
     ellipsis_xpath = f'//div[@title="{username}"]/../../../..//div[@class="ellipsis-menu-div"]'
     ellipsis = get_xpath_element(driver, ellipsis_xpath, description='悬浮按钮')
     ActionChains(driver).move_to_element(ellipsis).perform()
+    time.sleep(2)
 
 def do_not_disturb_become_available(driver):
     """

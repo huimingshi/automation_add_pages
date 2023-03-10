@@ -102,7 +102,7 @@ In_call_User_Notifications_9_10_11_31_32
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
     # 验证It occurs when invitee receive the invitation	%1$s has accepted your call
-    has_accepted_your_call    ${driver3}
+    has_accepted_your_call    ${driver3}    ${notifications_username05}
     make_sure_enter_call    ${driver1}
     # 进入进入giver/helper模式
     enter_giver_mode     ${driver3}    ${notifications_username04}    ${notifications_username03}      3
@@ -160,7 +160,6 @@ In_call_User_Notifications_17_19_40
     ${driver1}   driver_set_up_and_logIn    ${message_test2_user}
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_new_invite_in_calling   ${driver3}
-    close_invite_3th_page     ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
     # 验证It shows the name of a new participant that is joined to a call and it is on Face to Face	    %1$s has joined the call

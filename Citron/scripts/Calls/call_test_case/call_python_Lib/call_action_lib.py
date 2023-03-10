@@ -56,39 +56,39 @@
 #     elif enter_send_invite != 'yes':
 #         public_check_element(driver, contacts_list_in_calling, '进入contacts_list页面失败',if_click=None)
 #
-# def send_invite_in_calling_page(driver,if_send = 'not_send'):
-#     """
-#     通话过程中获取send invite的link
-#     :param driver:
-#     :param if_send:是否发送，默认不发送not_send，发送为send
-#     :return:返回会议link
-#     """
-#     # 进入send invite页面
-#     open_invite_3rd_participant_dialog(driver)
-#     # 复制
-#     public_check_element(driver, '//div[@class="image-container"]', '点击复制按钮失败')
-#     # 粘贴
-#     sys_type = get_system_type()   # 判断是哪种操作系统，Windows和非Windows的粘贴操作不一样
-#     if sys_type == 'Windows':
-#         public_click_element(driver, my_help_space_message, description='Windows操作系统message输入框')
-#         get_xpath_element(driver,my_help_space_message,description = 'Windows操作系统message输入框').send_keys(Keys.CONTROL, 'v')
-#     else:
-#         paste_on_a_non_windows_system(driver, my_help_space_message)
-#     # 验证复制后粘贴结果正确
-#     invite_url = get_xpath_element(driver,get_invite_link,description = 'link链接').get_attribute("textContent")  # Get the invitation link
-#     print('复制的link为:', invite_url)
-#     attribute = get_xpath_element(driver,my_help_space_message,description = 'message输入框').get_attribute('value')
-#     print('粘贴的link为:', attribute)
-#     # 验证复制后粘贴结果正确
-#     public_assert(driver,attribute , invite_url,action='复制和粘贴的内容不一致')
-#     if if_send != 'not_send':
-#         # 输入email
-#         email_ele = get_xpath_element(driver,send_link_email_input,description = 'email输入框')
-#         public_click_element(driver,send_link_email_input,description = 'email输入框')
-#         email_ele.send_keys('Huiming.shi.helplightning+123456789@outlook.com')
-#         # 点击Send Invite按钮
-#         public_click_element(driver,send_link_send_invite,description = 'email发送按钮')
-#     return invite_url    # 返回会议link
+def send_invite_in_calling_page(driver,if_send = 'not_send'):
+    """
+    通话过程中获取send invite的link
+    :param driver:
+    :param if_send:是否发送，默认不发送not_send，发送为send
+    :return:返回会议link
+    """
+    # 进入send invite页面
+    open_invite_3rd_participant_dialog(driver)
+    # 复制
+    public_check_element(driver, '//div[@class="image-container"]', '点击复制按钮失败')
+    # 粘贴
+    sys_type = get_system_type()   # 判断是哪种操作系统，Windows和非Windows的粘贴操作不一样
+    if sys_type == 'Windows':
+        public_click_element(driver, my_help_space_message, description='Windows操作系统message输入框')
+        get_xpath_element(driver,my_help_space_message,description = 'Windows操作系统message输入框').send_keys(Keys.CONTROL, 'v')
+    else:
+        paste_on_a_non_windows_system(driver, my_help_space_message)
+    # 验证复制后粘贴结果正确
+    invite_url = get_xpath_element(driver,get_invite_link,description = 'link链接').get_attribute("textContent")  # Get the invitation link
+    print('复制的link为:', invite_url)
+    attribute = get_xpath_element(driver,my_help_space_message,description = 'message输入框').get_attribute('value')
+    print('粘贴的link为:', attribute)
+    # 验证复制后粘贴结果正确
+    public_assert(driver,attribute , invite_url,action='复制和粘贴的内容不一致')
+    if if_send != 'not_send':
+        # 输入email
+        email_ele = get_xpath_element(driver,send_link_email_input,description = 'email输入框')
+        public_click_element(driver,send_link_email_input,description = 'email输入框')
+        email_ele.send_keys('Huiming.shi.helplightning+123456789@outlook.com')
+        # 点击Send Invite按钮
+        public_click_element(driver,send_link_send_invite,description = 'email发送按钮')
+    return invite_url    # 返回会议link
 #
 # def click_show_directory_when_invite_3rd(driver):
 #     """

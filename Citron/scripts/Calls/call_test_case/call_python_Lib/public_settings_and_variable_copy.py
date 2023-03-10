@@ -78,6 +78,7 @@ my_help_space_message = '//input[@name="message"]'
 new_invite_in_calling = '//a[@id="inviteDialog-tab-invitation"]'     # New Invitation标签页
 contacts_list_in_calling = '//a[@id="inviteDialog-tab-contacts" and @aria-selected="true"]'     # in-call中的Contacts标签页被选中
 directory_list_in_calling = '//a[@id="inviteDialog-tab-directory" and @aria-selected="true"]'     # in-call中的directory标签页被选中
+directory_checkbox = '//a[@id="inviteDialog-tab-directory" and @aria-selected="false"]'     # in-call中的directory标签
 invitation_list_in_calling = '//a[@id="inviteDialog-tab-invitation" and @aria-selected="true"]'     # in-call中的invitation标签页被选中
 current_account = '//button[@id="currentAccount"]'
 my_account_name = '//input[@placeholder="Name"]'
@@ -197,8 +198,8 @@ expect_text_24 = '//div[text()="Receiving document from {}"]'
 expect_text_25 = '//div[text()="Receiving photo from {}"]'
 expect_text_26 = '//div[text()="Sending photo…"]'
 expect_text_27 = '//div[text()="The upload of resource has been cancelled"]'
-expect_text_28 = '//div[text()="Checking Connection"]'
-expect_text_29 = '//div[text()="Audio+ Mode"]'
+expect_text_28 = '//div[text()="Checking Network Quality"]'
+expect_text_29 = '//div[text()="Ultra-Low Bandwidth Mode"]'
 expect_text_30 = '//div[text()="Your camera is off. Start Video or share content."]'
 expect_text_31 = '//div[text()="{} has joined the call."]'
 expect_text_32 = '//div[text()="{} left the call"]'

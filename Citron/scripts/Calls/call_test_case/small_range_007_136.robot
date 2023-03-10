@@ -148,9 +148,9 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     # Contact of WS2 call the user directly
     contacts_witch_page_make_call   ${driver2}   ${driver1}    ${py_team_page}   ${switch_workspace_name}
     # User open invite 3rd participant dialog
-    open_invite_3rd_participant_dialog    ${driver1}   directory
+    open_invite_3rd_participant_dialog    ${driver1}
     # VP: user has no Directory checkbox
-    check_user_show_up_or_not_when_invite_3rd   ${driver1}   0
+    has_no_directory_checkbox    ${driver1}   not_has
     # end call
     exit_call   ${driver2}
     [Teardown]      run keywords    Close
@@ -171,9 +171,9 @@ User_Directory_User_open_invite_3rd_participant_dialog
     # Contact of WS1 call the user directly
     contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${switch_workspace_name}
     # User open invite 3rd participant dialog
-    open_invite_3rd_participant_dialog    ${driver1}   directory
+    open_invite_3rd_participant_dialog    ${driver1}
     # User check on Directory	VP: All users of WS1 shows up
-    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
+    has_no_directory_checkbox    ${driver1}
     # end call
     exit_call   ${driver2}
     [Teardown]      run keywords    Close
@@ -395,7 +395,6 @@ In_calling_page_clicks_Invite_Send_Invitation_page
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     # Send this link to another user who is belong to the same enterprise
     ${invite_url}  send_new_invite_in_calling   ${driver1}
-    close_invite_3th_page   ${driver1}
     # This user clicks this link
     # VP: should directly enter this call
     user_make_call_via_meeting_link     ${driver3}    ${invite_url}
@@ -624,16 +623,16 @@ Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
     [Tags]     small range 131+132+133 line        call_case
     # Team user log in
-    ${driver1}   driver_set_up_and_logIn   ${a_team_user_username}
+    ${driver1}   driver_set_up_and_logIn   ${User_Aa_username}
     # 在Contacts页面查询user
-    contacts_different_page_search_user   ${driver1}    ${py_team_page}    ${for_expert_call_another_name}
+    contacts_different_page_search_user   ${driver1}    ${py_team_page}    ${Expert_User3_name}
     # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    contacts_page_send_email    ${driver1}    ${for_expert_call_another_name}
+    contacts_page_send_email    ${driver1}    ${Expert_User3_name}
     # 从邮箱获取刚发送的OTU邮件
     sleep  20s
     ${meeting_link}    obtain_meeting_link_from_email    check_otu
     # User B is expert user log in
-    ${driver2}   driver_set_up_and_logIn   ${for_expert_call_another_user}
+    ${driver2}   driver_set_up_and_logIn   ${Expert_User3_username}
     check_call_can_reach_to_or_not    ${driver1}   ${driver2}   ${meeting_link}    1
     # 切换到首个句柄
     switch_first_window   ${driver2}
