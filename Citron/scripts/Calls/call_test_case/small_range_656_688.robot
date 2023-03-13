@@ -4,7 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Resource          ../../../Lib/calls_resource.robot
 Resource          ../../../Lib/hodgepodge_resource.robot
-Library           call_python_Lib/call_action_lib.py
+Library           call_python_Lib/call_action_lib_copy.py
 Library           call_python_Lib/call_check_lib.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/login_lib.py
@@ -15,91 +15,91 @@ Library           call_python_Lib/recents_page.py
 Force Tags        small_range
 
 *** Test Cases ***
-Small_range_656
-    [Documentation]     No answer message   caller calls via normal way	   callee do not answer, waiting to timeout
-    [Tags]    small range 656 line      call_case
-    # Expert User1 登录（case中的caller）
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    # Expert User2 登录（case中的callee）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
-    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
-    # caller calls via normal way, callee do not answer
-    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
-    # waiting to timeout
-    which_page_is_currently_on    ${driver2}   ${anwser_call_button}
-    sleep  30s
-    # Verify: "xxx didn't answer your call" In recent tab
-    which_page_is_currently_on   ${driver1}    ${your_call_was_not_anwsered}
-    # VP: The two users should not see rating dialog.
-    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    ${not_currently_on}
-    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    ${not_currently_on}
-    # Expert User2 刷新Recents页面
-    refresh_browser_page    ${driver2}
-    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
-    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
-    [Teardown]   exit_driver
+#Small_range_656
+#    [Documentation]     No answer message   caller calls via normal way	   callee do not answer, waiting to timeout
+#    [Tags]    small range 656 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3714
+#    # Expert User1 登录（case中的caller）
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    # Expert User2 登录（case中的callee）
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
+#    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
+#    # caller calls via normal way, callee do not answer
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
+#    # waiting to timeout
+#    which_page_is_currently_on    ${driver2}   ${anwser_call_button}
+#    sleep  30s
+#    # Verify: "xxx didn't answer your call" In recent tab
+#    which_page_is_currently_on   ${driver1}    ${your_call_was_not_anwsered}
+#    # VP: The two users should not see rating dialog.
+#    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    ${not_currently_on}
+#    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    ${not_currently_on}
+#    # Expert User2 刷新Recents页面
+#    refresh_browser_page    ${driver2}
+#    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
+#    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
+#    [Teardown]   exit_driver
 
-Small_range_657
-    [Documentation]     No answer message   caller calls via normal way	   callee clicks on decline button
-    [Tags]    small range 657 line      call_case
-    # Expert User1 登录（case中的caller）
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    # Expert User2 登录（case中的callee）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
-    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
-    # caller calls via normal way
-    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
-    # callee clicks on decline button
-    user_decline_call    ${driver2}
-    # VP1: Your call was declined.2
-    which_page_is_currently_on   ${driver1}    ${your_call_was_declined}
-    # VP2: The two users should not see rating dialog.
-    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    ${not_currently_on}
-    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    ${not_currently_on}
-    # Expert User2 刷新Recents页面
-    refresh_browser_page    ${driver2}
-    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
-    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
-    [Teardown]   exit_driver
+#Small_range_657
+#    [Documentation]     No answer message   caller calls via normal way	   callee clicks on decline button
+#    [Tags]    small range 657 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3714
+#    # Expert User1 登录（case中的caller）
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    # Expert User2 登录（case中的callee）
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
+#    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
+#    # caller calls via normal way
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}    no_care
+#    # callee clicks on decline button
+#    user_decline_call    ${driver2}
+#    # VP1: Your call was declined.2
+#    which_page_is_currently_on   ${driver1}    ${your_call_was_declined}
+#    # VP2: The two users should not see rating dialog.
+#    which_page_is_currently_on   ${driver1}    ${five_star_high_praise}    ${not_currently_on}
+#    which_page_is_currently_on   ${driver2}    ${five_star_high_praise}    ${not_currently_on}
+#    # Expert User2 刷新Recents页面
+#    refresh_browser_page    ${driver2}
+#    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}           # 获取Recents页面前两行call记录的时间
+#    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
+#    [Teardown]   exit_driver
 
-Small_range_658
-    [Documentation]     No answer message   caller calls via normal way	   caller calls one participant who is in another call
-    [Tags]    small range 658 line      call_case
-    # Expert User1 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
-    ${occurred_time_list_0}    get_recents_page_records_occurred_time    ${driver1}           # 获取Recents页面前两行call记录的时间
-    # Expert User2 登录（case中的callee）
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
-    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}     3        # 获取Recents页面前三行call记录的时间
-    # caller calls via normal way
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
-    # Expert User3 登录（case中的caller）
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
-    # caller calls one participant who is in another call
-    contacts_witch_page_make_call   ${driver3}    ${driver2}    ${py_team_page}  ${Expert_User2_name}   no_care
-    # VP1: "/Target user/ is currently on another call.
-    which_page_is_currently_on   ${driver3}    ${user_is_currently_on_another_call}
-    # VP2: rating dialog doesn’t display.
-    which_page_is_currently_on   ${driver3}    ${five_star_high_praise}    ${not_currently_on}
-    ###### Verify: In recent tab, Callee has a missing incoming call record. And Caller has a outgoing call record.
-    exit_call   ${driver1}    # 结束Call
-    # Expert User2 刷新Recents页面
-    close_call_ending_page_RF      ${driver2}   # 关闭通话结束页面
-    refresh_browser_page        ${driver2}   # 刷新页面
-    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}       3     # 获取Recents页面前三行call记录的时间
-    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
-    # Expert User1 刷新Recents页面
-    close_call_ending_page_RF      ${driver1}   # 关闭通话结束页面
-    switch_to_diffrent_page     ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
-    refresh_browser_page        ${driver1}   # 刷新页面
-    ${occurred_time_list_01}    get_recents_page_records_occurred_time    ${driver1}           # 获取Recents页面前两行call记录的时间
-    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_0}   ${occurred_time_list_01}
-    [Teardown]   exit_driver
+#Small_range_658
+#    [Documentation]     No answer message   caller calls via normal way	   caller calls one participant who is in another call
+#    [Tags]    small range 658 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3712
+#    # Expert User1 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
+#    ${occurred_time_list_0}    get_recents_page_records_occurred_time    ${driver1}           # 获取Recents页面前两行call记录的时间
+#    # Expert User2 登录（case中的callee）
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
+#    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver2}     3        # 获取Recents页面前三行call记录的时间
+#    # caller calls via normal way
+#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_witch_page_make_call   ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
+#    # Expert User3 登录（case中的caller）
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    # caller calls one participant who is in another call
+#    contacts_witch_page_make_call   ${driver3}    ${driver2}    ${py_team_page}  ${Expert_User2_name}   no_care
+#    # VP1: "/Target user/ is currently on another call.
+#    which_page_is_currently_on   ${driver3}    ${user_is_currently_on_another_call}
+#    # VP2: rating dialog doesn’t display.
+#    which_page_is_currently_on   ${driver3}    ${five_star_high_praise}    ${not_currently_on}
+#    ###### Verify: In recent tab, Callee has a missing incoming call record. And Caller has a outgoing call record.
+#    exit_call   ${driver1}    # 结束Call
+#    # Expert User2 刷新Recents页面
+#    close_call_ending_page_RF      ${driver2}   # 关闭通话结束页面
+#    refresh_browser_page        ${driver2}   # 刷新页面
+#    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver2}       3     # 获取Recents页面前三行call记录的时间
+#    two_list_has_one_same_element    ${driver2}   ${occurred_time_list}    ${occurred_time_list_1}
+#    # Expert User1 刷新Recents页面
+#    close_call_ending_page_RF      ${driver1}   # 关闭通话结束页面
+#    switch_to_diffrent_page     ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
+#    refresh_browser_page        ${driver1}   # 刷新页面
+#    ${occurred_time_list_01}    get_recents_page_records_occurred_time    ${driver1}           # 获取Recents页面前两行call记录的时间
+#    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_0}   ${occurred_time_list_01}
+#    [Teardown]   exit_driver
 
 Small_range_660
     [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
@@ -137,53 +137,53 @@ Small_range_661
     user_end_call_by_self    ${driver1}
     [Teardown]   exit_driver
 
-Small_range_662
-    [Documentation]     User A call B enter call via normal way    User B invites callee [User C]
-    [Tags]    small range 662 line      call_case
-    # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}     3
-    # User A call B enter call via normal way
-    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
-    # User C 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
-    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
-    # User B invites callee [User C]
-    which_page_is_currently_on    ${driver2}    ${end_call_button}
-    inCall_enter_contacts_search_user    ${driver2}     ${Expert_User3_name}
-    click_user_in_contacts_list   ${driver2}     ${Expert_User3_name}
-    # User C] doesn't answer call until time out
-    which_page_is_currently_on    ${driver3}   ${anwser_call_button}
-    sleep  30s
-    # VP: "xxx didn't answer your call"
-    which_page_is_currently_on    ${driver2}   ${your_call_was_not_anwsered_in_call}
-    # 结束Call
-    exit_call   ${driver1}
-    # Verify: In recent tab, User A has 1 outgoing call to User B.
-    close_call_ending_page_RF    ${driver1}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}
-    two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
-    verify_username_in_recents_page    ${driver1}   ${Expert_User2_name}
-    # User B has 1 incoming call from User A, and 1 outgoing call to User C.
-    close_call_ending_page_RF    ${driver2}
-    refresh_browser_page   ${driver2}
-    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}    3
-    two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
-    verify_username_in_recents_page    ${driver2}   ${Expert_User3_name}   ${Expert_User1_name}
-    # User C has 1 missing incoming call from User B.
-    refresh_browser_page   ${driver3}
-    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
-    two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
-    verify_username_in_recents_page    ${driver3}   ${Expert_User2_name}
-    [Teardown]   exit_driver
+#Small_range_662
+#    [Documentation]     User A call B enter call via normal way    User B invites callee [User C]
+#    [Tags]    small range 662 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3715
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
+#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    # User B 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}     3
+#    # User A call B enter call via normal way
+#    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
+#    # User C 登录
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
+#    # User B invites callee [User C]
+#    which_page_is_currently_on    ${driver2}    ${end_call_button}
+#    inCall_enter_contacts_search_user    ${driver2}     ${Expert_User3_name}
+#    click_user_in_contacts_list   ${driver2}     ${Expert_User3_name}
+#    # User C] doesn't answer call until time out
+#    which_page_is_currently_on    ${driver3}   ${anwser_call_button}
+#    sleep  30s
+#    # VP: "xxx didn't answer your call"
+#    which_page_is_currently_on    ${driver2}   ${your_call_was_not_anwsered_in_call}
+#    # 结束Call
+#    exit_call   ${driver1}
+#    # Verify: In recent tab, User A has 1 outgoing call to User B.
+#    close_call_ending_page_RF    ${driver1}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}
+#    two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
+#    verify_username_in_recents_page    ${driver1}   ${Expert_User2_name}
+#    # User B has 1 incoming call from User A, and 1 outgoing call to User C.
+#    close_call_ending_page_RF    ${driver2}
+#    refresh_browser_page   ${driver2}
+#    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}    3
+#    two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
+#    verify_username_in_recents_page    ${driver2}   ${Expert_User3_name}   ${Expert_User1_name}
+#    # User C has 1 missing incoming call from User B.
+#    refresh_browser_page   ${driver3}
+#    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
+#    two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
+#    verify_username_in_recents_page    ${driver3}   ${Expert_User2_name}
+#    [Teardown]   exit_driver
 
 Small_range_663
     [Documentation]     User A call B enter call via normal way    User A invites User C] who doesn't login on any device
@@ -232,90 +232,90 @@ Small_range_663
     verify_username_in_recents_page    ${driver4}   ${Expert_User1_name}
     [Teardown]   exit_driver
 
-Small_range_664
-    [Documentation]     User A call B enter call via normal way    User A] invites User C
-    [Tags]    small range 664 line      call_case
-    # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User B 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
-    # User A call B enter call via normal way
-    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
-    # User C 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
-    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
-    # User A] invites User C
-    which_page_is_currently_on    ${driver1}    ${end_call_button}
-    inCall_enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
-    click_user_in_contacts_list   ${driver1}     ${Expert_User3_name}
-    # User C] clicks on decline button
-    user_decline_call    ${driver3}
-    # VP1: "Your call was declined.
-    which_page_is_currently_on    ${driver1}   ${declined_your_call}
-    # 结束Call
-    exit_call   ${driver1}
-    # VP2: user C should not see rating dialog.
-    which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    ${not_currently_on}
-    # Verify: In recent tab, User A has 1 outgoing call to User B, and 1 outgoing call to User C.
-    close_call_ending_page_RF    ${driver1}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
-    two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
-    verify_username_in_recents_page    ${driver1}    ${Expert_User3_name}   ${Expert_User2_name}
-    #User B has 1 incoming call from User A.
-    close_call_ending_page_RF    ${driver2}
-    refresh_browser_page   ${driver2}
-    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
-    two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
-    verify_username_in_recents_page    ${driver2}   ${Expert_User1_name}
-    #User C has 1 missing incoming call from User A.
-    refresh_browser_page   ${driver3}
-    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
-    two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
-    verify_username_in_recents_page    ${driver3}   ${Expert_User1_name}
-    [Teardown]   exit_driver
+#Small_range_664
+#    [Documentation]     User A call B enter call via normal way    User A] invites User C
+#    [Tags]    small range 664 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3715
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}    3
+#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    # User B 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_B1}   get_recents_page_records_occurred_time   ${driver2}
+#    # User A call B enter call via normal way
+#    contacts_witch_page_make_call    ${driver1}   ${driver2}    ${py_team_page}  ${Expert_User2_name}
+#    # User C 登录
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_C1}   get_recents_page_records_occurred_time   ${driver3}
+#    # User A] invites User C
+#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+#    inCall_enter_contacts_search_user    ${driver1}     ${Expert_User3_name}
+#    click_user_in_contacts_list   ${driver1}     ${Expert_User3_name}
+#    # User C] clicks on decline button
+#    user_decline_call    ${driver3}
+#    # VP1: "Your call was declined.
+#    which_page_is_currently_on    ${driver1}   ${declined_your_call}
+#    # 结束Call
+#    exit_call   ${driver1}
+#    # VP2: user C should not see rating dialog.
+#    which_page_is_currently_on    ${driver3}   ${five_star_high_praise}    ${not_currently_on}
+#    # Verify: In recent tab, User A has 1 outgoing call to User B, and 1 outgoing call to User C.
+#    close_call_ending_page_RF    ${driver1}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_A2}   get_recents_page_records_occurred_time   ${driver1}    3
+#    two_list_has_one_same_element    ${driver1}    ${occurred_time_list_A1}   ${occurred_time_list_A2}
+#    verify_username_in_recents_page    ${driver1}    ${Expert_User3_name}   ${Expert_User2_name}
+#    #User B has 1 incoming call from User A.
+#    close_call_ending_page_RF    ${driver2}
+#    refresh_browser_page   ${driver2}
+#    ${occurred_time_list_B2}   get_recents_page_records_occurred_time   ${driver2}
+#    two_list_has_one_same_element    ${driver2}    ${occurred_time_list_B1}   ${occurred_time_list_B2}
+#    verify_username_in_recents_page    ${driver2}   ${Expert_User1_name}
+#    #User C has 1 missing incoming call from User A.
+#    refresh_browser_page   ${driver3}
+#    ${occurred_time_list_C2}   get_recents_page_records_occurred_time   ${driver3}
+#    two_list_has_one_same_element    ${driver3}    ${occurred_time_list_C1}   ${occurred_time_list_C2}
+#    verify_username_in_recents_page    ${driver3}   ${Expert_User1_name}
+#    [Teardown]   exit_driver
 
-Small_range_665
-    [Documentation]     User A call B enter call via normal way    caller calls one participant who is in another call via normal call
-    [Tags]    small range 665 line      call_case
-    # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
-    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    # User C 登录
-    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
-    # User D 登录
-    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
-    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_D1}   get_recents_page_records_occurred_time   ${driver4}    3
-    # User A call B enter call via normal way
-    contacts_witch_page_make_call    ${driver3}   ${driver4}    ${py_team_page}  ${Expert_User4_name}
-    which_page_is_currently_on    ${driver3}    ${end_call_button}
-
-    # caller calls one participant who is in another call via normal call
-    contacts_witch_page_make_call    ${driver1}   ${driver4}    ${py_team_page}  ${Expert_User4_name}   no_care
-    which_page_is_currently_on    ${driver1}    ${user_is_currently_on_another_call}
-    # 结束Call
-    exit_call   ${driver3}
-    # Callee has a missing incoming call record.
-    close_call_ending_page_RF   ${driver4}
-    refresh_browser_page    ${driver4}
-    ${occurred_time_list_D2}    get_recents_page_records_occurred_time    ${driver4}       3
-    two_list_has_one_same_element    ${driver4}   ${occurred_time_list_D1}    ${occurred_time_list_D2}
-    verify_username_in_recents_page    ${driver4}   ${Expert_User3_name}    ${Expert_User1_name}
-    # And Caller has a outgoing call record.
-    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-    ${occurred_time_list_A2}    get_recents_page_records_occurred_time    ${driver1}
-    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
-    verify_username_in_recents_page    ${driver1}    ${Expert_User4_name}
-    [Teardown]   exit_driver
+#Small_range_665
+#    [Documentation]     User A call B enter call via normal way    caller calls one participant who is in another call via normal call
+#    [Tags]    small range 665 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3712
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
+#    switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    # User C 登录
+#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+#    # User D 登录
+#    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
+#    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_D1}   get_recents_page_records_occurred_time   ${driver4}    3
+#    # User A call B enter call via normal way
+#    contacts_witch_page_make_call    ${driver3}   ${driver4}    ${py_team_page}  ${Expert_User4_name}
+#    which_page_is_currently_on    ${driver3}    ${end_call_button}
+#
+#    # caller calls one participant who is in another call via normal call
+#    contacts_witch_page_make_call    ${driver1}   ${driver4}    ${py_team_page}  ${Expert_User4_name}   no_care
+#    which_page_is_currently_on    ${driver1}    ${user_is_currently_on_another_call}
+#    # 结束Call
+#    exit_call   ${driver3}
+#    # Callee has a missing incoming call record.
+#    close_call_ending_page_RF   ${driver4}
+#    refresh_browser_page    ${driver4}
+#    ${occurred_time_list_D2}    get_recents_page_records_occurred_time    ${driver4}       3
+#    two_list_has_one_same_element    ${driver4}   ${occurred_time_list_D1}    ${occurred_time_list_D2}
+#    verify_username_in_recents_page    ${driver4}   ${Expert_User3_name}    ${Expert_User1_name}
+#    # And Caller has a outgoing call record.
+#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+#    ${occurred_time_list_A2}    get_recents_page_records_occurred_time    ${driver1}
+#    two_list_has_one_same_element    ${driver1}   ${occurred_time_list_A1}    ${occurred_time_list_A2}
+#    verify_username_in_recents_page    ${driver1}    ${Expert_User4_name}
+#    [Teardown]   exit_driver
 
 #Small_range_666
 #    [Documentation]     Guest 1 call meeting link Owner    Guest 2] calls one participant via meeting link    Owner] kill app during incoming call
