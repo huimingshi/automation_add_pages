@@ -114,8 +114,10 @@ ${Toturial_switch_page}                         //i[@id="i-0"]                  
 ${Toturial_Let_go}                              //button[@id="nextBtn"]                                                                             # Toturial 页面的Let's go!按钮
 ${Toturial_title}                               //div[@class="Tutorials modal-dialog"]//h1                                                          # Toturial 页面的welcome文本信息
 ${Disclaimer_accept}                            //div[@class="modal-dialog"]//button[text()="ACCEPT"]                                               # Disclaimer的accept按钮
-${invite_contacts_tab}                          //a[@id="inviteDialog-tab-1" and text()="Contacts"]                                                 # 邀请第三位通话者页面的Contacts tab页面
-${invite_send_invite_tab}                       //a[@id="inviteDialog-tab-2" and text()="Send Invite"]                                              # 邀请第三位通话者页面的Send Invite tab页面
+#${invite_contacts_tab}                          //a[@id="inviteDialog-tab-1" and text()="Contacts"]                                                 # 邀请第三位通话者页面的Contacts tab页面
+#${invite_send_invite_tab}                       //a[@id="inviteDialog-tab-2" and text()="Send Invite"]                                              # 邀请第三位通话者页面的Send Invite tab页面
+${invite_contacts_tab}                          //a[@id="inviteDialog-tab-contacts" and @aria-selected="true"]                                      # 邀请第三位通话者页面的Contacts tab页面
+${invite_send_invite_tab}                       //a[@id="inviteDialog-tab-invitation" and @aria-selected="false"]                                   # 邀请第三位通话者页面的Send Invite tab页面
 ${send_invite_tab_send_invite_button}           //form[@class="MyHelpSpaceInvite form-horizontal"]//button[text()="Send Invite"]                    # 邀请第三位通话者页面的Send Invite tab页面Send Invite按钮
 ${f2f_mode_I_will_give_help}                    //span[text()="I will give help"]                                                                   # f2f模式的I will give help文本信息
 ${f2f_mode_I_need_help}                         //span[text()="I need help"]                                                                        # f2f模式的I need help文本信息
