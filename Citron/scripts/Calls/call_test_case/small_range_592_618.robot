@@ -379,7 +379,7 @@ Call_survey_608_610
 
     ###### 609 line
     # After customer save successfully call & comment, Expert click End Call button
-    exit_call   ${driver2}   check    10
+    exit_call   ${driver2}
     # Expert enter call tag & comment, and then click Take Survey button
     ${second_tag_text}  add_tags_and_comment    ${driver2}     2   good_experience_14
     check_survey_switch_success   ${driver2}    1   click
