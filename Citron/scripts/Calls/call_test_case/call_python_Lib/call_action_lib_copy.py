@@ -24,7 +24,7 @@ def click_participants_div(driver):
     :param driver:
     :return:
     """
-    public_click_element(driver, participants_div, '点击邀请user进入call的入口按钮')
+    public_click_element(driver, participants_div, description='点击邀请user进入call的入口按钮')
     time.sleep(2)
 
 def open_participants_dialog(driver):

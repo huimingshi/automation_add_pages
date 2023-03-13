@@ -417,12 +417,14 @@ Small_range_560_580
     exit_one_driver    ${driver4}
     # EU3 invite TU1
     ${driver5}    driver_set_up_and_logIn    ${Team_User1_username}
+    sleep   60s    # 等待一段时间后，driver3自动加载迟来Participants图标，方可操作
     inCall_enter_contacts_search_user     ${driver3}    ${Team_User1_name}
     click_user_in_contacts_list     ${driver3}    ${Team_User1_name}
     user_anwser_call    ${driver5}
     # EU2 leave call
     leave_call    ${driver2}
     exit_one_driver    ${driver2}
+    sleep   60s    # 等待一段时间后，driver5自动加载迟来Participants图标，方可操作
     # VP: TU1 can invite
     inCall_enter_contacts_search_user     ${driver5}    ${Team_User2_name}
     # VP: TU1 can not send 3PI link
