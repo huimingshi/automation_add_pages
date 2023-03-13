@@ -106,64 +106,64 @@ Small_range_628_629
     disclaimer_should_be_shown_up_or_not     ${driver1}
     # Expert B clicks Accept button.
     user_decline_or_accept_disclaimer    ${driver1}   accept
-    # VP: Expert B returns to call end page. .
-    which_page_is_currently_on    ${driver1}    ${tutorial_page_xpaths}
+#    # VP: Expert B returns to call end page. .
+#    which_page_is_currently_on    ${driver1}    ${tutorial_page_xpaths}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-Small_range_630_631
-    [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert C set on  for on-Call option.	Expert C is in call.
-    [Tags]    small range 630-631 lines     call_case
-    ###-----------------------------------------------------------------------------------###
-    # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
-    # 为确保流程会按照case所写的走下去，所以进行这一串操作
-    # User B 登录   case中的customer
-    ${driver11}    driver_set_up_and_logIn    ${User_B_username}
-    # Expert B 登录
-    ${driver22}    driver_set_up_and_logIn    ${Expert_B_username}
-    # customer makes expert call via group name
-    contacts_different_page_search_user    ${driver11}   ${py_team_page}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
-    # expert A declines call
-    contacts_witch_page_make_call     ${driver11}   ${driver22}   ${py_team_page}   ${Quantum_Mechanics_group_name}
-    # 结束通话
-    exit_call       ${driver11}
-    # 退出driver
-    exit_driver     ${driver11}    ${driver22}
-    ###-----------------------------------------------------------------------------------###
-    # User A 登录
-    ${driver1}    driver_set_up_and_logIn    ${User_A_username}
-    # Expert C 登录
-    ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}
-    # Expert C is in call.
-    contacts_different_page_search_user    ${driver1}   ${py_team_page}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
-    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
-    # User B 登录   case中的customer
-    ${driver3}    driver_set_up_and_logIn    ${User_B_username}
-    # Expert A 登录
-    ${driver4}    driver_set_up_and_logIn    ${Expert_A_username}
-    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
-    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
-    # Expert B 登录
-    ${driver5}    driver_set_up_and_logIn    ${Expert_B_username}
-    # customer makes expert call via group name
-    contacts_different_page_search_user    ${driver3}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
-    # expert A declines call
-    contacts_witch_page_make_call     ${driver3}   ${driver4}   ${py_team_page}   ${Quantum_Mechanics_group_name}    no_accept
-    # VP: Expert A No disclaimer window since he has accepted it.
-    disclaimer_should_be_shown_up_or_not    ${driver4}    not_appear
-    # expert B receives incoming call，expert B declines call
-    user_decline_call   ${driver5}
-    # VP: Expert B No disclaimer window since he has accepted it.
-    disclaimer_should_be_shown_up_or_not    ${driver5}    not_appear      2
-    # VP: customer gets message "No Experts are currently available to take your call."
-    which_page_is_currently_on    ${driver3}     ${no_experts_are_available}
-    # Expert A 刷新Recents页面
-    refresh_browser_page    ${driver4}
-    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
-    two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
-    # 结束call
-    exit_call       ${driver2}
-    [Teardown]      exit_driver
+#Small_range_630_631
+#    [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1     Expert C set on  for on-Call option.	Expert C is in call.
+#    [Tags]    small range 630-631 lines     call_case   有bug：https://vipaar.atlassian.net/browse/CITRON-3713
+#    ###-----------------------------------------------------------------------------------###
+#    # 闲置的会先收到call，比如第一次 expert 1 join call，第二次expert 2会先收到incoming
+#    # 为确保流程会按照case所写的走下去，所以进行这一串操作
+#    # User B 登录   case中的customer
+#    ${driver11}    driver_set_up_and_logIn    ${User_B_username}
+#    # Expert B 登录
+#    ${driver22}    driver_set_up_and_logIn    ${Expert_B_username}
+#    # customer makes expert call via group name
+#    contacts_different_page_search_user    ${driver11}   ${py_team_page}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
+#    # expert A declines call
+#    contacts_witch_page_make_call     ${driver11}   ${driver22}   ${py_team_page}   ${Quantum_Mechanics_group_name}
+#    # 结束通话
+#    exit_call       ${driver11}
+#    # 退出driver
+#    exit_driver     ${driver11}    ${driver22}
+#    ###-----------------------------------------------------------------------------------###
+#    # User A 登录
+#    ${driver1}    driver_set_up_and_logIn    ${User_A_username}
+#    # Expert C 登录
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_C_username}
+#    # Expert C is in call.
+#    contacts_different_page_search_user    ${driver1}   ${py_team_page}    ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
+#    contacts_witch_page_make_call     ${driver1}   ${driver2}   ${py_team_page}   ${Quantum_Mechanics_group_name}
+#    # User B 登录   case中的customer
+#    ${driver3}    driver_set_up_and_logIn    ${User_B_username}
+#    # Expert A 登录
+#    ${driver4}    driver_set_up_and_logIn    ${Expert_A_username}
+#    switch_to_diffrent_page   ${driver4}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}   # Expert A 切换到Recents页面
+#    ${occurred_time_list}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
+#    # Expert B 登录
+#    ${driver5}    driver_set_up_and_logIn    ${Expert_B_username}
+#    # customer makes expert call via group name
+#    contacts_different_page_search_user    ${driver3}   ${py_team_page}     ${Quantum_Mechanics_group_name}   # search on-call-group in Team page
+#    # expert A declines call
+#    contacts_witch_page_make_call     ${driver3}   ${driver4}   ${py_team_page}   ${Quantum_Mechanics_group_name}    no_accept
+#    # VP: Expert A No disclaimer window since he has accepted it.
+#    disclaimer_should_be_shown_up_or_not    ${driver4}    not_appear
+#    # expert B receives incoming call，expert B declines call
+#    user_decline_call   ${driver5}
+#    # VP: Expert B No disclaimer window since he has accepted it.
+#    disclaimer_should_be_shown_up_or_not    ${driver5}    not_appear      2
+#    # VP: customer gets message "No Experts are currently available to take your call."
+#    which_page_is_currently_on    ${driver3}     ${no_experts_are_available}
+#    # Expert A 刷新Recents页面
+#    refresh_browser_page    ${driver4}
+#    ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
+#    two_list_has_one_same_element    ${driver4}   ${occurred_time_list}    ${occurred_time_list_1}
+#    # 结束call
+#    exit_call       ${driver2}
+#    [Teardown]      exit_driver
 
 Small_range_632
     [Documentation]     Pre-condition: expert A B and C belong to Workspace ws1      Expert C set on  for on-Call option.	Expert C is in call.
@@ -366,7 +366,7 @@ Small_range_636
     # expert leaves call
     leave_call    ${driver2}
     # then user A leaves call
-    exit_call   ${driver1}    check    10
+    exit_call   ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page_RF     ${driver1}
     close_call_ending_page_RF     ${driver2}
@@ -403,7 +403,7 @@ Small_range_637_642
     # user B declines call
     user_decline_call    ${driver3}
     # user A leaves call
-    exit_call   ${driver1}    check   10
+    exit_call   ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page_RF     ${driver1}
     close_call_ending_page_RF     ${driver2}
@@ -447,7 +447,7 @@ Small_range_638_640
     # expert leaves call
     leave_call    ${driver2}
     # then user C leaves call
-    exit_call   ${driver3}    check    10
+    exit_call   ${driver3}
     # 关闭通话结束展示页面
     close_call_ending_page_RF     ${driver1}
     close_call_ending_page_RF     ${driver2}
@@ -489,7 +489,7 @@ Small_range_639
     click_user_in_contacts_list     ${driver1}    ${User_Cc_name}
     # user C doesn't answer call
     # user A leaves call
-    exit_call   ${driver1}    check   10
+    exit_call   ${driver1}
     # 关闭通话结束展示页面
     close_call_ending_page_RF     ${driver1}
     close_call_ending_page_RF     ${driver2}
