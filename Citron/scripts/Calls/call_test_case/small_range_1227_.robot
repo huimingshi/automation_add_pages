@@ -44,7 +44,7 @@ Small_range_1220_1281
     which_page_is_currently_on    ${driverD}     ${end_call_button}
     # User A sends 3pci link
     ${invite_link}      send_new_invite_in_calling     ${driverA}
-    close_invite_3th_page     ${driverA}
+#    close_invite_3th_page     ${driverA}
     # userC    A1    D1   login
     ${driverC}     driver_set_up_and_logIn     ${in_call_message_userC}
     ${driverD1}     driver_set_up_and_logIn     ${in_call_message_userD1}
@@ -81,7 +81,7 @@ Small_range_1220_1281
     in_call_check_receive_message       ${driverA1}      ${plain_english_text}
     in_call_check_receive_message       ${driverD1}      ${plain_english_text}
     # send attachment	VP: has options: Photo; camera;Document
-    in_call_click_upload_attach     ${driverA}
+    inCall_message_click_upload_attach     ${driverA}
     # send image files (prepared test data)	VP: files are correctly send out
     send_message_by_different_file     ${driverA}     ${message_jpg}      in_call
     send_message_by_different_file     ${driverA}     ${message_pdf}      in_call
