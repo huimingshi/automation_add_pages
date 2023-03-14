@@ -364,7 +364,7 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
     size = driver.get_window_size()  # 获取当前浏览器的像素
     height_size = int(size['height'])  # 获取当前浏览器的高度像素
     quarter_of_the_height = int(height_size/4)  # 获取当前浏览器的高度像素的四分之一，作为每次滑动的增加值
-    sixteen_of_the_height = int(height_size / 8)  # 获取当前浏览器的高度像素的八分之一，作为每次滑动的增加值
+    sixteen_of_the_height = int(height_size /6)  # 获取当前浏览器的高度像素的六分之一，作为每次滑动的增加值
     print(size)
     print(height_size)
     print(quarter_of_the_height)

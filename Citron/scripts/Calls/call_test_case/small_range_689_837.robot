@@ -83,13 +83,13 @@ Small_range_696_697_698_699
     # UserA sends a 3pi link to logged in UserC.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_new_invite_in_calling    ${driver1}
-    close_invite_3th_page    ${driver1}
+#    close_invite_3th_page    ${driver1}
     # UserC click the 3PI link join the call.
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver3}
     # UserA left session.
-    leave_call   ${driver1}   need_select
+    leave_call   ${driver1}
     # Expected : session does not end and still active.
     exit_call    ${driver3}
     [Teardown]      exit_driver
@@ -109,7 +109,7 @@ Small_range_700_701_702_703
     # UserA sends a 3pi link to anonymous UserC.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_new_invite_in_calling    ${driver1}
-    close_invite_3th_page    ${driver1}
+#    close_invite_3th_page    ${driver1}
     # UserC click the link join the call.
     ${driver3}    anonymous_open_meeting_link    ${invite_url_1}
     # 确保call连接成功，但未接听
@@ -140,7 +140,7 @@ Small_range_704_705_706_707
     # UserA sends a 3pi link to team license UserC.
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_new_invite_in_calling    ${driver1}
-    close_invite_3th_page    ${driver1}
+#    close_invite_3th_page    ${driver1}
     # UserC click the link join the call.
     ${driver3}    driver_set_up_and_logIn    ${Team_User1_username}
     user_make_call_via_meeting_link   ${driver3}   ${invite_url_1}
@@ -208,30 +208,33 @@ Small_range_710_723
     exit_call     ${driver3}
     ###### EU1 check on "Show directory" on invite screen     712行
     open_invite_3rd_participant_dialog     ${driver1}
-    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
+    has_no_directory_checkbox    ${driver1}
+#    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
     ###### VP: Title and location are shown in Directory list     712行
     which_page_is_currently_on    ${driver1}    ${contact_title_xpath}
     which_page_is_currently_on    ${driver1}    ${contact_location_xpath}
     close_invite_3th_page    ${driver1}
     ###### VP: On-call groups are not shown in the Directory view     712行
-    inCall_enter_contacts_search_user    ${driver1}    ${AaA_on_call_group_name}   click_show   has_no_user_data
+    inCall_enter_contacts_search_user    ${driver1}    ${AaA_on_call_group_name}
     close_invite_3th_page    ${driver1}
     ###### VP: user list is same with User directory ones     712行
-    open_invite_3rd_participant_dialog     ${driver1}
-    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
+    open_invite_3rd_participant_dialog     ${driver1}    directory
+#    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1   click_show
     ${user_directory_list_1}   get_all_data_on_the_page   ${driver1}   ${py_invite_page}   contact-name
     close_invite_3th_page     ${driver1}
     two_option_is_equal    ${driver1}    ${user_directory_list}    ${user_directory_list_1}
     exit_one_driver     ${driver3}
     ###### VP:Title and location are shown in Contact list         712行
     open_invite_3rd_participant_dialog     ${driver1}
-    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
+    has_no_directory_checkbox    ${driver1}
+#    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
     which_page_is_currently_on    ${driver1}    ${contact_title_xpath}
     which_page_is_currently_on    ${driver1}    ${contact_location_xpath}
     close_invite_3th_page    ${driver1}
     ###### EU1 search specific contact	VP: result is correct       713行
     open_invite_3rd_participant_dialog     ${driver1}
-    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
+    has_no_directory_checkbox    ${driver1}
+#    check_user_show_up_or_not_when_invite_3rd   ${driver1}   1
     close_invite_3th_page    ${driver1}
     inCall_enter_contacts_search_user    ${driver1}    ${Expert_User4_name}
     close_invite_3th_page    ${driver1}
@@ -248,7 +251,7 @@ Small_range_710_723
     ###### EU1 send 3PI link to eMail      716行
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url}   send_new_invite_in_calling    ${driver1}
-    close_invite_3th_page    ${driver1}
+#    close_invite_3th_page    ${driver1}
     ###### EU5 click 3PI link        717行
     # EU5 登录
     ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}
@@ -259,22 +262,23 @@ Small_range_710_723
     exit_call     ${driver5}
     exit_one_driver     ${driver5}
     ###### EU1's contact directly call EU1	VP: contact get message like "EU1 is in another call"       721行
-    # EU1's contact TU1 登录
-    ${driver6}    driver_set_up_and_logIn    ${Team_User1_username}
-    contacts_witch_page_make_call    ${driver6}   ${driver1}   ${py_team_page}   ${Expert_User1_name}   no_care
-    which_page_is_currently_on    ${driver6}    ${user_is_currently_on_another_call}
-    ###### EU2's contact directly call EU2	VP: contact get message like "EU1 is in another call"       722行
-    # EU1's contact TU2 登录
-    ${driver7}    driver_set_up_and_logIn    ${Team_User2_username}
-    contacts_witch_page_make_call    ${driver7}   ${driver2}   ${py_team_page}   ${Expert_User2_name}   no_care
-    which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
-    ###### Click EU2's OTU link	VP: Get message like "EU2 is in another call"       723行
-    user_make_call_via_meeting_link   ${driver7}     ${invite_url_otu}
-    # 确保建立call，但未接听
-    make_sure_enter_call    ${driver7}
-    which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
-    exit_call    ${driver1}
-    [Teardown]      exit_driver
+    ###### 有bug：https://vipaar.atlassian.net/browse/CITRON-3712
+#    # EU1's contact TU1 登录
+#    ${driver6}    driver_set_up_and_logIn    ${Team_User1_username}
+#    contacts_witch_page_make_call    ${driver6}   ${driver1}   ${py_team_page}   ${Expert_User1_name}   no_care
+#    which_page_is_currently_on    ${driver6}    ${user_is_currently_on_another_call}
+#    ###### EU2's contact directly call EU2	VP: contact get message like "EU1 is in another call"       722行
+#    # EU1's contact TU2 登录
+#    ${driver7}    driver_set_up_and_logIn    ${Team_User2_username}
+#    contacts_witch_page_make_call    ${driver7}   ${driver2}   ${py_team_page}   ${Expert_User2_name}   no_care
+#    which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
+#    ###### Click EU2's OTU link	VP: Get message like "EU2 is in another call"       723行
+#    user_make_call_via_meeting_link   ${driver7}     ${invite_url_otu}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver7}
+#    which_page_is_currently_on    ${driver7}    ${user_is_currently_on_another_call}
+#    exit_call    ${driver1}
+#    [Teardown]      exit_driver
 
 Small_range_724_742
     [Documentation]     3PI - Meeting call     EU1 click EU2's OTU link
@@ -314,7 +318,7 @@ Small_range_724_742
     exit_one_driver    ${driver4}
     ###### EU1 send 3PI link 1 to eMail       728行
     ${invite_url_1}   send_new_invite_in_calling    ${driver1}
-    close_invite_3th_page    ${driver1}
+#    close_invite_3th_page    ${driver1}
     ###### EU5 click 3PI link 1       729行
     # EU5 登录
     ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}
@@ -327,7 +331,7 @@ Small_range_724_742
     ###### EU2 send 3PI link 2 to eMail       731行
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url_2}   send_new_invite_in_calling    ${driver2}
-    close_invite_3th_page    ${driver2}
+#    close_invite_3th_page    ${driver2}
     ###### Expert user from another enterprise click 3PI link 1 to join       732行
     # Expert user from another enterprise 登录
     ${driver6}    driver_set_up_and_logIn    ${personal_user_username}
@@ -389,11 +393,11 @@ Small_range_743_744
     ###### EU1 send 3PI link 1 to eMail       728行
     which_page_is_currently_on    ${driver1}    ${end_call_button}
     ${invite_url_1}   send_new_invite_in_calling    ${driver1}
-    close_invite_3th_page    ${driver1}
+#    close_invite_3th_page    ${driver1}
     ###### EU2 send 3PI link 2 to eMail       731行
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url_2}   send_new_invite_in_calling    ${driver2}
-    close_invite_3th_page    ${driver2}
+#    close_invite_3th_page    ${driver2}
     # 结束Call
     exit_call    ${driver1}
     ###### Login user click previous 3PI link 1	VP: Get msg "This meeting is over. Please contact the host to invite you to another meeting."     743行

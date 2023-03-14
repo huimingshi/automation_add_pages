@@ -56,24 +56,7 @@ def end_call_for_all(driver,call_time='0'):
     MSEC(driver)
     # 点击End_Call_for_All
     circle_check_button_exists(driver, end_call_for_all_button, 'End_call_for_all按钮')
-    # for i in range(5):
-    #     hang_up_the_phone(driver)     # 点击红色的挂断电话按钮
-    #     ele_list = get_xpath_elements(driver,visibility_finishi_call)
-    #     ele_list_end_call = get_xpath_elements(driver,end_call_for_all_button)
-    #     if len(ele_list) == 1 and len(ele_list_end_call) == 1:
-    #         for i in range(2):
-    #             hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-    #             time.sleep(2)
-    #         public_click_element(driver,end_call_for_all_button,description='End_call_for_all按钮')
-    #         break
-    #     elif i == 4:
-    #         print('找不到End_Call_for_All按钮')
-    #         screen_shot_func(driver, '找不到End_Call_for_All按钮')
-    #         raise Exception('找不到End_Call_for_All按钮')
-    #     else:
-    #         time.sleep(5)
-    #         hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-    #         time.sleep(5)
+    # 点击yes
     public_click_element(driver, ECFA_YES_button, 'end_call_for_all时找不到Yes按钮')
 
 def leave_call(driver,call_time='0'):
@@ -89,24 +72,6 @@ def leave_call(driver,call_time='0'):
     MSEC(driver)
     # User Leave call
     circle_check_button_exists(driver, leave_call_button, 'Leave_call按钮')
-    # for i in range(5):
-    #     hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-    #     ele_list = get_xpath_elements(driver, visibility_finishi_call)
-    #     ele_list_leave_call = get_xpath_elements(driver, leave_call_button)
-    #     if len(ele_list) == 1 and len(ele_list_leave_call) == 1:
-    #         for i in range(2):
-    #             hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-    #             time.sleep(2)
-    #         public_click_element(driver, leave_call_button, description='leave_call_button')
-    #         break
-    #     elif i == 4:
-    #         print('找不到Leave_call按钮')
-    #         screen_shot_func(driver, '找不到Leave_call按钮')
-    #         raise Exception('找不到Leave_call按钮')
-    #     else:
-    #         time.sleep(5)
-    #         hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-    #         time.sleep(5)
 
 def exit_call(driver,call_time='0'):
     """
@@ -120,24 +85,7 @@ def exit_call(driver,call_time='0'):
     MSEC(driver)
     # User exit call
     circle_check_button_exists(driver, exit_call_yes, 'Yes按钮')
-    # for i in range(5):
-    #     hang_up_the_phone(driver)    # 点击红色的挂断电话按钮
-    #     ele_list = get_xpath_elements(driver,visibility_finishi_call)
-    #     ele_list_yes = get_xpath_elements(driver,exit_call_yes)
-    #     if len(ele_list_yes) == 1 and len(ele_list) == 1:
-    #         for i in range(2):
-    #             hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-    #             time.sleep(2)
-    #         public_click_element(driver,exit_call_yes,description='Yes按钮')
-    #         break
-    #     elif i == 4:
-    #         print('找不到Yes按钮')
-    #         screen_shot_func(driver,'找不到Yes按钮')
-    #         raise Exception('找不到Yes按钮')
-    #     else:
-    #         time.sleep(5)
-    #         hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
-    #         time.sleep(5)
+    time.sleep(2)
 
 def end_call_for_all_in_participants(driver):
     """

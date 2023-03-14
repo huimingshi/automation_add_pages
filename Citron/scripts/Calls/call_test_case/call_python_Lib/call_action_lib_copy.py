@@ -68,7 +68,7 @@ def open_invite_3rd_participant_dialog(driver,which_dialog = "Contacts"):
     elif which_dialog == 'directory':
         # 点击directory标签
         SIV(driver, new_invite_in_calling)
-        public_click_element(driver, new_invite_in_calling, description='进入New_Invitation标签页')
+        public_click_element(driver, directory_checkbox, description='进入Directory标签页')
         # 校验directory标签被选中
         public_check_element(driver, directory_list_in_calling, 'contacts列表标签页', if_click=None)
     else:
