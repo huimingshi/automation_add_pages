@@ -23,24 +23,6 @@ def has_no_directory_checkbox(driver,if_has = 'has'):
     else:
         public_assert(driver, len(ele_list), 0, action="不应该展示Directory框")
 
-
-# def check_user_show_up_or_not_when_invite_3rd(driver,count_expect,if_click = 'no_click_show'):
-#     """
-#     check 'Show Directory' button show up or not when invite 3rd user
-#     :param driver:
-#     :param count_expect: 预期count of user
-#     :param if_click: 是否勾选‘Show Directory’；默认'no_click_show'不勾选；'click_show'为勾选
-#     :return:
-#     """
-#     # try:
-#     if int(count_expect) == 1:
-#         public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段未出现', if_click=None)
-#     elif int(count_expect) == 0:
-#         public_check_element(driver, '//label[contains(.,"Show Directory")]', 'Show Directory字段出现了', if_click=None, if_show = None)
-#     public_check_element(driver, '//div[@id="inviteDialog"]//div[@class="ag-center-cols-container"]//div', 'Contacts列表没有数据', if_click=None)
-#     if if_click != 'no_click_show':
-#         CSDWI3(driver)
-
 def user_end_call_by_self(driver):
     """
     用户自己主动END Call

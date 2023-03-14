@@ -5,7 +5,6 @@ from public_settings_and_variable_copy import *
 from selenium.webdriver.common.keys import Keys
 from obtain_meeting_link_lib import obtain_meeting_link
 from about_call import make_sure_enter_call as m_s_e_c
-from finish_call import end_call_for_all as user_end_call_for_all
 from else_public_lib import refresh_browser_page as refresh_page, paste_on_a_non_windows_system
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -111,17 +110,6 @@ def send_new_invite_in_calling(driver,if_send = 'not_send'):
         # 点击Send Invite按钮
         public_click_element(driver, new_invitation_send, description='email发送按钮')
     return invite_url  # 返回会议link
-    # # 进入New Invitation标签页
-    # open_invite_3rd_participant_dialog(driver,which_dialog="New Invitation")
-    # # 输入Participant email
-    # email_ele = get_xpath_element(driver, send_link_email_input, description='email输入框')
-    # email_ele.send_keys(participant_email)
-    # # 点击Send按钮
-    # public_click_element(driver, new_invitation_send, description='发送按钮')
-    # # 获取刚发送的invitation邮件
-    # time.sleep(20)
-    # invite_url = obtain_meeting_link_from_email(check_otu='check_otu')
-    # return invite_url    # 返回会议link
 
 def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_personal'):
     """

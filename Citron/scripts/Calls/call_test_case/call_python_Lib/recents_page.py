@@ -8,7 +8,7 @@ from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import 
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 from Citron.Lib.python_Lib.ui_keywords import check_zipFile_exists as CZE
 
-def calls_click_details_button(driver,which_line = '1',participants = '6'):
+def calls_click_details_button(driver,which_line = '1'):
     """
     Calls页面点击第几行的Details按钮
     :param driver:
