@@ -64,6 +64,12 @@ def get_email_link(tag):
             return list_code
         else:
             return list_code
+    elif tag == 'Click here to set your password:' and 'Click here to set your password:' in gather_content:
+        link = re.findall('Click here to set your password: (.*?)Getting StartedDownload', gather_content)
+        print('从邮件获取的link_list为：', link)
+        print('从邮件获取的link_list长度为：', len(link))
+        print('从邮件获取的link为：', link[0])
+        return link[0]
     elif tag in gather_content:
         contain_tag = 1
         print(gather_content)
