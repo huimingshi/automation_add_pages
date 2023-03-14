@@ -20,11 +20,6 @@ Force Tags        small_range
 All_active_users_in_the_entire_enterprise_should_show
     [Documentation]    Open Directory view, All active users in the entire enterprise should show.
     [Tags]      small range 66 line       small_range
-#    [Setup]     run keywords      Login_premium_user   # log in with big_admin
-#    ...         AND               switch_to_second_workspace    # 切换到Canada这个WS
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
-#    ...         AND               Close    # close browser
     [Setup]   ws_open_directory    premium_user   switch_to_2
     # log in with big_admin
     ${driver}   driver_set_up_and_logIn    ${crunch_site_username}    ${crunch_site_password}
@@ -48,13 +43,6 @@ All_active_users_in_the_entire_enterprise_should_show
 Disable_External_Users_Pre_condition_In_a_site_meeting_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
     [Tags]    small range 103+104+105+107 line     有bug：https://vipaar.atlassian.net/browse/GAL-2749   MHS-link不应该打通        call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
-#    ...         AND               Close
-#    ...         AND               Login_workspaces_admin    # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
     [Setup]   run keywords        make_sure_two_ws_external_feature     open_feature        close_feature
     ...         AND               disable_external_users_setUp          workspaces_admin    close
     # User S belong to WS1 and WS2 log in
@@ -79,13 +67,6 @@ Disable_External_Users_Pre_condition_In_a_site_meeting_link
 Disable_External_Users_Pre_condition_In_a_site_on_call_link
     [Documentation]    Pre-condition: In a site,workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF; User S belong to WS1 and WS2; User E2
     [Tags]     small range 103+104+106+108 line    call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_external_feature      open_feature     close_feature          # workspace WS1 has "Disable External Feature"=ON; workspace WS2 has "Disable External Feature"=OFF;
-#    ...         AND               Close
-#    ...         AND               Login_workspaces_admin    # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   run keywords        make_sure_two_ws_external_feature    open_feature        close_feature
 #    ...         AND               disable_external_users_setUp         workspaces_admin    close
@@ -109,10 +90,6 @@ Disable_External_Users_Pre_condition_In_a_site_on_call_link
 User_A_opens_Personal_contact_tab
     [Documentation]    Personal users D and user E (from different site) exists in Personal contact tab.    User D and user E has signed out of every instance of mobile app and web.
     [Tags]     small range 111 line             call_case
-#    [Setup]     run keywords      Login_workspaces_admin          # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]    disable_external_users_setUp    workspaces_admin     close
     # Expert user A signs in.
@@ -133,12 +110,6 @@ User_A_opens_Personal_contact_tab
 User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
     [Tags]      small range 85 line      call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_call_center_mode_feature      close_feature     close_feature          # workspace WS1 has "Call Center Mode"=OFF; workspace WS2 has "Call Center Mode"=OFF;
-#    ...         AND               Close
-#    ...         AND               Login_premium_user
-#    ...         AND               make_sure_workspaces_setting_workspace_directory     open_feature     close_feature         # workspace WS1 has "Workspace Directory"=ON; workspace WS2 has "Workspace Directory"=OFF;
-#    ...         AND               Close
     [Setup]     run_keywords      make_sure_two_ws_call_center_mode_feature      close_feature     close_feature
     ...         AND               make_sure_two_ws_directory_feature             open_feature      close_feature
     # User S belong to WS1 and WS2 log in
@@ -159,9 +130,6 @@ User_Directory_User_open_invite_3rd_participant_dialog_has_no_Directory_checkbox
 User_Directory_User_open_invite_3rd_participant_dialog
     [Documentation]    Pre-conditron: User belong to 2 workspaces WS1 and WS2   Enable Directory feature for WS1   Disable Directory feature for WS2
     [Tags]      small range 84 line     call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_workspace_directory      open_feature     close_feature          # workspace WS1 has "Workspace Directory"=ON; workspace WS2 has "Workspace Directory"=OFF;
-#    ...         AND               Close
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]    make_sure_two_ws_directory_feature     open_feature     close_feature
     # User S belong to WS1 and WS2 log in
@@ -182,10 +150,6 @@ User_Directory_User_open_invite_3rd_participant_dialog
 User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_user
     [Documentation]    User A taps unreachable user B from recents tab.  User B is another enterprise user
     [Tags]     small range 122+126 line       call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
-#    [Setup]     run keywords      Login_premium_user              # log in with Site admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-#    ...         AND               Close    # close browser
     [Setup]      run keywords      disable_external_users_setUp    workspaces_admin    close
      ...         AND               disable_external_users_setUp    premium_user        close
     # User A log in
@@ -226,14 +190,6 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
 Disable_External_Users_check_case_1
     [Documentation]    in Citron-Admin-Calls, name of personal user and user from another site workspace should display as "External User" in call list and call details page
     [Tags]      small range 94 line      call_case
-#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
-#    ...         AND               Login_premium_user    # log in with premium admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]     run keywords      disable_external_users_setUp    workspaces_admin    close
 #    ...         AND               disable_external_users_setUp    premium_user        close
@@ -261,14 +217,6 @@ Disable_External_Users_check_case_1
 Disable_External_Users_check_case_2
     [Documentation]    Personal user or user from another site workspace logs in,VP: they should not be able to call this site workspace user via meeting link
     [Tags]         small range 96+97+98+99 line   有bug：https://vipaar.atlassian.net/browse/GAL-2749   MHS-link不应该打通       call_case
-#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               open_disable_external_users    # Switch "Disable External Feature" on from citron for a specific workspace
-#    ...         AND               Close    # close browser
-#    ...         AND               Login_premium_user    # log in with premium admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
     [Setup]     run keywords      disable_external_users_setUp    workspaces_admin    open
     ...         AND               disable_external_users_setUp    premium_user        close
     # Expert user log in
@@ -300,10 +248,6 @@ Disable_External_Users_check_case_2
 Disable_External_Users_check_case_3
     [Documentation]    Anonymous user  VP: he should be able to call this site workspace user via meeting link   VP: he should be able to call this site workspace via on-call group link
     [Tags]    small range 99+100 line         call_case
-#    [Setup]     run keywords      Login_workspaces_admin    # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               open_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
 #   因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]    disable_external_users_setUp    workspaces_admin    open
     # Expert user log in
@@ -329,10 +273,6 @@ Disable_External_Users_check_case_3
 #User_B_stays_logged_in_on_one_device_User_B_is_user_A_contact
 #    [Documentation]    User A opens Team contact tab. User B stays logged in on one device. User B is user A’s contact. 	User B logouts.
 #    [Tags]     small range 113 line  ，有bug：https://vipaar.atlassian.net/browse/CITRON-3274         call_case
-##    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-##    ...         AND               Close    # close browser
 ##   因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 ##    [Setup]   disable_external_users_setUp      premium_user    close
 #    # Expert user A signs in.
@@ -359,10 +299,6 @@ Disable_External_Users_check_case_3
 User_B_logouts_from_one_device
     [Documentation]    User A opens Team contact tab. User B stays logged in on two devices. User B is user A’s contact.
     [Tags]     small range 114 line     call_case
-#    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off from citron for a specific workspace
-#    ...         AND               Close    # close browser
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   disable_external_users_setUp      premium_user     close
     # Expert user A signs in.
@@ -470,10 +406,6 @@ During_Call_open_invite_the_3rd_participant_page
 User_A_opens_Directory_tab
     [Documentation]    Team user C exists in Directory tab.     User C has signed out of every instance of mobile app and web.
     [Tags]     small range 110 line        call_case
-#    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-#    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-#    ...         AND               open_workspace_directory    # Switch "Workspace Directory" on
-#    ...         AND               Close    # close browser
     [Setup]     ws_open_directory     premium_user
     # Expert user A signs in.
     ${driver1}  driver_set_up_and_logIn   ${switch_workspace_username}
@@ -647,17 +579,6 @@ Team_user_A_signs_in_User_B_is_expert_user
 #check_personal_user_can_see_user_S_is_unreachable_status
 #    [Documentation]    Pre-condition: User S belong to workspace WS1 and WS2    User S switch to WS1   User S logout of all devices
 #    [Tags]     small range 135+136 line        call_case
-##    [Setup]     run keywords      Login_premium_user              # log in with premium admin
-##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-##    ...         AND               switch_to_second_workspace      # 切换到第二个WS
-##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-##    ...         AND               Close                           # close browser
-##    ...         AND               Login_workspaces_admin          # log in with workspace admin
-##    ...         AND               enter_workspace_settings_page   # enter workspace settings page
-##    ...         AND               close_disable_external_users    # Switch "Disable External Feature" off
-##    ...         AND               Close                           # close browser
 #    [Setup]     run keywords      make_sure_two_ws_external_feature         close_feature        close_feature
 #    ...         AND               disable_external_users_setUp              workspaces_admin     close
 #    # User S signs in.

@@ -120,7 +120,6 @@ Small_range_1198_1210
     which_page_is_currently_on        ${driver4}      ${end_call_button}
     # Invite other conact by sending 3PI link	VP: anonymous or loggin user is able to enter call via this 3PI link
     ${invite_url}     send_new_invite_in_calling      ${driver1}
-#    close_invite_3th_page      ${driver1}
     ${driver5}     anonymous_open_meeting_link      ${invite_url}
     which_page_is_currently_on        ${driver5}      ${end_call_before_anwser}
     user_decline_call     ${driver1}    no_direct

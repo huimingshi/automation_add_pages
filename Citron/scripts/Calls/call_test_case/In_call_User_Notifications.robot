@@ -133,7 +133,6 @@ In_call_User_Notifications_18_20
     ${driver1}   driver_set_up_and_logIn   ${message_test5_user}
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_new_invite_in_calling   ${driver3}
-    close_invite_3th_page     ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
     # 验证When a participant joins the call in cooperation mode	    %1$s has joined as obeserver
@@ -207,8 +206,6 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}     accept    video
-#    proceed_with_camera_on    ${driver3}
-#    proceed_with_camera_on    ${driver2}
     # 验证When user enters a call check network	Checking Network Quality
     checking_network_quality    ${driver3}
     # 进入Giver/Helper模式
@@ -226,20 +223,20 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     your_camera_is_off    ${driver3}
     # 再打开camera
     turn_on_camera    ${driver2}
-#    # 进入Freeze模式
-#    image_is_frozen    ${driver3}
-#    # 验证It occurs when the Image is frozen and the user is not a Helper	Task field frozen.
-#    the_task_field_is_frozen    ${driver3}
-#    # 验证It occurs when the Image is frozen and the user is a Helper	Task field frozen.
-#    the_task_field_is_frozen    ${driver2}
-#    # 进入video模式
-#    image_is_unfrozen    ${driver3}
-#    # 验证It occurs when the image is unfrozen and the user is a Helper	Task field unfrozen.
-#    the_task_field_is_unfrozen    ${driver2}
-#    # 验证It occurs when the image is unfrozen and the user is not a Helper	Task field unfrozen.
-#    the_task_field_is_unfrozen    ${driver3}
-#    # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
-#    the_task_field_is_unfrozen    ${driver3}
+    # 进入Freeze模式
+    image_is_frozen    ${driver3}
+    # 验证It occurs when the Image is frozen and the user is not a Helper	Task field frozen.
+    the_task_field_is_frozen    ${driver3}
+    # 验证It occurs when the Image is frozen and the user is a Helper	Task field frozen.
+    the_task_field_is_frozen    ${driver2}
+    # 进入video模式
+    image_is_unfrozen    ${driver3}
+    # 验证It occurs when the image is unfrozen and the user is a Helper	Task field unfrozen.
+    the_task_field_is_unfrozen    ${driver2}
+    # 验证It occurs when the image is unfrozen and the user is not a Helper	Task field unfrozen.
+    the_task_field_is_unfrozen    ${driver3}
+    # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
+    the_task_field_is_unfrozen    ${driver3}
     # 第三位user登录
     ${driver1}   driver_set_up_and_logIn   ${message_test2_user}
     # 邀请第三位user进入call

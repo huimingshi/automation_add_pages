@@ -44,7 +44,6 @@ Small_range_1220_1281
     which_page_is_currently_on    ${driverD}     ${end_call_button}
     # User A sends 3pci link
     ${invite_link}      send_new_invite_in_calling     ${driverA}
-#    close_invite_3th_page     ${driverA}
     # userC    A1    D1   login
     ${driverC}     driver_set_up_and_logIn     ${in_call_message_userC}
     ${driverD1}     driver_set_up_and_logIn     ${in_call_message_userD1}

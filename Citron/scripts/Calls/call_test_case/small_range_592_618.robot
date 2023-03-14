@@ -18,12 +18,6 @@ Force Tags        small_range
 Call_Tag_Comment_600_604
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
     [Tags]     small range 600-604 lines           call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-#    ...         AND               Close
-#    ...         AND               Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_external_feature        close_feature     close_feature          # WS1 and WS2 both turn off Disable External Users
-#    ...         AND               Close
     [Setup]     run keywords      make_sure_two_ws_tagging_and_comments_feature        open_feature      open_feature
     ...         AND               make_sure_two_ws_external_feature                    close_feature     close_feature
     # User A log in
@@ -102,9 +96,6 @@ Call_Tag_Comment_600_604
 Call_Tag_Comment_592_595
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
     [Tags]     small range 592-595 lines  ，有bug：CITRON-3246，不能修改tag；https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复      call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-#    ...         AND               Close
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
     # User A log in
@@ -169,9 +160,6 @@ Call_Tag_Comment_592_595
 Call_Tag_Comment_596_599
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
     [Tags]     small range 596-599 lines     https://vipaar.atlassian.net/browse/CITRON-3338，通话记录没有DETAILS按钮，已修复         call_case
-#    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-#    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-#    ...         AND               Close
 #    #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
     # User A log in
@@ -234,9 +222,6 @@ Call_Tag_Comment_596_599
 #Call_Tag_Comment_605_606
 #    [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
 #    [Tags]     small range 605-606 lines     有bug: https://vipaar.atlassian.net/browse/CITRON-3654       call_case
-##    [Setup]     run keywords      Login_premium_user   # log in with premium admin
-##    ...         AND               make_sure_workspaces_setting_tagging_and_comments      open_feature     open_feature          # WS1 and WS2 both turn on tag feature
-##    ...         AND               Close
 ##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 ##    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
 #    # 该脚本中使用的on-call-group是three_user_in_this_on_call_group，隶属于big_admin

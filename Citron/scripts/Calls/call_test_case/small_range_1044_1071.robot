@@ -17,10 +17,6 @@ Force Tags        small_range
 Small_range_1045
     [Documentation]     External invitation message     set msg to pure character    Send MHS link to email and phone number
     [Tags]    small range 1045 line    call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             fill_invitation_message_content     ${small_horse}     # 填写信息
-#    ...         AND             Close
     [Setup]     fill_invitation_message_content_setUp    site_admin    ${small_horse}
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
@@ -33,10 +29,6 @@ Small_range_1045
 Small_range_1048
     [Documentation]     External invitation message     Set msg to Chinese character + special charator    Send MHS link to email and phone number
     [Tags]    small range 1048 line     call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             fill_invitation_message_content     ${jarvan_fourth}     # 填写信息
-#    ...         AND             Close
     [Setup]     fill_invitation_message_content_setUp   site_admin    ${jarvan_fourth}
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
@@ -49,10 +41,6 @@ Small_range_1048
 Small_range_1051
     [Documentation]     External invitation message     Turn off feature    Send MHS link to email and phone number
     [Tags]    small range 1048 line      call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
-#    ...         AND             Close
     [Setup]     close_invitation_message_set_setUp    site_admin
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
@@ -65,10 +53,6 @@ Small_range_1051
 Small_range_1046
     [Documentation]     External invitation message     set msg to pure character    Send One time use link to email and phone number
     [Tags]    small range 1046 line     call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             fill_invitation_message_content      ${big_horse}     # 填写信息
-#    ...         AND             Close
     [Setup]     fill_invitation_message_content_setUp   site_admin    ${big_horse}
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
@@ -81,10 +65,6 @@ Small_range_1046
 Small_range_1049
     [Documentation]     External invitation message     Set msg to Chinese character + special charator    Send One time use link to email and phone number
     [Tags]    small range 1049 line     call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             fill_invitation_message_content     ${jarvan_fourth_1}      # 填写信息
-#    ...         AND             Close
     [Setup]     fill_invitation_message_content_setUp   site_admin    ${jarvan_fourth_1}
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
@@ -97,10 +77,6 @@ Small_range_1049
 Small_range_1052
     [Documentation]     External invitation message     Turn off feature    Send One time use link to email and phone number
     [Tags]    small range 1052 line    call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
-#    ...         AND             Close
     [Setup]     close_invitation_message_set_setUp    site_admin
     # user login
     ${driver}     driver_set_up_and_logIn     ${personal_user_username}
@@ -113,10 +89,6 @@ Small_range_1052
 Small_range_1047
     [Documentation]     External invitation message     set msg to pure character    Site user send 3PI link
     [Tags]    small range 1047 line     call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             fill_invitation_message_content      ${I_am_horse}     # 填写信息
-#    ...         AND             Close
     [Setup]     fill_invitation_message_content_setUp   site_admin    ${I_am_horse}
     # user login
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
@@ -132,10 +104,6 @@ Small_range_1047
 Small_range_1050
     [Documentation]     External invitation message     Set msg to Chinese character + special charator     Site user send 3PI link
     [Tags]    small range 1050 line     call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             fill_invitation_message_content      ${demacia}     # 填写信息
-#    ...         AND             Close
     [Setup]     fill_invitation_message_content_setUp   site_admin    ${demacia}
     # user login
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}
@@ -151,10 +119,6 @@ Small_range_1050
 Small_range_1053
     [Documentation]     External invitation message     Turn off feature     Site user send 3PI link
     [Tags]    small range 1053 line     call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             enter_workspace_settings_page       # 进入settings页面
-#    ...         AND             close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
-#    ...         AND             Close
     [Setup]     close_invitation_message_set_setUp    site_admin
     # user login
     ${driver1}     driver_set_up_and_logIn     ${normal_username_for_calls}

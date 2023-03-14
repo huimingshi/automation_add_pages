@@ -198,35 +198,6 @@ Small_range_977_993
 #    user_decline_or_accept_disclaimer    ${driver2}   accept
 #    refresh_browser_page    ${driver2}
 
-     ###### 新版本的call页面的颜色时钟是黑色
-#    Comment  Select mode hint in F2F mode
-#    # Select mode hint in F2F mode
-#    ${driver3}    driver_set_up_and_logIn    ${personal_user_username}
-#    switch_to_diffrent_page   ${driver2}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}   switch_tree
-#    contacts_witch_page_make_call     ${driver2}    ${driver3}   ${py_team_page}   ${personal_user_name}       # 进行通话
-#    sleep   60s
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_will_give_help}   color                                # f2f模式的I will give help文本信息
-#    check_get_color_correct    ${get_value}   ${css_value}
-#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_I_need_help}   color                                     # f2f模式的I need help文本信息
-#    check_get_color_correct    ${get_value}   ${css_value}
-#    ${css_value}   get_css_value   ${driver2}   ${f2f_mode_Close}   color                                           # f2f模式的Close按钮
-#    check_get_color_correct    ${get_value}   ${css_value}
-#    ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_whole_page}   style                         # 通话过程中的背景色
-#    log  ${get_class_value}
-#    Run Keyword If   '${get_value}'=='#ff9933'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_orange_color}
-#    ...  ELSE IF  '${get_value}'=='#00ff00'    check_a_contains_b    ${driver2}     ${get_class_value}     ${lime_brand_green_color}
-#    Comment  Invite friend screen
-#    # Invite friend screen
-#    open_invite_3rd_participant_dialog    ${driver2}   # 打开邀请第三者通话界面
-#    ${css_value}   get_css_value   ${driver2}   ${invite_contacts_tab}   color                                      # 邀请第三位通话者页面的Contacts tab页面
-#    check_get_color_correct    ${get_value}   ${css_value}
-#    ${css_value}   get_css_value   ${driver2}   ${invite_send_invite_tab}   color                                   # 邀请第三位通话者页面的Send Invite tab页面
-#    check_get_color_correct    ${get_value}   ${css_value}
-#    ${css_value}   get_css_value   ${driver2}   ${send_invite_tab_send_invite_button}   background-color            # 邀请第三位通话者页面的Send Invite tab页面Send Invite按钮
-#    check_get_color_correct    ${get_value}   ${css_value}
-#    exit_call     ${driver3}     # 结束通话
-
     Comment   User logout
     # User logout	VP: product name string is "Help Lightning", not branded name	VP: App color is Help Lightning blue
     refresh_browser_page    ${driver2}

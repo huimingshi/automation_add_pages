@@ -18,9 +18,6 @@ Force Tags        small_range
 Small_range_1078_1082
     [Documentation]     Permission check
     [Tags]    small range 1078-1082 lines     message_case
-#    [Setup]     run keywords    Login_workspaces_admin
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
     [Setup]     turn_on_workspace_directory_setUp     workspaces_admin
     # user login
     ${driver}     driver_set_up_and_logIn     ${workspace_admin_username}
@@ -90,9 +87,6 @@ Small_range_1078_1082
 Small_range_1121_1122
     [Documentation]     Start new chat    click message icon from directory
     [Tags]    small range 1121-1122 lines       message_case
-#    [Setup]     run keywords    Login_workspaces_admin
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             turn_on_workspace_directory             # 打开Workspace Directory设置
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]     turn_on_workspace_directory_setUp     workspaces_admin
     # user login

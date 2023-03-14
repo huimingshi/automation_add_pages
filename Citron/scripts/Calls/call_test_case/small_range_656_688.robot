@@ -103,7 +103,7 @@ Force Tags        small_range
 
 Small_range_660
     [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
-    [Tags]    small range 660 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3502，已修复
+    [Tags]    small range 660 line      call_case
     # Expert User1 登录（case中的caller），这个user属于big_admin
     ${driver1}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_1@outlook.com
     # Expert User2 登录（case中的Joiner），这个user属于big_admin

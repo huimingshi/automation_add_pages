@@ -187,16 +187,6 @@ def close_call_ending_page_RF(driver):
     if len(ele_list) == 1:
         public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')
 
-def check_tutorial_screen_shows_up(driver):
-    """
-    # After ending call,	VP: The tutorial screen shows up.
-    :param driver:
-    :return:
-    """
-    # try:
-    count = get_xpath_elements(driver,close_tutorial_button)
-    public_assert(driver,len(count) , 1,action='该出现tutorial的')
-
 def get_all_comments_in_call_end(driver,*args):
     """
     通话结束页面，获取所有的comments

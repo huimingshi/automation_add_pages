@@ -19,10 +19,6 @@ Force Tags        small_range
 #Small_range_149_151
 #    [Documentation]    Guide First-Time use hints	newly installed app	   premium user call contact in F2F mode
 #    [Tags]      small range 149+150+151 lines    Bug：hint dialog does not show     有bug：https://vipaar.atlassian.net/browse/CITRON-3353     call_case
-##    [Setup]     run keywords      Login_premium_user                        # log in with premium admin
-##    ...         AND               enter_workspace_workspace_settings        # enter first workspace workspace setting
-##    ...         AND               close_call_center_mode                    # workspace WS1 has "Disable External Feature"=OFF
-##    ...         AND               Close
 ##    # 需要保证During Call: Call Center Mode为OFF状态
 ##    [Setup]      set_call_center_mode_setUp    site_admin     close
 #    # premium user log in
@@ -323,61 +319,6 @@ Join_call_188_195
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#Join_call_201_205
-#    [Documentation]     In call	  2PC
-#    [Tags]     small range 201-205 lines        call_case
-##    [Setup]     run keywords      Login_premium_user                # log in with Site Admin
-##    ...         AND               switch_to_created_workspace       ${created_workspace}      # 进入Huiming.shi_Added_WS这个WS
-##    ...         AND               enter_workspace_settings_page     # 进入settings页面
-##    ...         AND               close_disable_external_users      # 设置Security: Disable External Users为close状态
-##    ...         AND               Close
-##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-##    [Setup]   ws_open_directory    premium_user   switch_to_other    ${created_workspace}
-#    # EU1 登录
-#    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
-#    # Anonymous user 1 clicks on EU1’s MHS or OTU link. EU1 answers call.
-#    ${invite_url}    send_meeting_room_link    ${driver1}    ${OTU_link_email}
-#    ${driver2}   anonymous_open_meeting_link     ${invite_url}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver2}
-#    user_anwser_call     ${driver1}
-#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-#    sleep   20s
-#    hang_up_the_phone     ${driver1}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver1}
-#    hang_up_the_phone     ${driver2}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver2}
-#    # EU1 switches to receiver, enters freezing, photo or pdf mode.
-#    enter_giver_mode    ${driver1}   no_one    no_one    2    has_dialog    receive
-#    # Proceed with my camera Off
-#    proceed_with_camera_off    ${driver1}
-#    # 切换回FGD模式
-#    enter_FGD_mode    ${driver1}      Document
-#    # 返回Face to Face模式
-#    back_to_face_to_face_mode    ${driver1}
-#    # Anonymous user 2 clicks on the same link. EU1 answers call.
-#    ${driver3}   anonymous_open_meeting_link     ${invite_url}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver3}
-#    user_anwser_call     ${driver1}    no_direct
-#    # Anonymous user 1 leaves call.
-#    exit_call     ${driver3}
-#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-#    sleep   10s
-#    hang_up_the_phone     ${driver1}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver1}
-#    hang_up_the_phone     ${driver2}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver2}
-#    [Teardown]    exit_driver
-
 Small_range_560_580
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
     [Tags]    small range 560-580 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3494
@@ -497,7 +438,6 @@ Join_call_168_178
     contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${On_call_group_001}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     ${invite_url}    send_new_invite_in_calling    ${driver2}
-#    close_invite_3th_page    ${driver2}
     # Anonymous user 3 clicks on 3pi link. EU1 answers call.
     ${driver3}    anonymous_open_meeting_link    ${invite_url}
     # 确保call连接成功，但未接听
@@ -540,57 +480,6 @@ Join_call_168_178
     which_page_is_currently_on    ${driver6}    ${end_call_button}
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
-
-#Join_call_196_200
-#    [Documentation]     In call	  2PC
-#    [Tags]     small range 196-200 lines        call_case
-#    # EU1 登录
-#    ${driver1}   driver_set_up_and_logIn    ${Expert_User1_username}
-#    # EU2 登录
-#    ${driver2}   driver_set_up_and_logIn    ${Expert_User2_username}
-#    # EU1 calls EU2. EU2 answers call,
-#    contacts_witch_page_make_call     ${driver1}     ${driver2}   ${py_team_page}    ${Expert_User2_name}
-#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-#    sleep   10s
-#    hang_up_the_phone     ${driver1}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver1}
-#    hang_up_the_phone     ${driver2}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver2}
-#    # EU1 switches to Giver.
-#    enter_giver_mode     ${driver1}     no_one     no_one     2
-#    # Proceed with my camera Off
-#    proceed_with_camera_off    ${driver1}
-#    # EU1 invites TU3. TU3 answers call.
-#    ${driver3}   driver_set_up_and_logIn    ${Team_User1_username}
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    inCall_enter_contacts_search_user     ${driver1}    ${Team_User1_name}
-#    click_user_in_contacts_list     ${driver1}    ${Team_User1_name}
-#    user_anwser_call     ${driver3}
-#    # VP: participants icon is visible for EU1 and EU2, but invisible for TU3.
-#    which_page_is_currently_on     ${driver1}     ${gh_on_xpath}
-#    which_page_is_currently_on     ${driver2}     ${rh_on_xpath}
-#    which_page_is_currently_on     ${driver3}     ${gh_on_xpath}     ${not_currently_on}
-#    which_page_is_currently_on     ${driver3}     ${rh_on_xpath}     ${not_currently_on}
-#    # 返回Face to Face模式
-#    back_to_face_to_face_mode    ${driver1}
-#    # TU3 leaves call.
-#    exit_call     ${driver3}
-#    # VP: participant menu is not visible. Exit call submenu is Yes/No. Change role submenu is same as before.
-#    hang_up_the_phone     ${driver1}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver1}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver1}
-#    hang_up_the_phone     ${driver2}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_yes_button}
-#    which_page_is_currently_on     ${driver2}     ${exit_call_no_button}
-#    hang_up_the_phone     ${driver2}
-#    # End call.
-#    exit_call     ${driver1}
-#    [Teardown]    exit_driver
 
 Small_range_581_582
     [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
