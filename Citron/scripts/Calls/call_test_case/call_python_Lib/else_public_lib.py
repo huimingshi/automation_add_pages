@@ -677,10 +677,6 @@ def open_html_create_call(another_driver,login_user,password,call_user):
     public_click_element(driver, search_by_email,description = '根据email查询框')
     email_input = get_xpath_element(driver, search_by_email,description = '根据email查询框')
     email_input.send_keys(call_user)
-    # call_button = get_xpath_element(driver, '//button[@id="call-btn"]',description = 'Call按钮')
-    # for i in range(3):
-    #     driver.execute_script('arguments[0].removeAttribute("disabled")', call_button)
-    #     time.sleep(4)
     time.sleep(5)
     public_click_element(driver, '//button[@id="call-btn"]', description='Call按钮')
     for i in range(2):
