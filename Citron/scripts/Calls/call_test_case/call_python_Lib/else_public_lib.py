@@ -397,6 +397,8 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
             quarter_of_the_height_s = quarter_of_the_height_s + sixteen_of_the_height
             if witch_page == 'Directory' or witch_page == 'Team':
                 js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[2].scrollTop={quarter_of_the_height_n}'
+            elif witch_page == 'Users':
+                js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'
                 # driver.execute_script(js)
             else:
                 js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_s}'
