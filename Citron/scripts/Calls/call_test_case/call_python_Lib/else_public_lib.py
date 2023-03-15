@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------------------------------#
-
+import time
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action as CTA
@@ -26,6 +26,7 @@ def suspension_of_the_mouse(driver,username):
     :param username: 用户名
     :return:
     """
+    time.sleep(2)
     ellipsis_xpath = f'//div[@title="{username}"]/../../../..//div[@class="ellipsis-menu-div"]'
     ellipsis = get_xpath_element(driver, ellipsis_xpath, description='悬浮按钮')
     ActionChains(driver).move_to_element(ellipsis).perform()
@@ -685,6 +686,10 @@ def open_html_create_call(another_driver,login_user,password,call_user):
         if len(ele_count) == 1:
             break
         else:
+            email_input.clear()
+            email_input.send_keys(call_user)
+            time.sleep(5)
+            public_click_element(driver, '//button[@id="call-btn"]', description='Call按钮')
             time.sleep(5)
     return driver
 

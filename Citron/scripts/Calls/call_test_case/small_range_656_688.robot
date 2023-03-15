@@ -104,10 +104,11 @@ Force Tags        small_range
 Small_range_660
     [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
     [Tags]    small range 660 line      call_case
+    ###### 保证User2 再未登录情况下，User 1中查看到是未登录状态
     # Expert User1 登录（case中的caller），这个user属于big_admin
-    ${driver1}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_1@outlook.com
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User2_username}
     # Expert User2 登录（case中的Joiner），这个user属于big_admin
-    ${driver2}    driver_set_up_and_logIn    Huiming.shi.helplightning+free_user_2@outlook.com
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
     # 获取meeting link
     ${invite_url}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
     # Joiner's App is killed
