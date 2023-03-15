@@ -340,7 +340,8 @@ check_export_file_data
     should be equal as strings  ${first_lines}[6]    ${callDuration_get}
     ${tags_get_new}  string_with_whitespace_removed   ${tags_get}
     should be equal as strings  ${first_lines}[7]    ${tags_get_new}
-    [Return]    ${first_lines}[0]    ${first_lines}[1]
+#    [Return]    ${first_lines}[0]    ${first_lines}[1]
+    [Return]    ${first_lines}[2]
 
 check_zip_report_file_data
     # Read the first and second line field of the report.csv file

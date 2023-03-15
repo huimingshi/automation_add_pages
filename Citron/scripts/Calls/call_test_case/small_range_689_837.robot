@@ -488,14 +488,14 @@ Small_range_799_802
     # User C 登录
     ${driver3}    driver_set_up_and_logIn    ${email}
     # Normal call    User A, User B & User C are in a call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}   ${py_team_page}   ${normal_name_for_calls_B}
+    contacts_witch_page_make_call    ${driver2}   ${driver3}   ${py_team_page}   ${random}
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    inCall_enter_contacts_search_user     ${driver3}     ${normal_username_for_calls_name}
-    click_user_in_contacts_list    ${driver3}     ${normal_username_for_calls_name}
+    inCall_enter_contacts_search_user     ${driver2}     ${normal_username_for_calls_name}
+    click_user_in_contacts_list    ${driver2}     ${normal_username_for_calls_name}
     user_anwser_call      ${driver1}
     # End call, User A, User B & User C enter the call tag & comment.
-    leave_call    ${driver3}
-    exit_call    ${driver2}
+    leave_call    ${driver2}
+    exit_call    ${driver3}
 
     # 进入到workspace settings page
     enter_workspace_settings_page
@@ -540,13 +540,11 @@ Small_range_799_802
     refresh_web_page
     check_details_participant_name      Deleted User    # Deleted User在participant中
     refresh_web_page
-#    check_event_log_deleted_user    2  # event log中有两条deleted user
     enter_calls_menu
     # VP: In Citron->Admin  3)->Calls -> expert current it table, to check the csv file: the user name should be changed to Deleted User, email should be changed to Null.
     export_current_table
-    ${owner_name_get_from_excel}    ${owner_email_get_from_excel}    check_export_file_data
-    should be equal as strings    ${owner_name_get_from_excel}    Deleted User
-    should be empty     ${owner_email_get_from_excel}
+    ${Participants_get_from_excel}    check_export_file_data
+    should contain      ${Participants_get_from_excel}      Deleted User
     # VP: In Citron->Admin  2)-> Users, to check this user is not in Active User & Deactive User & Invitation User List.
     enter_workspace_users
     users_page_search_deleted_user   ${random}
@@ -558,29 +556,26 @@ Small_range_799_802
     # 802 line
     # VP: User A client:1) Check User A's Favorites, Directory, and Contacts Lists
     ###### 受bug影响：https://vipaar.atlassian.net/browse/CITRON-3717
-#    Login_new_added_user   ${normal_username_for_calls}
-#    contacts_page_search_deleted_user   1656042124716077   ${team_search_input}
-#    enter_directory_page
-#    contacts_page_search_deleted_user   1656042124716077   ${directory_search_input}
-#    enter_favorites_page
-#    contacts_page_search_deleted_user   1656042124716077   ${favorites_search_input}
-#    # VP: User A client:2) Check this call info of User A's recent call list
-#    enter_recents_page
-#    check_page_first_owner_is_deleted_user    name
-#    # VP: User A client:3) Check the call record should not be recalled for User C from User A's recent call
-#    recents_page_first_line_has_no_call_button
+    Login_new_added_user   ${normal_username_for_calls}
+    contacts_page_search_deleted_user   ${random}   ${team_search_input}
+    enter_directory_page
+    contacts_page_search_deleted_user   ${random}   ${directory_search_input}
+    enter_favorites_page
+    contacts_page_search_deleted_user   ${random}   ${favorites_search_input}
+    # VP: User A client:2) Check this call info of User A's recent call list
+    enter_recents_page
+    enter_which_call_details     0    # 进入第一条call记录的details
+    refresh_web_page
+    check_details_participant_count     3   # participant数目为3
+    refresh_web_page
+    check_details_participant_name      Deleted User    # Deleted User在participant中
+    refresh_web_page
     [Teardown]      run keywords    check_file_if_exists_delete
     ...             AND             exit_driver
 
 Disclaimer_805
     [Documentation]    Disclaimer   Set Declaimer ->'delete user' is NOT selected   Enterprise Admin Reset Disclaimer
     [Tags]     small range 805 line     call_case
-#    [Setup]     run keywords      Login_workspaces_admin            # log in with workspace admin
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
-#    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
-#    ...         AND               set_delete_user_close             # 设置delete user为close状态
-#    ...         AND               Close
     [Setup]     set_disclaimer_is_on_and_delete_user_close    workspaces_admin
     # User登录
     ${driver1}   driver_set_up_and_logIn   ${personal_user_username}
@@ -602,12 +597,6 @@ Disclaimer_805
 Disclaimer_806_807
     [Documentation]    Set Declaimer ->'delete user' is NOT selected    2 enterprise users in call	 Invite User C who is in same enterprise who has accepted disclaimer when logs in App.
     [Tags]     small range 806-807 lines        call_case
-#    [Setup]     run keywords      Login_premium_user                # log in with Site admin
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
-#    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
-#    ...         AND               set_delete_user_close             # 设置delete user为close状态
-#    ...         AND               Close
     [Setup]     set_disclaimer_is_on_and_delete_user_close    premium_user
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
@@ -649,12 +638,6 @@ Disclaimer_806_807
 Disclaimer_808_809
     [Documentation]   Set Declaimer ->'delete user' is NOT selected    logout app and click one-time meeting link
     [Tags]     small range 808-809 lines        call_case
-#    [Setup]     run keywords      Login_premium_user                # log in with Site admin
-#    ...         AND               enter_workspace_settings_page     # 进入settings页面
-#    ...         AND               expand_option_delete_user         # EXPAND delete user 选项
-#    ...         AND               set_disclaimer_is_on              # 设置Disclaimer为open状态
-#    ...         AND               set_delete_user_close             # 设置delete user为close状态
-#    ...         AND               Close
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]     set_disclaimer_is_on_and_delete_user_close    premium_user
     # User A 登录
@@ -677,185 +660,164 @@ Disclaimer_808_809
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#Small_range_820_821
-#    [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
-#    [Tags]    small range 820-821 lines     call_case
-##    [Setup]     run keywords    Login_site_admin
-##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-##    ...         AND             enter_workspace_settings_page           # 进入settings页面
-##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-##    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-##    ...         AND             Close
-#    [Setup]   set_always_on_select    always_on
-#    # User A 登录
-#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-#    # 获取meeting link
-#    ${invite_url}    send_meeting_room_link     ${driver1}    ${OTU_link_email}
-#    # Anonymous user call meeting owner
-#    ${driver2}   anonymous_open_meeting_link    ${invite_url}
-#    # 确保call连接成功，但未接听
-#    make_sure_enter_call   ${driver2}
-#    # 接受Call
-#    user_anwser_call      ${driver1}
-#    # Another enterprise user join call
-#    ${driver3}   driver_set_up_and_logIn   ${Expert_User5_username}
-#    user_make_call_via_meeting_link      ${driver3}     ${invite_url}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver3}
-#    # 接受Call
-#    user_anwser_call      ${driver1}     no_direct
-#    # VP: REC is on, can not changed
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
+Small_range_820_821
+    [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
+    [Tags]    small range 820-821 lines     call_case
+    [Setup]   set_always_on_select    always_on
+    # User A 登录
+    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+    # 获取meeting link
+    ${invite_url}    send_meeting_room_link     ${driver1}    ${OTU_link_email}
+    # Anonymous user call meeting owner
+    ${driver2}   anonymous_open_meeting_link    ${invite_url}
+    # 确保call连接成功，但未接听
+    make_sure_enter_call   ${driver2}
+    # 接受Call
+    user_anwser_call      ${driver1}
+    # Another enterprise user join call
+    ${driver3}   driver_set_up_and_logIn   ${Expert_User5_username}
+    user_make_call_via_meeting_link      ${driver3}     ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver3}
+    # 接受Call
+    user_anwser_call      ${driver1}     no_direct
+    # VP: REC is on, can not changed
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    rec_is_on_or_off     ${driver1}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    rec_is_on_or_off     ${driver2}
+    which_page_is_currently_on    ${driver3}    ${end_call_button}
+    rec_is_on_or_off     ${driver3}
+    # Change mode of giver/receiver/Observer;In mode of Freeze/GHoP/Doc Share
+    # In each mode, Say some words while do telestrations.	VP: REC is still on
+    enter_giver_mode     ${driver1}      ${ws3_branding_A_username}    ${Expert_User5_name}
+    proceed_with_camera_off    ${driver1}
+    rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
+    rec_is_on_or_off     ${driver2}
+    proceed_with_camera_off    ${driver3}
+    rec_is_on_or_off     ${driver3}
+    enter_FGD_mode     ${driver1}      Document
+    proceed_with_camera_off    ${driver1}
+    rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
+    rec_is_on_or_off     ${driver2}
+    proceed_with_camera_off    ${driver3}
+    rec_is_on_or_off     ${driver3}
+    enter_FGD_mode     ${driver1}      Photo
+    proceed_with_camera_off    ${driver1}
+    rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
+    rec_is_on_or_off     ${driver2}
+    proceed_with_camera_off    ${driver3}
+    rec_is_on_or_off     ${driver3}
+#    enter_FGD_mode     ${driver3}      Freeze
 #    rec_is_on_or_off     ${driver1}
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
 #    rec_is_on_or_off     ${driver2}
-#    which_page_is_currently_on    ${driver3}    ${end_call_button}
 #    rec_is_on_or_off     ${driver3}
-#    # Change mode of giver/receiver/Observer;In mode of Freeze/GHoP/Doc Share
-#    # In each mode, Say some words while do telestrations.	VP: REC is still on
-#    enter_giver_mode     ${driver1}      ${ws3_branding_A_username}    ${Expert_User5_name}
-#    proceed_with_camera_off    ${driver1}
-#    rec_is_on_or_off     ${driver1}
-#    proceed_with_camera_off    ${driver2}
-#    rec_is_on_or_off     ${driver2}
-#    proceed_with_camera_off    ${driver3}
-#    rec_is_on_or_off     ${driver3}
-#    enter_FGD_mode     ${driver1}      Document
-#    proceed_with_camera_off    ${driver1}
-#    rec_is_on_or_off     ${driver1}
-#    proceed_with_camera_off    ${driver2}
-#    rec_is_on_or_off     ${driver2}
-#    proceed_with_camera_off    ${driver3}
-#    rec_is_on_or_off     ${driver3}
-#    enter_FGD_mode     ${driver1}      Photo
-#    proceed_with_camera_off    ${driver1}
-#    rec_is_on_or_off     ${driver1}
-#    proceed_with_camera_off    ${driver2}
-#    rec_is_on_or_off     ${driver2}
-#    proceed_with_camera_off    ${driver3}
-#    rec_is_on_or_off     ${driver3}
-##    enter_FGD_mode     ${driver3}      Freeze
-##    rec_is_on_or_off     ${driver1}
-##    rec_is_on_or_off     ${driver2}
-##    rec_is_on_or_off     ${driver3}
-#    # 返回Face to Face模式
-#    back_to_face_to_face_mode    ${driver1}
-#    # end call
-#    end_call_for_all     ${driver1}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
+    # end call
+    end_call_for_all     ${driver1}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 
-#Small_range_823
-#    [Documentation]     Call on-call group from contact list
-#    [Tags]    small range 823 line      call_case
-##    [Setup]     run keywords    Login_site_admin
-##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-##    ...         AND             enter_workspace_settings_page           # 进入settings页面
-##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-##    ...         AND             choose_witch_recording_feature      ${always_on_select}    # set to always record
-##    ...         AND             Close
-##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-##    [Setup]   set_always_on_select    always_on
-#    # User A 登录
-#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-#    # On-call user登录
-#    ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}
-#    # Call on-call group from contact list
-#    contacts_witch_page_make_call    ${driver1}    ${driver2}   ${py_team_page}   ${Expert_Group_1}
-#    # VP: REC is on, can not changed. What's more, on both sides, REC logo should be shown up.
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    rec_is_on_or_off     ${driver1}
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    rec_is_on_or_off     ${driver2}
-#    # In mode of Freeze/GHoP/Doc Share，VP: REC is still on
-#    enter_giver_mode     ${driver1}      none    none     2
-#    proceed_with_camera_off    ${driver1}
-#    rec_is_on_or_off     ${driver1}
-#    proceed_with_camera_off    ${driver2}
-#    rec_is_on_or_off     ${driver2}
-#    enter_FGD_mode     ${driver1}      Document
-#    proceed_with_camera_off    ${driver1}
-#    rec_is_on_or_off     ${driver1}
-#    proceed_with_camera_off    ${driver2}
-#    rec_is_on_or_off     ${driver2}
-#    enter_FGD_mode     ${driver1}      Photo
-#    proceed_with_camera_off    ${driver1}
-#    rec_is_on_or_off     ${driver1}
-#    proceed_with_camera_off    ${driver2}
-#    rec_is_on_or_off     ${driver2}
-##    enter_FGD_mode     ${driver2}      Freeze
-##    rec_is_on_or_off     ${driver1}
-##    rec_is_on_or_off     ${driver2}
-#    # 返回Face to Face模式
-#    back_to_face_to_face_mode    ${driver1}
-#    # end call
-#    exit_call    ${driver1}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
-
-#Small_range_825_826
-#    [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
-#    [Tags]    small range 825+826 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3507
+Small_range_823
+    [Documentation]     Call on-call group from contact list
+    [Tags]    small range 823 line      call_case
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   set_always_on_select    always_on
-#    # User A 登录
-#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-#    # another company user登录
-#    ${driver2}   driver_set_up_and_logIn   ${Expert_User5_username}
-#    # Pre-condition：set to Default-OFF
-#    # VP: After setting changing,new call  should be OFF immediately . Do not need to logout.
-#    Login_site_admin              # another company user whose rec is on
-#    switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    enter_workspace_settings_page           # 进入settings页面
-#    expand_during_call_recording            # 展开During Call: Recording设置
-#    turn_on_during_call_recording           # 打开During Call: Recording设置
-#    choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-#    Close
-#    # MHS owner get incoming call from another company user whose rec is on
-#    ${invite_url}    send_meeting_room_link     ${driver1}    ${MHS_link_email}
-#    user_make_call_via_meeting_link      ${driver2}     ${invite_url}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver2}
-#    user_anwser_call     ${driver1}
-#    # VP: REC is off, only owner can change it
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    make_show_recording_settings    ${driver1}
-#    rec_is_on_or_off     ${driver1}     off   can_change
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    make_show_recording_settings    ${driver2}
-#    rec_is_on_or_off     ${driver2}     off   none
-#    # Change role of giver/receiver
-#    enter_giver_mode     ${driver1}      none    none     2
-#    # VP: only owner can change rec
-#    proceed_with_camera_off    ${driver1}
-#    make_show_recording_settings    ${driver1}
-#    rec_is_on_or_off     ${driver1}     off   can_change
-#    proceed_with_camera_off    ${driver2}
-#    make_show_recording_settings    ${driver2}
-#    rec_is_on_or_off     ${driver2}     off   none
-#    # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
-#    make_show_recording_settings    ${driver1}
-#    record_or_do_not_record    record          ${ws3_branding_A_username}    ${driver1}    ${driver2}
-#    make_show_recording_settings    ${driver1}
-#    record_or_do_not_record    do_not_record        ${ws3_branding_A_username}    ${driver1}    ${driver2}
-#    # 返回Face to Face模式
-#    back_to_face_to_face_mode    ${driver1}
-#    # end call
-#    exit_call    ${driver1}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+    # User A 登录
+    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+    # On-call user登录
+    ${driver2}   driver_set_up_and_logIn   ${ws3_branding_B_user}
+    # Call on-call group from contact list
+    contacts_witch_page_make_call    ${driver1}    ${driver2}   ${py_team_page}   ${Expert_Group_1}
+    # VP: REC is on, can not changed. What's more, on both sides, REC logo should be shown up.
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    rec_is_on_or_off     ${driver1}
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    rec_is_on_or_off     ${driver2}
+    # In mode of Freeze/GHoP/Doc Share，VP: REC is still on
+    enter_giver_mode     ${driver1}      none    none     2
+    proceed_with_camera_off    ${driver1}
+    rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
+    rec_is_on_or_off     ${driver2}
+    enter_FGD_mode     ${driver1}      Document
+    proceed_with_camera_off    ${driver1}
+    rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
+    rec_is_on_or_off     ${driver2}
+    enter_FGD_mode     ${driver1}      Photo
+    proceed_with_camera_off    ${driver1}
+    rec_is_on_or_off     ${driver1}
+    proceed_with_camera_off    ${driver2}
+    rec_is_on_or_off     ${driver2}
+#    enter_FGD_mode     ${driver2}      Freeze
+#    rec_is_on_or_off     ${driver1}
+#    rec_is_on_or_off     ${driver2}
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
+    # end call
+    exit_call    ${driver1}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
+
+Small_range_825_826
+    [Documentation]     Call recording feature     Pre-condition：set to Default-OFF
+    [Tags]    small range 825+826 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3507
+    [Setup]   set_always_on_select    always_on
+    # User A 登录
+    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+    # another company user登录
+    ${driver2}   driver_set_up_and_logIn   ${Expert_User5_username}
+    # Pre-condition：set to Default-OFF
+    # VP: After setting changing,new call  should be OFF immediately . Do not need to logout.
+    Login_site_admin              # another company user whose rec is on
+    switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
+    enter_workspace_settings_page           # 进入settings页面
+    expand_during_call_recording            # 展开During Call: Recording设置
+    turn_on_during_call_recording           # 打开During Call: Recording设置
+    choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
+    Close
+    # MHS owner get incoming call from another company user whose rec is on
+    ${invite_url}    send_meeting_room_link     ${driver1}    ${MHS_link_email}
+    user_make_call_via_meeting_link      ${driver2}     ${invite_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver2}
+    user_anwser_call     ${driver1}
+    # VP: REC is off, only owner can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    make_show_recording_settings    ${driver1}
+    rec_is_on_or_off     ${driver1}     off   can_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    make_show_recording_settings    ${driver2}
+    rec_is_on_or_off     ${driver2}     off   none
+    # Change role of giver/receiver
+    enter_giver_mode     ${driver1}      none    none     2
+    # VP: only owner can change rec
+    proceed_with_camera_off    ${driver1}
+    make_show_recording_settings    ${driver1}
+    rec_is_on_or_off     ${driver1}     off   can_change
+    proceed_with_camera_off    ${driver2}
+    make_show_recording_settings    ${driver2}
+    rec_is_on_or_off     ${driver2}     off   none
+    # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
+    make_show_recording_settings    ${driver1}
+    record_or_do_not_record    record          ${ws3_branding_A_username}    ${driver1}    ${driver2}
+    make_show_recording_settings    ${driver1}
+    record_or_do_not_record    do_not_record        ${ws3_branding_A_username}    ${driver1}    ${driver2}
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
+    # end call
+    exit_call    ${driver1}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 
 Small_range_827
     [Documentation]     Expert  get incoming call
     [Tags]    small range 827 line      call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-#    ...         AND             Close
     [Setup]   set_always_on_select      opt_in
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
@@ -888,57 +850,43 @@ Small_range_827
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#Small_range_829
-#    [Documentation]     Call enterprise contact
-#    [Tags]    small range 829 line      call_case
-##    [Setup]     run keywords    Login_site_admin
-##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-##    ...         AND             enter_workspace_settings_page           # 进入settings页面
-##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-##    ...         AND             choose_witch_recording_feature      ${opt_in_select}    # set to Default-OFF
-##    ...         AND             Close
-##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-##    [Setup]   set_always_on_select    opt_in
-#    # User A 登录
-#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-#    # Expert 登录
-#    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
-#    # Call enterprise contact
-#    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
-#    # VP: REC is off, only caller can change it
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    make_show_recording_settings    ${driver1}
-#    rec_is_on_or_off     ${driver1}     off   can_change
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    make_show_recording_settings    ${driver2}
-#    rec_is_on_or_off     ${driver2}     off   none
-#    # Change role of giver/receiver
-#    enter_giver_mode     ${driver1}      none    none     2
-#    # VP: only owner can change rec
-#    proceed_with_camera_off    ${driver1}
-#    make_show_recording_settings    ${driver1}
-#    rec_is_on_or_off     ${driver1}     off   can_change
-#    proceed_with_camera_off    ${driver2}
-#    make_show_recording_settings    ${driver2}
-#    rec_is_on_or_off     ${driver2}     off   none
-#    # 返回Face to Face模式
-#    back_to_face_to_face_mode    ${driver1}
-#    # end call
-#    exit_call    ${driver1}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+Small_range_829
+    [Documentation]     Call enterprise contact
+    [Tags]    small range 829 line      call_case
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   set_always_on_select    opt_in
+    # User A 登录
+    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+    # Expert 登录
+    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
+    # Call enterprise contact
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
+    # VP: REC is off, only caller can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    make_show_recording_settings    ${driver1}
+    rec_is_on_or_off     ${driver1}     off   can_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    make_show_recording_settings    ${driver2}
+    rec_is_on_or_off     ${driver2}     off   none
+    # Change role of giver/receiver
+    enter_giver_mode     ${driver1}      none    none     2
+    # VP: only owner can change rec
+    proceed_with_camera_off    ${driver1}
+    make_show_recording_settings    ${driver1}
+    rec_is_on_or_off     ${driver1}     off   can_change
+    proceed_with_camera_off    ${driver2}
+    make_show_recording_settings    ${driver2}
+    rec_is_on_or_off     ${driver2}     off   none
+    # 返回Face to Face模式
+    back_to_face_to_face_mode    ${driver1}
+    # end call
+    exit_call    ${driver1}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 
 Small_range_831_832
     [Documentation]     Call recording feature     Pre-condition：set to Default-ON
     [Tags]    small range 831+832 lines     call_case
-#    [Setup]     run keywords    Login_premium_user              # another company user whose rec is on
-#    ...         AND             switch_to_created_workspace         ${created_workspace}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
-#    ...         AND             Close
     [Setup]   set_always_on_select    opt_out
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
@@ -974,13 +922,6 @@ Small_range_831_832
 Small_range_833
     [Documentation]     call on-call group from contact list
     [Tags]    small range 827 line      call_case
-#    [Setup]     run keywords    Login_site_admin
-#    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-#    ...         AND             enter_workspace_settings_page           # 进入settings页面
-#    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-#    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-#    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-OFF
-#    ...         AND             Close
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   set_always_on_select    opt_out
     # User A 登录
@@ -1017,13 +958,6 @@ Small_range_833
 #Small_range_834
 #    [Documentation]     Call enterprise contact
 #    [Tags]    small range 834 line      call_case
-##    [Setup]     run keywords    Login_site_admin
-##    ...         AND             switch_to_created_workspace         ${created_workspace_branding_3}   # 切换到我自己创建的WS
-##    ...         AND             enter_workspace_settings_page           # 进入settings页面
-##    ...         AND             expand_during_call_recording            # 展开During Call: Recording设置
-##    ...         AND             turn_on_during_call_recording           # 打开During Call: Recording设置
-##    ...         AND             choose_witch_recording_feature      ${opt_out_select}    # set to Default-ON
-##    ...         AND             Close
 ##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 ##    [Setup]   set_always_on_select    opt_out
 #    # User A 登录
