@@ -284,9 +284,9 @@ direct_call_Scenario_3
     comment    CP: anonymous user can not be promoted to co-host
     # TU1 tries to turn on co-host for anonymous user	VP: anonymous user can not be promoted to co-host.
     turn_on_co_host_for_sb      ${driver_TU1}     ${anonymous_user_name}      gray
-    # AU1 mutes other participant	VP: are mute
+    # TU1 mutes other participant	VP: are mute
     co_host_mute_sb       ${driver_TU1}      mute    can    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
-    # TU1 tries to unmute other participant.	VP: co-host can not un-mute others
+#    # TU1 tries to unmute other participant.	VP: co-host can not un-mute others
 #    co_host_mute_sb       ${driver_TU1}      unmute    can_not    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
     # The muted participant turns on mic by himself.	VP: mic is on.
     turns_on_mic_by_himself      ${driver_EU2}     ${driver_U3}   ${driver_AU1}   ${driver_EU5}   ${driver_U6}
