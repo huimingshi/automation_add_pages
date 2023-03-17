@@ -344,7 +344,9 @@ direct_call_Scenario_3
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_U6}       ${has_removed_you}
     # Participants leave call in Face to Face mode one by one
-    end_call_for_all         ${driver_TU1}
+    exit_call    ${driver_EU2}
+    exit_call    ${driver_AU1}
+    exit_call    ${driver_TU1}
     [Teardown]      exit_driver
 
 direct_call_Scenario_4
@@ -374,7 +376,6 @@ direct_call_Scenario_4
     user_make_call_via_meeting_link     ${driver_EU5}   ${invite_url}
     ${driver_U6}      driver_set_up_and_logIn     ${Team_User2_username}
     user_make_call_via_meeting_link     ${driver_U6}    ${invite_url}
-    check_in_f2f_mode           ${driver_TU1}
     # VP: F2F mode;
     check_in_f2f_mode           ${driver_TU1}
     # VP: Web Desktop only - for the host/co-host, "Share Live Video from: <other participant(First one if multi)>"button
@@ -393,7 +394,7 @@ direct_call_Scenario_4
     # TU1 Leave call.	VP:
     leave_call      ${driver_TU1}
         # 2.  toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
-        has_left_the_session     ${driver_TU1}      ${Team_User2_name}
+        has_left_the_session     ${driver_EU2}      ${Team_User1_name}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_EU2}
 
@@ -403,6 +404,9 @@ direct_call_Scenario_4
     # EU2 clicks on Exit icon	VP: “Leave call” and “End Call For All” submenus display.
     check_has_end_call_button       ${driver_EU2}      1    2
     # Choose “Leave Call”	VP: text "You must select another co-host before you can Leave Call."	"End Call for All" button in the left bottom is enabled. "Leave Call" button is disabled.
+    sleep   20s    # 需要等待一段时间，EU2在点击leave call时才会出现提示信息You must select another co-host before you can Leave Call.
+    click_participants_div    ${driver_EU2}
+    close_invite_3th_page     ${driver_EU2}
     leave_call      ${driver_EU2}
     you_must_select_another_co_host          ${driver_EU2}
     participants_page_end_call_for_all       ${driver_EU2}
@@ -419,10 +423,10 @@ direct_call_Scenario_4
     select_co_host_back     ${driver_EU2}      ${Expert_User5_name}
     # EU2 leave call	VP:
     leave_call      ${driver_EU2}
-        # 1. app enters Face to Face mode.
-        check_in_f2f_mode           ${driver_EU5}
         # 2. Toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”	%1$s (%2$s) left the call. Switched back to Face to Face mode.
         has_left_the_session        ${driver_EU5}      ${Expert_User2_name}
+        # 1. app enters Face to Face mode.
+        check_in_f2f_mode           ${driver_EU5}
     # U5 share another one's live video	VP: U5 is the only co-host in call
     share_live_video_from_sb        ${driver_EU5}       ${Team_User2_name}
     participants_icon_is_visible     yes     ${driver_EU5}
@@ -432,6 +436,9 @@ direct_call_Scenario_4
     # co-host U5 observer clicks on Exit icon	VP: “Leave call” and “End Call For All” submenus display.
     check_has_end_call_button       ${driver_EU5}      1    2
     # Co-host observer selects Leave call.	VP: dialog "You must select another co-host before you can Leave Call.".	"End Call for All" button in the left bottom is enabled. "Leave Call" button in the right bottom is disabled.
+    sleep   20s    # 需要等待一段时间，EU5在点击leave call时才会出现提示信息You must select another co-host before you can Leave Call.
+    click_participants_div    ${driver_EU5}
+    close_invite_3th_page     ${driver_EU5}
     leave_call      ${driver_EU5}
     you_must_select_another_co_host          ${driver_EU5}
     participants_page_end_call_for_all       ${driver_EU5}

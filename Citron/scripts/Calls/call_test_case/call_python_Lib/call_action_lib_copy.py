@@ -931,16 +931,6 @@ def co_host_mute_sb(driver,mute = 'mute',can_operate = 'can',*usernames):
             else:
                 ele_list = get_xpath_elements(driver, mute_which_participant.format(user))
                 public_assert(driver, len(ele_list), 0, action=f"应无法给{user}取消静音")
-    # for user in usernames:
-    #     if len(get_xpath_elements(driver,mute_which_participant.format(user))) == 1:
-    #         public_click_element(driver,mute_which_participant.format(user),description=f"给{user}静音")
-    #         ele_list = get_xpath_elements(driver,unmute_which_participant.format(user))
-    #         public_assert(driver,len(ele_list),1,action=f"给{user}静音成功")
-    #     else:
-    #         public_click_element(driver, unmute_which_participant.format(user), description=f"给{user}取消静音")
-    #         ele_list = get_xpath_elements(driver, mute_which_participant.format(user))
-    #         public_assert(driver, len(ele_list), 0, action=f"不应无法给{user}取消静音")
-    # 点击左侧的Participants按钮进行收起
     close_invite_3th_page(driver)
 
 def turns_on_mic_by_himself(*drivers):
@@ -973,7 +963,7 @@ def select_co_host_back(driver,username = 'Huiming.shi.helplightning+EU2',can_tu
             public_click_element(driver, turn_off_co_host_button, description="Co-host关闭按钮")
     else:
         # 校验co-host开关不可用
-        ele_list = get_xpath_elements(driver, co_host_button_unusable)
+        ele_list = get_xpath_elements(driver, co_host_button_gray)
         public_assert(driver, len(ele_list), 1, action="Co-host无法开启")
     # 点击Participants的Back按钮
     public_click_element(driver,'//div[@class="return-button"]',description="Participants的Back按钮")
