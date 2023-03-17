@@ -178,12 +178,12 @@ def participants_icon_is_visible(visible = "yes",*drivers):
     :param visible:参与者图标是否可见，默认yes可见
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver, participants_div)
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i], participants_div)
         if visible == "yes":
-            public_assert(driver, 1, len(ele_list), action="参与者图标应该可见")
+            public_assert(drivers[i], 1, len(ele_list), action=f"第{i+1}个driver的参与者图标应该可见")
         else:
-            public_assert(driver, 0, len(ele_list), action="参与者图标应该不可见")
+            public_assert(drivers[i], 0, len(ele_list), action=f"第{i+1}个driver的参与者图标应该不可见")
 
 def invite_button_is_hidden(*drivers):
     """
@@ -191,14 +191,14 @@ def invite_button_is_hidden(*drivers):
     :param drivers: driver
     :return:
     """
-    for driver in drivers:
+    for i in range(len(drivers)):
         # 点击Participants按钮，展开
-        CPD(driver)
+        CPD(drivers[i])
         # 断言没有add user按钮
-        ele_list = get_xpath_elements(driver,enter_add_user_page)
-        public_assert(driver,len(ele_list),0,action="已达6人不可再邀请")
+        ele_list = get_xpath_elements(drivers[i],enter_add_user_page)
+        public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver已达6人应该不可再邀请")
         # 点击"x"按钮，收起
-        CI3P(driver)
+        CI3P(drivers[i])
 
 def check_in_photo_pdf_whiteboard_mode(*drivers):
     """
@@ -206,9 +206,9 @@ def check_in_photo_pdf_whiteboard_mode(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,zoom_in_button)
-        public_assert(driver,len(ele_list),1,action="处于photo或者pdf或者whiteboard模式中")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],zoom_in_button)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo或者pdf或者whiteboard模式中")
 
 def check_in_live_video_mode(*drivers):
     """
@@ -216,9 +216,9 @@ def check_in_live_video_mode(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,zoom_in_button)
-        public_assert(driver,len(ele_list),0,action="处于live_video模式中")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],zoom_in_button)
+        public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver处于live_video模式中")
 
 def check_only_can_share_themself(*drivers):
     """
@@ -226,14 +226,14 @@ def check_only_can_share_themself(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
+    for i in range(len(drivers)):
         # 将右侧的Share按钮展开
-        CRSB(driver)
+        CRSB(drivers[i])
         # 检查尽可以share自己
-        ele_list = get_xpath_elements(driver,live_video_from_sb.format("My Camera"))
-        public_assert(driver,len(ele_list),1,action="仅可以share自己")
+        ele_list = get_xpath_elements(drivers[i],live_video_from_sb.format("My Camera"))
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver仅可以share自己")
         # 将右侧的Share按钮收起
-        CRSB(driver)
+        CRSB(drivers[i])
 
 def check_has_merged(*drivers):
     """
@@ -241,9 +241,9 @@ def check_has_merged(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,merge_off_button)
-        public_assert(driver,len(ele_list),1,action="已经merge了")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],merge_off_button)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver应该已经merge了")
 
 def check_has_no_merged(*drivers):
     """
@@ -251,9 +251,9 @@ def check_has_no_merged(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,merge_on_button)
-        public_assert(driver,len(ele_list),1,action="还没有merge")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],merge_on_button)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver应该还没有merge")
 
 def check_has_merge_menu(*drivers):
     """
@@ -261,9 +261,9 @@ def check_has_merge_menu(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver, merge_on_button)
-        public_assert(driver, len(ele_list), 1, action="merge按钮应该展示")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i], merge_on_button)
+        public_assert(drivers[i], len(ele_list), 1, action=f"第{i+1}个driver的merge按钮应该展示")
 
 def check_has_no_merge_menu(*drivers):
     """
@@ -271,9 +271,9 @@ def check_has_no_merge_menu(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver, merge_on_button)
-        public_assert(driver, len(ele_list), 0, action="merge按钮应该不展示")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i], merge_on_button)
+        public_assert(drivers[i], len(ele_list), 0, action=f"第{i+1}个driver的merge按钮应该不展示")
 
 def check_in_f2f_mode(driver):
     """
@@ -281,28 +281,43 @@ def check_in_f2f_mode(driver):
     :param driver:
     :return:
     """
-    ele_list = get_xpath_elements(driver, '//button[@class="AudioPlusModeIndicator"]')
-    public_assert(driver,len(ele_list),1,action="处于f2f模式")
+    # ele_list = get_xpath_elements(driver, '//button[@class="AudioPlusModeIndicator"]')
+    for i in range(3):
+        merge_on_button_list = get_xpath_elements(driver, merge_on_button)
+        if len(merge_on_button_list) == 0:
+            break
+        elif i < 1:
+            time.sleep(5)
+        else:
+            public_assert(driver, len(merge_on_button_list), 0, action="应该on处于f2f模式")
+    for i in range(3):
+        merge_off_button_list = get_xpath_elements(driver, merge_off_button)
+        if len(merge_off_button_list) == 0:
+            break
+        elif i < 1:
+            time.sleep(5)
+        else:
+            public_assert(driver,len(merge_off_button_list),0,action="应该off处于f2f模式")
 
 def check_show_share_live_video_from(*drivers):
     """
-    校验Share live video from按钮展示
+    校验底部的Share live video from按钮展示
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,share_live_video_button)
-        public_assert(driver,len(ele_list),1,action="share_live_video按钮应该展示")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],share_live_video_button)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver的share_live_video按钮应该展示")
 
 def check_not_show_share_live_video_from(*drivers):
     """
-    校验Share live video from按钮展示
+    校验底部的Share live video from按钮展示
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,share_live_video_button)
-        public_assert(driver, len(ele_list), 0, action="share_live_video按钮应该不展示")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],share_live_video_button)
+        public_assert(drivers[i], len(ele_list), 0, action=f"第{i+1}个driver的share_live_video按钮应该不展示")
 
 def check_can_share_sb_live_video(driver,*users):
     """
@@ -326,9 +341,9 @@ def check_has_freeze_button(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,freeze_on_action)
-        public_assert(driver,len(ele_list),1,action="有freeze按钮")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],freeze_on_action)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver应该有freeze按钮")
 
 def check_has_unFreeze_button(*drivers):
     """
@@ -336,9 +351,9 @@ def check_has_unFreeze_button(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,freeze_off_action)
-        public_assert(driver,len(ele_list),1,action="有unFreeze按钮")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],freeze_off_action)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver应该有unFreeze按钮")
 
 def check_has_capture_button(*drivers):
     """
@@ -346,9 +361,9 @@ def check_has_capture_button(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,capture_button)
-        public_assert(driver,len(ele_list),1,action="应该有截图按钮")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],capture_button)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver应该有截图按钮")
 
 def check_has_no_capture_button(*drivers):
     """
@@ -356,9 +371,9 @@ def check_has_no_capture_button(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,capture_button)
-        public_assert(driver,len(ele_list),0,action="应该没有截图按钮")
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],capture_button)
+        public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver应该没有截图按钮")
 
 def check_has_photo_PDF_whiteboard(*drivers):
     """
@@ -366,13 +381,17 @@ def check_has_photo_PDF_whiteboard(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        ele_list = get_xpath_elements(driver,TPPW_share.format("Photo from Library"))
-        public_assert(driver,len(ele_list),1,action="share_photo按钮")
-        ele_list = get_xpath_elements(driver, TPPW_share.format("PDF Document"))
-        public_assert(driver, len(ele_list), 1, action="share_PDF按钮")
-        ele_list = get_xpath_elements(driver, TPPW_share.format("Whiteboard"))
-        public_assert(driver, len(ele_list), 1, action="Whiteboard按钮")
+    for i in range(len(drivers)):
+        # 将右侧的Share按钮展开
+        CRSB(drivers[i])
+        ele_list = get_xpath_elements(drivers[i],TPPW_share.format("Photo from Library"))
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver应该有share_photo按钮")
+        ele_list = get_xpath_elements(drivers[i], TPPW_share.format("PDF Document"))
+        public_assert(drivers[i], len(ele_list), 1, action=f"第{i+1}个driver应该有share_PDF按钮")
+        ele_list = get_xpath_elements(drivers[i], TPPW_share.format("Whiteboard"))
+        public_assert(drivers[i], len(ele_list), 1, action=f"第{i+1}个driver应该有Whiteboard按钮")
+        # 将右侧的Share按钮收起
+        CRSB(drivers[i])
 
 def check_if_is_highlight(driver,mode,is_highlight = "is_highlight"):
     """

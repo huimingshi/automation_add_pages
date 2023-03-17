@@ -114,7 +114,7 @@ webglCameraOn = "//canvas[@id='webglCameraOn']"
 video_on_button = '//*[@*="#video_on"]/..'
 stop_video_button = '//span[text()="Stop Video"]'
 start_video_button = '//span[text()="Start Video"]'
-off_on_camera = '//div[@class="menu NewCameraMenu"]//*[@*="#camera_front_{}"]/..'
+off_on_camera = '//div[@class="menu NewCameraMenu"]//*[@*="#camera_front_{}"]/../../..'    # call页面左侧的打开、关闭摄像头图标按钮
 return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
 pdf_on_button = "//div[@class='InCall']//*[@*='#pdf_on']"
 ghop_on_button = "//div[@class='InCall']//*[@*='#ghop_on']/../.."
@@ -247,7 +247,7 @@ nav_hollow = "//*[@*='#nav_hollow']/.."                                         
 nav_right = "//*[@*='#nav_right']/.."                                                           # 右移按钮
 current_participant_div = "//div[@class='videoViews_4_{}  ']"                                   # 通话页面上展示的每个入会者
 participants_title = "//div[@class='WebCall show']//span[@ref='eText']"                         # 通话页面上participants下的4个标题
-co_host_right_button = '//span[text()="{}"]/../../../../..//*[@*="#angle_right"]/..'            # Co-host旁边的>按钮
+co_host_right_button = '//span[text()="{}"]/../../../../..//*[@*="#angle_right"]/../..'            # Co-host旁边的>按钮
 co_host_on = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle react-toggle--checked']"    # Co-Host状态为on
 co_host_off = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle']"   # Co-Host状态为off
 can_not_turn_off = "//div[@class='ag-center-cols-container']//strong[text()='{}']/../../../../..//div[@class='react-toggle react-toggle--checked react-toggle--disabled']"   #Co-Host状态不能改成off
@@ -262,10 +262,11 @@ continue_button_in_bottom = "//div[@class='user-footer']/button[text()='Continue
 giver_help_mode = "//*[@*='#gh_on']"
 receiver_help_mode = "//*[@*='#rh_on']"
 observer_mode = "//*[@*='#ob_on']"
-mute_which_participant = '//span[text()="Anonymous 1"]/../../../../..//*[@*="#mic_on"]/..'   # co-host静音某个user
-unmute_which_participant = '//span[text()="Anonymous 1"]/../../../../..//*[@*="#mic_off"]/..'  # co-host尝试取消静音某个user
+mute_which_participant = '//span[text()="{}"]/../../../../..//*[@*="#mic_on"]/../../..'   # co-host静音某个user
+unmute_which_participant = '//span[text()="{}"]/../../../../..//*[@*="#mic_off"]/../../..'  # co-host尝试取消静音某个user
 turn_on_co_host_button = '//div[@class="react-toggle"]'            # 开启co-host按钮
 turn_off_co_host_button = '//div[@class="react-toggle react-toggle--checked"]'           # 关闭co-host按钮
-co_host_button_unusable = '//div[@class="react-toggle react-toggle--checked react-toggle--disabled"]'     # 不可开启或者关闭co-host
+co_host_button_unusable = '//div[@class="react-toggle react-toggle--checked react-toggle--disabled"]'     # 整个Participant置灰，无法选中
+co_host_button_gray = '//div[@class="react-toggle react-toggle--disabled"]'     # 不可开启或者关闭co-host
 PPECFA_button = '//div[@class="submenu-content"]//a[text()="End Call for All"]'    # participants页面的end_call_for_all按钮
 ECFA_YES_button = '//button[@variant="secondary" and contains(.,"Yes")]'    # end call for all时的Yes按钮

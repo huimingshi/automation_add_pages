@@ -1,4 +1,6 @@
 #----------------------------------------------------------------------------------------------------#
+import time
+
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from public_settings_and_variable_copy import *
@@ -599,9 +601,9 @@ def click_right_share_button(*drivers):
     :return:
     """
     # 点击右侧的share按钮
-    for driver in drivers:
-        public_click_element(driver, right_share_button, description="右侧SHARE按钮")
-        time.sleep(1)
+    for i in range(len(drivers)):
+        public_click_element(drivers[i], right_share_button, description=f"第{i+1}个driver右侧SHARE按钮")
+        time.sleep(3)
 
 def inCall_upload_photo_PDF(driver,file_type = "Photo"):
     """
@@ -619,10 +621,10 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo"):
     # 点击上传按钮，并先获取文件绝对路径
     if file_type == "Photo":
         public_click_element(driver, TPPW_share.format("Photo from Library"), description="share_photo按钮")
-        file = get_picture_path()
+        file = get_picture_path(is_input = "not_input")
     elif file_type == "PDF":
         public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
-        file = get_picture_path('test_citron.pdf')
+        file = get_picture_path('test_citron.pdf',is_input = "not_input")
     # 判断操作系统类型
     system_type = get_system_type()
     if system_type == 'Windows':
@@ -822,7 +824,7 @@ def turn_on_co_host_for_sb(driver,username,can_turn_on = 'can'):
     打开某个人的Co-host
     :param driver:
     :param username:
-    :param can_turn_on: 是否可以开启，默认可以
+    :param can_turn_on: 是否可以开启，默认can可以，can_not不可以，gray无法选中
     :return:
     """
     # 点击左侧的Participants按钮进行展开
@@ -832,9 +834,12 @@ def turn_on_co_host_for_sb(driver,username,can_turn_on = 'can'):
     if can_turn_on == 'can':
         # 进行开启co-host操作
         public_click_element(driver, turn_on_co_host_button, description="Co-host打开按钮")
-    else:
+    elif can_turn_on == 'can_not':
         ele_list = get_xpath_elements(driver,co_host_button_unusable)
-        public_assert(driver, len(ele_list), 1, action="Co-host无法开启")
+        public_assert(driver, len(ele_list), 1, action="Co-host应该无法开启")
+    else:
+        ele_list = get_xpath_elements(driver, co_host_button_gray)
+        public_assert(driver, len(ele_list), 1, action="Co-host应该无法开启")
     # 点击"x"按钮进行收起
     close_invite_3th_page(driver)
 
@@ -899,25 +904,42 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes'):
     # 点击"x"按钮进行收起
     close_invite_3th_page(driver)
 
-def co_host_mute_sb(driver,*usernames):
+def co_host_mute_sb(driver,mute = 'mute',can_operate = 'can',*usernames):
     """
-    co-host给user进行静音
+    co-host给user进行静音或者取消静音
     :param driver:
+    :param mute：mute静音，非mute取消静音
+    :param can_operate:是否可以进行静音或者非静音
     :param usernames:
     :return:
     """
     # 点击左侧的Participants按钮进行展开
     click_participants_div(driver)
-    # 给user进行静音
+    # 给user进行静音或者取消静音
     for user in usernames:
-        if len(get_xpath_elements(driver,mute_which_participant.format(user))) == 1:
+        if mute == 'mute':
             public_click_element(driver,mute_which_participant.format(user),description=f"给{user}静音")
+            time.sleep(1)
             ele_list = get_xpath_elements(driver,unmute_which_participant.format(user))
             public_assert(driver,len(ele_list),1,action=f"给{user}静音成功")
         else:
             public_click_element(driver, unmute_which_participant.format(user), description=f"给{user}取消静音")
-            ele_list = get_xpath_elements(driver, mute_which_participant.format(user))
-            public_assert(driver, len(ele_list), 0, action=f"不应无法给{user}取消静音")
+            time.sleep(1)
+            if can_operate == 'can':
+                ele_list = get_xpath_elements(driver, mute_which_participant.format(user))
+                public_assert(driver, len(ele_list), 1, action=f"不应无法给{user}取消静音")
+            else:
+                ele_list = get_xpath_elements(driver, mute_which_participant.format(user))
+                public_assert(driver, len(ele_list), 0, action=f"应无法给{user}取消静音")
+    # for user in usernames:
+    #     if len(get_xpath_elements(driver,mute_which_participant.format(user))) == 1:
+    #         public_click_element(driver,mute_which_participant.format(user),description=f"给{user}静音")
+    #         ele_list = get_xpath_elements(driver,unmute_which_participant.format(user))
+    #         public_assert(driver,len(ele_list),1,action=f"给{user}静音成功")
+    #     else:
+    #         public_click_element(driver, unmute_which_participant.format(user), description=f"给{user}取消静音")
+    #         ele_list = get_xpath_elements(driver, mute_which_participant.format(user))
+    #         public_assert(driver, len(ele_list), 0, action=f"不应无法给{user}取消静音")
     # 点击左侧的Participants按钮进行收起
     close_invite_3th_page(driver)
 

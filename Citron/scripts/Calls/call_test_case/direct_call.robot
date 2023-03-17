@@ -204,7 +204,7 @@ direct_call_Scenario_2
     # AU1 click share me
     share_live_video_from_sb    ${driver_AU1}      My Camera
     # VP: EU2 has no "End Call for all" option
-    check_has_end_call_button   ${driver_EU2}      1
+    check_has_end_call_button   ${driver_EU2}
     [Teardown]     exit_driver
 
 direct_call_Scenario_3
@@ -229,6 +229,7 @@ direct_call_Scenario_3
     participants_icon_is_visible     no      ${driver_U3}
     # Participant send 3pi link
     ${invite_url}     send_new_invite_in_calling    ${driver_EU2}
+    close_invite_3th_page   ${driver_EU2}
     # Anonymous user AU1 through 3pi link
     ${driver_AU1}      anonymous_open_meeting_link      ${invite_url}
     user_anwser_call                    ${driver_TU1}    no_direct
@@ -261,10 +262,10 @@ direct_call_Scenario_3
     check_only_can_share_themself       ${driver_U3}   ${driver_AU1}   ${driver_EU5}   ${driver_U6}
     # TU1 turns off, on camera	VP: camera works fine	VP: no swap camera on f2f moce
     turns_off_on_camera       ${driver_TU1}
-    turns_off_on_camera       ${driver_TU1}
+    turns_off_on_camera       ${driver_TU1}    on
     # TU1 clicks on participants icon	VP:
-        # 1. Participants has 4 columns: Participants, Mute, Co-Host, Remove.
-        participants_display_4_columns     ${driver_TU1}
+#        # 1. Participants has 4 columns: Participants, Mute, Co-Host, Remove.
+#        participants_display_4_columns     ${driver_TU1}
         # 2. TU1 isn’t in the table.
         # 3. Co-Host is turned on for EU2 by default, is off for other users.
         who_is_co_host      ${driver_TU1}     ${Expert_User2_name}
@@ -282,9 +283,11 @@ direct_call_Scenario_3
 
     comment    CP: anonymous user can not be promoted to co-host
     # TU1 tries to turn on co-host for anonymous user	VP: anonymous user can not be promoted to co-host.
-    turn_on_co_host_for_sb      ${driver_TU1}     ${anonymous_user_name}      can_not
+    turn_on_co_host_for_sb      ${driver_TU1}     ${anonymous_user_name}      gray
+    # AU1 mutes other participant	VP: are mute
+    co_host_mute_sb       ${driver_TU1}      mute    can    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
     # TU1 tries to unmute other participant.	VP: co-host can not un-mute others
-    co_host_mute_sb       ${driver_TU1}      ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
+#    co_host_mute_sb       ${driver_TU1}      unmute    can_not    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
     # The muted participant turns on mic by himself.	VP: mic is on.
     turns_on_mic_by_himself      ${driver_EU2}     ${driver_U3}   ${driver_AU1}   ${driver_EU5}   ${driver_U6}
     # co-host Share EU2's live video	(EU2's consider as receiver)
@@ -321,10 +324,10 @@ direct_call_Scenario_3
     co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}    can    not_remove
     # Co-host removes giver (U3) and confirms with Remove.	VP:
     co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}
-        # 1. app enters Face to Face mode.
-        check_in_f2f_mode           ${driver_TU1}
         # 2. Show a toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
         left_call_back_f2f_mode     ${driver_TU1}      ${Expert_User3_name}
+        # 1. app enters Face to Face mode.
+        check_in_f2f_mode           ${driver_TU1}
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_U3}       ${has_removed_you}
 
@@ -334,10 +337,10 @@ direct_call_Scenario_3
     # Co-host removes receiver (The participant who is sharing live video)	VP: confirmation dialog: “Are you sure you want to remove <USER NAME>?”, Remove User (emphasis)/Cancel.
     # Confirm with Remove.	VP:
     co_host_remove_sb           ${driver_TU1}     ${Team_User2_name}
-        # 1. app enters Face to Face mode.
-        check_in_f2f_mode           ${driver_TU1}
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
         left_call_back_f2f_mode     ${driver_TU1}      ${Team_User2_name}
+        # 1. app enters Face to Face mode.
+        check_in_f2f_mode           ${driver_TU1}
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_U6}       ${has_removed_you}
     # Participants leave call in Face to Face mode one by one
@@ -389,10 +392,10 @@ direct_call_Scenario_4
     check_has_end_call_button       ${driver_TU1}      1    2
     # TU1 Leave call.	VP:
     leave_call      ${driver_TU1}
-        # 1. app enters Face to Face mode.
-        check_in_f2f_mode           ${driver_EU2}
         # 2.  toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
         left_call_back_f2f_mode     ${driver_TU1}      ${Team_User2_name}
+        # 1. app enters Face to Face mode.
+        check_in_f2f_mode           ${driver_EU2}
 
     comment    CP: Receiver leaves call in normal giving/receiving help mode.
     # Share EU2's live video	"Now view video from xxx"

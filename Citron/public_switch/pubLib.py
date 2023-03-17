@@ -151,10 +151,12 @@ def public_check_element(driver,xpath,description,if_click = 1,if_show = 1):
             screen_shot_func(driver, description)
             raise Exception
 
-def get_picture_path(picture_name = 'avatar1.jpg'):
+def get_picture_path(picture_name = 'avatar1.jpg',is_input = "is_input"):
     """
     # 获取avatar1.jpg绝对路径
-    :return: avatar1.jpg绝对路径
+    :param picture_name: 文件名
+    :param is_input: 是否是input框的上传
+    :return: 绝对路径
     """
     dir_path = os.path.dirname(os.path.abspath(__file__))
     print('当前目录绝对路径:',dir_path)
@@ -171,10 +173,16 @@ def get_picture_path(picture_name = 'avatar1.jpg'):
         dir_list = dir_path.split('/')
         print(dir_list)
         dir_list[-1] = 'publicData'
-        join_str = '//'
+        if is_input == "is_input":
+            join_str = '//'
+        else:
+            join_str = '/'
         final_path = join_str.join(dir_list)
         print(final_path)
-        modify_picture_path = final_path + f'//{picture_name}'
+        if is_input == "is_input":
+            modify_picture_path = final_path + f'//{picture_name}'
+        else:
+            modify_picture_path = final_path + f'/{picture_name}'
         print(modify_picture_path)
         return modify_picture_path
 
