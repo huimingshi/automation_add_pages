@@ -110,6 +110,8 @@ direct_call_Scenario_1
     # VP: Whiteboard only
     check_in_photo_pdf_whiteboard_mode    ${driver_U3}
     # EU2 Share pdf
+    minimize_window_action        ${driver_TU1}   ${driver_U4}   ${driver_U3}   ${driver_EU5}   ${driver_U6}
+    click_window_center           ${driver_EU2}
     inCall_upload_photo_PDF       ${driver_EU2}     PDF
     # VP: pdf navigation mode
     check_in_photo_pdf_whiteboard_mode    ${driver_EU2}

@@ -27,6 +27,9 @@ def click_participants_div(driver):
     """
     public_click_element(driver, participants_div, description='点击邀请user进入call的入口按钮')
     time.sleep(2)
+    ele_list = get_xpath_elements(driver,close_participants_page_xpath)
+    if len(ele_list) != 1:
+        public_click_element(driver, participants_div, description='再次点击邀请user进入call的入口按钮')
 
 def open_participants_dialog(driver):
     """
@@ -48,6 +51,9 @@ def close_invite_3th_page(driver):
     # 关闭
     public_click_element(driver, close_participants_page_xpath, description='关闭invite_page')
     time.sleep(2)
+    ele_list = get_xpath_elements(driver,close_participants_page_xpath)
+    if len(ele_list) == 1:
+        public_click_element(driver, close_participants_page_xpath, description='再次关闭invite_page')
 
 def open_invite_3rd_participant_dialog(driver,which_dialog = "Contacts"):
     """
