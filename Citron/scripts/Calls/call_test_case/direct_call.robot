@@ -78,6 +78,7 @@ direct_call_Scenario_1
 
     comment   (From coding perspective, TU1 is still receiver role, U3 is giver role, remove TU1 will bring call back to F2F mode)
     # U3 share photo
+    minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     inCall_upload_photo_PDF       ${driver_U3}
     # VP: merged ( photo+ U3 live video)
     check_has_merged              ${driver_U3}
@@ -87,6 +88,7 @@ direct_call_Scenario_1
 
     comment    (From coding perspective, AU1 is receiver role, U3 is giver, U3 leave call will bring call to F2F mode)
     # AU1 share pdf, markup mode
+    minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_EU5}   ${driver_U6}
     inCall_upload_photo_PDF       ${driver_U4}     PDF
     # VP: no one is merged status
     check_has_no_merged           ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}

@@ -728,5 +728,15 @@ def remove_blank_for_list_ele(list):
         remove_blank_list.append(one)
     return remove_blank_list
 
+def minimize_window_action(*drivers):
+    """
+    窗口最小化
+    :param drivers:
+    :return:
+    """
+    for driver in drivers:
+        # 窗口最小化
+        driver.minimize_window()
+
 if __name__ == '__main__':
     print()
