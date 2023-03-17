@@ -306,7 +306,7 @@ direct_call_Scenario_3
         # 1. is Removed from participants window.
         display_users_as_joined_order   ${driver_TU1}   ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Team_User2_name}
         # 2. keep current mode.
-        check_in_f2f_mode           ${driver_TU1}
+        check_has_merge_menu           ${driver_TU1}
         # 3.  “A Host has removed you from the Help Lightning call.” on EU5's end-call screen.
         which_page_is_currently_on        ${driver_EU5}       ${has_removed_you}
     # turn on co-host for anonymous AU1
@@ -325,7 +325,7 @@ direct_call_Scenario_3
     # Co-host removes giver (U3) and confirms with Remove.	VP:
     co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}
         # 2. Show a toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
-        left_call_back_f2f_mode     ${driver_TU1}      ${Expert_User3_name}
+        has_left_the_session     ${driver_TU1}      ${Expert_User3_name}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_TU1}
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
@@ -338,7 +338,7 @@ direct_call_Scenario_3
     # Confirm with Remove.	VP:
     co_host_remove_sb           ${driver_TU1}     ${Team_User2_name}
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
-        left_call_back_f2f_mode     ${driver_TU1}      ${Team_User2_name}
+        has_left_the_session     ${driver_TU1}      ${Team_User2_name}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_TU1}
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
@@ -393,7 +393,7 @@ direct_call_Scenario_4
     # TU1 Leave call.	VP:
     leave_call      ${driver_TU1}
         # 2.  toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
-        left_call_back_f2f_mode     ${driver_TU1}      ${Team_User2_name}
+        has_left_the_session     ${driver_TU1}      ${Team_User2_name}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_EU2}
 
