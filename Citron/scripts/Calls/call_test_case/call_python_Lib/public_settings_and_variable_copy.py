@@ -114,6 +114,7 @@ webglCameraOn = "//canvas[@id='webglCameraOn']"
 video_on_button = '//*[@*="#video_on"]/..'
 stop_video_button = '//span[text()="Stop Video"]'
 start_video_button = '//span[text()="Start Video"]'
+camera_icon = '//div[@class="menu NewCameraMenu"]'      # call页面左侧的摄像头图标按钮
 off_on_camera = '//div[@class="menu NewCameraMenu"]//*[@*="#camera_front_{}"]/../../..'    # call页面左侧的打开、关闭摄像头图标按钮
 return_vidoe_on = '//div[@class="submenu-icons"]//span[contains(.,"amera")]/..'
 pdf_on_button = "//div[@class='InCall']//*[@*='#pdf_on']"
@@ -270,3 +271,4 @@ co_host_button_unusable = '//div[@class="react-toggle react-toggle--checked reac
 co_host_button_gray = '//div[@class="react-toggle react-toggle--disabled"]'     # 不可开启或者关闭co-host
 PPECFA_button = '//div[@class="submenu-content"]//a[text()="End Call for All"]'    # participants页面的end_call_for_all按钮
 ECFA_YES_button = '//button[@variant="secondary" and contains(.,"Yes")]'    # end call for all时的Yes按钮
+collaboration_mode_flag = '//canvas[@id="webgl"]'                # Collaboration mode的标志

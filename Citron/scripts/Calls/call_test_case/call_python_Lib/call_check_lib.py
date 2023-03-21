@@ -272,8 +272,14 @@ def check_has_no_merge_menu(*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers[i], merge_on_button)
-        public_assert(drivers[i], len(ele_list), 0, action=f"第{i+1}个driver的merge按钮应该不展示")
+        for j in range(3):
+            ele_list = get_xpath_elements(drivers[i], merge_on_button)
+            if len(ele_list) == 0:
+                break
+            elif j < 2:
+                time.sleep(5)
+            else:
+                public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver的merge按钮应该不展示")
 
 def check_in_f2f_mode(driver):
     """
@@ -374,6 +380,24 @@ def check_has_no_capture_button(*drivers):
     for i in range(len(drivers)):
         ele_list = get_xpath_elements(drivers[i],capture_button)
         public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver应该没有截图按钮")
+
+def has_no_take_a_new_photo_option(driver,can_new = 'can_not'):
+    """
+    检查没有take a new photo选项
+    :param drivers:
+    :param can_new: 是否有take a new photo选项，默认没有
+    :return:
+    """
+    # 将右侧的Share按钮展开
+    CRSB(driver)
+    # 校验是否有take a new photo选项
+    ele_list = get_xpath_elements(driver, TPPW_share.format("Take a New Photo"))
+    if can_new == 'can_not':
+        public_assert(driver, len(ele_list), 0, action=f"不应该有take_a_new_photo_option")
+    else:
+        public_assert(driver, len(ele_list), 1, action=f"应该有take_a_new_photo_option")
+    # 将右侧的Share按收起
+    CRSB(driver)
 
 def check_has_photo_PDF_whiteboard(*drivers):
     """
@@ -621,3 +645,68 @@ def participants_page_leave_call_disable(driver,usable = 'disable'):
     # 如果可用
     else:
         public_assert(driver, result, True, action="Leave_call按钮应该可用")
+
+def check_with_collaboration_mode(driver,collaboration_mode = 'yes'):
+    """
+    检查是否with Collaboration mode
+    :param driver:
+    :param collaboration_mode: 是否是Collaboration mode，默认是
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,collaboration_mode_flag)
+    if collaboration_mode == 'yes':
+        public_assert(driver,len(ele_list),1,action="当前应该处于collaboration_mode")
+    else:
+        public_assert(driver, len(ele_list), 0, action="当前不应该处于collaboration_mode")
+
+def check_can_or_not_stop_share(driver,can = 'can_not'):
+    """
+    校验是否可以进行stop sharing
+    :param driver:
+    :param can: 是否可以进行stop sharing，默认不可以
+    :return:
+    """
+    # 点击右侧的share按钮
+    public_click_element(driver, right_share_button, description="右侧SHARE按钮")
+    time.sleep(2)
+    ele_list = get_xpath_elements(driver, stop_sharing_button)
+    if can == 'can_not':
+        public_assert(driver, len(ele_list), 0, action="Stop_Sharing按钮不应该展示")
+    else:
+        public_assert(driver,len(ele_list),1,action="Stop_Sharing按钮应该展示")
+    # 点击右侧的share按钮，收起
+    public_click_element(driver, right_share_button, description="右侧SHARE按钮")
+    time.sleep(2)
+
+def check_is_receiver(driver):
+    """
+    检验user当前是receiver
+    :param driver:
+    :return:
+    """
+    check_has_no_merge_menu(driver)
+    check_has_freeze_button(driver)
+
+def check_is_giver(driver):
+    """
+    检验user当前是giver
+    :param driver:
+    :return:
+    """
+    check_has_merged(driver)
+    check_has_freeze_button(driver)
+
+def should_see_camera_button(driver,see = 'see',status = 'on'):
+    """
+    是否能看到左侧的相机按钮
+    :param driver:
+    :param see: 是否能看到相机按钮，默认可以
+    :param status: 相机打开或者关闭状态，默认打开
+    :return:
+    """
+    if see == 'see':
+        ele_list = get_xpath_elements(driver,off_on_camera.format(status))
+        public_assert(driver,len(ele_list),1,action=f"相机状态应该是{status}")
+    else:
+        ele_list = get_xpath_elements(driver,camera_icon)
+        public_assert(driver,len(ele_list),0,action="应该没有相机图标")

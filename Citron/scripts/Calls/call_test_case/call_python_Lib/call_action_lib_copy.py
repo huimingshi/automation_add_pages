@@ -650,7 +650,8 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo"):
         m = PyMouse()
         filepath = '/'
         # 模拟键盘点击 Command + Shift + G
-        k.press_keys(['Command', 'Shift', 'G'])
+        for i in range(3):
+            k.press_keys(['Command', 'Shift', 'G'])
         # 获取当前屏幕尺寸
         x_dim, y_dim = m.screen_size()
         m.click(x_dim // 2, y_dim // 2, 1)
@@ -883,13 +884,14 @@ def turns_off_on_camera(driver,action = 'off'):
     else:
         public_click_element(driver,off_on_camera.format('off'),description='turn_on——Camera')
 
-def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes'):
+def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',if_giver = 'not_giver'):
     """
     remove某个人的Co-host
     :param driver:
     :param username:
     :param can_remove: 是否可以remove
     :param if_remove: 是否remove
+    :param if_giver: remove的是否是giver，默认不是
     :return:
     """
     # 点击左侧的Participants按钮进行展开
@@ -898,8 +900,12 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes'):
     public_click_element(driver,co_host_right_button.format(username),description=f"{username}旁的>按钮")
     if can_remove == 'can':
         public_click_element(driver,'//div[@class="remove-button " and text()="remove"]',description=f'remove{username}')
-        ele_list = get_xpath_elements(driver,f'//div[text()="Are you sure you want to remove {username}?"]')
-        public_assert(driver,len(ele_list),1,action="remove时的message正确")
+        if if_giver == 'not_giver':
+            ele_list = get_xpath_elements(driver,f'//div[text()="Are you sure you want to remove {username}?"]')
+            public_assert(driver,len(ele_list),1,action="remove时的message正确")
+        else:
+            ele_list = get_xpath_elements(driver, '//div[text()="If you remove this Giver, call will end for all the participants."]')
+            public_assert(driver, len(ele_list), 1, action="remove时的message正确")
         if if_remove == 'yes':
             public_click_element(driver,'//button[text()="OK"]',description="OK按钮")
         else:

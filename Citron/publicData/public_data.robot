@@ -350,7 +350,18 @@ ${center_mode_username2}                Huiming.shi.helplightning+center_mode_us
 ${center_mode_user3}                    Huiming.shi.helplightning+center_mode_user3@outlook.com                                  # 用于Call center的case
 ${center_mode_username2}                Huiming.shi.helplightning+center_mode_user3
 
+${center_mode_expert}                   Huiming.shi.helplightning+center_mode_expert@outlook.com                                 # 用于Call center的case
+${center_mode_expert_name}              Huiming.shi.helplightning+center_mode_expert
 
+${center_mode_on_call_group}            center_mode_on_call_group                                                                # center_mode_on_call_group
+
+# 下列账号都属于Huiming.shi下的我自己创建的open_call_center_mode_WS1中的user，默认开启了call center mode
+# Call center
+${center_mode_user11}                   Huiming.shi.helplightning+center_mode_user11@outlook.com                                  # 用于Call center的case
+${center_mode_username11}               Huiming.shi.helplightning+center_mode_user11
+
+${center_mode_user21}                   Huiming.shi.helplightning+center_mode_user21@outlook.com                                  # 用于Call center的case
+${center_mode_username21}               Huiming.shi.helplightning+center_mode_user21
 
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
