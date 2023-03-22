@@ -24,7 +24,6 @@ direct_call_Scenario_1
     # TU1 calls EU2. EU2 answers call.
     contacts_witch_page_make_call       ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${Expert_User2_name}
     make_sure_enter_call                ${driver_EU2}
-    sleep   10000
     # U3 log in
     ${driver_U3}      driver_set_up_and_logIn     ${Expert_User3_username}
     # TU1 invites U3 from contact list. U3 answers call.
@@ -117,7 +116,7 @@ direct_call_Scenario_1
     inCall_upload_photo_PDF       ${driver_EU2}     PDF
     # VP: pdf navigation mode
     check_in_photo_pdf_whiteboard_mode    ${driver_EU2}
-#    [Teardown]     exit_driver
+    [Teardown]     exit_driver
 
 direct_call_Scenario_2
     [Documentation]   Test Point: change role(change giver)
