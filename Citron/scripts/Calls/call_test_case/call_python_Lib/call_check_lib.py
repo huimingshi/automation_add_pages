@@ -200,15 +200,20 @@ def invite_button_is_hidden(*drivers):
         # 点击"x"按钮，收起
         CI3P(drivers[i])
 
-def check_in_photo_pdf_whiteboard_mode(*drivers):
+def check_in_photo_pdf_whiteboard_mode(mode,*drivers):
     """
     校验处于photo、pdf或者whiteboard模式中
+    :param mode:哪种模式
     :param drivers:
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers[i],zoom_in_button)
-        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo或者pdf或者whiteboard模式中")
+        if mode == 'pdf' or mode == 'whiteboard':
+            ele_list = get_xpath_elements(drivers[i],zoom_in_pdf)
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于pdf或者whiteboard模式中")
+        elif mode == 'photo':
+            ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo模式中")
 
 def check_in_live_video_mode(*drivers):
     """

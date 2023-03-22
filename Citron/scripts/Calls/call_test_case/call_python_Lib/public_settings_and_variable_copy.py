@@ -170,7 +170,8 @@ task_field_is_unfrozen = '//div[@class="k-notification-content" and text()="The 
 choose_document = '//div[@class="submenu-content"]//span[text()="Document"]/..'            # 选择document
 Clear_Shared_Content = '//button[text()="Clear Shared Content"]'              # Clear Shared Content按钮
 cancel_send_photo = '//div[@class="ProgressInfo"]/button[text()="Cancel"]'     # 取消send图片
-zoom_in_button = '//*[@*="#zoom_in"]/..'    # 分享图片或PDF时，展示的放大按钮
+zoom_in_photo = '//*[@*="#zoom_in"]/..'    # 分享图片时，展示的放大按钮
+zoom_in_pdf = '//button[@id="zoomIn"]'    # 分享PDF时，展示的放大按钮
 # call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'
@@ -206,6 +207,7 @@ expect_text_31 = '//div[text()="{} has joined the call."]'
 expect_text_32 = '//div[text()="{} left the call"]'
 expect_text_33 = '//div[text()="Switched back to Face to Face mode."]'
 expect_text_34 = '//div[text()="The task field is frozen"]'
+expect_text_35 = '//div[text()="Exiting document sharing mode."]'
 # Messages页面
 message_textarea = '//textarea[@class="k-input"]'                         # 聊天输入框
 message_toolbarButton = '//div[@class="toolbarButton"]'     # 点击这个按钮出现不同的文件类型

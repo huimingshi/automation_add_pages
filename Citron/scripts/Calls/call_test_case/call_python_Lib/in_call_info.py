@@ -359,3 +359,12 @@ def left_call_back_f2f_mode(driver,username):
     public_assert(driver, len(ele_list32), 1, action='未出现提示32')
     ele_list33 = get_xpath_elements(driver, expect_text_33)
     public_assert(driver, len(ele_list33), 1, action='未出现提示33')
+
+@change_driver_implicit_wait
+def exiting_document_sharing_mode(driver):
+    """
+    Exiting document sharing mode.提示信息出现
+    :param driver:
+    :return:
+    """
+    get_xpath_element(driver,expect_text_35,description="应该出现提示35")

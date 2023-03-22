@@ -750,19 +750,6 @@ def maximize_window_action(*drivers):
         driver.maximize_window()
         time.sleep(2)
 
-def click_window_center(driver):
-    """
-    点击屏幕中心位置
-    :param driver:
-    :return:
-    """
-    size = driver.get_window_size()
-    width = size.get("width")
-    width = width/2
-    height = size.get("height")
-    height = height/2
-    ActionChains(driver).move_by_offset(width, height).click().perform()
-    time.sleep(2)
 
 if __name__ == '__main__':
     print()

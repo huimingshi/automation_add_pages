@@ -24,6 +24,7 @@ direct_call_Scenario_1
     # TU1 calls EU2. EU2 answers call.
     contacts_witch_page_make_call       ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${Expert_User2_name}
     make_sure_enter_call                ${driver_EU2}
+    sleep   10000
     # U3 log in
     ${driver_U3}      driver_set_up_and_logIn     ${Expert_User3_username}
     # TU1 invites U3 from contact list. U3 answers call.
@@ -54,7 +55,7 @@ direct_call_Scenario_1
 
     comment   Check Point: change receiver
     # TU1 share me
-    share_live_video_from_sb            ${driver_TU1}    My Camera
+    share_me          ${driver_TU1}
     # VP: other 5 persons has Merge menu
     check_has_merge_menu                ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     # host(TU1) and co-host (Eu2) click share menu
@@ -78,8 +79,8 @@ direct_call_Scenario_1
 
     comment   (From coding perspective, TU1 is still receiver role, U3 is giver role, remove TU1 will bring call back to F2F mode)
     # U3 share photo
-    minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
-    click_window_center           ${driver_U3}
+    minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
+    maximize_window_action        ${driver_U3}
     inCall_upload_photo_PDF       ${driver_U3}
     # VP: merged ( photo+ U3 live video)
     check_has_merged              ${driver_U3}
@@ -89,18 +90,19 @@ direct_call_Scenario_1
 
     comment    (From coding perspective, AU1 is receiver role, U3 is giver, U3 leave call will bring call to F2F mode)
     # AU1 share pdf, markup mode
-    minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_EU5}   ${driver_U6}
-    click_window_center           ${driver_U4}
+    minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
+    maximize_window_action        ${driver_U4}
     inCall_upload_photo_PDF       ${driver_U4}     PDF
     # VP: no one is merged status
-    check_has_no_merged           ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
+    maximize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
+    check_has_no_merged           ${driver_TU1}   ${driver_EU2}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     # AU1 click Share menu
     # Indicator of what is sharing (Pdf document option is highlight)
     check_if_is_highlight         ${driver_U4}     PDF Document
     # EU2 share U5's live video
     share_live_video_from_sb      ${driver_EU2}    ${Expert_User5_name}
     # VP: exit pdf mode, only U5's live video
-    check_in_live_video_mode      ${driver_EU2}
+    exiting_document_sharing_mode      ${driver_EU2}
     # U3 click Freeze
     freeze_operation              ${driver_U3}
     # VP: U5 is frozen
@@ -110,12 +112,12 @@ direct_call_Scenario_1
     # VP: Whiteboard only
     check_in_photo_pdf_whiteboard_mode    ${driver_U3}
     # EU2 Share pdf
-    minimize_window_action        ${driver_TU1}   ${driver_U4}   ${driver_U3}   ${driver_EU5}   ${driver_U6}
-    click_window_center           ${driver_EU2}
+    minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
+    maximize_window_action        ${driver_EU2}
     inCall_upload_photo_PDF       ${driver_EU2}     PDF
     # VP: pdf navigation mode
     check_in_photo_pdf_whiteboard_mode    ${driver_EU2}
-    [Teardown]     exit_driver
+#    [Teardown]     exit_driver
 
 direct_call_Scenario_2
     [Documentation]   Test Point: change role(change giver)
@@ -198,7 +200,7 @@ direct_call_Scenario_2
 
     comment    (AU 1 is receiver, No giver,server choose host TU1 as giver TU1 leave call will back to F2F)
     # AU1 Share me	VP: no one is merged status
-    share_live_video_from_sb    ${driver_AU1}      My Camera
+    share_me    ${driver_AU1}
     # AU1 stop sharing	VP: F2F mode	VP: F2F mode;
     stop_sharing_to_f2f         ${driver_AU1}
     check_in_f2f_mode           ${driver_AU1}
@@ -208,7 +210,7 @@ direct_call_Scenario_2
 
     comment    (TU1 is giver)
     # AU1 click share me
-    share_live_video_from_sb    ${driver_AU1}      My Camera
+    share_me    ${driver_AU1}
     # VP: EU2 has no "End Call for all" option
     check_has_end_call_button   ${driver_EU2}
     [Teardown]     exit_driver

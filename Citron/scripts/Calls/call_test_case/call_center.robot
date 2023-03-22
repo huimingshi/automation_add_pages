@@ -57,7 +57,7 @@ call_center_Scenario_1
     inCall_upload_photo_PDF    ${driver_U2}
     # Enter photo mode. Co-host keep current receiver, change giver.	VP:keep photo mode + B's live video
     maximize_window_action     ${driver_U1}    ${driver_U3}
-    check_in_photo_pdf_whiteboard_mode         ${driver_U1}      ${driver_U2}
+    check_in_photo_pdf_whiteboard_mode         photo    ${driver_U1}      ${driver_U2}
     # User C click share me	  VP:exit photo mode, C's live video
     share_me     ${driver_U3}
     # Co-host tries to remove giver (user B)(not host user A)	VP: Display message "If you remove giver, call will end for all participants"	VP: "Are you sure you want to remove <USER NAME>?"
@@ -67,7 +67,7 @@ call_center_Scenario_1
 
 call_center_Scenario_2
     [Documentation]
-    [Tags]     Call Center     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3727
+    [Tags]     Call Center     call_case     但这个cae，在我本地无法执行，始终会出现checking network quality，且没有merge按钮出现
     # Different workspace user B clicks on user A's MHS link. User A answers call.
     ${driver_UA}     driver_set_up_and_logIn     ${center_mode_user1}
     ${invite_url}    send_meeting_room_link    ${driver_UA}     MHS
@@ -87,13 +87,13 @@ call_center_Scenario_2
     # Agent share pdf
     inCall_upload_photo_PDF     ${driver_UA}
     # Enter pdf sharing mode. User C joins call via user A's mhs link. User A clicks on Mode Share icon.	VP: Face to Face submenu is hidden; No one can stop sharing
-    check_in_photo_pdf_whiteboard_mode     ${driver_UA}
+    check_in_photo_pdf_whiteboard_mode    pdf   ${driver_UA}
     ${driver_UC}     driver_set_up_and_logIn     ${center_mode_user2}
     user_make_call_via_meeting_link    ${driver_UC}    ${invite_url}
     check_can_or_not_stop_share     ${driver_UA}
     # User C start merge	VP: pdf mode with C's live video
     click_merge_button     ${driver_UC}
-    check_in_photo_pdf_whiteboard_mode     ${driver_UC}
+    check_in_photo_pdf_whiteboard_mode     pdf   ${driver_UC}
     # User D joins call via invited. Co-host tries to removes observer	VP: Display message "Are you sure you want to remove user D?"
     ${driver_UD}     driver_set_up_and_logIn     ${center_mode_user3}
     user_make_call_via_meeting_link    ${driver_UD}    ${invite_url}
@@ -107,13 +107,13 @@ call_center_Scenario_2
 
 call_center_Scenario_3
     [Documentation]     Test Point: Agent has no opportunity to show his video, always disabled; Receiver’s camera auto-switched to their rear-facing cam.
-    [Tags]     Call Center     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3727
+    [Tags]     Call Center     call_case     但这个cae，在我本地无法执行，始终会出现checking network quality，且没有展示user B's video.
     ###### 预置条件Workspace Setting: Call Center Mode is ON. "Enable agent‘s camera" is off
     # UserA send OTU link
     ${driver_UA}     driver_set_up_and_logIn     ${camera_off_user1}
     ${invite_url}    send_meeting_room_link    ${driver_UA}     OTU
     # Anonymous user B clicks on user A's OTU link. User A answers call.
-    ${driver_Ub}     anonymous_open_meeting_link    ${invite_url}
+    ${driver_UB}     anonymous_open_meeting_link    ${invite_url}
     user_anwser_call    ${driver_UA}
         # VP: 1.Skip face-to-face mode and go straight to Collaboration mode with only user B's video.
         check_with_collaboration_mode    ${driver_UA}
@@ -123,7 +123,27 @@ call_center_Scenario_3
         # VP: User A is not merged. User A can not start merge. A's camera is disabled.
         check_has_no_merge_menu       ${driver_UA}
         check_has_no_merged       ${driver_UA}
-    #
+    # User A click freeze	VP: UserB's screen is frozen
+    freeze_operation     ${driver_UA}
+    # User A click share photo
+    inCall_upload_photo_PDF     ${driver_UA}
+    # User B click start merge	VP: User B's live video is shown; A or B can not freeze because receiver has no live video now.
+    click_merge_button    ${driver_UB}
+    # User A click share User B's live video
+    share_live_video_from_sb     ${driver_UA}    ${anonymous_user_name}
+    # Anonymous user C, user D joins call via 3pi link or OTU link.
+    ${driver_UC}     anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call    ${driver_UA}    not_direct
+    ${driver_UD}     anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call    ${driver_UA}    not_direct
+    # Try to turn on co-host for Anonymous user C	VP: anonymous user can not be promote to co-host
+    turn_on_co_host_for_sb     ${driver_UA}     Anonymous 2    gray
+    # Anonymous user C start merge	VP: User C's live video shows, together with B's frozen screen
+    click_merge_button    ${driver_UC}
+    # Anonymous user C un-freeze	VP: User B is un-frozen
+    freeze_operation     ${driver_UC}    un_freeze
+    # User A end call for all
+    end_call_for_all      ${driver_UA}
 
 call_center_Scenario_4
     [Documentation]
@@ -150,7 +170,7 @@ call_center_Scenario_4
     minimize_window_action        ${driver_E1}     ${driver_U2}     ${driver_C}     ${driver_D}
     maximize_window_action          ${driver_E1}
     inCall_upload_photo_PDF         ${driver_E1}
-    check_in_photo_pdf_whiteboard_mode     ${driver_E1}     ${driver_U2}     ${driver_C}     ${driver_D}
+    check_in_photo_pdf_whiteboard_mode     photo   ${driver_E1}     ${driver_U2}     ${driver_C}     ${driver_D}
     # Giver or receiver leaves call.	VP: call ends for all the participants
     leave_call        ${driver_E1}
     which_page_is_currently_on     ${driver_D}    ${end_call_message}

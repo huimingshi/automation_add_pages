@@ -670,7 +670,7 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo"):
         pyperclip.copy(filepath)
         # 粘贴斜杠/
         k.press_keys(['Command', 'V'])
-        # 输入文件全路径进
+        # 输入文件全路径
         k.type_string(file)
         time.sleep(2)
         k.press_key('Return')
