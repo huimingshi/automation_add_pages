@@ -660,16 +660,23 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo"):
         k = PyKeyboard()
         m = PyMouse()
         filepath = '/'
+        time.sleep(10)
         # 模拟键盘点击 Command + Shift + G
-        for i in range(3):
-            k.press_keys(['Command', 'Shift', 'G'])
+        k.press_keys(['Command', 'Shift', 'G'])
+        time.sleep(3)
+        # for i in range(3):
+        #     k.press_keys(['Command', 'Shift', 'G'])
+        #     time.sleep(3)
         # 获取当前屏幕尺寸
         x_dim, y_dim = m.screen_size()
         m.click(x_dim // 2, y_dim // 2, 1)
+        time.sleep(3)
         # 复制文件路径开头的斜杠/，如果不加斜杠的话，脚本会缺少头部的斜杠
         pyperclip.copy(filepath)
+        time.sleep(3)
         # 粘贴斜杠/
         k.press_keys(['Command', 'V'])
+        time.sleep(3)
         # 输入文件全路径
         k.type_string(file)
         time.sleep(2)

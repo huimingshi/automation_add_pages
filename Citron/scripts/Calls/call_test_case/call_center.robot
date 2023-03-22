@@ -61,7 +61,7 @@ call_center_Scenario_1
     # User C click share me	  VP:exit photo mode, C's live video
     share_me     ${driver_U3}
     # Co-host tries to remove giver (user B)(not host user A)	VP: Display message "If you remove giver, call will end for all participants"	VP: "Are you sure you want to remove <USER NAME>?"
-    co_host_remove_sb     ${driver_U1}    ${center_mode_username2}     role='giver'
+    co_host_remove_sb     ${driver_U1}    ${center_mode_username2}    can   yes   giver
     # Confirm yes	VP: call ends for all the participants
     which_page_is_currently_on     ${driver_U1}    ${end_call_message}
 
@@ -102,7 +102,7 @@ call_center_Scenario_2
     display_users_as_joined_order     ${driver_UA}    ${center_mode_username11}     ${center_mode_user2}
     # Co-host tries to removes receiver	VP: Display message "If you remove receiver, call will end for all participants"
     # Confirm yes	VP: call ends for all the participants.
-    co_host_remove_sb     ${driver_DUB}    ${center_mode_username1}     role='receiver'
+    co_host_remove_sb     ${driver_DUB}    ${center_mode_username1}    can   yes     receiver
     which_page_is_currently_on     ${driver_DUB}    ${end_call_message}
 
 call_center_Scenario_3
