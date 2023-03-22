@@ -61,38 +61,77 @@ call_center_Scenario_1
     # User C click share me	  VP:exit photo mode, C's live video
     share_me     ${driver_U3}
     # Co-host tries to remove giver (user B)(not host user A)	VP: Display message "If you remove giver, call will end for all participants"	VP: "Are you sure you want to remove <USER NAME>?"
-    co_host_remove_sb     ${driver_U1}    ${center_mode_username2}     if_giver='not_giver'
+    co_host_remove_sb     ${driver_U1}    ${center_mode_username2}     role='giver'
     # Confirm yes	VP: call ends for all the participants
     which_page_is_currently_on     ${driver_U1}    ${end_call_message}
 
 call_center_Scenario_2
     [Documentation]
-    [Tags]     Call Center     call_case
+    [Tags]     Call Center     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3727
     # Different workspace user B clicks on user A's MHS link. User A answers call.
-    ${driver_U1}     driver_set_up_and_logIn     ${center_mode_user1}
-    ${invite_url}    send_meeting_room_link    ${driver_U1}     MHS
+    ${driver_UA}     driver_set_up_and_logIn     ${center_mode_user1}
+    ${invite_url}    send_meeting_room_link    ${driver_UA}     MHS
     ${driver_DUB}     driver_set_up_and_logIn     ${center_mode_user11}
     user_make_call_via_meeting_link    ${driver_DUB}    ${invite_url}
-    user_anwser_call     ${driver_U1}
+    user_anwser_call     ${driver_UA}
         # VP: 1.Skip face-to-face mode and go straight to Collaboration mode.
-        check_with_collaboration_mode     ${driver_U1}
+        check_with_collaboration_mode     ${driver_UA}
         # 2. User A is giver
-        check_is_giver     ${driver_U1}
+        check_is_giver     ${driver_UA}
         # 3.User B is receiver. Receiver’s camera auto-switched to their rear-facing cam.
         check_is_receiver     ${driver_DUB}
     # Agent start merge	VP: both giver and receiver's video displays
-    click_merge_button     ${driver_U1}
+    click_merge_button     ${driver_UA}
     # Agent stop merge	VP: only display receiver's video.
-
+    stop_merge_action     ${driver_UA}
     # Agent share pdf
+    inCall_upload_photo_PDF     ${driver_UA}
+    # Enter pdf sharing mode. User C joins call via user A's mhs link. User A clicks on Mode Share icon.	VP: Face to Face submenu is hidden; No one can stop sharing
+    check_in_photo_pdf_whiteboard_mode     ${driver_UA}
+    ${driver_UC}     driver_set_up_and_logIn     ${center_mode_user2}
+    user_make_call_via_meeting_link    ${driver_UC}    ${invite_url}
+    check_can_or_not_stop_share     ${driver_UA}
+    # User C start merge	VP: pdf mode with C's live video
+    click_merge_button     ${driver_UC}
+    check_in_photo_pdf_whiteboard_mode     ${driver_UC}
+    # User D joins call via invited. Co-host tries to removes observer	VP: Display message "Are you sure you want to remove user D?"
+    ${driver_UD}     driver_set_up_and_logIn     ${center_mode_user3}
+    user_make_call_via_meeting_link    ${driver_UD}    ${invite_url}
+    # Confirm yes	VP: keep current mode. Related user is removed
+    co_host_remove_sb     ${driver_DUB}    ${center_mode_username3}
+    display_users_as_joined_order     ${driver_UA}    ${center_mode_username11}     ${center_mode_user2}
+    # Co-host tries to removes receiver	VP: Display message "If you remove receiver, call will end for all participants"
+    # Confirm yes	VP: call ends for all the participants.
+    co_host_remove_sb     ${driver_DUB}    ${center_mode_username1}     role='receiver'
+    which_page_is_currently_on     ${driver_DUB}    ${end_call_message}
+
+call_center_Scenario_3
+    [Documentation]     Test Point: Agent has no opportunity to show his video, always disabled; Receiver’s camera auto-switched to their rear-facing cam.
+    [Tags]     Call Center     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3727
+    ###### 预置条件Workspace Setting: Call Center Mode is ON. "Enable agent‘s camera" is off
+    # UserA send OTU link
+    ${driver_UA}     driver_set_up_and_logIn     ${camera_off_user1}
+    ${invite_url}    send_meeting_room_link    ${driver_UA}     OTU
+    # Anonymous user B clicks on user A's OTU link. User A answers call.
+    ${driver_Ub}     anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call    ${driver_UA}
+        # VP: 1.Skip face-to-face mode and go straight to Collaboration mode with only user B's video.
+        check_with_collaboration_mode    ${driver_UA}
+        # 2. User A is giver and should not see camera hint dialog if camera is pointed at not light field
+        should_see_camera_button        ${driver_UA}     not_see
+        # 3.User B is receiver.
+        # VP: User A is not merged. User A can not start merge. A's camera is disabled.
+        check_has_no_merge_menu       ${driver_UA}
+        check_has_no_merged       ${driver_UA}
+    #
 
 call_center_Scenario_4
     [Documentation]
     [Tags]     Call Center     call_case
     # User B starts expert group call. Expert User A answers call.
-    ${driver_E1}     driver_set_up_and_logIn     ${center_mode_expert}
-    ${driver_U2}     driver_set_up_and_logIn     ${center_mode_user1}
-    contacts_witch_page_make_call       ${driver_U2}   ${driver_E1}   ${py_team_page}   ${center_mode_on_call_group}    audio='Video'
+    ${driver_E1}     driver_set_up_and_logIn     ${camera_off_expert}
+    ${driver_U2}     driver_set_up_and_logIn     ${camera_off_user1}
+    contacts_witch_page_make_call       ${driver_U2}   ${driver_E1}   ${py_team_page}   ${camera_off_on_call_group}    audio='Video'
         # VP: 1.Skip face-to-face mode and go straight to Collaboration mode with only user B's video.
         check_with_collaboration_mode    ${driver_U2}
         should_see_camera_button         ${driver_U2}

@@ -117,6 +117,8 @@ def send_new_invite_in_calling(driver,if_send = 'not_send'):
         email_ele.send_keys('Huiming.shi.helplightning+123456789@outlook.com')
         # 点击Send Invite按钮
         public_click_element(driver, new_invitation_send, description='email发送按钮')
+    # 关闭邀请第三位用户进入call的页面
+    close_invite_3th_page(driver)
     return invite_url  # 返回会议link
 
 def make_calls_with_who(driver1, driver2, who, answer='anwser',is_personal='not_personal'):
@@ -581,6 +583,15 @@ def click_merge_button(driver):
     public_click_element(driver,merge_on_button,description="merge_on按钮")
     public_click_element(driver,preview_merge_button,description="preview_merge按钮")
 
+def stop_merge_action(driver):
+    """
+    停止merge操作
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, merge_off_button, description="merge_on按钮")
+    time.sleep(2)
+
 def freeze_operation(driver,is_freeze = "freeze",check_notification = 'check'):
     """
     freeze或者unFreeze的操作
@@ -666,6 +677,7 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo"):
         time.sleep(2)
         k.press_key('Return')
         time.sleep(2)
+    time.sleep(10)
 
 def take_a_new_photo(driver):
     """
@@ -884,14 +896,14 @@ def turns_off_on_camera(driver,action = 'off'):
     else:
         public_click_element(driver,off_on_camera.format('off'),description='turn_on——Camera')
 
-def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',if_giver = 'not_giver'):
+def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role = 'observer'):
     """
     remove某个人的Co-host
     :param driver:
     :param username:
     :param can_remove: 是否可以remove
     :param if_remove: 是否remove
-    :param if_giver: remove的是否是giver，默认不是
+    :param role: remove的是那种角色？giver？receiver？observer？
     :return:
     """
     # 点击左侧的Participants按钮进行展开
@@ -900,11 +912,14 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',if_gi
     public_click_element(driver,co_host_right_button.format(username),description=f"{username}旁的>按钮")
     if can_remove == 'can':
         public_click_element(driver,'//div[@class="remove-button " and text()="remove"]',description=f'remove{username}')
-        if if_giver == 'not_giver':
+        if role == 'observer':
             ele_list = get_xpath_elements(driver,f'//div[text()="Are you sure you want to remove {username}?"]')
             public_assert(driver,len(ele_list),1,action="remove时的message正确")
-        else:
+        elif role == 'giver':
             ele_list = get_xpath_elements(driver, '//div[text()="If you remove this Giver, call will end for all the participants."]')
+            public_assert(driver, len(ele_list), 1, action="remove时的message正确")
+        else:
+            ele_list = get_xpath_elements(driver,'//div[text()="If you remove this Receiver, call will end for all the participants."]')
             public_assert(driver, len(ele_list), 1, action="remove时的message正确")
         if if_remove == 'yes':
             public_click_element(driver,'//button[text()="OK"]',description="OK按钮")

@@ -235,7 +235,6 @@ direct_call_Scenario_3
     participants_icon_is_visible     no      ${driver_U3}
     # Participant send 3pi link
     ${invite_url}     send_new_invite_in_calling    ${driver_EU2}
-    close_invite_3th_page   ${driver_EU2}
     # Anonymous user AU1 through 3pi link
     ${driver_AU1}      anonymous_open_meeting_link      ${invite_url}
     user_anwser_call                    ${driver_TU1}    no_direct

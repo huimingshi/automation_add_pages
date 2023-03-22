@@ -348,7 +348,7 @@ ${center_mode_user2}                    Huiming.shi.helplightning+center_mode_us
 ${center_mode_username2}                Huiming.shi.helplightning+center_mode_user2
 
 ${center_mode_user3}                    Huiming.shi.helplightning+center_mode_user3@outlook.com                                  # 用于Call center的case
-${center_mode_username2}                Huiming.shi.helplightning+center_mode_user3
+${center_mode_username3}                Huiming.shi.helplightning+center_mode_user3
 
 ${center_mode_expert}                   Huiming.shi.helplightning+center_mode_expert@outlook.com                                 # 用于Call center的case
 ${center_mode_expert_name}              Huiming.shi.helplightning+center_mode_expert
@@ -362,6 +362,16 @@ ${center_mode_username11}               Huiming.shi.helplightning+center_mode_us
 
 ${center_mode_user21}                   Huiming.shi.helplightning+center_mode_user21@outlook.com                                  # 用于Call center的case
 ${center_mode_username21}               Huiming.shi.helplightning+center_mode_user21
+
+# 下列账号都属于Huiming.shi下的我自己创建的agents_camera_is_off中的user，默认开启了call center mode，但关闭了agent‘s camera
+# Call center
+${camera_off_user1}                     Huiming.shi.helplightning+camera_off_1@outlook.com                                      # 用于Call center的case
+${camera_off_username1}                 Huiming.shi.helplightning+camera_off_1
+
+${camera_off_expert}                    Huiming.shi.helplightning+camera_off_expert@outlook.com                                 # 用于Call center的case
+${camera_off_expert_name}               Huiming.shi.helplightning+camera_off_expert
+
+${camera_off_on_call_group}             camera_off_on_call_group                                                                # camera_off_on_call_group
 
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
