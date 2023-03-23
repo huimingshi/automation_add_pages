@@ -23,7 +23,6 @@ call_center_Scenario_1
     ${driver_U2}     driver_set_up_and_logIn     ${center_mode_user2}
     contacts_witch_page_make_call       ${driver_U1}   ${driver_U2}   ${py_team_page}   ${center_mode_username2}    audio='Video'
     make_sure_enter_call                ${driver_U2}
-    sleep   10000
         # VP:1. begin with Collaboration mode.
         check_with_collaboration_mode     ${driver_U1}
         # 2. User A is able to start merge.
@@ -65,6 +64,7 @@ call_center_Scenario_1
     co_host_remove_sb     ${driver_U1}    ${center_mode_username2}    can   yes   giver
     # Confirm yes	VP: call ends for all the participants
     which_page_is_currently_on     ${driver_U1}    ${end_call_message}
+    [Teardown]      exit_driver
 
 call_center_Scenario_2
     [Documentation]
@@ -105,6 +105,7 @@ call_center_Scenario_2
     # Confirm yes	VP: call ends for all the participants.
     co_host_remove_sb     ${driver_DUB}    ${center_mode_username1}    can   yes     receiver
     which_page_is_currently_on     ${driver_DUB}    ${end_call_message}
+    [Teardown]      exit_driver
 
 call_center_Scenario_3
     [Documentation]     Test Point: Agent has no opportunity to show his video, always disabled; Receiver’s camera auto-switched to their rear-facing cam.
@@ -145,6 +146,7 @@ call_center_Scenario_3
     freeze_operation     ${driver_UC}    un_freeze
     # User A end call for all
     end_call_for_all      ${driver_UA}
+    [Teardown]      exit_driver
 
 call_center_Scenario_4
     [Documentation]
@@ -175,3 +177,4 @@ call_center_Scenario_4
     # Giver or receiver leaves call.	VP: call ends for all the participants
     leave_call        ${driver_E1}
     which_page_is_currently_on     ${driver_D}    ${end_call_message}
+    [Teardown]      exit_driver
