@@ -17,7 +17,7 @@ Force Tags        call_case
 *** Test Cases ***
 call_center_Scenario_1
     [Documentation]
-    [Tags]     Call Center     call_case
+    [Tags]     Call Center
     # User A calls user B. User B answers call.
     ${driver_U1}     driver_set_up_and_logIn     ${center_mode_user1}
     ${driver_U2}     driver_set_up_and_logIn     ${center_mode_user2}
@@ -68,7 +68,7 @@ call_center_Scenario_1
 
 call_center_Scenario_2
     [Documentation]
-    [Tags]     Call Center     call_case     但这个cae，在我本地无法执行，始终会出现checking network quality，且没有merge按钮出现
+    [Tags]     Call Center     但这个cae，在我本地无法执行，始终会出现checking network quality，且没有merge按钮出现
     # Different workspace user B clicks on user A's MHS link. User A answers call.
     ${driver_UA}     driver_set_up_and_logIn     ${center_mode_user1}
     ${invite_url}    send_meeting_room_link    ${driver_UA}     MHS
@@ -108,7 +108,7 @@ call_center_Scenario_2
 
 call_center_Scenario_3
     [Documentation]     Test Point: Agent has no opportunity to show his video, always disabled; Receiver’s camera auto-switched to their rear-facing cam.
-    [Tags]     Call Center     call_case     但这个cae，在我本地无法执行，始终会出现checking network quality，且没有展示user B's video.
+    [Tags]     Call Center     但这个cae，在我本地无法执行，始终会出现checking network quality，且没有展示user B's video.
     ###### 预置条件Workspace Setting: Call Center Mode is ON. "Enable agent‘s camera" is off
     # UserA send OTU link
     ${driver_UA}     driver_set_up_and_logIn     ${camera_off_user1}
@@ -148,7 +148,7 @@ call_center_Scenario_3
 
 call_center_Scenario_4
     [Documentation]
-    [Tags]     Call Center     call_case
+    [Tags]     Call Center
     # User B starts expert group call. Expert User A answers call.
     ${driver_E1}     driver_set_up_and_logIn     ${camera_off_expert}
     ${driver_U2}     driver_set_up_and_logIn     ${camera_off_user1}

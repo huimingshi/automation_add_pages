@@ -16,7 +16,7 @@ Force Tags        call_case
 *** Test Cases ***
 direct_call_Scenario_1
     [Documentation]   Test Point: change role(change receiver)
-    [Tags]     Direct Call     call_case
+    [Tags]     Direct Call
     # TU1 log in
     ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
     # EU2 log in
@@ -121,7 +121,7 @@ direct_call_Scenario_1
 
 direct_call_Scenario_2
     [Documentation]   Test Point: change role(change giver)
-    [Tags]     Direct Call     call_case
+    [Tags]     Direct Call
     # TU1 log in
     ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
     # EU2 log in
@@ -217,7 +217,7 @@ direct_call_Scenario_2
 
 direct_call_Scenario_3
     [Documentation]   Test Point: remove giver or receiver will back to F2F mode
-    [Tags]     Direct Call     call_case
+    [Tags]     Direct Call
     # TU1 calls EU2. EU2 answers call.
     ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
     ${driver_EU2}     driver_set_up_and_logIn     ${Expert_User2_username}
@@ -358,7 +358,7 @@ direct_call_Scenario_3
 
 direct_call_Scenario_4
     [Documentation]   Test Point: giver or receiver leave call, app back to F2F mode; observer leave call, app keep current mode.
-    [Tags]     Direct Call     call_case
+    [Tags]     Direct Call
     # TU1 calls EU2. EU2 answers call.
     ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
     ${driver_EU2}     driver_set_up_and_logIn     ${Expert_User2_username}
