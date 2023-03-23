@@ -209,24 +209,19 @@ def check_in_photo_pdf_whiteboard_mode(mode,*drivers):
     """
     for i in range(len(drivers)):
         if mode == 'pdf':
-            ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
-            print(len(ele_list))
-            public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver不处于photo或whiteboard模式中")
-            ele_list= get_xpath_elements(drivers[i],share_page_button)
-            print(len(ele_list))
-            public_assert(drivers[i], len(ele_list), 1, action=f"第{i + 1}个driver处于pdf模式中")
+            get_xpath_element(drivers,share_page_button,description=f"第{i + 1}个driver处于pdf模式中")
         elif mode == 'photo' or mode == 'whiteboard':
             ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
             public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo或whiteboard模式中")
 
 def check_in_live_video_mode(*drivers):
     """
-    校验处于photo或者pdf模式中
+    校验处于live video模式中
     :param drivers:
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers[i],zoom_in_button)
+        ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
         public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver处于live_video模式中")
 
 def check_only_can_share_themself(*drivers):
