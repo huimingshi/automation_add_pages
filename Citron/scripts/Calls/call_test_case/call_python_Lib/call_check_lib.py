@@ -321,7 +321,7 @@ def check_show_share_live_video_from(*drivers):
 
 def check_not_show_share_live_video_from(*drivers):
     """
-    校验底部的Share live video from按钮展示
+    校验底部的Share live video from按钮不展示
     :param drivers:
     :return:
     """

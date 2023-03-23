@@ -903,7 +903,7 @@ def turns_off_on_camera(driver,action = 'off'):
     else:
         public_click_element(driver,off_on_camera.format('off'),description='turn_on——Camera')
 
-def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role = 'observer'):
+def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role = 'observer',click_x = 'yes'):
     """
     remove某个人的Co-host
     :param driver:
@@ -911,6 +911,7 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role 
     :param can_remove: 是否可以remove
     :param if_remove: 是否remove
     :param role: remove的是那种角色？giver？receiver？observer？
+    :param click_x:是否"x"按钮进行收起
     :return:
     """
     # 点击左侧的Participants按钮进行展开
@@ -935,8 +936,9 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role 
     else:
         ele_list = get_xpath_elements(driver,'//div[@class="remove-button disableRemove" and text()="remove"]')
         public_assert(driver,len(ele_list),1,action=f"{username}不可remove")
-    # 点击"x"按钮进行收起
-    close_invite_3th_page(driver)
+    if click_x == 'yes':
+        # 点击"x"按钮进行收起
+        close_invite_3th_page(driver)
 
 def co_host_mute_sb(driver,mute = 'mute',can_operate = 'can',*usernames):
     """

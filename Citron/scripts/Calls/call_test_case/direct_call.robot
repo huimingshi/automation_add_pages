@@ -263,6 +263,7 @@ direct_call_Scenario_3
     ${driver_U7}  driver_set_up_and_logIn     ${Expert_User4_username}
     user_make_call_via_meeting_link   ${driver_U7}   ${invite_url}
     which_page_is_currently_on        ${driver_U7}       ${too_many_users_in_a_call}
+    exit_one_driver    ${driver_U7}
     # All of the users clicks share icon	Only Host and co-host can share anyone's live video;	VP: name on share dialog
     check_can_share_sb_live_video       ${driver_TU1}    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}    ${Expert_User5_name}    ${Team_User2_name}
     check_can_share_sb_live_video       ${driver_EU2}    ${Team_User1_name}      ${Expert_User3_name}    ${anonymous_user_name}    ${Expert_User5_name}    ${Team_User2_name}
@@ -316,7 +317,8 @@ direct_call_Scenario_3
         check_has_merge_menu           ${driver_TU1}
         # 3.  “A Host has removed you from the Help Lightning call.” on EU5's end-call screen.
         which_page_is_currently_on        ${driver_EU5}       ${has_removed_you}
-    # turn on co-host for anonymous AU1
+    # Turn on co-host for U6
+    turn_on_co_host_for_sb           ${driver_TU1}     ${Team_User2_name}
 
     comment    CP: observer leaves call in cooperation mode
     # Co-host observer clicks on Exit icon.	VP: “Leave call” and “End Call For All” submenus display.
@@ -330,9 +332,10 @@ direct_call_Scenario_3
     # Cancel remove
     co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}    can    not_remove
     # Co-host removes giver (U3) and confirms with Remove.	VP:
-    co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}
+    co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}   can    yes    observer   no
         # 2. Show a toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
         has_left_the_session     ${driver_TU1}      ${Expert_User3_name}
+        close_invite_3th_page    ${driver_TU1}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_TU1}
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
@@ -343,9 +346,10 @@ direct_call_Scenario_3
     share_me     ${driver_U6}
     # Co-host removes receiver (The participant who is sharing live video)	VP: confirmation dialog: “Are you sure you want to remove <USER NAME>?”, Remove User (emphasis)/Cancel.
     # Confirm with Remove.	VP:
-    co_host_remove_sb           ${driver_TU1}     ${Team_User2_name}
+    co_host_remove_sb           ${driver_TU1}     ${Team_User2_name}    can    yes    observer   no
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
         has_left_the_session     ${driver_TU1}      ${Team_User2_name}
+        close_invite_3th_page    ${driver_TU1}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_TU1}
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
