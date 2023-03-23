@@ -696,6 +696,7 @@ def take_a_new_photo(driver):
     click_right_share_button(driver)
     # 点击Take a New Photo按钮
     public_click_element(driver, TPPW_share.format("Take a New Photo"), description="Take_a_New_Photo按钮")
+    time.sleep(10)   # 等待摄像头画面捕捉到
     # 点击Capture and Share按钮
     public_click_element(driver,'//button[text()="Capture and Share"]',description="Capture_and_Share按钮")
 

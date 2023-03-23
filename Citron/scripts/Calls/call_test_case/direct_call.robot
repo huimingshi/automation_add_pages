@@ -263,7 +263,7 @@ direct_call_Scenario_3
     ${driver_U7}  driver_set_up_and_logIn     ${Expert_User4_username}
     user_make_call_via_meeting_link   ${driver_U7}   ${invite_url}
     which_page_is_currently_on        ${driver_U7}       ${too_many_users_in_a_call}
-    exit_one_driver    ${driver_U7}
+    exit one driver  ${driver_U7}
     # All of the users clicks share icon	Only Host and co-host can share anyone's live video;	VP: name on share dialog
     check_can_share_sb_live_video       ${driver_TU1}    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}    ${Expert_User5_name}    ${Team_User2_name}
     check_can_share_sb_live_video       ${driver_EU2}    ${Team_User1_name}      ${Expert_User3_name}    ${anonymous_user_name}    ${Expert_User5_name}    ${Team_User2_name}
@@ -292,9 +292,9 @@ direct_call_Scenario_3
     comment    CP: anonymous user can not be promoted to co-host
     # TU1 tries to turn on co-host for anonymous user	VP: anonymous user can not be promoted to co-host.
     turn_on_co_host_for_sb      ${driver_TU1}     ${anonymous_user_name}      gray
-    # TU1 mutes other participant	VP: are mute
+    # AU1 mutes other participant   VP: are mute
     co_host_mute_sb       ${driver_TU1}      mute    can    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
-#    # TU1 tries to unmute other participant.	VP: co-host can not un-mute others
+    # TU1 tries to unmute other participant.   VP: co-host can not un-mute others
 #    co_host_mute_sb       ${driver_TU1}      unmute    can_not    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
     # The muted participant turns on mic by himself.	VP: mic is on.
     turns_on_mic_by_himself      ${driver_EU2}     ${driver_U3}   ${driver_AU1}   ${driver_EU5}   ${driver_U6}
@@ -332,7 +332,7 @@ direct_call_Scenario_3
     # Cancel remove
     co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}    can    not_remove
     # Co-host removes giver (U3) and confirms with Remove.	VP:
-    co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}   can    yes    observer   no
+    co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}    can    yes    observer   no
         # 2. Show a toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
         has_left_the_session     ${driver_TU1}      ${Expert_User3_name}
         close_invite_3th_page    ${driver_TU1}
@@ -355,9 +355,7 @@ direct_call_Scenario_3
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_U6}       ${has_removed_you}
     # Participants leave call in Face to Face mode one by one
-    exit_call    ${driver_EU2}
-    exit_call    ${driver_AU1}
-    exit_call    ${driver_TU1}
+    end_call_for_all         ${driver_TU1}
     [Teardown]      exit_driver
 
 direct_call_Scenario_4
