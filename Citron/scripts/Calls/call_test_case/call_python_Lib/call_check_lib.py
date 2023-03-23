@@ -208,12 +208,14 @@ def check_in_photo_pdf_whiteboard_mode(mode,*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        if mode == 'pdf' or mode == 'whiteboard':
-            ele_list = get_xpath_elements(drivers[i],zoom_in_pdf)
-            public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于pdf或者whiteboard模式中")
-        elif mode == 'photo':
+        if mode == 'pdf':
             ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
-            public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo模式中")
+            public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver不处于photo或whiteboard模式中")
+            ele_list= get_xpath_elements(drivers,share_page_button)
+            public_assert(drivers[i], len(ele_list), 1, action=f"第{i + 1}个driver处于pdf模式中")
+        elif mode == 'photo' or mode == 'whiteboard':
+            ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo或whiteboard模式中")
 
 def check_in_live_video_mode(*drivers):
     """

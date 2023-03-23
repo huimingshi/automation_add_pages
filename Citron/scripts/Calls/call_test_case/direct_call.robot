@@ -54,7 +54,7 @@ direct_call_Scenario_1
 
     comment   Check Point: change receiver
     # TU1 share me
-    share_me          ${driver_TU1}
+    share_live_video_from_sb            ${driver_TU1}    My Camera
     # VP: other 5 persons has Merge menu
     check_has_merge_menu                ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     # host(TU1) and co-host (Eu2) click share menu
@@ -94,7 +94,7 @@ direct_call_Scenario_1
     inCall_upload_photo_PDF       ${driver_U4}     PDF
     # VP: no one is merged status
     maximize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
-    check_has_no_merged           ${driver_TU1}   ${driver_EU2}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
+    check_has_no_merge_menu       ${driver_TU1}   ${driver_EU2}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     # AU1 click Share menu
     # Indicator of what is sharing (Pdf document option is highlight)
     check_if_is_highlight         ${driver_U4}     PDF Document
@@ -102,6 +102,7 @@ direct_call_Scenario_1
     share_live_video_from_sb      ${driver_EU2}    ${Expert_User5_name}
     # VP: exit pdf mode, only U5's live video
     exiting_document_sharing_mode      ${driver_EU2}
+    sleep   30
     # U3 click Freeze
     freeze_operation              ${driver_U3}
     # VP: U5 is frozen
@@ -109,13 +110,13 @@ direct_call_Scenario_1
     # U3 Share whiteboard
     share_whiteboard              ${driver_U3}
     # VP: Whiteboard only
-    check_in_photo_pdf_whiteboard_mode    ${driver_U3}
+    check_in_photo_pdf_whiteboard_mode     photo      ${driver_U3}
     # EU2 Share pdf
     minimize_window_action        ${driver_TU1}   ${driver_EU2}   ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     maximize_window_action        ${driver_EU2}
     inCall_upload_photo_PDF       ${driver_EU2}     PDF
     # VP: pdf navigation mode
-    check_in_photo_pdf_whiteboard_mode    ${driver_EU2}
+    check_in_photo_pdf_whiteboard_mode      pdf       ${driver_EU2}
     [Teardown]     exit_driver
 
 direct_call_Scenario_2

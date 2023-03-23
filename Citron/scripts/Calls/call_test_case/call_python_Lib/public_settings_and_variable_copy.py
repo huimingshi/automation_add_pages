@@ -170,8 +170,9 @@ task_field_is_unfrozen = '//div[@class="k-notification-content" and text()="The 
 choose_document = '//div[@class="submenu-content"]//span[text()="Document"]/..'            # 选择document
 Clear_Shared_Content = '//button[text()="Clear Shared Content"]'              # Clear Shared Content按钮
 cancel_send_photo = '//div[@class="ProgressInfo"]/button[text()="Cancel"]'     # 取消send图片
-zoom_in_photo = '//*[@*="#zoom_in"]/..'    # 分享图片时，展示的放大按钮
-zoom_in_pdf = '//button[@id="zoomIn"]'    # 分享PDF时，展示的放大按钮
+zoom_in_photo = '//*[@*="#zoom_in"]/..'    # 分享图片或者whiteboard时，底部展示的放大按钮
+zoom_in_pdf = '//button[@id="zoomIn"]'    # 分享PDF时，上方展示的放大按钮
+share_page_button = '//button[text()="Share Page"]'        # 分享PDF时，左下角展示的Share Page按钮
 # call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'

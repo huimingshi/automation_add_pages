@@ -23,6 +23,7 @@ call_center_Scenario_1
     ${driver_U2}     driver_set_up_and_logIn     ${center_mode_user2}
     contacts_witch_page_make_call       ${driver_U1}   ${driver_U2}   ${py_team_page}   ${center_mode_username2}    audio='Video'
     make_sure_enter_call                ${driver_U2}
+    sleep   10000
         # VP:1. begin with Collaboration mode.
         check_with_collaboration_mode     ${driver_U1}
         # 2. User A is able to start merge.
