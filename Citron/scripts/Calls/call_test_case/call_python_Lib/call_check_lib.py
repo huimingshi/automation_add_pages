@@ -277,6 +277,7 @@ def check_has_no_merge_menu(*drivers):
     """
     for i in range(len(drivers)):
         for j in range(3):
+            drivers[i].implicitly_wait(5)
             ele_list = get_xpath_elements(drivers[i], merge_on_button)
             if len(ele_list) == 0:
                 break
@@ -284,6 +285,7 @@ def check_has_no_merge_menu(*drivers):
                 time.sleep(5)
             else:
                 public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver的merge按钮应该不展示")
+            drivers[i].implicitly_wait(IMPLICIT_WAIT)
 
 def check_in_f2f_mode(driver):
     """

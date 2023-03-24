@@ -747,18 +747,20 @@ def stop_sharing_to_f2f(driver):
     public_click_element(driver,stop_sharing_button,description="Stop_Sharing按钮")
     time.sleep(5)
 
-def share_live_video_from_sb(driver,user):
+def share_live_video_from_sb(driver,user,if_wait = 'wait'):
     """
     右侧的Share按钮点击后，选择Live Video From谁
     :param driver:
     :param user:  选择哪个user来share
+    :param if_wait: 操作后是否需要进行几秒钟的等待
     :return:
     """
     # 点击右侧的share按钮
     click_right_share_button(driver)
     # 点击Share live video from somebody：
     public_click_element(driver,live_video_from_sb.format(user),description=f"右侧的share_live_video_from_{user}")
-    time.sleep(5)
+    if if_wait == 'wait':
+        time.sleep(5)
 
 def record_or_do_not_record(if_record,who_do_it,*args):
     """

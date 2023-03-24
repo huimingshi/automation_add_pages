@@ -99,7 +99,7 @@ direct_call_Scenario_1
     # Indicator of what is sharing (Pdf document option is highlight)
     check_if_is_highlight         ${driver_U4}     PDF Document
     # EU2 share U5's live video
-    share_live_video_from_sb      ${driver_EU2}    ${Expert_User5_name}
+    share_live_video_from_sb      ${driver_EU2}    ${Expert_User5_name}    no_wait
     # VP: exit pdf mode, only U5's live video
     exiting_document_sharing_mode      ${driver_EU2}
     sleep   30

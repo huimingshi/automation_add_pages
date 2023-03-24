@@ -367,4 +367,5 @@ def exiting_document_sharing_mode(driver):
     :param driver:
     :return:
     """
-    get_xpath_element(driver,expect_text_35,description="应该出现提示35")
+    ele_list35 = get_xpath_elements(driver, expect_text_35)
+    public_assert(driver, len(ele_list35), 1, condition=">=", action='未出现提示32')

@@ -746,7 +746,7 @@ def minimize_window_action(*drivers):
     for driver in drivers:
         # 窗口最小化
         driver.minimize_window()
-        time.sleep(2)
+        time.sleep(1)
 
 def maximize_window_action(*drivers):
     """
@@ -757,7 +757,7 @@ def maximize_window_action(*drivers):
     for driver in drivers:
         # 窗口最大化
         driver.maximize_window()
-        time.sleep(2)
+        time.sleep(1)
 
 
 if __name__ == '__main__':
