@@ -44,10 +44,11 @@ def circle_check_button_exists(driver,button,description):
             hang_up_the_phone(driver)  # 点击红色的挂断电话按钮
         time.sleep(5)
 
-def end_call_for_all(driver,call_time='0'):
+def end_call_for_all(driver,check_dialog = 'no_check',call_time='0'):
     """
     End Call for All
     :param driver:
+    :param check_dialog: 是否检查退出通话时的提示框信息
     :return:
     """
     # 维持通话
@@ -56,6 +57,8 @@ def end_call_for_all(driver,call_time='0'):
     MSEC(driver)
     # 点击End_Call_for_All
     circle_check_button_exists(driver, end_call_for_all_button, 'End_call_for_all按钮')
+    if check_dialog != "no_check":
+        get_xpath_element(driver,'//div[text()="Are you sure you want to end this call for all participants?"]',description="end_call_for_all时应该有提示信息")
     # 点击yes
     public_click_element(driver, ECFA_YES_button, 'end_call_for_all时找不到Yes按钮')
 

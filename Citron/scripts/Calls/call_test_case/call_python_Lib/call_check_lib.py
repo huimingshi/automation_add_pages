@@ -584,6 +584,27 @@ def check_has_end_call_button(driver,*buttons):
     HUTP(driver)
     time.sleep(2)
 
+def check_has_no_end_call_button(driver,*buttons):
+    """
+    检查没有哪些结束call的操作
+    :param driver:
+    :param buttons: 1表示：end_call_for_all_button，2表示：leave_call_button
+    :return:
+    """
+    # 点击红色的挂断电话按钮展开
+    HUTP(driver)
+    time.sleep(2)
+    for button in buttons:
+        if button == '1':
+            ele_list = get_xpath_elements(driver, end_call_for_all_button)
+            public_assert(driver, len(ele_list), 0, action="应该没有End_call_for_all按钮")
+        elif button == '2':
+            ele_list = get_xpath_elements(driver, leave_call_button)
+            public_assert(driver, len(ele_list), 0, action="应该没有Leave_call按钮")
+    # 点击红色的挂断电话按钮收起
+    HUTP(driver)
+    time.sleep(2)
+
 def display_users_as_joined_order(driver,*username):
     """
     检查按顺序加入通话的

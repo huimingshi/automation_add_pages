@@ -241,6 +241,7 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
     # 怎么处理Disclaimer；ACCCEPT OR DECLINE
     if deal_with_disclaimer == 'accept':
         ele_list = get_xpath_elements(driver,accept_disclaimer)
+        print(len(ele_list))
         if len(ele_list) == 1:
             public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
             time.sleep(3)

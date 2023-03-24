@@ -231,10 +231,11 @@ MHS_call_Scenario_3
     has_joined_the_call       ${driver_EU2}         Anonymous 3
     # AU1 start merge as giver
     click_merge_button            ${driver_AU1}
+
     comment       CP: leave call in photo mode.
     # Giver (AU1) leaves call.
     leave_call     ${driver_AU1}
-        # 3. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
+        # 3. Show a toast message to all remaining users: “User Name left the call. Switched back to Face to Face mode.”
         left_call_back_f2f_mode     ${driver_EU2}     ${anonymous_user_name}
         # VP: 1. anonymous user sees star rating dialog. tag/comment, survey should not display for anonymous user.
         which_page_is_currently_on       ${driver_AU1}      ${star_rating_dialog}
@@ -242,6 +243,36 @@ MHS_call_Scenario_3
         which_page_is_currently_on       ${driver_AU1}      ${end_call_add_comment}     not_currently_on
         which_page_is_currently_on       ${driver_AU1}      ${end_call_take_survey}     not_currently_on
         # For web side, x button on the right top should not display for anonymous user.
-        which_page_is_currently_on       ${driver_AU1}      ${end_call_page_close}     not_currently_on
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_page_close}      not_currently_on
+        exit_one_driver     ${driver_AU1}
         # 2. app enters Face to Face mode.
         check_in_f2f_mode       ${driver_EU2}
+    # Anonymous user AU2 share whiteboard
+    share_whiteboard     ${driver_AU2}
+    # Receiver (AU2) leaves call.
+    leave_call     ${driver_AU2}
+        # 3. Show a toast message to all remaining users: “User Name left the call. Switched back to Face to Face mode.”
+        left_call_back_f2f_mode     ${driver_EU2}     Anonymous 2
+        # VP: 1. AU2 sees star rating dialog. 2. app enters Face to Face mode.
+        which_page_is_currently_on       ${driver_AU1}      ${star_rating_dialog}
+        # 4.tag/comment, survey should not display for personal user.
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_add_tag}         not_currently_on
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_add_comment}     not_currently_on
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_take_survey}     not_currently_on
+        exit_one_driver     ${driver_AU2}
+
+    comment       CP: mhs owner leaves
+    # Make sure there are 3 participants at least in the call. Owner clicks on Exit icon.	VP: “End call for all” submenu displays. “Leave call” menu should not display for owner in MHS call.
+    check_has_end_call_button       ${driver_EU2}     1
+    check_has_no_end_call_button    ${driver_EU2}     2
+    # AU3 share TU1's live video
+    share_live_video_from_sb        ${driver_AU3}     ${Team_User1_name}
+    # AU3 stop sharing	VP: Back to Face to Face mode
+    stop_sharing_to_f2f             ${driver_AU3}
+    check_in_f2f_mode               ${driver_AU3}
+    # Owner clicks on “End call for all”	VP: Present the user with a confirmation dialog: “Are you sure you want to end this call for all participants?” OK/Cancel
+    end_call_for_all     ${driver_EU2}     check
+    # Owner confirms with OK.	VP: call ends for all the participants. Owner sees star rating dialog above tag/comment view.
+    which_page_is_currently_on       ${driver_EU2}      ${star_rating_dialog}
+    which_page_is_currently_on       ${driver_EU2}      ${end_call_add_tag}
+    which_page_is_currently_on       ${driver_EU2}      ${end_call_add_comment}
