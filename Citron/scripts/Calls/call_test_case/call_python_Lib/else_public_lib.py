@@ -55,8 +55,15 @@ def scroll_into_view(driver,ele_xpath):
     :param ele_xpath:
     :return:
     """
-    element = driver.find_element_by_xpath(ele_xpath)
-    driver.execute_script('arguments[0].scrollIntoView();', element)
+    try:
+        element = driver.find_element_by_xpath(ele_xpath)
+        driver.execute_script('arguments[0].scrollIntoView();', element)
+    except Exception:
+        print("元素未找到不可滑动")
+        msg = traceback.format_exc()
+        print(msg)
+        screen_shot_func(driver, "元素未找到不可滑动")
+        raise Exception("元素未找到不可滑动")
 
 def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_on'):
     """

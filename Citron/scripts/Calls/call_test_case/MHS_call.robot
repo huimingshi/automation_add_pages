@@ -165,10 +165,10 @@ MHS_call_Scenario_2
         # VP: Present the user with a confirmation dialog: “If you remove this Receiver, then you will switch back to Face to Face mode.”, Remove User (emphasis)/Cancel.
         # confirm msg is "Are you sure you want to remove <USER NAME>?"
     #  Confirms with Remove
-    co_host_remove_sb     ${driver_TU1}     ${Expert_User3_name}      can    yes    receiver   no
+    co_host_remove_sb     ${driver_TU1}     ${Expert_User3_name}      can    yes    observer   no
         # VP:
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
-        has_left_the_session     ${driver_TU1}      ${Expert_User3_name}
+        left_call_back_f2f_mode     ${driver_TU1}      ${Expert_User3_name}
         close_invite_3th_page    ${driver_TU1}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode    ${driver_TU1}
@@ -187,9 +187,61 @@ MHS_call_Scenario_2
     comment       remove observer
     # Co-host removes observer	VP: warning dialog displays with message “Are you sure you want to remove User Name?”, OK/Cancel button.
     # Confirm with Ok.	VP:
-    co_host_remove_sb     ${driver_TU1}     ${Team_User2_username}      can    yes    observer   no
+    co_host_remove_sb     ${driver_TU1}     ${Team_User2_name}      can    yes    observer   no
         # 1. Removed user disappears from participants window.Removed user sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
-        has_left_the_session     ${driver_TU1}      ${Team_User2_username}
+        has_left_the_session     ${driver_TU1}      ${Team_User2_name}
         close_invite_3th_page    ${driver_TU1}
         # 2. keep whiteboard mode.
         check_in_photo_pdf_whiteboard_mode      whiteboard     ${driver_TU1}
+
+MHS_call_Scenario_3
+    [Documentation]      Join call in photo mode
+    [Tags]     MHS Call
+    # TU1 click EU2's MHS link to start call
+    ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
+    ${driver_EU2}     driver_set_up_and_logIn     ${Expert_User2_username}
+    ${MHS_url}    send_meeting_room_link    ${driver_EU2}     MHS
+    user_make_call_via_meeting_link    ${driver_TU1}    ${MHS_url}
+    user_anwser_call     ${driver_EU2}
+    # Invite user3 from contact list
+    ${driver_U3}     driver_set_up_and_logIn     ${Expert_User3_username}
+    inCall_enter_contacts_search_user    ${driver_EU2}     ${Expert_User3_name}
+    click_user_in_contacts_list          ${driver_EU2}     ${Expert_User3_name}
+    user_anwser_call     ${driver_U3}
+    # TU1 share photo
+    minimize_window_action        ${driver_TU1}   ${driver_EU2}    ${driver_U3}
+    maximize_window_action        ${driver_TU1}
+    inCall_upload_photo_PDF       ${driver_TU1}
+    maximize_window_action        ${driver_EU2}    ${driver_U3}
+    # TU1 start merge
+    click_merge_button            ${driver_TU1}
+    # Send 3PI link
+    ${invite_url}     send_new_invite_in_calling    ${driver_EU2}
+    # AU1 joins call via 3pi link.	VP: AU1 joins call with image synchronized.	%1$s has joined the call
+    ${driver_AU1}      anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call          ${driver_EU2}         no_direct
+    has_joined_the_call       ${driver_EU2}         ${anonymous_user_name}
+    # Anonymous user 2, 3 click 3PI link to join		%1$s has joined the call
+    # Anonymous user 2, 3 click 3PI link to join		%1$s has joined the call
+    ${driver_AU2}      anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call          ${driver_EU2}         no_direct
+    has_joined_the_call       ${driver_EU2}         Anonymous 2
+    ${driver_AU3}      anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call          ${driver_EU2}         no_direct
+    has_joined_the_call       ${driver_EU2}         Anonymous 3
+    # AU1 start merge as giver
+    click_merge_button            ${driver_AU1}
+    comment       CP: leave call in photo mode.
+    # Giver (AU1) leaves call.
+    leave_call     ${driver_AU1}
+        # 3. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
+        left_call_back_f2f_mode     ${driver_EU2}     ${anonymous_user_name}
+        # VP: 1. anonymous user sees star rating dialog. tag/comment, survey should not display for anonymous user.
+        which_page_is_currently_on       ${driver_AU1}      ${star_rating_dialog}
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_add_tag}         not_currently_on
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_add_comment}     not_currently_on
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_take_survey}     not_currently_on
+        # For web side, x button on the right top should not display for anonymous user.
+        which_page_is_currently_on       ${driver_AU1}      ${end_call_page_close}     not_currently_on
+        # 2. app enters Face to Face mode.
+        check_in_f2f_mode       ${driver_EU2}

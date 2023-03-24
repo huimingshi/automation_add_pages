@@ -45,15 +45,19 @@ def open_participants_dialog(driver):
 def close_invite_3th_page(driver):
     """
     关闭邀请第三位用户进入call的页面
-    :param driver:
+    :param driver:通话结束
     :return:
     """
     # 关闭
-    public_click_element(driver, close_participants_page_xpath, description='关闭invite_page')
+    ele_list = get_xpath_elements(driver, close_participants_page_xpath)
+    if len(ele_list) == 1:
+        public_click_element(driver, close_participants_page_xpath, description='关闭invite_page')
     time.sleep(2)
+    driver.implicitly_wait(3)
     ele_list = get_xpath_elements(driver,close_participants_page_xpath)
     if len(ele_list) == 1:
         public_click_element(driver, close_participants_page_xpath, description='再次关闭invite_page')
+    driver.implicitly_wait(IMPLICIT_WAIT)
 
 def open_invite_3rd_participant_dialog(driver,which_dialog = "Contacts"):
     """

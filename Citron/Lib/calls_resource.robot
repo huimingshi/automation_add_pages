@@ -141,7 +141,12 @@ ${Continue_to_show_hints}                       //div[@class="checkbox"]//input[
 ${hint_dialog_close_button}                     //span[@class="close-button"]                                                                       # 提示框关闭按钮
 ${gh_on_xpath}                                  //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#gh_on"]
 ${rh_on_xpath}                                  //div[@class='InCall']//div[@class='menu roleMenu']//*[@*="#rh_on"]
-
+# 通话结束页面
+${star_rating_dialog}                           //h2[text()="How would you rate the audio and video quality of the call?"]                          # 通话结束的星级评价对话框
+${end_call_add_tag}                             //input[@placeholder="Add tags to filter calls..."]                                                 # 通话结束的添加tag
+${end_call_add_comment}                         //textarea[@placeholder="Add a comment..."]                                                         # 通话结束的添加comment
+${end_call_take_survey}                         //button[text()="Take Survey"]                                                                      # 通话结束的Take Survey
+${end_call_page_close}                          //div[@class="EndCallPageContent"]//span[@role="presentation"]                                      # 通话结束页面的关闭按钮
 
 # 不是xpath的变量
 ${default_avatar_src}                           data:image/png;base64
