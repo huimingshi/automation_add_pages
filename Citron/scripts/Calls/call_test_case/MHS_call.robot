@@ -86,6 +86,7 @@ MHS_call_Scenario_1
     # Giver (AU4) stop merge	VP: photo, no live video
     stop_merge_action             ${driver_AU4}
     check_in_photo_pdf_whiteboard_mode      photo     ${driver_AU4}
+    [Teardown]      exit_driver
 
 MHS_call_Scenario_2
     [Documentation]      remove giver/receiver/observer in photo mode
@@ -193,6 +194,7 @@ MHS_call_Scenario_2
         close_invite_3th_page    ${driver_TU1}
         # 2. keep whiteboard mode.
         check_in_photo_pdf_whiteboard_mode      whiteboard     ${driver_TU1}
+    [Teardown]      exit_driver
 
 MHS_call_Scenario_3
     [Documentation]      Join call in photo mode
@@ -222,19 +224,15 @@ MHS_call_Scenario_3
     user_anwser_call          ${driver_EU2}         no_direct
     has_joined_the_call       ${driver_EU2}         ${anonymous_user_name}
     # Anonymous user 2, 3 click 3PI link to join		%1$s has joined the call
-    # Anonymous user 2, 3 click 3PI link to join		%1$s has joined the call
     ${driver_AU2}      anonymous_open_meeting_link    ${invite_url}
     user_anwser_call          ${driver_EU2}         no_direct
-    has_joined_the_call       ${driver_EU2}         Anonymous 2
-    ${driver_AU3}      anonymous_open_meeting_link    ${invite_url}
-    user_anwser_call          ${driver_EU2}         no_direct
-    has_joined_the_call       ${driver_EU2}         Anonymous 3
+    has_joined_the_call       ${driver_EU2}         ${anonymous_user_name2}
     # AU1 start merge as giver
     click_merge_button            ${driver_AU1}
 
     comment       CP: leave call in photo mode.
     # Giver (AU1) leaves call.
-    leave_call     ${driver_AU1}
+    exit_call     ${driver_AU1}
         # 3. Show a toast message to all remaining users: “User Name left the call. Switched back to Face to Face mode.”
         left_call_back_f2f_mode     ${driver_EU2}     ${anonymous_user_name}
         # VP: 1. anonymous user sees star rating dialog. tag/comment, survey should not display for anonymous user.
@@ -250,23 +248,26 @@ MHS_call_Scenario_3
     # Anonymous user AU2 share whiteboard
     share_whiteboard     ${driver_AU2}
     # Receiver (AU2) leaves call.
-    leave_call     ${driver_AU2}
+    exit_call     ${driver_AU2}
         # 3. Show a toast message to all remaining users: “User Name left the call. Switched back to Face to Face mode.”
-        left_call_back_f2f_mode     ${driver_EU2}     Anonymous 2
+        has_left_the_session     ${driver_EU2}     ${anonymous_user_name2}
         # VP: 1. AU2 sees star rating dialog. 2. app enters Face to Face mode.
-        which_page_is_currently_on       ${driver_AU1}      ${star_rating_dialog}
+        which_page_is_currently_on       ${driver_AU2}      ${star_rating_dialog}
         # 4.tag/comment, survey should not display for personal user.
-        which_page_is_currently_on       ${driver_AU1}      ${end_call_add_tag}         not_currently_on
-        which_page_is_currently_on       ${driver_AU1}      ${end_call_add_comment}     not_currently_on
-        which_page_is_currently_on       ${driver_AU1}      ${end_call_take_survey}     not_currently_on
+        which_page_is_currently_on       ${driver_AU2}      ${end_call_add_tag}         not_currently_on
+        which_page_is_currently_on       ${driver_AU2}      ${end_call_add_comment}     not_currently_on
+        which_page_is_currently_on       ${driver_AU2}      ${end_call_take_survey}     not_currently_on
         exit_one_driver     ${driver_AU2}
 
     comment       CP: mhs owner leaves
     # Make sure there are 3 participants at least in the call. Owner clicks on Exit icon.	VP: “End call for all” submenu displays. “Leave call” menu should not display for owner in MHS call.
+    ${driver_AU3}      anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call          ${driver_EU2}         no_direct
+    has_joined_the_call       ${driver_EU2}         ${anonymous_user_name3}
     check_has_end_call_button       ${driver_EU2}     1
     check_has_no_end_call_button    ${driver_EU2}     2
     # AU3 share TU1's live video
-    share_live_video_from_sb        ${driver_AU3}     ${Team_User1_name}
+    share_me        ${driver_AU3}
     # AU3 stop sharing	VP: Back to Face to Face mode
     stop_sharing_to_f2f             ${driver_AU3}
     check_in_f2f_mode               ${driver_AU3}
@@ -276,3 +277,4 @@ MHS_call_Scenario_3
     which_page_is_currently_on       ${driver_EU2}      ${star_rating_dialog}
     which_page_is_currently_on       ${driver_EU2}      ${end_call_add_tag}
     which_page_is_currently_on       ${driver_EU2}      ${end_call_add_comment}
+    [Teardown]      exit_driver

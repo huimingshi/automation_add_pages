@@ -76,9 +76,11 @@ def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_o
     if currently_on == 'currently_on':
         get_xpath_element(driver, page_tag_xpath, ec=None, select='xpath', description='当前页面与预期页面不一致', timeout=int(60))
     elif currently_on == 'not_currently_on':
+        driver.implicitly_wait(5)
         ele_list = get_xpath_elements(driver,page_tag_xpath)
         print(len(ele_list))
         public_assert(driver,len(ele_list),0,action='当前页面与预期页面不一致')
+        driver.implicitly_wait(IMPLICIT_WAIT)
 
 def add_tags_and_comment(driver,which_tag = 1,which_comment = 'good_experience'):
     """

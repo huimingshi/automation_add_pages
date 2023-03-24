@@ -240,17 +240,22 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
     driver.maximize_window()
     # 怎么处理Disclaimer；ACCCEPT OR DECLINE
     if deal_with_disclaimer == 'accept':
-        ele_list = get_xpath_elements(driver,accept_disclaimer)
-        print(len(ele_list))
+        public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
+        ele_list = get_xpath_elements(driver, accept_disclaimer)
         if len(ele_list) == 1:
-            public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
-            time.sleep(3)
-            driver.implicitly_wait(5)
-            ele_list = get_xpath_elements(driver, accept_disclaimer)
-            if len(ele_list) == 1:
-                print('还需要再一次ACCCEPT_Disclaimer')
-                public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
-            driver.implicitly_wait(int(IMPLICIT_WAIT))
+            print('还需要再一次ACCCEPT_Disclaimer')
+            public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+        # ele_list = get_xpath_elements(driver,accept_disclaimer)
+        # print(len(ele_list))
+        # if len(ele_list) == 1:
+        #     public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
+        #     time.sleep(3)
+        #     driver.implicitly_wait(5)
+        #     ele_list = get_xpath_elements(driver, accept_disclaimer)
+        #     if len(ele_list) == 1:
+        #         print('还需要再一次ACCCEPT_Disclaimer')
+        #         public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+        #     driver.implicitly_wait(int(IMPLICIT_WAIT))
     elif deal_with_disclaimer == 'decline':
         ele_list = get_xpath_elements(driver, decline_disclaimer)
         if len(ele_list) == 1:
@@ -704,6 +709,7 @@ def take_a_new_photo(driver):
     time.sleep(10)   # 等待摄像头画面捕捉到
     # 点击Capture and Share按钮
     public_click_element(driver,'//button[text()="Capture and Share"]',description="Capture_and_Share按钮")
+    time.sleep(5)
 
 def share_me(driver):
     """
@@ -715,6 +721,7 @@ def share_me(driver):
     click_right_share_button(driver)
     # 点击My camera按钮
     public_click_element(driver, my_camera_button, description="My_camera按钮")
+    time.sleep(5)
 
 def share_whiteboard(driver):
     """
@@ -726,6 +733,7 @@ def share_whiteboard(driver):
     click_right_share_button(driver)
     # 点击Whiteboard按钮
     public_click_element(driver, TPPW_share.format("Whiteboard"), description="Whiteboard按钮")
+    time.sleep(5)
 
 def stop_sharing_to_f2f(driver):
     """
@@ -737,6 +745,7 @@ def stop_sharing_to_f2f(driver):
     public_click_element(driver, right_share_button, description="右侧SHARE按钮")
     # 点击Stop Sharing按钮
     public_click_element(driver,stop_sharing_button,description="Stop_Sharing按钮")
+    time.sleep(5)
 
 def share_live_video_from_sb(driver,user):
     """
@@ -749,6 +758,7 @@ def share_live_video_from_sb(driver,user):
     click_right_share_button(driver)
     # 点击Share live video from somebody：
     public_click_element(driver,live_video_from_sb.format(user),description=f"右侧的share_live_video_from_{user}")
+    time.sleep(5)
 
 def record_or_do_not_record(if_record,who_do_it,*args):
     """

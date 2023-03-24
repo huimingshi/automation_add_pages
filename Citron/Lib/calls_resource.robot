@@ -26,6 +26,8 @@ ${py_favorites_page}                            Favorites                       
 ${py_contacts_page}                             Contacts                                                                                            # Contacts page
 ${py_messages_page}                             Messages                                                                                            # Messages page
 ${anonymous_user_name}                          Anonymous 1                                                                                         # 通话中显示匿名用户的名字
+${anonymous_user_name2}                         Anonymous 2                                                                                         # 通话中显示匿名用户的名字
+${anonymous_user_name3}                         Anonymous 3                                                                                         # 通话中显示匿名用户的名字
 ${py_invite_page}                               invite_page                                                                                         # 通话过程中邀请user的页面
 ${py_team_search_result}                        //div[@id="user-tabs-pane-1"]//div[@class="ag-center-cols-container"]/div                           # team search result
 ${py_personal_search_result}                    //div[@id="user-tabs-pane-2"]//div[@class="ag-center-cols-container"]/div                           # personal search result

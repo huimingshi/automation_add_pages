@@ -139,7 +139,7 @@ call_center_Scenario_3
     ${driver_UD}     anonymous_open_meeting_link    ${invite_url}
     user_anwser_call    ${driver_UA}    not_direct
     # Try to turn on co-host for Anonymous user C	VP: anonymous user can not be promote to co-host
-    turn_on_co_host_for_sb     ${driver_UA}     Anonymous 2    gray
+    turn_on_co_host_for_sb     ${driver_UA}     ${anonymous_user_name2}    gray
     # Anonymous user C start merge	VP: User C's live video shows, together with B's frozen screen
     click_merge_button    ${driver_UC}
     # Anonymous user C un-freeze	VP: User B is un-frozen
