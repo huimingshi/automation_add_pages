@@ -123,17 +123,17 @@ direct_call_Scenario_2
     [Documentation]   Test Point: change role(change giver)
     [Tags]     Direct Call
     # TU1 log in
-    ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
+    ${driver_TU1}     driver_set_up_and_logIn     ${STeam_User1_username}
     # EU2 log in
-    ${driver_EU2}     driver_set_up_and_logIn     ${Expert_User2_username}
+    ${driver_EU2}     driver_set_up_and_logIn     ${SExpert_User2_username}
     # TU1 calls EU2. EU2 answers call.
-    contacts_witch_page_make_call       ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${Expert_User2_name}
+    contacts_witch_page_make_call       ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${SExpert_User2_name}
     make_sure_enter_call                ${driver_EU2}
     # U3 log in
-    ${driver_U3}      driver_set_up_and_logIn     ${Expert_User3_username}
+    ${driver_U3}      driver_set_up_and_logIn     ${SExpert_User3_username}
     # TU1 invites U3 from contact list. U3 answers call.
-    inCall_enter_contacts_search_user   ${driver_TU1}    ${Expert_User3_name}
-    click_user_in_contacts_list         ${driver_TU1}     ${Expert_User3_name}
+    inCall_enter_contacts_search_user   ${driver_TU1}    ${SExpert_User3_name}
+    click_user_in_contacts_list         ${driver_TU1}     ${SExpert_User3_name}
     user_anwser_call                    ${driver_U3}
     make_sure_enter_call                ${driver_U3}
     enter_video_connection              ${driver_TU1}
@@ -146,9 +146,9 @@ direct_call_Scenario_2
     ${driver_AU1}      anonymous_open_meeting_link    ${invite_url}
     user_anwser_call                    ${driver_TU1}    no_direct
     # U5 and U6 via 3pi link.
-    ${driver_EU5}     driver_set_up_and_logIn     ${Expert_User5_username}
+    ${driver_EU5}     driver_set_up_and_logIn     ${SExpert_User5_username}
     user_make_call_via_meeting_link     ${driver_EU5}   ${invite_url}
-    ${driver_U6}      driver_set_up_and_logIn     ${Team_User2_username}
+    ${driver_U6}      driver_set_up_and_logIn     ${STeam_User2_username}
     user_make_call_via_meeting_link     ${driver_U6}   ${invite_url}
     # VP: F2F mode
     check_in_f2f_mode           ${driver_TU1}
@@ -176,9 +176,9 @@ direct_call_Scenario_2
 
     comment    (TU1 is receiver, server choose host EU2 as giver)
     # Share TU1's live video
-    share_live_video_from_sb               ${driver_EU2}     ${Team_User1_name}
+    share_live_video_from_sb               ${driver_EU2}     ${STeam_User1_name}
     # Turn off co-host for EU2
-    turn_off_co_host_for_sb                ${driver_TU1}     ${Expert_User2_name}
+    turn_off_co_host_for_sb                ${driver_TU1}     ${SExpert_User2_name}
     # EU2 has no participants menu
     participants_icon_is_visible           no                ${driver_EU2}
 
@@ -363,14 +363,14 @@ direct_call_Scenario_4
     [Documentation]   Test Point: giver or receiver leave call, app back to F2F mode; observer leave call, app keep current mode.
     [Tags]     Direct Call
     # TU1 calls EU2. EU2 answers call.
-    ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
-    ${driver_EU2}     driver_set_up_and_logIn     ${Expert_User2_username}
-    contacts_witch_page_make_call       ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${Expert_User2_name}
+    ${driver_TU1}     driver_set_up_and_logIn     ${STeam_User1_username}
+    ${driver_EU2}     driver_set_up_and_logIn     ${SExpert_User2_username}
+    contacts_witch_page_make_call       ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${SExpert_User2_name}
     make_sure_enter_call                ${driver_EU2}
     # TU1 invites U3 from contact list. U3 answers call.
-    ${driver_U3}      driver_set_up_and_logIn     ${Expert_User3_username}
-    inCall_enter_contacts_search_user   ${driver_TU1}    ${Expert_User3_name}
-    click_user_in_contacts_list         ${driver_TU1}     ${Expert_User3_name}
+    ${driver_U3}      driver_set_up_and_logIn     ${SExpert_User3_username}
+    inCall_enter_contacts_search_user   ${driver_TU1}    ${SExpert_User3_name}
+    click_user_in_contacts_list         ${driver_TU1}     ${SExpert_User3_name}
     user_anwser_call                    ${driver_U3}
     make_sure_enter_call                ${driver_U3}
     # VP:Only Host and co-host can see participants icon. participants icon iinvisible for u3.
@@ -382,9 +382,9 @@ direct_call_Scenario_4
     ${driver_AU1}      anonymous_open_meeting_link      ${invite_url}
     user_anwser_call                    ${driver_TU1}    no_direct
     # U5 and U6 via 3pi link.
-    ${driver_EU5}     driver_set_up_and_logIn     ${Expert_User5_username}
+    ${driver_EU5}     driver_set_up_and_logIn     ${SExpert_User5_username}
     user_make_call_via_meeting_link     ${driver_EU5}   ${invite_url}
-    ${driver_U6}      driver_set_up_and_logIn     ${Team_User2_username}
+    ${driver_U6}      driver_set_up_and_logIn     ${STeam_User2_username}
     user_make_call_via_meeting_link     ${driver_U6}    ${invite_url}
     # VP: F2F mode;
     check_in_f2f_mode           ${driver_TU1}
@@ -396,7 +396,7 @@ direct_call_Scenario_4
     comment    CP: Giver leaves call in normal merge mode.
     # Make only two co-host exist in the call.
     # TU1 share other's live video
-    share_live_video_from_sb      ${driver_TU1}     ${Expert_User5_name}
+    share_live_video_from_sb      ${driver_TU1}     ${SExpert_User5_name}
     # TU1 click merge button	TU1 is giver
     click_merge_button       ${driver_TU1}
     # TU1 clicks End Call icon	VP: “Leave call” and “End Call For All” submenus display.
@@ -404,7 +404,7 @@ direct_call_Scenario_4
     # TU1 Leave call.	VP:
     leave_call      ${driver_TU1}
         # 2.  toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
-        left_call_back_f2f_mode     ${driver_EU2}      ${Team_User1_name}
+        left_call_back_f2f_mode     ${driver_EU2}      ${STeam_User1_name}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_EU2}
 
@@ -424,21 +424,21 @@ direct_call_Scenario_4
     # EU2 tries to turn on co-host for anonymous AU1.	VP: AU1 cannot be prompted as Co-host.
     select_co_host_back     ${driver_EU2}      ${anonymous_user_name}    can_not
     # EU2 turn on co-host for  U5.	VP: "Leave Call" button is enabled.
-    select_co_host_back     ${driver_EU2}      ${Expert_User5_name}
+    select_co_host_back     ${driver_EU2}      ${SExpert_User5_name}
     participants_page_leave_call_disable     ${driver_EU2}    able
     # EU2 turn off co-host for  U5.	VP: Leave Call button changes to disabled.
-    select_co_host_back     ${driver_EU2}      ${Expert_User5_name}     can    turn_off
+    select_co_host_back     ${driver_EU2}      ${SExpert_User5_name}     can    turn_off
     participants_page_leave_call_disable     ${driver_EU2}
     # EU2 turn on co-host for  U5.
-    select_co_host_back     ${driver_EU2}      ${Expert_User5_name}
+    select_co_host_back     ${driver_EU2}      ${SExpert_User5_name}
     # EU2 leave call	VP:
     leave_call      ${driver_EU2}
         # 2. Toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”	%1$s (%2$s) left the call. Switched back to Face to Face mode.
-        has_left_the_session        ${driver_EU5}      ${Expert_User2_name}
+        has_left_the_session        ${driver_EU5}      ${SExpert_User2_name}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_EU5}
     # U5 share another one's live video	VP: U5 is the only co-host in call
-    share_live_video_from_sb        ${driver_EU5}       ${Team_User2_name}
+    share_live_video_from_sb        ${driver_EU5}       ${STeam_User2_name}
     participants_icon_is_visible     yes     ${driver_EU5}
     participants_icon_is_visible     no      ${driver_U3}   ${driver_AU1}   ${driver_U6}
 

@@ -137,6 +137,25 @@ ${big_admin_on_call_group}              three_user_in_this_on_call_group        
 ${on_call_group_1}                      on-call group 1                                                                         # on-call group 1
 
 ${auto_default_group}                   auto_default_group                                                                      # huiming.shi的第一个WS的auto_default_group
+
+
+# 下列账号都属于huiming.shi下的我自己创建的WS（WS-direct-call）中的User或者group，用于避免频繁地使用同一个账号进行call
+${STeam_User1_username}                  Huiming.shi.helplightning+STU1@outlook.com                                             # Team User1 username
+${STeam_User1_name}                      Huiming.shi.helplightning+STU1
+
+${STeam_User2_username}                  Huiming.shi.helplightning+STU2@outlook.com                                             # Team User2 username
+${STeam_User2_name}                      Huiming.shi.helplightning+STU2
+
+${SExpert_User2_username}                Huiming.shi.helplightning+SEU2@outlook.com                                             # Expert User2 username
+${SExpert_User2_name}                    Huiming.shi.helplightning+SEU2
+
+${SExpert_User3_username}                Huiming.shi.helplightning+SEU3@outlook.com                                             # Expert User3 username
+${SExpert_User3_name}                    Huiming.shi.helplightning+SEU3
+
+${SExpert_User5_username}                Huiming.shi.helplightning+SEU5@outlook.com                                             # Expert User5 username
+${SExpert_User5_name}                    Huiming.shi.helplightning+SEU5
+
+
 # 下列账号都属于big_admin下的我自己创建的WS（Huiming.shi_Added_WS）中的User或者group
 ${Expert_A_username}                    Huiming.shi.helplightning+Expert_A@outlook.com                                          # Expert A username(Quantum Mechanics)
 ${Expert_A_name}                        Huiming.shi.helplightning+Expert_A

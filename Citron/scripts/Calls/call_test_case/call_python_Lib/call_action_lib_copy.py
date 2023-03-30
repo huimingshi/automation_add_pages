@@ -240,26 +240,24 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
     driver.maximize_window()
     # 怎么处理Disclaimer；ACCCEPT OR DECLINE
     if deal_with_disclaimer == 'accept':
-        public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
-        ele_list = get_xpath_elements(driver, accept_disclaimer)
-        if len(ele_list) == 1:
-            print('还需要再一次ACCCEPT_Disclaimer')
-            public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
-        # ele_list = get_xpath_elements(driver,accept_disclaimer)
-        # print(len(ele_list))
+        # public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
+        # ele_list = get_xpath_elements(driver, accept_disclaimer)
         # if len(ele_list) == 1:
-        #     public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
-        #     time.sleep(3)
-        #     driver.implicitly_wait(5)
-        #     ele_list = get_xpath_elements(driver, accept_disclaimer)
-        #     if len(ele_list) == 1:
-        #         print('还需要再一次ACCCEPT_Disclaimer')
-        #         public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
-        #     driver.implicitly_wait(int(IMPLICIT_WAIT))
+        #     print('还需要再一次ACCCEPT_Disclaimer')
+        #     public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+        ele_list = get_xpath_elements(driver,accept_disclaimer)
+        print(len(ele_list))
+        if len(ele_list) == 1:
+            public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
+            ele_list = get_xpath_elements(driver, accept_disclaimer)
+            if len(ele_list) == 1:
+                print('还需要再一次ACCCEPT_Disclaimer')
+                public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
     elif deal_with_disclaimer == 'decline':
         ele_list = get_xpath_elements(driver, decline_disclaimer)
         if len(ele_list) == 1:
             public_click_element(driver, decline_disclaimer, description='DECLINE_Disclaimer')
+    driver.implicitly_wait(int(IMPLICIT_WAIT))
     return driver
 
 def user_make_call_via_meeting_link(driver,meeting_link,check_disclaimer = 'check'):
