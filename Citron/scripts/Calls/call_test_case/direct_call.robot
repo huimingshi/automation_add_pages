@@ -325,6 +325,7 @@ direct_call_Scenario_3
     check_has_end_call_button       ${driver_EU2}      1    2
     # Co-host observer clicks on Leave call.	VP: Keep current mode.
     leave_call       ${driver_EU2}
+    has_left_the_session     ${driver_TU1}      ${Expert_User2_name}
     check_in_f2f_mode           ${driver_TU1}
 
     comment    CP: remove giver （merging status）
@@ -334,7 +335,7 @@ direct_call_Scenario_3
     # Co-host removes giver (U3) and confirms with Remove.	VP:
     co_host_remove_sb           ${driver_TU1}     ${Expert_User3_name}    can    yes    observer   no
         # 2. Show a toast message to all remaining users: “User Name left the call. Switched back to Face to Face mode.”
-        left_call_back_f2f_mode     ${driver_TU1}      ${Expert_User3_name}
+        has_left_the_session     ${driver_TU1}      ${Expert_User3_name}
         close_invite_3th_page    ${driver_TU1}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_TU1}
@@ -348,14 +349,14 @@ direct_call_Scenario_3
     # Confirm with Remove.	VP:
     co_host_remove_sb           ${driver_TU1}     ${Team_User2_name}    can    yes    observer   no
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
-        left_call_switch_f2f_mode     ${driver_TU1}      ${Team_User2_name}
+        has_left_the_session     ${driver_TU1}      ${Team_User2_name}
         close_invite_3th_page    ${driver_TU1}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_TU1}
         # 3. User is removed sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_U6}       ${has_removed_you}
     # Participants leave call in Face to Face mode one by one
-    end_call_for_all         ${driver_TU1}
+    exit_call         ${driver_TU1}
     [Teardown]      exit_driver
 
 direct_call_Scenario_4
@@ -433,7 +434,7 @@ direct_call_Scenario_4
     # EU2 leave call	VP:
     leave_call      ${driver_EU2}
         # 2. Toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”	%1$s (%2$s) left the call. Switched back to Face to Face mode.
-        left_call_back_f2f_mode        ${driver_EU5}      ${Expert_User2_name}
+        has_left_the_session        ${driver_EU5}      ${Expert_User2_name}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode           ${driver_EU5}
     # U5 share another one's live video	VP: U5 is the only co-host in call
