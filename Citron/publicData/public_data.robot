@@ -392,6 +392,21 @@ ${camera_off_expert_name}               Huiming.shi.helplightning+camera_off_exp
 
 ${camera_off_on_call_group}             camera_off_on_call_group                                                                # camera_off_on_call_group
 
+
+# 下列账号都属于Huiming.shi下的我自己创建的close_call_center_mode_WS1中的user，默认关闭了call center mode
+# Call center
+${close_center_mode_user1}              Huiming.shi.helplightning+close_user1@outlook.com                                       # 用于OUT call的case
+${close_center_mode_name1}              Huiming.shi.helplightning+close_User1
+
+${close_center_mode_user2}              Huiming.shi.helplightning+close_user2@outlook.com                                       # 用于OUT call的case
+${close_center_mode_name2}              Huiming.shi.helplightning+close_user2
+
+${close_center_mode_user3}              Huiming.shi.helplightning+close_user3@outlook.com                                       # 用于OUT call的case
+${close_center_mode_name3}              Huiming.shi.helplightning+close_user3
+
+${close_center_mode_user4}              Huiming.shi.helplightning+close_user4@outlook.com                                       # 用于OUT call的case
+${close_center_mode_name4}              Huiming.shi.helplightning+close_user4
+
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
 # password:  Welcome1

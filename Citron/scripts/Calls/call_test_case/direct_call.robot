@@ -10,7 +10,7 @@ Library           call_python_Lib/about_call.py
 Library           call_python_Lib/finish_call.py
 Library           call_python_Lib/else_public_lib.py
 Library           call_python_Lib/call_check_lib.py
-Force Tags        call_case
+Force Tags        call_case     new_call_case
 
 
 *** Test Cases ***

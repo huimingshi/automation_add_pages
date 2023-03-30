@@ -235,29 +235,34 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
         driver = webdriver.Chrome(options=optionc)
     elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
         driver = webdriver.Firefox(options=optionf,firefox_profile=profile)
-    driver.implicitly_wait(int(6))
     driver.get(meeting_link)
     driver.maximize_window()
     # 怎么处理Disclaimer；ACCCEPT OR DECLINE
     if deal_with_disclaimer == 'accept':
-        # public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
-        # ele_list = get_xpath_elements(driver, accept_disclaimer)
-        # if len(ele_list) == 1:
-        #     print('还需要再一次ACCCEPT_Disclaimer')
-        #     public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
-        ele_list = get_xpath_elements(driver,accept_disclaimer)
-        print(len(ele_list))
+        try:
+            public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
+        except:
+            print("没有ACCCEPT_Disclaimer按钮")
+        driver.implicitly_wait(int(5))
+        ele_list = get_xpath_elements(driver, accept_disclaimer)
+        driver.implicitly_wait(int(IMPLICIT_WAIT))
         if len(ele_list) == 1:
-            public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
-            ele_list = get_xpath_elements(driver, accept_disclaimer)
-            if len(ele_list) == 1:
-                print('还需要再一次ACCCEPT_Disclaimer')
-                public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+            print('还需要再一次ACCCEPT_Disclaimer')
+            public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+        # ele_list = get_xpath_elements(driver,accept_disclaimer)
+        # print(len(ele_list))
+        # if len(ele_list) == 1:
+        #     public_click_element(driver,accept_disclaimer,description='ACCCEPT_Disclaimer')
+        #     driver.implicitly_wait(int(6))
+        #     ele_list = get_xpath_elements(driver, accept_disclaimer)
+        #     if len(ele_list) == 1:
+        #         print('还需要再一次ACCCEPT_Disclaimer')
+        #         public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+        #     driver.implicitly_wait(int(IMPLICIT_WAIT))
     elif deal_with_disclaimer == 'decline':
         ele_list = get_xpath_elements(driver, decline_disclaimer)
         if len(ele_list) == 1:
             public_click_element(driver, decline_disclaimer, description='DECLINE_Disclaimer')
-    driver.implicitly_wait(int(IMPLICIT_WAIT))
     return driver
 
 def user_make_call_via_meeting_link(driver,meeting_link,check_disclaimer = 'check'):
@@ -296,9 +301,9 @@ def user_anwser_call(driver,anwser_type = 'direct'):
     :return:
     """
     if anwser_type == 'direct':
-        public_check_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
+        public_click_element(driver, anwser_call_button, '没找到直接接受Call的按钮')
     elif anwser_type != 'direct':
-        public_check_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
+        public_click_element(driver, external_join_call_anwser_button, '没找到间接接受Call的按钮')
 
 def contacts_witch_page_make_call(driver1,driver2,witch_page,who = 'on-call group 1',accept='accept',audio = 'audio'):
     """
