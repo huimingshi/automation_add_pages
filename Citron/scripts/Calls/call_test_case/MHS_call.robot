@@ -92,25 +92,25 @@ MHS_call_Scenario_2
     [Documentation]      remove giver/receiver/observer in photo mode
     [Tags]     MHS Call
     # Precondition: TU1, EU2, U3 are in the same enterprise A.  TU1 clicks on EU2’s mhs link. EU2 answers call.
-    ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
-    ${driver_EU2}     driver_set_up_and_logIn     ${Expert_User2_username}
+    ${driver_TU1}     driver_set_up_and_logIn     ${STeam_User1_username}
+    ${driver_EU2}     driver_set_up_and_logIn     ${SExpert_User2_username}
     ${MHS_url}    send_meeting_room_link    ${driver_EU2}     MHS
     user_make_call_via_meeting_link    ${driver_TU1}    ${MHS_url}
     user_anwser_call     ${driver_EU2}
     # EU2 invites U3 from contact list. U3 answers call.    VP: participants icon is visible for TU1 and EU2, but invisible for U3.
-    ${driver_U3}     driver_set_up_and_logIn     ${Expert_User3_username}
-    inCall_enter_contacts_search_user    ${driver_EU2}     ${Expert_User3_name}
-    click_user_in_contacts_list          ${driver_EU2}     ${Expert_User3_name}
+    ${driver_U3}     driver_set_up_and_logIn     ${SExpert_User3_username}
+    inCall_enter_contacts_search_user    ${driver_EU2}     ${SExpert_User3_name}
+    click_user_in_contacts_list          ${driver_EU2}     ${SExpert_User3_name}
     user_anwser_call     ${driver_U3}
     participants_icon_is_visible    yes     ${driver_TU1}      ${driver_EU2}
     participants_icon_is_visible    no      ${driver_U3}
     # Following users join call in sequence: Anonymous user 4 via MHS link. Logged in user 5 via MHS link. User 6 via 3pi link
     ${driver_AU4}     anonymous_open_meeting_link    ${MHS_url}
     user_anwser_call     ${driver_EU2}    not_direct
-    ${driver_U5}     driver_set_up_and_logIn     ${Expert_User5_username}
+    ${driver_U5}     driver_set_up_and_logIn     ${SExpert_User5_username}
     user_make_call_via_meeting_link    ${driver_U5}    ${MHS_url}
     user_anwser_call     ${driver_EU2}    not_direct
-    ${driver_U6}     driver_set_up_and_logIn     ${Team_User2_username}
+    ${driver_U6}     driver_set_up_and_logIn     ${STeam_User2_username}
     ${invite_url}     send_new_invite_in_calling     ${driver_EU2}
     user_make_call_via_meeting_link    ${driver_U6}    ${invite_url}
     # U3 uploads a photo from gallery	VP: photo, no live video; All participants has Merge menu
@@ -125,10 +125,10 @@ MHS_call_Scenario_2
 
     comment      CP: TU turn on/off co-host
     # TU1 turns on U5’s co-host.	VP: participants menu become visible for U5
-    turn_on_co_host_for_sb      ${driver_TU1}     ${Expert_User5_name}
+    turn_on_co_host_for_sb      ${driver_TU1}     ${SExpert_User5_name}
     participants_icon_is_visible    yes     ${driver_U5}
     # TU1 turns off U5’s co-host.	VP: participants menu become invisible for U5.
-    turn_off_co_host_for_sb      ${driver_TU1}     ${Expert_User5_name}
+    turn_off_co_host_for_sb      ${driver_TU1}     ${SExpert_User5_name}
     participants_icon_is_visible    no     ${driver_U5}
 
     comment      remove giver
@@ -138,7 +138,7 @@ MHS_call_Scenario_2
     co_host_remove_sb     ${driver_TU1}     ${anonymous_user_name}      can    yes    observer   no
         # VP:
         # 2. Show a toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
-        has_left_the_session     ${driver_TU1}      ${anonymous_user_name}
+        left_call_back_f2f_mode     ${driver_TU1}      ${anonymous_user_name}
         close_invite_3th_page    ${driver_TU1}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode    ${driver_TU1}
@@ -166,10 +166,10 @@ MHS_call_Scenario_2
         # VP: Present the user with a confirmation dialog: “If you remove this Receiver, then you will switch back to Face to Face mode.”, Remove User (emphasis)/Cancel.
         # confirm msg is "Are you sure you want to remove <USER NAME>?"
     #  Confirms with Remove
-    co_host_remove_sb     ${driver_TU1}     ${Expert_User3_name}      can    yes    observer   no
+    co_host_remove_sb     ${driver_TU1}     ${SExpert_User3_name}      can    yes    observer   no
         # VP:
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
-        left_call_back_f2f_mode     ${driver_TU1}      ${Expert_User3_name}
+        has_left_the_session     ${driver_TU1}      ${SExpert_User3_name}
         close_invite_3th_page    ${driver_TU1}
         # 1. app enters Face to Face mode.
         check_in_f2f_mode    ${driver_TU1}
@@ -188,9 +188,9 @@ MHS_call_Scenario_2
     comment       remove observer
     # Co-host removes observer	VP: warning dialog displays with message “Are you sure you want to remove User Name?”, OK/Cancel button.
     # Confirm with Ok.	VP:
-    co_host_remove_sb     ${driver_TU1}     ${Team_User2_name}      can    yes    observer   no
+    co_host_remove_sb     ${driver_TU1}     ${STeam_User2_name}      can    yes    observer   no
         # 1. Removed user disappears from participants window.Removed user sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
-        has_left_the_session     ${driver_TU1}      ${Team_User2_name}
+        has_left_the_session     ${driver_TU1}      ${STeam_User2_name}
         close_invite_3th_page    ${driver_TU1}
         # 2. keep whiteboard mode.
         check_in_photo_pdf_whiteboard_mode      whiteboard     ${driver_TU1}
