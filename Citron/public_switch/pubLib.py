@@ -18,7 +18,7 @@ def get_system_type():
     :return: system type
     """
     system_type = platform.system()
-    print(system_type)
+    # print(system_type)
     return system_type
 
 def kill_all_browser():

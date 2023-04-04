@@ -214,15 +214,23 @@ def check_in_photo_pdf_whiteboard_mode(mode,*drivers):
             ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
             public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo或whiteboard模式中")
 
-def check_in_live_video_mode(*drivers):
+def check_only_can_share(mode,*drivers):
     """
-    校验处于live video模式中
+    校验仅可以share哪种内容？
+    :param mode: 内容（模式）
     :param drivers:
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
-        public_assert(drivers[i],len(ele_list),0,action=f"第{i+1}个driver处于live_video模式中")
+        # 将右侧的Share按钮展开
+        CRSB(drivers[i])
+        # 检查仅有一种分享方式
+        ele_list = get_xpath_elements(drivers[i],'//div[@class="submenu-container  "]')
+        public_assert(drivers[i], len(ele_list), 1, action=f"第{i + 1}个driver仅有一种分享方式")
+        ele_list = get_xpath_elements(drivers[i], TPPW_share.format(mode))
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver仅可以share{mode}")
+        # 将右侧的Share按钮收起
+        CRSB(drivers[i])
 
 def check_only_can_share_themself(*drivers):
     """
@@ -617,8 +625,10 @@ def display_users_as_joined_order(driver,*username):
     # 点击Participants按钮，展开
     CPD(driver)
     ele_list = get_xpath_elements(driver,'//span[@class="submenu noarrow"]//div[@ref="eBodyViewport"]//div[@col-id="name"]')
+    print(len(ele_list))
     for i in range(len(ele_list)):
         name = ele_list[i].get_attribute("textContent")
+        print(name,username[i])
         public_assert(driver,name,username[i],action="joiner按顺序加入")
     # 点击"x"按钮，收起
     CI3P(driver)

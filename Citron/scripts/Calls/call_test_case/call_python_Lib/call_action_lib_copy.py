@@ -635,11 +635,12 @@ def click_right_share_button(*drivers):
         public_click_element(drivers[i], right_share_button, description=f"第{i+1}个driver右侧SHARE按钮")
         time.sleep(3)
 
-def inCall_upload_photo_PDF(driver,file_type = "Photo"):
+def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.pdf'):
     """
     通话中点击右侧的Share按钮，上传photo或者PDF文件
     :param driver:
     :param file_type: 文件类型
+    :param file_name: 文件名
     :return:
     """
     # 确保文件类型输入正确
@@ -654,7 +655,8 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo"):
         file = get_picture_path(is_input = "not_input")
     elif file_type == "PDF":
         public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
-        file = get_picture_path('test_citron.pdf',is_input = "not_input")
+        # file = get_picture_path('test_citron.pdf',is_input = "not_input")
+        file = get_picture_path(file_name,is_input = "not_input")
     # 判断操作系统类型
     system_type = get_system_type()
     if system_type == 'Windows':
@@ -764,6 +766,16 @@ def share_live_video_from_sb(driver,user,if_wait = 'wait'):
     public_click_element(driver,live_video_from_sb.format(user),description=f"右侧的share_live_video_from_{user}")
     if if_wait == 'wait':
         time.sleep(5)
+
+def share_page(driver):
+    """
+    在上传PDF之后，左下角有Share Page按钮，点击这个按钮
+    点击后才可以Merge
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,share_page_button)
+    time.sleep(2)
 
 def record_or_do_not_record(if_record,who_do_it,*args):
     """
