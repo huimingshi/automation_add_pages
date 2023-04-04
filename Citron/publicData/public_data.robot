@@ -396,7 +396,7 @@ ${camera_off_on_call_group}             camera_off_on_call_group                
 # 下列账号都属于big_admin下的我自己创建的close_call_center_mode_WS中的user，默认关闭了call center mode
 # Call center
 ${close_center_mode_userA}              Huiming.shi.helplightning+close_userA@outlook.com                                       # 用于OUT call的case
-${close_center_mode_nameA}              Huiming.shi.helplightning+close_UserA
+${close_center_mode_nameA}              Huiming.shi.helplightning+close_userA
 
 ${close_center_mode_userB}              Huiming.shi.helplightning+close_userB@outlook.com                                       # 用于OUT call的case
 ${close_center_mode_nameB}              Huiming.shi.helplightning+close_userB
@@ -405,7 +405,7 @@ ${close_center_mode_nameB}              Huiming.shi.helplightning+close_userB
 # 下列账号都属于Huiming.shi下的我自己创建的close_call_center_mode_WS中的user，默认关闭了call center mode
 # Call center
 ${close_center_mode_user1}              Huiming.shi.helplightning+close_user1@outlook.com                                       # 用于OUT call的case
-${close_center_mode_name1}              Huiming.shi.helplightning+close_User1
+${close_center_mode_name1}              Huiming.shi.helplightning+close_user1
 
 ${close_center_mode_user2}              Huiming.shi.helplightning+close_user2@outlook.com                                       # 用于OUT call的case
 ${close_center_mode_name2}              Huiming.shi.helplightning+close_user2
@@ -419,7 +419,7 @@ ${close_center_mode_name4}              Huiming.shi.helplightning+close_user4
 # 下列账号都属于Huiming.shi下的我自己创建的close_call_center_mode_WS1中的user，默认关闭了call center mode
 # Call center
 ${close_center_mode_user11}             Huiming.shi.helplightning+close_user11@outlook.com                                      # 用于OUT call的case
-${close_center_mode_name11}             Huiming.shi.helplightning+close_User11
+${close_center_mode_name11}             Huiming.shi.helplightning+close_user11
 
 ${close_center_mode_user21}             Huiming.shi.helplightning+close_user21@outlook.com                                      # 用于OUT call的case
 ${close_center_mode_name21}             Huiming.shi.helplightning+close_user21

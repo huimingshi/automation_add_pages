@@ -624,7 +624,7 @@ def display_users_as_joined_order(driver,*username):
     """
     # 点击Participants按钮，展开
     CPD(driver)
-    ele_list = get_xpath_elements(driver,'//span[@class="submenu noarrow"]//div[@ref="eBodyViewport"]//div[@col-id="name"]')
+    ele_list = get_xpath_elements(driver,'//span[@class="submenu noarrow"]//div[@ref="eBodyViewport"]//div[@col-id="name"]//span')
     print(len(ele_list))
     for i in range(len(ele_list)):
         name = ele_list[i].get_attribute("textContent")
