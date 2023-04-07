@@ -355,6 +355,24 @@ def check_can_share_sb_live_video(driver,*users):
         # 将右侧的Share按收起
         CRSB(driver)
 
+def check_share_sb_video_visible(driver,somebody,visible = 'visible'):
+    """
+    检查Share某人的live video按钮是否可见可用
+    :param driver:
+    :param somebody:
+    :param visible: 默认可见
+    :return:
+    """
+    # 将右侧的Share按钮展开
+    CRSB(driver)
+    ele_list = get_xpath_elements(driver, live_video_from_sb.format(somebody))
+    if visible == 'visible':
+        public_assert(driver, len(ele_list), 1, action=f"{somebody}应该可以被share")
+    else:
+        public_assert(driver, len(ele_list), 0, action=f"{somebody}应该不可以被share")
+    # 将右侧的Share按钮收起
+    CRSB(driver)
+
 def check_has_freeze_button(*drivers):
     """
     校验有freeze按钮

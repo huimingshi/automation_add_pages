@@ -269,8 +269,8 @@ receiver_help_mode = "//*[@*='#rh_on']"
 observer_mode = "//*[@*='#ob_on']"
 mute_which_participant = '//span[text()="{}"]/../../../../..//*[@*="#mic_on"]/../../..'   # co-host静音某个user
 unmute_which_participant = '//span[text()="{}"]/../../../../..//*[@*="#mic_off"]/../../..'  # co-host尝试取消静音某个user
-turn_on_co_host_button = '//div[@class="react-toggle"]'            # 开启co-host按钮
-turn_off_co_host_button = '//div[@class="react-toggle react-toggle--checked"]'           # 关闭co-host按钮
+turn_on_co_host_button = '//div[@class="react-toggle"]/../..//div[@class="HLToggle"]'            # 开启co-host按钮
+turn_off_co_host_button = '//div[@class="react-toggle react-toggle--checked"]/../..//div[@class="HLToggle"]'           # 关闭co-host按钮
 co_host_button_unusable = '//div[@class="react-toggle react-toggle--checked react-toggle--disabled"]'     # 整个Participant置灰，无法选中
 co_host_button_gray = '//div[@class="react-toggle react-toggle--disabled"]'     # 不可开启或者关闭co-host
 PPECFA_button = '//div[@class="submenu-content"]//a[text()="End Call for All"]'    # participants页面的end_call_for_all按钮

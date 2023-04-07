@@ -429,6 +429,22 @@ ${close_center_mode_name31}             Huiming.shi.helplightning+close_user31
 
 ${close_center_mode_user41}             Huiming.shi.helplightning+close_user41@outlook.com                                      # 用于OUT call的case
 ${close_center_mode_name41}             Huiming.shi.helplightning+close_user41
+
+# 下列账号都属于Huiming.shi下的我自己创建的expert_group_call_WS中的user
+${expert_group_call_userT1}             Huiming.shi.helplightning+egcT1@outlook.com                                             # 用于Expert Group Call的case
+${expert_group_call_nameT1}             Huiming.shi.helplightning+egcT1
+
+${expert_group_call_userE2}             Huiming.shi.helplightning+egcE2@outlook.com                                             # 用于Expert Group Call的case
+${expert_group_call_nameE2}             Huiming.shi.helplightning+egcE2
+
+${expert_group_call_user3}              Huiming.shi.helplightning+egc3@outlook.com                                              # 用于Expert Group Call的case
+${expert_group_call_name3}              Huiming.shi.helplightning+egc3
+
+${expert_group_call_user4}              Huiming.shi.helplightning+egc4@outlook.com                                              # 用于Expert Group Call的case
+${expert_group_call_name4}              Huiming.shi.helplightning+egc4
+
+${expert_group_call_GROUP}              expert_group_call_GROUP                                                                 # 用于Expert Group Call的case的expert group
+
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
 # password:  Welcome1
