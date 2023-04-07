@@ -580,6 +580,7 @@ def check_has_end_call_button(driver,*buttons):
     :param buttons: 1表示：end_call_for_all_button，2表示：leave_call_button
     :return:
     """
+    driver.implicitly_wait(5)
     # 点击红色的挂断电话按钮展开
     HUTP(driver)
     time.sleep(2)
@@ -592,6 +593,7 @@ def check_has_end_call_button(driver,*buttons):
             public_assert(driver, len(ele_list), 1, action="有Leave_call按钮")
     # 点击红色的挂断电话按钮收起
     HUTP(driver)
+    driver.implicitly_wait(IMPLICIT_WAIT)
     time.sleep(2)
 
 def check_has_no_end_call_button(driver,*buttons):
@@ -604,6 +606,7 @@ def check_has_no_end_call_button(driver,*buttons):
     # 点击红色的挂断电话按钮展开
     HUTP(driver)
     time.sleep(2)
+    driver.implicitly_wait(5)
     for button in buttons:
         if button == '1':
             ele_list = get_xpath_elements(driver, end_call_for_all_button)
@@ -614,6 +617,7 @@ def check_has_no_end_call_button(driver,*buttons):
     # 点击红色的挂断电话按钮收起
     HUTP(driver)
     time.sleep(2)
+    driver.implicitly_wait(IMPLICIT_WAIT)
 
 def display_users_as_joined_order(driver,*username):
     """

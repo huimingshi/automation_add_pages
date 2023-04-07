@@ -16,6 +16,20 @@ def change_driver_implicit_wait(func):
         args[0].implicitly_wait(IMPLICIT_WAIT)
     return inner
 
+def modify_implicit_wait(implicit_wait_time):
+    """
+    短暂性修改隐式等待时间
+    :param func:
+    :return:
+    """
+    def outer(func):
+        def inner(*args):
+            args[0].implicitly_wait(int(implicit_wait_time))
+            func(*args)
+            args[0].implicitly_wait(IMPLICIT_WAIT)
+        return inner
+    return outer
+
 def close_tutorial_action(driver):
     """
     关闭导航页面

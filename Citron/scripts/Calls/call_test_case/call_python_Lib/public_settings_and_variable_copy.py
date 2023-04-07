@@ -173,6 +173,7 @@ cancel_send_photo = '//div[@class="ProgressInfo"]/button[text()="Cancel"]'     #
 zoom_in_photo = '//*[@*="#zoom_in"]/..'    # 分享图片或者whiteboard时，底部展示的放大按钮
 zoom_in_pdf = '//button[@id="zoomIn"]'    # 分享PDF时，上方展示的放大按钮
 share_page_button = '//button[text()="Share Page"]'        # 分享PDF时，左下角展示的Share Page按钮
+return_page_button = '//button[text()="Return"]'        # 分享PDF时，左下角展示的Share Page按钮
 # call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'

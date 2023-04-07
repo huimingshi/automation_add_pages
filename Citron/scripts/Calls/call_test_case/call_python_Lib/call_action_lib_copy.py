@@ -777,6 +777,15 @@ def share_page(driver):
     public_click_element(driver,share_page_button)
     time.sleep(2)
 
+def click_return_after_share_page(driver):
+    """
+    在上传PDF之后，点击左下角的Share Page按钮后，会出现Return按钮
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, return_page_button)
+    time.sleep(2)
+
 def record_or_do_not_record(if_record,who_do_it,*args):
     """
     开启/关闭record
@@ -962,8 +971,9 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role 
         else:
             ele_list = get_xpath_elements(driver,'//div[text()="If you remove this Receiver, call will end for all the participants."]')
             public_assert(driver, len(ele_list), 1, action="remove时的message正确")
+        time.sleep(3)
         if if_remove == 'yes':
-            public_click_element(driver,'//button[text()="OK"]',description="OK按钮")
+            public_click_element(driver,'//div[@class="modal-content"]//button[text()="OK"]',description="OK按钮")
         else:
             public_click_element(driver, '//button[@class="btn btn-default" and text()="Cancel"]', description="Cancel按钮")
     else:

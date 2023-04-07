@@ -2,7 +2,8 @@
 # @Time     :11/4/2022 2:15 PM
 # @Author   :Huiming Shi
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import change_driver_implicit_wait
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import change_driver_implicit_wait, \
+    modify_implicit_wait
 from public_settings_and_variable_copy import *
 
 @change_driver_implicit_wait
@@ -120,7 +121,7 @@ def has_joined_as_obeserver(driver,who):
     ele_list6 = get_xpath_elements(driver, expect_text_6.format(who))
     public_assert(driver, len(ele_list6), 1, action='未出现提示6')
 
-@change_driver_implicit_wait
+@modify_implicit_wait(5)
 def has_left_the_session(driver,who):
     """
     %1$s left the call提示信息出现
@@ -215,7 +216,7 @@ def has_joined_the_call(driver,who):
     ele_list16 = get_xpath_elements(driver, expect_text_16.format(who))
     public_assert(driver, len(ele_list16), 1, action='未出现提示16')
 
-@change_driver_implicit_wait
+@modify_implicit_wait(5)
 def left_call_switch_f2f_mode(driver,who):
     """
     %1$s (%2$s) left the call. Switched back to Face to Face mode.提示信息出现
@@ -347,7 +348,7 @@ def your_camera_is_off(driver):
     ele_list30 = get_xpath_elements(driver, expect_text_30)
     public_assert(driver, len(ele_list30), 1, action='未出现提示30')
 
-@change_driver_implicit_wait
+@modify_implicit_wait(5)
 def left_call_back_f2f_mode(driver,username):
     """
     UserName left the call. Switched back to Face to Face mode.
