@@ -971,7 +971,6 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role 
         else:
             ele_list = get_xpath_elements(driver,'//div[text()="If you remove this Receiver, call will end for all the participants."]')
             public_assert(driver, len(ele_list), 1, action="remove时的message正确")
-        time.sleep(3)
         if if_remove == 'yes':
             public_click_element(driver,'//div[@class="modal-content"]//button[text()="OK"]',description="OK按钮")
         else:

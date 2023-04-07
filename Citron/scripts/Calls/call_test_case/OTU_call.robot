@@ -184,7 +184,6 @@ OTU_call_Scenario_2
     comment       remove receiver
     # Co-host removes receiver(AU1) and confirms with Remove User.	VP:
     co_host_remove_sb      ${driver_DU4}     ${anonymous_user_name}      can    yes    observer   no
-#    co_host_remove_sb      ${driver_DU4}     ${anonymous_user_name}      can    yes    observer
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
         has_left_the_session     ${driver_DU4}      ${anonymous_user_name}
         close_invite_3th_page    ${driver_DU4}
@@ -224,8 +223,8 @@ OTU_call_Scenario_2
         which_page_is_currently_on        ${driver_AU1}       ${has_removed_you}
         # 2. keep pdf sharing mode.
         check_in_photo_pdf_whiteboard_mode    ${driver_DU4}    pdf
-#    [Teardown]     Run Keywords     end_call_for_all    ${driver_EU2}
-#    ...            AND              exit_driver
+    [Teardown]     Run Keywords     end_call_for_all    ${driver_EU2}
+    ...            AND              exit_driver
 
 OTU_call_Scenario_3
     [Documentation]       leave call in pdf mode
