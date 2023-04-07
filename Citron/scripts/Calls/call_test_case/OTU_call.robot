@@ -139,6 +139,8 @@ OTU_call_Scenario_2
     # Different enterprise U4 turns on U5’s co-host.	VP: participants menu and mode submenu become visible for U5.
     turn_on_co_host_for_sb     ${driver_DU4}    ${close_center_mode_name31}
     participants_icon_is_visible    yes     ${driver_U5}
+    turn_on_co_host_for_sb     ${driver_DU4}    ${close_center_mode_name41}
+    participants_icon_is_visible    yes     ${driver_U5}
     # Different enterprise U4 turns off U5’s co-host.	VP: participants menu and mode submenu become invisible for U5.
     turn_off_co_host_for_sb     ${driver_DU4}    ${close_center_mode_name31}
     participants_icon_is_visible    no     ${driver_U5}
