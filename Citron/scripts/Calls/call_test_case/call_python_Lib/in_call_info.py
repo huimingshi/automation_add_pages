@@ -111,7 +111,7 @@ def exiting_photo_mode_show(driver):
     public_assert(driver, len(ele_list5), 1, action='未出现提示5')
 
 @change_driver_implicit_wait
-def has_joined_as_obeserver(driver,who):
+def has_joined_as_observer(driver,who):
     """
     %1$s has joined as obeserver提示信息出现
     :param driver:

@@ -445,6 +445,22 @@ ${expert_group_call_name4}              Huiming.shi.helplightning+egc4
 
 ${expert_group_call_GROUP}              expert_group_call_GROUP                                                                 # 用于Expert Group Call的case的expert group
 
+# 下列账号都属于Huiming.shi下的我自己创建的expert_group_call_WS1中的user
+${expert_group_call_userT11}            Huiming.shi.helplightning+egcT11@outlook.com                                            # 用于Expert Group Call的case
+${expert_group_call_nameT11}            Huiming.shi.helplightning+egcT11
+
+${expert_group_call_userE21}            Huiming.shi.helplightning+egcE21@outlook.com                                            # 用于Expert Group Call的case
+${expert_group_call_nameE21}            Huiming.shi.helplightning+egcE21
+
+${expert_group_call_user31}             Huiming.shi.helplightning+egc31@outlook.com                                             # 用于Expert Group Call的case
+${expert_group_call_name31}             Huiming.shi.helplightning+egc31
+
+${expert_group_call_user41}             Huiming.shi.helplightning+egc41@outlook.com                                             # 用于Expert Group Call的case
+${expert_group_call_name41}             Huiming.shi.helplightning+egc41
+
+${expert_group_call_GROUP1}             expert_group_call_GROUP1                                                                # 用于Expert Group Call的case的expert group
+
+
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
 # password:  Welcome1

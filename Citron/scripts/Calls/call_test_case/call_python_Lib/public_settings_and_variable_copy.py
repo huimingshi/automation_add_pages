@@ -163,6 +163,7 @@ preview_merge_button = '//button[text()="Merge"]'    # Merge Preview中的Merge�
 right_share_button = '//div[@class="menu shareMenu"]'    # 右侧的SHARE按钮
 share_live_video_button = '//button[@class="k-button share-video-button btn-primary"]/div'    # 下方的Share live video from 按钮
 live_video_from_sb = '//div[@class="submenu-live-video-from"]//span[contains(.,"{}")]'     # 右侧的share live video from，选择somebody
+live_video_visible = '//div[@class="submenu-live-video-from"]/div[@class="submenu-userinfo"]/span[contains(.,"{}")]'     # 右侧的share live video from，选择somebody
 freeze_on_action = '//*[@*="#freeze_on"]/..'   # 进行freeze的操作
 freeze_off_action = '//*[@*="#freeze_off"]/..'   # 进行取消freeze的操作
 task_field_is_frozen = '//div[@class="k-notification-content" and text()="The task field is frozen"]'   # The task field is frozen的提示信息

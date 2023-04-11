@@ -355,6 +355,22 @@ def check_can_share_sb_live_video(driver,*users):
         # 将右侧的Share按收起
         CRSB(driver)
 
+def check_can_not_share_sb_live_video(user,*drivers):
+    """
+    点击右侧的share按钮后，检查不可以share哪些人的live video
+    :param user:
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        # 将右侧的Share按钮展开
+        CRSB(drivers[i])
+        # 校验可以share哪些人的live video
+        ele_list = get_xpath_elements(drivers[i],live_video_visible.format(user))
+        public_assert(drivers[i],len(ele_list),0,action=f"{user}不可以被share")
+        # 将右侧的Share按收起
+        CRSB(drivers[i])
+
 def check_share_sb_video_visible(driver,somebody,visible = 'visible'):
     """
     检查Share某人的live video按钮是否可见可用
