@@ -36,6 +36,7 @@ expert_group_call_Scenario_1
     ${driver_DU6}     driver_set_up_and_logIn     ${close_center_mode_userA}
     user_make_call_via_meeting_link     ${driver_DU6}    ${invite_url}
     user_anwser_call     ${driver_EU2}    not_direct
+    enter_video_connection     ${driver_TU1}
         # VP: 2. Invite(Add People) button should be hidden for users in enterprise A, room is full.
         invite_button_is_hidden     ${driver_TU1}    ${driver_EU2}
         # 3. Display users as joined order.
@@ -46,20 +47,22 @@ expert_group_call_Scenario_1
             # VP: F2F mode;
             check_in_f2f_mode     ${driver_TU1}
             # VP: Web Desktop only - for the host/co-host, "Share Live Video from: <other participant(First one if multi)>"button
-#            check_show_share_live_video_from     ${driver_TU1}    ${driver_EU2}
-#            check_not_show_share_live_video_from    ${driver_U3}    ${driver_AU4}    ${driver_U5}    ${driver_DU6}
+            check_show_share_live_video_from     ${driver_TU1}    ${driver_EU2}
+            check_not_show_share_live_video_from    ${driver_U3}    ${driver_AU4}    ${driver_U5}    ${driver_DU6}
 
     comment       CP: EU turn on/off co-host
     # EU2 turns on U5’s co-host.	VP: participants menu and 'Share my camera' button become visible for U5.
     turn_on_co_host_for_sb     ${driver_EU2}    ${expert_group_call_name4}
     participants_icon_is_visible     yes    ${driver_U5}
-#    check_share_sb_video_visible   ${driver_U5}    My Camera
+    check_share_sb_video_visible   ${driver_U5}    My Camera
     # EU2 turns off U5’s co-host.	VP: participants menu and 'Share my camera' button become invisible for U5.
     turn_off_co_host_for_sb     ${driver_EU2}    ${expert_group_call_name4}
     participants_icon_is_visible     no    ${driver_U5}
-    check_share_sb_video_visible   ${driver_U5}    My Camera    invisible
+#    check_share_sb_video_visible   ${driver_U5}    My Camera    invisible
     # U1 share live video	VP: "You are sharing video." for U1, "Currently viewing video from U1" for others	"Now view video from xxx"
-    enter_video_connection     ${driver_TU1}
+    share_me    ${driver_TU1}
+    you_are_sharing_video    ${driver_TU1}
+    currently_viewing_video_from_sb    ${expert_group_call_nameT1}    ${driver_EU2}    ${driver_U3}    ${driver_AU4}    ${driver_U5}    ${driver_DU6}
 
     # EU2 start merge	VP: merge preview dialog
     click_merge_button   ${driver_EU2}

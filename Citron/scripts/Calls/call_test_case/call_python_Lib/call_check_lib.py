@@ -726,16 +726,14 @@ def check_can_or_not_stop_share(driver,can = 'can_not'):
     :return:
     """
     # 点击右侧的share按钮
-    public_click_element(driver, right_share_button, description="右侧SHARE按钮")
-    time.sleep(2)
+    CRSB(driver)
     ele_list = get_xpath_elements(driver, stop_sharing_button)
     if can == 'can_not':
         public_assert(driver, len(ele_list), 0, action="Stop_Sharing按钮不应该展示")
     else:
         public_assert(driver,len(ele_list),1,action="Stop_Sharing按钮应该展示")
     # 点击右侧的share按钮，收起
-    public_click_element(driver, right_share_button, description="右侧SHARE按钮")
-    time.sleep(2)
+    CRSB(driver)
 
 def check_is_receiver(driver):
     """
@@ -769,3 +767,29 @@ def should_see_camera_button(driver,see = 'see',status = 'on'):
     else:
         ele_list = get_xpath_elements(driver,camera_icon)
         public_assert(driver,len(ele_list),0,action="应该没有相机图标")
+
+def you_are_sharing_video(driver):
+    """
+    You are sharing video
+    :param driver:
+    :return:
+    """
+    # 点击右侧的share按钮
+    CRSB(driver)
+    get_xpath_element(driver,'//span[text()="You are sharing video."]',description="应该展示该信息")
+    # 点击右侧的share按钮，收起
+    CRSB(driver)
+
+def currently_viewing_video_from_sb(somebody,*drivers):
+    """
+    Currently viewing video from 某某某
+    :param somebody:
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        # 点击右侧的share按钮
+        CRSB(drivers[i])
+        get_xpath_element(drivers[i], f'//span[text()="Currently viewing video from {somebody}"]', description="应该展示该信息")
+        # 点击右侧的share按钮，收起
+        CRSB(drivers[i])
