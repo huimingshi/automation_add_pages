@@ -460,6 +460,7 @@ ${expert_group_call_name41}             Huiming.shi.helplightning+egc41
 
 ${expert_group_call_GROUP1}             expert_group_call_GROUP1                                                                # 用于Expert Group Call的case的expert group
 
+${expert_group_link}                    https://app-stage.helplightning.net.cn/help?enterprise_id=7767&group_id=12854&group_name=expert_group_call_GROUP1
 
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com

@@ -17,7 +17,7 @@ Force Tags        call_case     new_call_case
 *** Test Cases ***
 expert_group_call_Scenario_1
     [Documentation]     Precondition: TU1, EU2, U3 are in the same enterprise A.  TU1 calls on-call group B. EU 2 in on-call group answers call.
-    [Tags]     Call Center
+    [Tags]     Expert Group Call
     # EU2 in on-call group B; TU1 calls on-call group B
     ${driver_TU1}     driver_set_up_and_logIn     ${expert_group_call_userT1}
     ${driver_EU2}     driver_set_up_and_logIn     ${expert_group_call_userE2}
@@ -99,7 +99,7 @@ expert_group_call_Scenario_1
 
 expert_group_call_Scenario_2
     [Documentation]      add/remove participant     Test point: participants list is updated after add or remove or leave	giver or receiver leave call, app back to F2F mode automatically
-    [Tags]     Call Center
+    [Tags]     Expert Group Call
     # EU2 in on-call group B; TU1 calls on-call group B
     ${driver_TU1}     driver_set_up_and_logIn     ${expert_group_call_userT11}
     ${driver_EU2}     driver_set_up_and_logIn     ${expert_group_call_userE21}
@@ -149,6 +149,7 @@ expert_group_call_Scenario_2
         check_in_f2f_mode    ${driver_U5}
         # 3. User is removed from the call. He sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_U3}       ${has_removed_you}
+        exit_one_driver    ${driver_U3}
 
     comment        remove receiver in freeze mode
     # TU1 Share My camera
@@ -156,7 +157,7 @@ expert_group_call_Scenario_2
     # EU2 click freeze	VP: enter merged reality mode with correct giver and receiver, other users are observer.
     freeze_operation        ${driver_EU2}
     # U5 removes receiver TU1 and confirms with Remove User.
-    co_host_remove_sb     ${driver_U5}     ${expert_group_call_nameT11}     can   yes    receiver    no
+    co_host_remove_sb     ${driver_U5}     ${expert_group_call_nameT11}     can   yes    observer    no
         # VP:
         # 2. Show a toast message to all remaining users: “User Name (Receiver) left the call. Switched back to Face to Face mode.”
         has_left_the_session     ${driver_U5}      ${expert_group_call_nameT11}
@@ -165,15 +166,17 @@ expert_group_call_Scenario_2
         check_in_f2f_mode    ${driver_U5}
         # 3. User is removed from the call. He sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_TU1}       ${has_removed_you}
+        exit_one_driver    ${driver_TU1}
         # TU1 left
     # share AU4's live video
     share_live_video_from_sb     ${driver_U5}      ${anonymous_user_name}
 
     comment        remove observer in freeze mode
     # enter freeze mode
-
+    freeze_operation        ${driver_EU2}
     # Co-host removes observer U5	VP: warning dialog displays with message “Are you sure you want to remove User Name?”, OK/Cancel button.	u5 left
     co_host_remove_sb     ${driver_EU2}     ${expert_group_call_name41}     can   yes    observer
+    exit_one_driver    ${driver_U5}
     # Confirm with Ok.	VP:
         # 1. Removed user disappears from participants window.
         display_users_as_joined_order     ${driver_EU2}     ${anonymous_user_name}       ${close_center_mode_nameB}
@@ -185,5 +188,121 @@ expert_group_call_Scenario_2
     comment        CP: Join call in freezing mode
     # EU7 joins call via 3pi link.	VP: TU A joins call with image synchronized.	%1$s has joined as obeserver
     ${driver_EU7}     driver_set_up_and_logIn     ${expert_group_call_user31}
-    user_make_call_via_meeting_link     ${driver_EU7}    ${invite_url}
-    has_joined_as_observer     ${driver_EU2}    ${expert_group_call_name31}
+    user_make_call_via_meeting_link     ${driver_EU7}    ${invite_url}    no_check
+    has_joined_the_call     ${driver_EU2}    ${expert_group_call_name31}
+    [Teardown]      exit_driver
+
+expert_group_call_Scenario_4
+    [Documentation]     leave call in frozen mode
+    [Tags]     Expert Group Call     有bug：https://vipaar.atlassian.net/browse/CITRON-3749
+    # EU2 in on-call group B; TU1 calls on-call group B
+    ${driver_TU1}     driver_set_up_and_logIn     ${expert_group_call_userT1}
+    ${driver_EU2}     driver_set_up_and_logIn     ${expert_group_call_userE2}
+    contacts_witch_page_make_call       ${driver_TU1}   ${driver_EU2}   ${py_team_page}   ${expert_group_call_GROUP}
+    # TU1 invites U3 from contact list. U3 answers call.
+    ${driver_U3}     driver_set_up_and_logIn     ${expert_group_call_user3}
+    inCall_enter_contacts_search_user    ${driver_TU1}     ${expert_group_call_name3}
+    click_user_in_contacts_list          ${driver_TU1}     ${expert_group_call_name3}
+    user_anwser_call     ${driver_U3}
+    # Join call in sequence: Anonymous user AU4 via 3pi link. Logged in user U5 via 3pi link. Different site DU6 via 3pi link
+    ${invite_url}     send_new_invite_in_calling     ${driver_EU2}
+    ${driver_AU4}     anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call     ${driver_EU2}    no_direct
+    ${driver_U5}     driver_set_up_and_logIn     ${expert_group_call_user4}
+    user_make_call_via_meeting_link     ${driver_U5}    ${invite_url}
+    ${driver_DU6}     driver_set_up_and_logIn     ${close_center_mode_userA}
+    user_make_call_via_meeting_link     ${driver_DU6}    ${invite_url}
+    user_anwser_call     ${driver_EU2}    not_direct
+    # TU1 Share My camera
+    enter_video_connection     ${driver_TU1}
+    share_me    ${driver_TU1}
+    # EU2 start merge as giver
+    click_merge_button     ${driver_EU2}
+    # Make only one co-host exist in the call, at least one remaining participant is expert, team, personal or different enterprise.
+    # Turn off co-host for TU1
+    turn_off_co_host_for_sb     ${driver_EU2}     ${expert_group_call_nameT1}
+
+    comment        giver leave by kill app
+    # giver EU2 kills app. Wait until he is disconnected from the call.
+    exit_one_driver     ${driver_EU2}
+        # 2. Show a toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
+        left_call_back_f2f_mode1     ${driver_TU1}     ${expert_group_call_nameE2}
+        # VP: 1. app enters Face to Face mode for all remaining users.
+        check_in_f2f_mode      ${driver_DU6}
+#        # 3. all the remaining participants are promoted to co-host, except anonymous user. Participants menu is visible for them.
+#        participants_icon_is_visible     yes    ${driver_TU1}    ${driver_U3}    ${driver_U5}    ${driver_DU6}
+#        participants_icon_is_visible     no    ${driver_AU4}
+#    # TU1 Share U3s live video	VP: TU1 is promt to co-host, can share other's live video
+#    share_live_video_from_sb      ${driver_TU1}      ${expert_group_call_name3}
+#    check_can_share_sb_live_video      ${driver_TU1}      ${expert_group_call_name3}     ${anonymous_user_name}     ${expert_group_call_name4}    ${close_center_mode_nameA}
+#
+#    comment        receiver directly leave
+#    # Co-host receiver clicks on Leave icon.	VP: “Leave call” and “End Call For All” submenus display.
+#    check_has_end_call_button     ${driver_TU1}     1    2
+#    # Co-host receiver selects “Leave call”	VP: leaved user sees star rating dialog
+#    leave_call     ${driver_TU1}
+#    which_page_is_currently_on     ${driver_TU1}    ${five_star_high_praise}
+    [Teardown]       exit_driver
+
+expert_group_call_Scenario_5
+    [Documentation]       Expert Group call through link
+    [Tags]     Expert Group Call     有bug：https://vipaar.atlassian.net/browse/CITRON-3749
+    # Anonymous AU1 click expert group link to start call
+    ${driver_EU2}     driver_set_up_and_logIn     ${expert_group_call_userE21}
+    ${driver_AU1}     anonymous_open_meeting_link    ${expert_group_link}
+    # Expert EU2 answer call
+    user_anwser_call     ${driver_EU2}    no_direct
+    # Expert invite TU1 to join call
+    ${driver_TU1}     driver_set_up_and_logIn     ${expert_group_call_userT11}
+    inCall_enter_contacts_search_user    ${driver_EU2}     ${expert_group_call_nameT11}
+    click_user_in_contacts_list          ${driver_EU2}     ${expert_group_call_nameT11}
+    user_anwser_call     ${driver_TU1}
+    # EU2 send 3PI link
+    ${invite_url}     send_new_invite_in_calling     ${driver_EU2}
+    # User3, AU4, User5, DU6 join call through 3PI link	VP: only host EU2 can see participant icon
+    ${driver_U3}     driver_set_up_and_logIn     ${expert_group_call_user41}
+    user_make_call_via_meeting_link     ${driver_U3}    ${invite_url}
+    ${driver_AU4}     anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call     ${driver_EU2}    no_direct
+    ${driver_DU6}     driver_set_up_and_logIn     ${close_center_mode_userB}
+    user_make_call_via_meeting_link     ${driver_DU6}    ${invite_url}
+    user_anwser_call     ${driver_EU2}    not_direct
+    participants_icon_is_visible     yes    ${driver_EU2}
+    participants_icon_is_visible     no    ${driver_TU1}    ${driver_AU1}    ${driver_AU4}    ${driver_U3}    ${driver_DU6}
+    # AU1 turn on co-host for DU6	VP: DU6 can now see participant icon
+    turn_on_co_host_for_sb     ${driver_EU2}    ${close_center_mode_nameB}
+    participants_icon_is_visible     yes    ${driver_DU6}
+    # DU6 mute other participant	VP: host and co-host can not un-mute other participants
+    # DU6 turn off co-host other participants	VP: host EU2 can not be demoted
+    # AU1 share her live video	VP: All users have merge option
+    share_me     ${driver_AU1}
+    check_has_merge_menu     ${driver_TU1}    ${driver_EU2}     ${driver_AU1}    ${driver_AU4}    ${driver_U3}    ${driver_DU6}
+    # Host EU2 start merge
+    click_merge_button    ${driver_EU2}
+    # User3 start merge to be giver	Observer change to giver
+    click_merge_button    ${driver_U3}
+    check_has_no_merged    ${driver_EU2}
+    # AU4 click share My camera	observer change to receiver, VP: User3 keeps merged
+    share me      ${driver_AU4}
+    check_has_merged   ${driver_U3}
+
+    comment         Giver share her own live video to be receiver
+    # User 3 click Share My Camera	VP: User 3 is now sharing live video; no one is merged
+    share_me     ${driver_U3}
+    check_has_no_merged    ${driver_TU1}    ${driver_EU2}     ${driver_AU1}    ${driver_AU4}    ${driver_U3}    ${driver_DU6}
+    # Only keep EU2 as co-host. Turn off others
+    turn_off_co_host_for_sb     ${driver_EU2}    ${close_center_mode_nameB}
+    # Expert EU2 kill app, and wait for leave call	VP: other participants are promoted to co-host
+    exit_one_driver     ${driver_EU2}
+    participants_icon_is_visible     yes    ${driver_TU1}    ${driver_AU1}    ${driver_U3}   ${driver_AU4}   ${driver_DU6}
+    # DU6 click participant icon	VP: DU6 has permission to turn on/off others as co-host
+
+    # Stop share	VP: back to F2F mode
+    stop_sharing_to_f2f    ${driver_U3}
+    check_in_f2f_mode      ${driver_U3}
+    # swipe page to view all participants
+    click_nav_right   ${driver_U3}
+    check_current_participants   ${driver_U3}   ${close_center_mode_nameB}
+    click_nav_left   ${driver_U3}
+    check_current_participants   ${driver_U3}    ${anonymous_user_name}    ${expert_group_call_nameT11}   ${expert_group_call_name41}    ${anonymous_user_name2}
+    [Teardown]       exit_driver

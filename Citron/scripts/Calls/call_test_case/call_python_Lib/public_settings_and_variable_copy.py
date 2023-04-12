@@ -92,7 +92,7 @@ send_link_email_input = '//input[@placeholder="Participant email"]'    # 发送l
 send_link_send_invite = '//button[contains(.,"Send Invite")]'          # 发送link时的Send Invite按钮
 new_invitation_send = '//button[text()="Send"]'    # New Invitation标签页中的Send按钮
 contacts_in_call_search_result = '//div[@id="inviteDialog-pane-1"]//div[@class="ag-center-cols-container"]/div'
-close_participants_page_xpath = '//div[@class="submenu-part-x-button"]'    # 关闭Participants入口页面
+close_participants_page_xpath = '//div[@class="selected-border"]/..//*[@*="#participants"]/..'    # 关闭Participants入口页面
 first_line_details_button = '//div[@class="ag-center-cols-container"]/div[@row-index="0"]//button[@class="k-button detailsButton"]'   # 首行数据的Details按钮
 close_details_xpath = '//div[@class="modal-content"]//span[contains(.,"×")]'   # Details页面的x按钮
 not_disturb = '//button[@class="dnd-btn available-btn"]'   # 不是免打扰模式

@@ -361,6 +361,19 @@ def left_call_back_f2f_mode(driver,username):
     ele_list33 = get_xpath_elements(driver, expect_text_33)
     public_assert(driver, len(ele_list33), 1, action='未出现提示33')
 
+@modify_implicit_wait(120)
+def left_call_back_f2f_mode1(driver,username):
+    """
+    UserName left the call. Switched back to Face to Face mode.
+    :param driver:
+    :param username:
+    :return:
+    """
+    ele_list32 = get_xpath_elements(driver, expect_text_32.format(username))
+    public_assert(driver, len(ele_list32), 1, action='未出现提示32')
+    ele_list33 = get_xpath_elements(driver, expect_text_33)
+    public_assert(driver, len(ele_list33), 1, action='未出现提示33')
+
 @change_driver_implicit_wait
 def exiting_document_sharing_mode(driver):
     """
