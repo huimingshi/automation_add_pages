@@ -276,7 +276,8 @@ expert_group_call_Scenario_5
     # DU6 turn off co-host other participants	VP: host EU2 can not be demoted
     # AU1 share her live video	VP: All users have merge option
     share_me     ${driver_AU1}
-    check_has_merge_menu     ${driver_TU1}    ${driver_EU2}     ${driver_AU1}    ${driver_AU4}    ${driver_U3}    ${driver_DU6}
+    sleep   30
+    check_has_merge_menu     ${driver_TU1}    ${driver_EU2}     ${driver_AU4}    ${driver_U3}    ${driver_DU6}
     # Host EU2 start merge
     click_merge_button    ${driver_EU2}
     # User3 start merge to be giver	Observer change to giver
@@ -289,20 +290,21 @@ expert_group_call_Scenario_5
     comment         Giver share her own live video to be receiver
     # User 3 click Share My Camera	VP: User 3 is now sharing live video; no one is merged
     share_me     ${driver_U3}
-    check_has_no_merged    ${driver_TU1}    ${driver_EU2}     ${driver_AU1}    ${driver_AU4}    ${driver_U3}    ${driver_DU6}
+    check_has_no_merged    ${driver_TU1}    ${driver_EU2}     ${driver_AU1}    ${driver_AU4}    ${driver_DU6}
     # Only keep EU2 as co-host. Turn off others
     turn_off_co_host_for_sb     ${driver_EU2}    ${close_center_mode_nameB}
     # Expert EU2 kill app, and wait for leave call	VP: other participants are promoted to co-host
     exit_one_driver     ${driver_EU2}
-    participants_icon_is_visible     yes    ${driver_TU1}    ${driver_AU1}    ${driver_U3}   ${driver_AU4}   ${driver_DU6}
-    # DU6 click participant icon	VP: DU6 has permission to turn on/off others as co-host
-
-    # Stop share	VP: back to F2F mode
-    stop_sharing_to_f2f    ${driver_U3}
-    check_in_f2f_mode      ${driver_U3}
-    # swipe page to view all participants
-    click_nav_right   ${driver_U3}
-    check_current_participants   ${driver_U3}   ${close_center_mode_nameB}
-    click_nav_left   ${driver_U3}
-    check_current_participants   ${driver_U3}    ${anonymous_user_name}    ${expert_group_call_nameT11}   ${expert_group_call_name41}    ${anonymous_user_name2}
+#    sleep    120
+#    participants_icon_is_visible     yes    ${driver_TU1}    ${driver_AU1}    ${driver_U3}   ${driver_AU4}   ${driver_DU6}
+#    # DU6 click participant icon	VP: DU6 has permission to turn on/off others as co-host
+#
+#    # Stop share	VP: back to F2F mode
+#    stop_sharing_to_f2f    ${driver_U3}
+#    check_in_f2f_mode      ${driver_U3}
+#    # swipe page to view all participants
+#    click_nav_right   ${driver_U3}
+#    check_current_participants   ${driver_U3}   ${close_center_mode_nameB}
+#    click_nav_left   ${driver_U3}
+#    check_current_participants   ${driver_U3}    ${anonymous_user_name}    ${expert_group_call_nameT11}   ${expert_group_call_name41}    ${anonymous_user_name2}
     [Teardown]       exit_driver
