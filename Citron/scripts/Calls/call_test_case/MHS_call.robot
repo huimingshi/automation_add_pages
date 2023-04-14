@@ -264,8 +264,9 @@ MHS_call_Scenario_3
     ${driver_AU3}      anonymous_open_meeting_link    ${invite_url}
     user_anwser_call          ${driver_EU2}         no_direct
     has_joined_the_call       ${driver_EU2}         ${anonymous_user_name3}
-    check_has_end_call_button       ${driver_EU2}     1
-    check_has_no_end_call_button    ${driver_EU2}     2
+    make_sure_enter_call     ${driver_AU3}
+    check_has_end_call_button       ${driver_EU2}     1    2
+#    check_has_no_end_call_button    ${driver_EU2}     2
     # AU3 share TU1's live video
     share_me        ${driver_AU3}
     # AU3 stop sharing	VP: Back to Face to Face mode

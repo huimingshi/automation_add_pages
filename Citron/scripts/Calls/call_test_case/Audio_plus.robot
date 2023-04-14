@@ -30,7 +30,7 @@ Audio_Mode_Scenario_1
         participant_avatar_displays     ${driver_UA}
         participant_avatar_displays     ${driver_UB}
         # 4. Retry Video Connection button displays for A and B
-        retry_video_connection_button_displays     ${driver_UA}     ${driver_UB}
+        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
         # 5. Show face to face mode.
         check_in_f2f_mode     ${driver_UA}
     # More participants join call
@@ -47,6 +47,7 @@ Audio_Mode_Scenario_1
         # 5. Enter face to face mode.
         check_in_f2f_mode     ${driver_UA}
 
+    sleep   10000
     comment        Share photo
     # Anyone Share -> Take New Photo  Web: Click on "Capture and Share" button
     take_a_new_photo     ${driver_UA}
@@ -56,4 +57,27 @@ Audio_Mode_Scenario_1
         receiving_file_from_anybody       ${driver_UB}    ${close_center_mode_name1}    photo
         # VP: 3.The spinner should be shown in the notification bar.
     # Wait until entering photo mode.
-    
+        # 5. All users sees message "You can now draw on the shared photo" in the notification bar. Presenter sees "You are sharing a Photo" and others see "Currently viewing Photo from xxx(presenter)" on iOS, "xxx is sharing a photo" on Android and web
+        you_can_draw_shared_photo     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # VP: 1. Telestration icon is visible for all participants
+        telestration_icon_is_visible     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # 2. Clear Shared Content button should display for all users.
+        clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # 6. Merged button is hidden for all participants
+        check_has_no_merge_menu     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # 7. Retry Video Connection button is hidden.
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+
+    comment         Clear Shared Content for Receiver
+    # photo uploader clicks on "Clear Shared Content" button
+    clear_shared_content_action     ${driver_UA}
+        # VP: 1. Exit Photo mode.for photo uploader: The first default view with Audio+ special dialog should display for receiver and helper.
+        audio_special_dialog_display     yes     ${driver_UA}     ${driver_UB}
+        # 2. Retry Video Connection button should be shown.
+        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
+    # Share -> Photo lib -> enter photo mode   VP: Clear Shared Content button should display for all users
+    minimize_window_action      ${driver_UA}     ${driver_UB}     ${driver_U3}
+    maximize_window_action      ${driver_UA}
+    inCall_upload_photo_PDF        ${driver_UA}
+    maximize_window_action      ${driver_UB}     ${driver_U3}
+    clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}

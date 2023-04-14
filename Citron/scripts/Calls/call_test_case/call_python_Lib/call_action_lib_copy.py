@@ -1029,6 +1029,13 @@ def select_co_host_back(driver,username = 'Huiming.shi.helplightning+EU2',can_tu
     # 点击Participants的Back按钮
     public_click_element(driver,'//div[@class="return-button"]',description="Participants的Back按钮")
 
+def clear_shared_content_action(driver):
+    """
+    点击Clear Shared Content按钮
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,Clear_Shared_Content,description="Clear_Shared_Content按钮")
 
 if __name__ == '__main__':
     import tkinter as tk

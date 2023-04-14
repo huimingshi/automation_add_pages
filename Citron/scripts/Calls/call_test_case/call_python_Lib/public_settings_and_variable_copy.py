@@ -180,6 +180,7 @@ option_menu = '//div[@class="OptionMenu"]'      # 展开右上角的三个横杠
 ultra_low_bandwidth = '//p[text()="Ultra-Low Bandwidth > "]'     # 点击右上角的三个横杠后，展示的Ultra-Low Bandwidth >
 close_option_menu = '//div[@class="selected-border"]/../..'         # 关闭右上角的三个横杠
 participants_avatar = '//div[@class="Avatars"]'     # participant's avatar displays
+AudioPlusModeShareDialog = '//div[@class="AudioPlusModeShareDialog"]'    # 下方的Audio+ Mode对话框
 # call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'

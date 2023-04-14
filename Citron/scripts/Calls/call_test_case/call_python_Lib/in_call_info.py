@@ -74,14 +74,15 @@ def helper_load_document(driver,fileName,click_share = 'click_share',check_info 
             public_assert(driver, len(ele_list22), 1, action='未出现提示22')
 
 @change_driver_implicit_wait
-def you_can_draw_shared_photo(driver):
+def you_can_draw_shared_photo(*drivers):
     """
     You can now draw on the shared photo提示信息出现
     :param driver:
     :return:
     """
-    ele_list4 = get_xpath_elements(driver, expect_text_4)
-    public_assert(driver, len(ele_list4), 1, action='未出现提示4')
+    for i in range(len(drivers)):
+        ele_list4 = get_xpath_elements(drivers[i], expect_text_4)
+        public_assert(drivers[i], len(ele_list4), 1, action=f'第{i + 1}个driver未出现提示4')
 
 @change_driver_implicit_wait
 def click_clear_shared_content(driver,which_mode = 'document',check_info='check_info'):

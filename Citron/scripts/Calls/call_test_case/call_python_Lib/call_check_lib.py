@@ -840,14 +840,19 @@ def participant_avatar_displays(driver,participants_count = 2):
     ele_list = get_xpath_elements(driver,participants_avatar)
     public_assert(driver,int(participants_count),len(ele_list),action="入会者个数正确")
 
-def retry_video_connection_button_displays(*drivers):
+def retry_video_connection_button_displays(display = 'yes',*drivers):
     """
     Retry Video Connection button displays
-    :param driver:
+    :param display: 展示？yes/no
+    :param drivers:
     :return:
     """
     for i in range(len(drivers)):
-        get_xpath_element(drivers[i],retry_video_connection,description=f"第{i + 1}个driver的retry_video_connection按钮应该展示")
+        if display == 'yes':
+            get_xpath_element(drivers[i],retry_video_connection,description=f"第{i + 1}个driver的retry_video_connection按钮应该展示")
+        else:
+            ele_list = get_xpath_elements(drivers[i],retry_video_connection)
+            public_assert(drivers[i],len(ele_list),0,action=f"第{i + 1}个driver的retry_video_connection按钮应该不展示")
 
 def button_not_display_for_non_host(driver,*buttons):
     """
@@ -863,3 +868,45 @@ def button_not_display_for_non_host(driver,*buttons):
         elif button == "2":
             ele_list = get_xpath_elements(driver,return_to_ultra_low_bandwidth)
             public_assert(driver, len(ele_list), 0, action="应该没有2按钮")
+
+def telestration_icon_is_visible(visible = 'yes',*drivers):
+    """
+    telestration icon 是否可见
+    :param visible:可见？yes/no
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers,'//div[@class="menu withsub  telestrationMenu "]')
+        if visible == 'yes':
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示telestration_icon")
+        else:
+            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示telestration_icon")
+
+def clear_shared_content_button_should_display(display = 'yes',*drivers):
+    """
+    Clear Shared Content button should display
+    :param display: 展示？yes/no
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers,Clear_Shared_Content)
+        if display == 'yes':
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示Clear_Shared_Content按钮")
+        else:
+            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示Clear_Shared_Content按钮")
+
+def audio_special_dialog_display(display = 'yes',*drivers):
+    """
+    Audio+ special dialog should display
+    :param display:
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers,AudioPlusModeShareDialog)
+        if display == 'yes':
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示AudioPlusModeShareDialog对话框")
+        else:
+            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示AudioPlusModeShareDialog对话框")
