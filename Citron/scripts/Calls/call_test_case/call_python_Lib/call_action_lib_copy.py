@@ -619,6 +619,72 @@ def click_right_share_button(*drivers):
         public_click_element(drivers[i], right_share_button, description=f"第{i+1}个driver右侧SHARE按钮")
         time.sleep(3)
 
+def upload_file_in_mac(file):
+    """
+    在mac系统上上传文件
+    :param file:
+    :return:
+    """
+    # 判断操作系统类型
+    system_type = get_system_type()
+    if system_type == 'Windows':
+        # 通过窗口打开
+        app = pywinauto.Desktop()
+        # 通过弹框名称进入控件中
+        win = app['打开']
+        time.sleep(2)
+        # 输入上传图片的地址
+        win['Edit'].type_keys(file)
+        time.sleep(2)
+        # 点击打开按钮
+        win['Button'].click()
+        time.sleep(2)
+    else:
+        k = PyKeyboard()
+        m = PyMouse()
+        filepath = '/'
+        time.sleep(5)
+        # 模拟键盘点击 Command + Shift + G
+        k.press_keys(['Command', 'Shift', 'G'])
+        time.sleep(3)
+        # 获取当前屏幕尺寸
+        x_dim, y_dim = m.screen_size()
+        m.click(x_dim // 2, y_dim // 2, 1)
+        time.sleep(3)
+        # 复制文件路径开头的斜杠/，如果不加斜杠的话，脚本会缺少头部的斜杠
+        pyperclip.copy(filepath)
+        time.sleep(3)
+        # 粘贴斜杠/
+        k.press_keys(['Command', 'V'])
+        time.sleep(3)
+        # 输入文件全路径
+        k.type_string(file)
+        time.sleep(2)
+        k.press_key('Return')
+        time.sleep(2)
+        k.press_key('Return')
+
+def share_photo_on_special_dialog(driver,file_type = "Photo",file_name = 'test_citron.pdf',if_wait = 'wait'):
+    """
+    在下方的Audio+ Mode特殊对话框中，点击Share a Photo按钮来上传图片
+    :param driver:
+    :param file_type: 文件类型
+    :param file_name: 文件名
+    :param if_wait: 是否等待？默认等待
+    :return:
+    """
+    # 点击上传按钮，并先获取文件绝对路径
+    if file_type == "Photo":
+        public_click_element(driver, Share_a_photo, description="share_photo按钮")
+        file = get_picture_path(is_input = "not_input")
+    elif file_type == "document":
+        public_click_element(driver, Share_a_document, description="share_PDF按钮")
+        file = get_picture_path(file_name,is_input = "not_input")
+    # mac上传文件
+    upload_file_in_mac(file)
+    if if_wait == 'wait':
+        time.sleep(10)
+
 def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.pdf',if_wait = 'wait'):
     """
     通话中点击右侧的Share按钮，上传photo或者PDF文件
@@ -641,49 +707,47 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.
     elif file_type == "PDF":
         public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
         file = get_picture_path(file_name,is_input = "not_input")
-    # 判断操作系统类型
-    system_type = get_system_type()
-    if system_type == 'Windows':
-        # 通过窗口打开
-        app = pywinauto.Desktop()
-        # 通过弹框名称进入控件中
-        win = app['打开']
-        time.sleep(2)
-        # 输入上传图片的地址
-        win['Edit'].type_keys(file)
-        time.sleep(2)
-        # 点击打开按钮
-        win['Button'].click()
-        time.sleep(2)
-    else:
-        k = PyKeyboard()
-        m = PyMouse()
-        filepath = '/'
-        time.sleep(10)
-        # 模拟键盘点击 Command + Shift + G
-        k.press_keys(['Command', 'Shift', 'G'])
-        time.sleep(3)
-        # for i in range(3):
-        #     k.press_keys(['Command', 'Shift', 'G'])
-        #     time.sleep(3)
-        # 获取当前屏幕尺寸
-        x_dim, y_dim = m.screen_size()
-        m.click(x_dim // 2, y_dim // 2, 1)
-        time.sleep(3)
-        # 复制文件路径开头的斜杠/，如果不加斜杠的话，脚本会缺少头部的斜杠
-        pyperclip.copy(filepath)
-        time.sleep(3)
-        # 粘贴斜杠/
-        k.press_keys(['Command', 'V'])
-        time.sleep(3)
-        # 输入文件全路径
-        k.type_string(file)
-        time.sleep(2)
-        k.press_key('Return')
-        time.sleep(2)
-        k.press_key('Return')
+    # mac上传文件
+    upload_file_in_mac(file)
+    # # 判断操作系统类型
+    # system_type = get_system_type()
+    # if system_type == 'Windows':
+    #     # 通过窗口打开
+    #     app = pywinauto.Desktop()
+    #     # 通过弹框名称进入控件中
+    #     win = app['打开']
+    #     time.sleep(2)
+    #     # 输入上传图片的地址
+    #     win['Edit'].type_keys(file)
+    #     time.sleep(2)
+    #     # 点击打开按钮
+    #     win['Button'].click()
+    #     time.sleep(2)
+    # else:
+    #     k = PyKeyboard()
+    #     m = PyMouse()
+    #     filepath = '/'
+    #     time.sleep(5)
+    #     # 模拟键盘点击 Command + Shift + G
+    #     k.press_keys(['Command', 'Shift', 'G'])
+    #     time.sleep(3)
+    #     # 获取当前屏幕尺寸
+    #     x_dim, y_dim = m.screen_size()
+    #     m.click(x_dim // 2, y_dim // 2, 1)
+    #     time.sleep(3)
+    #     # 复制文件路径开头的斜杠/，如果不加斜杠的话，脚本会缺少头部的斜杠
+    #     pyperclip.copy(filepath)
+    #     time.sleep(3)
+    #     # 粘贴斜杠/
+    #     k.press_keys(['Command', 'V'])
+    #     time.sleep(3)
+    #     # 输入文件全路径
+    #     k.type_string(file)
+    #     time.sleep(2)
+    #     k.press_key('Return')
+    #     time.sleep(2)
+    #     k.press_key('Return')
     if if_wait == 'wait':
-        time.sleep(2)
         time.sleep(10)
 
 def take_a_new_photo(driver):

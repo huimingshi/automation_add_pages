@@ -47,7 +47,6 @@ Audio_Mode_Scenario_1
         # 5. Enter face to face mode.
         check_in_f2f_mode     ${driver_UA}
 
-    sleep   10000
     comment        Share photo
     # Anyone Share -> Take New Photo  Web: Click on "Capture and Share" button
     take_a_new_photo     ${driver_UA}
@@ -110,7 +109,7 @@ Audio_Mode_Scenario_1
         # 2. Telestration icon is enabled.
         telestration_icon_is_visible     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
         # 4. Retry Video Connection button is hidden.
-        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_U3}
         # 5. Clear Shared Content button is visible for all users
         clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
     # Uploader clicks on Return button   # VP: Back to PDF navigation mode
@@ -125,7 +124,10 @@ Audio_Mode_Scenario_1
         # 2. Retry Video Connection button should be shown only for cohost.
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
     # Click share a photo on special dialog and select a picture	VP: enter photo mode
-
+    share_photo_on_special_dialog     ${driver_U3}
+    check_in_photo_pdf_whiteboard_mode     photo     ${driver_U3}
     # Anyone stop sharing button	VP: back to Face to Face mode
-
+    stop_sharing_to_f2f     ${driver_UB}
     # End call for all
+    end_call_for_all    ${driver_UB}
+    [Teardown]      exit_driver
