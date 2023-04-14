@@ -203,7 +203,7 @@ expect_text_18 = '//div[@class="subMessage" and contains(.,"Switched back to Fac
 expect_text_19 = '//div[@class="subMessage" and contains(.,"Point at a task area")]'
 expect_text_20 = '//div[@class="subMessage" and contains(.,"Point at a white background")]'
 expect_text_21 = '//div[text()="Now Observing"]'
-expect_text_22 = '//div[@class="subMessage" and contains(.,"PDF file is loading...")]'
+expect_text_22 = '//div[text()="PDF file is loading..."]'
 expect_text_23 = '//div[text()="Tap the Share button to share the document"]'
 expect_text_24 = '//div[text()="Receiving document from {}"]'
 expect_text_25 = '//div[text()="Receiving photo from {}"]'

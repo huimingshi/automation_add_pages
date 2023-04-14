@@ -879,7 +879,7 @@ def telestration_icon_is_visible(visible = 'yes',*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers,'//*[@*="#pencil"]/..')
+        ele_list = get_xpath_elements(drivers[i],'//*[@*="#pencil"]/..')
         if visible == 'yes':
             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示telestration_icon")
         else:
@@ -893,11 +893,11 @@ def telestration_icon_is_usable(usable = 'no',*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers,'//*[@*="#pencil_off"]/..')
+        ele_list = get_xpath_elements(drivers[i],'//*[@*="#pencil_off"]/..')
         if usable == 'yes':
-            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示telestration_icon")
+            public_assert(drivers[i],len(ele_list),0,action=f"第{i + 1}个driver应该展示telestration_icon")
         else:
-            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示telestration_icon")
+            public_assert(drivers[i], len(ele_list), 1, action=f"第{i + 1}个driver不应该展示telestration_icon")
 
 def cannot_do_pan_zoom(can_do = 'no',*drivers):
     """
@@ -907,7 +907,7 @@ def cannot_do_pan_zoom(can_do = 'no',*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers,PanZoomTools)
+        ele_list = get_xpath_elements(drivers[i],PanZoomTools)
         if can_do == 'yes':
             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该可以pan_zoom")
         else:
@@ -921,7 +921,7 @@ def share_button_is_visible(visible = 'yes',*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers,share_page_button)
+        ele_list = get_xpath_elements(drivers[i],share_page_button)
         if visible == 'yes':
             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示Clear_Shared_Content按钮")
         else:
@@ -935,7 +935,7 @@ def clear_shared_content_button_should_display(display = 'yes',*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers,Clear_Shared_Content)
+        ele_list = get_xpath_elements(drivers[i],Clear_Shared_Content)
         if display == 'yes':
             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示Clear_Shared_Content按钮")
         else:
@@ -949,7 +949,7 @@ def audio_special_dialog_display(display = 'yes',*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers,AudioPlusModeShareDialog)
+        ele_list = get_xpath_elements(drivers[i],AudioPlusModeShareDialog)
         if display == 'yes':
             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示AudioPlusModeShareDialog对话框")
         else:

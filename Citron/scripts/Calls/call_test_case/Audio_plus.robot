@@ -86,6 +86,7 @@ Audio_Mode_Scenario_1
     inCall_upload_photo_PDF        ${driver_U3}      PDF       test_citron.pdf       no_wait
         # VP: 1. For the uploader: a."Sending document" progress bar shows in the top.
         pending_document_sharing     ${driver_U3}
+        sleep   10
         # All the participants cannot do pan/zoom/telestration/screen capture.
         cannot_do_pan_zoom     no     ${driver_UA}     ${driver_UB}     ${driver_U3}
         check_has_no_capture_button    ${driver_UA}     ${driver_UB}     ${driver_U3}
