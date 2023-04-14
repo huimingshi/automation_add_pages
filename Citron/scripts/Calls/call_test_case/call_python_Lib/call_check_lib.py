@@ -301,23 +301,30 @@ def check_in_f2f_mode(driver):
     :param driver:
     :return:
     """
-    # ele_list = get_xpath_elements(driver, '//button[@class="AudioPlusModeIndicator"]')
-    for i in range(3):
-        merge_on_button_list = get_xpath_elements(driver, merge_on_button)
-        if len(merge_on_button_list) == 0:
-            break
-        elif i < 1:
-            time.sleep(5)
-        else:
-            public_assert(driver, len(merge_on_button_list), 0, action="应该on处于f2f模式")
-    for i in range(3):
-        merge_off_button_list = get_xpath_elements(driver, merge_off_button)
-        if len(merge_off_button_list) == 0:
-            break
-        elif i < 1:
-            time.sleep(5)
-        else:
-            public_assert(driver,len(merge_off_button_list),0,action="应该off处于f2f模式")
+    flag = 0
+    try:
+        get_xpath_element(driver,participants_avatar,description="参会者的avatar")
+    except Exception:
+        flag = 1
+    finally:
+        public_assert(driver,flag,0,action="应该处于f2f模式")
+    # # ele_list = get_xpath_elements(driver, '//button[@class="AudioPlusModeIndicator"]')
+    # for i in range(3):
+    #     merge_on_button_list = get_xpath_elements(driver, merge_on_button)
+    #     if len(merge_on_button_list) == 0:
+    #         break
+    #     elif i < 1:
+    #         time.sleep(5)
+    #     else:
+    #         public_assert(driver, len(merge_on_button_list), 0, action="应该on处于f2f模式")
+    # for i in range(3):
+    #     merge_off_button_list = get_xpath_elements(driver, merge_off_button)
+    #     if len(merge_off_button_list) == 0:
+    #         break
+    #     elif i < 1:
+    #         time.sleep(5)
+    #     else:
+    #         public_assert(driver,len(merge_off_button_list),0,action="应该off处于f2f模式")
 
 def check_show_share_live_video_from(*drivers):
     """
@@ -809,3 +816,50 @@ def currently_viewing_video_from_sb(somebody,*drivers):
         get_xpath_element(drivers[i], f'//span[text()="Currently viewing video from {somebody}"]', description="应该展示该信息")
         # 点击右侧的share按钮，收起
         CRSB(drivers[i])
+
+def check_in_ultra_low_bandwidth_mode(*drivers):
+    """
+    "Ultra-Low Bandwidth Mode" is shown in the top
+    :param driver:
+    :return:
+    """
+    for i in range(len(drivers)):
+        public_click_element(drivers[i],option_menu,description=f"第{i + 1}个driver的右上角三个横杠")
+        time.sleep(2)
+        get_xpath_element(drivers[i],ultra_low_bandwidth,description=f"第{i + 1}个driver的应该处在ultra_low_bandwidth模式")
+        public_click_element(drivers[i],close_option_menu,description=f"第{i + 1}个driver的关闭右上角三个横杠")
+        time.sleep(2)
+
+def participant_avatar_displays(driver,participants_count = 2):
+    """
+    participant's avatar displays
+    :param driver:
+    :param participants_count: participant个数
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,participants_avatar)
+    public_assert(driver,int(participants_count),len(ele_list),action="入会者个数正确")
+
+def retry_video_connection_button_displays(*drivers):
+    """
+    Retry Video Connection button displays
+    :param driver:
+    :return:
+    """
+    for i in range(len(drivers)):
+        get_xpath_element(drivers[i],retry_video_connection,description=f"第{i + 1}个driver的retry_video_connection按钮应该展示")
+
+def button_not_display_for_non_host(driver,*buttons):
+    """
+    Retry Video Connection/ Return to Ultra-Low Bandwidth button should not display for non-cohost in the bottom
+    :param driver:
+    :param buttons:
+    :return:
+    """
+    for button in buttons:
+        if button == "1":
+            ele_list = get_xpath_elements(driver,retry_video_connection)
+            public_assert(driver,len(ele_list),0,action="应该没有1按钮")
+        elif button == "2":
+            ele_list = get_xpath_elements(driver,return_to_ultra_low_bandwidth)
+            public_assert(driver, len(ele_list), 0, action="应该没有2按钮")

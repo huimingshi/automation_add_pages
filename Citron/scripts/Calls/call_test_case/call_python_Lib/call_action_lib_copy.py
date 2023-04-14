@@ -239,16 +239,17 @@ def anonymous_open_meeting_link(meeting_link,deal_with_disclaimer = 'accept'):
     driver.maximize_window()
     # 怎么处理Disclaimer；ACCCEPT OR DECLINE
     if deal_with_disclaimer == 'accept':
+        # public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
         try:
             public_click_element(driver, accept_disclaimer, description='ACCCEPT_Disclaimer')
         except:
             print("没有ACCCEPT_Disclaimer按钮")
-        driver.implicitly_wait(int(5))
-        ele_list = get_xpath_elements(driver, accept_disclaimer)
-        driver.implicitly_wait(int(IMPLICIT_WAIT))
-        if len(ele_list) == 1:
-            print('还需要再一次ACCCEPT_Disclaimer')
-            public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
+        # driver.implicitly_wait(int(5))
+        # ele_list = get_xpath_elements(driver, accept_disclaimer)
+        # driver.implicitly_wait(int(IMPLICIT_WAIT))
+        # if len(ele_list) == 1:
+        #     print('还需要再一次ACCCEPT_Disclaimer')
+        #     public_click_element(driver, accept_disclaimer, description='再一次ACCCEPT_Disclaimer')
         # ele_list = get_xpath_elements(driver,accept_disclaimer)
         # print(len(ele_list))
         # if len(ele_list) == 1:
@@ -714,7 +715,6 @@ def take_a_new_photo(driver):
     time.sleep(10)   # 等待摄像头画面捕捉到
     # 点击Capture and Share按钮
     public_click_element(driver,'//button[text()="Capture and Share"]',description="Capture_and_Share按钮")
-    time.sleep(5)
 
 def share_me(driver):
     """

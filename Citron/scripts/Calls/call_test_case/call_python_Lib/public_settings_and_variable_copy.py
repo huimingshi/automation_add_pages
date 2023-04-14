@@ -157,6 +157,7 @@ TPPW_share = '//span[text()="{}"]'      # 四种模式：“Take a New Photo”�
 stop_sharing_button = '//button[text()="Stop Sharing"]'   # Stop Sharing按钮
 my_camera_button = '//span[text()="My Camera"]'    # My Camera按钮
 retry_video_connection = '//button[text()="Retry Video Connection"]'           # Retry Video Connection按钮
+return_to_ultra_low_bandwidth = '//button[text()="Return to Ultra-Low Bandwidth"]'  # Return to Ultra-Low Bandwidth按钮
 merge_on_button = '//*[@*="#merge_off"]/..'      # 进行Merge的按钮#
 merge_off_button = '//*[@*="#merge_on"]/..'      # 取消Merge的按钮
 preview_merge_button = '//button[text()="Merge"]'    # Merge Preview中的Merge按钮
@@ -175,6 +176,10 @@ zoom_in_photo = '//*[@*="#zoom_in"]/..'    # 分享图片或者whiteboard时，�
 zoom_in_pdf = '//button[@id="zoomIn"]'    # 分享PDF时，上方展示的放大按钮
 share_page_button = '//button[text()="Share Page"]'        # 分享PDF时，左下角展示的Share Page按钮
 return_page_button = '//button[text()="Return"]'        # 分享PDF时，左下角展示的Share Page按钮
+option_menu = '//div[@class="OptionMenu"]'      # 展开右上角的三个横杠
+ultra_low_bandwidth = '//p[text()="Ultra-Low Bandwidth > "]'     # 点击右上角的三个横杠后，展示的Ultra-Low Bandwidth >
+close_option_menu = '//div[@class="selected-border"]/../..'         # 关闭右上角的三个横杠
+participants_avatar = '//div[@class="Avatars"]'     # participant's avatar displays
 # call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'
