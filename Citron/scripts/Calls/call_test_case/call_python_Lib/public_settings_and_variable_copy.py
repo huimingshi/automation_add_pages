@@ -175,7 +175,7 @@ cancel_send_photo = '//div[@class="ProgressInfo"]/button[text()="Cancel"]'     #
 zoom_in_photo = '//*[@*="#zoom_in"]/..'    # 分享图片或者whiteboard时，底部展示的放大按钮
 zoom_in_pdf = '//button[@id="zoomIn"]'    # 分享PDF时，上方展示的放大按钮
 share_page_button = '//button[text()="Share Page"]'        # 分享PDF时，左下角展示的Share Page按钮
-return_page_button = '//button[text()="Return"]'        # 分享PDF时，左下角展示的Share Page按钮
+return_page_button = '//button[text()="Return"]'        # 分享PDF时，左下角展示的Return按钮
 option_menu = '//div[@class="OptionMenu"]'      # 展开右上角的三个横杠
 ultra_low_bandwidth = '//p[text()="Ultra-Low Bandwidth > "]'     # 点击右上角的三个横杠后，展示的Ultra-Low Bandwidth >
 close_option_menu = '//div[@class="selected-border"]/../..'         # 关闭右上角的三个横杠

@@ -209,7 +209,9 @@ def check_in_photo_pdf_whiteboard_mode(mode,*drivers):
     """
     for i in range(len(drivers)):
         if mode == 'pdf':
-            get_xpath_element(drivers[i],share_page_button,description=f"第{i+1}个driver处于pdf模式中")
+            get_xpath_element(drivers[i],share_page_button,description=f"第{i+1}个driver处于pdf_navigation模式中")
+        elif mode == "pdf sharing":
+            get_xpath_element(drivers[i], return_page_button, description=f"第{i + 1}个driver处于pdf_sharing模式中")
         elif mode == 'photo' or mode == 'whiteboard':
             ele_list = get_xpath_elements(drivers[i],zoom_in_photo)
             public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver处于photo或whiteboard模式中")
@@ -877,11 +879,53 @@ def telestration_icon_is_visible(visible = 'yes',*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers,'//div[@class="menu withsub  telestrationMenu "]')
+        ele_list = get_xpath_elements(drivers,'//*[@*="#pencil"]/..')
         if visible == 'yes':
             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示telestration_icon")
         else:
             public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示telestration_icon")
+
+def telestration_icon_is_usable(usable = 'no',*drivers):
+    """
+    telestration icon 是否可用
+    :param usable:可用？yes/no
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers,'//*[@*="#pencil_off"]/..')
+        if usable == 'yes':
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示telestration_icon")
+        else:
+            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示telestration_icon")
+
+def cannot_do_pan_zoom(can_do = 'no',*drivers):
+    """
+    cannot do pan/zoom
+    :param can_do:
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers,PanZoomTools)
+        if can_do == 'yes':
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该可以pan_zoom")
+        else:
+            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该可以pan_zoom")
+
+def share_button_is_visible(visible = 'yes',*drivers):
+    """
+    Share button on bottom is visible
+    :param visible:可见？yes/no
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers,share_page_button)
+        if visible == 'yes':
+            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示Clear_Shared_Content按钮")
+        else:
+            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示Clear_Shared_Content按钮")
 
 def clear_shared_content_button_should_display(display = 'yes',*drivers):
     """

@@ -619,12 +619,13 @@ def click_right_share_button(*drivers):
         public_click_element(drivers[i], right_share_button, description=f"第{i+1}个driver右侧SHARE按钮")
         time.sleep(3)
 
-def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.pdf'):
+def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.pdf',if_wait = 'wait'):
     """
     通话中点击右侧的Share按钮，上传photo或者PDF文件
     :param driver:
     :param file_type: 文件类型
     :param file_name: 文件名
+    :param if_wait: 是否等待？默认等待
     :return:
     """
     # 确保文件类型输入正确
@@ -639,7 +640,6 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.
         file = get_picture_path(is_input = "not_input")
     elif file_type == "PDF":
         public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
-        # file = get_picture_path('test_citron.pdf',is_input = "not_input")
         file = get_picture_path(file_name,is_input = "not_input")
     # 判断操作系统类型
     system_type = get_system_type()
@@ -682,8 +682,9 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.
         k.press_key('Return')
         time.sleep(2)
         k.press_key('Return')
+    if if_wait == 'wait':
         time.sleep(2)
-    time.sleep(10)
+        time.sleep(10)
 
 def take_a_new_photo(driver):
     """
@@ -758,7 +759,6 @@ def share_page(driver):
     :return:
     """
     public_click_element(driver,share_page_button)
-    time.sleep(2)
 
 def click_return_after_share_page(driver):
     """
@@ -767,7 +767,6 @@ def click_return_after_share_page(driver):
     :return:
     """
     public_click_element(driver, return_page_button)
-    time.sleep(2)
 
 def record_or_do_not_record(if_record,who_do_it,*args):
     """

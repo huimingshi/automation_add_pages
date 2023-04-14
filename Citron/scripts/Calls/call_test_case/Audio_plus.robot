@@ -81,3 +81,51 @@ Audio_Mode_Scenario_1
     inCall_upload_photo_PDF        ${driver_UA}
     maximize_window_action      ${driver_UB}     ${driver_U3}
     clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
+    # Another participant Share pdf
+    minimize_window_action      ${driver_UA}     ${driver_UB}     ${driver_U3}
+    maximize_window_action      ${driver_U3}
+    inCall_upload_photo_PDF        ${driver_U3}      PDF       test_citron.pdf       no_wait
+        # VP: 1. For the uploader: a."Sending document" progress bar shows in the top.
+        pending_document_sharing     ${driver_U3}
+        # All the participants cannot do pan/zoom/telestration/screen capture.
+        cannot_do_pan_zoom     no     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        check_has_no_capture_button    ${driver_UA}     ${driver_UB}     ${driver_U3}
+    # Wait until entering PDF navigation mode
+        # VP: 1. Telestration icon is visible and off status
+        telestration_icon_is_usable     no     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # 2. Share button on bottom is visible.
+        share_button_is_visible     yes     ${driver_U3}
+        # 4. Clear Shared Content button is visible for all users
+        clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # 6. Merged menu is hidden for all
+        check_has_no_merge_menu     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # 7. Retry Video Connection button is hidden
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+    # Click on Share button
+    share_page     ${driver_U3}
+        # 5. Message "You can now draw on the shared document." shows in the notification bar.
+        you_can_now_draw_on_the_shared_document     ${driver_U3}
+        # VP: 1. Enter pdf sharing mode.
+        check_in_photo_pdf_whiteboard_mode     pdf sharing     ${driver_U3}
+        # 2. Telestration icon is enabled.
+        telestration_icon_is_visible     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
+        # 4. Retry Video Connection button is hidden.
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+        # 5. Clear Shared Content button is visible for all users
+        clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}     ${driver_U3}
+    # Uploader clicks on Return button   # VP: Back to PDF navigation mode
+    click_return_after_share_page     ${driver_U3}
+    check_in_photo_pdf_whiteboard_mode     pdf     ${driver_U3}
+
+    comment         CP: Clear Shared Content in PDF navigation mode for Receiver
+    # Pdf uploader clicks on Clear Shared Content button.
+    clear_shared_content_action      ${driver_U3}
+        # VP: 1. All participants should exit PDF mode. The first default view with Audio+ special dialog should display for pdf uploader (receiver) and helper.
+        audio_special_dialog_display     yes     ${driver_UA}     ${driver_UB}
+        # 2. Retry Video Connection button should be shown only for cohost.
+        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
+    # Click share a photo on special dialog and select a picture	VP: enter photo mode
+
+    # Anyone stop sharing button	VP: back to Face to Face mode
+
+    # End call for all

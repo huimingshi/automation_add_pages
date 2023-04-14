@@ -21,6 +21,17 @@ def now_which_help(driver,expect_mode = 'receiving'):
         ele_list13 = get_xpath_elements(driver, expect_text_13)
         public_assert(driver, len(ele_list13), 1, action='未出现提示Giving')
 
+def you_can_now_draw_on_the_shared_document(driver):
+    """
+    Message "You can now draw on the shared document." shows in the notification bar.
+    :param driver:
+    :return:
+    """
+    ele_list1 = get_xpath_elements(driver, expect_text_1)
+    ele_list2 = get_xpath_elements(driver, expect_text_2)
+    public_assert(driver, len(ele_list1), 1, action='未出现提示1')
+    public_assert(driver, len(ele_list2), 1, action='未出现提示2')
+
 @change_driver_implicit_wait
 def giver_share_a_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
     """
