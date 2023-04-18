@@ -121,7 +121,7 @@ Audio_Mode_Scenario_1
     # Pdf uploader clicks on Clear Shared Content button.
     clear_shared_content_action      ${driver_U3}
         # VP: 1. All participants should exit PDF mode. The first default view with Audio+ special dialog should display for pdf uploader (receiver) and helper.
-        audio_special_dialog_display     yes     ${driver_UA}     ${driver_UB}
+        audio_special_dialog_display     yes     ${driver_U3}     ${driver_UB}
         # 2. Retry Video Connection button should be shown only for cohost.
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
     # Click share a photo on special dialog and select a picture	VP: enter photo mode
@@ -132,3 +132,62 @@ Audio_Mode_Scenario_1
     # End call for all
     end_call_for_all    ${driver_UB}
     [Teardown]      exit_driver
+
+Audio_Mode_Scenario_2
+    [Documentation]       switch to SD in live video
+    [Tags]     Audio+
+    comment     All Users Enable Debug mode from account setting
+    # User A starts Audio+ call with user B.
+    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user11}
+    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user21}
+    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name21}
+    make_sure_enter_call                ${driver_UB}
+    # Anonymous join in call
+    ${invite_url}     send_new_invite_in_calling    ${driver_UB}
+    ${driver_AU}      anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call       ${driver_UA}    no_direct
+    # Several user join in call
+    ${driver_U4}     driver_set_up_and_logIn     ${close_center_mode_user31}
+    user_make_call_via_meeting_link     ${driver_U4}   ${invite_url}
+    # Open Call quality from Main submenus.
+        # VP: Call Quality is visible for all participants, including anonymous user;
+        # VP: Ultra-Low Bandwidth is selected status
+        check_in_ultra_low_bandwidth_mode      ${driver_UA}    ${driver_UB}     ${driver_AU}    ${driver_U4}
+        # VP: Call quality display with HD Video, SD Video and Ultra-Low Bandwidth options.
+        call_quality_display_with     ${driver_UA}    ${driver_UB}     ${driver_AU}    ${driver_U4}
+    # Anyone share whiteboard
+    share_whiteboard    ${driver_AU}
+        # VP: 1. Telestration icon is visible for all participants
+        telestration_icon_is_visible     yes     ${driver_UA}    ${driver_UB}     ${driver_AU}    ${driver_U4}
+        # 2. Clear Shared Content button should display for all users
+        clear_shared_content_button_should_display     yes     ${driver_UA}    ${driver_UB}     ${driver_AU}    ${driver_U4}
+        # 5. Uploader sees message "You can now draw on the shared photo" in the notification bar. Other participants see message "You can now draw on uploader's photo." in the notification bar.
+        you_can_draw_shared_photo     ${driver_UA}    ${driver_UB}     ${driver_AU}    ${driver_U4}
+        # 6. Merged button is hidden for all participants
+        check_has_no_merge_menu     ${driver_UA}    ${driver_UB}     ${driver_AU}    ${driver_U4}
+        # 7. Retry Video Connection button is hidden.
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+    # Helper or Receiver clicks on Cleared Shared Content.
+    clear_shared_content_action    ${driver_AU}
+        # VP: All participants should exit Whiteboard mode. The first default view with Audio+ special dialog should display for whiteboard selecter (receiver) and helper.
+        audio_special_dialog_display     yes     ${driver_AU}    ${driver_UA}
+    # Co-host clicks on Retry Video Connection button.
+    enter_video_connection     ${driver_UA}
+        # VP: 1. Is HD mode in call quality
+        # Merge menu visible for all except receiver.
+        check_has_merge_menu     ${driver_UA}    ${driver_UB}    ${driver_U4}
+        # 3. "Audio+ Mode" message disappears.
+        # 4. Return to Ultra-Low Bandwidth mode button display only for cohost.
+        return_to_ULB_button_displays     yes    ${driver_UA}     ${driver_UB}
+    # Another participant confirm to start merge
+    click_merge_button      ${driver_U4}
+    # Anonymous switch to SD from call quality	VP: Return to Ultra-Low Bandwidth mode button should display only for cohost.
+    switch_to_mode_from_call_quality    ${driver_UA}    SD
+    return_to_ULB_button_displays     yes    ${driver_UA}     ${driver_UB}
+    # Co-host clicks on Return to Ultra-Low Bandwidth Mode button
+    return_ULB_mode     ${driver_UA}
+        # VP: Return to Audio+ mode. Retry Video Connection button should display only for cohost.
+        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
+        # VP: for who merged previously show special dialog
+        # VP: for who shared previously show special dialog
+   [Teardown]     exit_driver

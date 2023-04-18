@@ -179,6 +179,7 @@ return_page_button = '//button[text()="Return"]'        # 分享PDF时，左下�
 option_menu = '//div[@class="OptionMenu"]'      # 展开右上角的三个横杠
 ultra_low_bandwidth = '//p[text()="Ultra-Low Bandwidth > "]'     # 点击右上角的三个横杠后，展示的Ultra-Low Bandwidth >
 close_option_menu = '//div[@class="selected-border"]/../..'         # 关闭右上角的三个横杠
+call_quality_span = '//span[text()="Call Quality"]'      # 点击右上角的三个横杠后，展示的Call Quality
 participants_avatar = '//div[@class="Avatars"]'     # participant's avatar displays
 AudioPlusModeShareDialog = '//div[@class="AudioPlusModeShareDialog"]'    # 下方的Audio+ Mode对话框
 # call通话过程中预期出现的提示信息

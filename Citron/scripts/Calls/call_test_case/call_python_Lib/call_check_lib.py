@@ -6,6 +6,7 @@ from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import IMPLICIT_WAIT
 from Citron.scripts.Calls.call_test_case.call_python_Lib.call_action_lib_copy import click_participants_div as CPD, \
     in_call_click_message_button as ICCMB, click_right_share_button as CRSB, close_invite_3th_page as CI3P
+from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import scroll_into_view as SIV
 from Citron.scripts.Calls.call_test_case.call_python_Lib.finish_call import hang_up_the_phone as HUTP
 from public_settings_and_variable_copy import *
 
@@ -826,9 +827,26 @@ def check_in_ultra_low_bandwidth_mode(*drivers):
     :return:
     """
     for i in range(len(drivers)):
+        SIV(drivers[i],option_menu)
         public_click_element(drivers[i],option_menu,description=f"第{i + 1}个driver的右上角三个横杠")
         time.sleep(2)
         get_xpath_element(drivers[i],ultra_low_bandwidth,description=f"第{i + 1}个driver的应该处在ultra_low_bandwidth模式")
+        public_click_element(drivers[i],close_option_menu,description=f"第{i + 1}个driver的关闭右上角三个横杠")
+        time.sleep(2)
+
+def call_quality_display_with(*drivers):
+    """
+    Call quality display with HD Video, SD Video and Ultra-Low Bandwidth options.
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        public_click_element(drivers[i],option_menu,description=f"第{i + 1}个driver的右上角三个横杠")
+        time.sleep(2)
+        public_click_element(drivers[i],ultra_low_bandwidth,description=f"第{i + 1}个driver的ultra_low_bandwidth模式按钮")
+        get_xpath_element(drivers[i],'//span[text()="HD Video"]',description=f"第{i + 1}个driver的HD_Video")
+        get_xpath_element(drivers[i],'//span[text()="SD Video"]',description=f"第{i + 1}个driver的SD_Video")
+        get_xpath_element(drivers[i],'//span[text()="Ultra-Low Bandwidth"]',description=f"第{i + 1}个driver的Ultra-Low_Bandwidth")
         public_click_element(drivers[i],close_option_menu,description=f"第{i + 1}个driver的关闭右上角三个横杠")
         time.sleep(2)
 
@@ -855,6 +873,20 @@ def retry_video_connection_button_displays(display = 'yes',*drivers):
         else:
             ele_list = get_xpath_elements(drivers[i],retry_video_connection)
             public_assert(drivers[i],len(ele_list),0,action=f"第{i + 1}个driver的retry_video_connection按钮应该不展示")
+
+def return_to_ULB_button_displays(display = 'yes',*drivers):
+    """
+    Return to Ultra-Low Bandwidth mode button should display only for cohost.
+    :param display: 展示？yes/no
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        if display == 'yes':
+            get_xpath_element(drivers[i],return_to_ultra_low_bandwidth,description=f"第{i + 1}个driver的return_to_ULB按钮应该展示")
+        else:
+            ele_list = get_xpath_elements(drivers[i],return_to_ultra_low_bandwidth)
+            public_assert(drivers[i],len(ele_list),0,action=f"第{i + 1}个driver的return_to_ULB按钮应该不展示")
 
 def button_not_display_for_non_host(driver,*buttons):
     """

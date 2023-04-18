@@ -571,6 +571,14 @@ def enter_video_connection(driver):
     if len(ele_list) == 1:
         public_click_element(driver, retry_video_connection, description="RVC按钮")
 
+def return_ULB_mode(driver):
+    """
+    点击Return to Ultra-Low Bandwidth按钮
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,return_to_ultra_low_bandwidth,description="return_ULB按钮")
+
 def click_merge_button(driver):
     """
     点击Merge按钮，进入到giver角色
@@ -1099,6 +1107,23 @@ def clear_shared_content_action(driver):
     :return:
     """
     public_click_element(driver,Clear_Shared_Content,description="Clear_Shared_Content按钮")
+
+def switch_to_mode_from_call_quality(driver,mode = "SD"):
+    """
+    点击右上角三个横杠，切换模式
+    :param driver:
+    :param mode: HD?SD?Ultra-Low Bandwidth
+    :return:
+    """
+    public_click_element(driver, option_menu, description=f"右上角三个横杠")
+    public_click_element(driver,call_quality_span,description="call_quality按钮")
+    if mode == "HD":
+        public_click_element(driver, '//span[text()="HD Video"]', description="HD_Video按钮")
+    elif mode == "SD":
+        public_click_element(driver, '//span[text()="SD Video"]', description="SD_Video按钮")
+    else:
+        public_click_element(driver, '//span[text()="Ultra-Low Bandwidth"]', description="ULB按钮")
+
 
 if __name__ == '__main__':
     import tkinter as tk
