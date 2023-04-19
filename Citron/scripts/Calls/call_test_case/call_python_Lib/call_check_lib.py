@@ -889,21 +889,6 @@ def return_to_ULB_button_displays(display = 'yes',*drivers):
             ele_list = get_xpath_elements(drivers[i],return_to_ultra_low_bandwidth)
             public_assert(drivers[i],len(ele_list),0,action=f"第{i + 1}个driver的return_to_ULB按钮应该不展示")
 
-def button_not_display_for_non_host(driver,*buttons):
-    """
-    Retry Video Connection/ Return to Ultra-Low Bandwidth button should not display for non-cohost in the bottom
-    :param driver:
-    :param buttons:
-    :return:
-    """
-    for button in buttons:
-        if button == "1":
-            ele_list = get_xpath_elements(driver,retry_video_connection)
-            public_assert(driver,len(ele_list),0,action="应该没有1按钮")
-        elif button == "2":
-            ele_list = get_xpath_elements(driver,return_to_ultra_low_bandwidth)
-            public_assert(driver, len(ele_list), 0, action="应该没有2按钮")
-
 def telestration_icon_is_visible(visible = 'yes',*drivers):
     """
     telestration icon 是否可见

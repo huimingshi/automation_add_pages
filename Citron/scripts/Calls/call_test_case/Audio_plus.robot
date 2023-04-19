@@ -44,9 +44,8 @@ Audio_Mode_Scenario_1
         # 2. Not video but participant's avatar displays.
         participant_avatar_displays     ${driver_U3}    3
         # 4. Retry Video Connection/ Return to Ultra-Low Bandwidth button should not display for non-cohost in the bottom.
-#        button_not_display_for_non_host    ${driver_U3}    1    2
-        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
-        return_to_ULB_button_displays     no    ${driver_UA}     ${driver_UB}
+        retry_video_connection_button_displays     no    ${driver_U3}
+        return_to_ULB_button_displays     no    ${driver_U3}
         # 5. Enter face to face mode.
         check_in_f2f_mode     ${driver_UA}
 
@@ -126,8 +125,7 @@ Audio_Mode_Scenario_1
     # Pdf uploader clicks on Clear Shared Content button.
     clear_shared_content_action      ${driver_U3}
         # VP: 1. All participants should exit PDF mode. The first default view with Audio+ special dialog should display for pdf uploader (receiver) and helper.
-#        audio_special_dialog_display     yes     ${driver_U3}     ${driver_UB}
-        show_special_dialog_in_bottom     ${driver_UA}
+        show_special_dialog_in_bottom     ${driver_U3}
         show_special_dialog_in_bottom     ${driver_UB}
         # 2. Retry Video Connection button should be shown only for cohost.
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
