@@ -198,9 +198,9 @@ Audio_Mode_Scenario_2
         # VP: Return to Audio+ mode. Retry Video Connection button should display only for cohost.
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
         # VP: for who merged previously show special dialog
-        show_special_dialog_in_bottom
+        show_special_dialog_in_bottom       ${driver_AU}     2
         # VP: for who shared previously show special dialog
-        show_special_dialog_in_bottom
+        show_special_dialog_in_bottom       ${driver_U4}     3
    [Teardown]     exit_driver
 
 Audio_Mode_Scenario_3
