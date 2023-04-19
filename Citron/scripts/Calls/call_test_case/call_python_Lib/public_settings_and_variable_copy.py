@@ -182,6 +182,7 @@ close_option_menu = '//div[@class="selected-border"]/../..'         # 关闭右�
 call_quality_span = '//span[text()="Call Quality"]'      # 点击右上角的三个横杠后，展示的Call Quality
 participants_avatar = '//div[@class="Avatars"]'     # participant's avatar displays
 AudioPlusModeShareDialog = '//div[@class="AudioPlusModeShareDialog"]'    # 下方的Audio+ Mode对话框
+capture_and_share = '//button[text()="Capture and Share"]'    # Capture and Share按钮
 # call通话过程中预期出现的提示信息
 expect_text_1 = '//div[text()="Entering document sharing mode."]'
 expect_text_2 = '//div[text()="You can now draw on the shared document"]'

@@ -4,6 +4,7 @@ Library           OperatingSystem
 Resource          ../../../Lib/public.robot
 Library           call_python_Lib/call_action_lib_copy.py
 Resource          ../../../Lib/calls_resource.robot
+Resource          ../../../Lib/All_Pages_Xpath/Normal/load_file.robot
 Library           call_python_Lib/in_call_info.py
 Library           call_python_Lib/login_lib.py
 Library           call_python_Lib/about_call.py
@@ -43,7 +44,9 @@ Audio_Mode_Scenario_1
         # 2. Not video but participant's avatar displays.
         participant_avatar_displays     ${driver_U3}    3
         # 4. Retry Video Connection/ Return to Ultra-Low Bandwidth button should not display for non-cohost in the bottom.
-        button_not_display_for_non_host    ${driver_U3}    1    2
+#        button_not_display_for_non_host    ${driver_U3}    1    2
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+        return_to_ULB_button_displays     no    ${driver_UA}     ${driver_UB}
         # 5. Enter face to face mode.
         check_in_f2f_mode     ${driver_UA}
 
@@ -71,7 +74,9 @@ Audio_Mode_Scenario_1
     # photo uploader clicks on "Clear Shared Content" button
     clear_shared_content_action     ${driver_UA}
         # VP: 1. Exit Photo mode.for photo uploader: The first default view with Audio+ special dialog should display for receiver and helper.
-        audio_special_dialog_display     yes     ${driver_UA}     ${driver_UB}
+#        audio_special_dialog_display     yes     ${driver_UA}     ${driver_UB}
+        show_special_dialog_in_bottom     ${driver_UA}
+        show_special_dialog_in_bottom     ${driver_UB}
         # 2. Retry Video Connection button should be shown.
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
     # Share -> Photo lib -> enter photo mode   VP: Clear Shared Content button should display for all users
@@ -83,7 +88,7 @@ Audio_Mode_Scenario_1
     # Another participant Share pdf
     minimize_window_action      ${driver_UA}     ${driver_UB}     ${driver_U3}
     maximize_window_action      ${driver_U3}
-    inCall_upload_photo_PDF        ${driver_U3}      PDF       test_citron.pdf       no_wait
+    inCall_upload_photo_PDF        ${driver_U3}      PDF       ${load_test_pdf}       no_wait
         # VP: 1. For the uploader: a."Sending document" progress bar shows in the top.
         pending_document_sharing     ${driver_U3}
         sleep   10
@@ -121,7 +126,9 @@ Audio_Mode_Scenario_1
     # Pdf uploader clicks on Clear Shared Content button.
     clear_shared_content_action      ${driver_U3}
         # VP: 1. All participants should exit PDF mode. The first default view with Audio+ special dialog should display for pdf uploader (receiver) and helper.
-        audio_special_dialog_display     yes     ${driver_U3}     ${driver_UB}
+#        audio_special_dialog_display     yes     ${driver_U3}     ${driver_UB}
+        show_special_dialog_in_bottom     ${driver_UA}
+        show_special_dialog_in_bottom     ${driver_UB}
         # 2. Retry Video Connection button should be shown only for cohost.
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
     # Click share a photo on special dialog and select a picture	VP: enter photo mode
@@ -170,7 +177,9 @@ Audio_Mode_Scenario_2
     # Helper or Receiver clicks on Cleared Shared Content.
     clear_shared_content_action    ${driver_AU}
         # VP: All participants should exit Whiteboard mode. The first default view with Audio+ special dialog should display for whiteboard selecter (receiver) and helper.
-        audio_special_dialog_display     yes     ${driver_AU}    ${driver_UA}
+#        audio_special_dialog_display     yes     ${driver_AU}    ${driver_UA}
+        show_special_dialog_in_bottom     ${driver_UA}
+        show_special_dialog_in_bottom     ${driver_UA}
     # Co-host clicks on Retry Video Connection button.
     enter_video_connection     ${driver_UA}
         # VP: 1. Is HD mode in call quality
@@ -189,5 +198,93 @@ Audio_Mode_Scenario_2
         # VP: Return to Audio+ mode. Retry Video Connection button should display only for cohost.
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
         # VP: for who merged previously show special dialog
+        show_special_dialog_in_bottom
         # VP: for who shared previously show special dialog
+        show_special_dialog_in_bottom
    [Teardown]     exit_driver
+
+Audio_Mode_Scenario_3
+    [Documentation]       switch call quality in photo, pdf mode
+    [Tags]     Audio+
+    # User A starts Audio+ call with user B.
+    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user1}
+    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user2}
+    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name2}
+    make_sure_enter_call                ${driver_UB}
+    # Anonymous join in call, several user C, D join in call
+    ${invite_url}     send_new_invite_in_calling    ${driver_UB}
+    ${driver_AU}      anonymous_open_meeting_link    ${invite_url}
+    user_anwser_call       ${driver_UA}    no_direct
+    ${driver_UC}      driver_set_up_and_logIn     ${close_center_mode_user3}
+    user_make_call_via_meeting_link     ${driver_UC}   ${invite_url}
+    ${driver_UD}      driver_set_up_and_logIn     ${close_center_mode_user4}
+    user_make_call_via_meeting_link     ${driver_UD}   ${invite_url}
+    # User C switch to HD
+    switch_to_mode_from_call_quality    ${driver_UC}    HD
+    # User B shares his live video. User C confirm merge
+    share_me    ${driver_UB}
+    click_merge_button     ${driver_UC}
+    # Co-host clicks on Return to Ultra-Low Bandwidth Mode button
+    return_ULB_mode     ${driver_UA}
+        # VP: Return to Audio+ mode. Retry Video Connection button should display only for cohost.
+        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
+        # VP: for who merged (userC) previously show special dialog
+        show_special_dialog_in_bottom   ${driver_UC}    3
+        # VP: for who shared previously(userB) show special dialog
+        show_special_dialog_in_bottom   ${driver_UB}    2
+    # UserC taps "Take a photo" in Audio+ special dialog.     Web:Click on Capture and Share button.
+    share_photo_on_special_dialog      ${driver_UC}    take
+
+    comment         photo mode, switch
+    # Wait until entering photo mode.
+    check_in_photo_pdf_whiteboard_mode    photo     ${driver_UC}
+        # VP: 1. Merged Reality (Camera On) button is hidden.
+        check_has_no_merge_menu     ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+        # 2. Retry Video Connection button should be hidden.
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+    # Switch to SD mode.
+    switch_to_mode_from_call_quality    ${driver_UC}    SD
+        # VP: keep photo mode. All should see merge menu.
+        check_in_photo_pdf_whiteboard_mode    photo     ${driver_UC}
+        check_has_merge_menu     ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+        # Return to Ultra-Low Bandwidth Mode button should be hidden
+        return_to_ULB_button_displays     no    ${driver_UA}     ${driver_UB}
+
+    comment        pdf navigation, switch
+    # User C (giver) click Share - pdf document from menu
+    minimize_window_action      ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+    maximize_window_action      ${driver_UC}
+    inCall_upload_photo_PDF        ${driver_UC}      PDF       ${load_test_pdf}      no_wait
+        # For the uploader: a."Sending document" progress bar shows in the top
+        pending_document_sharing     ${driver_UC}
+        maximize_window_action       ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+        sleep   10
+        # All the participants cannot do pan/zoom/telestration/screen capture.
+        cannot_do_pan_zoom     no      ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+        check_has_no_capture_button    ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+    # Wait until enter PDF navigation mode.  VP: Retry Video Connection / Return to Audio+ button should be hidden.
+    check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UC}
+    retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+    return_to_ULB_button_displays     no    ${driver_UA}     ${driver_UB}
+    # Switch to Audio+ mode.   VP: Keep current pdf mode.
+    switch_to_mode_from_call_quality    ${driver_UC}    ULB
+    check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UC}
+    # Enter PDF sharing mode
+    share_page    ${driver_UC}
+        # VP: No merge menu is shown. Retry Video Connection / Return to Audio+ button should be hidden.
+        check_has_no_merge_menu     ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+        retry_video_connection_button_displays     no    ${driver_UA}     ${driver_UB}
+        return_to_ULB_button_displays     no    ${driver_UA}     ${driver_UB}
+        # Clear Shared Content button should be shown
+        clear_shared_content_button_should_display    yes     ${driver_UA}     ${driver_UB}    ${driver_AU}    ${driver_UC}     ${driver_UD}
+
+    comment         CP: Clear Shared Content button & PDF Sharing mode for Receiver
+    # Giver(userC) taps Clear Shared Content button.
+    clear_shared_content_action       ${driver_UC}
+        # VP: 1. All participants should exit PDF sharing mode. The first default view with Audio+ special dialog should display for giver and receiver.
+        show_special_dialog_in_bottom   ${driver_UC}    3
+        show_special_dialog_in_bottom   ${driver_UB}    2
+        # 2. Retry Video Connection button should be shown only for cohost.
+        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
+        retry_video_connection_button_displays     no     ${driver_AU}    ${driver_UC}     ${driver_UD}
+    [Teardown]     exit_driver

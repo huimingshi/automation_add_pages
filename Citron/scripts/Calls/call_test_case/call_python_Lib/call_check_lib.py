@@ -9,6 +9,7 @@ from Citron.scripts.Calls.call_test_case.call_python_Lib.call_action_lib_copy im
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import scroll_into_view as SIV
 from Citron.scripts.Calls.call_test_case.call_python_Lib.finish_call import hang_up_the_phone as HUTP
 from public_settings_and_variable_copy import *
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import modify_implicit_wait
 
 #----------------------------------------------------------------------------------------------------#
 def has_no_directory_checkbox(driver,if_has = 'has'):
@@ -973,16 +974,31 @@ def clear_shared_content_button_should_display(display = 'yes',*drivers):
         else:
             public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示Clear_Shared_Content按钮")
 
-def audio_special_dialog_display(display = 'yes',*drivers):
+# def audio_special_dialog_display(display = 'yes',*drivers):
+#     """
+#     Audio+ special dialog should display
+#     :param display:
+#     :param drivers:
+#     :return:
+#     """
+#     for i in range(len(drivers)):
+#         ele_list = get_xpath_elements(drivers[i],AudioPlusModeShareDialog)
+#         if display == 'yes':
+#             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示AudioPlusModeShareDialog对话框")
+#         else:
+#             public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示AudioPlusModeShareDialog对话框")
+
+def show_special_dialog_in_bottom(driver,button_count = 2):
     """
-    Audio+ special dialog should display
-    :param display:
-    :param drivers:
+    在底部展示几个按钮
+    :param driver:
+    :param button_count: Share a Photo/Share a Document/Take a Photo
     :return:
     """
-    for i in range(len(drivers)):
-        ele_list = get_xpath_elements(drivers[i],AudioPlusModeShareDialog)
-        if display == 'yes':
-            public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示AudioPlusModeShareDialog对话框")
-        else:
-            public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示AudioPlusModeShareDialog对话框")
+    if int(button_count) == 2:
+        get_xpath_element(driver,Take_a_photo,description="Take_a_photo按钮展示")
+        get_xpath_element(driver,Share_a_photo,description="Share_a_photo按钮展示")
+    elif int(button_count) == 3:
+        get_xpath_element(driver,Take_a_photo,description="Take_a_photo按钮展示")
+        get_xpath_element(driver, Share_a_document, description="Share_a_document按钮展示")
+        get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")

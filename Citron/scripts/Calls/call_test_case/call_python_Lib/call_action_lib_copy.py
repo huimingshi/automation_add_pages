@@ -672,24 +672,31 @@ def upload_file_in_mac(file):
         time.sleep(2)
         k.press_key('Return')
 
-def share_photo_on_special_dialog(driver,file_type = "Photo",file_name = 'test_citron.pdf',if_wait = 'wait'):
+def share_photo_on_special_dialog(driver,action = "share",file_type = "Photo",file_name = 'test_citron.pdf',if_wait = 'wait'):
     """
     在下方的Audio+ Mode特殊对话框中，点击Share a Photo按钮来上传图片
     :param driver:
-    :param file_type: 文件类型
+    :param action: Share/take a Photo/Share a Document
+    :param file_type: 文件类型  Photo/document
     :param file_name: 文件名
     :param if_wait: 是否等待？默认等待
     :return:
     """
     # 点击上传按钮，并先获取文件绝对路径
-    if file_type == "Photo":
-        public_click_element(driver, Share_a_photo, description="share_photo按钮")
-        file = get_picture_path(is_input = "not_input")
-    elif file_type == "document":
-        public_click_element(driver, Share_a_document, description="share_PDF按钮")
-        file = get_picture_path(file_name,is_input = "not_input")
-    # mac上传文件
-    upload_file_in_mac(file)
+    if action == "share":
+        if file_type == "Photo":
+            public_click_element(driver, Share_a_photo, description="share_photo按钮")
+            file = get_picture_path(is_input = "not_input")
+        else:
+            public_click_element(driver, Share_a_document, description="share_PDF按钮")
+            file = get_picture_path(file_name,is_input = "not_input")
+        # mac上传文件
+        upload_file_in_mac(file)
+    elif action == "take":
+        public_click_element(driver, Take_a_photo, description="share_photo按钮")
+        public_click_element(driver,capture_and_share,description="capture_and_share按钮")
+    else:
+        raise Exception("请输入正确的操作类型take/share")
     if if_wait == 'wait':
         time.sleep(10)
 
@@ -770,7 +777,7 @@ def take_a_new_photo(driver):
     public_click_element(driver, TPPW_share.format("Take a New Photo"), description="Take_a_New_Photo按钮")
     time.sleep(10)   # 等待摄像头画面捕捉到
     # 点击Capture and Share按钮
-    public_click_element(driver,'//button[text()="Capture and Share"]',description="Capture_and_Share按钮")
+    public_click_element(driver,capture_and_share,description="Capture_and_Share按钮")
 
 def share_me(driver):
     """
