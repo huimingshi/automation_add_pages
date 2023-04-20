@@ -286,3 +286,148 @@ Audio_Mode_Scenario_3
         retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
         retry_video_connection_button_displays     no     ${driver_AU}    ${driver_UC}     ${driver_UD}
     [Teardown]     exit_driver
+
+#Audio_Mode_Scenario_6
+#    [Documentation]       cancel sending progress in Audio+  mode
+#    [Tags]     Audio+
+#    # Start Audio+ mode direct call, user A, B, C in call
+#    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user11}
+#    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user21}
+#    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name21}
+#    make_sure_enter_call                ${driver_UB}
+#    ${driver_UC}      driver_set_up_and_logIn     ${close_center_mode_user31}
+#    inCall_enter_contacts_search_user   ${driver_UB}    ${close_center_mode_name31}
+#    click_user_in_contacts_list         ${driver_UB}     ${close_center_mode_name31}
+#    user_anwser_call                    ${driver_UC}
+#    # Scenario 6 - 1: face to face mode
+#
+#Audio_Mode_Scenario_7
+#    [Documentation]       cancel sending progress in video mode.
+#    [Tags]     Audio+
+#    # Start Audio+ mode direct call, user A, B, C in call
+#    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user1}
+#    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user2}
+#    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name2}
+#    make_sure_enter_call                ${driver_UB}
+#    ${driver_UC}      driver_set_up_and_logIn     ${close_center_mode_user3}
+#    inCall_enter_contacts_search_user   ${driver_UB}    ${close_center_mode_name3}
+#    click_user_in_contacts_list         ${driver_UB}     ${close_center_mode_name3}
+#    user_anwser_call                    ${driver_UC}
+#    # Scenario 7-1: freeze
+
+Audio_Mode_Scenario_another_1
+    [Documentation]       Call Center Mode is on. Enable agent's camera is on.
+    [Tags]     Audio+
+    # User A starts Audio call with user B.
+    ${driver_UA}     driver_set_up_and_logIn     ${center_mode_user1}
+    ${driver_UB}     driver_set_up_and_logIn     ${center_mode_user2}
+    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${center_mode_username2}
+    make_sure_enter_call                ${driver_UB}
+    # User C, D join call.
+    ${invite_url}     send_new_invite_in_calling    ${driver_UB}
+    ${driver_UC}     driver_set_up_and_logIn     ${center_mode_user3}
+    user_make_call_via_meeting_link     ${driver_UC}   ${invite_url}
+    ${driver_UD}     driver_set_up_and_logIn     ${center_mode_user4}
+    user_make_call_via_meeting_link     ${driver_UD}   ${invite_url}
+        # VP: 3D annotation will be disabled in Audio+ mode.
+        # VP: Telestration icon is not visible.
+        telestration_icon_is_visible    no   ${driver_UA}    ${driver_UB}    ${driver_UC}    ${driver_UD}
+        # VP: Retry Video Connection button displays in the bottom only for cohost.
+        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
+        retry_video_connection_button_displays     no     ${driver_UC}     ${driver_UD}
+            # 1. For user B:
+            # a. shown a special dialog : Take a Photo, Share a Photo.
+            show_special_dialog_in_bottom     ${driver_UB}
+            # b. text is “Ultra-Low Bandwidth Mode. Select content to share.”.
+            special_dialog_text    ${driver_UB}
+            # c. Display live video as vague in background.
+            # 2. For User A:
+            # a.shown a special dialog: Take a Photo,Share a Document, Share a Photo.
+            show_special_dialog_in_bottom     ${driver_UA}     3
+            # b. text is “Ultra-Low Bandwidth Mode. Ask others to Take a Photo or Share Content.
+            special_dialog_text     ${driver_UA}    ask
+            # c. Display receiver's avatar in background.
+    # B click takes a photo    VP: enter photo mode. Clear Shared Content button should
+    share_photo_on_special_dialog      ${driver_UB}    take
+    clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}     ${driver_UC}     ${driver_UD}
+    # Switch to HD/SD mode.	VP: keep photo mode. Stop sharing should be hidden from Share menu when call center mode on.
+    switch_to_mode_from_call_quality    ${driver_UB}    SD
+    check_in_photo_pdf_whiteboard_mode     photo     ${driver_UB}
+    # C start merge	VP: keep in photo mode; C's live video is on screen.
+    click_merge_button      ${driver_UC}
+    check_in_photo_pdf_whiteboard_mode     photo     ${driver_UB}
+    # Switch to Audio+ mode.	VP: Clear Shared Content button should
+    switch_to_mode_from_call_quality    ${driver_UB}    ULB
+    # User C taps Clear Shared Content button.
+    clear_shared_content_action      ${driver_UC}
+        # VP: 1. Exit photo mode for all participants.
+        # 2. Shown the Audio+ special dialog for giver and receiver (C and B)	VP: C see giver's dialog, B see receiver's dialog
+        show_special_dialog_in_bottom     ${driver_UB}
+        show_special_dialog_in_bottom     ${driver_UC}    3
+            # VP: C see giver's dialog, B see receiver's dialog
+    # B selects a PDF, enter markup mode	VP: Clear Shared Content button should display for
+    minimize_window_action     ${driver_UA}     ${driver_UB}     ${driver_UC}     ${driver_UD}
+    maximize_window_action     ${driver_UB}
+    inCall_upload_photo_PDF    ${driver_UB}      PDF
+    maximize_window_action     ${driver_UA}     ${driver_UC}     ${driver_UD}
+    clear_shared_content_button_should_display      yes     ${driver_UA}     ${driver_UB}     ${driver_UC}     ${driver_UD}
+    # Switch to HD/SD mode.   VP: No one is merged status; keep pdf markup mode
+    switch_to_mode_from_call_quality    ${driver_UB}    HD
+    check_has_no_merge_menu      ${driver_UA}     ${driver_UB}     ${driver_UC}     ${driver_UD}
+    check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UB}
+    [Teardown]      exit_driver
+
+#Audio_Mode_Scenario_another_2
+#    [Documentation]       Call Center Mode is on. Enable agent's camera is off.
+#    [Tags]     Audio+
+#    comment      该case无法构造bad network condition，因此部分检查点无法检查
+#    # User A starts video call to B
+#    ${driver_UA}     driver_set_up_and_logIn     ${camera_off_user1}
+#    ${driver_UB}     driver_set_up_and_logIn     ${camera_off_user2}
+#    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${camera_off_username2}    accept    video
+#    make_sure_enter_call                ${driver_UB}
+#        # VP: Both users should not see merge menu.
+#        check_has_no_merge_menu      ${driver_UA}     ${driver_UB}
+#        # VP: Buttons: Retry Video Connection on bottom right.
+#    # User C, D join call.
+#    ${invite_url}     send_new_invite_in_calling    ${driver_UB}
+#    ${driver_UC}     driver_set_up_and_logIn     ${camera_off_user3}
+#    user_make_call_via_meeting_link     ${driver_UC}   ${invite_url}
+#    ${driver_UD}     driver_set_up_and_logIn     ${camera_off_user4}
+#    user_make_call_via_meeting_link     ${driver_UD}   ${invite_url}
+#    # Click Retry Video Connection button.	VP: Call should be switched to HD mode. Return to Ultra-Low Bandwidth mode button should display only for cohost.
+#    enter_video_connection     ${driver_UA}
+#    return_to_ULB_button_displays     yes    ${driver_UA}     ${driver_UB}
+#    return_to_ULB_button_displays     no     ${driver_UC}     ${driver_UD}
+#    # Click on Return to Return to Ultra-Low Bandwidth modebutton.
+#    return_ULB_mode    ${driver_UA}
+#        # VP: For user B: receiver special dialog; Display live video as vague in background
+#        show_special_dialog_in_bottom    ${driver_UB}
+#        # VP: for user A: can not merge; giver special dialog
+#        check has no merge menu   ${driver_UA}
+#        show_special_dialog_in_bottom     ${driver_UA}    3
+#        # For Others: a. should not see the dialog. b. Display receiver's avatar in background
+#        not_show_special_dialog_in_bottom     ${driver_UC}     ${driver_UD}
+#        # VP: 4. 3D annotation will be disabled in Audio+ mode.
+#        # VP: 5. Telestration icon is not visible.
+#        telestration_icon_is_visible    no    ${driver_UA}     ${driver_UB}     ${driver_UC}     ${driver_UD}
+#        # VP: 6. Retry Video Connection button displays in the bottom only for cohost
+#        retry_video_connection_button_displays     yes    ${driver_UA}     ${driver_UB}
+#        retry_video_connection_button_displays     no     ${driver_UC}     ${driver_UD}
+#    # B share - pdf document
+#    inCall_upload_photo_PDF     ${driver_UB}      PDF
+#    # Switch to HD/SD mode.	VP: keep pdf navigation mode
+#    switch_to_mode_from_call_quality    ${driver_UB}    HD
+#    check_in_photo_pdf_whiteboard_mode     pdf     ${driver_UB}
+#    # Enter pdf markup mode	VP: user A can not merge, others can merge,
+#    check_has_no_merge_menu     ${driver_UA}
+#    check_has_merge_menu        ${driver_UB}     ${driver_UC}     ${driver_UD}
+#    # User D click share me	VP: user A can not merge (Because camera is OFF)
+#    share_me      ${driver_UD}
+#    # User C starts merge.
+#    click_merge_button     ${driver_UC}
+#    # Switch to Audio+ mode.	VP: C shows giver special dialog; D shows receiver special dialog
+#    switch_to_mode_from_call_quality    ${driver_UC}    ULB
+#
+#    # C leave call	Call end for all
+#    end_call_for_all      ${driver_UC}

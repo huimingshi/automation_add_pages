@@ -69,7 +69,7 @@ expert_group_call_Scenario_1
 
     comment       Observer freeze
     # AU1 click freeze
-    freeze_operation     ${driver_AU4}
+    freeze_operation     ${driver_AU4}    freeze   no_check
     # U3 start merge as giver	VP: frozen mode + merged video from U3
     click_merge_button    ${driver_U3}
     check_has_unFreeze_button   ${driver_U3}
@@ -79,7 +79,7 @@ expert_group_call_Scenario_1
     # U1 share live video
     share_me     ${driver_TU1}
     # DU5 click freeze	VP: frozen image only.
-    freeze_operation     ${driver_U5}
+    freeze_operation     ${driver_U5}    freeze   no_check
 
     comment       Keep receiver, change giver
     # EU2 start merge	VP: merge preview dialog shows first; keep freezing mode;
@@ -94,7 +94,7 @@ expert_group_call_Scenario_1
     click merge button      ${driver_TU1}
     # U1 in portrait view
     # U1 click freeze	VP: freezes image is correct
-    freeze_operation      ${driver_TU1}
+    freeze_operation      ${driver_TU1}    freeze   no_check
     [Teardown]      exit_driver
 
 expert_group_call_Scenario_2
@@ -155,7 +155,7 @@ expert_group_call_Scenario_2
     # TU1 Share My camera
     share_me      ${driver_TU1}
     # EU2 click freeze	VP: enter merged reality mode with correct giver and receiver, other users are observer.
-    freeze_operation        ${driver_EU2}
+    freeze_operation        ${driver_EU2}    freeze   no_check
     # U5 removes receiver TU1 and confirms with Remove User.
     co_host_remove_sb     ${driver_U5}     ${expert_group_call_nameT11}     can   yes    observer    no
         # VP:
@@ -173,15 +173,15 @@ expert_group_call_Scenario_2
 
     comment        remove observer in freeze mode
     # enter freeze mode
-    freeze_operation        ${driver_EU2}
+    freeze_operation        ${driver_EU2}    freeze   no_check
     # Co-host removes observer U5	VP: warning dialog displays with message “Are you sure you want to remove User Name?”, OK/Cancel button.	u5 left
     co_host_remove_sb     ${driver_EU2}     ${expert_group_call_name41}     can   yes    observer
-    exit_one_driver    ${driver_U5}
     # Confirm with Ok.	VP:
         # 1. Removed user disappears from participants window.
         display_users_as_joined_order     ${driver_EU2}     ${anonymous_user_name}       ${close_center_mode_nameB}
         # Removed user sees message “A Host has removed you from the Help Lightning call.” on the end-call screen.
         which_page_is_currently_on        ${driver_U5}       ${has_removed_you}
+        exit_one_driver    ${driver_U5}
         # 2. keep freezing mode.
         check_has_unFreeze_button     ${driver_EU2}
 
@@ -229,6 +229,7 @@ expert_group_call_Scenario_4
         left_call_back_f2f_mode1     ${driver_TU1}     ${expert_group_call_nameE2}
         # VP: 1. app enters Face to Face mode for all remaining users.
         check_in_f2f_mode      ${driver_DU6}
+#    # 有bug：https://vipaar.atlassian.net/browse/CITRON-3749
 #        # 3. all the remaining participants are promoted to co-host, except anonymous user. Participants menu is visible for them.
 #        participants_icon_is_visible     yes    ${driver_TU1}    ${driver_U3}    ${driver_U5}    ${driver_DU6}
 #        participants_icon_is_visible     no    ${driver_AU4}
@@ -251,7 +252,7 @@ expert_group_call_Scenario_5
     ${driver_EU2}     driver_set_up_and_logIn     ${expert_group_call_userE21}
     ${driver_AU1}     anonymous_open_meeting_link    ${expert_group_link}
     # Expert EU2 answer call
-    user_anwser_call     ${driver_EU2}    no_direct
+    user_anwser_call     ${driver_EU2}
     # Expert invite TU1 to join call
     ${driver_TU1}     driver_set_up_and_logIn     ${expert_group_call_userT11}
     inCall_enter_contacts_search_user    ${driver_EU2}     ${expert_group_call_nameT11}

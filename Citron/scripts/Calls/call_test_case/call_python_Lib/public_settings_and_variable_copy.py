@@ -167,8 +167,8 @@ live_video_from_sb = '//div[@class="submenu-live-video-from"]//span[contains(.,"
 live_video_visible = '//div[@class="submenu-live-video-from"]/div[@class="submenu-userinfo"]/span[contains(.,"{}")]'     # 右侧的share live video from，选择somebody
 freeze_on_action = '//*[@*="#freeze_on"]/..'   # 进行freeze的操作
 freeze_off_action = '//*[@*="#freeze_off"]/..'   # 进行取消freeze的操作
-task_field_is_frozen = '//div[@class="k-notification-content" and text()="The task field is frozen"]'   # The task field is frozen的提示信息
-task_field_is_unfrozen = '//div[@class="k-notification-content" and text()="The task field is unfrozen"]'   # The task field is unfrozen的提示信息
+task_field_is_frozen = '//div[text()="The task field is frozen"]'   # The task field is frozen的提示信息
+task_field_is_unfrozen = '//div[text()="The task field is unfrozen"]'   # The task field is unfrozen的提示信息
 choose_document = '//div[@class="submenu-content"]//span[text()="Document"]/..'            # 选择document
 Clear_Shared_Content = '//button[text()="Clear Shared Content"]'              # Clear Shared Content按钮
 cancel_send_photo = '//div[@class="ProgressInfo"]/button[text()="Cancel"]'     # 取消send图片

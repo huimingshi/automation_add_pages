@@ -358,7 +358,7 @@ ${notifications_user05}                 Huiming.shi.helplightning+notificat_05@o
 ${notifications_username05}             Huiming.shi.helplightning+notificat_05
 
 
-# 下列账号都属于Huiming.shi下的我自己创建的open_call_center_mode_WS中的user，默认开启了call center mode
+# 下列账号都属于Huiming.shi下的我自己创建的open_call_center_mode_WS中的user，默认开启了call center mode,且Enable agent's camera
 # Call center
 ${center_mode_user1}                    Huiming.shi.helplightning+center_mode_user1@outlook.com                                  # 用于Call center的case
 ${center_mode_username1}                Huiming.shi.helplightning+center_mode_user1
@@ -369,12 +369,15 @@ ${center_mode_username2}                Huiming.shi.helplightning+center_mode_us
 ${center_mode_user3}                    Huiming.shi.helplightning+center_mode_user3@outlook.com                                  # 用于Call center的case
 ${center_mode_username3}                Huiming.shi.helplightning+center_mode_user3
 
+${center_mode_user4}                    Huiming.shi.helplightning+center_mode_user4@outlook.com                                  # 用于Call center的case
+${center_mode_username4}                Huiming.shi.helplightning+center_mode_user4
+
 ${center_mode_expert}                   Huiming.shi.helplightning+center_mode_expert@outlook.com                                 # 用于Call center的case
 ${center_mode_expert_name}              Huiming.shi.helplightning+center_mode_expert
 
 ${center_mode_on_call_group}            center_mode_on_call_group                                                                # center_mode_on_call_group
 
-# 下列账号都属于Huiming.shi下的我自己创建的open_call_center_mode_WS1中的user，默认开启了call center mode
+# 下列账号都属于Huiming.shi下的我自己创建的open_call_center_mode_WS1中的user，默认开启了call center mode,且Enable agent's camera
 # Call center
 ${center_mode_user11}                   Huiming.shi.helplightning+center_mode_user11@outlook.com                                  # 用于Call center的case
 ${center_mode_username11}               Huiming.shi.helplightning+center_mode_user11
@@ -386,6 +389,15 @@ ${center_mode_username21}               Huiming.shi.helplightning+center_mode_us
 # Call center
 ${camera_off_user1}                     Huiming.shi.helplightning+camera_off_1@outlook.com                                      # 用于Call center的case
 ${camera_off_username1}                 Huiming.shi.helplightning+camera_off_1
+
+${camera_off_user2}                     Huiming.shi.helplightning+camera_off_2@outlook.com                                      # 用于Call center的case
+${camera_off_username2}                 Huiming.shi.helplightning+camera_off_2
+
+${camera_off_user3}                     Huiming.shi.helplightning+camera_off_3@outlook.com                                      # 用于Call center的case
+${camera_off_username3}                 Huiming.shi.helplightning+camera_off_3
+
+${camera_off_user4}                     Huiming.shi.helplightning+camera_off_4@outlook.com                                      # 用于Call center的case
+${camera_off_username4}                 Huiming.shi.helplightning+camera_off_4
 
 ${camera_off_expert}                    Huiming.shi.helplightning+camera_off_expert@outlook.com                                 # 用于Call center的case
 ${camera_off_expert_name}               Huiming.shi.helplightning+camera_off_expert

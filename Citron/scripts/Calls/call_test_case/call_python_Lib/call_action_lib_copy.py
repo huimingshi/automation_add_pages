@@ -710,7 +710,7 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.
     :return:
     """
     # 确保文件类型输入正确
-    if file_type != "Photo" and file_type != "PDF":
+    if file_type.upper() != "PHOTO" and file_type.upper() != "PDF":
         print("请输入正确的文件名：Photo or PDF")
         raise Exception("请输入正确的文件名：Photo or PDF")
     # 点击右侧的share按钮

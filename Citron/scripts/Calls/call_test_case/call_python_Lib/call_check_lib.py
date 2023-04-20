@@ -305,13 +305,15 @@ def check_in_f2f_mode(driver):
     :param driver:
     :return:
     """
-    flag = 0
-    try:
-        get_xpath_element(driver,participants_avatar,description="参会者的avatar")
-    except Exception:
-        flag = 1
-    finally:
-        public_assert(driver,flag,0,action="应该处于f2f模式")
+    # flag = 0
+    # try:
+    #     get_xpath_element(driver,participants_avatar,description="参会者的avatar")
+    # except Exception:
+    #     flag = 1
+    # finally:
+    #     public_assert(driver,flag,0,action="应该处于f2f模式")
+    get_xpath_element(driver,'//div[@class="F2FVideos ShowOpenTokVideos"]',description="处于f2f模式")
+    # get_xpath_element(driver,'//div[@class="F2FVideos HideOpenTokVideos"]',description="处于f2f模式")
     # # ele_list = get_xpath_elements(driver, '//button[@class="AudioPlusModeIndicator"]')
     # for i in range(3):
     #     merge_on_button_list = get_xpath_elements(driver, merge_on_button)
@@ -987,3 +989,27 @@ def show_special_dialog_in_bottom(driver,button_count = 2):
         get_xpath_element(driver,Take_a_photo,description="Take_a_photo按钮展示")
         get_xpath_element(driver, Share_a_document, description="Share_a_document按钮展示")
         get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
+
+def not_show_special_dialog_in_bottom(*drivers):
+    """
+    should not see the dialog
+    :param driver:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele_list = get_xpath_elements(drivers[i],Share_a_photo)
+        public_assert(drivers[i],len(ele_list),0,action=f"第{i + 1}个driver底部应该不展示对话框")
+
+def special_dialog_text(driver,text = 'select'):
+    """
+    在底部出现的特殊对话框中的文字信息
+    :param driver:
+    :param text:
+    :return:
+    """
+    if text == "select":
+        get_xpath_element(driver,'//b[text()="Audio+ Mode"]',description="Audio+mode展示")
+        get_xpath_element(driver,'//span[text()="Select content to share."]',description="select展示")
+    else:
+        get_xpath_element(driver, '//b[text()="Audio+ Mode"]', description="Audio+mode展示")
+        get_xpath_element(driver, '//span[text()="Ask others to Take a Photo or share content"]', description="ask展示")
