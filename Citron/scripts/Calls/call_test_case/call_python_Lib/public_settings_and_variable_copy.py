@@ -18,6 +18,20 @@ if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
     # 忽略证书错误，不需要手动点高级选项
     optionc.add_argument('--ignore-certificate-errors')
 
+    optionc1 = Options()
+    optionc1.add_argument("--disable-infobars")
+    optionc1.add_argument("start-maximized")
+    optionc1.add_argument("--disable-extensions")
+
+    # Pass the argument 1 to allow and 2 to block
+    optionc1.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.notifications": 1,   # chrome开启通知
+        "profile.default_content_setting_values.media_stream_mic": 1 ,   # chrome开启麦克风
+        "profile.default_content_setting_values.media_stream_camera": 2    # chrome关闭摄像头
+    })
+    # 忽略证书错误，不需要手动点高级选项
+    optionc1.add_argument('--ignore-certificate-errors')
+
 elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
     from selenium.webdriver.firefox.options import Options
 

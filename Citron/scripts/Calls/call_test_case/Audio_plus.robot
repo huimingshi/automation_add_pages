@@ -315,6 +315,21 @@ Audio_Mode_Scenario_3
 #    user_anwser_call                    ${driver_UC}
 #    # Scenario 7-1: freeze
 
+Audio_Mode_Scenario_10
+    [Documentation]        camera permission is denied
+    [Tags]     Audio+
+    # User A and B denies camera permission. User A starts video call or meeting call with user B. User B answers call. Make call in HD & F2F mode.
+    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user11}    ${public_pass}     accept     not_set_disturb     close_camera
+    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user21}    ${public_pass}     accept     not_set_disturb     close_camera
+    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name21}     accept    video
+        # VP: camera icon is not visible in F2F mode. “Share my camera" option is hidden from Share menu.
+        check_can_not_share_sb_live_video     My Camera    ${driver_UA}   ${driver_UB}
+    # User A shares user B's live video.
+    share_live_video_from_sb     ${driver_UA}    ${close_center_mode_name21}
+        # VP: Start Video dialog should display for giver and receiver.
+
+        # Web/IOS: Receiver should see option Shar a Photo. Giver should see options Share a Document and Share a Photo.
+
 Audio_Mode_Scenario_another_1
     [Documentation]       Call Center Mode is on. Enable agent's camera is on.
     [Tags]     Audio+

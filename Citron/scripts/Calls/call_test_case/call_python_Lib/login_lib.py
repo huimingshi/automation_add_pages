@@ -9,13 +9,16 @@ from Citron.scripts.Deletion_of_a_Recordings_and_Screen_Captures.make_a_call_lib
 from selenium import webdriver
 from concurrent.futures import ThreadPoolExecutor
 
-def start_an_empty_window():
+def start_an_empty_window(option = 'default'):
     """
     启动一个空的窗口
     :return:
     """
     if SMALL_RANGE_BROWSER_TYPE == 'Chrome':
-        driver = webdriver.Chrome(options=optionc)
+        if option == 'default':
+            driver = webdriver.Chrome(options=optionc)
+        else:
+            driver = webdriver.Chrome(options=optionc1)
     elif SMALL_RANGE_BROWSER_TYPE == 'Firefox':
         driver = webdriver.Firefox(options=optionf,firefox_profile=profile)
     driver.implicitly_wait(int(IMPLICIT_WAIT))
@@ -32,16 +35,14 @@ def open_citron_url(driver):
     driver.get(TEST_WEB)
 
 @ERR_NAME_NOT_RESOLVED
-def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',close_bounced='close_bounced',accept = 'accept',disturb = 'not_set_disturb'):
+def logIn_citron(driver,username,password,accept = 'accept',disturb = 'not_set_disturb'):
     """
     封装页面的登录操作和关闭弹框操作
     :param driver: 浏览器驱动
     :param username: 用户名
     :param password: 密码
-    :param close_bounced: 是否关闭教程，默认关闭
     :param accept: 是否接受免责声明，默认accept接受
     :param disturb: 是否设置为免打扰模式，默认not_set_disturb不设置；set_disturb为设置
-    :param check_toturial:是否检查导航页面的welcome信息，默认不检查no_check_toturial，检查check_toturial
     :return:
     """
     # try:    # enter email
@@ -97,21 +98,19 @@ def logIn_citron(driver,username,password,check_toturial = 'no_check_toturial',c
         set_do_not_disturb(driver)
     driver.implicitly_wait(int(IMPLICIT_WAIT))
 
-def driver_set_up_and_logIn(username,password='*IK<8ik,8ik,',check_toturial = 'no_check_toturial',close_bounced='close_bounced',accept = 'accept',disturb = 'not_set_disturb'):
+def driver_set_up_and_logIn(username,password='*IK<8ik,8ik,',accept = 'accept',disturb = 'not_set_disturb',option = 'default'):
     """
     # driver set up And LogIn
     :param username: 用户名
     :param password: 密码
-    :param close_bounced: 是否关闭教程，默认关闭
     :param accept: 是否接受免责声明，默认accept接受
     :param disturb: 是否设置为免打扰模式，默认not_set_disturb不设置；set_disturb为设置
-    :param check_toturial:是否检查导航页面的welcome信息，默认不检查no_check_toturial，检查check_toturial
     :return:
     """
-    driver = start_an_empty_window()
+    driver = start_an_empty_window(option=option)
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
     open_citron_url(driver)
-    logIn_citron(driver, username, password, check_toturial, close_bounced, accept, disturb)
+    logIn_citron(driver, username, password, accept, disturb)
     return driver
 
 def set_do_not_disturb(driver):
