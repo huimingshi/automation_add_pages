@@ -327,8 +327,35 @@ Audio_Mode_Scenario_10
     # User A shares user B's live video.
     share_live_video_from_sb     ${driver_UA}    ${close_center_mode_name21}
         # VP: Start Video dialog should display for giver and receiver.
-
         # Web/IOS: Receiver should see option Shar a Photo. Giver should see options Share a Document and Share a Photo.
+        start_video_dialog_display     ${driver_UA}     giver     ${close_center_mode_name21}
+        start_video_dialog_display     ${driver_UB}
+    # Giver(userA) selects a photo and cancels sending progress.
+    # Switch to Audio+ mode.
+    switch_to_mode_from_call_quality    ${driver_UA}    ULB
+        # VP: Start Video dialog should display for giver and receiver.
+        # Web/IOS: Receiver should see option Shar a Photo. Giver should see options Share a Document and Share a Photo.
+        show_special_dialog_in_bottom     ${driver_UA}     2-1
+        show_special_dialog_in_bottom     ${driver_UB}     1
+    # Giver chooses a photo and wait until entering photo mode.
+    minimize_window_action     ${driver_UA}     ${driver_UB}
+    maximize_window_action     ${driver_UA}
+    share_photo_on_special_dialog    ${driver_UA}
+    maximize_window_action     ${driver_UB}
+    # VP: Clear Shared Content button should display
+    clear_shared_content_button_should_display     yes     ${driver_UA}     ${driver_UB}
+    # Receiver taps Clear Shared Content button.	VP: All participants exit photo mode. Back to initial status with Audio+ special dialog.
+    clear_shared_content_action      ${driver_UB}
+    show_special_dialog_in_bottom     ${driver_UA}     2-1
+    show_special_dialog_in_bottom     ${driver_UB}     1
+    # Receiver selects a PDF, taps Share button, wait until entering sharing PDF mode.
+    minimize_window_action     ${driver_UA}     ${driver_UB}
+    maximize_window_action     ${driver_UB}
+    inCall_upload_photo_PDF    ${driver_UB}     PDF
+    share_page      ${driver_UB}
+    check_in_photo_pdf_whiteboard_mode     pdf sharing     ${driver_UB}
+    [Teardown]     exit_driver
+
 
 Audio_Mode_Scenario_another_1
     [Documentation]       Call Center Mode is on. Enable agent's camera is on.
