@@ -891,6 +891,25 @@ def return_to_ULB_button_displays(display = 'yes',*drivers):
             ele_list = get_xpath_elements(drivers[i],return_to_ultra_low_bandwidth)
             public_assert(drivers[i],len(ele_list),0,action=f"第{i + 1}个driver的return_to_ULB按钮应该不展示")
 
+def start_video_dialog_display(driver,role = "receiver",name = None):
+    """
+    Start Video dialog should display for giver and receiver.
+    :param driver:
+    :param role: giver/receiver
+    :param name:
+    :return:
+    """
+    get_xpath_element(driver,AudioPlusModeShareDialog,description="底部对话框出现")
+    if role == 'giver':
+        get_xpath_element(driver, Share_a_document, description="Share_a_document按钮展示")
+        get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
+        get_xpath_element(driver,f'//label[text()="Ask {name} to turn on their camera or share content. Or you may Share Content."]',description="应该出现文本")
+    elif role == 'receiver':
+        get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
+        ele_list = get_xpath_elements(driver,Share_a_document)
+        public_assert(driver,len(ele_list),0,action="应该没有Share_a_document按钮")
+        get_xpath_element(driver,'//label[text()="Start Video to turn on your camera or select content to share."]',description="应该出现文本")
+
 def telestration_icon_is_visible(visible = 'yes',*drivers):
     """
     telestration icon 是否可见
@@ -961,20 +980,6 @@ def clear_shared_content_button_should_display(display = 'yes',*drivers):
         else:
             public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示Clear_Shared_Content按钮")
 
-# def audio_special_dialog_display(display = 'yes',*drivers):
-#     """
-#     Audio+ special dialog should display
-#     :param display:
-#     :param drivers:
-#     :return:
-#     """
-#     for i in range(len(drivers)):
-#         ele_list = get_xpath_elements(drivers[i],AudioPlusModeShareDialog)
-#         if display == 'yes':
-#             public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}个driver应该展示AudioPlusModeShareDialog对话框")
-#         else:
-#             public_assert(drivers[i], len(ele_list), 0, action=f"第{i + 1}个driver不应该展示AudioPlusModeShareDialog对话框")
-
 def show_special_dialog_in_bottom(driver,button_count = 2):
     """
     在底部展示几个按钮
@@ -982,13 +987,27 @@ def show_special_dialog_in_bottom(driver,button_count = 2):
     :param button_count: Share a Photo/Share a Document/Take a Photo
     :return:
     """
-    if int(button_count) == 2:
+    get_xpath_element(driver,AudioPlusModeShareDialog,description="底部对话框出现")
+    if button_count == "2":
         get_xpath_element(driver,Take_a_photo,description="Take_a_photo按钮展示")
         get_xpath_element(driver,Share_a_photo,description="Share_a_photo按钮展示")
-    elif int(button_count) == 3:
+        ele_list = get_xpath_elements(driver, Share_a_document)
+        public_assert(driver, len(ele_list), 0, action="应该没有Share_a_document按钮")
+    elif button_count == "3":
         get_xpath_element(driver,Take_a_photo,description="Take_a_photo按钮展示")
         get_xpath_element(driver, Share_a_document, description="Share_a_document按钮展示")
         get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
+    elif button_count == "1":
+        get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
+        ele_list = get_xpath_elements(driver, Share_a_document)
+        public_assert(driver, len(ele_list), 0, action="应该没有Share_a_document按钮")
+        ele_list = get_xpath_elements(driver, Take_a_photo)
+        public_assert(driver, len(ele_list), 0, action="应该没有Take_a_photo按钮")
+    elif button_count == "2-1":
+        get_xpath_element(driver, Share_a_document, description="Share_a_document按钮展示")
+        get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
+        ele_list = get_xpath_elements(driver, Take_a_photo)
+        public_assert(driver, len(ele_list), 0, action="应该没有Take_a_photo按钮")
 
 def not_show_special_dialog_in_bottom(*drivers):
     """
