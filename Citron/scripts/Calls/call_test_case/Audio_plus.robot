@@ -287,19 +287,51 @@ Audio_Mode_Scenario_3
         retry_video_connection_button_displays     no     ${driver_AU}    ${driver_UC}     ${driver_UD}
     [Teardown]     exit_driver
 
-#Audio_Mode_Scenario_6
-#    [Documentation]       cancel sending progress in Audio+  mode
-#    [Tags]     Audio+
-#    # Start Audio+ mode direct call, user A, B, C in call
-#    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user11}
-#    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user21}
-#    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name21}
-#    make_sure_enter_call                ${driver_UB}
-#    ${driver_UC}      driver_set_up_and_logIn     ${close_center_mode_user31}
-#    inCall_enter_contacts_search_user   ${driver_UB}    ${close_center_mode_name31}
-#    click_user_in_contacts_list         ${driver_UB}     ${close_center_mode_name31}
-#    user_anwser_call                    ${driver_UC}
-#    # Scenario 6 - 1: face to face mode
+Audio_Mode_Scenario_6
+    [Documentation]       cancel sending progress in Audio+  mode
+    [Tags]     Audio+
+    # Start Audio+ mode direct call, user A, B, C in call
+    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user11}
+    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user21}
+    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name21}
+    make_sure_enter_call                ${driver_UB}
+    ${driver_UC}      driver_set_up_and_logIn     ${close_center_mode_user31}
+    inCall_enter_contacts_search_user   ${driver_UB}    ${close_center_mode_name31}
+    click_user_in_contacts_list         ${driver_UB}     ${close_center_mode_name31}
+    user_anwser_call                    ${driver_UC}
+
+    comment        Scenario 6 - 1: face to face mode
+    # A select photo, then cancel	VP: back to initial status with Audio+ special dialog.
+    minimize_window_action       ${driver_UA}   ${driver_UB}    ${driver_UC}
+    maximize_window_action       ${driver_UA}
+    inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
+    click_cancel_send_photo      ${driver_UA}
+    show_special_dialog_in_bottom     ${driver_UA}    2-2
+    # B select a pdf	VP: no cancel button. Enter pdf navigation mode automatically.
+    minimize_window_action       ${driver_UA}
+    maximize_window_action       ${driver_UB}
+    inCall_upload_photo_PDF      ${driver_UB}    PDF     big_size.pdf    no_wait
+    check_has_not_cancel_button    ${driver_UB}
+    check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UB}
+    # B cancel on entering pdf markup mode	VP: keep in PDF navigation mode.
+
+    comment         Scenario 6 - 2 : pdf to photo
+    # B select a pdf in navigation mode
+    # A select photo, then cancel	VP: back to initial status with Audio+ special dialog.
+    minimize_window_action       ${driver_UB}
+    maximize_window_action       ${driver_UA}
+    inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
+    click_cancel_send_photo      ${driver_UA}
+    show_special_dialog_in_bottom     ${driver_UA}    3
+
+    comment         Scenario 6 - 3 : photo to pdf
+    # A select photo, B select pdf file	VP: pdf navigation mode
+    inCall_upload_photo_PDF      ${driver_UA}
+    minimize_window_action       ${driver_UA}
+    maximize_window_action       ${driver_UB}
+    inCall_upload_photo_PDF      ${driver_UB}    PDF
+    # B cancel on entering pdf markup mode	VP: back to pdf navigation mode
+    check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UB}
 #
 #Audio_Mode_Scenario_7
 #    [Documentation]       cancel sending progress in video mode.

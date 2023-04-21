@@ -12,6 +12,7 @@ from public_settings_and_variable_copy import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import modify_implicit_wait
 
 #----------------------------------------------------------------------------------------------------#
+@modify_implicit_wait(5)
 def has_no_directory_checkbox(driver,if_has = 'has'):
     """
     邀请user进入call时，校验Directory展不展示
@@ -187,6 +188,7 @@ def participants_icon_is_visible(visible = "yes",*drivers):
         else:
             public_assert(drivers[i], 0, len(ele_list), action=f"第{i+1}个driver的参与者图标应该不可见")
 
+@modify_implicit_wait(5)
 def invite_button_is_hidden(*drivers):
     """
     校验Invite button is hidden for all participants
@@ -342,6 +344,7 @@ def check_show_share_live_video_from(*drivers):
         ele_list = get_xpath_elements(drivers[i],share_live_video_button)
         public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver的share_live_video按钮应该展示")
 
+@modify_implicit_wait(5)
 def check_not_show_share_live_video_from(*drivers):
     """
     校验底部的Share live video from按钮不展示
@@ -368,6 +371,7 @@ def check_can_share_sb_live_video(driver,*users):
         # 将右侧的Share按收起
         CRSB(driver)
 
+@modify_implicit_wait(5)
 def check_can_not_share_sb_live_video(user,*drivers):
     """
     点击右侧的share按钮后，检查不可以share哪些人的live video
@@ -432,6 +436,7 @@ def check_has_capture_button(*drivers):
         ele_list = get_xpath_elements(drivers[i],capture_button)
         public_assert(drivers[i],len(ele_list),1,action=f"第{i+1}个driver应该有截图按钮")
 
+@modify_implicit_wait(5)
 def check_has_no_capture_button(*drivers):
     """
     检查没有截图按钮
@@ -643,6 +648,7 @@ def check_has_end_call_button(driver,*buttons):
     driver.implicitly_wait(IMPLICIT_WAIT)
     time.sleep(2)
 
+@modify_implicit_wait(5)
 def check_has_no_end_call_button(driver,*buttons):
     """
     检查没有哪些结束call的操作
@@ -1008,7 +1014,13 @@ def show_special_dialog_in_bottom(driver,button_count = 2):
         get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
         ele_list = get_xpath_elements(driver, Take_a_photo)
         public_assert(driver, len(ele_list), 0, action="应该没有Take_a_photo按钮")
+    elif button_count == "2-2":
+        get_xpath_element(driver, Take_a_photo, description="Share_a_document按钮展示")
+        get_xpath_element(driver, Share_a_photo, description="Share_a_photo按钮展示")
+        ele_list = get_xpath_elements(driver, Share_a_document)
+        public_assert(driver, len(ele_list), 0, action="应该没有Share_a_document按钮")
 
+@modify_implicit_wait(5)
 def not_show_special_dialog_in_bottom(*drivers):
     """
     should not see the dialog
@@ -1032,3 +1044,13 @@ def special_dialog_text(driver,text = 'select'):
     else:
         get_xpath_element(driver, '//b[text()="Audio+ Mode"]', description="Audio+mode展示")
         get_xpath_element(driver, '//span[text()="Ask others to Take a Photo or share content"]', description="ask展示")
+
+@modify_implicit_wait(5)
+def check_has_not_cancel_button(driver):
+    """
+    检查应该没有Cancel按钮
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,cancel_send_photo)
+    public_assert(driver,len(ele_list),0,action="应该没有Cancel按钮 ")

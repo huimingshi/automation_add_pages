@@ -716,52 +716,17 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.
     # 点击右侧的share按钮
     click_right_share_button(driver)
     # 点击上传按钮，并先获取文件绝对路径
-    if file_type == "Photo":
+    if file_type.upper() == "PHOTO":
         public_click_element(driver, TPPW_share.format("Photo from Library"), description="share_photo按钮")
-        file = get_picture_path(is_input = "not_input")
-    elif file_type == "PDF":
+        if file_name == 'test_citron.pdf':
+            file = get_picture_path(is_input = "not_input")
+        else:
+            file = get_picture_path(file_name, is_input="not_input")
+    elif file_type.upper() == "PDF":
         public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
         file = get_picture_path(file_name,is_input = "not_input")
     # mac上传文件
     upload_file_in_mac(file)
-    # # 判断操作系统类型
-    # system_type = get_system_type()
-    # if system_type == 'Windows':
-    #     # 通过窗口打开
-    #     app = pywinauto.Desktop()
-    #     # 通过弹框名称进入控件中
-    #     win = app['打开']
-    #     time.sleep(2)
-    #     # 输入上传图片的地址
-    #     win['Edit'].type_keys(file)
-    #     time.sleep(2)
-    #     # 点击打开按钮
-    #     win['Button'].click()
-    #     time.sleep(2)
-    # else:
-    #     k = PyKeyboard()
-    #     m = PyMouse()
-    #     filepath = '/'
-    #     time.sleep(5)
-    #     # 模拟键盘点击 Command + Shift + G
-    #     k.press_keys(['Command', 'Shift', 'G'])
-    #     time.sleep(3)
-    #     # 获取当前屏幕尺寸
-    #     x_dim, y_dim = m.screen_size()
-    #     m.click(x_dim // 2, y_dim // 2, 1)
-    #     time.sleep(3)
-    #     # 复制文件路径开头的斜杠/，如果不加斜杠的话，脚本会缺少头部的斜杠
-    #     pyperclip.copy(filepath)
-    #     time.sleep(3)
-    #     # 粘贴斜杠/
-    #     k.press_keys(['Command', 'V'])
-    #     time.sleep(3)
-    #     # 输入文件全路径
-    #     k.type_string(file)
-    #     time.sleep(2)
-    #     k.press_key('Return')
-    #     time.sleep(2)
-    #     k.press_key('Return')
     if if_wait == 'wait':
         time.sleep(10)
 
