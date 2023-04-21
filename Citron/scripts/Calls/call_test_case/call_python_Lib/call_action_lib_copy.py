@@ -880,7 +880,7 @@ def click_share_a_photo(driver,fileName):
     picture_path = get_picture_path(fileName)
     get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
 
-def click_cancel_send_photo(driver):
+def click_cancel_send_button(driver):
     """
     点击Cancel按钮，取消上传图片
     :param driver:

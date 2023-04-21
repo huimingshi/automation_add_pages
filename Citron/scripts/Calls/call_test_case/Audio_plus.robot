@@ -305,7 +305,7 @@ Audio_Mode_Scenario_6
     minimize_window_action       ${driver_UA}   ${driver_UB}    ${driver_UC}
     maximize_window_action       ${driver_UA}
     inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
-    click_cancel_send_photo      ${driver_UA}
+    click_cancel_send_button      ${driver_UA}
     show_special_dialog_in_bottom     ${driver_UA}    2-2
     # B select a pdf	VP: no cancel button. Enter pdf navigation mode automatically.
     minimize_window_action       ${driver_UA}
@@ -321,7 +321,7 @@ Audio_Mode_Scenario_6
     minimize_window_action       ${driver_UB}
     maximize_window_action       ${driver_UA}
     inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
-    click_cancel_send_photo      ${driver_UA}
+    click_cancel_send_button      ${driver_UA}
     show_special_dialog_in_bottom     ${driver_UA}    3
 
     comment         Scenario 6 - 3 : photo to pdf
@@ -332,20 +332,51 @@ Audio_Mode_Scenario_6
     inCall_upload_photo_PDF      ${driver_UB}    PDF
     # B cancel on entering pdf markup mode	VP: back to pdf navigation mode
     check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UB}
-#
-#Audio_Mode_Scenario_7
-#    [Documentation]       cancel sending progress in video mode.
-#    [Tags]     Audio+
-#    # Start Audio+ mode direct call, user A, B, C in call
-#    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user1}
-#    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user2}
-#    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name2}
-#    make_sure_enter_call                ${driver_UB}
-#    ${driver_UC}      driver_set_up_and_logIn     ${close_center_mode_user3}
-#    inCall_enter_contacts_search_user   ${driver_UB}    ${close_center_mode_name3}
-#    click_user_in_contacts_list         ${driver_UB}     ${close_center_mode_name3}
-#    user_anwser_call                    ${driver_UC}
-#    # Scenario 7-1: freeze
+    [Teardown]     exit_driver
+
+Audio_Mode_Scenario_7
+    [Documentation]       cancel sending progress in video mode.
+    [Tags]     Audio+
+    # Start Audio+ mode direct call, user A, B, C in call
+    ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user1}
+    ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user2}
+    contacts_witch_page_make_call       ${driver_UA}   ${driver_UB}   ${py_team_page}   ${close_center_mode_name2}     accept    video
+    make_sure_enter_call                ${driver_UB}
+    ${driver_UC}      driver_set_up_and_logIn     ${close_center_mode_user3}
+    inCall_enter_contacts_search_user   ${driver_UB}    ${close_center_mode_name3}
+    click_user_in_contacts_list         ${driver_UB}     ${close_center_mode_name3}
+    user_anwser_call                    ${driver_UC}
+
+    comment         Scenario 7-1: freeze
+    # A share me, B confirm merge
+    share_me     ${driver_UA}
+    click_merge_button    ${driver_UB}
+    # Anyone taps freeze icon	VP: only receiver can see cancel button.
+    freeze_operation     ${driver_UA}    freeze     no_check
+    # A click cancel as soon as possible	VP: back to A is in shared, B is in Merged, C is observing
+    click_cancel_send_button      ${driver_UA}
+    check_has_merged      ${driver_UB}
+    check_has_merge_menu       ${driver_UC}
+
+    comment         Scenario 7- 2 : freeze to photo
+    # A share me, B confirm merge
+    # A selects a photo and cancels sending progress.	VP: back to A is in shared, B is in Merged, C is observing
+    minimize_window_action       ${driver_UA}   ${driver_UB}    ${driver_UC}
+    maximize_window_action       ${driver_UA}
+    inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
+    click_cancel_send_button      ${driver_UA}
+    check_has_merged      ${driver_UB}
+    check_has_merge_menu       ${driver_UC}
+
+    comment         Scenario 7-3: freeze to pdf
+    # A share me, B confirm merge
+    # B select pdf in navigation mode
+    minimize_window_action       ${driver_UA}
+    maximize_window_action       ${driver_UB}
+    inCall_upload_photo_PDF      ${driver_UB}    PDF
+    # B cancel on entering pdf markup mode	VP: A, B, C are in pdf navigation mode
+    check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UB}
+    [Teardown]     exit_driver
 
 Audio_Mode_Scenario_10
     [Documentation]        camera permission is denied
