@@ -437,7 +437,7 @@ Small_range_663
 #    [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
 #    [Tags]    small range 669+670 lines     有bug：https://vipaar.atlassian.net/browse/CITRON-3655     call_case
 #    # User A login and set Do not disturb
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}   no_check_toturial    close_bounced     accept    set_disturb
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}       accept    set_disturb
 #    # User B 登录
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
 #    # Become available from app
@@ -455,7 +455,7 @@ Small_range_663
 #    [Documentation]     User set Do not Disturb(DND)   User A set Do not Disturb  from App
 #    [Tags]    small range 671+672+673 lines     call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3504
 #    # User A set Do not Disturb from App
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}    no_check_toturial     close_bounced     accept    set_disturb
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}        accept    set_disturb
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    ${occurred_time_list_A1}   get_recents_page_records_occurred_time   ${driver1}
 #    # User B 登录
@@ -495,7 +495,7 @@ Small_range_663
 #    [Documentation]     User set Do not Disturb(DND)   UserB call user A by meeting link
 #    [Tags]    small range 674 line      call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3504
 #    # User A login and set Do not disturb
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}    no_check_toturial    close_bounced     accept    set_disturb
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}        accept    set_disturb
 #    ${invite_url}    send_meeting_room_link    ${driver1}    ${MHS_link_email}   no_send
 #    # User B 登录
 #    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
@@ -518,7 +518,7 @@ Small_range_663
 #    # User B make calls with User C
 #    contacts_witch_page_make_call    ${driver2}   ${driver3}    ${py_team_page}  ${Expert_User3_name}
 #    # User A login and set Do not disturb
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}    no_check_toturial    close_bounced     accept    set_disturb
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}        accept    set_disturb
 #    # InCall user invite User A to 3PC call
 #    which_page_is_currently_on    ${driver2}    ${end_call_button}
 #    inCall_enter_contacts_search_user   ${driver2}    ${Expert_User1_name}

@@ -26,7 +26,7 @@ Small_range_970_974
     ...         AND             Close
     # User of WS1 login
     # VP: Toturial screen
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}    check_toturial
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}     ${public_pass}
     # VP: Branding name everywhere use Help Lighning
     ${get_ele_text}    get_ele_text    ${driver1}    ${first_tree_text}
     two_option_is_equal    ${driver1}    ${get_ele_text}     MY HELP LIGHTNING
