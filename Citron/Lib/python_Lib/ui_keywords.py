@@ -86,14 +86,15 @@ def read_zip_file_check_cloumns():
     else:
         return 'There is no such file'
 
-def check_jpg_picture_exists():
+def check_jpg_picture_exists(partial_file_name = 'IMG_CAP_'):
     """
     # Check whether the jpg picture exists
+    :param partial_file_name:部分文件名
     :return: if exists, return jpg picture name list;
              else, return "There is no such jpg picture"
     """
     files_list = all_file_name(DOWNLOAD_PATH)
-    partial_file_name = 'IMG_CAP_'
+    # partial_file_name = 'IMG_CAP_'
     exists_tag = 0
     jpg_list = []
     for file_name in files_list:
@@ -106,7 +107,7 @@ def check_jpg_picture_exists():
     else:
         return jpg_list, exists_tag
 
-def get_file_count(type = 'jpg'):
+def get_file_count(type = 'jpg',partial_content = 'IMG_CAP_'):
     """
     获取下载到本地的某种文件的数量
     :param type:文件类型：jpg/jpeg
@@ -114,10 +115,9 @@ def get_file_count(type = 'jpg'):
     """
     files_list = all_file_name(DOWNLOAD_PATH)
     if type == 'jpg':
-        partial_file_name = 'IMG_CAP_'
         jpg_count = 0
         for file_name in files_list:
-            if partial_file_name in file_name:
+            if partial_content in file_name:
                 jpg_count += 1
         return jpg_count
     elif type == 'jpeg':
@@ -128,12 +128,12 @@ def get_file_count(type = 'jpg'):
                 jpeg_count += 1
         return jpeg_count
 
-def delete_picture_jpg_file():
+def delete_picture_jpg_file(partial_file_name = 'IMG_CAP_'):
     """
     # Deleting all jpg File
     :return:  Jpg picture has been deleted
     """
-    jpg_list = check_jpg_picture_exists()[0]
+    jpg_list = check_jpg_picture_exists(partial_file_name)[0]
     system_type = get_system_type()
     if jpg_list != "T":
         for one in jpg_list:

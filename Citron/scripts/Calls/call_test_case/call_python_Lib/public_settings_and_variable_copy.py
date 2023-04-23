@@ -166,6 +166,7 @@ video_off_red = '//*[@*="#video_off_red"]'
 use_photo_button = '//button[text()="Use"]'
 clear_shared_content = '//div[@class="RetakeButton"]'
 open_freeze = '//*[@*="#freeze_on"]/..'     # 打开左侧的freeze设置的按钮
+attachment_selectable = '//div[@class="attachment selectable "]'        # Calls的Details页面的附件
 # right_share_button = '//*[@*="#share"]/..'    # 右侧的SHARE按钮
 TPPW_share = '//span[text()="{}"]'      # 四种模式：“Take a New Photo”，“Photo from library“，”PDF Document“，”Whiteboard“
 stop_sharing_button = '//button[text()="Stop Sharing"]'   # Stop Sharing按钮
