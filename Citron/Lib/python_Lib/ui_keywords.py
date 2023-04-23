@@ -106,6 +106,28 @@ def check_jpg_picture_exists():
     else:
         return jpg_list, exists_tag
 
+def get_file_count(type = 'jpg'):
+    """
+    获取下载到本地的某种文件的数量
+    :param type:文件类型：jpg/jpeg
+    :return:某种文件的数量
+    """
+    files_list = all_file_name(DOWNLOAD_PATH)
+    if type == 'jpg':
+        partial_file_name = 'IMG_CAP_'
+        jpg_count = 0
+        for file_name in files_list:
+            if partial_file_name in file_name:
+                jpg_count += 1
+        return jpg_count
+    elif type == 'jpeg':
+        partial_file_name = 'image_'
+        jpeg_count = 0
+        for file_name in files_list:
+            if partial_file_name in file_name:
+                jpeg_count += 1
+        return jpeg_count
+
 def delete_picture_jpg_file():
     """
     # Deleting all jpg File

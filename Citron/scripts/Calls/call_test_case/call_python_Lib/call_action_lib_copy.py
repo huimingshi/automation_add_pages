@@ -392,13 +392,15 @@ def obtain_meeting_link_from_email(check_otu = 'no_check_otu'):
             raise AssertionError('当前邮件不是OTU邮件')
     return meeting_link
 
-def click_screen_capture_button(driver):
+def click_screen_capture_button(*drivers):
     """
     点击截图按钮
     :param driver:
     :return:
     """
-    public_click_element(driver,capture_button,description='点击截图按钮')
+    for i in range(len(drivers)):
+        public_click_element(drivers[i],capture_button,description=f'第{i + 1}driver点击截图按钮')
+        time.sleep(3)
 
 def in_call_click_message_button(driver,operation='open'):
     """
@@ -1043,10 +1045,10 @@ def turns_on_mic_by_himself(*drivers):
     :param drivers:
     :return:
     """
-    for driver in drivers:
-        public_click_element(driver, turns_on_mic, description="自己解除静音")
-        ele_list = get_xpath_elements(driver,mic_is_on)
-        public_assert(driver,len(ele_list),1,action="自己解除静音成功")
+    for i in range(len(drivers)):
+        public_click_element(drivers[i], turns_on_mic, description=f"第{i + 1}driver自己解除静音")
+        ele_list = get_xpath_elements(drivers[i],mic_is_on)
+        public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}driver自己解除静音成功")
 
 def select_co_host_back(driver,username = 'Huiming.shi.helplightning+EU2',can_turn_on = 'can',action = 'turn_on'):
     """
