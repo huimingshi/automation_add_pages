@@ -32,7 +32,7 @@ In_call_User_Notifications_3467_28_29_30_46_49_50_51
     minimize_window_action     ${driver1}    ${driver2}
     maximize_window_action     ${driver1}
     inCall_upload_photo_PDF     ${driver1}    PDF    ${load_test_pdf}    no_wait
-    # 28-验证Initiating Document sharing - particpipant has selected document but not selected Share.	  Pending Document sharing.
+    # 28/30-验证Initiating Document sharing - particpipant has selected document but not selected Share.	  Pending Document sharing.
     pending_document_sharing    ${driver1}
     # 50-验证When downloader receive the document from presenter	Receiving photo from %1$s (Receiver)
     receiving_file_from_anybody   ${driver2}     ${message_test0_username}
@@ -71,14 +71,17 @@ In_call_User_Notifications_3568
     # 确保进入通话
     make_sure_enter_call      ${driver1}
     # 选择giver，进入giver/helper模式
-    enter_giver_mode   ${driver1}    None   None   2   has_dialog   give
-    # giver进入Document模式，上传PDF      验证It occurs when you aren't the Helper and are sharing a document
-    giver_share_a_document     ${driver1}    ${load_test_pdf}
-    # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when the share document mode ends.
-    click_clear_shared_content      ${driver1}
-    # 点击Share a photo按钮
-    click_share_a_photo     ${driver1}    ${load_test_jpg}
-    # 验证It occurs when you aren't the Helper and are sharing a picture
+    enter_video_connection    ${driver1}
+    share_me   ${driver1}
+    click_merge_button    ${driver2}
+    # 5-验证It occurs when you aren't the Helper and are sharing a document
+    inCall_upload_photo_PDF     ${driver1}    PDF    ${load_test_pdf}
+    share_page    ${driver1}
+    you_can_now_draw_on_the_shared_document    ${driver1}
+    # 6-验证It occurs when the share document mode ends.
+    stop_sharing_to_f2f      ${driver1}
+    # 8-验证It occurs when you aren't the Helper and are sharing a picture
+    inCall_upload_photo_PDF     ${driver1}    Photo     ${load_picture_jpg}    no_wait
     you_can_draw_shared_photo     ${driver1}
     [Teardown]   exit_driver
 
