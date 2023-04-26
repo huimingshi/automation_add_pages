@@ -264,6 +264,7 @@ Survey_Rate_6pc
     close_call_ending_page    ${driver_TU1}
     switch_MY_TAB_calls_page    ${driver_TU1}
     calls_click_first_details    ${driver_TU1}
+    sleep    10
     check_star_evaluate    ${driver_TU1}
     check_call_comment     ${driver_TU1}
     exit_driver
