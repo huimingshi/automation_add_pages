@@ -199,3 +199,33 @@ def get_all_comments_in_call_end(driver,*args):
     for i in range(len(ele_list)):
         get_comment = ele_list[i].get_attribute("textContent")   # 获取comment
         public_assert(driver,get_comment,args[i],action='获取的comments和预期不符')
+
+def five_star_evaluate(*drivers):
+    """
+    通话结束后给几星级评价
+    :param star:
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        public_click_element(drivers[i],five_star_high_praise,description=f"第{i + 1}个driver的五星好评按钮")
+
+def give_call_comment(*drivers):
+    """
+    通话结束后给的comment
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        ele = get_xpath_element(drivers[i],add_comment,description=f"第{i + 1}个driver的add_comment输入框")
+        ele.click()
+        ele.send_keys(good_experience)
+
+def save_evaluate(*drivers):
+    """
+    通话结束后评价后的保存操作
+    :param drivers:
+    :return:
+    """
+    for i in range(len(drivers)):
+        public_click_element(drivers[i],'//div[@class="call-info-form-group form-group"]//button[text()="Save"]',description=f"第{i + 1}个driver的Save按钮")

@@ -300,3 +300,4 @@ co_host_button_gray = '//div[@class="react-toggle react-toggle--disabled"]'     
 PPECFA_button = '//div[@class="submenu-content"]//a[text()="End Call for All"]'    # participants页面的end_call_for_all按钮
 ECFA_YES_button = '//button[@variant="secondary" and contains(.,"Yes")]'    # end call for all时的Yes按钮
 collaboration_mode_flag = '//canvas[@id="webgl"]'                # Collaboration mode的标志
+good_experience = 'good_experience'

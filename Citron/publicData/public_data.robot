@@ -19,6 +19,8 @@ ${site_admin_name}                      huiming.shi                             
 ${site_admin_username_auto}             hlnauto+basic                                                                           # site admin username
 ${site_admin_password_auto}             Abc12345                                                                                # site admin password
 
+${auto_default_workspace}               auto_default_workspace
+
 ${site_admin_name_one_workspace}        Huiming.shi.helplightning+11111111111@outlook.com                                       # Site Admin user which just has one workspace                                                                           # Site Admin pass which just has one workspace
 
 ${workspace_admin_username}             Huiming.shi.helplightning@outlook.com                                                   # workspace admin username(This is a workspace admin with many groups)                                                                            # workspace admin password
@@ -446,7 +448,7 @@ ${close_center_mode_name41}             Huiming.shi.helplightning+close_user41
 ${expert_group_call_userT1}             Huiming.shi.helplightning+egcT1@outlook.com                                             # 用于Expert Group Call的case
 ${expert_group_call_nameT1}             Huiming.shi.helplightning+egcT1
 
-${expert_group_call_userE2}             Huiming.shi.helplightning+egcE2@outlook.com                                             # 用于Expert Group Call的case
+${expert_group_call_userE2}             Huiming.shi.helplightning+egcE2@outlook.com                                             # 用于Expert Group Call的case(Expert User)
 ${expert_group_call_nameE2}             Huiming.shi.helplightning+egcE2
 
 ${expert_group_call_user3}              Huiming.shi.helplightning+egc3@outlook.com                                              # 用于Expert Group Call的case
@@ -454,6 +456,12 @@ ${expert_group_call_name3}              Huiming.shi.helplightning+egc3
 
 ${expert_group_call_user4}              Huiming.shi.helplightning+egc4@outlook.com                                              # 用于Expert Group Call的case
 ${expert_group_call_name4}              Huiming.shi.helplightning+egc4
+
+${expert_group_call_user5}              Huiming.shi.helplightning+egc5@outlook.com                                              # 用于Expert Group Call的case
+${expert_group_call_name5}              Huiming.shi.helplightning+egc5
+
+${expert_group_call_user6}              Huiming.shi.helplightning+egc6@outlook.com                                              # 用于Expert Group Call的case
+${expert_group_call_name6}              Huiming.shi.helplightning+egc6
 
 ${expert_group_call_GROUP}              expert_group_call_GROUP                                                                 # 用于Expert Group Call的case的expert group
 
