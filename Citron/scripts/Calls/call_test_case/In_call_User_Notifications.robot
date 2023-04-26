@@ -28,25 +28,26 @@ In_call_User_Notifications_3467_28_29_30_46_49_50_51
     contacts_witch_page_make_call   ${driver2}   ${driver1}   ${py_team_page}    ${message_test0_username}
     # 确保进入通话
     make_sure_enter_call      ${driver1}
-    # 选择helper，进入giver/helper模式
-    enter_giver_mode   ${driver1}    None   None   2   has_dialog   help
     # helper点击右侧红色按钮，选择document，上传pdf，不share
-    helper_load_document    ${driver1}     ${load_test_pdf}    no_click_share
-    # 验证Initiating Document sharing - particpipant has selected document but not selected Share.	  Pending Document sharing.
+    minimize_window_action     ${driver1}    ${driver2}
+    maximize_window_action     ${driver1}
+    inCall_upload_photo_PDF     ${driver1}    PDF    ${load_test_pdf}    no_wait
+    # 28-验证Initiating Document sharing - particpipant has selected document but not selected Share.	  Pending Document sharing.
     pending_document_sharing    ${driver1}
-    # 验证When downloader receive the document from presenter	Receiving photo from %1$s (Receiver)
+    # 50-验证When downloader receive the document from presenter	Receiving photo from %1$s (Receiver)
     receiving_file_from_anybody   ${driver2}     ${message_test0_username}
-    # 验证Doc Sharing after 5 seconds without selecting Share.	  Tap the Share button to share the document.
+    # 29-验证Doc Sharing after 5 seconds without selecting Share.	  Tap the Share button to share the document.
     tap_share_button_to_share      ${driver1}
-    click_clear_shared_content      ${driver1}
-    # helper点击右侧红色按钮，选择document，上传pdf     验证It occurs when you are the Helper and are sharing a document
-    helper_load_document    ${driver1}     ${load_test_pdf}
-    # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when the share document mode ends.
-    click_clear_shared_content      ${driver1}
+    # 4-验证It occurs when you are the Helper and are sharing a document
+    share_page    ${driver1}
+    you_can_now_draw_on_the_shared_document    ${driver1}
+    # 6-验证It occurs when the share document mode ends.
+    clear_shared_content_action      ${driver1}
+    exiting_document_sharing_mode      ${driver1}
     # 点击Share a photo按钮
-    click_share_a_photo     ${driver1}     ${load_picture_jpg}
+    inCall_upload_photo_PDF     ${driver1}    photo     big_size.jpg    no_wait
     # 点击Cancel按钮，取消上传图片
-    click_cancel_send_photo        ${driver1}
+    click_cancel_send_button        ${driver1}
     # 验证When user cancel sending photo	The upload of resource has been cancelled
     upload_resource_has_cancelled       ${driver1}
     # 点击Share a photo按钮

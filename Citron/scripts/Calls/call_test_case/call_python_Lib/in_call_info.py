@@ -57,32 +57,32 @@ def giver_share_a_document(driver,fileName,click_share = 'click_share',check_inf
             ele_list22 = get_xpath_elements(driver, expect_text_22)
             public_assert(driver, len(ele_list22), 1, action='未出现提示22')
 
-@change_driver_implicit_wait
-def helper_load_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
-    """
-    Load document，非fiver需要点击右侧的video红色按钮才能上传document
-    :param driver:
-    :param fileName: 文件名
-    :param click_share:
-    :param check_info:
-    :return:
-    """
-    public_click_element(driver,video_off_red,description='点击右侧的Video红色按钮')
-    time.sleep(2)
-    public_click_element(driver,choose_document,description='选择document')
-    picture_path = get_picture_path(fileName)
-    get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
-    if click_share == 'click_share':
-        public_click_element(driver,'//button[text()="Share"]',description='点击Share按钮')
-        if check_info == 'check_info':
-            ele_list1 = get_xpath_elements(driver, expect_text_1)
-            ele_list2 = get_xpath_elements(driver, expect_text_2)
-            public_assert(driver,len(ele_list1),1,action='未出现提示1')
-            public_assert(driver, len(ele_list2), 1, action='未出现提示2')
-    else:
-        if check_info == 'check_info':
-            ele_list22 = get_xpath_elements(driver, expect_text_22)
-            public_assert(driver, len(ele_list22), 1, action='未出现提示22')
+# @change_driver_implicit_wait
+# def helper_load_document(driver,fileName,click_share = 'click_share',check_info = 'check_info'):
+#     """
+#     Load document，非fiver需要点击右侧的video红色按钮才能上传document
+#     :param driver:
+#     :param fileName: 文件名
+#     :param click_share:
+#     :param check_info:
+#     :return:
+#     """
+#     public_click_element(driver,video_off_red,description='点击右侧的Video红色按钮')
+#     time.sleep(2)
+#     public_click_element(driver,choose_document,description='选择document')
+#     picture_path = get_picture_path(fileName)
+#     get_xpath_element(driver, input_type_file, ec='ec').send_keys(picture_path)
+#     if click_share == 'click_share':
+#         public_click_element(driver,'//button[text()="Share"]',description='点击Share按钮')
+#         if check_info == 'check_info':
+#             ele_list1 = get_xpath_elements(driver, expect_text_1)
+#             ele_list2 = get_xpath_elements(driver, expect_text_2)
+#             public_assert(driver,len(ele_list1),1,action='未出现提示1')
+#             public_assert(driver, len(ele_list2), 1, action='未出现提示2')
+#     else:
+#         if check_info == 'check_info':
+#             ele_list22 = get_xpath_elements(driver, expect_text_22)
+#             public_assert(driver, len(ele_list22), 1, action='未出现提示22')
 
 @change_driver_implicit_wait
 def you_can_draw_shared_photo(*drivers):
