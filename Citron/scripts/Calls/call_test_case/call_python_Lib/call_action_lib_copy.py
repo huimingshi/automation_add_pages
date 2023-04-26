@@ -686,7 +686,7 @@ def share_photo_on_special_dialog(driver,action = "share",file_type = "Photo",fi
     """
     # 点击上传按钮，并先获取文件绝对路径
     if action == "share":
-        if file_type == "Photo":
+        if file_type.upper() == "PHOTO":
             public_click_element(driver, Share_a_photo, description="share_photo按钮")
             file = get_picture_path(is_input = "not_input")
         else:
