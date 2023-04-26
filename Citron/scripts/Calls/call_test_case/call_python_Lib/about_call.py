@@ -4,8 +4,8 @@
 import time
 
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import if_has_tutorial_then_close
+from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW, \
+    switch_to_last_window as STLW,  close_last_window as CLW
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 
 
@@ -154,7 +154,6 @@ def check_survey_switch_success(driver,status = '0',click_button = 'no_click'):
             public_click_element(driver,take_survey_after_call,description = 'take_survery按钮')
             time.sleep(6)       # 等待Survey页面加载出来
 
-@if_has_tutorial_then_close
 def close_call_ending_page(driver):
     """
     # 关闭通话结束展示页面
@@ -200,7 +199,7 @@ def get_all_comments_in_call_end(driver,*args):
         get_comment = ele_list[i].get_attribute("textContent")   # 获取comment
         public_assert(driver,get_comment,args[i],action='获取的comments和预期不符')
 
-def five_star_evaluate(*drivers):
+def five_star_evaluate(star = 'excellent',*drivers):
     """
     通话结束后给几星级评价
     :param star:
@@ -208,7 +207,19 @@ def five_star_evaluate(*drivers):
     :return:
     """
     for i in range(len(drivers)):
-        public_click_element(drivers[i],five_star_high_praise,description=f"第{i + 1}个driver的五星好评按钮")
+        if star == 'excellent':
+            public_click_element(drivers[i],five_star_high_praise,description=f"第{i + 1}个driver的五星好评按钮")
+        else:
+            public_click_element(drivers[i], one_star_praise, description=f"第{i + 1}个driver的五星好评按钮")
+
+def rating_dialog_exists(*drivers):
+    """
+    星级评价对话框依旧存在
+    :param driver:
+    :return:
+    """
+    for i in range(len(drivers)):
+        get_xpath_element(drivers[i],'//h2[text()="How would you rate the audio and video quality of the call?"]',description=f"第{i+ 1}driver星级评价对话框依旧存在")
 
 def give_call_comment(*drivers):
     """
@@ -229,3 +240,18 @@ def save_evaluate(*drivers):
     """
     for i in range(len(drivers)):
         public_click_element(drivers[i],'//div[@class="call-info-form-group form-group"]//button[text()="Save"]',description=f"第{i + 1}个driver的Save按钮")
+
+def take_survey_action(*drivers):
+    """
+    通话结束后，Take Survey的操作
+    :param driver:
+    :return:
+    """
+    for i in range(len(drivers)):
+        public_click_element(drivers[i],take_survey_after_call,description=f"第{i+ 1}个driver的take_survey按钮")
+        # 切换窗口
+        STLW(drivers[i])
+        time.sleep(1)
+        get_xpath_element(drivers[i],'//input[@id="kw"]',description=f"第{i+ 1}个driver的百度的查询输入框")
+        # 切换窗口
+        CLW(drivers[i])

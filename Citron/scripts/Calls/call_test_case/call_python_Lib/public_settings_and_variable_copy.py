@@ -73,7 +73,8 @@ count_of_list = '//div[@class="ag-center-cols-container"]/div'
 click_call_button = '//button[@class="k-button callButton"]'
 anwser_call_button = '//button[@class="k-button success-btn big-btn" and text()="ANSWER"]'
 external_join_call_anwser_button = '//button[contains(.,"Answer")]'
-five_star_high_praise = '//span[@class="star"]/div[contains(.,"Excellent")]'
+one_star_praise = '//span[@class="star"]/div[contains(.,"Poor")]'    # 一星级评价
+five_star_high_praise = '//span[@class="star"]/div[contains(.,"Excellent")]'     # 五星级评价
 end_call_button = "//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']"    # 结束Call的红色按钮
 add_tag_input = '//input[@placeholder="Add tags to filter calls..."]'       # call结束后的add tag
 add_tag_input_after = '//span[@class="k-searchbar"]/input[@type="text"]'    # call结束后已经添加tag后，再添加tag

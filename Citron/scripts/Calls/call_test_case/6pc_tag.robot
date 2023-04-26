@@ -215,7 +215,7 @@ anonymous_start_a_6pc_meeting_call
     ...             AND             delete_picture_jpg_file     multipart-
     ...             AND             exit_driver
 
-Survey_6pc
+Survey_Rate_6pc
     [Documentation]       Tag/Comment - 6pc
     [Tags]     6pc tag
     # TU1 calls EU2. EU2 answers call.
@@ -239,20 +239,36 @@ Survey_6pc
     user_make_call_via_meeting_link     ${driver_EU5}   ${invite_url}
     ${driver_U6}      driver_set_up_and_logIn     ${Team_User2_username}
     user_make_call_via_meeting_link     ${driver_U6}   ${invite_url}
+    sleep  10
     # 6 participants leave call one by one
     exit_call    ${driver_U6}
     exit_call    ${driver_EU5}
     exit_call    ${driver_U4}
     exit_call    ${driver_U3}
     exit_call    ${driver_EU2}
+    # User clicks on any star icon.	VP: rating dialog still displays.
+    five_star_evaluate    poor   ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_U4}    ${driver_EU5}     ${driver_U6}
     # Each one add tag/comment and survey and rate start
-    five_star_evaluate    ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_TU1}    ${driver_EU5}     ${driver_U6}
-    give_call_comment    ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_TU1}    ${driver_EU5}     ${driver_U6}
-    save_evaluate    ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_TU1}    ${driver_EU5}     ${driver_U6}
+    five_star_evaluate    excellent   ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_U4}    ${driver_EU5}     ${driver_U6}
+    # User taps other area beyond the star rating dialog.	VP: rating dialog should not disappear.
+    rating_dialog_exists    ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_U4}    ${driver_EU5}     ${driver_U6}
+    # User adds tag/comment.
+    give_call_comment    ${driver_TU1}     ${driver_EU2}     ${driver_U3}     ${driver_EU5}     ${driver_U6}
+    # User  clicks on survey button.   VP: Survey page opens successfully.
+    take_survey_action    ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_EU5}     ${driver_U6}
+    # User clicks on Done button.
+    save_evaluate    ${driver_TU1}     ${driver_EU2}     ${driver_U3}    ${driver_EU5}     ${driver_U6}
+
+    # Open call detials page from Citron.	VP: the rating stars are correct. Tag and comment are displayed correctly.
+    sleep   120
+    close_call_ending_page    ${driver_TU1}
+    switch_MY_TAB_calls_page    ${driver_TU1}
+    calls_click_first_details    ${driver_TU1}
+    check_star_evaluate    ${driver_TU1}
+    check_call_comment     ${driver_TU1}
     exit_driver
 
     # Citron admin login to view call details	VP: rate and tag/comment participant added are all here
-    sleep   120
     ${driver_SA}     driver_set_up_and_logIn     ${crunch_site_username}    ${crunch_site_password}
     user_switch_to_second_workspace     ${driver_SA}     ${Huiming_shi_Added_WS}
     switch_to_WS_calls_page     ${driver_SA}
