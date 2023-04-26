@@ -572,6 +572,7 @@ def enter_video_connection(driver):
     ele_list = get_xpath_elements(driver, retry_video_connection)
     if len(ele_list) == 1:
         public_click_element(driver, retry_video_connection, description="RVC按钮")
+    time.sleep(3)
 
 def return_ULB_mode(driver):
     """

@@ -75,6 +75,8 @@ In_call_User_Notifications_3568
     share_me   ${driver1}
     click_merge_button    ${driver2}
     # 5-验证It occurs when you aren't the Helper and are sharing a document
+    minimize_window_action     ${driver1}    ${driver2}
+    maximize_window_action     ${driver1}
     inCall_upload_photo_PDF     ${driver1}    PDF    ${load_test_pdf}
     share_page    ${driver1}
     you_can_now_draw_on_the_shared_document    ${driver1}
@@ -101,22 +103,26 @@ In_call_User_Notifications_9_10_11_31_32
     inCall_enter_contacts_search_user   ${driver3}   ${notifications_username05}
     # 点击查询到的User A
     click_user_in_contacts_list   ${driver3}   ${notifications_username05}
-    # 验证It occurs when invite participant to join a call	Your invite to %1$s was sent successfully
+    # 31-验证It occurs when invite participant to join a call	Your invite to %1$s was sent successfully
     your_invite_to_was_sent_successfully    ${driver3}    ${notifications_username05}
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
-    # 验证It occurs when invitee receive the invitation	%1$s has accepted your call
+    # 32-验证It occurs when invitee receive the invitation	%1$s has accepted your call
     has_accepted_your_call    ${driver3}    ${notifications_username05}
     make_sure_enter_call    ${driver1}
     # 进入进入giver/helper模式
-    enter_giver_mode     ${driver3}    ${notifications_username04}    ${notifications_username03}      3
-    # 点击Share a photo按钮，上传jpg图片
-    click_share_a_photo     ${driver3}    ${load_test_jpg}
-    # 点击Clear Shared Content按钮，回到初始状态      验证It occurs when you change from the image mode and it tells for the Helper, tha it return to Help Mode
-    click_clear_shared_content      ${driver3}      photo
-    # 验证It occurs when you change from the image mode and it tells for the Receiver, that it return to Receive help
+    enter_video_connection    ${driver2}
+    share_me   ${driver1}
+    click_merge_button    ${driver2}
+    minimize_window_action     ${driver1}    ${driver2}
+    maximize_window_action     ${driver1}
+    inCall_upload_photo_PDF    ${driver1}
+    stop_sharing_to_f2f   ${driver1}
+    # 9-验证It occurs when you change from the image mode and it tells for the Helper, tha it return to Help Mode
+    exiting_photo_mode_show      ${driver3}
+    # 10-验证It occurs when you change from the image mode and it tells for the Receiver, that it return to Receive help
     exiting_photo_mode_show       ${driver2}
-    # 验证It occurs when you change from the image mode and it tells for Observers, that it return to be an Observer
+    # 11-验证It occurs when you change from the image mode and it tells for Observers, that it return to be an Observer
     exiting_photo_mode_show       ${driver1}
     [Teardown]    exit_driver
 
@@ -132,19 +138,21 @@ In_call_User_Notifications_18_20
     make_sure_enter_call    ${driver3}
     make_sure_enter_call    ${driver2}
     # 进入Giver/Helper模式
-    enter_giver_mode      ${driver3}     none    none     2
+    enter_video_connection    ${driver2}
+    share_me   ${driver2}
+    click_merge_button    ${driver3}
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${message_test5_user}
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_new_invite_in_calling   ${driver3}
     # User A点击link进入call
-    user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
+    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
     # 验证When a participant joins the call in cooperation mode	    %1$s has joined as obeserver
-    has_joined_as_obeserver    ${driver3}    ${message_test5_username}
+    has_joined_the_call    ${driver2}    ${message_test5_username}
     # User A 结束call
     exit_call   ${driver1}
     # 验证When a participant leaves the call.	%1$s has left the session
-    has_left_the_session    ${driver3}    ${message_test5_username}
+    has_left_the_session    ${driver2}    ${message_test5_username}
     [Teardown]    exit_driver
 
 In_call_User_Notifications_17_19_40
@@ -168,9 +176,11 @@ In_call_User_Notifications_17_19_40
     # 验证It shows the name of a new participant that is joined to a call and it is on Face to Face	    %1$s has joined the call
     has_joined_the_call     ${driver3}    ${message_test2_username}
     # 进入进入giver/helper模式
-    enter_giver_mode     ${driver3}    ${message_test1_username}    ${message_test0_username}      3
+    enter_video_connection    ${driver2}
+    share_me   ${driver2}
+    click_merge_button    ${driver3}
     # Giver or Receiver leave call
-    leave_call    ${driver2}   no_need_select  none   0   no_check
+    leave_call    ${driver2}
     # 验证When a participant leaves the call, and is the Giver or Receiver of help.	%1$s (%2$s) left the call. Switched back to Face to Face mode.
     left_call_switch_f2f_mode     ${driver3}      ${message_test0_username}
     [Teardown]    exit_driver
@@ -186,17 +196,19 @@ In_call_User_Notifications_24_25_54_55
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username01}
     make_sure_enter_call     ${driver2}
     make_sure_enter_call     ${driver3}
-    # 验证Call recording started	       %1$s has enabled recording for this call.
+    # 24-验证Call recording started	       %1$s has enabled recording for this call.
     make_show_recording_settings    ${driver3}
     click_do_not_record     ${driver3}    ${notifications_username02}
-    # 验证Call recording stopped	       %1$s has turned off recording for this call.
+    # 25-验证Call recording stopped	       %1$s has turned off recording for this call.
     make_show_recording_settings    ${driver3}
     click_record_this_session     ${driver3}    ${notifications_username02}
     # 进入Giver/Helper模式
-    enter_giver_mode      ${driver3}     none    none     2
-    # 验证When user switches its role to Help Giver in audio mode	     Now Giving Help.
+    enter_video_connection    ${driver2}
+    share_me   ${driver2}
+    click_merge_button    ${driver3}
+    # 54-验证When user switches its role to Help Giver in audio mode	     Now Giving Help.
     now_which_help     ${driver2}
-    # 验证When user switches its role to Help Receiver in audio mode	     Now Receiving Help.
+    # 55-验证When user switches its role to Help Receiver in audio mode	     Now Receiving Help.
     now_which_help     ${driver3}    giving
     [Teardown]    exit_driver
 
