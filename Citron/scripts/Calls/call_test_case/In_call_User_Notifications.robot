@@ -146,7 +146,7 @@ In_call_User_Notifications_18_20
     # User C 进入到邀请第三位用户进入call，获取link
     ${invite_url}    send_new_invite_in_calling   ${driver3}
     # User A点击link进入call
-    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
+    user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
     # 18-验证When a participant joins the call in cooperation mode	    %1$s has joined as obeserver
     has_joined_the_call    ${driver2}    ${message_test5_username}
     # User A 结束call
