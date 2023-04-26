@@ -147,11 +147,11 @@ In_call_User_Notifications_18_20
     ${invite_url}    send_new_invite_in_calling   ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}
-    # 验证When a participant joins the call in cooperation mode	    %1$s has joined as obeserver
+    # 18-验证When a participant joins the call in cooperation mode	    %1$s has joined as obeserver
     has_joined_the_call    ${driver2}    ${message_test5_username}
     # User A 结束call
     exit_call   ${driver1}
-    # 验证When a participant leaves the call.	%1$s has left the session
+    # 20-验证When a participant leaves the call.	%1$s has left the session
     has_left_the_session    ${driver2}    ${message_test5_username}
     [Teardown]    exit_driver
 
@@ -164,7 +164,7 @@ In_call_User_Notifications_17_19_40
     ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}
-    # 验证When user joins an audio call	Audio Only
+    # 40-验证When user joins an audio call	Audio Only
     audio_only_alert    ${driver3}
     audio_only_alert    ${driver2}
     # User A log in
@@ -173,7 +173,7 @@ In_call_User_Notifications_17_19_40
     ${invite_url}    send_new_invite_in_calling   ${driver3}
     # User A点击link进入call
     user_make_call_via_meeting_link    ${driver1}   ${invite_url}    no_check
-    # 验证It shows the name of a new participant that is joined to a call and it is on Face to Face	    %1$s has joined the call
+    # 17-验证It shows the name of a new participant that is joined to a call and it is on Face to Face	    %1$s has joined the call
     has_joined_the_call     ${driver3}    ${message_test2_username}
     # 进入进入giver/helper模式
     enter_video_connection    ${driver2}
@@ -181,7 +181,7 @@ In_call_User_Notifications_17_19_40
     click_merge_button    ${driver3}
     # Giver or Receiver leave call
     leave_call    ${driver2}
-    # 验证When a participant leaves the call, and is the Giver or Receiver of help.	%1$s (%2$s) left the call. Switched back to Face to Face mode.
+    # 19-验证When a participant leaves the call, and is the Giver or Receiver of help.	%1$s (%2$s) left the call. Switched back to Face to Face mode.
     left_call_switch_f2f_mode     ${driver3}      ${message_test0_username}
     [Teardown]    exit_driver
 
