@@ -45,18 +45,18 @@ In_call_User_Notifications_3467_28_29_30_46_49_50_51
     clear_shared_content_action      ${driver1}
     exiting_document_sharing_mode      ${driver1}
     # 点击Share a photo按钮
-    inCall_upload_photo_PDF     ${driver1}    photo     big_size.jpg    no_wait
+    share_photo_on_special_dialog     ${driver1}   share   photo     ${big_size_jpg}    no_wait
     # 点击Cancel按钮，取消上传图片
     click_cancel_send_button        ${driver1}
-    # 验证When user cancel sending photo	The upload of resource has been cancelled
+    # 51-验证When user cancel sending photo	The upload of resource has been cancelled
     upload_resource_has_cancelled       ${driver1}
     # 点击Share a photo按钮
-    click_share_a_photo     ${driver1}     ${load_test_jpg}
-    # 验证Uploading a photo	  Sending photo...
+    share_photo_on_special_dialog     ${driver1}   share   photo     ${load_picture_jpg}    no_wait
+    # 46-验证Uploading a photo	  Sending photo...
     sending_photo_info    ${driver1}
-    # 验证When downloader receive the photo from uploader	Receiving photo from %1$s (Receiver)
+    # 49-验证When downloader receive the photo from uploader	Receiving photo from %1$s (Receiver)
     receiving_file_from_anybody   ${driver2}     ${message_test0_username}    photo
-    # 验证It occurs when you are the Helper and are sharing a picture
+    # 7-验证It occurs when you are the Helper and are sharing a picture
     you_can_draw_shared_photo     ${driver1}
     [Teardown]   exit_driver
 
