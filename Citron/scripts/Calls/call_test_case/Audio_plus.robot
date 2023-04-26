@@ -304,13 +304,13 @@ Audio_Mode_Scenario_6
     # A select photo, then cancel	VP: back to initial status with Audio+ special dialog.
     minimize_window_action       ${driver_UA}   ${driver_UB}    ${driver_UC}
     maximize_window_action       ${driver_UA}
-    inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
+    inCall_upload_photo_PDF      ${driver_UA}    Photo     ${big_size_jpg}    no_wait
     click_cancel_send_button      ${driver_UA}
     show_special_dialog_in_bottom     ${driver_UA}    2-2
     # B select a pdf	VP: no cancel button. Enter pdf navigation mode automatically.
     minimize_window_action       ${driver_UA}
     maximize_window_action       ${driver_UB}
-    inCall_upload_photo_PDF      ${driver_UB}    PDF     big_size.pdf    no_wait
+    inCall_upload_photo_PDF      ${driver_UB}    PDF     ${big_size_pdf}    no_wait
     check_has_not_cancel_button    ${driver_UB}
     check_in_photo_pdf_whiteboard_mode    pdf     ${driver_UB}
     # B cancel on entering pdf markup mode	VP: keep in PDF navigation mode.
@@ -320,7 +320,7 @@ Audio_Mode_Scenario_6
     # A select photo, then cancel	VP: back to initial status with Audio+ special dialog.
     minimize_window_action       ${driver_UB}
     maximize_window_action       ${driver_UA}
-    inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
+    inCall_upload_photo_PDF      ${driver_UA}    Photo     ${big_size_jpg}    no_wait
     click_cancel_send_button      ${driver_UA}
     show_special_dialog_in_bottom     ${driver_UA}    3
 
@@ -363,7 +363,7 @@ Audio_Mode_Scenario_7
     # A selects a photo and cancels sending progress.	VP: back to A is in shared, B is in Merged, C is observing
     minimize_window_action       ${driver_UA}   ${driver_UB}    ${driver_UC}
     maximize_window_action       ${driver_UA}
-    inCall_upload_photo_PDF      ${driver_UA}    Photo     big_size.jpg    no_wait
+    inCall_upload_photo_PDF      ${driver_UA}    Photo     ${big_size_jpg}    no_wait
     click_cancel_send_button      ${driver_UA}
     check_has_merged      ${driver_UB}
     check_has_merge_menu       ${driver_UC}
