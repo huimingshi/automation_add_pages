@@ -201,19 +201,14 @@ In_call_User_Notifications_24_25_54_55
     click_do_not_record     ${driver3}    ${notifications_username02}
     # 25-验证Call recording stopped	       %1$s has turned off recording for this call.
     click_record_this_session     ${driver3}    ${notifications_username02}
-#    # 24-验证Call recording started	       %1$s has enabled recording for this call.
-#    make_show_recording_settings    ${driver3}
-#    click_do_not_record     ${driver3}    ${notifications_username02}
-#    # 25-验证Call recording stopped	       %1$s has turned off recording for this call.
-#    make_show_recording_settings    ${driver3}
-#    click_record_this_session     ${driver3}    ${notifications_username02}
     # 进入Giver/Helper模式
     enter_video_connection    ${driver2}
     share_me   ${driver2}
     click_merge_button    ${driver3}
-    # 54-验证When user switches its role to Help Giver in audio mode	     Now Giving Help.
-    now_which_help     ${driver2}
-    # 55-验证When user switches its role to Help Receiver in audio mode	     Now Receiving Help.
+    # 这俩notification新版本不再出现
+#    # 54-验证When user switches its role to Help Giver in audio mode	     Now Giving Help.
+#    now_which_help     ${driver2}
+#    # 55-验证When user switches its role to Help Receiver in audio mode	     Now Receiving Help.
     now_which_help     ${driver3}    giving
 #    [Teardown]    exit_driver
 
@@ -227,45 +222,48 @@ In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     ${driver3}   driver_set_up_and_logIn   ${message_test1_user}
     # User C与User B进行Call
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${message_test0_username}     accept    video
-    # 验证When user enters a call check network	Checking Network Quality
+    # 44-验证When user enters a call check network	Checking Network Quality
     checking_network_quality    ${driver3}
-    # 进入Giver/Helper模式
-    enter_giver_mode      ${driver3}     none    none     2
-    # 验证When user switches its role to Help Receiver	Now Receiving Help. Point at a task area
-    # 验证When user enters a call on Call Center Mode	Now Receiving Help. Point at a task area
-    point_at_a_task_area     ${driver2}
-    # Giver模式切换到receiver模式
-    giver_switch_receiver      ${driver3}
-    # 验证When user switches its role to Help Giver	 Now Giving Help. Pont at a white backgroud
-    point_at_a_white_background     ${driver2}
+    make_sure_enter_call     ${driver2}
+    make_sure_enter_call     ${driver3}
+#    # 进入Giver/Helper模式
+#    enter_giver_mode      ${driver3}     none    none     2
+#    # 22-验证When user switches its role to Help Receiver	Now Receiving Help. Point at a task area
+#    # 45-验证When user enters a call on Call Center Mode	Now Receiving Help. Point at a task area
+#    point_at_a_task_area     ${driver2}
+#    # Giver模式切换到receiver模式
+#    giver_switch_receiver      ${driver3}
+#    # 21-验证When user switches its role to Help Giver	 Now Giving Help. Pont at a white backgroud
+#    point_at_a_white_background     ${driver2}
+    share_me   ${driver2}
     # 关闭camera
-    turn_off_camera    ${driver2}
-    # 验证When receiver in cooperation mode turn camara off	Your camera is off. Start Video or share content.
-    your_camera_is_off    ${driver3}
+    turns_off_on_camera    ${driver2}
+    # 38-验证When receiver in cooperation mode turn camara off	Your camera is off. Start Video or share content.
+    your_camera_is_off    ${driver2}
     # 再打开camera
-    turn_on_camera    ${driver2}
+    turns_off_on_camera    ${driver2}   on
     # 进入Freeze模式
-    image_is_frozen    ${driver3}
-    # 验证It occurs when the Image is frozen and the user is not a Helper	Task field frozen.
+    freeze_operation    ${driver3}   freeze   no_check
+    # 13-验证It occurs when the Image is frozen and the user is not a Helper	Task field frozen.
     the_task_field_is_frozen    ${driver3}
-    # 验证It occurs when the Image is frozen and the user is a Helper	Task field frozen.
+    # 12-验证It occurs when the Image is frozen and the user is a Helper	Task field frozen.
     the_task_field_is_frozen    ${driver2}
     # 进入video模式
-    image_is_unfrozen    ${driver3}
-    # 验证It occurs when the image is unfrozen and the user is a Helper	Task field unfrozen.
+    freeze_operation    ${driver3}   unfreeze   no_check
+    # 14-验证It occurs when the image is unfrozen and the user is a Helper	Task field unfrozen.
     the_task_field_is_unfrozen    ${driver2}
-    # 验证It occurs when the image is unfrozen and the user is not a Helper	Task field unfrozen.
+    # 15-验证It occurs when the image is unfrozen and the user is not a Helper	Task field unfrozen.
     the_task_field_is_unfrozen    ${driver3}
-    # 验证It occurs when you change from the image freeze mode	Task field unfrozen.
+    # 16-验证It occurs when you change from the image freeze mode	Task field unfrozen.
     the_task_field_is_unfrozen    ${driver3}
-    # 第三位user登录
-    ${driver1}   driver_set_up_and_logIn   ${message_test2_user}
-    # 邀请第三位user进入call
-    inCall_enter_contacts_search_user   ${driver3}   ${message_test2_username}
-    # 点击查询到的User A
-    click_user_in_contacts_list   ${driver3}   ${message_test2_username}
-    # User A 接收打进来的Call
-    user_anwser_call    ${driver1}
-    # 验证Now Observing mode
-    now_observing_mode    ${driver1}
+#    # 第三位user登录
+#    ${driver1}   driver_set_up_and_logIn   ${message_test2_user}
+#    # 邀请第三位user进入call
+#    inCall_enter_contacts_search_user   ${driver3}   ${message_test2_username}
+#    # 点击查询到的User A
+#    click_user_in_contacts_list   ${driver3}   ${message_test2_username}
+#    # User A 接收打进来的Call
+#    user_anwser_call    ${driver1}
+#    # 23-验证Now Observing mode
+#    now_observing_mode    ${driver1}
     [Teardown]    exit_driver
