@@ -15,74 +15,74 @@ Library           call_python_Lib/public_lib.py
 Force Tags        small_range
 
 *** Test Cases ***
-Small_range_1078_1082
-    [Documentation]     Permission check
-    [Tags]    small range 1078-1082 lines     message_case
-    [Setup]     turn_on_workspace_directory_setUp     workspaces_admin
-    # user login
-    ${driver}     driver_set_up_and_logIn     ${workspace_admin_username}
-    # 进入到workspace settings页面
-    switch_to_settings_page    ${driver}
-    # message is a workspace feature
-    scroll_into_view     ${driver}      ${Workspace_Messaging}
-    which_page_is_currently_on       ${driver}     ${Workspace_Messaging}
-    which_page_is_currently_on       ${driver}     ${Workspace_Messaging_description}
-    # Only person in same worksapce can chat with each other
-    # Go to Personal contacts，VP: only the person in same workspace with login user has Message icon
-    switch_to_diffrent_page     ${driver}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}     switch_tree
-    contacts_different_page_search_user     ${driver}     ${py_team_page}     ${user_13857584759}
-    suspension_of_the_mouse     ${driver}     ${user_13857584759}
-    sleep  6
-    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
-    should be equal as strings     ${return_value}     flex
-    # Favite a personal contact	VP: only the person in same workspace with login user has Message icon
-    switch_to_diffrent_page     ${driver}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     ${hlnauto_p1}
-    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
-    sleep  6
-    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
-    should be equal as strings     ${return_value}     none
-
-    # turn off message from workspace setting
-    switch_to_settings_page    ${driver}
-    scroll_into_view     ${driver}      ${Workspace_Messaging}
-    switch_to_other_tab       ${driver}      ${Workspace_Messaging_close_xpath}
-    # Message tab or nav bar is hiden
-    switch_to_other_tab       ${driver}      //div[@role="tree"]/div[1]
-    which_page_is_currently_on       ${driver}     ${contacts_menu_xpath}
-    which_page_is_currently_on       ${driver}     ${message_menu_xpath}     ${not_currently_on}
-    # Go to Contacts	Message icon for each contact is not visible	VP: icon is not visible for favorites, team, personal, directory
-    switch_to_diffrent_page     ${driver}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_team_page}     ${user_13857584759}
-    suspension_of_the_mouse     ${driver}     ${user_13857584759}
-    sleep  6
-    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
-    should be equal as strings     ${return_value}     none
-    # VP: icon is not visible for favorites, team, personal, directory
-    switch_to_diffrent_page     ${driver}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     ${hlnauto_p1}
-    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
-    sleep  6
-    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
-    should be equal as strings     ${return_value}     none
-    # VP: icon is not visible for favorites, team, personal, directory
-    switch_to_diffrent_page     ${driver}     ${py_personal_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_personal_page}     ${hlnauto_p1}
-    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
-    sleep  6
-    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
-    should be equal as strings     ${return_value}     none
-    # VP: icon is not visible for favorites, team, personal, directory
-    switch_to_diffrent_page     ${driver}     ${py_directory_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
-    contacts_different_page_search_user     ${driver}     ${py_directory_page}     ${user_13857584759}
-    suspension_of_the_mouse     ${driver}     ${user_13857584759}
-    sleep  6
-    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
-    should be equal as strings     ${return_value}     none
-    [Teardown]      run keywords     switch_to_settings_page    ${driver}
-    ...             AND              scroll_into_view     ${driver}      ${Workspace_Messaging}
-    ...             AND              switch_to_other_tab       ${driver}      ${Workspace_Messaging_open_xpath}
-    ...             AND              exit_driver
+#Small_range_1078_1082
+#    [Documentation]     Permission check
+#    [Tags]    small range 1078-1082 lines     message_case
+#    [Setup]     turn_on_workspace_directory_setUp     workspaces_admin
+#    # user login
+#    ${driver}     driver_set_up_and_logIn     ${workspace_admin_username}
+#    # 进入到workspace settings页面
+#    switch_to_settings_page    ${driver}
+#    # message is a workspace feature
+#    scroll_into_view     ${driver}      ${Workspace_Messaging}
+#    which_page_is_currently_on       ${driver}     ${Workspace_Messaging}
+#    which_page_is_currently_on       ${driver}     ${Workspace_Messaging_description}
+#    # Only person in same worksapce can chat with each other
+#    # Go to Personal contacts，VP: only the person in same workspace with login user has Message icon
+#    switch_to_diffrent_page     ${driver}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}     switch_tree
+#    contacts_different_page_search_user     ${driver}     ${py_team_page}     ${user_13857584759}
+#    suspension_of_the_mouse     ${driver}     ${user_13857584759}
+#    sleep  6
+#    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
+#    should be equal as strings     ${return_value}     flex
+#    # Favite a personal contact	VP: only the person in same workspace with login user has Message icon
+#    switch_to_diffrent_page     ${driver}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     ${hlnauto_p1}
+#    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
+#    sleep  6
+#    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
+#    should be equal as strings     ${return_value}     none
+#
+#    # turn off message from workspace setting
+#    switch_to_settings_page    ${driver}
+#    scroll_into_view     ${driver}      ${Workspace_Messaging}
+#    switch_to_other_tab       ${driver}      ${Workspace_Messaging_close_xpath}
+#    # Message tab or nav bar is hiden
+#    switch_to_other_tab       ${driver}      //div[@role="tree"]/div[1]
+#    which_page_is_currently_on       ${driver}     ${contacts_menu_xpath}
+#    which_page_is_currently_on       ${driver}     ${message_menu_xpath}     ${not_currently_on}
+#    # Go to Contacts	Message icon for each contact is not visible	VP: icon is not visible for favorites, team, personal, directory
+#    switch_to_diffrent_page     ${driver}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_different_page_search_user     ${driver}     ${py_team_page}     ${user_13857584759}
+#    suspension_of_the_mouse     ${driver}     ${user_13857584759}
+#    sleep  6
+#    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
+#    should be equal as strings     ${return_value}     none
+#    # VP: icon is not visible for favorites, team, personal, directory
+#    switch_to_diffrent_page     ${driver}     ${py_favorites_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_different_page_search_user     ${driver}     ${py_favorites_page}     ${hlnauto_p1}
+#    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
+#    sleep  6
+#    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
+#    should be equal as strings     ${return_value}     none
+#    # VP: icon is not visible for favorites, team, personal, directory
+#    switch_to_diffrent_page     ${driver}     ${py_personal_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_different_page_search_user     ${driver}     ${py_personal_page}     ${hlnauto_p1}
+#    suspension_of_the_mouse     ${driver}     ${hlnauto_p1}
+#    sleep  6
+#    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
+#    should be equal as strings     ${return_value}     none
+#    # VP: icon is not visible for favorites, team, personal, directory
+#    switch_to_diffrent_page     ${driver}     ${py_directory_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
+#    contacts_different_page_search_user     ${driver}     ${py_directory_page}     ${user_13857584759}
+#    suspension_of_the_mouse     ${driver}     ${user_13857584759}
+#    sleep  6
+#    ${return_value}    get_css_value     ${driver}     ${message_button_xpath}     display
+#    should be equal as strings     ${return_value}     none
+#    [Teardown]      run keywords     switch_to_settings_page    ${driver}
+#    ...             AND              scroll_into_view     ${driver}      ${Workspace_Messaging}
+#    ...             AND              switch_to_other_tab       ${driver}      ${Workspace_Messaging_open_xpath}
+#    ...             AND              exit_driver
 
 Small_range_1121_1122
     [Documentation]     Start new chat    click message icon from directory

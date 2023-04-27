@@ -1060,3 +1060,8 @@ delete_someone_group
     sleep  2s
     # 等待提示信息消失
     wait until element is not visible   ${prompt_information}   20s
+
+your_count_has_been_deactived
+    # 出现提示：Your account has been deactivated. Please contact your administrator.
+    wait until element is visible    xpath=//span[text()="Your account has been deactivated. Please contact your administrator."]
+    element should be visible    xpath=//a[contains(.,'Forgot Password?')]

@@ -182,7 +182,7 @@ In_call_User_Notifications_17_19_40
     # Giver or Receiver leave call
     leave_call    ${driver2}
     # 19-验证When a participant leaves the call, and is the Giver or Receiver of help.	%1$s (%2$s) left the call. Switched back to Face to Face mode.
-    left_call_switch_f2f_mode     ${driver3}      ${message_test0_username}
+    has_left_the_session     ${driver3}      ${message_test0_username}
     [Teardown]    exit_driver
 
 In_call_User_Notifications_24_25_54_55
@@ -196,12 +196,17 @@ In_call_User_Notifications_24_25_54_55
     contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}      ${notifications_username01}
     make_sure_enter_call     ${driver2}
     make_sure_enter_call     ${driver3}
+    # 这块的逻辑要改一下，先关闭再打开，检查提示信息
     # 24-验证Call recording started	       %1$s has enabled recording for this call.
-    make_show_recording_settings    ${driver3}
     click_do_not_record     ${driver3}    ${notifications_username02}
     # 25-验证Call recording stopped	       %1$s has turned off recording for this call.
-    make_show_recording_settings    ${driver3}
     click_record_this_session     ${driver3}    ${notifications_username02}
+#    # 24-验证Call recording started	       %1$s has enabled recording for this call.
+#    make_show_recording_settings    ${driver3}
+#    click_do_not_record     ${driver3}    ${notifications_username02}
+#    # 25-验证Call recording stopped	       %1$s has turned off recording for this call.
+#    make_show_recording_settings    ${driver3}
+#    click_record_this_session     ${driver3}    ${notifications_username02}
     # 进入Giver/Helper模式
     enter_video_connection    ${driver2}
     share_me   ${driver2}
@@ -210,7 +215,7 @@ In_call_User_Notifications_24_25_54_55
     now_which_help     ${driver2}
     # 55-验证When user switches its role to Help Receiver in audio mode	     Now Receiving Help.
     now_which_help     ${driver3}    giving
-    [Teardown]    exit_driver
+#    [Teardown]    exit_driver
 
 In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
     [Documentation]    When user switches its role to Help Giver

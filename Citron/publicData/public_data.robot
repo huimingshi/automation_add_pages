@@ -45,6 +45,8 @@ ${group_admin_username_auto}            Huiming.shi.helplightning+6668889991@out
 
 ${a_normal_test_username}               Huiming.shi.helplightning+23748795579@outlook.com                                       # a normal test username                                                                           # a normal test password
 
+${without_WS_user}                      Huiming.shi.helplightning+without_WS@outlook.com                                        # 没有任何的WS的user
+
 ${group_admin_name}                     Huiming.shi.helplightning+45148523051                                                   # Administrator when adding a group
 ${On_Call_notifications_email}          468390125@qq.com                                                                        # On-Call Notifications
 

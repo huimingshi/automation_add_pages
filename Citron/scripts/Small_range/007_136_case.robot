@@ -7,6 +7,15 @@ Force Tags        small_range
 
 
 *** Test Cases ***
+User_without_a_workspace_try_to_login
+    [Documentation]    User without a workspace try to login
+    [Tags]    small range 7 line
+    # User without a workspace try to login
+    Login_without_check   ${without_WS_user}
+    # VP: msg like "You have not been assign to a workspace in your organization, please contact your administrator"
+    your_count_has_been_deactived
+    [Teardown]    Close
+
 #Register_personal
 #    [Documentation]    Tutorial
 #    [Tags]    small range 12-18 lines,新版本导致登录后没有tutorial，脚本不适用

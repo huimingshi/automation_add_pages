@@ -244,7 +244,7 @@ Login_new_added_user
 #    # 关闭tutorial
 #    check_tutorial_again
 
-Login_new_added_user_whitout_workspaces
+Login_without_check
     [Arguments]    ${user_username}
     # 登录系统
     Open Browser    ${citron_website}     ${BROWSER_TYPE}
@@ -270,11 +270,6 @@ Login_new_added_user_whitout_workspaces
     # 点击LOG IN
     wait until element is visible   ${login_button}    10s
     Click Button    ${login_button}
-    # 出现提示信息
-#    wait until element is visible    xpath=//span[contains(.,'You have not been assigned to a Workspace in your Organization. Please contact your administrator.')]
-    wait until element is visible    xpath=//span[contains(.,'Your account has been deactivated. Please contact your administrator.')]
-    sleep  3s
-    element should be visible    xpath=//a[contains(.,'Forgot Password?')]
 
 Login_normal_for_calls
     # 登录系统
