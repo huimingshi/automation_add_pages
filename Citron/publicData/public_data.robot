@@ -47,6 +47,8 @@ ${a_normal_test_username}               Huiming.shi.helplightning+23748795579@ou
 
 ${without_WS_user}                      Huiming.shi.helplightning+without_WS@outlook.com                                        # 没有任何的WS的user
 
+${multi_WS_user}                        Huiming.shi.helplightning+multi_WS@outlook.com                                          # 有多个WS的user
+
 ${group_admin_name}                     Huiming.shi.helplightning+45148523051                                                   # Administrator when adding a group
 ${On_Call_notifications_email}          468390125@qq.com                                                                        # On-Call Notifications
 

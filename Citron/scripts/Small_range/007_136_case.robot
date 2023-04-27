@@ -16,6 +16,26 @@ User_without_a_workspace_try_to_login
     your_count_has_been_deactived
     [Teardown]    Close
 
+User_has_multi_workspaces
+    [Documentation]     User has multi - workspaces
+    [Tags]     small range 8-9 lines
+    # 登录有多个WS的用户
+    Login_new_added_user   ${multi_WS_user}
+    # VP: User is default on first workspace of the list
+    # 获取当前所在的WS
+    ${current_WS}    get_current_WS
+    # 切换到另一个WS   User switch to another workspace
+    Run Keyword If   '${current_WS}'=='Canada'    switch_to_created_workspace     ${created_workspace}
+    ...  ELSE     switch_to_created_workspace    ${Canada_workspace}
+    # user close app
+    log_out_from_citron
+    # User launch app again
+    re_log_in_citron    ${multi_WS_user}
+    # VP: user is on the latest workspace
+    ${current_WS1}    get_current_WS
+    should not be equal as strings    ${current_WS1}    ${current_WS}
+    [Teardown]    Close
+
 #Register_personal
 #    [Documentation]    Tutorial
 #    [Tags]    small range 12-18 lines,新版本导致登录后没有tutorial，脚本不适用

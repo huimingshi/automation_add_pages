@@ -1065,3 +1065,8 @@ your_count_has_been_deactived
     # 出现提示：Your account has been deactivated. Please contact your administrator.
     wait until element is visible    xpath=//span[text()="Your account has been deactivated. Please contact your administrator."]
     element should be visible    xpath=//a[contains(.,'Forgot Password?')]
+
+get_current_WS
+    # 获取当前所在的WS
+    ${text}   get text    xpath=//span[@role="listbox"]//i/following-sibling::span[1]
+    [Return]     ${text}
