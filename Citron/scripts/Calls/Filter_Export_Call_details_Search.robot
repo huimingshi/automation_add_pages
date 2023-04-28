@@ -33,21 +33,6 @@ Calls_Export_current_table
     [Teardown]    Run Keywords  check_file_if_exists_delete   # Check whether there are existing files in the path and delete them if there are
     ...           AND           Close
 
-#Calls_Create_new_call_report
-#    [Documentation]    Create new call report
-#    [Tags]    Create new call report     citron 269
-#    [Setup]   delete_zip_and_csv_file     # Check whether there are existing files in the path and delete them if there are
-#    # log in with Workspace admin
-#    Login_workspaces_admin
-#    # enter Workspace ADMINISTRATION Calls page
-#    enter_workspace_calls
-#    # Click 'Generate New Call Report' button
-#    create_new_call_report
-#    # the call report can be seen. And the columns are correct.(Id, Started_at, Ended_at, tags, comments, groups, Participants, dialer, status, duration)
-#    check_zip_report_file_data
-#    [Teardown]    Run Keywords   delete_zip_and_csv_file   # Check whether there are existing files in the path and delete them if there are
-#    ...           AND            Close
-
 Call_details
     [Documentation]    Call details
     [Tags]    Call details；    citron 270+271        有bug：https://vipaar.atlassian.net/browse/CITRON-3626，已修复
