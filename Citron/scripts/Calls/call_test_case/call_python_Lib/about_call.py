@@ -154,6 +154,22 @@ def check_survey_switch_success(driver,status = '0',click_button = 'no_click'):
             public_click_element(driver,take_survey_after_call,description = 'take_survery按钮')
             time.sleep(6)       # 等待Survey页面加载出来
 
+def cancel_workbox_details(func):
+    """
+    通话结束页面弹出的WorkBox Details对话框，莫名其妙
+    :param driver:
+    :return:
+    """
+    def inner(*args,**kwargs):
+        args[0].implicitly_wait(3)
+        ele_list = get_xpath_elements(args[0],'//span[text()="Cancel"]')
+        if len(ele_list) != 0:
+            public_click_element(args[0],'//span[text()="Cancel"]',description="CANCEL按钮")
+        args[0].implicitly_wait(int(IMPLICIT_WAIT))
+        func(*args,**kwargs)
+    return inner
+
+@cancel_workbox_details
 def close_call_ending_page(driver):
     """
     # 关闭通话结束展示页面
@@ -167,16 +183,6 @@ def close_call_ending_page(driver):
         public_click_element(driver,close_end_call_page_button,description='关闭通话结束页面')
     elif len(ele_list) == 0:
         print('没有通话结束页面')
-
-def cancel_workbox_details(driver):
-    """
-    通话结束页面弹出的WorkBox Details对话框，莫名其妙
-    :param driver:
-    :return:
-    """
-    ele_list = get_xpath_elements(driver,'//span[text()="Cancel"]')
-    if len(ele_list) != 0:
-        public_click_element(driver,'//span[text()="Cancel"]',description="CANCEL按钮")
 
 def close_call_ending_page_RF(driver):
     """
