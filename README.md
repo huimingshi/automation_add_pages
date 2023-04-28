@@ -61,6 +61,8 @@
   - 进入到Citron目录下，cmd中执行命令：robot  --exclude  call_case scripts
 ### 如何只执行message相关的case？
   - 进入到Citron目录下，cmd中执行命令：robot  --include  message_case scripts
+### 如何只执行最新的case？
+  - 进入到Citron目录下，cmd中执行命令：robot  --include  new_call_case scripts
 ### 如何执行单个case
   - 进入到Citron目录下，cmd中执行命令：robot  --test  case名称  scripts
 
