@@ -682,40 +682,37 @@ Small_range_820_821
     user_anwser_call      ${driver1}     no_direct
     # VP: REC is on, can not changed
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    rec_is_on_or_off     ${driver1}
     which_page_is_currently_on    ${driver2}    ${end_call_button}
-    rec_is_on_or_off     ${driver2}
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    rec_is_on_or_off     ${driver3}
+    rec_is_on_or_off     ${driver1}    ${driver2}    ${driver3}
     # Change mode of giver/receiver/Observer;In mode of Freeze/GHoP/Doc Share
     # In each mode, Say some words while do telestrations.	VP: REC is still on
-    enter_giver_mode     ${driver1}      ${ws3_branding_A_username}    ${Expert_User5_name}
-    proceed_with_camera_off    ${driver1}
+    enter_video_connection   ${driver1}
+    share_me    ${driver1}
     rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
-    proceed_with_camera_off    ${driver3}
     rec_is_on_or_off     ${driver3}
-    enter_FGD_mode     ${driver1}      Document
-    proceed_with_camera_off    ${driver1}
+    # merge 操作
+    click_merge_button  ${driver3}
+    # freeze操作
+    freeze_operation    ${driver3}
     rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
-    proceed_with_camera_off    ${driver3}
     rec_is_on_or_off     ${driver3}
-    enter_FGD_mode     ${driver1}      Photo
-    proceed_with_camera_off    ${driver1}
+    # 上传pdf
+    minimize_window_action    ${driver1}    ${driver2}    ${driver3}
+    maximize_window_action    ${driver1}
+    inCall_upload_photo_PDF    ${driver1}   pdf
     rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
-    proceed_with_camera_off    ${driver3}
     rec_is_on_or_off     ${driver3}
-#    enter_FGD_mode     ${driver3}      Freeze
-#    rec_is_on_or_off     ${driver1}
-#    rec_is_on_or_off     ${driver2}
-#    rec_is_on_or_off     ${driver3}
+    # 上传photo
+    inCall_upload_photo_PDF   ${driver1}
+    rec_is_on_or_off     ${driver1}
+    rec_is_on_or_off     ${driver2}
+    rec_is_on_or_off     ${driver3}
     # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
+    stop_sharing_to_f2f    ${driver1}
     # end call
     end_call_for_all     ${driver1}
     [Teardown]      run keywords    Close
@@ -738,26 +735,24 @@ Small_range_823
     which_page_is_currently_on    ${driver2}    ${end_call_button}
     rec_is_on_or_off     ${driver2}
     # In mode of Freeze/GHoP/Doc Share，VP: REC is still on
-    enter_giver_mode     ${driver1}      none    none     2
-    proceed_with_camera_off    ${driver1}
+    enter_video_connection   ${driver1}
+    share_me    ${driver1}
+    # merge 操作
+    click_merge_button  ${driver2}
+    # freeze操作
+    freeze_operation    ${driver2}
     rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
-    enter_FGD_mode     ${driver1}      Document
-    proceed_with_camera_off    ${driver1}
+    # 上传pdf
+    inCall_upload_photo_PDF    ${driver1}   pdf
     rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
-    enter_FGD_mode     ${driver1}      Photo
-    proceed_with_camera_off    ${driver1}
+    # 上传photo
+    inCall_upload_photo_PDF    ${driver1}
     rec_is_on_or_off     ${driver1}
-    proceed_with_camera_off    ${driver2}
     rec_is_on_or_off     ${driver2}
-#    enter_FGD_mode     ${driver2}      Freeze
-#    rec_is_on_or_off     ${driver1}
-#    rec_is_on_or_off     ${driver2}
     # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
+    stop_sharing_to_f2f    ${driver1}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
@@ -794,12 +789,13 @@ Small_range_825_826
     make_show_recording_settings    ${driver2}
     rec_is_on_or_off     ${driver2}     off   none
     # Change role of giver/receiver
-    enter_giver_mode     ${driver1}      none    none     2
+    enter_video_connection   ${driver1}
+    share_me    ${driver1}
+    # merge 操作
+    click_merge_button  ${driver2}
     # VP: only owner can change rec
-    proceed_with_camera_off    ${driver1}
     make_show_recording_settings    ${driver1}
     rec_is_on_or_off     ${driver1}     off   can_change
-    proceed_with_camera_off    ${driver2}
     make_show_recording_settings    ${driver2}
     rec_is_on_or_off     ${driver2}     off   none
     # VP:  Msg of "$Username has enabled/turned off recording for this call." show to all participants
@@ -808,7 +804,7 @@ Small_range_825_826
     make_show_recording_settings    ${driver1}
     record_or_do_not_record    do_not_record        ${ws3_branding_A_username}    ${driver1}    ${driver2}
     # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
+    stop_sharing_to_f2f    ${driver1}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
@@ -868,16 +864,17 @@ Small_range_829
     make_show_recording_settings    ${driver2}
     rec_is_on_or_off     ${driver2}     off   none
     # Change role of giver/receiver
-    enter_giver_mode     ${driver1}      none    none     2
+    enter_video_connection   ${driver1}
+    share_me    ${driver1}
+    # merge 操作
+    click_merge_button  ${driver2}
     # VP: only owner can change rec
-    proceed_with_camera_off    ${driver1}
     make_show_recording_settings    ${driver1}
     rec_is_on_or_off     ${driver1}     off   can_change
-    proceed_with_camera_off    ${driver2}
     make_show_recording_settings    ${driver2}
     rec_is_on_or_off     ${driver2}     off   none
     # 返回Face to Face模式
-    back_to_face_to_face_mode    ${driver1}
+    stop_sharing_to_f2f    ${driver1}
     # end call
     exit_call    ${driver1}
     [Teardown]      run keywords    Close
@@ -954,47 +951,51 @@ Small_range_833
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#Small_range_834
-#    [Documentation]     Call enterprise contact
-#    [Tags]    small range 834 line      call_case
-##    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-##    [Setup]   set_always_on_select    opt_out
-#    # User A 登录
-#    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
-#    # Expert 登录
-#    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
-#    # Call enterprise contact
-#    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
-#    # VP: REC is off, only caller can change it
-#    which_page_is_currently_on    ${driver1}    ${end_call_button}
-#    make_show_recording_settings    ${driver1}
-#    rec_is_on_or_off     ${driver1}     on   can_change
-#    which_page_is_currently_on    ${driver2}    ${end_call_button}
-#    make_show_recording_settings    ${driver2}
-#    rec_is_on_or_off     ${driver2}     on   none
-#    # Change role of giver/receiver
-#    enter_giver_mode     ${driver1}      none    none     2
-#    # Proceed with my camera Off
-#    proceed_with_camera_off    ${driver1}
-#    # In mode of Freeze/GHoP/Doc Share
-#    # VP: only caller can change rec
-#    enter_FGD_mode     ${driver1}      Document
-#    make_show_recording_settings    ${driver1}
-#    rec_is_on_or_off     ${driver1}    on    can_change    click_share
-#    rec_is_on_or_off     ${driver2}    on    can_not_change
-#    enter_FGD_mode     ${driver1}      Photo
-#    make_show_recording_settings    ${driver1}
-#    rec_is_on_or_off     ${driver1}    on    can_change
-#    rec_is_on_or_off     ${driver2}    on    can_not_change
-##    enter_FGD_mode     ${driver2}      Freeze
-##    rec_is_on_or_off     ${driver1}    on    can_change
-##    rec_is_on_or_off     ${driver2}    on    can_not_change
-#    # 返回Face to Face模式
-#    back_to_face_to_face_mode    ${driver1}
-#    # end call
-#    exit_call    ${driver1}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+Small_range_834
+    [Documentation]     Call enterprise contact
+    [Tags]    small range 834 line      call_case
+#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
+#    [Setup]   set_always_on_select    opt_out
+    # User A 登录
+    ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
+    # Expert 登录
+    ${driver2}   driver_set_up_and_logIn   ${site_admin_username}
+    # Call enterprise contact
+    contacts_witch_page_make_call     ${driver1}    ${driver2}   ${py_team_page}   ${site_admin_name}
+    # VP: REC is off, only caller can change it
+    which_page_is_currently_on    ${driver1}    ${end_call_button}
+    make_show_recording_settings    ${driver1}
+    rec_is_on_or_off     ${driver1}     on   can_change
+    which_page_is_currently_on    ${driver2}    ${end_call_button}
+    make_show_recording_settings    ${driver2}
+    rec_is_on_or_off     ${driver2}     on   none
+    # Change role of giver/receiver
+    enter_video_connection   ${driver1}
+    share_me    ${driver1}
+    # merge 操作
+    click_merge_button  ${driver2}
+    # In mode of Freeze/GHoP/Doc Share
+    # freeze操作
+    freeze_operation    ${driver1}
+    rec_is_on_or_off     ${driver1}     on   can_change
+    rec_is_on_or_off     ${driver2}     on   none
+    # 上传pdf
+    minimize_window_action    ${driver1}    ${driver2}
+    maximize_window_action    ${driver1}
+    inCall_upload_photo_PDF    ${driver1}   pdf
+    share_page    ${driver1}
+    rec_is_on_or_off     ${driver1}     on   can_change
+    rec_is_on_or_off     ${driver2}     on   none
+    # 上传photo
+    inCall_upload_photo_PDF   ${driver1}
+    rec_is_on_or_off     ${driver1}     on   can_change
+    rec_is_on_or_off     ${driver2}     on   none
+    # 返回Face to Face模式
+    stop_sharing_to_f2f    ${driver1}
+    # end call
+    exit_call    ${driver1}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 
 Small_range_836
     [Documentation]     Special Recent call	    One user logins on two devices

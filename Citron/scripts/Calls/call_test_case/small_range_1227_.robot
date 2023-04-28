@@ -34,6 +34,7 @@ Small_range_1220_1281
     user_make_call_via_meeting_link     ${driverB}    ${mhs_link}
     user_anwser_call    ${driverA}
     make_sure_enter_call     ${driverB}
+    enter_video_connection   ${driverB}
     # userD login
     ${driverD}     driver_set_up_and_logIn     ${in_call_message_userD}
     # User A invites Expert Group
@@ -100,7 +101,11 @@ Small_range_1220_1281
     in_call_download_file     ${driverB}     ${message_audio}
     delete_zip_file     ${particial_message_audio}
     # User C select 1 uploaded picture from chat list, click sub-menu 'Share' button.	VP: this file should be shown in main video screen.(前提条件：需要先进入到giving receiving help mode下)
-    enter_giver_mode     ${driverA}      ${in_call_message_usernameB}     ${in_call_message_usernameC}
+#    enter_giver_mode     ${driverA}      ${in_call_message_usernameB}     ${in_call_message_usernameC}
+    minimize_window_action   ${driverA}   ${driverB}   ${driverC}   ${driverD}   ${driverA1}   ${driverD1}
+    maximize_window_action   ${driverC}
+    inCall upload photo PDF    ${driverC}
+    maximize_window_action   ${driverA}   ${driverB}   ${driverD}   ${driverA1}   ${driverD1}
     proceed_with_camera_on     ${driverA}
     proceed_with_camera_on     ${driverB}
     share_in_main_screen     ${driverC}        ${message_jpg}

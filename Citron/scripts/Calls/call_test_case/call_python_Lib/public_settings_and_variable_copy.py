@@ -154,8 +154,8 @@ notification_content = '//div[@class="k-notification-content"]'      # 底下抛
 updated_settings_successfully = '//div[@class="k-notification-content"]/span[text()="Updated settings sucessfully"]'      # 底下抛出的绿色的提示信息，Updated settings sucessfully
 call_top_message = '//div[@class="AlertContainer"]//div[@class="message"]'    # 通话过程中最上方的提示信息，比如Checking Network Quality或者No camera detected
 share_button = '//div[@class="DocToolBar show"]/button[text()="Share"]'      # 通话过程中左下角的Share按钮
-enable_recording_call = '//div[@class="message" and contains(.,"{} has enabled recording for this call.")]'
-turn_off_recording_call = '//div[@class="message" and contains(.,"{} has turned off recording for this call.")]'
+enable_recording_call = '//div[text()="{} has enabled recording for this call."]'
+turn_off_recording_call = '//div[text()="{} has turned off recording for this call."]'
 Audio_Only_button = '//div[@class="message" and text()="Audio Only"]'
 which_mode_xpath = '//div[@class="top Alert"]/div[contains(.,"{} Mode")]'                                     # 会话顶部的模式
 which_mode_bottom_xpath = '//button[@id="audioPlusModeIndicator"]//h2[text()="{}"]'                            # 会话底部的模式
