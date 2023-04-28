@@ -611,7 +611,7 @@ Small_range_1005_1007
     # User D登录
     ${driver3}    driver_set_up_and_logIn    ${ws_branding_D_user}
     # User D click link1 to enter call
-    close_call_ending_page_RF    ${driver1}    #关闭通话结束页面
+    close_call_ending_page    ${driver1}    #关闭通话结束页面
     user_make_call_via_meeting_link    ${driver3}     ${invite_url_1}
     # 确保建立call，但未接听
     make_sure_enter_call    ${driver3}
@@ -733,7 +733,7 @@ Small_range_1010_1017
     ${get_class_value}    get_ele_class_name    ${driver2}   ${end_call_logo}   src
     check_a_contains_b    ${driver2}     ${get_class_value}        ${WS_1_Big_Logo}
     # Anonymous clicks EG's universal link
-    close_call_ending_page_RF    ${driver2}
+    close_call_ending_page    ${driver2}
     ${driver3}    anonymous_open_meeting_link     https://app-stage.helplightning.net.cn/help?enterprise_id=6769&group_id=10995&group_name=Expert_Group_1
     # 确保call连接成功，但未接听
     make_sure_enter_call   ${driver3}
@@ -1103,7 +1103,7 @@ Small_range_1036_1043
 #    two_option_is_equal    ${driver2}    ${get_class_value}    None
 ##    should be equal as strings    ${get_class_value}    None
     # Anonymous clicks EG's universal link
-    close_call_ending_page_RF    ${driver2}
+    close_call_ending_page    ${driver2}
     ${driver3}    anonymous_open_meeting_link     https://app-stage.helplightning.net.cn/help?enterprise_id=6788&group_id=10997&group_name=Expert_Group_1
     # 确保call连接成功，但未接听
     make_sure_enter_call   ${driver3}

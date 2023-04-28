@@ -163,8 +163,8 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_another_enterprise_use
     # 结束通话
     exit_call     ${driver1}
     # 关闭通话结束展示页面
-    close_call_ending_page_RF      ${driver1}
-    close_call_ending_page_RF      ${driver2}
+    close_call_ending_page      ${driver1}
+    close_call_ending_page      ${driver2}
     # User B logout
     logout_citron   ${driver2}
     # 进入Recents页面
@@ -228,9 +228,9 @@ Disable_External_Users_check_case_2
 #    # VP: they should not be able to call this site workspace user via meeting link
 #    check_call_can_reach_to_or_not   ${driver1}   ${driver2}   https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+an_expert_user1     0     # MHS link
 #    # VP: this record should not appear in recent list for both participants
-#    ${time_started_3}   record_should_not_appear_in_recent_list   ${driver1}
+#    ${time_started_3}   get_start_time_of_the_last_call   ${driver1}
 #    should be equal as strings    ${time_started_3}   ${time_started_1}
-#    ${time_started_4}   record_should_not_appear_in_recent_list   ${driver2}
+#    ${time_started_4}   get_start_time_of_the_last_call   ${driver2}
 #    should be equal as strings    ${time_started_4}   ${time_started_2}
     # VP: they should not be able to call this site workspace user via on-call group link
     check_call_can_reach_to_or_not   ${driver1}  ${driver2}   https://app-stage.helplightning.net.cn/help?enterprise_id=2799&group_id=5562&group_name=on-call+group+2   0    # this is (on-call group 2) On-Call Group Url
@@ -347,8 +347,8 @@ User_1_receives_an_incoming_call_from_user_2
     # make calls with who
     contacts_witch_page_make_call    ${driver2}   ${driver1}    ${py_team_page}    ${switch_workspace_name}
     exit call   ${driver1}
-    close_call_ending_page_RF     ${driver1}
-    close_call_ending_page_RF     ${driver2}
+    close_call_ending_page     ${driver1}
+    close_call_ending_page     ${driver2}
     # get modify picture absolute path
     ${modify_picture_path}  return_modify_pirture_path
     # Make sure the name and avator is in its original state
@@ -471,10 +471,11 @@ unable_to_reach_user_message_displays
 #    # 结束通话
 #    exit_call     ${driver1}
 #    # 关闭通话结束展示页面并退出
-#    close_call_ending_page_RF      ${driver2}
+#    close_call_ending_page      ${driver2}
 #    logout_citron   ${driver2}
 #    # 关闭通话结束展示页面
-#    close_call_ending_page_RF      ${driver1}
+#    close_call_ending_page      ${driver1}
+#    cancel_workbox_details      ${driver1}
 #    # 进入Recents页面
 #    sleep  5s   # 等待最近一次通话记录加载
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -504,7 +505,7 @@ unable_to_reach_user_message_displays
 #    # User A exit call
 #    exit_call  ${driver1}
 #    # 关闭通话结束展示页面
-#    close_call_ending_page_RF      ${driver1}
+#    close_call_ending_page      ${driver1}
 #    # 进入Recents页面
 #    sleep  5s   # 等待最近一次通话记录加载
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     switch_tree    1
@@ -524,8 +525,8 @@ unable_to_reach_user_message_displays
 #    # 结束通话
 #    exit_call     ${driver1}
 #    # 关闭通话结束展示页面
-#    close_call_ending_page_RF      ${driver1}
-#    close_call_ending_page_RF      ${driver2}
+#    close_call_ending_page      ${driver1}
+#    close_call_ending_page      ${driver2}
 #    # User B logout
 #    logout_citron   ${driver2}
 #    # 进入Recents页面

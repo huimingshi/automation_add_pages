@@ -95,9 +95,9 @@ Small_range_1198_1210
     # ---------  1206-1210  --------- #
     comment   --------- 1206-1210 ---------
     end_call_for_all           ${driver1}
-    close_call_ending_page_RF     ${driver1}
-    close_call_ending_page_RF     ${driver3}
-    close_call_ending_page_RF     ${driver4}
+    close_call_ending_page     ${driver1}
+    close_call_ending_page     ${driver3}
+    close_call_ending_page     ${driver4}
     switch_to_diffrent_page     ${driver1}     ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page     ${driver1}     ${py_messages_page}     ${py_messages_switch_success}    ${search_messages_box}
     create_a_new_message     ${driver1}     search     ${message_test1_username}     ${message_test2_username}     ${message_test3_username}
@@ -124,7 +124,7 @@ Small_range_1198_1210
     which_page_is_currently_on        ${driver5}      ${end_call_before_anwser}
     user_decline_call     ${driver1}    no_direct
     [Teardown]      run keywords    end_call_for_all           ${driver1}
-    ...             AND             close_call_ending_page_RF     ${driver1}
+    ...             AND             close_call_ending_page     ${driver1}
     ...             AND             delete_all_message_thread        ${driver1}
     ...             AND             exit_driver
 
@@ -170,7 +170,7 @@ Small_range_1211_1214
     user_anwser_call      ${driver7}
     which_page_is_currently_on        ${driver7}       ${too_many_users_in_a_call}
     [Teardown]      run keywords    end_call_for_all           ${driver1}
-    ...             AND             close_call_ending_page_RF     ${driver1}
+    ...             AND             close_call_ending_page     ${driver1}
     ...             AND             delete_all_message_thread        ${driver1}
     ...             AND             exit_driver
 

@@ -42,9 +42,9 @@ Call_Tag_Comment_600_604
     ${tags_list_A1}    get_all_tag_after_call    ${driver1}
 
     # 先关闭call结束页面
-    close_call_ending_page_RF   ${driver1}
-    close_call_ending_page_RF   ${driver2}
-    close_call_ending_page_RF   ${driver3}
+    close_call_ending_page   ${driver1}
+    close_call_ending_page   ${driver2}
+    close_call_ending_page   ${driver3}
     # User C switch to WS2
     user_switch_to_second_workspace     ${driver3}
     # C send meeing link [link2]
@@ -78,7 +78,7 @@ Call_Tag_Comment_600_604
     # 添加tag和comment
     ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_9    # 添加tag和comment
     # VP: For C, tag comment is saved to recents of ws2
-    close_call_ending_page_RF   ${driver3}    # 先关闭call结束页面
+    close_call_ending_page   ${driver3}    # 先关闭call结束页面
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     # 切换到Recents页面
     first_call_record_tag_and_comment   ${driver3}     ${third_tag_text}     good_experience_9
     # Anonymous click link2 to enter call
@@ -119,7 +119,7 @@ Call_Tag_Comment_592_595
     ${first_tag_text}   add_tags_and_comment    ${driver1}     1   good_experience_1
     # User A 进入Recents页面
     sleep  5s   # 等待最近一次通话记录加载
-    close_call_ending_page_RF   ${driver1}
+    close_call_ending_page   ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     # A's recent should have tag and comments just entered
     first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}   good_experience_1
@@ -129,8 +129,8 @@ Call_Tag_Comment_592_595
     ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_2
     ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_3
     # 先关闭call结束页面
-    close_call_ending_page_RF   ${driver2}
-    close_call_ending_page_RF   ${driver3}
+    close_call_ending_page   ${driver2}
+    close_call_ending_page   ${driver3}
     # View recents of this call	A and B and C should have same tags and comments，进入到Recents页面
     # User A切换到Contacts页面，再切换到Recents页面，目的是为了使Recents页面得到刷新
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
@@ -183,9 +183,9 @@ Call_Tag_Comment_596_599
     ${tags_list_C1}    get_all_tag_after_call    ${driver3}
 
     # 先关闭call结束页面
-    close_call_ending_page_RF   ${driver1}
-    close_call_ending_page_RF   ${driver2}
-    close_call_ending_page_RF   ${driver3}
+    close_call_ending_page   ${driver1}
+    close_call_ending_page   ${driver2}
+    close_call_ending_page   ${driver3}
     # User C switch to WS2
     user_switch_to_second_workspace     ${driver3}
     # User A切换到Contacts页面
@@ -209,7 +209,7 @@ Call_Tag_Comment_596_599
     ${second_tag_text}   add_tags_and_comment     ${driver2}    2   good_experience_5
     ${third_tag_text}    add_tags_and_comment     ${driver3}    3   good_experience_6
     # 先关闭call结束页面
-    close_call_ending_page_RF   ${driver3}
+    close_call_ending_page   ${driver3}
     # User C switch to WS1
     user_switch_to_first_workspace   ${driver3}
     # 切换到Recents页面
@@ -240,11 +240,11 @@ Call_Tag_Comment_596_599
 #    ${first_tag_text}     add_tags_and_comment     ${driver1}    1   good_experience_11
 #    ${second_tag_text}    add_tags_and_comment     ${driver3}    2   good_experience_12
 #    # VP: for A , tag comment is saved to WS1's recents
-#    close_call_ending_page_RF   ${driver1}
+#    close_call_ending_page   ${driver1}
 #    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    first_call_record_tag_and_comment   ${driver1}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
 #    # VP: For C, tag comment is saved to recents of ws1
-#    close_call_ending_page_RF   ${driver3}
+#    close_call_ending_page   ${driver3}
 #    user_switch_to_first_workspace   ${driver3}    # User C switch to WS1
 #    switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 #    first_call_record_tag_and_comment   ${driver3}   ${first_tag_text}, ${second_tag_text}   good_experience_12    good_experience_11
@@ -298,7 +298,7 @@ Call_survey_611_615
     which_page_is_currently_on     ${driver1}     ${py_contacts_switch_success}
     # User B return to the previous page before entering call.
     close_last_window   ${driver2}
-    close_call_ending_page_RF   ${driver2}
+    close_call_ending_page   ${driver2}
     which_page_is_currently_on     ${driver2}     ${py_contacts_switch_success}
 
     ###### 614 line
@@ -316,7 +316,7 @@ Call_survey_611_615
 
     ###### 615 line
     # C receives an incoming call from A
-    close_call_ending_page_RF   ${driver1}
+    close_call_ending_page   ${driver1}
     refresh_browser_page    ${driver3}
     contacts_witch_page_make_call   ${driver1}   ${driver3}   ${py_team_page}   ${big_admin_first_WS_name}   no_anwser
     # Cancel
@@ -389,7 +389,7 @@ Call_survey_608_610
     get_all_comments_in_call_end    ${driver3}   good_experience_15    good_experience_14   good_experience_13
 
     # Customer navigate to Recent ->Call, to make sure the tags & comments should be saved successfully
-    close_call_ending_page_RF   ${driver1}
+    close_call_ending_page   ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}     # 切换到Recents页面
     first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}     good_experience_15    good_experience_14   good_experience_13
     [Teardown]      run keywords    Close
@@ -431,7 +431,7 @@ Call_survey_616_618
     # Owner adds tags/comment
     ${first_tag_text}   add_tags_and_comment    ${driver1}    1    good_experience_16
     # Owner navigate to Recent tab to make sure these tags/comment should be saved successfully.
-    close_call_ending_page_RF    ${driver1}
+    close_call_ending_page    ${driver1}
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
 
     ###### 617 line

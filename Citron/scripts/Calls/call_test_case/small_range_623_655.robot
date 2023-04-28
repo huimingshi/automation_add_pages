@@ -100,7 +100,7 @@ Small_range_628_629
     user_anwser_call     ${driver1}
     # End Call.
     exit_call    ${driver1}
-    close_call_ending_page_RF    ${driver1}
+    close_call_ending_page    ${driver1}
     # VP:Expert B shows his enterprise's Disclaimer window.
     refresh_browser_page    ${driver1}   no_care
     disclaimer_should_be_shown_up_or_not     ${driver1}
@@ -286,7 +286,7 @@ Small_range_633
     exit_call       ${driver2}
     exit_call       ${driver3}
     # Expert A 关闭通话结束页面
-    close_call_ending_page_RF    ${driver4}
+    close_call_ending_page    ${driver4}
     # Expert A 刷新Recents页面
     refresh_browser_page    ${driver4}
     ${occurred_time_list_1}    get_recents_page_records_occurred_time    ${driver4}           # 获取Recents页面前两行call记录的时间
@@ -368,9 +368,9 @@ Small_range_636
     # then user A leaves call
     exit_call   ${driver1}
     # 关闭通话结束展示页面
-    close_call_ending_page_RF     ${driver1}
-    close_call_ending_page_RF     ${driver2}
-    close_call_ending_page_RF     ${driver3}
+    close_call_ending_page     ${driver1}
+    close_call_ending_page     ${driver2}
+    close_call_ending_page     ${driver3}
     sleep    30s
     # 进入到Recents页面
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -405,8 +405,8 @@ Small_range_637_642
     # user A leaves call
     exit_call   ${driver1}
     # 关闭通话结束展示页面
-    close_call_ending_page_RF     ${driver1}
-    close_call_ending_page_RF     ${driver2}
+    close_call_ending_page     ${driver1}
+    close_call_ending_page     ${driver2}
     # 进入到Recents页面
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -449,9 +449,9 @@ Small_range_638_640
     # then user C leaves call
     exit_call   ${driver3}
     # 关闭通话结束展示页面
-    close_call_ending_page_RF     ${driver1}
-    close_call_ending_page_RF     ${driver2}
-    close_call_ending_page_RF     ${driver3}
+    close_call_ending_page     ${driver1}
+    close_call_ending_page     ${driver2}
+    close_call_ending_page     ${driver3}
     # 进入到Recents页面
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -491,8 +491,8 @@ Small_range_639
     # user A leaves call
     exit_call   ${driver1}
     # 关闭通话结束展示页面
-    close_call_ending_page_RF     ${driver1}
-    close_call_ending_page_RF     ${driver2}
+    close_call_ending_page     ${driver1}
+    close_call_ending_page     ${driver2}
     # 进入到Recents页面
     switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page   ${driver2}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
@@ -518,8 +518,8 @@ Small_range_646
     ${driver3}    driver_set_up_and_logIn    ${Expert_Aa_username}
     contacts_witch_page_make_call     ${driver1}   ${driver3}   ${py_team_page}   ${another_on_call_group_name}
     exit_call    ${driver3}
-    close_call_ending_page_RF  ${driver1}
-    close_call_ending_page_RF  ${driver3}
+    close_call_ending_page  ${driver1}
+    close_call_ending_page  ${driver3}
     #------------------------------------------------------------------------------------------------------#
     # other experts 登录
     ${driver2}    driver_set_up_and_logIn    ${Expert_Bb_username}

@@ -1017,10 +1017,10 @@ Small_range_836
     which_page_is_currently_on    ${driver2}     ${py_contacts_switch_success}
     # Verify User 1-1 & User 1-2 should have this incoming call record in recent tab.
     exit_call       ${driver1}
-    close_call_ending_page_RF    ${driver1}
+    close_call_ending_page    ${driver1}
     switch_to_diffrent_page    ${driver1}   ${py_recents_page}    ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_1}   get_recents_page_records_occurred_time    ${driver1}
-    close_call_ending_page_RF    ${driver2}
+    close_call_ending_page    ${driver2}
     switch_to_diffrent_page    ${driver2}   ${py_recents_page}    ${py_recents_switch_success}    ${py_get_number_of_rows}
     ${occurred_time_list_2}   get_recents_page_records_occurred_time    ${driver2}
     two_option_is_equal    ${driver2}    ${occurred_time_list_1}   ${occurred_time_list_2}

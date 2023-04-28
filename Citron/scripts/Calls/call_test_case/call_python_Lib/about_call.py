@@ -168,6 +168,16 @@ def close_call_ending_page(driver):
     elif len(ele_list) == 0:
         print('没有通话结束页面')
 
+def cancel_workbox_details(driver):
+    """
+    通话结束页面弹出的WorkBox Details对话框，莫名其妙
+    :param driver:
+    :return:
+    """
+    ele_list = get_xpath_elements(driver,'//span[text()="Cancel"]')
+    if len(ele_list) != 0:
+        public_click_element(driver,'//span[text()="Cancel"]',description="CANCEL按钮")
+
 def close_call_ending_page_RF(driver):
     """
     # 关闭通话结束展示页面
