@@ -223,7 +223,7 @@ Call_Tag_Comment_605_606
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
     [Tags]     small range 605-606 lines     有bug: https://vipaar.atlassian.net/browse/CITRON-3654       call_case
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
+#    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
     # 该脚本中使用的on-call-group是three_user_in_this_on_call_group，隶属于big_admin
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
