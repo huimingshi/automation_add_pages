@@ -358,39 +358,39 @@ Small_range_581_582
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
-#Small_range_583_585
-#    [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
-#    [Tags]    small range 583-585 lines         call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3712
-#    # EU1 登录
-#    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
-#    # EU2 登录
-#    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
-#    # 获取OTU和MHS link
-#    ${invite_otu_url}   send_meeting_room_link    ${driver1}   ${OTU_link_email}
-#    ${invite_mhs_url}   send_meeting_room_link    ${driver1}   ${MHS_link_email}
-#    # EU1 call EU2 from contact list
-#    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${Expert_User2_name}
-#    # Someone directly call EU1 or EU2	Someone get messgage about EU1 is on another call
-#    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
-#    contacts_witch_page_make_call     ${driver3}    ${driver1}   ${py_team_page}   ${Expert_User1_name}    no_anwser
-#    which_page_is_currently_on    ${driver3}    ${user_is_currently_on_another_call}
-#    exit_one_driver    ${driver3}
-#    # Someone click EU1 or EU2's MHS link	Someone get messgage about EU1 is on another call
-#    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
-#    user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver4}
-#    which_page_is_currently_on    ${driver4}    ${user_is_currently_on_another_call}
-#    exit_one_driver    ${driver4}
-#    # someone click EU1 or EU2's OTU link	Someone get messgage about EU1 is on another call
-#    ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}
-#    user_make_call_via_meeting_link    ${driver5}    ${invite_otu_url}
-#    # 确保建立call，但未接听
-#    make_sure_enter_call    ${driver5}
-#    which_page_is_currently_on    ${driver5}    ${user_is_currently_on_another_call}
-#    exit_one_driver    ${driver5}
-#    [Teardown]      run keywords    Close
-#    ...             AND             exit_driver
+Small_range_583_585
+    [Documentation]     3PI - Direct call     EU1 call EU2 from contact list
+    [Tags]    small range 583-585 lines         call_case     有bug：https://vipaar.atlassian.net/browse/CITRON-3712    已解决
+    # EU1 登录
+    ${driver1}    driver_set_up_and_logIn    ${Expert_User1_username}
+    # EU2 登录
+    ${driver2}    driver_set_up_and_logIn    ${Expert_User2_username}
+    # 获取OTU和MHS link
+    ${invite_otu_url}   send_meeting_room_link    ${driver1}   ${OTU_link_email}
+    ${invite_mhs_url}   send_meeting_room_link    ${driver1}   ${MHS_link_email}
+    # EU1 call EU2 from contact list
+    contacts_witch_page_make_call     ${driver1}    ${driver2}    ${py_team_page}   ${Expert_User2_name}
+    # Someone directly call EU1 or EU2	Someone get messgage about EU1 is on another call
+    ${driver3}    driver_set_up_and_logIn    ${Expert_User3_username}
+    contacts_witch_page_make_call     ${driver3}    ${driver1}   ${py_team_page}   ${Expert_User1_name}    no_anwser
+    which_page_is_currently_on    ${driver3}    ${user_is_currently_on_another_call}
+    exit_one_driver    ${driver3}
+    # Someone click EU1 or EU2's MHS link	Someone get messgage about EU1 is on another call
+    ${driver4}    driver_set_up_and_logIn    ${Expert_User4_username}
+    user_make_call_via_meeting_link    ${driver4}    ${invite_mhs_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver4}
+    which_page_is_currently_on    ${driver4}    ${user_is_currently_on_another_call}
+    exit_one_driver    ${driver4}
+    # someone click EU1 or EU2's OTU link	Someone get messgage about EU1 is on another call
+    ${driver5}    driver_set_up_and_logIn    ${Expert_User5_username}
+    user_make_call_via_meeting_link    ${driver5}    ${invite_otu_url}
+    # 确保建立call，但未接听
+    make_sure_enter_call    ${driver5}
+    which_page_is_currently_on    ${driver5}    ${user_is_currently_on_another_call}
+    exit_one_driver    ${driver5}
+    [Teardown]      run keywords    Close
+    ...             AND             exit_driver
 
 Small_range_590
     [Documentation]     3PI - Direct call     TU1 call EU1 from contact list
