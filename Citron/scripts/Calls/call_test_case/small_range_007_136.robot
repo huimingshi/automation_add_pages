@@ -511,45 +511,45 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_expert_user_User
     # 判断在Recents页面，匿名用户的通话记录没有Call按钮
     anonymous_user_call_can_not_call_again   ${driver1}
     [Teardown]     exit_driver
-#
-#User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
-#    [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
-#    [Tags]     small range 122+124+128 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
-#    # User A log in
-#    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
-#    # User B is team user log in
-#    ${driver2}   driver_set_up_and_logIn   ${for_team_call_username}
-#    # 进行一次call
-#    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_team_page}      ${for_team_call_name}
-#    # 结束通话
-#    exit_call     ${driver1}
-#    # 关闭通话结束展示页面
-#    close_call_ending_page      ${driver1}
-#    close_call_ending_page      ${driver2}
-#    # User B logout
-#    logout_citron   ${driver2}
-#    # 进入Recents页面
-#    sleep  5s   # 等待最近一次通话记录加载
-#    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
-#    refresh_browser_page   ${driver1}
-#    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-#    recents_page_check_call    ${driver1}   ${for_team_call_name}
-#    # 从邮箱获取刚发送的OTU邮件
-#    sleep  20s
-#    ${meeting_link}    obtain_meeting_link_from_email    check_otu
-#    # User B is team user log in
-#    ${driver3}   driver_set_up_and_logIn   ${for_team_call_username}
-#    # VP: call establish successfully
-#    check_call_can_reach_to_or_not   ${driver1}  ${driver3}   ${meeting_link}    1
-#    # 切换到首个句柄
-#    switch_first_window   ${driver3}
-#    # User B logout
-#    logout_citron   ${driver3}
-#    # 启动一个空的窗口
-#    ${driver4}   start_an_empty_window
-#    # VP: call establish successfully
-#    check_call_can_reach_to_or_not   ${driver1}  ${driver4}   ${meeting_link}    1
-#    [Teardown]     exit_driver
+
+User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
+    [Documentation]    User A taps unreachable user B from recents tab.  User B is team user   Other user clicks on this OTU link  User B is anonymous user.
+    [Tags]     small range 122+124+128 line      call_case    有bug：https://vipaar.atlassian.net/browse/CITRON-3496
+    # User A log in
+    ${driver1}   driver_set_up_and_logIn   ${switch_workspace_username}
+    # User B is team user log in
+    ${driver2}   driver_set_up_and_logIn   ${for_team_call_username}
+    # 进行一次call
+    contacts_witch_page_make_call   ${driver1}    ${driver2}     ${py_team_page}      ${for_team_call_name}
+    # 结束通话
+    exit_call     ${driver1}
+    # 关闭通话结束展示页面
+    close_call_ending_page      ${driver1}
+    close_call_ending_page      ${driver2}
+    # User B logout
+    logout_citron   ${driver2}
+    # 进入Recents页面
+    sleep  5s   # 等待最近一次通话记录加载
+    switch_to_diffrent_page   ${driver1}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
+    refresh_browser_page   ${driver1}
+    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
+    recents_page_check_call    ${driver1}   ${for_team_call_name}
+    # 从邮箱获取刚发送的OTU邮件
+    sleep  20s
+    ${meeting_link}    obtain_meeting_link_from_email    check_otu
+    # User B is team user log in
+    ${driver3}   driver_set_up_and_logIn   ${for_team_call_username}
+    # VP: call establish successfully
+    check_call_can_reach_to_or_not   ${driver1}  ${driver3}   ${meeting_link}    1
+    # 切换到首个句柄
+    switch_first_window   ${driver3}
+    # User B logout
+    logout_citron   ${driver3}
+    # 启动一个空的窗口
+    ${driver4}   start_an_empty_window
+    # VP: call establish successfully
+    check_call_can_reach_to_or_not   ${driver1}  ${driver4}   ${meeting_link}    1
+    [Teardown]     exit_driver
 
 Team_user_A_signs_in_User_B_is_expert_user
     [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
