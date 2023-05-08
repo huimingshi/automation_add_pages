@@ -155,7 +155,7 @@ OTU_call_Scenario_2
 
     comment      remove giver
     # U4 removes co-host giver( U3)	    VP: Present the user with a confirmation dialog: “Are you sure you want to remove <USER NAME>?”, Remove User (emphasis)/Cancel.
-    co_host_remove_sb      ${driver_DU4}     ${close_center_mode_name21}      can    yes    giver   no
+    co_host_remove_sb      ${driver_DU4}     ${close_center_mode_name21}      can    yes    observer   no
     # U4 confirms with Remove User.	VP:
         # 2. Show a toast message to all remaining users: “User Name (Giver) left the call. Switched back to Face to Face mode.”
         left_call_back_f2f_mode     ${driver_DU4}      ${close_center_mode_name21}
