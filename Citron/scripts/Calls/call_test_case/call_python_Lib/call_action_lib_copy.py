@@ -992,7 +992,7 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role 
         else:
             public_click_element(driver, '//button[@class="btn btn-default" and text()="Cancel"]', description="Cancel按钮")
     else:
-        ele_list = get_xpath_elements(driver,'//div[@class="remove-button disableRemove" and text()="Remove"]')
+        ele_list = get_xpath_elements(driver,'//div[@class="remove-button disableRemove" and contains(.,"emove")]')
         public_assert(driver,len(ele_list),1,action=f"{username}不可remove")
     if click_x == 'yes':
         # 点击"x"按钮进行收起

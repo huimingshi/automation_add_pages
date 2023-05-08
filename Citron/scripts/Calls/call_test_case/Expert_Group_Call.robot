@@ -186,6 +186,7 @@ expert_group_call_Scenario_2
         check_has_unFreeze_button     ${driver_EU2}
 
     comment        CP: Join call in freezing mode
+    sleep   60s
     # EU7 joins call via 3pi link.	VP: TU A joins call with image synchronized.	%1$s has joined as obeserver
     ${driver_EU7}     driver_set_up_and_logIn     ${expert_group_call_user31}
     user_make_call_via_meeting_link     ${driver_EU7}    ${invite_url}    no_check
