@@ -977,7 +977,7 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role 
     # 点击>
     public_click_element(driver,co_host_right_button.format(username),description=f"{username}旁的>按钮")
     if can_remove == 'can':
-        public_click_element(driver,'//div[@class="remove-button " and text()="Remove"]',description=f'Remove_{username}')
+        public_click_element(driver,'//div[@class="remove-button " and contains(.,"emove")]',description=f'Remove_{username}')
         if role == 'observer':
             ele_list = get_xpath_elements(driver,f'//div[text()="Are you sure you want to remove {username}?"]')
             public_assert(driver,len(ele_list),1,action="remove时的message正确")

@@ -60,6 +60,7 @@ call_center_Scenario_1
     check_in_photo_pdf_whiteboard_mode         photo    ${driver_U1}      ${driver_U2}
     # User C click share me	  VP:exit photo mode, C's live video
     share_me     ${driver_U3}
+    sleep    10
     # Co-host tries to remove giver (user B)(not host user A)	VP: Display message "If you remove giver, call will end for all participants"	VP: "Are you sure you want to remove <USER NAME>?"
     co_host_remove_sb     ${driver_U1}    ${center_mode_username2}    can   yes   giver
     # Confirm yes	VP: call ends for all the participants
