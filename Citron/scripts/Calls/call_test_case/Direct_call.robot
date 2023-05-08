@@ -67,7 +67,7 @@ direct_call_Scenario_1
     check_has_freeze_button             ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     check_has_photo_PDF_whiteboard      ${driver_U3}   ${driver_U4}   ${driver_EU5}   ${driver_U6}
     # AU1 click freeze
-    freeze_operation                    ${driver_U4}
+    freeze_operation                    ${driver_U4}      freeze    un_check
     # VP: TU1 is frozen; TU1 has no Merge menu
     check_has_unFreeze_button           ${driver_TU1}
     check_has_no_merge_menu             ${driver_TU1}
@@ -104,7 +104,7 @@ direct_call_Scenario_1
     exiting_document_sharing_mode      ${driver_EU2}
     sleep   30
     # U3 click Freeze
-    freeze_operation              ${driver_U3}
+    freeze_operation              ${driver_U3}        freeze    un_check
     # VP: U5 is frozen
     check_has_unFreeze_button     ${driver_EU5}
     # U3 Share whiteboard
