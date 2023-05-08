@@ -164,9 +164,9 @@ anonymous_start_a_6pc_meeting_call
     user_make_call_via_meeting_link     ${driver_UD}   ${invite_url}
     ${driver_UE}     driver_set_up_and_logIn     ${center_mode_user11}
     user_make_call_via_meeting_link     ${driver_UE}   ${invite_url}
-    user_anwser_call     ${driver_UB}   no_direct
+    user_anwser_call     ${driver_UA}   no_direct
     ${driver_UF}     anonymous_open_meeting_link    ${invite_url}
-    user_anwser_call     ${driver_UB}    no_direct
+    user_anwser_call     ${driver_UA}    no_direct
     # Giver & Receiver & Observer Draw curve & arrow
     enter_video_connection    ${driver_UA}
     sleep    10
