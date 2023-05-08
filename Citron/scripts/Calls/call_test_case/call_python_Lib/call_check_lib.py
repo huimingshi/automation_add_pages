@@ -371,7 +371,6 @@ def check_can_share_sb_live_video(driver,*users):
         # 将右侧的Share按收起
         CRSB(driver)
 
-@modify_implicit_wait(5)
 def check_can_not_share_sb_live_video(user,*drivers):
     """
     点击右侧的share按钮后，检查不可以share哪些人的live video
@@ -1038,11 +1037,10 @@ def special_dialog_text(driver,text = 'select'):
     :param text:
     :return:
     """
+    get_xpath_element(driver, '//b[text()="Ultra-Low Bandwidth Mode"]', description="Audio+mode展示")
     if text == "select":
-        get_xpath_element(driver,'//b[text()="Audio+ Mode"]',description="Audio+mode展示")
-        get_xpath_element(driver,'//span[text()="Select content to share."]',description="select展示")
+        get_xpath_element(driver,'//span[text()="Select content to share"]',description="select展示")
     else:
-        get_xpath_element(driver, '//b[text()="Audio+ Mode"]', description="Audio+mode展示")
         get_xpath_element(driver, '//span[text()="Ask others to Take a Photo or share content"]', description="ask展示")
 
 @modify_implicit_wait(5)

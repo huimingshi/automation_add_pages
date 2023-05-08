@@ -726,6 +726,8 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.
             file = get_picture_path(is_input = "not_input")
         else:
             file = get_picture_path(file_name, is_input="not_input")
+        file = file[1:]
+        print(file)
     elif file_type.upper() == "PDF":
         public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
         file = get_picture_path(file_name,is_input = "not_input")
