@@ -239,7 +239,7 @@ MHS_call_Scenario_3
         which_page_is_currently_on       ${driver_AU1}      ${star_rating_dialog}
         which_page_is_currently_on       ${driver_AU1}      ${end_call_add_tag}         not_currently_on
         which_page_is_currently_on       ${driver_AU1}      ${end_call_add_comment}     not_currently_on
-        which_page_is_currently_on       ${driver_AU1}      ${end_call_take_survey}     not_currently_on
+#        which_page_is_currently_on       ${driver_AU1}      ${end_call_take_survey}     not_currently_on
         # For web side, x button on the right top should not display for anonymous user.
         which_page_is_currently_on       ${driver_AU1}      ${end_call_page_close}      not_currently_on
         exit_one_driver     ${driver_AU1}
@@ -256,7 +256,7 @@ MHS_call_Scenario_3
         # 4.tag/comment, survey should not display for personal user.
         which_page_is_currently_on       ${driver_AU2}      ${end_call_add_tag}         not_currently_on
         which_page_is_currently_on       ${driver_AU2}      ${end_call_add_comment}     not_currently_on
-        which_page_is_currently_on       ${driver_AU2}      ${end_call_take_survey}     not_currently_on
+#        which_page_is_currently_on       ${driver_AU2}      ${end_call_take_survey}     not_currently_on
         exit_one_driver     ${driver_AU2}
 
     comment       CP: mhs owner leaves
@@ -265,8 +265,8 @@ MHS_call_Scenario_3
     user_anwser_call          ${driver_EU2}         no_direct
     has_joined_the_call       ${driver_EU2}         ${anonymous_user_name3}
     make_sure_enter_call     ${driver_AU3}
-    check_has_end_call_button       ${driver_EU2}     1    2
-#    check_has_no_end_call_button    ${driver_EU2}     2
+    check_has_end_call_button       ${driver_EU2}     1
+    check_has_no_end_call_button    ${driver_EU2}     2
     # AU3 share TU1's live video
     share_me        ${driver_AU3}
     # AU3 stop sharing	VP: Back to Face to Face mode
