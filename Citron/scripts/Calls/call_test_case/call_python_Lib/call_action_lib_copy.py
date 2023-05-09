@@ -980,13 +980,11 @@ def co_host_remove_sb(driver,username,can_remove = 'can',if_remove = 'yes',role 
         public_click_element(driver,'//div[@class="remove-button " and contains(.,"emove")]',description=f'Remove_{username}')
         if role == 'observer':
             ele_list = get_xpath_elements(driver,f'//div[text()="Are you sure you want to remove {username}?"]')
-            public_assert(driver,len(ele_list),1,action="remove时的message正确")
         elif role == 'giver':
             ele_list = get_xpath_elements(driver, '//div[text()="If you remove this Giver, call will end for all the participants."]')
-            public_assert(driver, len(ele_list), 1, action="remove时的message正确")
         else:
             ele_list = get_xpath_elements(driver,'//div[text()="If you remove this Receiver, call will end for all the participants."]')
-            public_assert(driver, len(ele_list), 1, action="remove时的message正确")
+        public_assert(driver, len(ele_list), 1, action="remove时的message正确")
         if if_remove == 'yes':
             public_click_element(driver,'//div[@class="modal-content"]//button[text()="OK"]',description="OK按钮")
         else:
