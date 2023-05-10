@@ -411,6 +411,7 @@ def in_call_click_message_button(driver,operation='open'):
     :return:
     """
     # 点击Message图标
+    SIV(driver,message_chat_icon)   # 滑动到可见
     public_check_element(driver, message_chat_icon, '点击Message图标')
     time.sleep(2)
     # 校验

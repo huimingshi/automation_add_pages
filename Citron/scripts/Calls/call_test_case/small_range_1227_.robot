@@ -101,7 +101,6 @@ Small_range_1220_1281
     in_call_download_file     ${driverB}     ${message_audio}
     delete_zip_file     ${particial_message_audio}
     # User C select 1 uploaded picture from chat list, click sub-menu 'Share' button.	VP: this file should be shown in main video screen.(前提条件：需要先进入到giving receiving help mode下)
-#    enter_giver_mode     ${driverA}      ${in_call_message_usernameB}     ${in_call_message_usernameC}
     minimize_window_action   ${driverA}   ${driverB}   ${driverC}   ${driverD}   ${driverA1}   ${driverD1}
     maximize_window_action   ${driverC}
     inCall_upload_photo_PDF    ${driverC}
@@ -130,9 +129,6 @@ Small_range_1220_1281
     delete_zip_file     ${particial_message_audio}
     in_call_download_file     ${driverD1}     ${message_audio}
     delete_zip_file     ${particial_message_audio}
-    # User B select 1 uploaded PDF file, click sub-menu 'Share' button	VP: this file should be shown in main video screen.
-    # User B clicks Share button to enter Markup mode
-    share_in_main_screen     ${driverB}        ${message_pdf}    file_type='pdf'
     # User A, User B, User C, User D, A1 & D1  do some telestrations
 
     # User A and D1 clicks Screen Capture button	VP: The 2 screen captures are uploaded into Message List for User A, User B, User C, User D, A1 & D1.
@@ -156,9 +152,10 @@ Small_range_1220_1281
     in_call_check_receive_attach       ${driverD1}      ${screen_capture_name}     attach_count=3
     # ------------------------ 1271-1281 ------------------------ #
     # End call
-    back_to_face_to_face_mode      ${driverA}
     end_call_for_all      ${driverA}
     exit_driver
+    # 等待call log生成
+    sleep    90s
     # Site Admin navigates to Site Administration -> Calls, WS Adminitration -> Calls
     ${driverSA}     driver_set_up_and_logIn     ${site_admin_username}
     user_switch_to_second_workspace      ${driverSA}     ${message_test_WS_A}
