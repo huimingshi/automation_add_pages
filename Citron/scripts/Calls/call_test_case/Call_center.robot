@@ -17,7 +17,7 @@ Force Tags        call_case     new_call_case
 *** Test Cases ***
 call_center_Scenario_1
     [Documentation]
-    [Tags]     Call Center
+    [Tags]     Call Center     upload_file_case
     # User A calls user B. User B answers call.
     ${driver_U1}     driver_set_up_and_logIn     ${center_mode_user1}
     ${driver_U2}     driver_set_up_and_logIn     ${center_mode_user2}
@@ -151,7 +151,7 @@ call_center_Scenario_3
 
 call_center_Scenario_4
     [Documentation]
-    [Tags]     Call Center
+    [Tags]     Call Center     upload_file_case
     # User B starts expert group call. Expert User A answers call.
     ${driver_E1}     driver_set_up_and_logIn     ${camera_off_expert}
     ${driver_U2}     driver_set_up_and_logIn     ${camera_off_user1}

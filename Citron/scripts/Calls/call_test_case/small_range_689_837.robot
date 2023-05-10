@@ -661,7 +661,7 @@ Disclaimer_808_809
 
 Small_range_820_821
     [Documentation]     Call recording feature     Pre-condition：set to always record      Anonymous user call meeting owner
-    [Tags]    small range 820-821 lines     call_case
+    [Tags]    small range 820-821 lines     call_case      upload_file_case
     [Setup]   set_always_on_select    always_on
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
@@ -720,7 +720,7 @@ Small_range_820_821
 
 Small_range_823
     [Documentation]     Call on-call group from contact list
-    [Tags]    small range 823 line      call_case
+    [Tags]    small range 823 line      call_case     upload_file_case
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   set_always_on_select    always_on
     # User A 登录
@@ -953,7 +953,7 @@ Small_range_833
 
 Small_range_834
     [Documentation]     Call enterprise contact
-    [Tags]    small range 834 line      call_case
+    [Tags]    small range 834 line      call_case      upload_file_case
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]   set_always_on_select    opt_out
     # User A 登录

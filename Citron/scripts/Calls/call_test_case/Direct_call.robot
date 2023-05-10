@@ -16,7 +16,7 @@ Force Tags        call_case     new_call_case
 *** Test Cases ***
 direct_call_Scenario_1
     [Documentation]   Test Point: change role(change receiver)
-    [Tags]     Direct Call
+    [Tags]     Direct Call      upload_file_case
     # TU1 log in
     ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
     # EU2 log in

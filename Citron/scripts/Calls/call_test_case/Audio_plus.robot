@@ -18,7 +18,7 @@ Force Tags        call_case     new_call_case
 *** Test Cases ***
 Audio_Mode_Scenario_1
     [Documentation]       always in Audio+ mode
-    [Tags]     Audio+
+    [Tags]     Audio+     upload_file_case
     comment     Face to Face mode
     # User A starts Audio+ call with user B.
     ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user1}
@@ -203,7 +203,7 @@ Audio_Mode_Scenario_2
 
 Audio_Mode_Scenario_3
     [Documentation]       switch call quality in photo, pdf mode
-    [Tags]     Audio+
+    [Tags]     Audio+     upload_file_case
     # User A starts Audio+ call with user B.
     ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user1}
     ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user2}
@@ -289,7 +289,7 @@ Audio_Mode_Scenario_3
 
 Audio_Mode_Scenario_6
     [Documentation]       cancel sending progress in Audio+  mode
-    [Tags]     Audio+
+    [Tags]     Audio+     upload_file_case
     # Start Audio+ mode direct call, user A, B, C in call
     ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user11}
     ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user21}
@@ -336,7 +336,7 @@ Audio_Mode_Scenario_6
 
 Audio_Mode_Scenario_7
     [Documentation]       cancel sending progress in video mode.
-    [Tags]     Audio+
+    [Tags]     Audio+     upload_file_case
     # Start Audio+ mode direct call, user A, B, C in call
     ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user1}
     ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user2}
@@ -380,7 +380,7 @@ Audio_Mode_Scenario_7
 
 Audio_Mode_Scenario_10
     [Documentation]        camera permission is denied
-    [Tags]     Audio+
+    [Tags]     Audio+      upload_file_case
     # User A and B denies camera permission. User A starts video call or meeting call with user B. User B answers call. Make call in HD & F2F mode.
     ${driver_UA}     driver_set_up_and_logIn     ${close_center_mode_user11}    ${public_pass}     accept     not_set_disturb     close_camera
     ${driver_UB}     driver_set_up_and_logIn     ${close_center_mode_user21}    ${public_pass}     accept     not_set_disturb     close_camera
@@ -422,7 +422,7 @@ Audio_Mode_Scenario_10
 
 Audio_Mode_Scenario_another_1
     [Documentation]       Call Center Mode is on. Enable agent's camera is on.
-    [Tags]     Audio+
+    [Tags]     Audio+      upload_file_case
     # User A starts Audio call with user B.
     ${driver_UA}     driver_set_up_and_logIn     ${center_mode_user1}
     ${driver_UB}     driver_set_up_and_logIn     ${center_mode_user2}

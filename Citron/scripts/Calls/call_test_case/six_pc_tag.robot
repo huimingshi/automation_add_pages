@@ -148,7 +148,7 @@ Force Tags        call_case     new_call_case
 
 anonymous_start_a_6pc_meeting_call
     [Documentation]       Screen capture -6pc
-    [Tags]     6pc tag    有bug：https://vipaar.atlassian.net/browse/CITRON-3764
+    [Tags]     6pc tag    有bug：https://vipaar.atlassian.net/browse/CITRON-3764      upload_file_case
     [Setup]     run keywords    delete_picture_jpg_file
     ...         AND             delete_picture_jpg_file     multipart-
     comment     photo mode, pdf;

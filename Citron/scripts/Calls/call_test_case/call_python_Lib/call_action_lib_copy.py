@@ -731,6 +731,8 @@ def inCall_upload_photo_PDF(driver,file_type = "Photo",file_name = 'test_citron.
     elif file_type.upper() == "PDF":
         public_click_element(driver, TPPW_share.format("PDF Document"), description="share_PDF按钮")
         file = get_picture_path(file_name,is_input = "not_input")
+        file = file[1:]
+        print(file)
     # mac上传文件
     upload_file_in_mac(file)
     if if_wait == 'wait':

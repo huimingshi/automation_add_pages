@@ -20,7 +20,7 @@ Force Tags        small_range
 *** Test Cases ***
 Small_range_1220_1281
     [Documentation]     In call message
-    [Tags]    small range 1260-1281 lines       call_case        message_case
+    [Tags]    small range 1260-1281 lines       call_case        message_case      upload_file_case
     [Setup]   run keywords    delete_zip_file     ${message_audio}
     ...       AND             delete_zip_file     ${particial_message_audio}
     ...       AND             delete_zip_file     ${screen_capture_file_name}
@@ -104,10 +104,8 @@ Small_range_1220_1281
 #    enter_giver_mode     ${driverA}      ${in_call_message_usernameB}     ${in_call_message_usernameC}
     minimize_window_action   ${driverA}   ${driverB}   ${driverC}   ${driverD}   ${driverA1}   ${driverD1}
     maximize_window_action   ${driverC}
-    inCall upload photo PDF    ${driverC}
+    inCall_upload_photo_PDF    ${driverC}
     maximize_window_action   ${driverA}   ${driverB}   ${driverD}   ${driverA1}   ${driverD1}
-    proceed_with_camera_on     ${driverA}
-    proceed_with_camera_on     ${driverB}
     share_in_main_screen     ${driverC}        ${message_jpg}
     # User A, User B, User C, User D, A1 & D1  do some sample operations	VP: These operations should be worked.
 

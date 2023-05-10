@@ -17,7 +17,7 @@ Force Tags        call_case     new_call_case
 *** Test Cases ***
 OTU_call_Scenario_1
     [Documentation]      Workspace call center mode = OFF
-    [Tags]     OTU Call
+    [Tags]     OTU Call       upload_file_case
     # EU2 send OTU link
     ${driver_EU2}     driver_set_up_and_logIn     ${close_center_mode_user1}
     ${OTU_url}    send_meeting_room_link    ${driver_EU2}     OTU
@@ -110,7 +110,7 @@ OTU_call_Scenario_1
 
 OTU_call_Scenario_2
     [Documentation]      remove giver/receiver/observer in pdf mode.
-    [Tags]     OTU Call
+    [Tags]     OTU Call       upload_file_case
     # EU2 send OTU link
     ${driver_EU2}     driver_set_up_and_logIn     ${close_center_mode_user11}
     ${OTU_url}    send_meeting_room_link    ${driver_EU2}     OTU
@@ -230,7 +230,7 @@ OTU_call_Scenario_2
 
 OTU_call_Scenario_3
     [Documentation]       leave call in pdf mode
-    [Tags]     OTU Call
+    [Tags]     OTU Call      upload_file_case
     # EU2 send OTU link
     ${driver_EU2}     driver_set_up_and_logIn     ${close_center_mode_user1}
     ${OTU_url}    send_meeting_room_link    ${driver_EU2}     OTU
@@ -299,7 +299,7 @@ OTU_call_Scenario_3
 
 OTU_call_Scenario_5
     [Documentation]      Join call in pdf mode
-    [Tags]     OTU Call
+    [Tags]     OTU Call       upload_file_case
     # EU2 send OTU link
     ${driver_EU2}     driver_set_up_and_logIn     ${close_center_mode_user11}
     ${OTU_url}    send_meeting_room_link    ${driver_EU2}     OTU

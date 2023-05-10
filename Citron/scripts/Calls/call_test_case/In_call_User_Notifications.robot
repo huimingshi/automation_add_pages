@@ -20,7 +20,7 @@ Force Tags        In-call User Notifications
 *** Test Cases ***
 In_call_User_Notifications_3467_28_29_30_46_49_50_51
     [Documentation]    It occurs when you are the Helper and are sharing a document
-    [Tags]      In-call User Notifications 3-51 lines       call_case
+    [Tags]      In-call User Notifications 3-51 lines       call_case      upload_file_case
     # log in
     ${driver1}   driver_set_up_and_logIn    ${message_test0_user}
     ${driver2}   driver_set_up_and_logIn    ${message_test1_user}
@@ -62,7 +62,7 @@ In_call_User_Notifications_3467_28_29_30_46_49_50_51
 
 In_call_User_Notifications_3568
     [Documentation]    It occurs when you aren't the Helper and are sharing a document
-    [Tags]      In-call User Notifications 3-8 lines       call_case
+    [Tags]      In-call User Notifications 3-8 lines       call_case      upload_file_case
     # log in
     ${driver1}   driver_set_up_and_logIn    ${notifications_user01}
     ${driver2}   driver_set_up_and_logIn    ${notifications_user02}
@@ -89,7 +89,7 @@ In_call_User_Notifications_3568
 
 In_call_User_Notifications_9_10_11_31_32
     [Documentation]    It occurs when you change from the image mode and it tells for the Helper, tha it return to Help Mode
-    [Tags]      In-call User Notifications 9-32 lines       call_case
+    [Tags]      In-call User Notifications 9-32 lines       call_case      upload_file_case
     # User B log in
     ${driver2}   driver_set_up_and_logIn   ${notifications_user03}
     # User C log in

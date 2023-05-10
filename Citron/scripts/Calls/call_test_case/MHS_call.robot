@@ -17,7 +17,7 @@ Force Tags        call_case     new_call_case
 *** Test Cases ***
 MHS_call_Scenario_1
     [Documentation]      Key Point: Anonymous can not be promote to co-host; can not turn off co-host for 2pc call
-    [Tags]     MHS Call
+    [Tags]     MHS Call      upload_file_case
     # Precondition: TU1, EU2, U3 are in the same enterprise A.  TU1 clicks on EU2’s mhs link. EU2 answers call.
     # Precondition: tag/comment is on, survey is off.
     ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
@@ -90,7 +90,7 @@ MHS_call_Scenario_1
 
 MHS_call_Scenario_2
     [Documentation]      remove giver/receiver/observer in photo mode
-    [Tags]     MHS Call
+    [Tags]     MHS Call      upload_file_case
     # Precondition: TU1, EU2, U3 are in the same enterprise A.  TU1 clicks on EU2’s mhs link. EU2 answers call.
     ${driver_TU1}     driver_set_up_and_logIn     ${STeam_User1_username}
     ${driver_EU2}     driver_set_up_and_logIn     ${SExpert_User2_username}
@@ -198,7 +198,7 @@ MHS_call_Scenario_2
 
 MHS_call_Scenario_3
     [Documentation]      Join call in photo mode
-    [Tags]     MHS Call
+    [Tags]     MHS Call      upload_file_case
     # TU1 click EU2's MHS link to start call
     ${driver_TU1}     driver_set_up_and_logIn     ${Team_User1_username}
     ${driver_EU2}     driver_set_up_and_logIn     ${Expert_User2_username}
