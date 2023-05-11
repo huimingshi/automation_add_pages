@@ -955,8 +955,7 @@ Small_range_833
 Small_range_834
     [Documentation]     Call enterprise contact
     [Tags]    small range 834 line      call_case      upload_file_case
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-#    [Setup]   set_always_on_select    opt_out
+    [Setup]   set_always_on_select    opt_out
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # Expert 登录
