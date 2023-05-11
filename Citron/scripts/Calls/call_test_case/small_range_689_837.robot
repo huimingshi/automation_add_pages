@@ -721,8 +721,7 @@ Small_range_820_821
 Small_range_823
     [Documentation]     Call on-call group from contact list
     [Tags]    small range 823 line      call_case     upload_file_case
-#    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
-#    [Setup]   set_always_on_select    always_on
+    [Setup]   set_always_on_select    always_on
     # User A 登录
     ${driver1}   driver_set_up_and_logIn   ${ws3_branding_A_user}
     # On-call user登录
@@ -744,6 +743,8 @@ Small_range_823
     rec_is_on_or_off     ${driver1}
     rec_is_on_or_off     ${driver2}
     # 上传pdf
+    minimize_window_action     ${driver1}    ${driver2}
+    maximize_window_action     ${driver1}
     inCall_upload_photo_PDF    ${driver1}   pdf
     rec_is_on_or_off     ${driver1}
     rec_is_on_or_off     ${driver2}
