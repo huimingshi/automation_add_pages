@@ -1036,7 +1036,9 @@ def turns_on_mic_by_himself(*drivers):
     """
     for i in range(len(drivers)):
         public_click_element(drivers[i], turns_on_mic, description=f"第{i + 1}driver自己解除静音")
+        time.sleep(10)
         ele_list = get_xpath_elements(drivers[i],mic_is_on)
+        print(len(ele_list))
         public_assert(drivers[i],len(ele_list),1,action=f"第{i + 1}driver自己解除静音成功")
 
 def select_co_host_back(driver,username = 'Huiming.shi.helplightning+EU2',can_turn_on = 'can',action = 'turn_on'):

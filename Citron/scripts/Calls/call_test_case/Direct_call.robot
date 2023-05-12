@@ -294,6 +294,7 @@ direct_call_Scenario_3
     turn_on_co_host_for_sb      ${driver_TU1}     ${anonymous_user_name}      gray
     # AU1 mutes other participant   VP: are mute
     co_host_mute_sb       ${driver_TU1}      mute    can    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
+    sleep    30
     # TU1 tries to unmute other participant.   VP: co-host can not un-mute others
 #    co_host_mute_sb       ${driver_TU1}      unmute    can_not    ${Expert_User2_name}    ${Expert_User3_name}    ${anonymous_user_name}   ${Expert_User5_name}   ${Team_User2_name}
     # The muted participant turns on mic by himself.	VP: mic is on.

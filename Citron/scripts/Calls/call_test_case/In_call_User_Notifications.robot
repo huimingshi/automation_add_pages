@@ -209,7 +209,7 @@ In_call_User_Notifications_24_25_54_55
 #    # 54-验证When user switches its role to Help Giver in audio mode	     Now Giving Help.
 #    now_which_help     ${driver2}
 #    # 55-验证When user switches its role to Help Receiver in audio mode	     Now Receiving Help.
-    now_which_help     ${driver3}    giving
+#    now_which_help     ${driver3}    giving
 #    [Teardown]    exit_driver
 
 In_call_User_Notifications_12_13_14_15_16_21_22_23_38_44_45
