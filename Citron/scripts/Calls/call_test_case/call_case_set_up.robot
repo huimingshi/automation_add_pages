@@ -119,7 +119,19 @@ make_sure_two_ws_call_center_mode_feature
     Close
 
 make_sure_two_ws_tagging_and_comments_feature
-    [Arguments]    ${first_action}    ${second_action}
-    Login_premium_user   # log in with premium admin
-    make_sure_workspaces_setting_tagging_and_comments      ${first_action}    ${second_action}          # WS1 and WS2 both turn on tag feature
+    [Arguments]    ${first_action}    ${second_action}    ${first_WS}=${close_call_center_mode_WS}      ${second_WS}=${close_call_center_mode_WS1}
+    Login_site_admin   # log in with premium admin
+    switch_to_created_workspace    ${first_WS}
+    # enter first workspace workspace setting
+    enter_workspace_workspace_settings
+    # workspace WS1 has "After Call: Tagging and Comments"=ON or OFF
+    Run Keyword If   '${first_action}'=='open_feature'    open_tagging_and_comments
+    ...  ELSE IF  '${first_action}'=='close_feature'    close_tagging_and_comments
+    # switch to second workspace
+    switch_to_created_workspace     ${second_WS}
+    # enter second workspace workspace setting
+    enter_workspace_workspace_settings
+    # workspace WS2 has "After Call: Tagging and Comments"=ON or OFF
+    Run Keyword If   '${second_action}'=='open_feature'    open_tagging_and_comments
+    ...  ELSE IF  '${second_action}'=='close_feature'    close_tagging_and_comments
     Close
