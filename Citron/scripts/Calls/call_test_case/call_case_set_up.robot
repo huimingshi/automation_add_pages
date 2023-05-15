@@ -53,8 +53,9 @@ turn_on_workspace_directory_setUp
     turn_on_workspace_directory             # 打开Workspace Directory设置
 
 fill_invitation_message_content_setUp
-    [Arguments]    ${who_login}    ${content}
+    [Arguments]    ${who_login}    ${content}     ${witch_WS}=${auto_default_workspace_xpath}
     who_login_keyword    ${who_login}
+    switch_to_created_workspace     ${witch_WS}
     enter_workspace_settings_page       # 进入settings页面
     fill_invitation_message_content     ${content}     # 填写信息
     Close
@@ -70,8 +71,9 @@ set_call_center_mode_setUp
     Close
 
 close_invitation_message_set_setUp
-    [Arguments]     ${who_login}
+    [Arguments]     ${who_login}    ${witch_WS}=${auto_default_workspace_xpath}
     who_login_keyword    ${who_login}
+    switch_to_created_workspace     ${witch_WS}
     enter_workspace_settings_page       # 进入settings页面
     close_invitation_message_set        # 关闭Before Call: Invitation Message配置项
     Close

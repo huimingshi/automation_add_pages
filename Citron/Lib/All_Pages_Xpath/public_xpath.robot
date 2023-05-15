@@ -36,6 +36,7 @@ ${second_workspace_xpath}                   xpath=//ul[@role="listbox" and @clas
 ${expand_workspace_button}                  xpath=//span[@role="listbox"]//i                                                                        # expand workspace button
 ${WS_E_update_workspace}                    xpath=//div[@class="k-list-scroller"]//li[contains(.,'WS-E update')]                                    # WS-E update workspace
 ${Canada_workspace}                         xpath=//div[@class="k-list-scroller"]//li[contains(.,'Canada')]                                         # Canada workspace
+${auto_default_workspace_xpath}             xpath=//div[@class="k-list-scroller"]//li[contains(.,'auto_default_workspace')]                                         # Canada workspace
 ${created_workspace}                        xpath=//div[@class="k-list-scroller"]//li[contains(.,'Huiming.shi_Added_WS')]                           # 我创建的WS(big_admin)
 ${created_workspace_branding_1}             xpath=//div[@class="k-list-scroller"]//li[contains(.,'WS_branding_setting_WS1')]                        # 我创建的WS(huiming.shi)
 ${created_workspace_branding_2}             xpath=//div[@class="k-list-scroller"]//li[contains(.,'WS_branding_setting_WS2')]                        # 我创建的WS(huiming.shi)

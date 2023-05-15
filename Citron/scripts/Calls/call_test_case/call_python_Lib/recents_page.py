@@ -127,16 +127,11 @@ def get_start_time_of_the_last_call(driver):
     :return: time_started   最近一次的通话开始时间
     """
     driver.switch_to.window(driver.window_handles[0])  # 切换到第一个页面
+    time.sleep(5)
+    public_click_element(driver,contacts_page,description = 'Contacts页面')  # 进入Contacts页面
     time.sleep(2)
-    try:
-        public_click_element(driver,contacts_page,description = 'Contacts页面')  # 进入Contacts页面
-        time.sleep(2)
-        public_click_element(driver,recents_page,description = 'Recents页面')  # 进入Recents页面
-        time.sleep(5)
-    except Exception as e:
-        print('切换页面失败',e)
-        screen_shot_func(driver, '切换页面失败')
-        raise Exception
+    public_click_element(driver,recents_page,description = 'Recents页面')  # 进入Recents页面
+    time.sleep(5)
     time_started = 'there is no call record'
     count = get_xpath_elements(driver,first_time_call_started)
     if len(count) != 0:

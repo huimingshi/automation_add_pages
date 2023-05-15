@@ -33,6 +33,7 @@ def my_account_change_name_and_avator(driver,change_name,change_avator,picture_p
     :param picture_path: 修改图片的绝对路径
     :return:
     """
+    time.sleep(5)
     click_my_account(driver)
     public_check_element(driver, '//span[contains(.,"My Account")]','进入My_Account_Settings页面失败')
     # 判断是否需要更改name

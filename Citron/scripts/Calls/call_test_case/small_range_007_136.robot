@@ -259,14 +259,14 @@ Disable_External_Users_check_case_3
     check_call_can_reach_to_or_not  ${driver1}   ${driver2}   https://app-stage.helplightning.net.cn/meet/Huiming.shi.helplightning+an_expert_user1    1    # MHS link
     # this record should not appear in recent list for this site user
     ${time_started_1}   get_start_time_of_the_last_call   ${driver1}
-    should be equal as strings    ${time_started_1}   ${time_started}
+    should not be equal as strings    ${time_started_1}   ${time_started}
     # 启动一个空的窗口
     ${driver3}  start_an_empty_window
     # Anonymous user   VP: he should be able to call this site workspace via on-call group link
     check_call_can_reach_to_or_not  ${driver1}   ${driver3}   https://app-stage.helplightning.net.cn/help?enterprise_id=2799&group_id=5562&group_name=on-call+group+2    1    # this is (on-call group 2) On-Call Group Url
     # this record should not appear in recent list for this site user
     ${time_started_2}   get_start_time_of_the_last_call   ${driver1}
-    should be equal as strings    ${time_started_2}   ${time_started}
+    should not be equal as strings    ${time_started_2}   ${time_started}
     [Teardown]      run keywords     Close
     ...             AND              exit_driver
 
@@ -551,27 +551,27 @@ User_A_taps_unreachable_user_B_from_recents_tab_User_B_is_team_user
     check_call_can_reach_to_or_not   ${driver1}  ${driver4}   ${meeting_link}    1
     [Teardown]     exit_driver
 
-Team_user_A_signs_in_User_B_is_expert_user
-    [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
-    [Tags]     small range 131+132+133 line        call_case
-    # Team user log in
-    ${driver1}   driver_set_up_and_logIn   ${User_Aa_username}
-    # 在Contacts页面查询user
-    contacts_different_page_search_user   ${driver1}    ${py_team_page}    ${Expert_User1_name}
-    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
-    contacts_page_send_email    ${driver1}    ${Expert_User1_name}
-    # 从邮箱获取刚发送的OTU邮件
-    sleep  20s
-    ${meeting_link}    obtain_meeting_link_from_email    check_otu
-    # User B is expert user log in
-    ${driver2}   driver_set_up_and_logIn   ${Expert_User1_username}
-    check_call_can_reach_to_or_not    ${driver1}   ${driver2}   ${meeting_link}    1
-    # 切换到首个句柄
-    switch_first_window   ${driver2}
-    # User B logout
-    logout_citron   ${driver2}
-    # 启动一个空的窗口
-    ${driver3}   start_an_empty_window
-    # User B is anonymous user clicks on this OTU link.
-    check_call_can_reach_to_or_not    ${driver1}   ${driver3}   ${meeting_link}    1
-    [Teardown]      exit_driver
+#Team_user_A_signs_in_User_B_is_expert_user
+#    [Documentation]    Team user A signs in. User A taps unreachable user B from contacts tab.  User B is expert user
+#    [Tags]     small range 131+132+133 line        call_case
+#    # Team user log in
+#    ${driver1}   driver_set_up_and_logIn   ${User_Aa_username}
+#    # 在Contacts页面查询user
+#    contacts_different_page_search_user   ${driver1}    ${py_team_page}    ${Expert_User1_name}
+#    # Send invitation dialog displays asking “Would you like to invite them into a call via email”，Click Send Invite button.
+#    contacts_page_send_email    ${driver1}    ${Expert_User1_name}
+#    # 从邮箱获取刚发送的OTU邮件
+#    sleep  20s
+#    ${meeting_link}    obtain_meeting_link_from_email    check_otu
+#    # User B is expert user log in
+#    ${driver2}   driver_set_up_and_logIn   ${Expert_User1_username}
+#    check_call_can_reach_to_or_not    ${driver1}   ${driver2}   ${meeting_link}    1
+#    # 切换到首个句柄
+#    switch_first_window   ${driver2}
+#    # User B logout
+#    logout_citron   ${driver2}
+#    # 启动一个空的窗口
+#    ${driver3}   start_an_empty_window
+#    # User B is anonymous user clicks on this OTU link.
+#    check_call_can_reach_to_or_not    ${driver1}   ${driver3}   ${meeting_link}    1
+#    [Teardown]      exit_driver

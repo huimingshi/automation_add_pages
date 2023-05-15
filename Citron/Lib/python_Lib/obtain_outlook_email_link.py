@@ -117,14 +117,14 @@ def get_external_invitation_message(expect_get_content):
     for one in mailContent:
         one_text = one.decode('utf-8')
         i += 1
-        print(f'第{i}个元素：', one_text)
+        # print(f'第{i}个元素：', one_text)
         if one_text.endswith('='):
             one_text = one_text[:-1]
             # print(f'第{i}个元素：', one_text)
             gather_content.append(one_text)
         else:
             gather_content.append(one_text)
-    # print('聚集后的邮件内容列表是：',gather_content)
+    print('聚集后的邮件内容列表是：',gather_content)
     if expect_get_content in gather_content:
         return 'External invitation message is correct'
     else:
