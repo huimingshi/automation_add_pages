@@ -2,7 +2,7 @@
 import time
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action as CTA
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action as CTA, cancel_workbox_details
 from public_settings_and_variable_copy import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -82,6 +82,7 @@ def which_page_is_currently_on(driver,page_tag_xpath,currently_on = 'currently_o
         public_assert(driver,len(ele_list),0,action='当前页面与预期页面不一致')
         driver.implicitly_wait(IMPLICIT_WAIT)
 
+@cancel_workbox_details
 def add_tags_and_comment(driver,which_tag = 1,which_comment = 'good_experience'):
     """
     # add tags and comment
@@ -676,7 +677,7 @@ def open_html_create_call(another_driver,login_user,password,call_user):
     """
     driver = SAEW()
     html_abs_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))),'publicData','html_login.html')
-    driver.get(html_abs_path)
+    driver.get(f"file://{html_abs_path}")
     select = get_xpath_element(driver, '//select[@id="environment-select"]',description = '选择environment')
     Select(select).select_by_visible_text('stage-asia')
     time.sleep(1)

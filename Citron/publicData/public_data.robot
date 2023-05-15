@@ -434,6 +434,15 @@ ${close_center_mode_name3}              Huiming.shi.helplightning+close_user3
 ${close_center_mode_user4}              Huiming.shi.helplightning+close_user4@outlook.com                                       # 用于OUT call的case
 ${close_center_mode_name4}              Huiming.shi.helplightning+close_user4
 
+${tag_comment_userA}                    Huiming.shi.helplightning+tcA@outlook.com                                               # 用于tag和comment测试
+${tag_comment_nameA}                    Huiming.shi.helplightning+tcA
+
+${tag_comment_userB}                    Huiming.shi.helplightning+tcB@outlook.com                                               # 用于tag和comment测试
+${tag_comment_nameB}                    Huiming.shi.helplightning+tcB
+
+${tag_comment_userC}                    Huiming.shi.helplightning+tcC@outlook.com                                               # 用于tag和comment测试
+${tag_comment_nameC}                    Huiming.shi.helplightning+tcC
+
 # 下列账号都属于Huiming.shi下的我自己创建的close_call_center_mode_WS1中的user，默认关闭了call center mode
 # Call center
 ${close_center_mode_user11}             Huiming.shi.helplightning+close_user11@outlook.com                                      # 用于OUT call的case

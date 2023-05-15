@@ -4,8 +4,8 @@
 import time
 
 from Citron.public_switch.pubLib import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW, \
-    switch_to_last_window as STLW,  close_last_window as CLW
+from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_last_window as STLW,  close_last_window as CLW
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import cancel_workbox_details
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 
 
@@ -98,6 +98,7 @@ def first_call_record_tag_and_comment(driver,expect_tag,*args):
     # 关闭Details页面
     close_details_page(driver)
 
+@cancel_workbox_details
 def get_all_tag_after_call(driver):
     """
     在通话结束页面，获取所有的tags
@@ -153,21 +154,6 @@ def check_survey_switch_success(driver,status = '0',click_button = 'no_click'):
         if click_button == 'click':
             public_click_element(driver,take_survey_after_call,description = 'take_survery按钮')
             time.sleep(6)       # 等待Survey页面加载出来
-
-def cancel_workbox_details(func):
-    """
-    通话结束页面弹出的WorkBox Details对话框，莫名其妙
-    :param driver:
-    :return:
-    """
-    def inner(*args,**kwargs):
-        args[0].implicitly_wait(3)
-        ele_list = get_xpath_elements(args[0],'//span[text()="Cancel"]')
-        if len(ele_list) != 0:
-            public_click_element(args[0],'//span[text()="Cancel"]',description="CANCEL按钮")
-        args[0].implicitly_wait(int(IMPLICIT_WAIT))
-        func(*args,**kwargs)
-    return inner
 
 @cancel_workbox_details
 def close_call_ending_page(driver):

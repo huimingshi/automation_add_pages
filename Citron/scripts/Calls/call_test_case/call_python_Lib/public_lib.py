@@ -53,3 +53,18 @@ def if_has_tutorial_then_close(func):
         # if len(ele_list) == 1:
         #     public_click_element(driver, close_tutorial_button, description='close_tutorial按钮')
     return inner
+
+def cancel_workbox_details(func):
+    """
+    通话结束页面弹出的WorkBox Details对话框，莫名其妙
+    :param driver:
+    :return:
+    """
+    def inner(*args,**kwargs):
+        args[0].implicitly_wait(3)
+        ele_list = get_xpath_elements(args[0],'//span[text()="Cancel"]')
+        if len(ele_list) != 0:
+            public_click_element(args[0],'//span[text()="Cancel"]',description="CANCEL按钮")
+        args[0].implicitly_wait(int(IMPLICIT_WAIT))
+        return func(*args,**kwargs)
+    return inner

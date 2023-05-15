@@ -21,18 +21,18 @@ Call_Tag_Comment_600_604
     [Setup]     run keywords      make_sure_two_ws_tagging_and_comments_feature        open_feature      open_feature
     ...         AND               make_sure_two_ws_external_feature                    close_feature     close_feature
     # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
+    ${driver1}   driver_set_up_and_logIn   ${tag_comment_userA}
     # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
+    ${driver2}   driver_set_up_and_logIn   ${tag_comment_userB}
     # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver3}   driver_set_up_and_logIn   ${tag_comment_userC}
     # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${big_admin_third_WS_name}
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}    ${tag_comment_nameB}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    inCall_enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    inCall_enter_contacts_search_user   ${driver3}   ${tag_comment_nameA}
     # 点击查询到的User A
-    click_user_in_contacts_list   ${driver3}   ${big_admin_first_WS_name}
+    click_user_in_contacts_list   ${driver3}   ${tag_comment_nameA}
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
     # User C End Call for All
@@ -99,18 +99,18 @@ Call_Tag_Comment_592_595
 #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
     # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
+    ${driver1}   driver_set_up_and_logIn   ${tag_comment_userA}
     # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
+    ${driver2}   driver_set_up_and_logIn   ${tag_comment_userB}
     # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver3}   driver_set_up_and_logIn   ${tag_comment_userC}
     # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${tag_comment_nameB}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    inCall_enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    inCall_enter_contacts_search_user   ${driver3}   ${tag_comment_nameA}
     # 点击查询到的User A
-    click_user_in_contacts_list   ${driver3}   ${big_admin_first_WS_name}
+    click_user_in_contacts_list   ${driver3}   ${tag_comment_nameA}
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
     # User A leave call
@@ -151,9 +151,9 @@ Call_Tag_Comment_592_595
     switch_to_diffrent_page   ${driver3}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     # Other participants tags must be updated,too;
-    first_call_record_tag_and_comment   ${driver1}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver2}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver3}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
@@ -163,18 +163,18 @@ Call_Tag_Comment_596_599
 #    #    因为上个case已经做了这个初始化动作了，故这个case不再执行初始化
 #    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
     # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
+    ${driver1}   driver_set_up_and_logIn   ${tag_comment_userA}
     # User B log in
-    ${driver2}   driver_set_up_and_logIn   ${big_admin_third_WS_username}
+    ${driver2}   driver_set_up_and_logIn   ${tag_comment_userB}
     # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver3}   driver_set_up_and_logIn   ${tag_comment_userC}
     # User C与User B进行Call
-    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    contacts_witch_page_make_call    ${driver3}   ${driver2}     ${py_team_page}     ${tag_comment_nameB}
     # User C 进入到邀请第三位用户进入call 的页面，并查询User A
     which_page_is_currently_on    ${driver3}    ${end_call_button}
-    inCall_enter_contacts_search_user   ${driver3}   ${big_admin_first_WS_name}
+    inCall_enter_contacts_search_user   ${driver3}   ${tag_comment_nameA}
     # 点击查询到的User A
-    click_user_in_contacts_list   ${driver3}   ${big_admin_first_WS_name}
+    click_user_in_contacts_list   ${driver3}   ${tag_comment_nameA}
     # User A 接收打进来的Call
     user_anwser_call   ${driver1}
     # User C End Call for All
