@@ -12,17 +12,26 @@ def click_my_account(driver):
     :param driver:
     :return:
     """
-    public_check_element(driver, current_account, '点击我的账号失败')
-    public_check_element(driver, '//div[@class="dropdown open btn-group btn-group-lg btn-group-link"]', '展开我的账号失败',if_click=None, if_show=1)
+    public_click_element(driver, current_account, '点击我的账号失败')
+    public_click_element(driver, '//div[@class="dropdown open btn-group btn-group-lg btn-group-link"]', '展开我的账号失败')
 
 def enter_my_account_settings_page(driver):
+    """
+    进入My Account的Settings页面
+    :param driver:
+    :return:
+    """
+    click_my_account(driver)
+    public_click_element(driver, '//li[@role="presentation"]//span[contains(.,"Settings")]', '进入My_Account_Settings页面失败')
+
+def enter_my_account_subpage(driver):
     """
     进入My Account页面
     :param driver:
     :return:
     """
     click_my_account(driver)
-    public_check_element(driver, '//li[@role="presentation"]//span[contains(.,"Settings")]', '进入My_Account_Settings页面失败')
+    public_click_element(driver, '//span[text()="My Account"]', '进入My_Account页面失败')
 
 def my_account_change_name_and_avator(driver,change_name,change_avator,picture_path,back_to_contact = 'no_back_to_contact'):
     """

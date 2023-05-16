@@ -12,6 +12,7 @@ Library           call_python_Lib/finish_call.py
 Library           call_python_Lib/contacts_page.py
 Library           call_python_Lib/about_call.py
 Library           call_python_Lib/workspace_settings_page.py
+Library           call_python_Lib/my_account.py
 Force Tags        small_range
 
 *** Test Cases ***
@@ -132,8 +133,7 @@ Small_range_977_993
 
     Comment    My Account 页面
     # open My account, Setting of my account	VP: All context with "Help Lightning" is branded, accent color is orange
-    switch_to_other_tab   ${driver1}   ${My_Account_button}
-    switch_to_other_tab   ${driver1}   ${My_Account_span_xpath}
+    enter_my_account_subpage    ${driver1}
     sleep   10
     ${css_value}   get_css_value   ${driver1}   ${My_Account_Settings_tab}        color                             # Settings tab页面
     check_get_color_correct    ${get_value}   ${css_value}
@@ -153,6 +153,7 @@ Small_range_977_993
     Comment    Site admin login
     # Site admin login and switch to WS1,VP: All context with "Help Lightning" is branded, accent color is orange, for following sceen
     ${driver2}    driver_set_up_and_logIn    ${site_admin_username}
+    switch_to_created_workspace    ${driver2}    ${auto_default_workspace_xpath}
     # Contacts screen
     ${css_value}   get_css_value   ${driver2}   ${Contacts_Send_link_email}   background-color                      # Send My Help Space Invitation按钮
     check_get_color_correct    ${get_value}   ${css_value}
