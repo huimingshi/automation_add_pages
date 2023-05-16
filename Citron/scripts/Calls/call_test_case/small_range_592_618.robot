@@ -187,15 +187,15 @@ Call_Tag_Comment_596_599
     close_call_ending_page   ${driver2}
     close_call_ending_page   ${driver3}
     # User C switch to WS2
-    user_switch_to_second_workspace     ${driver3}
+    user_switch_to_second_workspace     ${driver3}    ${close_call_center_mode_WS1_name}
     # User A切换到Contacts页面
     switch_to_diffrent_page   ${driver1}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     # A call B, invite C
-    contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${big_admin_third_WS_name}
+    contacts_witch_page_make_call    ${driver1}   ${driver2}     ${py_team_page}     ${tag_comment_nameB}
     which_page_is_currently_on    ${driver1}    ${end_call_button}
-    inCall_enter_contacts_search_user    ${driver1}   ${switch_workspace_name}
+    inCall_enter_contacts_search_user    ${driver1}   ${tag_comment_nameC}
     # 点击查询到的User C
-    click_user_in_contacts_list   ${driver1}   ${switch_workspace_name}
+    click_user_in_contacts_list   ${driver1}   ${tag_comment_nameC}
     user_anwser_call    ${driver3}
     # A end call for all
     end_call_for_all   ${driver1}
@@ -226,14 +226,14 @@ Call_Tag_Comment_605_606
 #    [Setup]     make_sure_two_ws_tagging_and_comments_feature     open_feature     open_feature
     # 该脚本中使用的on-call-group是three_user_in_this_on_call_group，隶属于big_admin
     # User A log in
-    ${driver1}   driver_set_up_and_logIn   ${big_admin_first_WS_username}
+    ${driver1}   driver_set_up_and_logIn   ${tag_comment_userA}
     # User C log in
-    ${driver3}   driver_set_up_and_logIn   ${switch_workspace_username}
+    ${driver3}   driver_set_up_and_logIn   ${tag_comment_userC}
     # User C switch to WS2
-    user_switch_to_second_workspace     ${driver3}
+    user_switch_to_second_workspace     ${driver3}    ${close_call_center_mode_WS1_name}
     # A Call on-call group from contact list
-    contacts_different_page_search_user    ${driver1}   ${py_team_page}    ${big_admin_on_call_group}  # search on-call-group in Team page
-    contacts_witch_page_make_call     ${driver1}   ${driver3}    ${py_team_page}  ${big_admin_on_call_group}
+    contacts_different_page_search_user    ${driver1}   ${py_team_page}    tag_comment_on_call_group  # search on-call-group in Team page
+    contacts_witch_page_make_call     ${driver1}   ${driver3}    ${py_team_page}    tag_comment_on_call_group
     # C accept call, then end call
     exit_call     ${driver3}
     # A and C fill in tag and comments
