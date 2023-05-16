@@ -468,6 +468,7 @@ Small_range_799_802
     [Tags]    small range 799 800 801 802 lines     call_case
     [Setup]     run keywords    check_file_if_exists_delete
     ...         AND             Login_site_admin
+    ...         AND             switch_to_created_workspace     ${auto_default_workspace_xpath}
     ...         AND             enter_workspace_settings_page       # 进入settings页面
     ...         AND             open_workspace_directory            # 打开Workspace Directory设置
     ...         AND             expand_option_delete_user           # EXPAND delete user 选项
@@ -532,6 +533,7 @@ Small_range_799_802
     # 801 line
     # VP: In Citron->Admin  1)-> Calls, to check any reference to the User becomes "Deleted User".
     Login_site_admin
+    switch_to_created_workspace     ${auto_default_workspace_xpath}
     enter_workspace_calls_page
     enter_which_call_details     0    # 进入第一条call记录的details
     refresh_web_page
