@@ -63,7 +63,7 @@ Small_range_625_627
     user_decline_or_accept_disclaimer    ${driver1}
     which_page_is_currently_on   ${driver1}   ${login_page_username}
     # Expert A logs in App.VP: Disclaimer window is shown up.
-    ${driver3}    driver_set_up_and_logIn    ${Expert_A_username}    ${public_pass}   no_check_toturial   no_care    no_care    no_care
+    ${driver3}    driver_set_up_and_logIn    ${Expert_A_username}    ${public_pass}    no_care    no_care
     disclaimer_should_be_shown_up_or_not     ${driver3}
     # Expert A clicks Accept button.
     user_decline_or_accept_disclaimer    ${driver3}   accept

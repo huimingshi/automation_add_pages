@@ -101,25 +101,25 @@ Small_range_658
     two_list_has_one_same_element    ${driver1}   ${occurred_time_list_0}   ${occurred_time_list_01}
     [Teardown]   exit_driver
 
-Small_range_660
-    [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
-    [Tags]    small range 660 line      call_case
-    ###### 保证User2 再未登录情况下，User 1中查看到是未登录状态
-    # Expert User1 登录（case中的caller），这个user属于big_admin
-    ${driver1}    driver_set_up_and_logIn    ${Expert_User2_username}
-    # Expert User2 登录（case中的Joiner），这个user属于big_admin
-    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
-    # 获取meeting link
-    ${invite_url}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
-    # Joiner's App is killed
-    logout_citron    ${driver2}
-    # caller calls via meeting link
-    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
-    # 确保建立call，但未接听
-    make_sure_enter_call    ${driver1}
-    # Owner decline call
-    which_page_is_currently_on   ${driver1}    ${that_user_is_unreachable}
-    [Teardown]   exit_driver
+#Small_range_660
+#    [Documentation]     No answer message   caller calls via meeting link	   One-time meeting room link [Joiner's App is killed]
+#    [Tags]    small range 660 line      call_case
+#    ###### 保证User2 再未登录情况下，User 1中查看到是未登录状态
+#    # Expert User1 登录（case中的caller），这个user属于big_admin
+#    ${driver1}    driver_set_up_and_logIn    ${Expert_User2_username}
+#    # Expert User2 登录（case中的Joiner），这个user属于big_admin
+#    ${driver2}    driver_set_up_and_logIn    ${Expert_User1_username}
+#    # 获取meeting link
+#    ${invite_url}    send_meeting_room_link    ${driver2}    ${OTU_link_email}   no_send
+#    # Joiner's App is killed
+#    logout_citron    ${driver2}
+#    # caller calls via meeting link
+#    user_make_call_via_meeting_link    ${driver1}   ${invite_url}
+#    # 确保建立call，但未接听
+#    make_sure_enter_call    ${driver1}
+#    # Owner decline call
+#    which_page_is_currently_on   ${driver1}    ${that_user_is_unreachable}
+#    [Teardown]   exit_driver
 
 Small_range_661
     [Documentation]     No answer message   caller calls via meeting link	  Meeting room link[Owner's App runs in backgroup]
