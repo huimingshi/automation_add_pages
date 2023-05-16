@@ -18,10 +18,8 @@ Force Tags        small_range
 Call_Tag_Comment_600_604
     [Documentation]    Call Tag/Comment   Pre-condition:Site has workspace WS1 ,WS2; User A,B,C in WS1; User C in WS2        A, B and C in a call
     [Tags]     small range 600-604 lines           call_case
-    # 保证两个WS的 external feature处于close状态
+    ###### 保证两个WS的 external feature处于close状态
     [Setup]      make_sure_two_ws_tagging_and_comments_feature        open_feature      open_feature
-#    [Setup]     run keywords      make_sure_two_ws_tagging_and_comments_feature        open_feature      open_feature
-#    ...         AND               make_sure_two_ws_external_feature                    close_feature     close_feature
     # User A log in
     ${driver1}   driver_set_up_and_logIn   ${tag_comment_userA}
     # User B log in
@@ -48,7 +46,7 @@ Call_Tag_Comment_600_604
     close_call_ending_page   ${driver2}
     close_call_ending_page   ${driver3}
     # User C switch to WS2
-    user_switch_to_second_workspace     ${driver3}    ${close_call_center_mode_WS_name}
+    user_switch_to_second_workspace     ${driver3}    ${close_call_center_mode_WS1_name}
     # C send meeing link [link2]
     ${invite_url}  send_meeting_room_link   ${driver3}  ${OTU_link_email}
     # A and B click [link2] to enter call
@@ -153,9 +151,9 @@ Call_Tag_Comment_592_595
     switch_to_diffrent_page   ${driver3}   ${py_contacts_page}     ${py_contacts_switch_success}    ${py_get_number_of_rows}
     switch_to_diffrent_page   ${driver3}   ${py_recents_page}     ${py_recents_switch_success}    ${py_get_number_of_rows}
     # Other participants tags must be updated,too;
-    first_call_record_tag_and_comment   ${driver1}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver2}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
-    first_call_record_tag_and_comment   ${driver3}     ${first_tag_text}, ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver1}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver2}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
+    first_call_record_tag_and_comment   ${driver3}     ${second_tag_text}, ${third_tag_text}      good_experience_3    good_experience_2   good_experience_1
     [Teardown]      run keywords    Close
     ...             AND             exit_driver
 
