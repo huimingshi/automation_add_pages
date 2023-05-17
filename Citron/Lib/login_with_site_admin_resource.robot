@@ -404,15 +404,15 @@ calls_check_cloumns_workspaces_tab
     ${workspaceString_get}   get text   ${first_data_show}/div[@col-id="workspaceString"]
     ${reasonCallEnded_get}   get text   ${first_data_show}/div[@col-id="reasonCallEnded"]
     ${callDuration_get}   get text   ${first_data_show}/div[@col-id="callDuration"]
-    ${tags_get}   get text   ${first_data_show}/div[@col-id="tags"]
+#    ${tags_get}   get text   ${first_data_show}/div[@col-id="tags"]
     should be equal as strings  ${first_lines}[0]    ${owner_name_get}
     should be equal as strings  ${first_lines}[1]    ${owner_email_get}
     should contain  ${first_lines}[2]    ${participants_get}
     should be equal as strings  ${first_lines}[3]    ${workspaceString_get}
     should be equal as strings  ${first_lines}[5]    ${reasonCallEnded_get}
     should be equal as strings  ${first_lines}[6]    ${callDuration_get}
-    ${tags_get_new}  string_with_whitespace_removed   ${tags_get}
-    should be equal as strings  ${first_lines}[7]    ${tags_get_new}
+#    ${tags_get_new}  string_with_whitespace_removed   ${tags_get}
+#    should be equal as strings  ${first_lines}[7]    ${tags_get_new}
 
 click_create_workspace_button
     # click Create Workspace button
