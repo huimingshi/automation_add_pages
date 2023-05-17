@@ -153,7 +153,7 @@ Small_range_977_993
     Comment    Site admin login
     # Site admin login and switch to WS1,VP: All context with "Help Lightning" is branded, accent color is orange, for following sceen
     ${driver2}    driver_set_up_and_logIn    ${site_admin_username}
-    switch_to_created_workspace    ${driver2}    ${auto_default_workspace_xpath}
+    user_switch_to_second_workspace     ${driver2}    ${auto_default_workspace}
     # Contacts screen
     ${css_value}   get_css_value   ${driver2}   ${Contacts_Send_link_email}   background-color                      # Send My Help Space Invitation按钮
     check_get_color_correct    ${get_value}   ${css_value}

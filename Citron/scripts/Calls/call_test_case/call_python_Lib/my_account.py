@@ -13,7 +13,7 @@ def click_my_account(driver):
     :return:
     """
     public_click_element(driver, current_account, '点击我的账号失败')
-    public_click_element(driver, '//div[@class="dropdown open btn-group btn-group-lg btn-group-link"]', '展开我的账号失败')
+    public_check_element(driver, '//div[@class="dropdown open btn-group btn-group-lg btn-group-link"]', '展开我的账号失败',if_click=None, if_show=1)
 
 def enter_my_account_settings_page(driver):
     """

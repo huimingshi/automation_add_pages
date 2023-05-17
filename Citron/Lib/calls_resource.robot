@@ -152,12 +152,12 @@ ${end_call_page_close}                          //div[@class="EndCallPageContent
 
 # 不是xpath的变量
 ${default_avatar_src}                           data:image/png;base64
-${organizer_brand_orange_color}                 --organizer-brand-color:#ff9933
-${lime_brand_orange_color}                      --lime-brand-color:#ff9933
-${lime_brand_green_color}                       --lime-brand-color:#00ff00
-${organizer_brand_default_color}                --organizer-brand-color:#00A9E0
-${lime_brand_default_color}                     --lime-brand-color:#00a9e0
-${lime_brand_default_color_1}                   --lime-brand-color:#00A9E0
+${organizer_brand_orange_color}                 --organizer-brand-color: #ff9933
+${lime_brand_orange_color}                      --lime-brand-color: #ff9933
+${lime_brand_green_color}                       --lime-brand-color: #00ff00
+${organizer_brand_default_color}                --organizer-brand-color: #00A9E0
+${lime_brand_default_color}                     --lime-brand-color: #00a9e0
+${lime_brand_default_color_1}                   --lime-brand-color: #00A9E0
 
 *** Keywords ***
 enter_group_calls
