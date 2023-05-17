@@ -1,6 +1,7 @@
 #-*- encoding: gb2312 -*-
 import poplib
 import re
+from Citron.public_switch.public_switch_py import TEST_WEB
 
 # pop3服务器地址
 host = "outlook.office365.com"
@@ -73,7 +74,7 @@ def get_email_link(tag):
     elif tag in gather_content:
         contain_tag = 1
         print(gather_content)
-        link = re.findall('https.*',gather_content)
+        link = re.findall(f'{TEST_WEB}.*',gather_content)
         print('从邮件获取的link_list为：', link)
         print('从邮件获取的link_list长度为：', len(link))
         print('从邮件获取的link为：', link[0])
@@ -132,7 +133,8 @@ def get_external_invitation_message(expect_get_content):
 
 if __name__ == '__main__':
     # print(get_email_link('Change My Password:'))
-    print(get_email_link('Click here to set your password:'))
+    # print(get_email_link('Click here to set your password:'))
+    print(get_email_link('confirmation_token'))
     # print(get_email_link('Accept Invitation'))
     # print(get_email_link('confirmation_token'))
     # print(get_email_verification_code())

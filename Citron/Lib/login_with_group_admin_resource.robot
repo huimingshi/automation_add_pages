@@ -838,6 +838,7 @@ add_tag_and_comments
     sleep  0.5s
     # 点击SAVE
     click element     ${tags_save_button}
+    sleep   1
     wait until element is not visible    ${prompt_information}    20s
     # 滑动到底
     swipe_browser_to_bottom

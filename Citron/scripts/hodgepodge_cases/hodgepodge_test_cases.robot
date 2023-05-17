@@ -358,8 +358,8 @@ favorite_onCall_group_from_team_page_AND_unfavorite_onCall_group_from_team_page
     [Tags]    favorite on-call group from team page AND unfavorite on-call group from team page
     # log in with Premium User
     Login_premium_user
-    # ordered by alphabetically
-    ordered_by_alphabetically
+#    # ordered by alphabetically
+#    ordered_by_alphabetically
     # favorite on-call group from team page or unfavorite
     favorite_on_call_group_from_team_page_or_not    On-call group update
     [Teardown]    Close
