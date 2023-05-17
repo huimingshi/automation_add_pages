@@ -28,5 +28,5 @@ Site_Admin_In_Site_Administration
     [Teardown]      run keywords    select_default_workspace   # choose defaultworkspace
     ...             AND         log_out_from_citron  # Log out from citron
     ...             AND         re_log_in_citron     # Re-log in Citron with the same user
-    ...             AND         the_workspace_field_should_be_the_selected_one_before_loging_out     agents_camera_is_off  # the workspace field shoud be the selected one before loging out.
+    ...             AND         the_workspace_field_should_be_the_selected_one_before_loging_out     ${agents_camera_is_off_WS}   # the workspace field shoud be the selected one before loging out.
     ...             AND         Close

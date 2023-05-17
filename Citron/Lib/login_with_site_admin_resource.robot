@@ -801,7 +801,7 @@ activate_workspace
 the_workspace_is_correct
     # the workspace is correct.
     ${get_text}  get text  xpath=//div[@class="workspace-dropdown-container"]
-    should be equal as strings  ${get_text}   auto_default_workspace
+    should be equal as strings  ${get_text}   ${agents_camera_is_off_WS}
 
 field_content_is_empty
     # The Email, Name, Title, Location, Mobile Phone should be blank.
@@ -1460,7 +1460,20 @@ open_tagging_and_comments_setting
     click element   ${open_tag_and_comment}
     sleep  3s   # Waiting for the configuration to take effect
 
+expand_workspaces_switch
+    # Expand workspace
+    click element   ${expand_workspace_button}
+    sleep  2s
 
+switch_to_created_workspace
+    [Arguments]   ${witch_created_WS}
+    # Expand workspace
+    expand_workspaces_switch
+    # choose second workspace
+    click element   ${witch_created_WS}
+    sleep  3
+    ${ele_count}     get element count    ${accept_disclaimer}
+    Run Keyword If   '${ele_count}'=='1'    click element    ${accept_disclaimer}
 
 
 

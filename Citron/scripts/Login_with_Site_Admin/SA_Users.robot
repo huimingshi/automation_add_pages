@@ -22,7 +22,7 @@ Site_Admin_Add_users_do_not_select_workspace
     # close browser
     Close
     # New added user logs in Citron
-    Login_new_added_user_whitout_workspaces   ${email}
+    Login_new_added_user   ${email}
     # close browser
     Close
     # log in with site admin
@@ -48,6 +48,7 @@ Site_Admin_Add_users_select_one_workspace
     [Tags]     Add Users Select one of workspace       open outlook email
     # log in with site admin
     Login_site_admin
+    switch_to_created_workspace    ${auto_default_workspace_xpath}
     # enter SITE ADMINISTRATION Users page
     enter_site_users
     # Select one of workspace
@@ -71,6 +72,7 @@ Site_Admin_Add_users_Click_Submit_and_Add_another_button
     [Tags]     Add Users Click 'Submit and Add another' button       open outlook email
     # log in with site admin
     Login_site_admin
+    switch_to_created_workspace    ${auto_default_workspace_xpath}
     # enter SITE ADMINISTRATION Users page
     enter_site_users
     # Add Users Select one of workspace And Click 'Submit and Add another' button
@@ -111,6 +113,7 @@ Site_Admin_Select_randomly_one_User
     [Tags]     Select randomly one User     open outlook email
     # log in with site admin
     Login_site_admin
+    switch_to_created_workspace    ${auto_default_workspace_xpath}
     # enter SITE ADMINISTRATION Users page
     enter_site_users
     # Add Users Select one of workspace And Click 'Add' button

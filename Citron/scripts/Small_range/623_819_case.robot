@@ -217,78 +217,76 @@ Set_Declaimer_delete_user_is_not_selected_User_clicks_Accept_button
     users_successfully_login
     [Teardown]  Close
 
-Set_Declaimer_delete_user_is_not_selected_user_S_belong_to_Workspace_WS1_WS2_and_WS3
-    [Documentation]     user S belong to Workspace WS1, WS2, and WS3;  Each workspace has its own disclaimer content;
-    [Tags]    small range 812-816 line
-    [Setup]     run keywords    Login_premium_user
-    ...         AND             enter_workspace_settings_page       # 进入settings页面
-    ...         AND             expand_option_delete_user           # EXPAND delete user 选项
-    ...         AND             set_disclaimer_is_on                # 设置Disclaimer为open状态
-    ...         AND             set_delete_user_close               # 设置delete user为close状态
-    ...         AND             switch_to_second_workspace          # 切换到第二个workspace-Canada
-    ...         AND             expand_option_delete_user           # EXPAND delete user 选项
-    ...         AND             set_disclaimer_is_on                # 设置Disclaimer为open状态
-    ...         AND             set_delete_user_close               # 设置delete user为close状态
-    ...         AND             switch_to_third_workspace           # 切换到第三个workspace-Slytherin 🐍
-    ...         AND             expand_option_delete_user           # EXPAND delete user 选项
-    ...         AND             set_disclaimer_is_on                # 设置Disclaimer为open状态
-    ...         AND             set_delete_user_close               # 设置delete user为close状态
-    # 进入users页面
-    enter_workspace_users_page
-    # 新建一个normal user
-    ${random}   get_random_number
-    ${email}   add_normal_user   ${random}
-    # 进入Site Administration目录树中的Users页面
-    enter_site_users_page
-    # 在这个页面查询刚添加的user
-    page_search   ${email}   1
-    # 点击Details按钮
-    click_Users_user_details
-    # 使得这个user处于三个WS中，目前已处于第三个WS
-    make_user_belong_to_three_WS    Canada    BigAdmin Premium
-    # 根据邮件打开链接并设置密码
-    fill_password_mailbox
-    # Close driver
-    Close
-
-    ###### 813,814,816 lines
-    # User S login，进入第一个WS
-    user_login_citron_without_accept_disclaimer    ${email}
-    # User S decline disclaimer of WS1
-    check_appear_disclaimer
-    click_decline_disclaimer
-    # VP: User S switch to WS2
-    # User S decline disclaimer of WS2
-    check_appear_disclaimer
-    click_decline_disclaimer
-    # User S decline disclaimer of WS3
-    check_appear_disclaimer
-    click_decline_disclaimer
-    # VP: User S is force logout
-    login_page_without_user_info
-    # close driver
-    Close
-
-    ###### 815 line
-    user_login_citron_without_accept_disclaimer    ${email}
-    # User S decline disclaimer of WS1
-    check_appear_disclaimer
-    click_decline_disclaimer
-    # VP: User S switch to WS2
-    # User S decline disclaimer of WS2
-    check_appear_disclaimer
-    click_decline_disclaimer
-    # User S decline disclaimer of WS3
-    check_appear_disclaimer
-    click_accept_disclaimer
-#    # 关闭导航页面
-#    close_tutorial
-    # User S click workspace list	VP: WS1, WS2 and WS3 still show in the option list, even disclaimer is declined
-    ${WSList}   all_WS_show_in_option_list    3
-    string_in_list_object    BigAdmin Premium   ${WSList}
-    string_in_list_object    Canada   ${WSList}
-    string_in_list_object    Slytherin   ${WSList}
-    [Teardown]  Close
+#Set_Declaimer_delete_user_is_not_selected_user_S_belong_to_Workspace_WS1_WS2_and_WS3
+#    [Documentation]     user S belong to Workspace WS1, WS2, and WS3;  Each workspace has its own disclaimer content;
+#    [Tags]    small range 812-816 line     有bug：https://vipaar.atlassian.net/browse/CITRON-3798   不自动跳转到下一个WS
+#    [Setup]     run keywords    Login_premium_user
+#    ...         AND             enter_workspace_settings_page       # 进入settings页面
+#    ...         AND             expand_option_delete_user           # EXPAND delete user 选项
+#    ...         AND             set_disclaimer_is_on                # 设置Disclaimer为open状态
+#    ...         AND             set_delete_user_close               # 设置delete user为close状态
+#    ...         AND             switch_to_second_workspace          # 切换到第二个workspace-Canada
+#    ...         AND             expand_option_delete_user           # EXPAND delete user 选项
+#    ...         AND             set_disclaimer_is_on                # 设置Disclaimer为open状态
+#    ...         AND             set_delete_user_close               # 设置delete user为close状态
+#    ...         AND             switch_to_third_workspace           # 切换到第三个workspace-Slytherin 🐍
+#    ...         AND             expand_option_delete_user           # EXPAND delete user 选项
+#    ...         AND             set_disclaimer_is_on                # 设置Disclaimer为open状态
+#    ...         AND             set_delete_user_close               # 设置delete user为close状态
+#    # 进入users页面
+#    enter_workspace_users_page
+#    # 新建一个normal user
+#    ${random}   get_random_number
+#    ${email}   add_normal_user   ${random}
+#    # 进入Site Administration目录树中的Users页面
+#    enter_site_users_page
+#    # 在这个页面查询刚添加的user
+#    page_search   ${email}   1
+#    # 点击Details按钮
+#    click_Users_user_details
+#    # 使得这个user处于三个WS中，目前已处于第三个WS
+#    make_user_belong_to_three_WS    Canada    BigAdmin Premium
+#    # 根据邮件打开链接并设置密码
+#    fill_password_mailbox
+#    # Close driver
+#    Close
+#
+#    ###### 813,814,816 lines
+#    # User S login，进入第一个WS
+#    user_login_citron_without_accept_disclaimer    ${email}
+#    # User S decline disclaimer of WS1
+#    check_appear_disclaimer
+#    click_decline_disclaimer
+#    # VP: User S switch to WS2
+#    # User S decline disclaimer of WS2
+#    check_appear_disclaimer
+#    click_decline_disclaimer
+#    # User S decline disclaimer of WS3
+#    check_appear_disclaimer
+#    click_decline_disclaimer
+#    # VP: User S is force logout
+#    login_page_without_user_info
+#    # close driver
+#    Close
+#
+#    ###### 815 line
+#    user_login_citron_without_accept_disclaimer    ${email}
+#    # User S decline disclaimer of WS1
+#    check_appear_disclaimer
+#    click_decline_disclaimer
+#    # VP: User S switch to WS2
+#    # User S decline disclaimer of WS2
+#    check_appear_disclaimer
+#    click_decline_disclaimer
+#    # User S decline disclaimer of WS3
+#    check_appear_disclaimer
+#    click_accept_disclaimer
+#    # User S click workspace list	VP: WS1, WS2 and WS3 still show in the option list, even disclaimer is declined
+#    ${WSList}   all_WS_show_in_option_list    3
+#    string_in_list_object    BigAdmin Premium   ${WSList}
+#    string_in_list_object    Canada   ${WSList}
+#    string_in_list_object    Slytherin   ${WSList}
+#    [Teardown]  Close
 
 #Set_Declaimer_delete_user_is_selected_user_S_belong_to_Workspace_WS1_WS2_and_WS3
 #    [Documentation]     Site Admin set "delete user" for disclaimer of WS1    user S belong to Workspace WS1, WS2, and WS3

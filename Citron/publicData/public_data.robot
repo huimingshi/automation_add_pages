@@ -19,6 +19,8 @@ ${site_admin_name}                      huiming.shi                             
 ${site_admin_username_auto}             hlnauto+basic                                                                           # site admin username
 ${site_admin_password_auto}             Abc12345                                                                                # site admin password
 
+${agents_camera_is_off_WS}              agents_camera_is_off                                                                    # agents_camera_is_off这个WS
+
 ${auto_default_workspace}               auto_default_workspace
 
 ${site_admin_name_one_workspace}        Huiming.shi.helplightning+11111111111@outlook.com                                       # Site Admin user which just has one workspace                                                                           # Site Admin pass which just has one workspace

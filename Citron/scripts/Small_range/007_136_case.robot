@@ -122,6 +122,7 @@ Turn_off_User_Directory_case
     [Tags]    small range 62 lines
     # log in citron with site admin
     Login_site_admin
+    switch_to_created_workspace    ${auto_default_workspace_xpath}
     # enter Workspace Settings page
     enter_workspace_settings_page
     # Turn off User Directory

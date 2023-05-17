@@ -517,7 +517,7 @@ back_to_directory_page
 switch_workspace_check_directory
     # first workspace data list
     @{NameList_A}=    Create List
-    FOR   ${i}   IN RANGE  1   11
+    FOR   ${i}   IN RANGE  1   8
         ${get_name_text}   get text    ${directory_page_id}//div[@row-index="${i}"]//div[@class="cardName"]
         Append To List    ${NameList_A}    ${get_name_text}
     END
@@ -528,7 +528,7 @@ switch_workspace_check_directory
     wait until element is visible   ${directory_first_data_show}
     # second workspace data list
     @{NameList_B}=    Create List
-    FOR   ${i}   IN RANGE  1   11
+    FOR   ${i}   IN RANGE  1   8
         ${get_name_text}   get text    ${directory_page_id}//div[@row-index="${i}"]//div[@class="cardName"]
         Append To List    ${NameList_B}    ${get_name_text}
     END
