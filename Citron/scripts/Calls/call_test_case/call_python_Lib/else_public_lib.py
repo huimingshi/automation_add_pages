@@ -405,8 +405,10 @@ def get_all_data_on_the_page(driver,witch_page,search_key = 'cardName'):
             # 如果当前循环下，尾条数据不存在，就进行向下滑动(每次向下滑动 当前浏览器的高度像素的四分之一)
             quarter_of_the_height_n = quarter_of_the_height_n + quarter_of_the_height
             quarter_of_the_height_s = quarter_of_the_height_s + sixteen_of_the_height
-            if witch_page == 'Directory' or witch_page == 'Team':
+            if witch_page == 'Directory':
                 js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[2].scrollTop={quarter_of_the_height_n}'
+            elif witch_page == 'Team':
+                js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[1].scrollTop={quarter_of_the_height_n}'
             elif witch_page == 'Users':
                 js = f'document.getElementsByClassName("ag-body-viewport ag-layout-normal ag-row-no-animation")[0].scrollTop={quarter_of_the_height_n}'
                 # driver.execute_script(js)
