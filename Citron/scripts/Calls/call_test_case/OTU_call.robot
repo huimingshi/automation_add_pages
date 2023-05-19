@@ -285,8 +285,8 @@ OTU_call_Scenario_3
     # Confirm with “Leave call”.	VP: owner sees star rating dialog with survey, but without tag/comment. Call still continues for the remaining participants.
     leave_call     ${driver_EU2}
     which_page_is_currently_on       ${driver_EU2}      ${star_rating_dialog}
-    which_page_is_currently_on       ${driver_EU2}      ${end_call_add_tag}         not_currently_on
-    which_page_is_currently_on       ${driver_EU2}      ${end_call_add_comment}     not_currently_on
+    which_page_is_currently_on       ${driver_EU2}      ${end_call_add_tag}
+    which_page_is_currently_on       ${driver_EU2}      ${end_call_add_comment}
     which_page_is_currently_on       ${driver_EU2}      ${end_call_take_survey}
     which_page_is_currently_on       ${driver_AU1}      ${end_call_button}
     which_page_is_currently_on       ${driver_U3}      ${end_call_button}

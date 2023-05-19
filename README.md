@@ -65,6 +65,8 @@
   - 进入到Citron目录下，cmd中执行命令：robot  --include  new_call_case scripts
 ### 如何只执行老的case？
   - 进入到Citron目录下，cmd中执行命令：robot  --exclude  new_call_case scripts
+### 如何只执行不需要上传文件的case？
+  - 进入到Citron目录下，cmd中执行命令：robot  --exclude  upload_file_case scripts
 ### 如何只执行需要再Call中上传图片的case？
   - 进入到Citron/scripts/Calls目录下，cmd中执行命令：robot  --include  upload_file_case call_test_call
 ### 如何只执行不需要再Call中上传图片的case（即是全量脚本【除去上传文件的】）？

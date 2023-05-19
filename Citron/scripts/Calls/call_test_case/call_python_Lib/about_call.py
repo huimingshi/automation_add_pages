@@ -33,6 +33,7 @@ def del_tags_in_call_details(driver):
     """
     # 点击首行数据的Details按钮
     click_first_line_details(driver)
+    time.sleep(3)
     # 删除第一个tag
     public_click_element(driver, '//ul[@role="listbox"]/li[1]/span[@aria-label="delete"]', description='删除第一个tag失败')
     public_click_element(driver, '//div[@class="Tags container-box"]//button[@class="k-button k-primary pull-right"]', description='点击保存tag按钮失败')
