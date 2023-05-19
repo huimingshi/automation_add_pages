@@ -801,7 +801,7 @@ activate_workspace
 the_workspace_is_correct
     # the workspace is correct.
     ${get_text}  get text  xpath=//div[@class="workspace-dropdown-container"]
-    should be equal as strings  ${get_text}   ${agents_camera_is_off_WS}
+    should be equal as strings  ${get_text}   ${auto_default_workspace}
 
 field_content_is_empty
     # The Email, Name, Title, Location, Mobile Phone should be blank.

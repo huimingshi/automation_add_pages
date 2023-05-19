@@ -21,7 +21,7 @@ Small_range_623_two_users_login
     # User A 登录
     ${driver1}    driver_set_up_and_logIn    ${User_A_username}
     # team list for user A is:Quantum Mechanics (on-call group is marked with visual indication, email field is blank for web side)  Feynman  Gell-mann  User B  (the order to show from top to below: on-call groups  alphabetically, users in external and internal groups alphabetically
-    check_contacts_list   ${driver1}    ${Quantum_Mechanics_group_name}   Huiming.shi.helplightning+Feynman    Huiming.shi.helplightning+Gell-mann    Huiming.shi.helplightning+User_B
+    check_contacts_list   ${driver1}    ${Quantum_Mechanics_group_name}   Huiming.shi.helplightning+Feynman    Huiming.shi.helplightning+Gell-mann    Huiming.shi.helplightning+multi_WS    Huiming.shi.helplightning+User_B
     # on-call group is marked with visual indication
     ${css_value}   get_css_value   ${driver1}   ${first_data_background_color}     background-color
     two_option_is_equal    ${driver1}    rgba(160, 220, 238, 1)    ${css_value}

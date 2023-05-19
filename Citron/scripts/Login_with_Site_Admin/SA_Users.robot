@@ -11,6 +11,7 @@ Site_Admin_Add_users_do_not_select_workspace
     [Tags]     Add Users Don't select workspace      open outlook email
     # log in with site admin
     Login_site_admin
+    switch_to_created_workspace    ${auto_default_workspace_xpath}
     # enter SITE ADMINISTRATION Users page
     enter_site_users
     # Add Users Don't select workspace
@@ -27,6 +28,7 @@ Site_Admin_Add_users_do_not_select_workspace
     Close
     # log in with site admin
     Login_site_admin
+    switch_to_created_workspace    ${auto_default_workspace_xpath}
     # enter SITE ADMINISTRATION Users page
     enter_site_users
     # The user is listed in Active Users tab.
