@@ -801,7 +801,7 @@ activate_workspace
 the_workspace_is_correct
     # the workspace is correct.
     ${get_text}  get text  xpath=//div[@class="workspace-dropdown-container"]
-    should be equal as strings  ${get_text}   ${auto_default_workspace}
+    should be equal as strings  ${get_text}   ${agents_camera_is_off_WS}
 
 field_content_is_empty
     # The Email, Name, Title, Location, Mobile Phone should be blank.
@@ -1134,6 +1134,8 @@ select_one_workspace_from_drop_down_menu
     ${workspace_text_after}  converts_string_to_uppercase   ${workspace_text}
     ${information}    Catenate    ${workspace_text_after}   ADMINISTRATION
     should be equal as strings    ${information}   ${header_get}
+    # 点击disclaimer
+    check_disclaimer
     [Return]   ${workspace_text}
 
 select_default_workspace
