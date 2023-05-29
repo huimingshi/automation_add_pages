@@ -9,6 +9,7 @@ Resource          All_Pages_Xpath/WS_Admin/Users.robot
 Resource          All_Pages_Xpath/WS_Admin/Workspace_Settings.robot
 Resource          All_Pages_Xpath/Normal/Contacts.robot
 Resource          All_Pages_Xpath/public_xpath.robot
+Resource          All_Pages_Xpath/Normal/load_file.robot
 Library           python_Lib/ui_keywords.py
 
 *** Variables ***
@@ -25,6 +26,8 @@ ${py_recents_page}                              Calls                           
 ${py_favorites_page}                            Favorites                                                                                           # Favorites page
 ${py_contacts_page}                             Contacts                                                                                            # Contacts page
 ${py_messages_page}                             Messages                                                                                            # Messages page
+${py_knowledge_page}                            Knowledge                                                                                           # Knowledge page
+${py_workboxes_page}                            Workboxes                                                                                           # Workboxes page
 ${anonymous_user_name}                          Anonymous 1                                                                                         # 通话中显示匿名用户的名字
 ${anonymous_user_name2}                         Anonymous 2                                                                                         # 通话中显示匿名用户的名字
 ${anonymous_user_name3}                         Anonymous 3                                                                                         # 通话中显示匿名用户的名字
@@ -35,6 +38,7 @@ ${py_team_user_search}                          //div[@id="user-tabs-pane-1"]//i
 ${py_personal_user_search}                      //div[@id="user-tabs-pane-2"]//input[@id="filter-text-box"]                                         # personal search input box
 ${py_input_search}                              //input[@id="filter-text-box"]                                                                      # search entry box
 ${py_get_number_of_rows}                        //div[@class="ag-center-cols-container"]/div                                                        # Get number of rows
+${py_get_knowledge_rows}                        //div[@class="list-item-content"]                                                                   # Get number of rows
 ${py_directory_switch_success}                  //a[@id="user-tabs-tab-directory" and @aria-selected="true"]                                        # switch to Directory page successfully
 ${py_users_switch_success}                      //span[contains(.,"Active Users")]                                                                  # switch to Users page successfully
 ${py_groups_switch_success}                     //h1[text()="Groups"]                                                                               # switch to Groups page successfully
@@ -43,6 +47,7 @@ ${py_messages_switch_success}                   //h1[contains(.,"Messages")]    
 ${py_personal_switch_success}                   //a[@id="user-tabs-tab-personal" and @aria-selected="true"]                                         # switch to Personal page successfully
 ${py_recents_switch_success}                    //h1[contains(.,"Calls")]                                                                           # switch to Calls page successfully
 ${py_favorites_switch_success}                  //a[@id="user-tabs-tab-favorites" and @aria-selected="true"]                                        # switch to Favorites page successfully
+${py_knowledge_switch_success}                  //span[text()="Knowledge"]                                                                          # switch to Knowledge page successfully
 ${login_page_username}                          //input[@autocomplete="username"]                                                                   # 登录页面的输入用户名的xpath
 ${invite_user_in_calling}                       //div[@class="menus"]//*[@*="#options_menu"]                                                        # 在通话中的页面邀请user的按钮（右上角三个横杠）
 ${end_call_button}                              //div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']                                  # 通话中的结束通话红色按钮
@@ -773,13 +778,13 @@ click_to_edit_branding_setting
     wait until element is visible      ${close_branding_setting}
 
 change_branding_big_logo
-    ${picture_path}   get_modify_picture_path    Logo1.jpg
+    ${picture_path}   get_modify_picture_path    ${Logo1_jpg}
     wait until element is visible    xpath=//button[text()="Change logo..."]    20
     choose file   ${change_big_logo}   ${picture_path}
     sleep  2s
 
 change_branding_default_avatat
-    ${picture_path}   get_modify_picture_path    avatar1.jpg
+    ${picture_path}   get_modify_picture_path    ${avatar1_jpg}
     wait until element is visible     xpath=//button[text()="Change avatar..."]    20
     choose file   ${change_default_avatar}   ${picture_path}
     sleep  2s

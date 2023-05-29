@@ -423,6 +423,16 @@ def get_modify_picture_path(picture_name = 'modify_picture.jpg'):
     """
     return get_picture_path(picture_name)
 
+def opposite_of_two_lists(list1,list2):
+    """
+    验证两个列表的数据相反
+    :param list1:
+    :param list2:
+    :return:
+    """
+    for i in range(len(list1)):
+        assert list1[i] == list2[len(list1) - i - 1]
+
 
 if __name__ == '__main__':
     # print(get_picture_path())

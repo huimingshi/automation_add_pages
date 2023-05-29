@@ -25,8 +25,9 @@ def modify_implicit_wait(implicit_wait_time):
     def outer(func):
         def inner(*args):
             args[0].implicitly_wait(int(implicit_wait_time))
-            func(*args)
+            res = func(*args)
             args[0].implicitly_wait(IMPLICIT_WAIT)
+            return res
         return inner
     return outer
 
@@ -68,3 +69,10 @@ def cancel_workbox_details(func):
         args[0].implicitly_wait(int(IMPLICIT_WAIT))
         return func(*args,**kwargs)
     return inner
+
+def py_get_random():
+    """
+    得到随机数
+    :return:
+    """
+    return int(time.time() * 1000000)

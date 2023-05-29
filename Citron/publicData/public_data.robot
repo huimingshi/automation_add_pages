@@ -499,6 +499,31 @@ ${expert_group_call_GROUP1}             expert_group_call_GROUP1                
 
 ${expert_group_link}                    https://app-stage.helplightning.net.cn/help?enterprise_id=7767&group_id=12854&group_name=expert_group_call_GROUP1
 
+# 下列账号都属于Huiming.shi下的我自己创建的watermark_enable_WS中的user
+${wm_e_TU1_user}                        Huiming.shi.helplightning+wm_e_TU1@outlook.com                                          # 用于watermark的测试
+${wm_e_TU1_name}                        Huiming.shi.helplightning+wm_e_TU1
+
+${wm_e_EU2_user}                        Huiming.shi.helplightning+wm_e_EU2@outlook.com                                          # 用于watermark的测试
+${wm_e_EU2_name}                        Huiming.shi.helplightning+wm_e_EU2
+
+${wm_e_TU3_user}                        Huiming.shi.helplightning+wm_e_TU3@outlook.com                                          # 用于watermark的测试
+${wm_e_TU3_name}                        Huiming.shi.helplightning+wm_e_TU3
+
+# 下列账号都属于Huiming.shi下的我自己创建的Knowledge_WS中的user
+${knowledge_WS_admin}                   Huiming.shi.helplightning+knowledge_WS_Admin@outlook.com                                # Knowledge_WS的WA
+${knowledge_WS_Aname}                   Huiming.shi.helplightning+knowledge_WS_Admin
+
+${knowledge_u1_user}                    Huiming.shi.helplightning+knowledge_u1@outlook.com                                      # 用于konwledge的测试
+${knowledge_u1_name}                    Huiming.shi.helplightning+knowledge_u1
+
+${knowledge_u2_user}                    Huiming.shi.helplightning+knowledge_u2@outlook.com                                      # 用于konwledge的测试
+${knowledge_u2_name}                    Huiming.shi.helplightning+knowledge_u2
+
+${Knowledge_WS}                         Knowledge_WS
+
+${public_folder}                        public_folder_WA
+
+${private_folder}                       private_folder_WA
 # Personal user to add as personal user
 # username:  hlnauto+p22@outlook.com
 # password:  Welcome1

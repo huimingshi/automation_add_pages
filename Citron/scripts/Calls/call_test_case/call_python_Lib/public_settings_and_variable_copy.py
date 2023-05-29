@@ -302,3 +302,31 @@ PPECFA_button = '//div[@class="submenu-content"]//a[text()="End Call for All"]' 
 ECFA_YES_button = '//button[@variant="secondary" and contains(.,"Yes")]'    # end call for all时的Yes按钮
 collaboration_mode_flag = '//canvas[@id="webgl"]'                # Collaboration mode的标志
 good_experience = 'good_experience'
+# Knowledge页面
+add_folder_button = '//button[@title="Add Folder"]'    # Add Folder按钮
+folder_name_input = '//input[@name="name"]'     # name输入框
+folder_save_button = '//div[@class="k-widget k-window k-dialog"]//button[@type="submit"]'   # folder的save按钮
+folder_single_div = '//div[text()="{}"]'    # 某个名称的folder
+folder_settings = '//div[text()="{}"]/../../..//li[text()="Settings"]'    # 某个folder的settings按钮
+folder_delete = '//div[text()="{}"]/../../..//li[text()="Delete"]'    # 某个folder的Delete按钮
+add_knowledge = '//button[@title="Add Knowledge"]'    # Add Knowledge按钮
+add_file_to_knowledge = '//span[text()="File"]'   # 添加File
+add_procedure_to_knowledge = '//span[text()="Procedure"]'   # 添加Procedure
+add_file_input = '//input[@id="choose-file"]'    # 上传文件按钮
+delete_knowledge_file = '//span[@class="k-button-icon k-icon k-i-close"]'    # 删除上传的knowledge文件
+select_a_folder_location = '//div[text()="Select a folder location"]/../i'   # Select a folder location
+choose_sharing_options = '//div[text()="Sharing options"]/../i'   # Sharing options
+share_with_all_users = '//input[@type="checkbox"]'    #  Share with all users in this Workspace勾选框
+choose_which_folder = '//span[text()="{}"]'   # 选择某个folder location
+add_file_save = '//div[@class="custom-fields-input "]//button[@type="submit"]'    # add file的SAVE按钮
+procedure_name_input = '//input[@name="name"]'    # New Procedure的name
+description_input = '//span[text()="Description"]/../input'    # Description输入框
+master_node = '//span[text()="Main"]'    # 主节点
+procedure_settings = '//div[text()="{}"]/../../../..//li[text()="Settings"]'     # 某个procedure或者file的settings按钮
+procedure_delete = '//div[text()="{}"]/../../../..//li[text()="Delete"]'     # 某个procedure或者file的Delete按钮
+procedure_single_div = '//div[@title="{}"]'    # 某个名称的procedure或者file
+add_procedure_step_text = '//span[@class="k-button-icon k-icon k-i-font-family"]'    # 给procedure添加step的文本
+step_title_input = '//input[@id="title"]'    # step title输入框
+folder_sort_button = '//span[@class="k-button-icon k-icon k-i-sort-asc"]'    # folder的排序按钮
+sort_by_name_button = '//span[text()="Name"]'    # 按name排序
+sort_by_last_updated_button = '//span[text()="Last Updated"]'    # 按Last Updated排序
