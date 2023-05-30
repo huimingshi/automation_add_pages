@@ -178,6 +178,8 @@ def back_to_main(driver):
     :param driver:
     :return:
     """
+    # 切回主html文档
+    driver.switch_to.default_content()
     ele_list = get_xpath_elements(driver,master_node)
     if len(ele_list) == 1:
         public_click_element(driver,master_node,description="主节点按钮")
@@ -221,8 +223,24 @@ def update_procedure_step(driver):
     step_title = f'step_title{random_int}'
     ele = get_xpath_element(driver,step_title_input,description="step_title输入框")
     ele.send_keys(step_title)
-    # 等待自动put
-    time.sleep(3)
+    # 点击对钩按钮
+    click_nike_button(driver)
+    # 删除Question窗口
+    # 鼠标悬停
+    ellipsis_xpath = '//div[@class="procedure-item-container "][2]//div[@class="procedure-item-actions"]'
+    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
+    ActionChains(driver).move_to_element(ellipsis).perform()
+    time.sleep(1)
+    public_click_element(driver,'//div[@class="procedure-item-container "][2]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
+
+def switch_iframe(driver):
+    """
+    切换到iframe中
+    :param driver:
+    :return:
+    """
+    # 进入frame中
+    driver.switch_to.frame(get_xpath_element(driver, '//iframe[@class="k-iframe"]', description="切换iframe"))
 
 def add_text_to_procedure(driver,):
     """
@@ -235,8 +253,13 @@ def add_text_to_procedure(driver,):
     text_item = f'text_item{random_int}'
     # 输入文本信息
     public_click_element(driver,add_procedure_step_text,description="T按钮")
-    ele = get_xpath_element(driver, '//div[@class="k-editor-content"]', description="添加文本的输入框")
+    # 进入frame中
+    switch_iframe(driver)
+    # 输入文本
+    ele = get_xpath_element(driver, '//div[@class="k-content ProseMirror"]', description="添加文本的输入框")
     ele.send_keys(text_item)
+    # 切回主html文档
+    driver.switch_to.default_content()
     return text_item
 
 def check_all_character_strings(driver,strings):
@@ -255,6 +278,15 @@ def check_all_character_strings(driver,strings):
     # actions.key_up(Keys.META)
     # actions.perform()
 
+def click_nike_button(driver):
+    """
+    点击对钩按钮
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, '//span[@class="k-button-icon k-icon k-i-check-circle"]', description="点击对钩按钮")
+    time.sleep(1)
+
 def change_text_item_size(driver,strings):
     """
     改变字体大小
@@ -262,21 +294,25 @@ def change_text_item_size(driver,strings):
     :param strings:
     :return:
     """
+    # 进入frame中
+    switch_iframe(driver)
     # 全选输入的字符串
     check_all_character_strings(driver, strings)
+    # 切回主html文档
+    driver.switch_to.default_content()
     public_click_element(driver,'//span[text()="Font Size"]',description="选择字体大小按钮")
     time.sleep(1)
     public_click_element(driver,'//li[text()="6 (24pt)"]',description="选择14pt的大小")
     time.sleep(1)
-    public_click_element(driver,'//span[@class="k-button-icon k-icon k-i-check-circle"]',description="点击对钩按钮")
-    time.sleep(1)
+    click_nike_button(driver)
     # 删除Question窗口
     # 鼠标悬停
     ellipsis_xpath = '//div[@class="procedure-item-container "][3]//div[@class="procedure-item-actions"]'
     ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
     ActionChains(driver).move_to_element(ellipsis).perform()
     time.sleep(1)
-    public_click_element(driver,'//div[@class="procedure-item-container "][4]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
+    public_click_element(driver,'//div[@class="procedure-item-container "][3]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
+    time.sleep(1)
 
 def add_question(driver):
     """
@@ -284,13 +320,14 @@ def add_question(driver):
     :param driver:
     :return:
     """
+    click_nike_button(driver)
     # 预先设置随机数
     random_int = py_get_random()
     question = f'question{random_int}'
     # 输入Question信息
     get_xpath_element(driver,'//input[@placeholder="Question*"]',description="Question输入框").send_keys(question)
     time.sleep(1)
-    public_click_element(driver, '//span[@class="k-button-icon k-icon k-i-check-circle"]', description="点击对钩按钮")
+    click_nike_button(driver)
     # 删除第二个Question窗口
     # 鼠标悬停
     ellipsis_xpath = '//div[@class="procedure-item-container "][4]//div[@class="procedure-item-actions"]'

@@ -238,4 +238,6 @@ Knowledge_Scenario_10
     publish_procedure    ${driver_Ad2}
     # VP: status is "Published" from "Draft"
     check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
 
