@@ -7,7 +7,7 @@ import time
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import scroll_into_view as SIV
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import py_get_random, modify_implicit_wait
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import py_get_random, modify_implicit_wait, switch_to_default_content
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -179,7 +179,8 @@ def back_to_main(driver):
     :return:
     """
     # 切回主html文档
-    driver.switch_to.default_content()
+    switch_to_default_content(driver)
+    # 回到main节点
     ele_list = get_xpath_elements(driver,master_node)
     if len(ele_list) == 1:
         public_click_element(driver,master_node,description="主节点按钮")
@@ -212,6 +213,20 @@ def click_which_procedure(driver,procedure_name):
     """
     public_click_element(driver,procedure_single_div.format(procedure_name),description=f"{procedure_name}这个procedure")
 
+def delete_question_textbox(driver,index):
+    """
+    # 删除Question窗口
+    :param driver:
+    :return:
+    """
+    # 鼠标悬停
+    ellipsis_xpath = f'//div[@class="procedure-item-container "][{index}]//div[@class="procedure-item-actions"]'
+    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
+    ActionChains(driver).move_to_element(ellipsis).perform()
+    time.sleep(1)
+    public_click_element(driver,f'//div[@class="procedure-item-container "][{index}]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
+    time.sleep(1)
+
 def update_procedure_step(driver):
     """
     更新procedure的step
@@ -226,12 +241,7 @@ def update_procedure_step(driver):
     # 点击对钩按钮
     click_nike_button(driver)
     # 删除Question窗口
-    # 鼠标悬停
-    ellipsis_xpath = '//div[@class="procedure-item-container "][2]//div[@class="procedure-item-actions"]'
-    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
-    ActionChains(driver).move_to_element(ellipsis).perform()
-    time.sleep(1)
-    public_click_element(driver,'//div[@class="procedure-item-container "][2]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
+    delete_question_textbox(driver,2)
 
 def switch_iframe(driver):
     """
@@ -259,7 +269,7 @@ def add_text_to_procedure(driver,):
     ele = get_xpath_element(driver, '//div[@class="k-content ProseMirror"]', description="添加文本的输入框")
     ele.send_keys(text_item)
     # 切回主html文档
-    driver.switch_to.default_content()
+    switch_to_default_content(driver)
     return text_item
 
 def check_all_character_strings(driver,strings):
@@ -299,20 +309,14 @@ def change_text_item_size(driver,strings):
     # 全选输入的字符串
     check_all_character_strings(driver, strings)
     # 切回主html文档
-    driver.switch_to.default_content()
+    switch_to_default_content(driver)
     public_click_element(driver,'//span[text()="Font Size"]',description="选择字体大小按钮")
     time.sleep(1)
     public_click_element(driver,'//li[text()="6 (24pt)"]',description="选择14pt的大小")
     time.sleep(1)
     click_nike_button(driver)
     # 删除Question窗口
-    # 鼠标悬停
-    ellipsis_xpath = '//div[@class="procedure-item-container "][3]//div[@class="procedure-item-actions"]'
-    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
-    ActionChains(driver).move_to_element(ellipsis).perform()
-    time.sleep(1)
-    public_click_element(driver,'//div[@class="procedure-item-container "][3]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
-    time.sleep(1)
+    delete_question_textbox(driver,3)
 
 def add_question(driver):
     """
@@ -329,13 +333,7 @@ def add_question(driver):
     time.sleep(1)
     click_nike_button(driver)
     # 删除第二个Question窗口
-    # 鼠标悬停
-    ellipsis_xpath = '//div[@class="procedure-item-container "][4]//div[@class="procedure-item-actions"]'
-    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
-    ActionChains(driver).move_to_element(ellipsis).perform()
-    time.sleep(1)
-    public_click_element(driver,'//div[@class="procedure-item-container "][4]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
-    time.sleep(1)
+    delete_question_textbox(driver,4)
 
 def publish_procedure(driver):
     """

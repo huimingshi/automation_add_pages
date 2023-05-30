@@ -76,3 +76,12 @@ def py_get_random():
     :return:
     """
     return int(time.time() * 1000000)
+
+def switch_to_default_content(driver):
+    """
+    从iframe中再次切换到主html文档中
+    :param driver:
+    :return:
+    """
+    # 切回主html文档
+    driver.switch_to.default_content()
