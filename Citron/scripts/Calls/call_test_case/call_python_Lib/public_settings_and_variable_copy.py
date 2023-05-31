@@ -330,3 +330,9 @@ step_title_input = '//input[@id="title"]'    # step title输入框
 folder_sort_button = '//span[@class="k-button-icon k-icon k-i-sort-asc"]'    # folder的排序按钮
 sort_by_name_button = '//span[text()="Name"]'    # 按name排序
 sort_by_last_updated_button = '//span[text()="Last Updated"]'    # 按Last Updated排序
+question_input = '//div[@class="procedure-item-container "][last()]//input[@placeholder="Question*"]'     # 添加Question的输入框
+options_button = '//div[@class="procedure-item-container "][last()]//span[text()="Options"]/..'    # Options按钮
+option_name_input = '//input[@placeholder="Option name*"]'   # option name输入框
+add_option_dialog_close = '//span[@class="k-button-icon k-icon k-i-x"]'   # 添加option的dialog关闭按钮
+option_show = '//div[@class="procedure-item-container "][last()]//span[@class="choice-label"]'   # 展示到前端页面的option
+add_file_to_procedure_input = '//input[@id="choose-file"]'   # 添加File到procedure中

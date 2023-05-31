@@ -168,7 +168,6 @@ def get_picture_path(picture_name = 'avatar1.jpg',is_input = "is_input"):
         join_str = '\\\\'
         final_path = join_str.join(dir_list)
         modify_picture_path = final_path + f'\\\\{picture_name}'
-        return  modify_picture_path
     else:
         dir_list = dir_path.split('/')
         print(dir_list)
@@ -183,8 +182,8 @@ def get_picture_path(picture_name = 'avatar1.jpg',is_input = "is_input"):
             modify_picture_path = final_path + f'//{picture_name}'
         else:
             modify_picture_path = final_path + f'/{picture_name}'
-        print(modify_picture_path)
-        return modify_picture_path
+    print(modify_picture_path)
+    return modify_picture_path
 
 def public_assert(driver,string1,string2,condition = '=',action=None):
     """

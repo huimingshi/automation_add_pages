@@ -221,7 +221,7 @@ Knowledge_Scenario_9
     search_knowledge    ${driver_Ad2}    Selected_all
 
 Knowledge_Scenario_10
-    [Documentation]     Create procedure( web only)
+    [Documentation]     Create procedure( web only)     Scenario 1- Text item procedure
     [Tags]    Knowledge
     ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
     switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
@@ -234,6 +234,80 @@ Knowledge_Scenario_10
     change_text_item_size    ${driver_Ad2}    ${text_item}
     # Add other text with bold/italic/underline
     add_question    ${driver_Ad2}
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
+
+Knowledge_Scenario_11
+    [Documentation]     Create procedure( web only)     Scenario 2 - Confirm item procedure
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # create procesure2B with step having Confirm item
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step    ${driver_Ad2}
+    add_question      ${driver_Ad2}     3
+    # Add multi Confirm items   Questions is saved
+    add_question      ${driver_Ad2}
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
+
+Knowledge_Scenario_12
+    [Documentation]     Create procedure( web only)     Scenario 3 - Choice item procedure
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # create procesure3C with step having single choice item
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step    ${driver_Ad2}
+    # Add options    VP: options is saved after close options dialog
+    add_single_or_multiple_choices    ${driver_Ad2}    add_option
+    # Add multi choice item
+    ${question}   add_single_or_multiple_choices    ${driver_Ad2}    add_option   multiple
+    # Edit options again    VP: options are updated
+    edit_options    ${driver_Ad2}    ${question}
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
+
+Knowledge_Scenario_13
+    [Documentation]     Create procedure( web only)     Scenario 4 - Image/video item
+    [Tags]    Knowledge      有bug：https://vipaar.atlassian.net/browse/CITRON-3807
+
+Knowledge_Scenario_14
+    [Documentation]     Create procedure( web only)     Scenario 5 - QR code
+    [Tags]    Knowledge      有bug：https://vipaar.atlassian.net/browse/CITRON-3807
+
+Knowledge_Scenario_15
+    [Documentation]     Create procedure( web only)     Scenario 6 - attachment item
+    [Tags]    Knowledge    有bug：https://vipaar.atlassian.net/browse/CITRON-3808    在add_file_to_procedure方法的audio分支中
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # create procesure6F with step having attachment item
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step     ${driver_Ad2}
+    # upload image	upload video, audio
+    add_file_to_procedure     ${driver_Ad2}
+    add_file_to_procedure     ${driver_Ad2}     ${audio_file}
+    add_file_to_procedure     ${driver_Ad2}     ${video_file}
+    # Add step	upload pdf
+    add_step      ${driver_Ad2}
+    update_procedure_step     ${driver_Ad2}
+    # Add attchment item	upload pdf with password
+    add_file_to_procedure     ${driver_Ad2}     ${load_test_pdf}
     # Publish procedure
     publish_procedure    ${driver_Ad2}
     # VP: status is "Published" from "Draft"
