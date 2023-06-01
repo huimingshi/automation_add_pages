@@ -330,9 +330,21 @@ step_title_input = '//input[@id="title"]'    # step title输入框
 folder_sort_button = '//span[@class="k-button-icon k-icon k-i-sort-asc"]'    # folder的排序按钮
 sort_by_name_button = '//span[text()="Name"]'    # 按name排序
 sort_by_last_updated_button = '//span[text()="Last Updated"]'    # 按Last Updated排序
-question_input = '//div[@class="procedure-item-container "][last()]//input[@placeholder="Question*"]'     # 添加Question的输入框
-options_button = '//div[@class="procedure-item-container "][last()]//span[text()="Options"]/..'    # Options按钮
+procedure_container = '//div[@class="procedure-item-container "]'   # item的数目
+last_procedure_container = '//div[@class="procedure-item-container "][last()]'   # 最后一个procedure container
+question_input = f'{last_procedure_container}//input[@placeholder="Question*"]'     # 添加Question的输入框
+options_button = f'{last_procedure_container}//span[text()="Options"]/..'    # Options按钮
 option_name_input = '//input[@placeholder="Option name*"]'   # option name输入框
 add_option_dialog_close = '//span[@class="k-button-icon k-icon k-i-x"]'   # 添加option的dialog关闭按钮
-option_show = '//div[@class="procedure-item-container "][last()]//span[@class="choice-label"]'   # 展示到前端页面的option
+option_show = f'{last_procedure_container}//span[@class="choice-label"]'   # 展示到前端页面的option
 add_file_to_procedure_input = '//input[@id="choose-file"]'   # 添加File到procedure中
+image_button = '//span[@class="k-button-icon far fa-camera"]'    # 相机按钮
+video_button = '//span[@class="k-button-icon far fa-video"]'   # 摄像按钮
+Conditions_button = '//span[text()="Conditions"]/..'   # CONDITIONS按钮
+Add_condition_button = '//span[text()="Add condition"]'   # ADD CONDITION按钮
+condition_input = '//div[@class="choice-option"][last()]//input[@placeholder="Condition*"]'   # condition输入框
+choose_which_step = '//div[@class="k-popup k-menu-popup k-child-animation-container"]//span[text()="Step {}"]/../..'   # 选择第二个STEP
+step_action = '//span[text()="Step actions"]'    # 右上角的STEP ACTION按钮
+procedure_publish_ok = '//div[@class="k-window-content k-dialog-content"]//button[@type="submit"]'   # publish procedure时的OK按钮
+version_num = '//div[@class="info-badge"][1]'    # Version版本号
+description_str = '//div[@class="info-badge"][2]'  # Description描述信息

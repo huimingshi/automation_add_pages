@@ -60,7 +60,7 @@ def add_knowledge_folder(driver,sharing_options=None,select_location = None):
 
 def click_which_folder(driver,folder_name):
     """
-    点击某个procedure
+    点击某个folder
     :param driver:
     :param procedure_name:
     :return:
@@ -213,20 +213,6 @@ def click_which_procedure(driver,procedure_name):
     """
     public_click_element(driver,procedure_single_div.format(procedure_name),description=f"{procedure_name}这个procedure")
 
-def delete_question_textbox(driver,index):
-    """
-    # 删除Question窗口
-    :param driver:
-    :return:
-    """
-    # 鼠标悬停
-    ellipsis_xpath = f'//div[@class="procedure-item-container "][{index}]//div[@class="procedure-item-actions"]'
-    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
-    ActionChains(driver).move_to_element(ellipsis).perform()
-    time.sleep(1)
-    public_click_element(driver,f'//div[@class="procedure-item-container "][{index}]//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
-    time.sleep(1)
-
 def update_procedure_step(driver):
     """
     更新procedure的step
@@ -240,10 +226,6 @@ def update_procedure_step(driver):
     ele.send_keys(step_title)
     # 点击第一个procedure
     click_first_procedure(driver)
-    # # 点击对钩按钮
-    # click_nike_button(driver)
-    # # 删除Question窗口
-    # delete_question_textbox(driver,2)
 
 def switch_iframe(driver):
     """
@@ -315,13 +297,8 @@ def change_text_item_size(driver,strings):
     public_click_element(driver,'//span[text()="Font Size"]',description="选择字体大小按钮")
     time.sleep(1)
     public_click_element(driver,'//li[text()="6 (24pt)"]',description="选择14pt的大小")
-    time.sleep(1)
     # 点击第一个procedure
     click_first_procedure(driver)
-    # # 点击对钩按钮
-    # click_nike_button(driver)
-    # # 删除Question窗口
-    # delete_question_textbox(driver,3)
 
 def add_question(driver,index = 4):
     """
@@ -337,13 +314,8 @@ def add_question(driver,index = 4):
     question = f'question{random_int}'
     # 输入Question信息
     get_xpath_element(driver,question_input,description="Question输入框").send_keys(question)
-    time.sleep(1)
     # 点击第一个procedure
     click_first_procedure(driver)
-    # # 点击对钩按钮
-    # click_nike_button(driver)
-    # # 删除第二个Question窗口
-    # delete_question_textbox(driver,int(index))
 
 def click_first_procedure(driver):
     """
@@ -352,7 +324,9 @@ def click_first_procedure(driver):
     :return:
     """
     # 点击第一个procedure
-    public_click_element(driver, '//div[@class="list-item-content"]', description=f"第一个procedure")
+    time.sleep(1)
+    public_click_element(driver, '//div[@class="row p-2 align-middle list-item"][last()]//div[@class="list-item-content"]', description=f"第一个procedure")
+    time.sleep(1)
 
 def add_single_or_multiple_choices(driver,options = 'add_option',single = 'single'):
     """
@@ -373,7 +347,7 @@ def add_single_or_multiple_choices(driver,options = 'add_option',single = 'singl
     time.sleep(1)
     # single还是multiple
     if single != 'single':
-        public_click_element(driver,'//div[@class="procedure-item-container "][last()]//span[text()="Single choice"]',description="SINGLE_CHOICE按钮")
+        public_click_element(driver,f'{last_procedure_container}//span[text()="Single choice"]',description="SINGLE_CHOICE按钮")
         public_click_element(driver,'//span[text()="Multiple choice"]',description="选择Multiple_choice")
     # 是否Options
     if options == 'add_option':
@@ -421,15 +395,195 @@ def add_file_to_procedure(driver,file_name = "avatar1.jpg"):
     time.sleep(5)
     # 验证文件上传成功
     if '.jpg' in file_name:
-        get_xpath_element(driver,'//div[@class="procedure-item-container "][last()]//img',description="picture上传成功")
+        get_xpath_element(driver,f'{last_procedure_container}//img',description="picture上传成功")
     elif '.mp3' in file_name:
         pass
     elif '.mp4' in file_name:
-        get_xpath_element(driver,'//div[@class="procedure-item-container "][last()]//i[@class="far  fa-file-video"]',description="video上传成功")
+        get_xpath_element(driver,f'{last_procedure_container}//i[@class="far  fa-file-video"]',description="video上传成功")
     elif '.pdf' in file_name:
-        get_xpath_element(driver, '//div[@class="procedure-item-container "][last()]//i[@class="far  fa-file-pdf"]',description="pdf上传成功")
+        get_xpath_element(driver, f'{last_procedure_container}//i[@class="far  fa-file-pdf"]',description="pdf上传成功")
     else:
         raise Exception("请上传正确的文件")
+
+def add_image_video(driver,type = 'image'):
+    """
+    添加image或者video到procedure
+    :param driver:
+    :param type:  image或者video
+    :return:
+    """
+    if type == 'image':
+        SIV(driver,image_button)
+        public_click_element(driver,image_button,description="相机按钮")
+    elif type == 'video':
+        SIV(driver,video_button)
+        public_click_element(driver,video_button,description="摄像按钮")
+    else:
+        raise Exception("请输入正确的类型")
+    time.sleep(1)
+    get_xpath_element(driver, f'{last_procedure_container}//input[@placeholder="Add {type} description*"]',description=f"add_{type}_desc输入框").send_keys(f"add {type}")
+    # 点击第一个procedure
+    click_first_procedure(driver)
+
+def add_QR_code(driver):
+    """
+    添加二维码到procedure
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,'//span[@class="k-button-icon far fa-qrcode"]',description="二维码按钮")
+    get_xpath_element(driver,f'{last_procedure_container}//input[@placeholder="Add QR code description*"]',description="add_QR输入框").send_keys("二维码")
+    # 点击第一个procedure
+    click_first_procedure(driver)
+
+def add_signature(driver):
+    """
+    添加signature到procedure
+    :param driver:
+    :return:
+    """
+    public_click_element(driver,'//span[@class="k-button-icon far fa-signature"]',description="signature按钮")
+    get_xpath_element(driver,f'{last_procedure_container}//input[@placeholder="Add your signature*"]',description="add_signature输入框").send_keys("德玛西亚皇子")
+    # 点击第一个procedure
+    click_first_procedure(driver)
+
+def fill_conditional_step_desc(driver,back = None):
+    """
+    填充Add conditional step description
+    :param driver:
+    :param back: 是否需要点击第一个procedure
+    :return:
+    """
+    get_xpath_element(driver,f'{last_procedure_container}//input[@placeholder="Add conditional step description*"]',description="add_conditional输入框").send_keys("熔岩巨兽")
+    if back:
+        # 点击第一个procedure
+        click_first_procedure(driver)
+
+def add_condition_item(driver,condition = "add",count = 2):
+    """
+    添加condition到procedure
+    :param driver:
+    :param condition: 是否添加Condition；默认添加
+    :param count: 添加condition的个数；默认2个
+    :return:
+    """
+    # 点击add condition图标
+    public_click_element(driver,'//div[@class="k-widget k-toolbar"]/span[last()]//button[1]',description="add_condition图标")
+    # 填充Add conditional step description
+    fill_conditional_step_desc(driver)
+    if condition == "add":
+        # 点击CONDITIONS按钮
+        public_click_element(driver,Conditions_button,description="CONDITIONS按钮")
+        for i in range(int(count)):
+            # 点击ADD CONDITION按钮
+            public_click_element(driver,Add_condition_button,description="ADD_CONDITION按钮")
+            # 输入描述信息
+            get_xpath_element(driver,condition_input,description="Condition输入框").send_keys(f"condition{i + 1}")
+        # 关闭dialog
+        public_click_element(driver,add_option_dialog_close,description="窗口关闭按钮")
+    # 点击第一个procedure
+    click_first_procedure(driver)
+
+def change_step_index(driver,index = 2):
+    """
+    改变condition的step的次序
+    :param driver:
+    :param index: 想更改step为几
+    :return:
+    """
+    # 点击CONDITIONS按钮
+    public_click_element(driver, Conditions_button, description="CONDITIONS按钮")
+    # 点击第一个步骤的STEP1
+    public_click_element(driver,'//div[@class="choice-option"][1]//span[@class="k-button-text"]',description="STEP1")
+    time.sleep(1)
+    # 改为Step 2
+    public_click_element(driver,choose_which_step.format(int(index)),description="选择Step_2")
+    time.sleep(1)
+    # 关闭dialog
+    public_click_element(driver, add_option_dialog_close, description="窗口关闭按钮")
+    # 校验修改成功
+    get_xpath_element(driver,'//span[text()="condition1 >> 2"]',description="校验修改成功")
+
+def add_more_condition(driver,count = 1):
+    """
+    添加额外的condition
+    :param driver:
+    :param count:
+    :return:
+    """
+    # 点击CONDITIONS按钮
+    public_click_element(driver, Conditions_button, description="CONDITIONS按钮")
+    for i in range(int(count)):
+        # 点击ADD CONDITION按钮
+        public_click_element(driver, Add_condition_button, description="ADD_CONDITION按钮")
+        # 输入描述信息
+        get_xpath_element(driver, condition_input,description="Condition输入框").send_keys(f"more_condition{i + 1}")
+    # 关闭dialog
+    public_click_element(driver, add_option_dialog_close, description="窗口关闭按钮")
+
+def delete_one_condition_option(driver):
+    """
+    删除一条condition中的option
+    :param driver:
+    :return:
+    """
+    # 点击CONDITIONS按钮
+    public_click_element(driver, Conditions_button, description="CONDITIONS按钮")
+    # 删除第一个step
+    public_click_element(driver,'//div[@class="choice-option"][1]//span[@class="k-button-icon k-icon k-i-delete"]/..',description="删除第一个Step")
+    # 关闭dialog
+    public_click_element(driver, add_option_dialog_close, description="窗口关闭按钮")
+    # 校验删除成功
+    get_xpath_element(driver, '//span[text()="condition2 >> 1"]', description="校验删除成功1")
+    get_xpath_element(driver, '//span[text()="more_condition1 >> 1"]', description="校验删除成功2")
+
+def enter_which_step(driver,step = 2):
+    """
+    进入到第几个STEP中
+    :param driver:
+    :param step: 默认为第二个STEP
+    :return:
+    """
+    # 点击右上角的选择STEP按钮
+    public_click_element(driver,'//button[@title="Select step"]',description="右上角的选择STEP按钮")
+    time.sleep(1)
+    # 选择STEP 2
+    public_click_element(driver,choose_which_step.format(int(step)),description="选择Step_2")
+
+def add_enter_data(driver):
+    """
+    添加enter data到procedure中
+    :param driver:
+    :return:
+    """
+    # 点击enter data按钮
+    public_click_element(driver,'//span[@class="k-button-icon far fa-pencil-ruler"]',description="enter_data按钮")
+    time.sleep(1)
+    # 输Add data description
+    get_xpath_element(driver,f'{last_procedure_container}//input[@placeholder="Add data description*"]',description="add_data_desc输入框").send_keys("扭曲树精")
+    # 点击第一个procedure
+    click_first_procedure(driver)
+
+def delete_procedure_item(driver):
+    """
+    删除最后一个procedure的item
+    :param driver:
+    :return:
+    """
+    # 删除前查看item的数量
+    ele_list = get_xpath_elements(driver,procedure_container)
+    print(len(ele_list))
+    # 鼠标悬停
+    ellipsis_xpath = f'{last_procedure_container}//div[@class="procedure-item-actions"]'
+    ellipsis = get_xpath_element(driver, ellipsis_xpath, description='鼠标悬浮')
+    ActionChains(driver).move_to_element(ellipsis).perform()
+    time.sleep(3)
+    public_click_element(driver,f'{last_procedure_container}//span[@class="k-button-icon k-icon k-i-delete"]',description="删除按钮")
+    time.sleep(3)
+    # 删除后查看item的数量
+    ele_list_after = get_xpath_elements(driver,procedure_container)
+    print(len(ele_list_after))
+    public_assert(driver,len(ele_list),len(ele_list_after) + 1,action="item删除成功")
 
 def publish_procedure(driver):
     """
@@ -444,7 +598,7 @@ def publish_procedure(driver):
     get_xpath_element(driver,'//input[@name="comments"]',description="Version_comments输入框").send_keys('1')
     time.sleep(1)
     # 点击OK
-    public_click_element(driver,'//div[@class="k-window-content k-dialog-content"]//button[@type="submit"]',description="OK按钮")
+    public_click_element(driver,procedure_publish_ok,description="OK按钮")
 
 def check_published_status(driver):
     """
@@ -452,8 +606,53 @@ def check_published_status(driver):
     :param driver:
     :return:
     """
+    # 检查Publish成功，按钮文本改变
     get_xpath_element(driver,'//div[text()="PUBLISHED" and @class="primary-badge"]',description="PUBLISHED状态")
     get_xpath_element(driver,'//span[text()="Update"]',description="右上角的UPDATE按钮")
+    # 检查版本号
+    version = get_xpath_element(driver, version_num, description="Version").get_attribute("textContent")
+    print(version)
+    public_assert(driver, version, 'Version:  1', action="Version正确")
+    # 检查Description
+    description = get_xpath_element(driver, description_str, description="Version").get_attribute("textContent")
+    print(description)
+    public_assert(driver, description, 'Description:  1', action="Description正确")
+
+def update_procedure(driver):
+    """
+    更新procedure
+    :param driver:
+    :return:
+    """
+    # 点击UPDATE按钮
+    public_click_element(driver, '//span[text()="Update"]', description="Update按钮")
+    time.sleep(1)
+    # 输入Version comments
+    get_xpath_element(driver, '//input[@name="comments"]', description="Version_comments输入框").send_keys('.1')
+    time.sleep(1)
+    # 点击OK
+    public_click_element(driver, procedure_publish_ok,description="OK按钮")
+
+@modify_implicit_wait(3)
+def check_updated_success(driver):
+    """
+    校验处于update成功
+    :param driver:
+    :return:
+    """
+    # 当Procedure updated的提示信息消失
+    for i in range(10):
+        ele = get_xpath_elements(driver,'//div[text()="Procedure updated"]')
+        if len(ele) == 1:
+            time.sleep(1)
+        else:
+            break
+    # 检查版本号
+    version = get_xpath_element(driver,version_num,description="Version").get_attribute("textContent")
+    public_assert(driver,version,'Version:  2',action="Version正确")
+    # 检查Description
+    description = get_xpath_element(driver,description_str,description="Version").get_attribute("textContent")
+    public_assert(driver,description,'Description:  1.1',action="Description正确")
 
 @modify_implicit_wait(3)
 def delete_which_procedure(driver,procedure_name,can_delete = "yes"):
@@ -620,12 +819,19 @@ def add_step(driver):
     :param driver:
     :return:
     """
-    public_click_element(driver,'//span[text()="Step actions"]',description="STEP_ACTIONS按钮")
+    public_click_element(driver,step_action,description="STEP_ACTIONS按钮")
     public_click_element(driver,'//span[text()="Add Step"]',description="Add_Step按钮")
     time.sleep(3)
 
-
-
+def delete_step(driver):
+    """
+    删除某个step
+    :param driver:
+    :return:
+    """
+    public_click_element(driver, step_action, description="STEP_ACTIONS按钮")
+    public_click_element(driver,'//span[text()="Delete Step"]',description="delete_step按钮")
+    time.sleep(3)
 
 
 

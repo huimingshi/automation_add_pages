@@ -270,7 +270,7 @@ Knowledge_Scenario_12
     add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
     update_procedure_step    ${driver_Ad2}
     # Add options    VP: options is saved after close options dialog
-    add_single_or_multiple_choices    ${driver_Ad2}    add_option
+    add_single_or_multiple_choices    ${driver_Ad2}
     # Add multi choice item
     ${question}   add_single_or_multiple_choices    ${driver_Ad2}    add_option   multiple
     # Edit options again    VP: options are updated
@@ -284,11 +284,46 @@ Knowledge_Scenario_12
 
 Knowledge_Scenario_13
     [Documentation]     Create procedure( web only)     Scenario 4 - Image/video item
-    [Tags]    Knowledge      有bug：https://vipaar.atlassian.net/browse/CITRON-3807
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # create procesure4D with step having image item
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step    ${driver_Ad2}
+    add_image_video     ${driver_Ad2}
+    # Add more image tiem
+    add_image_video     ${driver_Ad2}
+    # Add step
+    add_step      ${driver_Ad2}
+    update_procedure_step    ${driver_Ad2}
+    # Add video item
+    add_image_video     ${driver_Ad2}    video
+    # Add more video item
+    add_image_video     ${driver_Ad2}    video
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
 
 Knowledge_Scenario_14
     [Documentation]     Create procedure( web only)     Scenario 5 - QR code
-    [Tags]    Knowledge      有bug：https://vipaar.atlassian.net/browse/CITRON-3807
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # create procesure5E with step having QR code item
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step    ${driver_Ad2}
+    add_QR_code    ${driver_Ad2}
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
 
 Knowledge_Scenario_15
     [Documentation]     Create procedure( web only)     Scenario 6 - attachment item
@@ -315,3 +350,114 @@ Knowledge_Scenario_15
     [Teardown]      run keywords     back_to_main           ${driver_Ad2}
     ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
 
+Knowledge_Scenario_16
+    [Documentation]     Create procedure( web only)     Scenario 7 - Signature item
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # create procesure7G with step having Signature item
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step     ${driver_Ad2}
+    # Add more signature item
+    add_signature      ${driver_Ad2}
+    # Add step
+    add_step      ${driver_Ad2}
+    update_procedure_step     ${driver_Ad2}
+    # add signature
+    add_signature      ${driver_Ad2}
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
+
+Knowledge_Scenario_17
+    [Documentation]     Create procedure( web only)     Scenario 8 - Condition Step item
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # Create procesure8H with more than 1 step
+    ${procedure_name}    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step     ${driver_Ad2}
+    add_step      ${driver_Ad2}
+    update_procedure_step     ${driver_Ad2}
+    # Add condition item in certain step
+    add_condition_item     ${driver_Ad2}
+    # select step option to a later step(e.g. in step2 set option to step4)
+    change_step_index     ${driver_Ad2}
+    # Add more condition item
+    add_more_condition     ${driver_Ad2}
+    # delete step which is an option of condition   # View condition option again  # VP: option is updated
+    delete_one_condition_option     ${driver_Ad2}
+    # 刷新下页面后，填写Conditional step description
+    refresh_browser_page     ${driver_Ad2}
+    click_which_folder     ${driver_Ad2}    ${folder_name}
+    click_which_procedure     ${driver_Ad2}    ${procedure_name}
+    # 进入到STEP 2中
+    enter_which_step     ${driver_Ad2}
+    # 填写Conditional step description
+    fill_conditional_step_desc     ${driver_Ad2}    back
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
+
+Knowledge_Scenario_18
+    [Documentation]     Create procedure( web only)     Scenario 9 - data item
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # Create procesure9K, add data item
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step     ${driver_Ad2}
+    add_enter_data     ${driver_Ad2}
+    # check on number
+    # add more data items
+    add_enter_data     ${driver_Ad2}
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}
+
+Knowledge_Scenario_19
+    [Documentation]     Create procedure( web only)     Scenario 9 - data item    View procedure (web+mobile)
+    [Tags]    Knowledge
+    ${driver_Ad2}   driver_set_up_and_logIn    ${knowledge_WS_admin}
+    switch_to_diffrent_page    ${driver_Ad2}    ${py_knowledge_page}    ${py_knowledge_switch_success}    ${py_get_knowledge_rows}
+    ${folder_name}    add_knowledge_folder   ${driver_Ad2}
+    # create a procedure
+    add_file_procedure_to_folder    ${driver_Ad2}    ${folder_name}     not_file
+    update_procedure_step     ${driver_Ad2}
+    # add more steps	navigate between different step	VP: step details load
+    add_step      ${driver_Ad2}
+    update_procedure_step     ${driver_Ad2}
+    add_step      ${driver_Ad2}
+    update_procedure_step     ${driver_Ad2}
+    # Add more items	VP: item shows
+    add_question    ${driver_Ad2}
+    add_single_or_multiple_choices    ${driver_Ad2}
+    # Delete item	VP: item is deleted
+    delete_procedure_item    ${driver_Ad2}
+    # delete certain step	navigate between different step	VP: step details load
+    enter_which_step    ${driver_Ad2}
+    delete_step    ${driver_Ad2}
+    # Publish procedure
+    publish_procedure    ${driver_Ad2}
+    # VP: status is "Published" from "Draft"
+    check_published_status       ${driver_Ad2}
+    # Change something and update
+    enter_which_step    ${driver_Ad2}
+    add_single_or_multiple_choices    ${driver_Ad2}
+    update_procedure   ${driver_Ad2}
+    # VP: view again, changes is updated
+    check_updated_success   ${driver_Ad2}
+    [Teardown]      run keywords     back_to_main           ${driver_Ad2}
+    ...             AND              delete_which_folder    ${driver_Ad2}    ${folder_name}

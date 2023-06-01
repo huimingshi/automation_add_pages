@@ -13,7 +13,8 @@ ${cognito_login_username}               xiaoyan.yan+cognito@helplightning.com   
 ${cognito_login_email}                  emily.huang+cognito@helplightning.com                                                   # cognito login email
 ${cognito_login_password}               Abc12345                                                                                # cognito login password
 
-${site_admin_username}                  huiming.shi@helplightning.com                                                           # site admin username
+#${site_admin_username}                  huiming.shi@helplightning.com                                                           # site admin username
+${site_admin_username}                  Huiming.shi.helplightning+site_admin@outlook.com                                         # site admin username
 ${site_admin_name}                      huiming.shi                                                                             # site admin password
 
 ${site_admin_username_auto}             hlnauto+basic                                                                           # site admin username
