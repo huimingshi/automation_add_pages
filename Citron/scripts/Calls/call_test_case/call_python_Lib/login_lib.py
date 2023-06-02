@@ -4,8 +4,6 @@
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import TEST_WEB
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
-# from Citron.scripts.Deletion_of_a_Recordings_and_Screen_Captures.make_a_call_lib import username_input, next_button, \
-#     password_input, login_button, accept_disclaimer
 from selenium import webdriver
 from concurrent.futures import ThreadPoolExecutor
 

@@ -6,7 +6,7 @@ import time
 from selenium.webdriver.common.by import By
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_diffrent_page, scroll_into_view
 from Citron.scripts.Calls.call_test_case.call_python_Lib.login_lib import driver_set_up_and_logIn
-site_admin = 'Huiming.shi.helplightning+8888888888@outlook.com'
+site_admin = 'Huiming.shi.helplightning+site_admin@outlook.com'
 
 
 # 搜索group

@@ -2,7 +2,7 @@
 import time
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import *
-from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import close_tutorial_action as CTA, cancel_workbox_details
+from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import cancel_workbox_details
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains

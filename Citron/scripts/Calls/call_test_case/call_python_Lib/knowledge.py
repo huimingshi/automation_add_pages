@@ -5,14 +5,11 @@
 #----------------------------------------------------------------------------------------------------#
 import time
 from Citron.public_switch.pubLib import *
-from Citron.public_switch.public_switch_py import *
 from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import scroll_into_view as SIV
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_lib import py_get_random, modify_implicit_wait, switch_to_default_content
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.select import Select
-from Citron.scripts.Calls.call_test_case.call_python_Lib.login_lib import start_an_empty_window as SAEW
 
 #----------------------------------------------------------------------------------------------------#
 # define python Library
