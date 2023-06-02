@@ -9,8 +9,8 @@ SMALL_RANGE_BROWSER_TYPE = 'Chrome'      # 暂不支持Firefox，请固定为Chr
 CITRON_BROWSER_TYPE = 'Chrome'
 
 # 浏览器设置的文件默认下载路径
-DOWNLOAD_PATH = r'C:\Users\ts\Downloads'
-# DOWNLOAD_PATH = r'/Users/ts/Downloads'
+# DOWNLOAD_PATH = r'C:\Users\ts\Downloads'
+DOWNLOAD_PATH = r'/Users/ts/Downloads'
 
 # Citron的地址https://app-stage.helplightning.net.cn
 TEST_WEB = 'https://app-stage.helplightning.net.cn/'
