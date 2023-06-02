@@ -48,8 +48,7 @@ Knowledge_Scenario_2
     change_location_to_public_folder    ${driver_Ad2}     ${folder_name}    ${public_folder}
     # Admin2 on webapp delete	VP: can delete
     click_which_folder    ${driver_Ad2}     ${public_folder}
-#    delete_which_folder    ${driver_Ad2}    ${new_folder_name}
-    delete_which_folder    ${driver_Ad2}    ${folder_name}
+    [Teardown]     delete_which_folder    ${driver_Ad2}    ${folder_name}
 
 Knowledge_Scenario_3
     [Documentation]     Admin1 create 'editable by owner only' folder      Scenario 4
@@ -82,7 +81,7 @@ Knowledge_Scenario_4
     back_to_main     ${driver_Ad1}
     change_location_to_public_folder    ${driver_Ad1}     ${new_folder_name}    ${public_folder}
     click_which_folder    ${driver_Ad1}     ${public_folder}
-    delete_which_folder    ${driver_Ad1}    ${new_folder_name}
+    [Teardown]     delete_which_folder    ${driver_Ad1}    ${new_folder_name}
 
 Knowledge_Scenario_5
     [Documentation]     Admin1 create  'editable by all users and admins' folder      Scenario 2
@@ -102,7 +101,7 @@ Knowledge_Scenario_5
     back_to_main     ${driver_Ad2}
     change_location_to_public_folder    ${driver_Ad2}     ${new_folder_name}    ${public_folder}
     click_which_folder    ${driver_Ad2}     ${public_folder}
-    delete_which_folder    ${driver_Ad2}    ${new_folder_name}
+    [Teardown]     delete_which_folder    ${driver_Ad2}    ${new_folder_name}
 
 #Knowledge_Scenario_6
 #    [Documentation]     Admin1 create  'editable by all users and admins' folder      Scenario 3
