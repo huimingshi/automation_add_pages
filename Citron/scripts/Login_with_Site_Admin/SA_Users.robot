@@ -141,7 +141,7 @@ Site_Admin_Select_randomly_one_User
     # this new user can successfully login Citron
     Login_new_added_user   ${email}
     # the workspace is correct.
-    the_workspace_is_correct
+    the_workspace_is_correct     ${agents_camera_is_off_WS}
     [Teardown]    Close
 
 Site_Admin_Select_randomly_one_User_Click_Deactivate_User_button

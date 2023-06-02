@@ -296,8 +296,12 @@ refresh_web_page
     sleep   1s
 
 swipe_browser_to_bottom
-    # 滑动
+    # 滑动到底部
     Execute Javascript     window.scrollTo(0,5000000)    #滑动到最底部
+
+swipe_browser_to_top
+    # 滑动到顶部
+    Execute Javascript     window.scrollTo(0,0)    #滑动到最底部
 
 switch_window_to_first
     ${window}    Get Window Handles

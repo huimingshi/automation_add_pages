@@ -289,7 +289,7 @@ change_name_title_location
     # click UPDATE button
     click element   ${my_account_update}
     sleep  1s
-    wait until element is visible    ${my_account_update_success_tag}
+    wait until element is visible    ${my_account_update_success_tag}    20s
 
 check_changed_successfully
     [Arguments]   ${name}   ${title}
@@ -302,6 +302,7 @@ check_changed_successfully
     # check Location changed successfully
     ${get_attribute}   get element attribute   ${my_account_location}  value
     should be equal as strings   ${title}   ${get_attribute}
+    wait until element is not visible    ${my_account_update_success_tag}    20s
 
 upload_a_photo
     # Default app icon should display.
@@ -339,7 +340,9 @@ change_your_avatar
     should not be equal as strings  ${get_scr_before}   ${get_scr_after}
 
 remove_my_avatar
-    # Click on "Remove my avatar"
+    # 滑动到顶部
+    swipe_browser_to_top
+    sleep   1s
     click element   ${remove_avatar}
     sleep  1s
     # Warnign dialog displays. Confirm Yes.

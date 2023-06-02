@@ -4,9 +4,9 @@
 
 import time
 from selenium.webdriver.common.by import By
-from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_diffrent_page, scroll_into_view, user_switch_to_second_workspace
+from Citron.scripts.Calls.call_test_case.call_python_Lib.else_public_lib import switch_to_diffrent_page, scroll_into_view
 from Citron.scripts.Calls.call_test_case.call_python_Lib.login_lib import driver_set_up_and_logIn
-site_admin = 'huiming.shi@helplightning.com'
+site_admin = 'Huiming.shi.helplightning+8888888888@outlook.com'
 
 
 # 搜索group
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     # site Admin登录
     driver = driver_set_up_and_logIn(site_admin)
     # 切换到WS
-    user_switch_to_second_workspace(driver,"auto_default_workspace")
+    # user_switch_to_second_workspace(driver,"auto_default_workspace")
     driver.implicitly_wait(5)
     # 进入到ADMINISTRATION的Groups页面
     switch_to_diffrent_page(driver, 'Groups', '//h1[text()="Groups"]', '//div[@class="ag-center-cols-container"]/div',switch_tree='switch_tree', which_tree='2')

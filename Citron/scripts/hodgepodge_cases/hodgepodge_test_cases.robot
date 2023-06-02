@@ -117,6 +117,7 @@ My_Account_When_GA_logins
     # Check Change name, title and location successfully
     check_changed_successfully   ${random}   ${random}
     # Upload a photo
+    remove_avatar_teardown
     upload_a_photo
     # Change your avatar
     change_your_avatar

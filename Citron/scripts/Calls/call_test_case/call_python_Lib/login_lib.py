@@ -4,8 +4,8 @@
 from Citron.public_switch.pubLib import *
 from Citron.public_switch.public_switch_py import TEST_WEB
 from Citron.scripts.Calls.call_test_case.call_python_Lib.public_settings_and_variable_copy import *
-from Citron.scripts.Deletion_of_a_Recordings_and_Screen_Captures.make_a_call_lib import username_input, next_button, \
-    password_input, login_button, accept_disclaimer
+# from Citron.scripts.Deletion_of_a_Recordings_and_Screen_Captures.make_a_call_lib import username_input, next_button, \
+#     password_input, login_button, accept_disclaimer
 from selenium import webdriver
 from concurrent.futures import ThreadPoolExecutor
 
@@ -147,20 +147,4 @@ def multi_login(*args):
     return list(driversList)
 
 if __name__ == '__main__':
-    a_tuple = (1,2,3,[1,2,3])
-    a_tuple[3][0] = 5
-    print(a_tuple)
-
-    a = [1,2,3,[4,5,6]]
-    import copy
-    b = copy.deepcopy(a)
-    b[0] = 0
-    print(b,a)
-    b[3][0] = 0
-    print(b, a)
-
-    c = copy.copy(a)
-    c[0] = 0
-    print(c, a)
-    c[3][0] = 0
-    print(c, a)
+    driver_set_up_and_logIn("Huiming.shi.helplightning+knowledge_u1@outlook.com","*IK<8ik,8ik,")
