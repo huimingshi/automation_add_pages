@@ -13,6 +13,11 @@
 - publicData路径下的文件，存放需要上传的图片、修改的图片；以及所有账户的账号密码（请勿修改）
 ### scripts目录简介
 - scripts路径下的文件，存放每个模块对应的UI测试脚本
+### delete_groups.py文件
+- 用于删除site admin中auto_default_workspace这个WS中多余的group，可单独执行
+### delFirefoxLog.bat和delFirefoxLog.sh文件
+- .bat是windows下的批处理文件，用于一键清除火狐浏览器驱动生成的日志文件
+- .sh是mac下的批处理文件，用于一键清除火狐浏览器驱动生成的日志文件
 ### 所有的进行call的case，都是通过python自定义的关键字驱动进行自动化脚本的开发的，每个步骤如果出错了都已添加截图功能
 <br><br>
 ---
